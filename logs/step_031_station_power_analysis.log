@@ -1,0 +1,23 @@
+[02:11:56] ═══ Starting Step 031: Station Power & Grasse Dominance Assessment...
+[02:11:56] ═══ ═══ Starting Step 031: Station Power & Grasse Dominance Assessment...
+[02:11:56]     ═══ STEP PURPOSE: Assess per-station statistical power and address Grasse dominance concern
+[02:11:56]     ═══ METHOD: Expected vs observed SNR analysis, Monte Carlo IPW simulation, precision-weighted regression
+[02:11:56]     ═══ DATA SUMMARY
+[02:11:56]         Dataset: N = 26,207 observations
+[02:11:56]         Measured global η: -3.16979820e-04
+[02:11:56]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+[02:11:56]     ═══ ANALYSIS TRACE
+[02:11:56] >>> >>> Performing per-station power analysis
+[02:12:14]     ═══ RESULTS SUMMARY
+[02:12:14]         Expected powered stations: 2
+[02:12:14]         Actually powered stations: 1
+[02:12:14]         Overall verdict: CONSISTENT
+[02:12:14]     ═══ INTERPRETATION
+[02:12:14]         No individual station achieves conventional statistical significance (SNR ≥ 3σ)
+[02:12:14]         Detection relies on combined analysis with N = 25,177 observations
+[02:12:14]         Pattern of detections matches per-station power analysis expectations
+[02:12:14]     ═══ REPRODUCIBILITY
+[02:12:14]         Output file: results/outputs/step_031_station_power_analysis.json
+[02:12:14]         Analysis components: Per-station power, phase coverage, IPW simulation, precision-weighted regression
+[02:12:14] ✓   Results saved to results/outputs/step_031_station_power_analysis.json
+[02:12:14] ✓   Status: CONSISTENT

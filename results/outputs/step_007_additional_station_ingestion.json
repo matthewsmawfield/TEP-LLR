@@ -1,0 +1,10 @@
+{
+    "step_id": "step_007",
+    "planned_for_ingestion": [
+        "Wettzell",
+        "Zimmerwald",
+        "Mt. Stromlo"
+    ],
+    "found_external_data": false,
+    "status": "PASS"
+}

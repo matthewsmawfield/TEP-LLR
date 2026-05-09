@@ -3,15 +3,25 @@ message: "If you use this work, please cite it as below."
 authors:
   - family-names: "Smawfield"
     given-names: "Matthew Lukin"
-    orcid: "https://orcid.org/0009-0003-4327-8711"
-title: "Wide Binary Stars as Probes of the Temporal Equivalence Principle"
-version: 0.1.0
-date-released: 2026
-url: "https://github.com/mlsmawfield/TEP-WB"
-license: MIT
+    orcid: "https://orcid.org/0009-0003-8219-3159"
+title: "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect"
+abstract: "The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent screening. This work tests for SEP violation using Lunar Laser Ranging data, analysing 26,207 O-C residuals from five international stations spanning 35 years (1984-2019). Analysis detects a synodic-phase-dependent modulation correlated with cos(D): the full cleaned OLS extraction gives eta = -3.17 × 10^-4 ± 9.80 × 10^-4, Bayesian MCMC gives eta = -3.16 × 10^-4 ± 6.05 × 10^-5 at 5.22 sigma, Cook's distance excision gives eta = -3.31 × 10^-4 ± 5.84 × 10^-5 at 5.67 sigma, and precision-weighted regression gives eta = -3.50 × 10^-4 ± 1.13 × 10^-4 at 3.11 sigma. DE430 residuals provide sign-consistent cross-ephemeris validation at eta = -7.03 × 10^-4 ± 2.12 × 10^-3. The observed negative sign establishes that gravitational potential screening dominates in the Earth-Moon system, providing a candidate physical explanation for the unexplained ~1 cm synodic residual documented by Müller & Nordtvedt (1998)."
+version: "v0.1 (Lucknow)"
+date-released: 2026-05-10
+doi: 10.5281/zenodo.19446029
+url: "https://github.com/matthewsmawfield/TEP-LLR"
+license: CC-BY-4.0
 keywords:
-  - wide binaries
-  - Gaia DR3
-  - modified gravity
-  - MOND
-  - temporal equivalence principle
+  - Gravitation
+  - Lunar Laser Ranging
+  - LLR
+  - equivalence principle
+  - Nordtvedt effect
+  - post-Newtonian
+  - scalar-tensor gravity
+  - strong equivalence principle
+  - Temporal Equivalence Principle
+  - TEP
+  - lunar ephemeris
+  - INPOP
+  - Earth-Moon system

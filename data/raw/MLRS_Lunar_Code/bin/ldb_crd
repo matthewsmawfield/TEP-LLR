@@ -1,0 +1,201 @@
+#! /bin/csh -f
+#
+# ldb_crd
+#
+# *****************************************************************************
+#
+# Copyright (c) 2017, The University of Texas at Austin
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without 
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice, 
+# this list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice, 
+# this list of conditions and the following disclaimer in the documentation 
+# and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors 
+# may be used to endorse or promote products derived from this software without 
+# specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE 
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+# THE POSSIBILITY OF SUCH DAMAGE.
+#
+# *****************************************************************************
+# 
+# batch process to convert ranging data file to lunar format,
+# filter it, and normalpoint it.
+# input is the .lf full rate lunar data file.
+# output are the .frd (lunar full rate) and .npt (lunar normalpoint) files.
+#
+# R. L. Ricklefs / Univerity of Texas / CSR
+#
+# History
+#   01/02/97 - recalculate residuals before filtering. rlr.
+#   07xx07 - CRD version. Includes flag on arg list to specify whether to
+#            perform data plots. rlr.
+#   120707 - Handle LRO through crd_cal rather than convert_itdf_crd. rlr
+#   011717 - Adapt for open dource distribution. rlr.
+#
+# THIS SCRIPT HAS BEEN MODIFIED TO USE poldat_thruJ17 INSTEAD OF THE
+# USUAL SHORT poldat FILE FOR FILTERING AND NORMAL POINTING OLD DATA!
+#
+#############################################################################
+#####				Set Up					#####
+#############################################################################
+set DATA_DIR_LIB= (data/lib/)
+set DATA_DIR_FR= (data/fr/)
+set DATA_DIR= (data/analysis/)
+set SLR_DATA_DIR= (data/analysis/)
+@ SWFAIL = 0
+@ CSTAT = 0
+@ NCSTAT = 0
+@ FCSTAT = 0
+
+if ( $#argv == 0 ) then
+  echo No file specified. Try again!
+  exit 1
+endif
+echo == Started processing lunar data file $1. ==
+
+#############################################################################
+#####			Remove old files				#####
+#############################################################################
+
+if (-e $DATA_DIR$1".errorc") then
+  rm -f  $DATA_DIR$1".errorc"
+endif
+if (-e $DATA_DIR$1".llc") then
+  rm -f $DATA_DIR$1".llc"
+endif
+if (-e $DATA_DIR$1".lsc") then
+  rm -f $DATA_DIR$1".lsc"
+endif
+if (-e $DATA_DIR$1".frd") then
+  rm -f $DATA_DIR$1".frd"
+endif
+if (-e $DATA_DIR$1".npt") then
+  rm -f $DATA_DIR$1".npt"
+endif
+
+#############################################################################
+#####                            Copy in needed files                   #####
+#############################################################################
+#  make sure listing file exists!
+#if (-e $DATA_DIR_FR$1".dlc") then
+#  cp $DATA_DIR_FR$1".dlc" $DATA_DIR$1".llc" > /dev/null
+#else
+  touch $DATA_DIR$1".llc"
+#endif
+#mv $DATA_DIR_FR$1".lfc" $DATA_DIR$1".lxc"
+#mv $DATA_DIR_FR$1".ds" $DATA_DIR$1".lsc"
+#mv $DATA_DIR_FR$1".dl" $DATA_DIR$1".llc"
+
+#############################################################################
+#####				Calibration				#####
+#############################################################################
+# MLRS-specific calibration code removed
+
+#############################################################################
+#####				Recalculate Residuals			#####
+#############################################################################
+
+echo Recalc is now executing...
+##bin/llr_npt_crd -r \
+## Changed to reprocess old data!
+bin/llr_npt_crd -r -p poldat_thruJ17 \
+        -i $DATA_DIR$1".frcal" -o $DATA_DIR$1".frrec" \
+	-c  $DATA_DIR$1".rsc" -l $DATA_DIR$1".llc" -s $DATA_DIR$1".lsc" \
+	>>& $DATA_DIR$1".errorc"
+        ##-p data/lib/poldat_thruJ17 \  # Changed to reprocess old data!
+if (!(-z $DATA_DIR$1".errorc")) then
+    echo Recalc Failed.
+      exit 1
+endif
+
+#############################################################################
+#####				Poisson Filtering			#####
+#############################################################################
+
+echo Poisson Filter is now executing...
+bin/Poisson_crd -i $DATA_DIR$1".frrec" -o $DATA_DIR$1".frfil" \
+	-c data/lib/filter_crd.pc \
+	-l $DATA_DIR$1".llc" -s $DATA_DIR$1".lsc" >>& $DATA_DIR$1".errorc"
+@ PSTAT= $status
+if ($PSTAT >= 2) then
+  echo Poisson Failed.
+  mv $DATA_DIR$1".frrec" $DATA_DIR$1".frfil"
+  @ SWFAIL= 1
+  goto end
+endif
+#############################################################################
+#####				Lun_Auto				#####
+#############################################################################
+
+echo Lun_auto is now executing...
+bin/lun_auto_crd -i $DATA_DIR$1".frfil" -o $DATA_DIR$1".frfil2" \
+	-l $DATA_DIR$1".llc" -s $DATA_DIR$1".lsc" \
+	>>& $DATA_DIR$1".errorc"
+@ PSTAT= $status
+if ($PSTAT <> 0) then
+  echo Lun_auto Failed.
+  mv $DATA_DIR$1".frfil" $DATA_DIR$1".frfil2"
+endif
+
+#############################################################################
+#####				Lun_SDQI				#####
+#############################################################################
+
+echo Lun_sdqi is now executing...
+bin/lun_sdqi_crd -i $DATA_DIR$1".frfil2" -o $DATA_DIR$1".frfil3" \
+	-l $DATA_DIR$1".llc" -s $DATA_DIR$1".lsc" \
+	>>& $DATA_DIR$1".errorc"
+@ PSTAT= $status
+if ($PSTAT <> 0) then
+  echo Lun_sdqi Failed.
+  mv $DATA_DIR$1".frfil2" $DATA_DIR$1".frfil3"
+endif
+
+#############################################################################
+#####				NormalPoint				#####
+#############################################################################
+echo NormalPoint is now executing...
+#bin/llr_npt_crd -n \
+## Changed to reprocess old data!
+bin/llr_npt_crd -n -p poldat_thruJ17 \
+        -i $DATA_DIR$1".frfil3" -o $DATA_DIR$1".frfin" \
+	-m $DATA_DIR$1".npt" -c  $DATA_DIR$1".rsc" -l $DATA_DIR$1".llc" \
+	-s $DATA_DIR$1".lsc" >>& $DATA_DIR$1".errorc"
+if (!(-z $DATA_DIR$1".errorc")) then
+    echo NormalPoint Failed.
+    @ SWFAIL= 1
+    goto end
+endif
+
+bin/frd_strip $DATA_DIR$1".frfin" $DATA_DIR$1".frd"
+#############################################################################
+#####				Clean Up		 		#####
+#############################################################################
+end:
+
+echo Cleaning up...
+if (-e $DATA_DIR$1".templist") \
+    rm -f $DATA_DIR$1".templist"
+
+#############################################################################
+
+echo == Finished processing lunar data file $1! ==
+unset DATA_DIR
+exit 0

@@ -1,0 +1,164 @@
+H1 CRD  2 2024 10 01 08
+H2 GRSM       7845 78  1  7 ILRS
+H3 apollo14   0000102 0102 na 0 1 3
+H4  1 2024 10 01 07 58 14 2024 10 01 08 08 19  0 0 0 0 1 0 2 0
+H5  0 24 092900 OPA 7741
+C0 0 1064.200 me09 las6 det2 tim2 none nm01 met1 na
+C1 0 las6 Nd-Yag 1064.20 10.00 240.00 150.0 0.00 1
+C2 0 det2 SPAD 1064.20 20.00 80.0 12.0 ECL 999.9 0.14 60.0 70.0 none 0.0 0.0 na
+C3 0 tim2 Maser_T4S36_Oca Maser_T4S36_Oca Dassault na 0.0
+C5 0 nm01 station_meo version_1.0 telemetrie_laser version_1.0
+C6 0 met1 VAISALA PTU303 na VAISALA PTU303 na VAISALA PTU303 na
+20 28694.235969667894 874.35 288.75 56  0
+40 28998.506015487677 0 me09 2178 2138 3.716 102397.7 904.0 182.5 -0.054 -0.467 na 3 3 0 4 51.9
+41 28998.506015487677 0 me09 2178 2138 3.716 102397.7 904.0 182.5 -0.054 -0.467 na 3 3 0 0 51.9
+30 28964.863 130.9966 38.3719 0 2 0 0.0044129 0.0021785
+11 28964.863082037278 2.669601876108 me09 2 608.0 32 180.3 -0.202 -0.477  na 0.5 0 4.8
+50 me09 180.3 -0.202 -0.477 na 2
+H8
+h1 CRD  2 2025  6 23 17
+h2       APOL 7045 95  1  4       ILRS
+h3 apollo14        102  102       na 0 1  3
+h4  1 2024 10 21 12 35 10 2024 10 21 12 39 23  0 0 0 0 1 0 2 0
+h5  0 24 102112 JPL   430
+c0 0     532.0 std3 lpd apd4 cesm  na  na  na  na
+c1 0 lpd  Nd-YAG 1064.00 10.00 100.00 100.0 0.5 1
+c2 0 apd4 APD-array 532.000    na 30.5 100.0 ECL   na 16.00 90.0 1.4 Functional_fit   na   na 0
+c3 0 cesm Symmetricom_5071A_GPS CS-C001 ACM_CS_PS7186H na 0.0
+11 45445.0000000 2.4468019842157 std3 2  252.0    459     197.3      na      na       na    na 0  29.5
+20 45445.000  731.82 280.61   56 1
+40   126.5000000 0 std3 5996 2113      na        na      na  132.9      na      na    na 3 0 0 4    na
+50 std3  197.3     na     na   na 1
+00 run.refl.shots.thresh.yield.net 241021e.r2.s05000.t01.y654.n459
+00 Git commit f7f6b18499c2f24116e876377a8c58a34b0e16bf
+00 ACS Git commit 1d568d1eaebb3ad9b8317693fea841524d0605db
+00 LUN Gate width 9
+00 Longterm offsets data not present. 0 ps used for all channels.
+00 No 1st photon bias.
+00 Cesium used as timebase; Clock allan deviation suggests no...
+00 uncertainty inflation is needed relative to the scale of NP uncertainty.
+00 Run contains adequate contemporaneous ACS data...
+00 Utilizing photon-by-photon ACS corrections.
+00 Representative differential estimate of...
+00 ACS corrections applied to range photons: 22.2 +/- 2.0 [ps]
+00 We estimate a total (excepting a potential scale factor or RSS value,
+00 which will follow) normal point uncertainty of 10.2 [ps].
+00 Internal studies suggest no additional uncertainty inflation is needed.
+h8
+h1 CRD  2 2025  6 23 17
+h2       APOL 7045 95  1  4       ILRS
+h3 apollo14        102  102       na 0 1  3
+h4  1 2024 10 21 12 56 20 2024 10 21 13  0 33  0 0 0 0 1 0 2 0
+h5  0 24 102112 JPL   430
+c0 0     532.0 std3 lpd apd4 cesm  na  na  na  na
+c1 0 lpd  Nd-YAG 1064.00 10.00 100.00 100.0 0.5 1
+c2 0 apd4 APD-array 532.000    na 30.5 100.0 ECL   na 16.00 90.0 1.4 Functional_fit   na   na 0
+c3 0 cesm Symmetricom_5071A_GPS CS-C001 ACM_CS_PS7186H na 0.0
+11 46695.0000000 2.4489186591025 std3 2  253.0    633     185.7      na      na       na    na 0  52.2
+20 46695.000  731.83 280.67   54 1
+40   126.5000000 0 std3 6315 3432      na        na      na  122.3      na      na    na 3 0 0 4    na
+50 std3  185.7     na     na   na 1
+00 run.refl.shots.thresh.yield.net 241021i.r2.s05000.t01.y898.n633
+00 Git commit f7f6b18499c2f24116e876377a8c58a34b0e16bf
+00 ACS Git commit 1d568d1eaebb3ad9b8317693fea841524d0605db
+00 LUN Gate width 9
+00 Longterm offsets data not present. 0 ps used for all channels.
+00 No 1st photon bias.
+00 Cesium used as timebase; Clock allan deviation suggests no...
+00 uncertainty inflation is needed relative to the scale of NP uncertainty.
+00 Run contains inadequate or no contemporaneous ACS data.
+00 Applied ACS differential correction of 25.7 +/- 5.7 [ps]...
+00 to final normal point round trip time based on distributions of...
+00 historic ACS differential correction estimates.
+00 We estimate a total (excepting a potential scale factor or RSS value,
+00 which will follow) normal point uncertainty of 9.4 [ps].
+00 Internal studies suggest no additional uncertainty inflation is needed.
+h8
+h1 CRD  2 2025  6 23 17
+h2       APOL 7045 95  1  4       ILRS
+h3 apollo14        102  102       na 0 1  3
+h4  1 2024 10 24 12 42 45 2024 10 24 12 46 54  0 0 0 0 1 0 2 0
+h5  0 24 102412 JPL   430
+c0 0     532.0 std3 lpd apd4 cesm  na  na  na  na
+c1 0 lpd  Nd-YAG 1064.00 10.00 100.00 100.0 0.5 1
+c2 0 apd4 APD-array 532.000    na 30.5 100.0 ECL   na 16.00 90.0 1.4 Functional_fit   na   na 0
+c3 0 cesm Symmetricom_5071A_GPS CS-C001 ACM_CS_PS7186H na 0.0
+11 45895.0000000 2.5639174358651 std3 2  249.0    988     191.0      na      na       na    na 0  72.9
+20 45895.000  731.39 284.84   38 1
+40   124.5000000 0 std3 7887 2882      na        na      na  132.2      na      na    na 3 0 0 4    na
+50 std3  191.0     na     na   na 1
+00 run.refl.shots.thresh.yield.net 241024e.r2.s05000.t01.y2068.n988
+00 Git commit f7f6b18499c2f24116e876377a8c58a34b0e16bf
+00 ACS Git commit 1d568d1eaebb3ad9b8317693fea841524d0605db
+00 LUN Gate width 9
+00 Longterm offsets data not present. 0 ps used for all channels.
+00 No 1st photon bias.
+00 Cesium used as timebase; Clock allan deviation suggests no...
+00 uncertainty inflation is needed relative to the scale of NP uncertainty.
+00 Run contains adequate contemporaneous ACS data...
+00 Utilizing photon-by-photon ACS corrections.
+00 Representative differential estimate of...
+00 ACS corrections applied to range photons: 18.9 +/- 1.8 [ps]
+00 We estimate a total (excepting a potential scale factor or RSS value,
+00 which will follow) normal point uncertainty of 6.9 [ps].
+00 Internal studies suggest no additional uncertainty inflation is needed.
+h8
+h1 CRD  2 2025  6 23 17
+h2       APOL 7045 95  1  4       ILRS
+h3 apollo14        102  102       na 0 1  3
+h4  1 2024 10 27 13  5  8 2024 10 27 13  7 39  0 0 0 0 1 0 2 0
+h5  0 24 102713 JPL   430
+c0 0     532.0 std3 lpd apd4 cesm  na  na  na  na
+c1 0 lpd  Nd-YAG 1064.00 10.00 100.00 100.0 0.5 1
+c2 0 apd4 APD-array 532.000    na 30.5 100.0 ECL   na 16.00 90.0 1.4 Functional_fit   na   na 0
+c3 0 cesm Symmetricom_5071A_GPS CS-C001 ACM_CS_PS7186H na 0.0
+11 47200.0000000 2.6493671029043 std3 2  150.0    233     152.4      na      na       na    na 0 663.1
+20 47200.000  735.67 284.99   29 1
+40    75.5000000 0 std3 5066 2649      na        na      na  127.6      na      na    na 3 0 0 4    na
+50 std3  152.4     na     na   na 1
+00 run.refl.shots.thresh.yield.net 241027f.r2.s03000.t01.y321.n233
+00 Git commit f7f6b18499c2f24116e876377a8c58a34b0e16bf
+00 ACS Git commit Since
+00 LUN Gate width 9
+00 Longterm offsets data not present. 0 ps used for all channels.
+00 No 1st photon bias.
+00 Cesium used as timebase; Clock allan deviation suggests no...
+00 uncertainty inflation is needed relative to the scale of NP uncertainty.
+00 Run contains inadequate or no contemporaneous ACS data.
+00 Applied ACS differential correction of 24.8 +/- 5.9 [ps]...
+00 to final normal point round trip time based on distributions of...
+00 historic ACS differential correction estimates.
+00 We estimate a total (excepting a potential scale factor or RSS value,
+00 which will follow) normal point uncertainty of 11.4 [ps].
+00 Internal studies suggest no additional uncertainty inflation is needed.
+h8
+h1 CRD  2 2025  6 23 17
+h2       APOL 7045 95  1  4       ILRS
+h3 apollo14        102  102       na 0 1  3
+h4  1 2024 10 29 12 57 46 2024 10 29 13  1 53  0 0 0 0 1 0 2 0
+h5  0 24 102912 JPL   430
+c0 0     532.0 std3 lpd apd4 cesm  na  na  na  na
+c1 0 lpd  Nd-YAG 1064.00 10.00 100.00 100.0 0.5 1
+c2 0 apd4 APD-array 532.000    na 30.5 100.0 ECL   na 16.00 90.0 1.4 Functional_fit   na   na 0
+c3 0 cesm Symmetricom_5071A_GPS CS-C001 ACM_CS_PS7186H na 0.0
+11 46765.0000000 2.6793960950071 std3 2  246.0     46     139.6      na      na       na    na 0 162.8
+20 46765.000  724.44 281.99   44 1
+40   123.5000000 0 std3 6624 3551      na        na      na  123.9      na      na    na 3 0 0 4    na
+50 std3  139.6     na     na   na 1
+00 run.refl.shots.thresh.yield.net 241029g.r2.s05000.t01.y50.n46
+00 Git commit f7f6b18499c2f24116e876377a8c58a34b0e16bf
+00 ACS Git commit 1d568d1eaebb3ad9b8317693fea841524d0605db
+00 LUN Gate width 9
+00 Longterm offsets data not present. 0 ps used for all channels.
+00 No 1st photon bias.
+00 Cesium used as timebase; Clock allan deviation suggests no...
+00 uncertainty inflation is needed relative to the scale of NP uncertainty.
+00 Run contains inadequate or no contemporaneous ACS data.
+00 Applied ACS differential correction of 8.7 +/- 6.1 [ps]...
+00 to final normal point round trip time based on distributions of...
+00 historic ACS differential correction estimates.
+00 We estimate a total (excepting a potential scale factor or RSS value,
+00 which will follow) normal point uncertainty of 22.3 [ps].
+00 Internal studies suggest no additional uncertainty inflation is needed.
+h8
+H9 

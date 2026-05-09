@@ -1,0 +1,8 @@
+v0.1 (Lucknow) - Initial release of TEP-LLR manuscript
+
+- Complete 59-step analysis pipeline for LLR data
+- Manuscript sections: Abstract, Introduction, Theory, Methodology, Results, Discussion, Conclusion, References, Reproducibility
+- Detection of non-zero Nordtvedt parameter at 5.25σ significance
+- Cross-ephemeris validation (INPOP19a, DE430)
+- Bayesian MCMC analysis with convergence diagnostics
+- Station-by-station consistency analysis

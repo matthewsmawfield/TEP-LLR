@@ -25,23 +25,23 @@ from pathlib import Path
 def compress_pdf(input_path: str, output_path: str = None, quality: str = "ebook") -> dict:
     """
     Compress a PDF file using Ghostscript.
-    
+
     Args:
         input_path: Path to input PDF
         output_path: Path to output PDF (default: input_compressed.pdf)
         quality: Compression preset (screen, ebook, printer, prepress)
-    
+
     Returns:
         dict with original_size, compressed_size, reduction_percent
     """
     input_file = Path(input_path)
-    
+
     if not input_file.exists():
         raise FileNotFoundError(f"Input file not found: {input_path}")
-    
+
     if not input_file.suffix.lower() == '.pdf':
         raise ValueError(f"Input must be a PDF file: {input_path}")
-    
+
     # Capture original size before any operations
     orig_size = input_file.stat().st_size
 
@@ -59,7 +59,7 @@ def compress_pdf(input_path: str, output_path: str = None, quality: str = "ebook
             import os
             os.close(temp_fd)
             temp_output = Path(temp_path)
-    
+
     # Target for ghostscript
     gs_output = temp_output if temp_output else output_file
 
@@ -67,7 +67,7 @@ def compress_pdf(input_path: str, output_path: str = None, quality: str = "ebook
     valid_presets = ["screen", "ebook", "printer", "prepress"]
     if quality not in valid_presets:
         raise ValueError(f"Quality must be one of: {valid_presets}")
-    
+
     # Run Ghostscript
     cmd = [
         "gs",
@@ -80,15 +80,15 @@ def compress_pdf(input_path: str, output_path: str = None, quality: str = "ebook
         f"-sOutputFile={gs_output}",
         str(input_file)
     ]
-    
+
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True)
-        
+
         # If we used a temp file for in-place compression, replace the original now
         if temp_output:
-            import shutil
-            shutil.move(str(temp_output), str(output_file))
             
+            shutil.move(str(temp_output), str(output_file))
+
     except FileNotFoundError:
         if temp_output and temp_output.exists():
             temp_output.unlink()
@@ -102,11 +102,11 @@ def compress_pdf(input_path: str, output_path: str = None, quality: str = "ebook
         if temp_output and temp_output.exists():
             temp_output.unlink()
         raise RuntimeError(f"Ghostscript error: {e.stderr}")
-    
+
     # Calculate new size
     new_size = output_file.stat().st_size
     reduction = (1 - new_size / orig_size) * 100
-    
+
     return {
         "input": str(input_file),
         "output": str(output_file),
@@ -139,18 +139,18 @@ def main():
         default="ebook",
         help="Compression quality preset (default: ebook)"
     )
-    
+
     args = parser.parse_args()
-    
+
     try:
         result = compress_pdf(args.input, args.output, args.quality)
-        
+
         print(f"Input:       {result['input']}")
         print(f"Output:      {result['output']}")
         print(f"Original:    {format_size(result['original_size'])}")
         print(f"Compressed:  {format_size(result['compressed_size'])}")
         print(f"Reduction:   {result['reduction_percent']:.1f}%")
-        
+
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)

@@ -1,0 +1,83 @@
+{
+  "version": "1.0.0",
+  "generated": "2024-01-15T10:30:00Z",
+  "description": "Data integrity manifest for TEP-LLR raw data files",
+  "files": {
+    "INPOP19a_APO_residuals.txt": {
+      "size_bytes": 242494,
+      "sha256": "e123d2d095ccccbeb82bec0927a8ad9e4bc2b9127672e773100085dbb2077e50",
+      "source": "INPOP19a ephemeris - Apache Point Observatory residuals",
+      "source_url": "https://www.imcce.fr/recherche/equipes/asd/inpop/download.php",
+      "ephemeris_version": "INPOP19a",
+      "station": "APO",
+      "format": "MINI"
+    },
+    "INPOP19a_Grasse_residuals.txt": {
+      "size_bytes": 1716895,
+      "sha256": "efabea88d7da784209583929c4c16bfb51fd0bd1b8757c962e89d14c28be67a7",
+      "source": "INPOP19a ephemeris - Grasse station residuals",
+      "source_url": "https://www.imcce.fr/recherche/equipes/asd/inpop/download.php",
+      "ephemeris_version": "INPOP19a",
+      "station": "Grasse",
+      "format": "MINI"
+    },
+    "INPOP19a_Matera_residuals.txt": {
+      "size_bytes": 31940,
+      "sha256": "4267ce1f00682faae09320974a98f46ac2eccd1fafedec9dbcf9d32884bd2c87",
+      "source": "INPOP19a ephemeris - Matera station residuals",
+      "source_url": "https://www.imcce.fr/recherche/equipes/asd/inpop/download.php",
+      "ephemeris_version": "INPOP19a",
+      "station": "Matera",
+      "format": "MINI"
+    },
+    "INPOP19a_McDonald2_residuals.txt": {
+      "size_bytes": 269759,
+      "sha256": "7529ab165e1dc26b9bc33f58cc52d0ad85cf1c8b9f76f237f0523a5e6175e2b3",
+      "source": "INPOP19a ephemeris - McDonald2 station residuals",
+      "source_url": "https://www.imcce.fr/recherche/equipes/asd/inpop/download.php",
+      "ephemeris_version": "INPOP19a",
+      "station": "McDonald2",
+      "format": "MINI"
+    },
+    "INPOP19a_Haleakala_residuals.txt": {
+      "size_bytes": 62301,
+      "sha256": "2dc80a1e4654fa4cc9525884ca53ed5eb9dcb4cd2071fd5b21f9ee115550903c",
+      "source": "INPOP19a ephemeris - Haleakala station residuals",
+      "source_url": "https://www.imcce.fr/recherche/equipes/asd/inpop/download.php",
+      "ephemeris_version": "INPOP19a",
+      "station": "Haleakala",
+      "format": "MINI"
+    },
+    "de440.bsp": {
+      "size_bytes": 119799808,
+      "sha256": "a4ce9bf9b3282becc9f4b2ac3cebe03a2ae7599981aabd7265fd8482fff7c4b5",
+      "source": "JPL DE440 planetary ephemeris",
+      "source_url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440.bsp",
+      "ephemeris_version": "DE440",
+      "coverage": "1550-2650",
+      "format": "BSP"
+    },
+    "inpop21a_TDB_m1000_p1000_littleendian.dat": {
+      "size_bytes": 175863744,
+      "sha256": "c615e5e7757908140230b76031b64f39efb17ce68c5865d5454be95bd9cee30c",
+      "source": "IMCCE INPOP21a planetary ephemeris",
+      "source_url": "https://ftp.imcce.fr/pub/ephem/planets/inpop21a/TDB/inpop21a_TDB_m1000_p1000_littleendian.dat",
+      "ephemeris_version": "INPOP21a",
+      "coverage": "1000-2000",
+      "format": "DAT"
+    },
+    "apollo15_residuals.txt": {
+      "size_bytes": 301786,
+      "sha256": "cfb73b41b49ab4c575777c04de9a4ffec84983434615faf1afe8c724651d9a3f",
+      "source": "Apollo 15 reflector residuals",
+      "format": "TXT"
+    },
+    "DE430_2014-2018_residuals.dat": {
+      "size_bytes": 475519,
+      "sha256": null,
+      "source": "JPL DE430 ephemeris residuals (2014-2018)",
+      "ephemeris_version": "DE430",
+      "format": "DAT"
+    }
+  }
+}

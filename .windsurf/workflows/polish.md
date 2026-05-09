@@ -6,7 +6,6 @@
 6. Ensure consistency throughout paper
 7. Ensure consistency throghout entire codebase
 8. The zenodo.txt and readme must match the absract from the manuscript
-9. we should not set timelines for future years and future research. we are one independent researcher without insitutional backing so should not set unachievable plans. 
 10. Nothing should be fabricated, fake or made up. 
 11. Everything must be real. 
 12. All data and numbers must be consistent with analysis pipeline outputs.

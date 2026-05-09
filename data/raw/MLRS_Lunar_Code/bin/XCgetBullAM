@@ -1,0 +1,97 @@
+#!/bin/bash
+######################################################################
+#
+#  XCgetBullAM
+# *****************************************************************************
+#
+# Copyright (c) 2017, The University of Texas at Austin
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without 
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice, 
+# this list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice, 
+# this list of conditions and the following disclaimer in the documentation 
+# and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors 
+# may be used to endorse or promote products derived from this software without 
+# specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE 
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+# THE POSSIBILITY OF SUCH DAMAGE.
+#
+# *****************************************************************************
+#
+#  Get the latest USNO (IERS) Bulletin A via ftp from the usno
+#  and ftp it to the MLRS analysis computer. This is not done directly
+#  from the controller as this system may be limited to communicating 
+#  with the local network, for security reasons.
+#  R. Ricklefs 10/96
+#
+#  History:
+#	10/21/09 - Changed "complete" to "OK" below as ftp no longer 
+#		   says "complete". rlr.
+#       01/17/17 - Modify for open source distribution. rlr.
+#
+######################################################################
+getfile() {
+echo "Logging on to USNO computer" >> ${FTPLOG}
+trap ':' 1 2 3 15
+ftp -i -v -n <<-EOF >> ${FTPLOG}
+open maia.usno.navy.mil
+binary
+hash
+user anonymous xxx@yyy.zzz
+cd ser7
+get mark3.out
+quit
+EOF
+} # end getfile
+
+#############################
+#  Start executable code
+#############################
+FTPLOG="../log/ftpbulla.log";   export FTPLOG
+cd data/lib
+rm ${FTPLOG} > /dev/null
+echo "Updating Earth Orientation predicts." >> ${FTPLOG}
+getfile
+# Changed to "OK" on 10/21/09. "complete" no longer in log.
+# Changed back to "complete" on 02/20/15 "OK" no longer in log.
+grepstring=`grep complete ${FTPLOG}`
+#grepstring=`grep OK ${FTPLOG}`
+if test -z "$grepstring"
+  then
+  echo "\nDownload apparently failed!" >> ${FTPLOG}
+  date >> ${FTPLOG}
+  exit 1
+else
+  echo "\nDownload succeeded" >> ${FTPLOG}
+  date >> ${FTPLOG}
+fi
+
+# Save old poldat file
+mv poldat poldat_old
+
+# Convert input file to a format we like
+/prod/bin/BullA <mark3.out >poldat
+
+f1=`date +%m%d%y`
+cp poldat poldat_$f1
+
+# Tell someone...
+#mail -s "Bull A retrieval" xxx < ${FTPLOG}
+# end XCgetBullAM

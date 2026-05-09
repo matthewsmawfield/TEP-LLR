@@ -1,0 +1,8 @@
+C 12 Sep 90, 1124 - move to /np.dr for JPL ephemeris.
+C       COMMON AREA FOR 'STATE'
+C
+      LOGICAL KM
+      LOGICAL BARY
+      DOUBLE PRECISION PVSUN(3,2)
+      COMMON/STCOMM/KM,BARY,PVSUN
+

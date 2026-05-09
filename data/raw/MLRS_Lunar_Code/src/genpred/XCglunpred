@@ -1,0 +1,3 @@
+cd /data/llr/pred
+datestring=`date +%F`
+/prod/bin/genpred -e $datestring -a7 -f PRDCTRL.PCAgeo > gp$datestring.op

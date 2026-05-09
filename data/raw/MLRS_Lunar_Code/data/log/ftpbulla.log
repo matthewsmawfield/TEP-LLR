@@ -1,0 +1,16 @@
+Updating Earth Orientation predicts.
+Logging on to USNO computer
+Connected to maia.usno.NAVY.mil.
+220 (vsFTPd 3.0.2)
+530 Please login with USER and PASS.
+Hash mark printing on (1024 bytes/hash mark).
+331 Please specify the password.
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+250 Directory successfully changed.
+local: mark3.out remote: mark3.out
+500 Illegal PORT command
+221 Goodbye.
+\nDownload apparently failed!
+Tue Jan 17 18:57:09 CST 2017

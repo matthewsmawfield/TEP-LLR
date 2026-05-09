@@ -1,0 +1,69 @@
+h1 CRD  2 2023  4  5 21
+h2       APOL 7045 95  1  4       ILRS
+h3 apollo11        100  100       na 0 1  3
+h4  1 2010  2 18  1 35 27 2010  2 18  1 39 38  4 0 0 0 1 0 2 0
+h5  0 10 021801 JPL   430
+c0 0     532.0 std1 lpd apd1 orig  na  na  na  na
+c1 0 lpd  Nd-YAG 1064.00 10.00 100.00 100.0 0.5 1
+c2 0 apd1 APD-array 532.000    na 30.0 100.0 ECL   na 16.00 90.0 1.4 Functional_fit   na   na 0
+c3 0 orig Truetime_XL-DC Truetime-Wenzel_OCXO ACM_CS_PS7186H na 0.0
+11  5780.0000000 2.6266169678279 std1 2  250.0     51      35.6      na      na       na    na 0  13.4
+20  5780.000  723.63 273.05   32 0
+40   125.5000000 0 std1 8351 4708      na        na      na    2.0      na      na    na 3 0 0 4    na
+50 std1   35.6     na     na   na 1
+00 run.refl.shots.thresh.yield.net 100218e.r0.s05000.t01.y61.n51
+00 Git commit bfa766f7fe275f1f5f42d84182816b70eb461d3f
+00 ACS Git commit 4e60f54c46573e72d4e0dc9e6dfbacc105de8799
+00 LUN Gate width 8
+00 Found 'bad' channel(s): [3, 5, 8, 10]...
+00 I.e.: channel(s) found to be unusual performer(s); Unused in reduction.
+00 Run corresponds to longterm offsets date range 090508-100228...
+00 Channel by channel longterm offsets (in ps)...:
+00 111  -1   0 240   0  -1 -55   0 -101 -33  87  32  51 127   0 -83 
+00 No 1st photon bias.
+00 XL-DC timebase back-corrected such that the resulting round trip time...
+00 is modified (subtracted) by -0.3 ps.
+00 Resulting NP uncertainty inflated by 8.7 ps (RSS).
+00 Run contains inadequate or no contemporaneous ACS data.
+00 Applied ACS differential correction of 58.0 +/- 6.0 [ps]...
+00 to final normal point round trip time based on distributions of...
+00 historic ACS differential correction estimates.
+00 (NP uncertainty already adjusted to include ACS correction uncertainty)
+00 We recommend an additional uncertainty adjustment of...:
+00 scale factor 2.0 OR RSS value 17 [ps] (not applied here)
+h8
+h1 CRD  2 2023  4  5 21
+h2       APOL 7045 95  1  4       ILRS
+h3 apollo11        100  100       na 0 1  3
+h4  1 2010  2 18  1 53 18 2010  2 18  1 55 48  4 0 0 0 1 0 2 0
+h5  0 10 021801 JPL   430
+c0 0     532.0 std1 lpd apd1 orig  na  na  na  na
+c1 0 lpd  Nd-YAG 1064.00 10.00 100.00 100.0 0.5 1
+c2 0 apd1 APD-array 532.000    na 30.0 100.0 ECL   na 16.00 90.0 1.4 Functional_fit   na   na 0
+c3 0 orig Truetime_XL-DC Truetime-Wenzel_OCXO ACM_CS_PS7186H na 0.0
+11  6880.0000000 2.6286898313246 std1 2  150.0     28      61.0      na      na       na    na 0  20.5
+20  6880.000  723.77 273.08   32 0
+40    75.0000000 0 std1 4982 2915      na        na      na    2.6      na      na    na 3 0 0 4    na
+50 std1   61.0     na     na   na 1
+00 run.refl.shots.thresh.yield.net 100218i.r0.s03000.t01.y29.n28
+00 Git commit bfa766f7fe275f1f5f42d84182816b70eb461d3f
+00 ACS Git commit 4e60f54c46573e72d4e0dc9e6dfbacc105de8799
+00 LUN Gate width 8
+00 Found 'bad' channel(s): [3, 5, 8, 10]...
+00 I.e.: channel(s) found to be unusual performer(s); Unused in reduction.
+00 Run corresponds to longterm offsets date range 090508-100228...
+00 Channel by channel longterm offsets (in ps)...:
+00 111  -1   0 240   0  -1 -55   0 -101 -33  87  32  51 127   0 -83 
+00 No 1st photon bias.
+00 XL-DC timebase back-corrected such that the resulting round trip time...
+00 is modified (subtracted) by -4.5 ps.
+00 Resulting NP uncertainty inflated by 8.8 ps (RSS).
+00 Run contains inadequate or no contemporaneous ACS data.
+00 Applied ACS differential correction of 58.8 +/- 6.0 [ps]...
+00 to final normal point round trip time based on distributions of...
+00 historic ACS differential correction estimates.
+00 (NP uncertainty already adjusted to include ACS correction uncertainty)
+00 We recommend an additional uncertainty adjustment of...:
+00 scale factor 2.0 OR RSS value 17 [ps] (not applied here)
+h8
+H9 

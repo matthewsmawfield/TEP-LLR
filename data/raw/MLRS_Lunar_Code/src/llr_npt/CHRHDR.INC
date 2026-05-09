@@ -1,0 +1,8 @@
+c 12 Sep 90, 1117 - move to /np.dr for JPL ephemeris.
+C       COMMON AREA FOR CHARACTER DATA IN RECORD 1
+C
+      CHARACTER*6 TTL(14,3)
+      CHARACTER*6 CNAM(400)
+      COMMON/CHRHDR/TTL,CNAM
+C
+

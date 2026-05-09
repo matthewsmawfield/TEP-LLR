@@ -1,0 +1,216 @@
+	SUBROUTINE RDLUN(RJD,FJD,NREFL,OBSY,VLIGHT,isignal,detector,
+     x		isch,isite)
+	IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      INCLUDE 'LICENSE-BSD3.inc'
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C  Wed Oct 19, 1988 14:18:00
+C     1) REPLACE "COMPILER DOUBLE PRECISION" WITH
+C        "IMPLICIT DOUBLE PRECISION (A-H,O-Z)".
+C     2) MAKE SURE STATEMENTS DON'T EXTEND BEYOND COLUMN 72.
+C     3) REMOVE IN-LINE COMMENTS.
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C  Fri Oct 28, 1988 09:29:15
+C     1) MOVE DATA STATEMENT TO "BLKNP.FOR", AND FIX "STOP [S]".
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C  Wed Feb 1, 1989 08:25:49
+C     1) REPLACE CALLS TO SCANF AND SCANB WITH INTERNAL READS.
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C 08 Mar 91, 1720: add parameter to error for calling HP-UX exit.
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C 06 Oct 95      : Copy the detector type to an output variable. rlr.
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+C
+C  RDLUN IS RESPONSIBLE FOR READING AND DECODING INFORMATION FROM INPUT 
+C  LUNAR DATA RECORDS AND MAKING IT AVAILABLE TO OTHER ROUTINES.
+C
+C  REVISIONS:
+C       10/25/84 - DECODE LASER FREQUENCY FROM Z CARD AND PASS IT TO 
+C                  REFRACTION ROUTINE AS WAVELENGTH IN MICRONS.
+C       02/26/85 - CONVERT FROM WRITING IP BACK TO DISK & REREADING TO
+C                  CALLING SCANF.
+C       10/29/85 - SET UP FOR USE IN NORMAL POINTING PGM
+C       12/03/86 - LUNAR '86 FORMAT. V10. RLR.
+C	05/01/87 - Lunar '86 format, mod 1 (mini-normalpt). v11. rlr.
+C	06/08/88 - CORRECT HANDLING OF FREQ OFFSET! AND USE SCANB FOR
+C		   MOST FIELDS. V12. RLR.
+C	11/26/91 - Pick up all detail times and o-c's for S:N calcs. rlr
+C	12/03/91 - Allow non-signal records to be passed back for 
+C		   S:N calculations. rlr.
+C	10/26/99 - Y2K fixes. rlr.
+C$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ rlr
+
+	character*(*) sccsid
+	parameter (sccsid = "%W%\t%G%")
+
+	INCLUDE 'MODEOP.INC'
+
+	INCLUDE 'PASSIT.INC'
+
+	INCLUDE 'DEFCMN.INC'
+
+	INCLUDE 'DEVCOM.INC'
+
+	INCLUDE 'ENVPAR.INC'
+
+	INCLUDE 'AZLTRN.INC'
+
+	INCLUDE 'NOISE.INC'
+
+        INTEGER YEAR,MON,DAY,HOUR,MIN
+
+	character detector*1
+
+C  '1'&'2' HEADER RECORDS - PROCESS AFTER ALL OTHER STUFF DONE FOR GROUP
+C   ....RUN HEADER IS IN 'IP' AND BURST HEADER IS IN 'BH'
+        IF (IP(1:1).NE.'1') GO TO 10
+C  TO SECONDS
+C------------------------------------------------------------
+	errmsg = ' IN RDLUN, ERROR IN READ(BH,5401)'
+	READ(BH,5401,ERR=989,IOSTAT=IERR)SBYS,NSHOTS,TEMP,HUMID,
+     1			TOFF, NFK,NRK,FKSX,FKSX2,RKSX,RKSX2
+5401	FORMAT(T23,F6.0, T42,I5, T50,F4.0,F2.0, T60,F8.0,
+     1		T82,2I4, T91,4F10.0)
+	SBYS = SBYS*1.D-4
+	TEMP = (TEMP*1.D-1)+273.15D0
+	TOFF = TOFF*1.D-7
+	FKSX  = FKSX *1.D-4
+	FKSX2 = FKSX2*1.D-2
+	RKSX  = RKSX *1.D-4
+	RKSX2 = RKSX2*1.D-2
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+	errmsg = ' IN RDLUN, ERROR IN READ(IP,5601)'
+	READ(IP,5601,ERR=989,IOSTAT=IERR)OBSY,WMICRN,NREFL,SDQI,detector,
+     x		isch,isite
+5601	FORMAT(T25,2F5.0, T51,I2,A1,A1,I1,I8)
+	WMICRN = WMICRN*1.D-4
+        CALL WRLUN(OMC,AZALTRN(2),AZALTRN(3))
+
+C  NOT A RUN HEADER RECORD, SO READ ANOTHER
+ 10     READ(21,1000,END=99) IP
+ 1000   FORMAT(A130)
+
+C  RUN HEADER RECORD ON READ
+        IF (IP(1:1) .NE. '1') GO TO 20
+
+C  READ A BURST HEADER. CHECK FOR OUT OF SEQUENCE!
+        READ(21,1000,END=99) BH
+        IF (BH(1:1).NE.'2') then
+	  errmsg='--ERROR: RUN HEADER W/O BURST HEADER'
+	  call error(2,errmsg,0,0)
+	endif
+        GO TO 100
+
+C  BURST HEADER IN MIDDLE OF RUN. JUST CHANGE WHAT IS NECESSARY.
+ 20     IF (IP(1:1).NE.'2') GO TO 30
+	BH= IP
+C...NORMALPOINT BURST HEADER SHOULD NOT BE DECODED
+	IF (IP(68:68).EQ.'N') GO TO 10
+	errmsg = ' IN RDLUN, ERROR IN READ(IP,5602)'
+	READ(IP,5602,ERR=989,IOSTAT=IERR)SBYS,MSHOTS,TEMP,HUMID,
+     1		TOFF, MFK,MRK, GKSX,GKSX2, SKSX,SKSX2
+5602	FORMAT(T23,F6.0, T42,I5, T50,F4.0,F2.0,T60,F8.0,
+     1		T82,2I4, T91,4F10.0)
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        TOFF   = TOFF*1.D-7
+        TEMP   = (TEMP*1.D-1)+273.15D0
+        SBYS   = SBYS*1.D-4
+	NSHOTS = NSHOTS+ MSHOTS
+        NFK    = NFK   + MFK
+        NRK    = NRK   + MRK
+        FKSX   = FKSX  + GKSX *1.D-4
+        FKSX2  = FKSX2 + GKSX2*1.D-2
+        RKSX   = RKSX  + SKSX *1.D-4
+        RKSX2  = RKSX2 + SKSX2*1.D-2
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        GO TO 50
+
+C  DETAIL OR NORMALPOINT RECORD
+C...ALL TIME UNITS ARE CONVERTED TO NSEC OR SEC ON INPUT
+ 30     IF (IP(1:1).NE.'3' .AND. IP(1:1).NE.'4') GO TO 40
+C...BYPASS NOISE RETURNS AND DROP OLD NP's WHEN FORMING NORMALPOINTS
+	IF (MODEOP.NE.0) GO TO 35
+C          IF (IP(85:85).EQ.'0') GO TO 50
+          IF (IP(85:85).EQ.'0') CALL WRLUN(OMC,AZALTRN(2),AZALTRN(3))
+	  IF (IP(1:1).EQ.'4') GO TO 10
+C------------------------------------------------------------
+35	CONTINUE
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+	errmsg = ' IN RDLUN, ERROR IN READ(IP,5603)'
+	READ(IP,5603,ERR=989,IOSTAT=IERR) YEAR,MON,DAY, HOUR,MIN,SEC,
+     1	  RORANGE, ELDEL,GEODEL, UNCERT, FREQ, PRESS, ISIGNAL, ORESID
+5603	FORMAT(T5,5I2,F9.0,
+     1		F14.0, T39,F9.0,F8.0,F6.0,F7.0,F6.0,T85,I1,T111,F9.0)
+	SEC = SEC*1.D-7
+	RORANGE = RORANGE*1.D-4
+	ELDEL  = ELDEL *1.D-4
+	GEODEL = GEODEL*1.D-4
+	UNCERT = UNCERT*1.D-4
+	PRESS = PRESS*1.D-2
+	ORESID = ORESID*1.D-3
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+C  Y2k correction:
+        if (year < 65) year= year+100
+        CALL GRTJD(YEAR,MON,DAY,HOUR,MIN,SEC+TOFF,RJD,FJD)
+	ORANGE = (RORANGE - ELDEL - GEODEL)*1.D-9
+	ORANGE = ORANGE*(1.D0 - FREQ/8.64D11)
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+C	if (isignal .eq. 1 .and. modeop .eq. 0) then
+c	  nsignal= nsignal+ 1
+c	  stime(nsignal)= rjd+ fjd
+c	  somc(nsignal)= oresid
+c	else
+c	  nnoise= nnoise+ 1
+c	  ntime(nnoise)= rjd+ fjd
+c	  nomc(nnoise)= oresid
+c	  go to 50
+c	endif
+	IF (DEB(20)) THEN
+	  WRITE(DUNIT,1010) RORANGE,ELDEL,GEODEL,UNCERT,
+     1		TOFF,FREQ,PRESS,ORESID,ORANGE,isignal
+ 1010	  FORMAT(1X,'RDLUN: ',F15.4,2F10.4,F8.4,
+     1		F10.6,F8.0,F8.2,F8.4,F15.13,i2)
+	ENDIF
+	GO TO 100
+
+C  MINI NORMAL POINTS
+ 40     IF (IP(1:1).NE.'5') GO TO 50
+C------------------------------------------------------------
+	errmsg = ' IN RDLUN, ERROR IN READ(IP,5604)'
+	READ(IP,5604,ERR=989,IOSTAT=IERR) YEAR,MON,DAY, HOUR,MIN,SEC,
+     1		ORANGE, NREFL, OBSY, UNCERT,
+     2		PRESS,TEMP,HUMID,WMICRN, ORESID
+5604	FORMAT(T5,5I2,F9.0,
+     1		F14.0,I1,F5.0, T47,F6.0,
+     2		T57,F6.0,F4.0,F2.0,F5.0, T101,F9.0)
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+	SEC = SEC*1.D-7
+	CALL GRTJD(YEAR,MON,DAY,HOUR,MIN,SEC,RJD,FJD)
+	ORANGE = ORANGE*1.D-13
+	TOFF   = 0.D0
+	FREQ   = 0.D0
+	ELDEL  = 0.D0
+	GEODEL = 0.D0
+        UNCERT = UNCERT*1.D-4
+        PRESS  = PRESS*1.D-2
+        TEMP   = (TEMP*1.D-1)+ 273.15D0
+        WMICRN = WMICRN*1.D-4
+        ORESID = ORESID*1.D-3
+C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        GO TO 100
+
+C  ANYTHING ELSE (INCLUDING BURST HEADERS NOT IMMEDIATELY AFTER RUN HEADER)
+ 50     CALL WRLUN(OMC,AZALTRN(2),AZALTRN(3))
+        GO TO 10
+
+C  END OF FILE
+ 99     NREFL= -1
+C  In case the file contains only a header (1) and burst header (2)
+        IP(1:1)= ''
+ 100    RETURN
+C
+989	CONTINUE
+	CALL ERROR(1,errmsg,IERR,IERR)
+C
+C	   THE
+	   END
+

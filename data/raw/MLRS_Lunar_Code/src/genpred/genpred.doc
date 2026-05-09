@@ -1,0 +1,106 @@
+
+Part 1
+Compute center of earth to reflector or feature vectors.
+Write out vectors with time. Maybe need relativistic correction.
+
+EOP not needed as at center of earth.
+
+
+Part 2
+For each reflector and feature file,
+For each time
+	Compute lighttime offset between center of earth and station.
+	Retard time of interpolation of center of earth state vector by this 
+	  amount to get lunar range at the same time as c-of-e.
+        Subtract properly rotated station vector from state vector to get state
+	  vector at the time of interpolation.
+	Do same thing with return leg.
+	Compute range from sqrt of sum of squares of leg, for both directions.
+
+Detail:
+  Compute outgoing range
+  Translate from C-of-E to station
+  Compute outgoing range
+  Difference the ranges.
+  increase interp time by diff in range time
+  Computer outgoing range.
+  Iterate current and previous range until closure??
+  Do same with inbound range.
+	 
+Format requirements: 
+ - EOP
+ - outgoing, returning statevector (center of earth and reflector/feature
+ - nutation values (4)
+ - relativistic correction(s)
+
+
+Notes on relativistic correction:
+This goes as A+B+AB/(A+B-AB). Consider full moon, new moon, and quadrature.
+Say the sun-earth distance (A) = 500 sec and AB = 1.25 sec 
+Full: B= 500+1.25, and the quotient becomes: 1.0025
+New:  B= 500-1.25, and the quotient becomes: 1.002506
+Quad: B= 500, and the quotient becomes: 1.002503
+So the variation is 5e-6, far below needs for predictions, given an overall
+relativistic effect of 25nsec, one way.
+
+Earth-moon distance vary from 1.15 to 1.35 sec, giving values of
+Full: 1.0023, 1.0027
+New:  1.002305,...
+Earth's orbit ellipticity (re-rm)/rm = 0.0034.
+Hmmm, One day's test shows that the outbound correction goes from 23.362-
+24.230 nsec. Bakleg correction is similar, giving an overall change of 
+1.7 nsec.
+
+
+To run genpred using the center of earth coordinates:
+[rlr@farmalldhcp elunpred]$ ./genpred -f PRDCTRL.PCAgeo
+                         GENERALIZED SOLAR SYSTEM PREDICTION PACKAGE
+                         ************************
+ 
+ ENTER OUTPUT EPHEMERIS FILE NAME:
+geocx
+ Enter polar motion file name (just return for "poldat")
+ 
+ 
+ ENTER INITIAL JULIAN DATE (MM DD YYYY HH MM SS):
+7 9 2002 0 0 0
+ 
+ ENTER FINAL   JULIAN DATE (MM DD YYYY HH MM SS):
+7 10 2002 0 0 0
+
+
+Aberration:
+Apparently, the aberration corrections to the point angle are of the wrong sign,
+which had been suspected but not previously confirmed. Using USNO NOVAS code aberat routine, here is a comparison:
+ bodtel  -0.00227567855 -0.000103913452  0.0010656014 -0.000602025677
+  0.0137364909 -1.54521665E-05
+ tlrfvec   0.000475268016 -0.00222670668 -0.00106801477  0.000584151723
+  0.000151732782  1.24950011E-05
+ stvec   0.294566371 -0.892743488 -0.387050387  0.0161934171  0.00451978301
+  0.0019586884 DIST   0.00251490713 VLITE   173.144633
+ old aberr -2.35207638E-07 -6.5649361E-08 -2.84497379E-08  <==
+ usno aberr  2.40074449E-07  4.28535494E-08  1.75159682E-08<==
+ celtel   0.000506637685 -0.00222096738 -0.00106554212  0.00058227166
+  0.000158540402  1.54553417E-05
+ bodtel   0.00227564618  0.000103982348 -0.00106554212  0.000602562127
+ -0.0137362785  1.54553417E-05
+Now regarding the MLRS acq code: it applies no aberration correction, because 
+it is applied to the input station to center of moon coordinates.
+
+DTADT shouldn't have to be carried or computed in genprst. It seems to make 
+about .5 nsec difference in the range at the horizon and ~1 near the zenith?
+
+
+Aberration: " SEE MURRAY (1981) MON. NOTICES ROYAL AST. SOCIETY 195, 639-648."
+Sun velocity needed for aberration can be computed in closed form w/ usno 
+novas solsys3 routine.
+
+Setting UT1C=0 in genpred resulted in error wrt standard run of 608->-624 nsec.
+Current versions w/ proper UT1C give errors of 9 -> -36nsec h to h.
+
+Problem was that the WOBBLEREC needs to be applies to BODY FIXED coordinates,
+and need to be applied with negatice signs to xpole and ypole. Both USNO and 
+our routines give the same results. Now we are down to 0 error near the 
+horizon and 2 nsec difference at the meridian.
+
+

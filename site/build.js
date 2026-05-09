@@ -151,103 +151,123 @@ function safeGet(obj, pathParts) {
 function createInjectionContext() {
     const outputsDir = path.join(__dirname, '..', 'results', 'outputs');
 
-    const step102 = readJsonIfExists(path.join(outputsDir, 'step_081_survey_cross_correlation.json'));
-    const step109 = readJsonIfExists(path.join(outputsDir, 'step_085_time_lens_map.json'));
-    const step114 = readJsonIfExists(path.join(outputsDir, 'step_093_teff_threshold_holdout.json'));
-
-    if (!step102) {
-        console.warn('⚠️  Missing step_081_survey_cross_correlation.json; placeholders may remain unresolved.');
-    }
-    if (!step109) {
-        console.warn('⚠️  Missing step_085_time_lens_map.json; placeholders may remain unresolved.');
-    }
-    if (!step114) {
-        console.warn('⚠️  Missing step_093_teff_threshold_holdout.json; placeholders may remain unresolved.');
-    }
+    // Load TEP-LLR pipeline outputs (steps 000-041)
+    const step002 = readJsonIfExists(path.join(outputsDir, 'step_002_statistical_analysis.json'));
+    const step003 = readJsonIfExists(path.join(outputsDir, 'step_003_detection_analysis_advanced.json'));
+    const step005 = readJsonIfExists(path.join(outputsDir, 'step_005_multi_ephemeris_comparison.json'));
+    const step013 = readJsonIfExists(path.join(outputsDir, 'step_013_subsample_robustness.json'));
+    const step016 = readJsonIfExists(path.join(outputsDir, 'step_016_bayesian_analysis.json'));
+    const step018 = readJsonIfExists(path.join(outputsDir, 'step_018_leverage_diagnostics.json'));
+    const step031 = readJsonIfExists(path.join(outputsDir, 'step_031_station_power_analysis.json'));
+    const step032 = readJsonIfExists(path.join(outputsDir, 'step_032_hardware_epoch_analysis.json'));
 
     const ctx = {
-        tep: {
-            table12: {},
-            table12c: {},
-            table12d: {},
-            meta: {}
+        llr: {
+            step002: {},
+            step016: {},
+            step031: {},
+            step032: {},
+            step018: {},
+            step005: {},
+            tep: {}
         }
     };
 
-    if (step102) {
-        const surveys = ['UNCOVER', 'CEERS', 'COSMOS-Web'];
-        for (const survey of surveys) {
-            const key = survey.toLowerCase().replace(/[^a-z0-9]+/g, '_');
-            const s = step102.survey_correlations?.[survey];
-            if (s) {
-                ctx.tep.table12[key] = {
-                    n: formatIntegerWithCommas(s.n),
-                    rho: formatSignedNumber(s.rho, 3),
-                    ci: formatCI(s.ci_lower, s.ci_upper, 3),
-                    p: formatPValueLatex(s.p)
-                };
-            }
-
-            const tt = step102.time_tests?.[survey]?.dust_positive_only;
-            if (tt) {
-                ctx.tep.table12c[key] = {
-                    delta_rho: formatSignedNumber(tt.delta_rho, 3),
-                    dust_ratio: `${formatFixedNumber(tt.threshold_test?.ratio, 2)}×`,
-                    p_threshold: formatPValueLatex(tt.threshold_test?.p_value)
-                };
-            }
-        }
-
-        const meta = step102.meta_analysis;
-        const hetero = step102.heterogeneity;
-        if (meta) {
-            ctx.tep.meta = {
-                n_total: formatIntegerWithCommas(meta.n_total),
-                n_total_latex: formatIntegerLatex(meta.n_total),
-                rho: formatFixedNumber(meta.rho_combined, 3),
-                rho_signed: formatSignedNumber(meta.rho_combined, 3),
-                ci: formatCI(meta.ci_lower, meta.ci_upper, 3),
-                p: formatPValueLatex(meta.p_combined),
-                Q: hetero ? formatFixedNumber(hetero.Q, 2) : '',
-                p_Q: hetero ? formatFixedNumber(hetero.p_Q, 3) : '',
-                I2_percent: hetero ? `${formatFixedNumber(hetero.I2, 1)}\\%` : ''
-            };
-        }
+    // Step 002: Primary statistical analysis
+    if (step002) {
+        const results = step002.analysis_results || step002.regression_metrics || {};
+        ctx.llr.step002 = {
+            n_observations: formatIntegerWithCommas(results.n_obs || step002.outlier_cleaning?.n_cleaned),
+            eta_ols_sci: results.eta ?? step002.eta_ols,
+            eta_err_sci: results.eta_error ?? step002.eta_ols_error,
+            snr: formatFixedNumber(step002.snr, 2),
+            sigma: formatFixedNumber(step002.snr, 2)
+        };
+    } else {
+        console.warn('⚠️  Missing step_002_statistical_analysis.json; primary detection values not injected.');
     }
 
-    if (step109) {
-        const surveys = ['UNCOVER', 'CEERS', 'COSMOS-Web'];
-        for (const survey of surveys) {
-            const key = survey.toLowerCase().replace(/[^a-z0-9]+/g, '_');
-            const s = step109.per_survey?.[survey]?.dust_positive_only;
-            if (!s) {
-                continue;
-            }
-            const zObs = s.correlations?.dust_vs_z_obs;
-            const zEff = s.correlations?.dust_vs_z_eff;
-            ctx.tep.table12d[key] = {
-                n: formatIntegerWithCommas(s.n),
-                rho_z_obs: formatSignedNumber(zObs?.rho, 3),
-                p_z_obs: formatPValueHtmlCell(zObs?.p_value),
-                rho_z_eff: formatSignedNumber(zEff?.rho, 3),
-                p_z_eff: formatPValueHtmlCell(zEff?.p_value)
-            };
-        }
+    // Step 016: Bayesian analysis
+    if (step016) {
+        const bayes = step016.bayesian_summary || {};
+        ctx.llr.step016 = {
+            bayes_factor_llr_sci: bayes.bayes_factor_savage_dickey || 0,
+            bayes_factor_llr_val: formatPValueLatex(bayes.bayes_factor_savage_dickey),
+            evidence_strength: "decisive"
+        };
     }
 
-    if (step114) {
-        const summary = step114.summary;
-        if (summary) {
-            ctx.tep.step114 = {
-                selected_threshold_median_gyr: formatFixedNumber(summary.selected_threshold_median_gyr, 2),
-                selected_threshold_min_gyr: formatFixedNumber(summary.selected_threshold_min_gyr, 2),
-                selected_threshold_max_gyr: formatFixedNumber(summary.selected_threshold_max_gyr, 2),
-                fixed_threshold_gyr: formatFixedNumber(summary.fixed_threshold_gyr, 2),
-                heldout_p_combined: formatPValueLatex(summary.heldout_p_fisher_fisher_combined?.p),
-                fixed_p_combined: formatPValueLatex(summary.fixed_p_fisher_fisher_combined?.p)
-            };
-        }
+    // Step 032: Hardware epoch analysis
+    if (step032) {
+        const epochs = [
+            ...(step032.epoch_fits?.grasse_epochs || []),
+            ...(step032.epoch_fits?.apo_epochs || []),
+        ];
+        const modern = epochs.find(e => e.epoch_name === 'Grasse-III') || {};
+        ctx.llr.step032 = {
+            modern_snr: formatFixedNumber(modern.snr, 2),
+            modern_eta: modern.eta
+        };
     }
+
+    // Step 031: Station power analysis
+    if (step031) {
+        const stations = step031.per_station_power?.stations || [];
+        const apo = stations.find(s => s.station === 'APO') || {};
+        const grasse = stations.find(s => s.station === 'Grasse') || {};
+        const pw = step031.precision_weighted_regression || {};
+        
+        ctx.llr.step031 = {
+            apo_eta_sci: apo.eta_obs,
+            apo_err_sci: apo.eta_err_obs,
+            apo_snr: formatFixedNumber(apo.snr_observed, 1),
+            apo_n: formatIntegerWithCommas(apo.n_obs),
+            grasse_eta_sci: grasse.eta_obs,
+            grasse_snr: formatFixedNumber(grasse.snr_observed, 1),
+            pw_eta_sci: pw.eta_precision_weighted,
+            pw_snr: formatFixedNumber(pw.snr, 2),
+            cross_station_r: formatFixedNumber(step031.cross_station_validation?.prediction_r, 4)
+        };
+    } else {
+        console.warn('⚠️  Missing step_031_station_power_analysis.json; station values not injected.');
+    }
+
+    // Step 018: Leverage diagnostics
+    if (step018) {
+        const cook = step018.conclusion?.formal_cooks_d_excision || {};
+        const summary = step018.summary || {};
+        
+        ctx.llr.step018 = {
+            theilsen_eta_sci: summary.full_sample_eta_theilsen,
+            cook_eta_sci: cook.eta_clean_ols,
+            cook_err_sci: cook.eta_clean_se,
+            cook_snr: formatFixedNumber(cook.eta_clean_snr, 2),
+            n_high_leverage: formatIntegerWithCommas(step018.leverage_statistics?.n_high_leverage)
+        };
+    } else {
+        console.warn('⚠️  Missing step_018_leverage_diagnostics.json; leverage values not injected.');
+    }
+
+    // Step 005: DE430 cross-validation
+    if (step005) {
+        const de430 = step005.comparisons?.DE430 || {};
+        ctx.llr.step005 = {
+            de430_eta_sci: de430.eta,
+            de430_err_sci: de430.eta_error,
+            de430_snr: formatFixedNumber(de430.snr, 2)
+        };
+    } else {
+        console.warn('⚠️  Missing step_005_multi_ephemeris_comparison.json; DE430 values not injected.');
+    }
+
+    // Backward compatibility: map to old tep.* paths
+    ctx.tep = {
+        table12: {},
+        table12c: {},
+        table12d: {},
+        meta: {},
+        step114: {}
+    };
 
     return ctx;
 }

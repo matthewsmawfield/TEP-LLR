@@ -1,0 +1,55 @@
+0a1
+> #ifdef TESTEPH
+219c220
+< 
+---
+> #endif
+251c252
+<       NRECL= 
+---
+>       NRECL= 4
+316c317
+<       NRECL=
+---
+>       NRECL=1
+373a375,382
+> 
+> #ifndef TESTEPH
+>       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+>       INCLUDE 'DEVCOM.INC'
+>       INCLUDE 'CNTINF.INC'
+>       COMMON /EPUNIT/ ifeph
+>       integer itrimlen
+> #endif
+388c397
+<        NRECL=
+---
+>        NRECL=4
+393c402
+< 
+---
+> #ifdef TESTEPH
+394a404,406
+> #else
+>       NRFILE=ifeph
+> #endif
+399a412
+> #ifdef TESTEPH
+400a414,422
+> #else
+>       lene=itrimlen(fileph)
+>       if(patheph(1:1) .EQ. ' ')then
+>         NAMFIL = fileph(1:lene)
+>       else
+>         NAMFIL = patheph(1:leneph)//fileph(1:lene)
+>       endif
+> CC      write(*,*) fileph, lene, patheph, leneph
+> #endif
+417c439
+<       KSIZE = 
+---
+>       KSIZE = 2036
+941c963
+< C        CALL FSIZER3(NRECL,KSIZE,NRFILE,NAMFIL)
+---
+>         CALL FSIZER3(NRECL,KSIZE,NRFILE,NAMFIL)

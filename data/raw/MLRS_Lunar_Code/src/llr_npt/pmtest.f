@@ -1,0 +1,37 @@
+
+	double precision tjdutc, xdum,ydum,ut1c
+	integer iflg
+	tjdutc= 2452801.7829476651d0
+	CALL KUSTNER(TJDUTC,XDUM,YDUM,UT1C,IFLG)
+	write (*,*) DUM,YDUM,UT1C,IFLG
+	end
+
+
+	SUBROUTINE ENTSET(TIMARR,TIM,N,COEFS)
+      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      DOUBLE PRECISION TIMARR(N),COEFS(N)
+ 
+      DO 10 I=1,N
+          COEFS(I)= 1.D0
+          DO 5 J=1,N
+           IF (I.EQ.J) GO TO 5
+           COEFS(I)= (TIM-TIMARR(J))*COEFS(I)/(TIMARR(I)-TIMARR(J))
+ 5        CONTINUE
+ 10   CONTINUE
+C
+C	   THE
+	   END
+
+
+	DOUBLE PRECISION FUNCTION ENTRP(COEFS,DATARR,N)
+      IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      DOUBLE PRECISION COEFS(N),DATARR(N)
+      Y= 0.D0
+      DO 10 I=1,N
+ 10   Y= Y+ COEFS(I)*DATARR(I)
+      ENTRP= Y
+C
+C	   THE
+	   END
+
+

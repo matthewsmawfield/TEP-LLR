@@ -1,0 +1,5 @@
+00 As of 12 May 2010 lunar predictions are computed using JPL DE-421.
+00 At the same time the Lunakhod 1 (reflector 101) coordinates were updated
+00 based on JPL work with LRO images and APOLLO LLR data.
+00 As of 09 May 2011 aberration has reverted to the non-relativistic
+00 calculation.

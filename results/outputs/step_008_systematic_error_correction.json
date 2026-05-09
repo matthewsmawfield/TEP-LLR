@@ -1,0 +1,10 @@
+{
+    "step_id": "step_008",
+    "correction_summary": {
+        "rms_before_m": 0.09481055785630182,
+        "rms_after_m": 0.09481055785630182,
+        "improvement_pct": 0.0,
+        "output_file": "data/processed/INPOP19a_all_stations_residuals_corrected.csv"
+    },
+    "status": "PASS"
+}

@@ -1,0 +1,12 @@
+[01:59:46] >>> Processing DE430 data from DE430_2014-2018_residuals.dat
+[01:59:46]     Parsed 4597 observations from DE430_2014-2018_residuals.dat
+[01:59:46]     Parsed 4597 observations
+[01:59:46]     Computing Moon-Sun elongation angles...
+[01:59:46]     Cleaning data...
+[01:59:46]     Cleaned dataset: 4597 observations (removed 0)
+[01:59:46]     Residual stats for DE430:
+[01:59:46]       Mean: 1.228713e-02 m
+[01:59:46]       Std:  2.662568e-01 m
+[01:59:46]       RMS:  2.665112e-01 m
+[01:59:46] ✓   DE430 Preprocessing Complete: 4597 observations
+[01:59:46] Results saved to results/outputs/step_001b_de430_preprocessing.json

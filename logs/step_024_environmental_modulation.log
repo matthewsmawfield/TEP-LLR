@@ -1,0 +1,22 @@
+[02:11:32]     Computing Earth-Sun distances via Skyfield...
+[02:11:32]     Using ephemeris: de421.bsp
+[02:11:32]     Computed distances for 25,445 cleaned observations.
+[02:11:32]     Distance range: 0.9832 AU to 1.0168 AU
+[02:11:32]     Removed 762 outliers (6σ threshold)
+[02:11:32] 
+[02:11:32] >>> --- DIFFERENTIAL SUPPRESSION ANALYSIS ---
+[02:11:32]     Hypothesis: Eta magnitude should scale with solar scalar gradient (varies with solar distance)
+[02:11:32]     Perihelion threshold: r <= 15th percentile
+[02:11:32]     Aphelion threshold: r >= 85th percentile
+[02:11:32] 
+[02:11:32]     DEEP PERIHELION (High Shear, r <= 15th percentile):
+[02:11:32]       N = 3,817
+[02:11:32]       η = -2.8075e-04 ± 1.9147e-04
+[02:11:32]       SNR = 1.47σ
+[02:11:32] 
+[02:11:32]     DEEP APHELION (Low Shear, r >= 85th percentile):
+[02:11:32]       N = 3,818
+[02:11:32]       η = 7.0761e-05 ± 1.5706e-04
+[02:11:32]       SNR = 0.45σ
+[02:11:32] Results saved to results/outputs/step_024_environmental_modulation.json
+[02:11:32] ✓   Environmental Modulation Tests Complete.

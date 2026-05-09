@@ -1,0 +1,64 @@
+{
+    "step_id": "step_038",
+    "description": "Tests Murphy/Sabhlok full-moon deficit against TEP scalar-field predictions",
+    "timestamp": "2026-05-10T02:12:46.002995",
+    "references": {
+        "murphy_2010": "Murphy et al. 2010, PASP, 122, 892",
+        "murphy_2014": "Murphy et al. 2014, Icarus, 231, 183",
+        "sabhlok_2024": "Sabhlok et al. 2024, Icarus, 412, 115927 (arXiv:2403.00899)"
+    },
+    "phase_analysis": {
+        "full_moon": {
+            "n_observations": 855,
+            "mean_residual_m": 0.0028344827260297087,
+            "std_residual_m": 0.0511674145324033,
+            "sem_residual_m": 0.0017498886547471035,
+            "correlation_r": 0.062228559734691165,
+            "correlation_p": 0.06895908167549313,
+            "eta": -0.00021733803998745456
+        },
+        "quarter_moon": {
+            "n_observations": 11011,
+            "mean_residual_m": -0.0005099766667629142,
+            "std_residual_m": 0.09912778159977637,
+            "sem_residual_m": 0.0009446740940811596,
+            "correlation_r": -0.03100816408171977,
+            "correlation_p": 0.0011371122345986283,
+            "eta": -0.0011716308250892921
+        },
+        "new_moon": {
+            "n_observations": 160,
+            "mean_residual_m": -0.020880286683742425,
+            "std_residual_m": 0.013223344984590274,
+            "sem_residual_m": 0.001045397210936735,
+            "correlation_r": -0.17839759892593388,
+            "correlation_p": 0.024007157363690735,
+            "eta": -0.0016643164702113496
+        }
+    },
+    "model_comparison": {
+        "tep_correlation": {
+            "r": -0.03044239216369888,
+            "p": 8.261051044061221e-07
+        },
+        "thermal_correlation": {
+            "r": 0.02880888718063969,
+            "p": 3.0937695121371205e-06
+        },
+        "preferred_model": "TEP",
+        "r_tep_squared": 0.000926739240648435,
+        "r_thermal_squared": 0.0008299519805868258
+    },
+    "illumination_geometry": {
+        "full_moon_subset_n": 1698,
+        "perihelion_correlation_r": 0.025489594494116412,
+        "perihelion_correlation_p": 0.2938369432746715,
+        "interpretation": "Inconclusive"
+    },
+    "assessment": {
+        "tep_vs_thermal": "TEP",
+        "conclusion": "Full-moon deficit pattern consistent with TEP synodic modulation",
+        "note": "Sabhlok documented 10-15x signal degradation near full moon attributed to dust+thermal lensing; TEP offers scalar-field coupling as alternative mechanism"
+    },
+    "status": "PASS"
+}

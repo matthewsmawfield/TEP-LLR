@@ -1,0 +1,60 @@
+{
+    "individual_stations": {
+        "APO": {
+            "n_obs": 2595,
+            "residual_min_m": -0.117879355683,
+            "residual_max_m": 0.118808662162,
+            "residual_rms_m": 0.031601798760565084,
+            "date_min": 2006.26356852,
+            "date_max": 2016.90088362
+        },
+        "Grasse": {
+            "n_obs": 19390,
+            "residual_min_m": -1.03619744556,
+            "residual_max_m": 1.55421719773,
+            "residual_rms_m": 0.09870697444379005,
+            "date_min": 1984.26625597,
+            "date_max": 2019.77663227
+        },
+        "Matera": {
+            "n_obs": 346,
+            "residual_min_m": -0.16312240422,
+            "residual_max_m": 0.359140288232,
+            "residual_rms_m": 0.0619324718317995,
+            "date_min": 2003.14198213,
+            "date_max": 2019.23802473
+        },
+        "McDonald2": {
+            "n_obs": 3139,
+            "residual_min_m": -0.824569582939,
+            "residual_max_m": 1.03032982349,
+            "residual_rms_m": 0.09555025387360164,
+            "date_min": 1988.16071428,
+            "date_max": 2013.93737637
+        },
+        "Haleakala": {
+            "n_obs": 737,
+            "residual_min_m": -0.418387960138,
+            "residual_max_m": 0.420614785157,
+            "residual_rms_m": 0.1383762784480651,
+            "date_min": 1984.86808199,
+            "date_max": 1990.66064725
+        }
+    },
+    "combined": {
+        "total_obs": 26207,
+        "stations": [
+            "APO",
+            "Grasse",
+            "Matera",
+            "McDonald2",
+            "Haleakala"
+        ],
+        "date_range": [
+            1984.26625597,
+            2019.77663227
+        ],
+        "residual_rms_m": 0.09481055785630182,
+        "output_file": "data/processed/INPOP19a_all_stations_residuals.csv"
+    }
+}

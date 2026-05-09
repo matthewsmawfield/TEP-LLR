@@ -18,20 +18,15 @@ venv/
 .vscode/
 *.swp
 *.swo
+.windsurf/
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs (keep structure)
-logs/*.log
-logs/*.txt
-!logs/.gitkeep
-
-# Results (keep structure)
-results/outputs/*
-!results/outputs/.gitkeep
-
 # Temp files
 *.tmp
 *.temp
+
+# Test scripts (development tools)
+test_*.py

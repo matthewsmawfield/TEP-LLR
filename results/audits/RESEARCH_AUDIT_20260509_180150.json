@@ -1,0 +1,358 @@
+{
+    "report_metadata": {
+        "pipeline_name": "Full Canonical",
+        "timestamp": "2026-05-09T18:01:50.707604",
+        "elapsed_total_s": 994.75,
+        "status": "PASS"
+    },
+    "system_telemetry": {
+        "os": "Darwin",
+        "os_release": "25.3.0",
+        "machine": "arm64",
+        "processor": "arm",
+        "cpu_count_logical": 14,
+        "cpu_count_physical": 14,
+        "memory_total_gb": 24.0,
+        "python_version": "3.13.5",
+        "is_m4_pro": true
+    },
+    "dependency_audit": {
+        "scripts": {
+            "step_000_llr_data_ingestion.py": "7c53477be169",
+            "step_001_data_preprocessing.py": "245af1416c7a",
+            "step_001b_de430_preprocessing.py": "572e7465754d",
+            "step_001c_de440_ephemeris.py": "1d195ab139fb",
+            "step_001d_inpop21a_ephemeris.py": "3be39bfe831b",
+            "step_002_statistical_analysis.py": "35b743b5c34f",
+            "step_003_detection_analysis_advanced.py": "65016d88a80c",
+            "step_004_temporal_drift_analysis.py": "40165fd38fa6",
+            "step_005_multi_ephemeris_comparison.py": "a7f4ae3657dd",
+            "step_055_meta_analysis.py": "b00d8011921d",
+            "step_006_systematic_error_analysis.py": "f7e15ba27573",
+            "step_007_additional_station_ingestion.py": "0fcdf9ad3b6f",
+            "step_008_systematic_error_correction.py": "7223abe87878",
+            "step_009_corrected_data_analysis.py": "2ba6a5b93e58",
+            "step_010_ephemeris_independent_analysis.py": "62eeca8e522c",
+            "step_011_systematic_control_analysis.py": "6ad4a7191c98",
+            "step_012_noise_signal_injection.py": "25cfee344761",
+            "step_013_subsample_robustness.py": "4861e7f45040",
+            "step_014_station_decomposition.py": "e8b39f332439",
+            "step_014_inter_station_consistency.py": "24e8b599db7b",
+            "step_015_null_tests.py": "4802d47e3200",
+            "step_016_bayesian_analysis.py": "4717a7c064bc",
+            "step_017_tep_prediction.py": "99b830a8e61e",
+            "step_018_leverage_diagnostics.py": "9f5e7af28b1a",
+            "step_019_station_quality.py": "72a6da1e372a",
+            "step_020_systematic_monte_carlo.py": "3b3f4c918fff",
+            "step_021_temporal_amplitude.py": "263035469c68",
+            "step_022_ipw_validation.py": "52a3aca7b4de",
+            "step_023_absorption_simulation.py": "86b6706918d1",
+            "step_024_environmental_modulation.py": "636d4506eb13",
+            "step_025_solar_cycle_correlation.py": "d2c4a63f081c",
+            "step_026_thermal_array_modeling.py": "37fad444da79",
+            "step_027_leverage_temporal_clustering.py": "e00f7d930081",
+            "step_028_tep_core_density_simulation.py": "9c75fe816356",
+            "step_029_day_night_thermal_bias.py": "5ff0463fd53e",
+            "step_030_geometric_elongation.py": "c3a9c522c1fb",
+            "step_031_station_power_analysis.py": "85d088ef46b7",
+            "step_032_hardware_epoch_analysis.py": "d9a0c3f650da",
+            "step_033_lomb_scargle_orbital_dynamics.py": "33997b9d6ac1",
+            "step_034_ephemeris_orthogonality_proof.py": "7e871bf915d2",
+            "step_035_quantitative_eta_prediction.py": "39c0c8c0987e",
+            "step_036_static_dynamic_absorption.py": "8a6464f6d9c3",
+            "step_037_historical_comparison.py": "cb36a33019d5",
+            "step_038_full_moon_deficit_analysis.py": "218427723f3d",
+            "step_039_lunar_recession_analysis.py": "ad7700534387",
+            "step_040_tidal_resonance_analysis.py": "734fe9842205",
+            "step_041_dust_sensitivity_analysis.py": "10fcfdd832c5"
+        },
+        "utils": {
+            "statistical_utils.py": "c781409058cf",
+            "llr_constants.py": "949e111d6581"
+        }
+    },
+    "step_telemetry": [
+        {
+            "name": "step_000_llr_data_ingestion.py",
+            "status": "PASS",
+            "elapsed_s": 0.05,
+            "returncode": 0
+        },
+        {
+            "name": "step_001_data_preprocessing.py",
+            "status": "PASS",
+            "elapsed_s": 10.13,
+            "returncode": 0
+        },
+        {
+            "name": "step_001b_de430_preprocessing.py",
+            "status": "PASS",
+            "elapsed_s": 1.14,
+            "returncode": 0
+        },
+        {
+            "name": "step_001c_de440_ephemeris.py",
+            "status": "PASS",
+            "elapsed_s": 0.04,
+            "returncode": 0
+        },
+        {
+            "name": "step_001d_inpop21a_ephemeris.py",
+            "status": "PASS",
+            "elapsed_s": 0.04,
+            "returncode": 0
+        },
+        {
+            "name": "step_002_statistical_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 770.15,
+            "returncode": 0
+        },
+        {
+            "name": "step_003_detection_analysis_advanced.py",
+            "status": "PASS",
+            "elapsed_s": 10.21,
+            "returncode": 0
+        },
+        {
+            "name": "step_004_temporal_drift_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.79,
+            "returncode": 0
+        },
+        {
+            "name": "step_005_multi_ephemeris_comparison.py",
+            "status": "PASS",
+            "elapsed_s": 0.89,
+            "returncode": 0
+        },
+        {
+            "name": "step_055_meta_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.84,
+            "returncode": 0
+        },
+        {
+            "name": "step_006_systematic_error_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.38,
+            "returncode": 0
+        },
+        {
+            "name": "step_007_additional_station_ingestion.py",
+            "status": "PASS",
+            "elapsed_s": 0.04,
+            "returncode": 0
+        },
+        {
+            "name": "step_008_systematic_error_correction.py",
+            "status": "PASS",
+            "elapsed_s": 0.56,
+            "returncode": 0
+        },
+        {
+            "name": "step_009_corrected_data_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.91,
+            "returncode": 0
+        },
+        {
+            "name": "step_010_ephemeris_independent_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.94,
+            "returncode": 0
+        },
+        {
+            "name": "step_011_systematic_control_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 1.21,
+            "returncode": 0
+        },
+        {
+            "name": "step_012_noise_signal_injection.py",
+            "status": "PASS",
+            "elapsed_s": 0.91,
+            "returncode": 0
+        },
+        {
+            "name": "step_013_subsample_robustness.py",
+            "status": "PASS",
+            "elapsed_s": 0.85,
+            "returncode": 0
+        },
+        {
+            "name": "step_014_station_decomposition.py",
+            "status": "PASS",
+            "elapsed_s": 0.78,
+            "returncode": 0
+        },
+        {
+            "name": "step_014_inter_station_consistency.py",
+            "status": "PASS",
+            "elapsed_s": 0.75,
+            "returncode": 0
+        },
+        {
+            "name": "step_015_null_tests.py",
+            "status": "PASS",
+            "elapsed_s": 1.3,
+            "returncode": 0
+        },
+        {
+            "name": "step_016_bayesian_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 73.91,
+            "returncode": 0
+        },
+        {
+            "name": "step_017_tep_prediction.py",
+            "status": "PASS",
+            "elapsed_s": 0.18,
+            "returncode": 0
+        },
+        {
+            "name": "step_018_leverage_diagnostics.py",
+            "status": "PASS",
+            "elapsed_s": 15.72,
+            "returncode": 0
+        },
+        {
+            "name": "step_019_station_quality.py",
+            "status": "PASS",
+            "elapsed_s": 1.66,
+            "returncode": 0
+        },
+        {
+            "name": "step_020_systematic_monte_carlo.py",
+            "status": "PASS",
+            "elapsed_s": 8.83,
+            "returncode": 0
+        },
+        {
+            "name": "step_021_temporal_amplitude.py",
+            "status": "PASS",
+            "elapsed_s": 1.31,
+            "returncode": 0
+        },
+        {
+            "name": "step_022_ipw_validation.py",
+            "status": "PASS",
+            "elapsed_s": 7.27,
+            "returncode": 0
+        },
+        {
+            "name": "step_023_absorption_simulation.py",
+            "status": "PASS",
+            "elapsed_s": 0.66,
+            "returncode": 0
+        },
+        {
+            "name": "step_024_environmental_modulation.py",
+            "status": "PASS",
+            "elapsed_s": 1.06,
+            "returncode": 0
+        },
+        {
+            "name": "step_025_solar_cycle_correlation.py",
+            "status": "PASS",
+            "elapsed_s": 14.85,
+            "returncode": 0
+        },
+        {
+            "name": "step_026_thermal_array_modeling.py",
+            "status": "PASS",
+            "elapsed_s": 0.19,
+            "returncode": 0
+        },
+        {
+            "name": "step_027_leverage_temporal_clustering.py",
+            "status": "PASS",
+            "elapsed_s": 2.84,
+            "returncode": 0
+        },
+        {
+            "name": "step_028_tep_core_density_simulation.py",
+            "status": "PASS",
+            "elapsed_s": 0.11,
+            "returncode": 0
+        },
+        {
+            "name": "step_029_day_night_thermal_bias.py",
+            "status": "PASS",
+            "elapsed_s": 3.79,
+            "returncode": 0
+        },
+        {
+            "name": "step_030_geometric_elongation.py",
+            "status": "PASS",
+            "elapsed_s": 4.4,
+            "returncode": 0
+        },
+        {
+            "name": "step_031_station_power_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 19.64,
+            "returncode": 0
+        },
+        {
+            "name": "step_032_hardware_epoch_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 1.52,
+            "returncode": 0
+        },
+        {
+            "name": "step_033_lomb_scargle_orbital_dynamics.py",
+            "status": "PASS",
+            "elapsed_s": 27.64,
+            "returncode": 0
+        },
+        {
+            "name": "step_034_ephemeris_orthogonality_proof.py",
+            "status": "PASS",
+            "elapsed_s": 1.12,
+            "returncode": 0
+        },
+        {
+            "name": "step_035_quantitative_eta_prediction.py",
+            "status": "PASS",
+            "elapsed_s": 0.1,
+            "returncode": 0
+        },
+        {
+            "name": "step_036_static_dynamic_absorption.py",
+            "status": "PASS",
+            "elapsed_s": 0.61,
+            "returncode": 0
+        },
+        {
+            "name": "step_037_historical_comparison.py",
+            "status": "PASS",
+            "elapsed_s": 0.9,
+            "returncode": 0
+        },
+        {
+            "name": "step_038_full_moon_deficit_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.89,
+            "returncode": 0
+        },
+        {
+            "name": "step_039_lunar_recession_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.88,
+            "returncode": 0
+        },
+        {
+            "name": "step_040_tidal_resonance_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.85,
+            "returncode": 0
+        },
+        {
+            "name": "step_041_dust_sensitivity_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.86,
+            "returncode": 0
+        }
+    ]
+}

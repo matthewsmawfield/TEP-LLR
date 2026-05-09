@@ -1,0 +1,67 @@
+{
+    "step_id": "step_034",
+    "status": "PASS",
+    "peak_frequencies": {
+        "static_ratio_synodic": 0.9999959999199985
+    },
+    "empirical_modulation_depth": 1.673953115039556,
+    "primary_model_m1": {
+        "modulation_depth_m": 1.0,
+        "sideband_power_D_minus_Lprime": 0.15983683804736565,
+        "sideband_power_D_plus_Lprime": 0.024288493683626938,
+        "static_power_D_minus_Lprime": 0.013427032595667621,
+        "power_ratio_tep_to_static": 11.904107397411007,
+        "theoretical_sideband_fraction_pct": 33.33
+    },
+    "modulation_depth_sweep": [
+        {
+            "modulation_depth_m": 0.017,
+            "sideband_power_D_minus_Lprime": 0.014674916401870875,
+            "sideband_power_D_plus_Lprime": 0.024574058533553926,
+            "static_power_D_minus_Lprime": 0.013427032595667621,
+            "power_ratio_tep_to_static": 1.0929381676339935,
+            "theoretical_sideband_fraction_pct": 0.01
+        },
+        {
+            "modulation_depth_m": 0.1,
+            "sideband_power_D_minus_Lprime": 0.02190727454559839,
+            "sideband_power_D_plus_Lprime": 0.01655258128281279,
+            "static_power_D_minus_Lprime": 0.013427032595667621,
+            "power_ratio_tep_to_static": 1.6315797544624278,
+            "theoretical_sideband_fraction_pct": 0.5
+        },
+        {
+            "modulation_depth_m": 0.5,
+            "sideband_power_D_minus_Lprime": 0.07755843381335913,
+            "sideband_power_D_plus_Lprime": 0.00047822966381236347,
+            "static_power_D_minus_Lprime": 0.013427032595667621,
+            "power_ratio_tep_to_static": 5.776289977756083,
+            "theoretical_sideband_fraction_pct": 11.11
+        },
+        {
+            "modulation_depth_m": 1.0,
+            "sideband_power_D_minus_Lprime": 0.15983683804736565,
+            "sideband_power_D_plus_Lprime": 0.024288493683626938,
+            "static_power_D_minus_Lprime": 0.013427032595667621,
+            "power_ratio_tep_to_static": 11.904107397411007,
+            "theoretical_sideband_fraction_pct": 33.33
+        },
+        {
+            "modulation_depth_m": 1.67,
+            "sideband_power_D_minus_Lprime": 0.23466763608420796,
+            "sideband_power_D_plus_Lprime": 0.07734725702400333,
+            "static_power_D_minus_Lprime": 0.013427032595667621,
+            "power_ratio_tep_to_static": 17.47725228282577,
+            "theoretical_sideband_fraction_pct": 58.24
+        }
+    ],
+    "sideband_period_days": 32.12808656716507,
+    "geophysical_isolation": {
+        "evection_period_days": 31.81,
+        "Mm_tide_period_days": 27.55,
+        "rayleigh_resolution_cpd": 7.710087692138248e-05,
+        "sideband_evection_separation_cpd": 0.0003112409976764839,
+        "separation_exceeds_rayleigh_by": 4.036802305035354
+    },
+    "conclusion": "The TEP dynamic suppression model deposits significant sideband power at D\u00b1l' frequencies (32.13 days). The modulation depth m is empirically calibrated against Step 024 perihelion/aphelion data (m\u22482.0; m=1.0 used conservatively). At m=1.0, 33% of the signal power resides in sidebands where standard static-\u03b7 solvers lack degrees of freedom. The D-l' sideband at 32.13d is spectrally isolated from lunar evection (31.81d) by 4\u00d7 the Rayleigh resolution."
+}

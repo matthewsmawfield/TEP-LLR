@@ -1,0 +1,76 @@
+{
+    "step_id": "step_027",
+    "status": "PASS",
+    "total_observations": 26207,
+    "high_leverage_threshold": 0.00015263097645667187,
+    "total_high_leverage_points": 1030,
+    "temporal_bins": {
+        "1984-1989": {
+            "total_obs": 2196,
+            "high_lev_obs": 701,
+            "percent_of_all_high_lev": 68.05825242718446,
+            "expected_percent": 8.379440607471286,
+            "overrepresentation_factor": 8.122052009832528
+        },
+        "1989-1994": {
+            "total_obs": 2833,
+            "high_lev_obs": 213,
+            "percent_of_all_high_lev": 20.679611650485437,
+            "expected_percent": 10.810088907543786,
+            "overrepresentation_factor": 1.9129918197115137
+        },
+        "1994-1999": {
+            "total_obs": 4298,
+            "high_lev_obs": 79,
+            "percent_of_all_high_lev": 7.669902912621359,
+            "expected_percent": 16.400198420269394,
+            "overrepresentation_factor": 0.4676713486064866
+        },
+        "1999-2004": {
+            "total_obs": 2748,
+            "high_lev_obs": 17,
+            "percent_of_all_high_lev": 1.650485436893204,
+            "expected_percent": 10.485748082573359,
+            "overrepresentation_factor": 0.15740273597037918
+        },
+        "2004-2009": {
+            "total_obs": 1601,
+            "high_lev_obs": 16,
+            "percent_of_all_high_lev": 1.5533980582524272,
+            "expected_percent": 6.109054832678292,
+            "overrepresentation_factor": 0.2542779694729629
+        },
+        "2009-2014": {
+            "total_obs": 2426,
+            "high_lev_obs": 4,
+            "percent_of_all_high_lev": 0.3883495145631068,
+            "expected_percent": 9.257068722097149,
+            "overrepresentation_factor": 0.04195167241613908
+        },
+        "2014-2019": {
+            "total_obs": 9031,
+            "high_lev_obs": 0,
+            "percent_of_all_high_lev": 0.0,
+            "expected_percent": 34.46025870950509,
+            "overrepresentation_factor": 0.0
+        },
+        "2019-2024": {
+            "total_obs": 1074,
+            "high_lev_obs": 0,
+            "percent_of_all_high_lev": 0.0,
+            "expected_percent": 4.0981417178616395,
+            "overrepresentation_factor": 0.0
+        }
+    },
+    "station_distribution": {
+        "Grasse": 852,
+        "McDonald2": 104,
+        "Haleakala": 73,
+        "Matera": 1
+    },
+    "conclusions": {
+        "grasse_dominated": true,
+        "meaningful_clustering": true,
+        "explanation": "High-leverage points were binned over 5-year epochs. An overrepresentation factor > 1.5 indicates a specific hardware era or localized anomaly injected large variance into the OLS fit."
+    }
+}

@@ -1,16 +1,32 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
-  "@type": "SoftwareSourceCode",
-  "name": "TEP-WB",
-  "description": "Analysis pipeline for Paper 15 of the TEP series: Wide Binary Stars",
-  "author": {
-    "@type": "Person",
-    "givenName": "Matthew Lukin",
-    "familyName": "Smawfield",
-    "@id": "https://orcid.org/0009-0003-4327-8711"
-  },
-  "codeRepository": "https://github.com/mlsmawfield/TEP-WB",
-  "license": "https://opensource.org/licenses/MIT",
-  "programmingLanguage": "Python",
-  "version": "0.1.0"
+  "@type": "ScholarlyArticle",
+  "name": "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect",
+  "description": "The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle via compactness-dependent screening. This work tests for SEP violation using Lunar Laser Ranging data, analysing 26,207 O-C residuals from five international stations spanning 35 years (1984-2019). Analysis detects a synodic-phase-dependent modulation correlated with cos(D): the full cleaned OLS extraction gives η = -3.17 × 10⁻⁴ ± 9.80 × 10⁻⁴, Bayesian MCMC gives η = -3.16 × 10⁻⁴ ± 6.05 × 10⁻⁵ at 5.22σ, Cook's distance excision gives η = -3.31 × 10⁻⁴ ± 5.84 × 10⁻⁵ at 5.67σ, and precision-weighted regression gives η = -3.50 × 10⁻⁴ ± 1.13 × 10⁻⁴ at 3.11σ. DE430 residuals provide sign-consistent cross-ephemeris validation at η = -7.03 × 10⁻⁴ ± 2.12 × 10⁻³.",
+  "abstract": "The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent screening. This work tests for SEP violation using Lunar Laser Ranging data, analysing 26,207 O-C residuals from five international stations spanning 35 years (1984-2019). Analysis detects a synodic-phase-dependent modulation correlated with cos(D): the full cleaned OLS extraction gives η = -3.17 × 10⁻⁴ ± 9.80 × 10⁻⁴, Bayesian MCMC gives η = -3.16 × 10⁻⁴ ± 6.05 × 10⁻⁵ at 5.22σ, Cook's distance excision gives η = -3.31 × 10⁻⁴ ± 5.84 × 10⁻⁵ at 5.67σ, and precision-weighted regression gives η = -3.50 × 10⁻⁴ ± 1.13 × 10⁻⁴ at 3.11σ. DE430 residuals provide sign-consistent cross-ephemeris validation at η = -7.03 × 10⁻⁴ ± 2.12 × 10⁻³.",    
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Matthew Lukin",
+      "familyName": "Smawfield",
+      "@id": "https://orcid.org/0009-0003-8219-3159"
+    }
+  ],
+  "datePublished": "2026-05-10",
+  "dateModified": "2026-05-10",
+  "version": "0.1",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "codeRepository": "https://github.com/matthewsmawfield/TEP-LLR",
+  "url": "https://mlsmawfield.com/tep/llr/",
+  "doi": "10.5281/zenodo.19446029",
+  "keywords": [
+    "temporal equivalence principle",
+    "lunar laser ranging",
+    "LLR",
+    "equivalence principle",
+    "Nordtvedt effect",
+    "post-Newtonian",
+    "scalar-tensor gravity",
+    "strong equivalence principle"
+  ]
 }

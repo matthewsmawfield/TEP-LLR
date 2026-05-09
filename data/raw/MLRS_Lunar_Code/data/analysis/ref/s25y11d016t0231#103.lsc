@@ -1,0 +1,43 @@
+Normalpoint(s):
+
+Poisson: Time bin:     1, Points: total 1761, expected:  11, selected:  12
+Poisson: Cal SD: 0.128 nsec, Bin width:  0.75 nsec, 
+Poisson: Slope:    -0.10 nsec/hour, O-C:   -0.58 nsec, SD: 0.480 nsec, S:N:  1.7
+Poisson: ==> Data is weak. Number of points is near noise level. Check results.
+Poisson: ==> Tie in significant slopes - please check the results.
+
+
+
+Poisson Filtering: Total obs=  1761,  Selected obs=    12
+                       Lun_auto   v 2.1
+
+
+Automated Segmentation Statistics for
+data/analysis/s25y11d016t0231#103.frfil:
+
+Date: 16/01/2011 02:31
+nrecd:   5003 ndata     12 nnoise    126 tnoise   1444 s:r   0.8
+Preliminary configuration:
+group:  0 begin: 9168.081300 end: 9168.081300 dt: 0.000000 npts:      1
+group:  1 begin: 9516.404373 end: 9516.404373 dt: 0.000000 npts:      1
+group:  2 begin: 9882.564821 end: 10383.415550 dt: 500.850729 npts:      8
+group:  3 begin: 10686.699945 end: 10686.699945 dt: 0.000000 npts:      1
+group:  4 begin: 11008.781242 end: 11008.781242 dt: 0.000000 npts:      1
+Intermediate A configuration:
+group:  0 begin: 9168.081300 end: 11008.781242 dt: 1840.699942 npts:     12
+Intermediate B configuration:
+group:  0 begin: 9168.081300 end: 9516.404373 dt: 348.323073 npts:      2
+group:  1 begin: 9882.564821 end: 10383.415550 dt: 500.850729 npts:      8
+group:  2 begin: 10686.699945 end: 11008.781242 dt: 322.081297 npts:      2
+Final configuration:
+group:  0 begin: 9168.081300 end: 11008.781242 dt: 1840.699942 npts:     12
+                       Lun_sdqi   v 2.1 
+
+
+Automated Subjective Data Quality Indicator for
+data/analysis/s25y11d016t0231#103.frfil2:
+
+New quality indicator: d
+Normalpoint(s):
+Time: 2011/ 1/16   2:48:36 O-C(nsec):    -1.2411 RMS:   0.4802 Uncert:   0.1386
+Fitted Obs:  12 Rejects:   0 Span (min): 30.68 HA:   -0.7873 Dec:   23.7397

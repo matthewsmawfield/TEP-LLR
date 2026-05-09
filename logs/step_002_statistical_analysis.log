@@ -1,0 +1,55 @@
+[01:59:48] ═══ ═══ Starting Step 002: Statistical Analysis...
+[01:59:48]     ═══ STEP PURPOSE: Primary TEP Nordtvedt parameter estimation using OLS and Bayesian MCMC methods
+[01:59:48]     ═══ METHOD: Unweighted OLS regression + Bayesian MCMC with emcee sampler
+[01:59:48]     ═══ PARAMETERS: 6σ MAD outlier cleaning, 32 walkers, 2000 steps, 500 burn-in
+[01:59:48]     ═══ DATA SUMMARY
+[01:59:48]         Dataset: N = 26,207 observations
+[01:59:48]         Stations: 5 (APO, Grasse, Matera, McDonald2, Haleakala)
+[01:59:48]     Applied 6σ MAD outlier cleaning: removed 762/26207 outliers
+[01:59:48]         Cleaned dataset: N = 25,445 observations
+[01:59:48]     ═══ ANALYSIS TRACE
+[01:59:48] >>> >>> Performing unweighted OLS regression
+[01:59:48]         Unweighted Regression Complete (N=25445, DOF=25443):
+[01:59:48]           RSS = 9.665864e+01
+[01:59:48]           χ²_red = 0.003799
+[01:59:48]           Birge Ratio = 0.062
+[01:59:48]           Condition Number κ(R) = 2.11e+00
+[01:59:48]           Final η = -3.16979820e-04 ± 6.04065838e-05
+[01:59:48] >>> >>> Running Bayesian MCMC analysis
+[01:59:48]         Number of walkers: 32
+[01:59:48]         Total steps: 3000
+[01:59:48]         Burn-in steps: 1000
+[01:59:48]         Initial position: η=-3.16979820e-04, b=-1.04988507e-03
+[02:00:01]     ═══ MCMC CONVERGENCE DIAGNOSTICS
+[02:00:01]         Autocorrelation time: 30.16
+[02:00:01]         Steps per autocorr: 66.3
+[02:00:01]         Acceptance fraction: 0.717
+[02:00:01]         Convergence status: CONVERGED
+[02:00:01] >>> >>> Performing AR(1) GLS regression (autocorrelation-aware error estimation)
+[02:10:12]     AR(1) GLS Regression Results:
+[02:10:12]       η (GLS) = -3.27953503e-04 ± 9.78855609e-05
+[02:10:12]       AR(1) parameter ρ = 0.4291 ± 0.0057
+[02:10:12]       Durbin-Watson = 1.142
+[02:10:12]       Interpretation: Significant autocorrelation
+[02:10:12]     ═══ RESULTS SUMMARY
+[02:10:12]         OLS η: -3.16979820e-04 ± 6.04065838e-05
+[02:10:12]         MCMC η: -3.16817246e-04 ± 5.98550922e-05
+[02:10:12]         AR(1) GLS η: -3.27953503e-04 ± 9.78855609e-05
+[02:10:12]         AR(1) parameter ρ: 0.4291 ± 0.0057
+[02:10:12]         Durbin-Watson: 1.142
+[02:10:12]         SNR: 5.29σ
+[02:10:12]         Status: STRONG DETECTION
+[02:10:12]     ═══ INTERPRETATION
+[02:10:12]         The negative η indicates TEP Nordtvedt violation is present
+[02:10:12]         Statistical significance: 5.29σ (STRONG DETECTION)
+[02:10:12]         Convergence: CONVERGED
+[02:10:12]         Temporal autocorrelation: ρ = 0.4291 (DW = 1.142)
+[02:10:12]         Autocorrelation impact: Error inflation factor = 0.61x if significant
+[02:10:12]         Limitations: Uses unweighted regression due to unreliable sigma_m values
+[02:10:12]     ═══ REPRODUCIBILITY
+[02:10:12]         Output file: results/outputs/step_002_statistical_analysis.json
+[02:10:12]         MCMC walkers: 32
+[02:10:12]         MCMC steps: 3000
+[02:10:12]         MCMC burn-in: 1000
+[02:10:12] Results saved to results/outputs/step_002_statistical_analysis.json
+[02:10:12] ✓   Statistical Analysis Complete. SNR = 5.3σ

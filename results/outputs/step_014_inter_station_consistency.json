@@ -1,0 +1,25 @@
+{
+    "step_id": "step_014",
+    "n_stations": 5,
+    "station_names": [
+        "APO",
+        "Grasse",
+        "Matera",
+        "McDonald2",
+        "Haleakala"
+    ],
+    "meta_analysis": {
+        "weighted_mean_eta": -0.0003505301941416979,
+        "weighted_error_eta": 6.621678559379576e-05,
+        "snr": 5.293675780216989
+    },
+    "heterogeneity": {
+        "Q": 12.269829072235442,
+        "df": 4,
+        "p_value": 0.015453585005256842,
+        "I_squared_pct": 67.39970885942228,
+        "is_consistent": false
+    },
+    "status": "WARNING",
+    "conclusion": "Station-specific biases detected; meta-analysis still yields significant TEP detection."
+}

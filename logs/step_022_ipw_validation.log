@@ -1,0 +1,33 @@
+[02:11:25] ═══ ═══ Starting Step 022: IPW Criteria Monte Carlo Validation...
+[02:11:25]     ═══ STEP PURPOSE: Validate IPW station-balance test threshold (Δη/ση < 8.0) through simulation
+[02:11:25]     ═══ METHOD: Simulate station-concentrated signals, measure Δη/ση distribution, compute false positive rate
+[02:11:25]     ═══ PARAMETERS: MC iterations=500, seed=42, station fractions matching actual LLR data
+[02:11:25] Step 022: IPW Criteria Monte Carlo Validation
+[02:11:25]     ═══ DATA SUMMARY
+[02:11:25]         Measured η from step_002: -3.1698e-04
+[02:11:25] Loaded measured η from step_002: -3.1698e-04
+[02:11:25]         Station fractions: Grasse=74%, APO=9.9%, Matera=1.3%, McDonald2=12%, Haleakala=2.8%
+[02:11:25]     ═══ ANALYSIS TRACE
+[02:11:25] >>> >>> Simulating 500 genuine signals
+[02:11:25] >>> >>> Simulating 500 null signals
+[02:11:25] Simulating 500 genuine signals...
+[02:11:28] Simulating 500 null signals...
+[02:11:31]     ═══ RESULTS SUMMARY
+[02:11:31]         Genuine signal pass rate at 8σ: 100.0%
+[02:11:31]         Null false positive rate: 0.0%
+[02:11:31]         Same sign consistency: 98.2%
+[02:11:31]         Expected Δσ for genuine: 1.7 ± 1.2σ
+[02:11:31]     ═══ INTERPRETATION
+[02:11:31]         8.0σ threshold captures 100.0% of genuine signals
+[02:11:31]         False positive risk: 0.0% (acceptable)
+[02:11:31]         Same sign reliability: 98.2% (highly reliable)
+[02:11:31]         IPW test valid for station-balance validation with 8.0σ threshold
+[02:11:31]     ═══ REPRODUCIBILITY
+[02:11:31]         Output file: results/outputs/step_022_ipw_validation.json
+[02:11:31]         MC iterations: 500
+[02:11:31]         Random seed: 42
+[02:11:31]         η source: step_002_statistical_analysis.json
+[02:11:31] Results saved to results/outputs/step_022_ipw_validation.json
+[02:11:31] Genuine signal pass rate at 8σ: 100.0%
+[02:11:31] Null false positive rate: 0.0%
+[02:11:31] Same sign consistency: 98.2%

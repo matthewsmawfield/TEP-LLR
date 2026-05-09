@@ -1,6 +1,7 @@
 {
-  "version": "0.1.0",
-  "paper": "TEP-WB",
-  "series": 15,
-  "status": "in_progress"
+  "version": "0.1",
+  "codename": "Lucknow",
+  "date": "2026-05-09",
+  "author": "Matthew Lukin Smawfield",
+  "description": "Lunar Laser Ranging Tests of TEP"
 }

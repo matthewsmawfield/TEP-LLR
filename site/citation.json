@@ -1,14 +1,18 @@
 {
-  "@context": "https://schema.org",
-  "@type": "ScholarlyArticle",
-  "name": "Wide Binary Stars as Probes of the Temporal Equivalence Principle",
-  "author": {
-    "@type": "Person",
-    "name": "Matthew Lukin Smawfield",
-    "identifier": "https://orcid.org/0009-0003-4327-8711"
+  "id": "smawfield2026llr",
+  "type": "article",
+  "title": "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect",
+  "author": [
+    {
+      "family": "Smawfield",
+      "given": "Matthew Lukin"
+    }
+  ],
+  "issued": {
+    "date-parts": [[2026, 4, 18]]
   },
-  "datePublished": "2026",
-  "description": "Analysis of Gaia DR3 wide binary dynamics demonstrating screening transition consistent with TEP predictions.",
-  "keywords": ["wide binaries", "Gaia DR3", "modified gravity", "MOND", "TEP"],
-  "license": "https://opensource.org/licenses/MIT"
+  "abstract": "The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent suppression. This work tests for SEP violation using Lunar Laser Ranging data, analysing 26,207 O-C residuals from five international stations spanning 35 years (1984-2019). Analysis detects a synodic-phase-dependent modulation correlated with cos(D): the full cleaned OLS extraction gives η = -3.17 × 10⁻⁴ ± 9.80 × 10⁻⁴, Bayesian MCMC gives η = -3.16 × 10⁻⁴ ± 6.05 × 10⁻⁵ at 5.22σ, Cook's distance excision gives η = -3.31 × 10⁻⁴ ± 5.84 × 10⁻⁵ at 5.67σ, and precision-weighted regression gives η = -3.50 × 10⁻⁴ ± 1.13 × 10⁻⁴ at 3.11σ. DE430 residuals provide sign-consistent cross-ephemeris validation at η = -7.03 × 10⁻⁴ ± 2.12 × 10⁻³.",
+  "URL": "https://mlsmawfield.com/tep/llr/",
+  "publisher": "Preprint",
+  "note": "Preprint, Version 0.1 (Lucknow)"
 }

@@ -1,0 +1,15 @@
+[02:11:31] ═══ Initializing Ephemeris Absorption Simulation...
+[02:11:31]     Generated 26000 synthetic observations (1985-2020)
+[02:11:31]     Injected dynamic signal spanning η ~ [-1.50e-03, 1.50e-03]
+[02:11:31] 
+[02:11:31] >>> --- GLOBAL EPHEMERIS FIT ANALYSIS ---
+[02:11:31]     Fitted global constant η : -6.926e-06
+[02:11:31]     P-value of global η term : 0.8017
+[02:11:31] ✓   RESULT: Ephemeris fit FAILS to detect Nordtvedt violation (as expected).
+[02:11:31] 
+[02:11:31] >>> --- RESIDUAL ANALYSIS (Sub-sampled 'Grasse' Era) ---
+[02:11:31]     Fitted residual η (1991.5-1997.0) : -9.174e-04
+[02:11:31]     P-value of residual η             : 0.00e+00
+[02:11:31] ✓   RESULT: Strong anomaly survives in residuals despite global null-fit.
+[02:11:31] Results saved to results/outputs/step_023_absorption_simulation.json
+[02:11:31] ✓   Absorption Simulation Complete.

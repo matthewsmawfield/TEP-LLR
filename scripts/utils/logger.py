@@ -45,11 +45,33 @@ class TEPLogger:
     def exception(self, msg):
         self.logger.exception(msg)
 
+    def save_step_results(self, results: dict, project_root, step_name: str):
+        import json
+        import os
+        from pathlib import Path
+        root = Path(project_root)
+        out_path = root / "results" / "outputs" / f"{step_name}.json"
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, 'w') as f:
+            json.dump(results, f, indent=4)
+        # Show relative path for cleaner logs
+        rel_path = out_path.relative_to(root) if out_path.is_relative_to(root) else out_path
+        self.info(f"Results saved to {rel_path}")
+
 
 def set_step_logger(logger: TEPLogger):
     """Register a TEPLogger so that print_status routes through it."""
     global _active_logger
     _active_logger = logger
+
+_verbose_mode = False
+def set_verbose_mode(verbose: bool):
+    global _verbose_mode
+    _verbose_mode = verbose
+
+def get_verbose_mode() -> bool:
+    global _verbose_mode
+    return _verbose_mode
 
 
 _LEVEL_PREFIXES = {
@@ -63,7 +85,7 @@ _LEVEL_PREFIXES = {
 }
 
 
-def print_status(msg: str, level: str | None = None):
+def print_status(msg: str, level=None):
     """
     Print a formatted status message.
 

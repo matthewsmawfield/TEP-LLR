@@ -1,0 +1,41 @@
+[02:11:19] ═══ ═══ Starting Step 020: Systematic Error Monte Carlo Propagation...
+[02:11:19]     ═══ STEP PURPOSE: Quantify systematic uncertainty through Monte Carlo error propagation for TEP detection
+[02:11:19]     ═══ METHOD: Ephemeris uncertainties, tidal model variations, atmospheric delay errors, instrumental calibration uncertainties
+[02:11:19]     ═══ PARAMETERS: MC iterations=500, seed=42, ephemeris position error=0.5m, tidal Love number error=0.01, atmospheric zenith error=5mm
+[02:11:19] Step 020: Systematic Error Monte Carlo Propagation
+[02:11:19]     ═══ DATA SUMMARY
+[02:11:19]         Dataset: N = 26,207 observations
+[02:11:19]         Data source: INPOP19a_all_stations_residuals.csv
+[02:11:19]     ═══ ANALYSIS TRACE
+[02:11:19] Loaded 26207 observations
+[02:11:19] >>> >>> Running ephemeris uncertainty MC
+[02:11:19] >>> >>> Running tidal uncertainty MC
+[02:11:19] >>> >>> Running atmospheric uncertainty MC
+[02:11:19] >>> >>> Running instrumental uncertainty MC
+[02:11:19] >>> >>> Running combined systematic MC
+[02:11:19] Running ephemeris uncertainty MC...
+[02:11:20] Running tidal uncertainty MC...
+[02:11:21] Running atmospheric uncertainty MC...
+[02:11:21] Running instrumental uncertainty MC...
+[02:11:22] Running combined systematic MC...
+[02:11:23]     ═══ RESULTS SUMMARY
+[02:11:23]         Statistical error: ±5.99e-05
+[02:11:23]         Systematic error: ±5.80e-03
+[02:11:23]         Total uncertainty: ±5.81e-03
+[02:11:23]         Signal/Total ratio: 0.1
+[02:11:23]         Dominant source: SYSTEMATIC
+[02:11:23]     ═══ INTERPRETATION
+[02:11:23]         Systematic errors dominate over statistical precision at LLR precision levels
+[02:11:23]         Literature systematic floor (~5mm) applied from Murphy 2013; Williams et al. 2014
+[02:11:23]         Recommendation: Report both statistical and systematic uncertainties
+[02:11:23]     ═══ REPRODUCIBILITY
+[02:11:23]         Output file: results/outputs/step_020_systematic_monte_carlo.json
+[02:11:23]         MC iterations: 500
+[02:11:23]         Random seed: 42
+[02:11:23]         Statistical error source: step_002_statistical_analysis.json
+[02:11:23] Results saved to results/outputs/step_020_systematic_monte_carlo.json
+[02:11:23] Statistical error: ±5.99e-05
+[02:11:23] Systematic error: ±5.80e-03
+[02:11:23] Total uncertainty: ±5.81e-03
+[02:11:23] Signal/Total ratio: 0.1
+[02:11:23] Dominant source: SYSTEMATIC

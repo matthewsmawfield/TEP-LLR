@@ -1,0 +1,10 @@
+{
+    "step_id": "step_001c",
+    "validation": {
+        "status": "PASS",
+        "file_path": "data/raw/de440.bsp",
+        "file_size_mb": 119.8,
+        "coverage": "1550-2650"
+    },
+    "status": "PASS"
+}

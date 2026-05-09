@@ -1,0 +1,29 @@
+[02:26:05] ═══ Computing Quantitative η Prediction from TEP...
+[02:26:05]     Loaded measured η from step_002: -3.1698e-04 ± 6.0407e-05
+[02:26:05]     ρ_T: 20.0 ± 8.0 g/cm³ (GNSS atomic clock correlations (Paper 6, UCD))
+[02:26:05] 
+[02:26:05] >>> --- THEORETICAL COMPARISON ---
+[02:26:05]     Earth compactness: Φ_⊕/c² = 6.953e-10
+[02:26:05]     Moon compactness:  Φ_☽/c² = 3.140e-11
+[02:26:05]     Compactness squared differential: Δ(Φ²) = 4.825e-19
+[02:26:05]     Theoretical η from TEP formalism (Cassini-bound α_0): 4.3427e-24
+[02:26:05]     Enhancement factor (measured / TEP theoretical): 72991181779343187968.0×
+[02:26:05] 
+[02:26:05] >>> --- CROSS-DOMAIN COMPARISON (Jakarta v0.8 κ Framework) ---
+[02:26:05]     κ_MSP (pulsars): ~1.0e+06
+[02:26:05]     κ_Cep (Cepheids): 1.05e+06 ± 4.30e+05 mag (Paper 11)
+[02:26:05]     η (LLR): -3.1698e-04 (Solar System screened regime)
+[02:26:05]     Screening ratio: η/κ_Cep ~ -3.02e-10 (consistent with strong screening)
+[02:26:05] 
+[02:26:05] >>> --- AMPLITUDE PREDICTION ---
+[02:26:05]     Measured amplitude: 0.0041 mm
+[02:26:05]     Theoretical amplitude (from TEP formalism): 0.000000 mm
+[02:26:05] 
+[02:26:05] >>> --- SUMMARY ---
+[02:26:05]     Measured η: -3.1698e-04
+[02:26:05]     Theoretical η (Cassini-bound α_0): 4.3427e-24
+[02:26:05]     Enhancement: 72991181779343187968.0×
+[02:26:05]     Amplitude: 0.0041 mm
+[02:26:05]     Screening ratio η/κ_Cep: -3.02e-10
+[02:26:05] Results saved to results/outputs/step_035_quantitative_eta_prediction.json
+[02:26:05] ✓   Quantitative η Prediction Complete.

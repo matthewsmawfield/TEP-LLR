@@ -1,0 +1,2414 @@
+=SNX 2.00 JCT 25:145:00000 ALL 76:121:00000 00:000:00000 L 00000 2
+*-------------------------------------------------------------------------------
++FILE/REFERENCE
+
+ VERSION            250513
+
+ RELEASE DATE       2025/05/13
+ DESCRIPTION        range, time & pressure biases to be applied to SLR tracking
+                    data and periods to be excluded from data analysis.
+
+ INPUT              Corrections to SLR tracking data collected from various
+                    tables at CDDIS, resolutions from the ILRS/ASC (AWG), the
+                    T2L2 @ Jason-2 project (July 2008 to December 2017),
+                    the final results of the ILRS Station Systematic Error
+                    Monitoring--SSEM project amended with results from the
+                    2024 extended version SSEM-X.
+
+*##############################################################################*
+
+*-------------------------------------------------------------------------------
+
+ OUTPUT             ILRS SINEX file with data handling recommendations
+
+ ACCESS             https://edc.dgfi.tum.de/en/ilrs-ac/
+                    https://cddis.nasa.gov/archive/slr/products/resource/
+                    ILRS_Data_Handling_File_2025.05.13.snx
+
+ CONTACT            Antonio Basoni <antonio.basoni@e-geos.it>
+ CONTACT            Mathis Blossfeld <mathis.blossfeld@tum.de>
+ CONTACT            Christian Schwatke <christian.schwatke@tum.de>
+
+-FILE/REFERENCE
+*-------------------------------------------------------------------------------
++FILE/COMMENT
+*-------------------------------------------------------------------------------
+
+ This Data Handling File release is compatible with the currently adopted
+ TARGET_SIGNATURE_GEOMETRY correction model for LAGEOS-1/2, Etalon-1/2, LARES, 
+ LARES-2, Starlette, and Ajisai, released by Jose Rodriguez on 28.11.2023,
+ which is now mandatory for all ILRS/ASC product versions.
+
+ The model is currently available at
+
+ https://edc.dgfi.tum.de/en/ilrs-ac under the category "space segment".
+
+********************************************************************************
+*===============================================================================
+ IMPORTANT: Use of ILRS DHF on s/c other than LAGEOS-1/2, Etalon-1/2 and LARES-2
+*===============================================================================
+
+ If an ITRF2020/SLRF2020 user performs POD on any satellites other than for   
+ LAGEOS-1/2, Etalon-1/2 and LARES-2 for which we have specific model bias 
+ values, a station-specific range bias must be pre-applied, calculated as the 
+ mean of the two biases for the LAGEOS-1/2 satellites. This will act as a proxy 
+ of station-specific errors, since for the two LAGEOS s/c all other unaccounted 
+ errors are believed to be less than Â±2 mm (J. Rodriguez et al., 2019,
+ DOI: 10.1007/s00190-019-01315-0).
+
+ This bias should be used only as an a priori value since additional satellite-
+ specific errors might still be present in the SLR observations (e.g., CoM model
+ errors, LRA offset/orientation errors, etc.). It is important to allow this 
+ bias to be adjusted on the basis of the actual data. The level of looseness of 
+ the constraints on the a priori value is to be decided by the user, who
+ presumably is more informed on the quality of the applied POD model for the
+ specific s/c and adopted CoM model, etc.
+
+ This "recipe" applies ONLY for the "MODEL/RANGE_BIAS" values, timing and other
+ biases should be applied as stated in the DHF.
+
+********************************************************************************
+*-------------------------------------------------------------------------------
+
+ To limit the number of updates to the DHF we have included in this release 
+ records that refer to a number of stations that do not exist at present, have
+ not yet initiated tracking or it has been announced that they will soon start
+ operations. Some of the information on these systems is preliminary (e.g., the
+ start and end date associated with the estimation of biases. Once the systems
+ become operational, these can be adjusted appropriately, while the approximate
+ dates used are sufficient to cover all posibilities. These sites are:
+
+* 7329 --  --- A 25:098:00000 00:000:00000 E    Xian       NTSC
+* 7395 --  --- A 17:223:00000 00:000:00000 E    Geochang   GEOL                              
+* 7807 --  --- A 23:060:00000 00:000:00000 E    Metsahovi3 METNSLR                              
+* 7816 --  --- A 22:032:00000 00:000:00000 E    Stuttgart2 SMILAS                              
+* 7817 --  --- A 23:060:00000 00:000:00000 E    Yebes      YLARA                              
+* 7865 --  --- A 20:072:00000 00:000:00000 E    NRL OTF    STAL                              
+
+*-------------------------------------------------------------------------------
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+Last Updated:
+  May 13 2025  new site Ishioka (7317) included
+
+ Apr. 08 2025  introduction of range bias data for LARES-2; new site Xian (7329) 
+               included
+ 
+ Feb. 06 2025  update with range bias data through the end of 2024
+ 
+ Feb. 13 2024  update with range bias data through the end of 2023
+
+ June 21 2023  DHF public release compatible with the SLRF2020/ITRF2020 version
+
+ Mar. 28 2023  FIRST update of compatible with SLRF2020/ITRF2020 version
+ Mar. 14 2023  New release compatible with SLRF2020/ITRF2020
+
+*-------------------------------------------------------------------------------
+
+ Apr. 16 2021  Removed DUPLICATE barometer correction entries for 7080 (1995-96)
+               re-introduced Simosato data delete (X) 18:291:00000 20:171:00000
+ Mar. 02 2021  Corrected contradicting statements on the version of the CoG
+               model to be used with this release of the DHF.
+ Jan. 11 2021  Streamlined and reformatted version according to SINEX rules with
+               the new model for long-term mean biases that resulted from the
+               ILRS SSEM project included FIRST in its own Block:
+
+               MODEL/RANGE_BIAS
+
+ Jun. 16 2020  Corrected misplaced comments' location (abbreviations' legend)
+ May  28 2020  Replaced all occurrences of 00:000:00000 with 00:000:00000 and
+               corrected the 7080 end date to 20:001:00000
+ May  22 2020  Reformatted the file to 80-cols., and enforced new BLOCK HEADERs
+               consistent with the agreed structure of the 3 new SINEX BLOCKS.
+ Apr. 27 2020  Added Van Husson updates for NASA systems (191219 version)
+ Sep. 25 2019  Added hist. HARL (7501) Tb/Rb and edits, and new Wuhan2 (7396)
+ Jul. 22 2019  Addition of GGAO SLR (MOB7 7105) barometric pressure corrections
+ May  29 2019  New release with EGU2019 ASC recommended optional sections
+ May  10 2019  Included future South Korean station Geochang (7395)
+ May  04 2018  Included two POINT B missing entries for 7810 & 7824
+ Mar. 07 2018  New release with the T2L2 (edited) set of TB included
+ Jun. 06 2017  Yarragadee  (7090) release 0 incorrect Met data day 17:152
+ May  11 2017  Station Kunming2 (7819) new station replaces 7820 (Kunming)
+ Apr. 20 2017  Station Changchun (7237) time bias of 1 ms on Feb. 16 and 17 2017
+ Jul. 19 2016  Station 7394 (Sejong) new station, replaces 7359 (Daedok)
+ May  12 2016  Station 7080 (MLRS) solve for range bias due to new configuration
+ Nov. 18 2015  Edited 7105 data 2015.11.09 00:00 UTC - 2015.11.17 18:00 UTC
+ Sep. 30 2015  New systems @ Irkutsk(1891), Brazilia(7407), Wettzell SOSW(7827)
+ Jul. 09 2015  Zimmerwald (7810) data not valid July 3 2015 to July 6 2015 8h
+ Jul. 06 2015  San Fernando (7824) invalid data 2015: June 17 21h - June 18 4h
+ Sep. 09 2014  Changed end date of Graz (7839) range bias to 1996/09/28
+ Jul. 16 2014  Remove of quarantine entries in the file (info is at the DCs)
+ May. 06 2014  Mt. Stromlo quarantine
+ Apr. 29 2014  Deletion of double lines
+ Apr. 04 2014  Updated biases 7080 in 1990
+ Mar. 26 2014  Updated biases for ITRF2013 processing
+ Mar. 18 2014  Update from CDDIS free format data corrections, new flag
+ Feb. 19 2014  Change of Flag for stations with preliminary coordinates to V
+ Feb. 05 2014  Incorrect weather data at Haleakala (7119) data to be deleted
+ Feb. 04 2014  Solve for range biases for Kunming
+ Jan. 30 2014  Kunming released  from quarantine
+ Jan. 27 2014  Wettzell back from quarantine, solving for a Rb  is necessary
+ Oct. 29 2013  McDonald back to normal operation, without Tb
+ Oct. 22 2013  New station Deadok, in quarantine
+ Oct. 01 2013  Added information on new CoM tables
+ Jun. 18 2013  Haleakala (7119) data released from quarantine
+ Apr. 22 2013  Kunming (7820) in quarantine, more than 90 days without data
+ Apr. 19 2013  Haleakala (7119) in quarantine due to telescope removal
+ Mar. 08 2013  Simeiz (1873)  big range bias
+ Feb. 21 2013  Zimmerwald (7810) back to standard processing
+ Feb. 18 2013  Zimmerwald (7810) in quarantine due to longer break
+ Jan. 08 2013  Russian stations, 1887, 1888, 1889, 1890 no longer in quarantine
+ Nov. 12 2012  San Juan (7406) back to normal
+ Oct. 24 2012  San Juan (7406) with big range biases since Oct. 13 2012
+ Sep. 07 2012  Riga (1884) and Simeiz data released from quarantine
+ Aug. 07 2012  Riga (1884) CRD data put into quarantine
+ Aug. 05 2012  Monument Peak (7110) big time bias
+ Jun. 15 2012  Tahiti (7124) data released from quarantine
+ Jun. 05 2012  Russian stations, 1887, 1888, 1889, 1890 are in quarantine
+ May. 23 2012  Handling of Beijing data (7249), Rb estimation starting 12/03/07
+ May. 16 2012  Reference to ILRS station upgrades file
+ May. 15 2012  Tahiti (7124) in quarantine (12/05/14), due to receiver upgrade
+ Apr. 12 2012  Arequipa (7403) & Monument Peak (7110) data out of quarantine
+ Mar. 14 2012  MOBLAS 4, Monument Peak, (7110) big Rb starting: 12/02/23
+ Feb. 06 2012  Delete Observations for Haleakala (7119) 12/01/30-12/01/31
+ Oct. 06 2011  Range bias estimation for 7821 (Shanghai) 11/05/28-10/09/03
+ Sep. 30 2011  Problem with Matera 7941 Sep.24 18:00 - Sep.25 8:00 2011
+ Sep. 21 2011  Exclude Simeiz data starting July 2011, increasing Tb
+ Nov. 18 2010  mandatory Bias correction for Wettzell (starting March 2009)
+ Nov. 12 2010  Bias correction for Arequipa (7403) added
+ Sep. 15 2010  -20cm range bias for Haleakala July and August 2010
+ Aug. 12 2010  100 ms time bias for MLRO from DOY 221 to 223 2010 included
+ Apr. 23 2010  corrections of errors detected by F. Deleflie
+ Apr. 15 2010  all corrections from Van`s tables at CDDIS added
+
+*-------------------------------------------------------------------------------
+
+  For informations on recent station upgrades and data in quarantine refer to:
+
+  http://edc.dgfi.tum.de/en/stations/
+
+*-------------------------------------------------------------------------------
+
+ This file sets up a SLR data handling file for the official ILRS normal points
+ provided by CDDIS (ftp://cddis.gsfc.nasa.gov/slr/data/npt_crd/) and
+             EDC   (ftp://edc.dgfi.tum.de/pub/slr/data/npt_crd/)
+
+ and contains information on pressure, humidity, range (Rb) and time biases (Tb)
+ for SLR stations, as well as information on data to be deleted.
+
+ A new section is now added (March 2019) that contains timing biases for the
+ entire network and for the period 2008-2018, estimated from data taken by the
+ T2L2 system on Jason-2. Tb and their rates are given in Âµs and Âµs/d !!!
+
+ For the year 1999 a set of single observations to be deleted in analysis step
+ source CDDIS (ftp://cddis.gsfc.nasa.gov/pub/slr/data/slr_data_corrections.snx)
+
+ The contents of this file is a recommendation accepted by the ILRS
+ Analysis Standing Committee in Sep. 2007 with updates since then.
+
+ For stations in quarantine, data should NOT be available on the public
+ directories at the data centers. Stations marked with N, are unreliable and
+ should be handled carefully, as unexpected range or time errors may occur.
+
+ LEGEND FOR SOLUTION/DATA_HANDLING
+ ---------------------------------
+ "M" Models codes:
+      X = Exclude/delete data
+      C = Target signature bias, correction different from standard
+      E = Estimation of range bias, known a priori values are given
+      H = humidity error (correction in %)
+      N = unreliable station, should not be used in routine processing
+      P = pressure bias (correction in mB)
+      Q = Station with data in quarantine, not to be used in official products
+      R = Range bias to be applied, no estimation of bias
+      S = Stanford event counter bias
+      T = Time bias in ms or Âµs & Âµs/d (T2L2) to be applied, NOT estimated
+      U = Estimation of time bias in ms
+      V = Station with not validated coordinates, not solving for biases
+
+ estimated values (when provided) to be subtracted from the 1-way observations
+                                        ##########
+*-------------------------------------------------------------------------------
+ LEGEND FOR ABBREVIATED COMMENT CODES IN SOLUTION/DATA_HANDLING
+*--------------------------------------------------------------
+
+ Explanation of abbreviations found under "CMNTS" column:
+
+ Rb    = Range Bias
+ Tb    = Time Bias
+ drift = Flag for T2L2 Tb records, that indicates the existence of Tb-rate
+
+ nnn = Indicates wavelength affected by this error for multi-color systems
+
+ BRE = Barometer Reading Error
+ CCD = Cesium Clock Drift
+ EQK = Earthquake
+ ERB = Engineering Range Bias
+ ETO = ET Unit Offset
+ FBE = Frequency Bias Error
+ FPR = Frozen Pressure Reading
+ HER = Humidity Error Reading
+ HRV = High RMS Value
+ ITB = Increasing Time Bias
+ NSP = New Station Position
+ NTU = New TIU
+ SCD = Station Clock Drift
+ SRB = Small Remaining Bias
+ SUB = System Upgrade-related Biases
+ TCP = Time Counter Problems
+ TDP = Timing Data Problems
+ TUF = Time Interval Unit (TIU) Failure
+ UDP = Uncorrectable Data Problems
+ URB = Uncorrectable Range Bias or Unknown Range Bias
+ VLB = Very Large Biases
+ WMD = Wrong Met Data
+ WPR = Wrong Pressure Reading
+
+*-------------------------------------------------------------------------------
+
+ Time Biases of SLR station clocks, relative to UTC, have been estimated
+ from T2L2 measurements during the Jason-2 mission: July 2008 to December 2017.
+
+ The method is using a time transfer from a master station (Grasse 7845)
+ where clock behavior is continuously compared to GPS time (then to UTC)
+ to each of the other SLR stations.
+ Grasse has been time calibrated resulting in an accuracy of 0.1-0.2 ns
+ of the time of measurements.
+
+ Pierre.Exertier@oca.eu & Alexandre.Belli@geoazur.unice.fr
+ September, 1 2017 Release 1.0
+ February, 1 2019 Release 2.0
+
+ Units: Tb is in Âµs (us) and drift in Âµs/day
+
+ Resolution: by considering the time variations of each Tb due to the clock
+ drift, we considered only variations greater than 0.1 Âµs to be reported.
+ Period Covered: 2008-2018 ONLY !!!
+
+ Record Format Explanation and Example:
+
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+*-------------------------------------------------------------------------------
++MODEL/TIME_BIAS
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT
+ 1824 --  501 A 02:084:68460 12:085:00000 T      -24.400   5.000    0.0000   us
+ 1873 --  501 A 07:059:00000 09:110:00000 T      -21.750  50.000   -0.2600   us
+-MODEL/TIME_BIAS
+
+ CODE site ID# (e.g. 1824), PT "--" (to apply it to all targets), SOLN denotes
+ laser wavelength "501" to discriminate multi-wavelength system sites, T
+ set to "A", START_DATE (YY:DDD:SSSSS), END_DATE (YY:DDD:SSSSS), M set to "T",
+ then real values for Tb "E-VALUE", Std. Dev. Tb "STD_DEV" and drift "E-RATE",
+ (drift, i.e. "E-RATE", equals zero if nonexistent), and UNIT "us".
+
+ Correct time = time of SLR NP (t) - ( E-VALUE + (t - t_midInterval)*E-RATE )
+
+ where:         t_midInterval  = 1/2 *( MJD_{END_DATE} + MJD_{START_DATE} )
+
+*-------------------------------------------------------------------------------
+
+ T2L2 Results Availability Period by Station:
+
+    CDP#       Period       Comment
+    1824  2008-07  2016-12
+    1831  2008-07  2009-12
+    1873  2009-01  2017-12
+    1874  2016-01  2017-04
+    1879  2016-01  2016-12
+    1868  2016-01  2016-12
+    1884  2016-01  2017-06
+    1886  2016-01  2016-12
+    1888  2016-01  2016-12
+    1889  2016-01  2017-12
+    1890  2016-01  2017-12
+    1891  2016-01  2017-04
+    1893  2008-07  2017-06
+*
+    7080  2008-07  2017-12
+    7090  2008-07  2017-12
+    7105  2008-07  2017-12
+    7110  2008-07  2017-12
+    7119  2010-09  2017-12
+    7124  2008-07  2017-12
+    7403  2008-07  2017-12
+    7406  2012-02  2016-12
+    7407  2016-01  2016-12
+    7501  2008-07  2017-12
+*
+    7237  2008-07  2017-12
+    7308  2009-06  2016-12
+    7358  2010-11  2011-04
+    7394  2016-01  2017-04
+*
+    7810  2008-07  2017-12
+    7811  2008-07  2017-12
+*
+    7821  2008-07  2016-12
+    7822  2011-05  2011-10
+    7824  2008-07  2016-01
+    7825  2008-07  2017-12
+    7832  2008-08  2011-11
+    7838  2009-05  2017-12
+*
+    7840  2008-07  2017-12
+    7841  2008-07  2017-12
+    7845  2008-07  2017-12
+    7848  2008-07  2008-12
+    7941  2008-08  2017-12
+    8834  2008-07  2017-12
+*
+
+-FILE/COMMENT
+*-------------------------------------------------------------------------------
++INPUT/ACKNOWLEDGMENTS
+*AGY ______________FULL_DESCRIPTION_____________________________________________
+ ASI CGS Matera, Italy (Cinzia Luceri & Antonio Basoni)
+ SGP NASA Goddard Space Flight Center, Greenbelt, MD, USA (Van Husson)
+ JCT Joint Center for Earth System Technology (JCET), UMBC, Baltimore, MD, USA
+ DGF Deutsches Geodaetisches Forschungsinstitut (DGFI), Munich, Germany
+ GFZ GeoForschungsZentrum Potsdam (GFZ), Potsdam, Germany
+ OCA Observatoire de la Cote d`Azur, Grasse, France
+     + Several individuals.
+-INPUT/ACKNOWLEDGMENTS
+*
+*-------------------------------------------------------------------------------
+*  LIST UPDATED FROM THE LATEST ECCENTRICITY FILE:  slrecc.230314.ILRS.xyz.snx
+*-------------------------------------------------------------------------------
++SITE/ID
+*Code PT __Domes__ T _Station Description__ _Longitude_ _Latitude__ _Height
+ 1148  A   ---     L Ondrejov   OND. FIXED   14 47 08.1  49 54 49.3   592.6
+ 1181  A 14106S001 L Potsdam    GDR FIXED    13  3 55.0  52 22 48.9   148.5
+ 1824  A 12356S001 L Kiev       KIEV FIXED   30 29 45.1  50 21 47.2   213.1
+ 1831  A 12368S001 L Lviv       LVIV         23 57 15.8  49 55  3.2   359.8
+ 1863  A 12340S001 L Maidanak   MDN. FIXED   66 56 35.3  38 41  8.6  2712.0
+ 1864  A 12340S002 L Maidanak   MDN2 FIXED   66 56 35.1  38 41  5.6  2714.2
+ 1866  A 12347S001 L Dunaovcy   DUN. FIXED   26 43  6.3  48 50 53.6   397.2
+ 1867  A 12344S001 L Evpatoria  EVP. FIXED   33  9 50.5  45 13 11.0    47.7
+ 1868  A 12341S001 L Komsomolsk KOM. FIXED  136 44 37.7  50 41 40.6   270.1
+ 1869  A 12343S001 L Balkhash   BAL. FIXED   73 36  2.2  45 53 58.6   321.4
+ 1870  A 12309S001 L Mendeleevo MENLAS       37 13 24.4  56  1 39.3   257.3
+ 1871  A 12357S001 L Sarapul    SARLAS       56 28 45.2  53 47 15.0   141.8
+ 1873  A 12337S003 L Simeiz     SIM. FIXED   33 59 27.4  44 24 47.4   365.3
+ 1874  A 12309S003 L Mendeleev2 MDVS         37 13 24.4  56  1 39.3   257.3
+ 1879  A 12372S001 L Altay      ALTL         82 10 38.3  51 20 38.0   270.0
+ 1884  A 12302S002 L Riga       RIGA FIXED   24  3 31.0  56 56 55.3    31.7
+ 1885  A 12302S006 L Riga       RIGA         24  3 31.1  56 56 55.4    31.5
+ 1886  A 12373S001 L Arkhyz                  41 25 53.3  43 38 59.4  2078.2
+ 1887  A 25603S001 L Baikonur   BAIL         63 20 31.9  45 42 16.9    98.3
+ 1888  A 12350S002 L Svetloe    QUASAR       29 47 00.0  60 32 00.0   100.0
+ 1889  A 12351S002 L Zelenchuks QUASAR       41 34 00.0  43 47 00.0  1000.0
+ 1890  A 12338S004 L Badary     QUASAR      102 14  7.3  51 46 12.1   100.0
+ 1891  A 12313S007 L Irkutsk    IRKL FIXED  104 18 59.0  52 13  8.8   505.6
+ 1893  A 12337S006 L Katzively  CRIMEA FIX   33 58 12.4  44 23 35.4    68.7
+ 1953  A 40701S001 L Santiago D CUBA FIXED  284 14 16.0  20  0 43.0    18.3
+ 7035  A 40436M003 L Otay Mount TLRS-3      243  9 32.9  34 22 55.2  2200.0
+ 7040  A 49901S001 L Wrightwood OCTL        248 34 45.4  41 56  0.7  1963.9
+ 7046  A 40438M002 L Bear Lake  TLRS-4      248 34 45.4  41 56  0.7  1963.9
+ 7051  A 40433M001 L Quincy     MOBLAS-1    239  3 37.6  39 58 24.5  1060.7
+ 7061  A 41703M001 L Easter Isl TLRS-2      250 36 59.1 -27 -8-52.1   116.8
+ 7062  A 40436M002 L Otay Mount MOBLAS-2    243  9 32.8  32 36  2.6   989.0
+ 7063  A 40451M112 L Greenbelt  GSFC FIXED  283 10 19.9  39  1 13.3    19.9
+ 7064  A 40451M107 L Greenbelt  MOBLAS-1    283 10 19.1  39  1 14.9    18.7
+ 7065  A 40451M108 L Greenbelt  MOBLAS-2    283 10 19.1  39  1 14.4    18.6
+ 7066  A   ---     L Wallops Is WAL. FIXED  284 29 25.2  37 51 36.5     5.8
+ 7067  A 42501M001 L Bermuda    MOBLAS-1    295 20 37.6  32 21 12.8   -20.5
+ 7068  A 43602M002 L Grand Turk MOBLAS-2    288 52  5.1  21 27 37.7   -17.6
+ 7069  A 40417M002 L Patrick    PAFB FIXED  279 23 39.4  28 13 40.6   -23.0
+ 7070  A   ---     L Wallops Is MOBLAS-2    284 29 23.4  37 51 35.9     5.6
+ 7080  A 40442M006 L Mcdonald   MLRS        255 59  5.2  30 40 48.9  2004.9
+ 7081  A 40417M001 L Patrick    MOBLAS-2    279 23 36.5  28 13 39.7     1.8
+ 7082  A 40438M001 L Bear Lake  MOBLAS-1    248 34 45.6  41 56  0.8  1963.7
+ 7083  A 40451M122 L Greenbelt  MOBLAS-3    283 10 19.1  39  1 14.0    18.6
+ 7084  A 40439M003 L Owens Vall MOBLAS-2    241 42 15.2  37 13 55.6  1178.7
+ 7085  A 40405M001 L Goldstone  MOBLAS-1    243  6 49.0  35 25 27.9   966.7
+ 7086  A 40442M001 L Mcdonald   MOBLAS-1    255 59  2.6  30 40 37.3  1962.1
+ 7090  A 50107M001 L Yarragadee MOBLAS-5    115 20 48.2 -29 -2-47.3   242.0
+ 7091  A 40440M001 L Westford   MOBLAS-3    288 30 44.4  42 37 21.7    92.8
+ 7092  A 50505M001 L Kwajalein  MOBLAS-8    167 28 32.5   9 23 37.6    31.3
+ 7096  A 50503M001 L American N-MOBLAS-6    189 16 30.4 -14-20 -7.4    45.5
+ 7097  A 41703M002 L Easter Isl TLRS-2      250 36 59.1 -27 -8-52.1   118.2
+ 7100  A 40451M106 L Greenbelt  MOBLAS-3    283 10 47.7  39  1 15.4    10.8
+ 7101  A 40451M101 L Greenbelt  MOBLAS-6    283 10 43.0  39  1 16.2     8.1
+ 7102  A 40451M102 L Greenbelt  MOBLAS-3    283 10 18.9  39  1 14.4    19.1
+ 7103  A 40451M103 L Greenbelt  MOBLAS-6    283 10 18.9  39  1 14.6    18.1
+ 7104  A 40451M104 L Greenbelt  MOBLAS-7    283 10 36.9  39  1 17.0    11.9
+ 7105  A 40451M105 L Greenbelt  TLRS-2      283 10 20.3  39  1 14.1    19.8
+ 7106  A 40451M113 L Greenbelt  48-INCH     283 10 17.7  39  1 17.3    20.0
+ 7109  A 40433M002 L Quincy     MOBLAS-8    239  3 19.0  39 58 30.0  1107.0
+ 7110  A 40497M001 L Monument P MOBLAS-3    243 34 38.3  32 53 30.2  1839.7
+ 7111  A 40420M001 L Vandenberg TLRS-1      239 29 58.0  34 33 58.4   601.6
+ 7112  A 40496M001 L Plattevill MOBLAS-2    255 16 26.4  40 10 58.0  1502.2
+ 7114  A 40439M001 L Owens Vall MOBLAS-2    241 42 22.3  37 13 57.2  1178.6
+ 7115  A 40405M002 L Goldstone  MOBLAS-3    243 12 29.1  35 14 53.9  1037.6
+ 7119  A 40445M004 L Haleakala  TLRS-4      203 44 35.2  20 42 27.4  3068.5
+ 7120  A 40445M002 L Haleakala  MOBLAS-1    203 44 38.2  20 42 27.4  3069.6
+ 7121  A 92202M002 L Huahine    MOBLAS-1    208 57 31.9 -16-44 -0.6    44.3
+ 7122  A 40504M001 L Mazatlan   MOBLAS-6    253 32 27.3  23 20 34.2    31.6
+ 7123  A 92202M004 L Huahine    TLRS-2      208 57 31.9 -16-44 -0.6    46.1
+ 7124  A 92201M007 L Papeete    MOBLAS-8    210 23 37.6 -17-34-36.5    95.1
+ 7125  A 40451M114 L Greenbelt  TLRS-3      283 10 21.2  39  1 12.9    19.0
+ 7126  A   ---     L Greenbelt  MLRO        283 10 21.1  39  1 12.9    19.2
+ 7127  A   ---     L Greenbelt  GUTS        283 10 21.1  39  1 12.9    19.2
+ 7130  A 40451M116 L Greenbelt  TLRS-2      283 10 21.1  39  1 15.2    19.6
+ 7206  A 40442S002 L Mcdonald   2.7 METER   255 58 40.8  30 40 18.3  2059.0
+ 7210  A 40445M001 L Haleakala  HALEAKALA   203 44 38.7  20 42 25.9  3068.2
+ 7220  A 40497M002 L Monument P TLRS-1      243 34 37.7  32 53 30.2  1840.9
+ 7231  A 21602S004 L Wuhan      WUHAN       114 29 22.8  30 30 56.4    87.1
+ 7236  A 21602S003 L Wuhan      WUH. FIXED  114 20 46.5  30 32 30.4    39.4
+ 7237  A 21611S001 L Changchun  CHALAS      125 26 36.4  43 47 25.8   274.9
+ 7249  A 21601S004 L Beijing    BEIJ FIXED  115 53 31.3  39 36 24.9    82.3
+ 7261  A 40491M003 L Flagstaff  TLRS-1      248 21 55.7  35 12 52.3  2144.9
+ 7265  A 40405M006 L Mojave     TLRS-1      243  6 31.3  35 19 52.3   896.7
+ 7274  A 40497M003 L Monument P TLRS-1      243 34 37.8  32 53 30.3  1839.4
+ 7288  A 40405M013 L Mojave     TLRS-3      243  6 30.5  35 19 52.4   896.8
+ 7295  A 40499M002 L Richmond   TLRS-1      279 36 57.1  25 36 48.0   -22.0
+ 7300  A 21733S001 L Minami Tor HTLRS-1     153 59  3.1  24 17 40.8    35.9
+ 7301  A 21709S001 L Okinawa (J HTLRS-1     127 42 56.9  26  7 54.7   126.5
+ 7302  A 21735S001 L Tsushima   HTLRS-1     129 17 37.0  34 11 47.4    33.9
+ 7303  A   ---     L Oki Gunto  HTLRS-1     133 19  9.7  36 10 48.3   122.5
+ 7304  A   ---     L Minami Dai HTLRS-1     131 13 47.4  25 49 45.1    50.8
+ 7305  A   ---     L Iwo Jima   HTLRS-1     141 18 20.2  24 46 18.3   135.7
+ 7306  A 21797S001 L Tsukuba_SC TKBLAS      140 07 52.6  36 04  3.1    68.2
+ 7307  A 21736S001 L Isigaki Sh HTLRS-1     124 12 51.4  24 22  9.1   100.8
+ 7308  A 21704S002 L Koganei    CRLLAS      139 29 20.8  35 42 36.3   123.1
+ 7309  A   ---     L Hachijo Ji HTLRS-1     139 49 22.1  33  4 22.7   264.1
+ 7313  A   ---     L Hiroo      HTLRS-1     143 19 42.4  42 19  4.1    46.1
+ 7317  A 21791M008 L Ishioka    ISHL        140 13  5.2  36 12 32.4   156.5
+ 7320  A   ---     L Wakkanai   HTLRS-1     141 43 47.8  45 23  9.5    91.6
+ 7321  A   ---     L Oga        HTLRS-1     139 42  6.2  40  0 16.7    69.4
+ 7322  A   ---     L Tyosi      HTLRS-1     140 51 12.4  35 42 17.8    90.1
+ 7323  A   ---     L Makura Sak HTLRS-1     130 17 35.4  31 16 19.2    62.7
+ 7328  A 21704M001 L Koganei    KOGLAS      139 29 16.6  35 42 36.6   115.1
+ 7329  A 21614S001 L Xian       NTSC        109 12 51.8  34 21  6.1   940.3
+ 7335  A 21701M002 L Kashima    KASH. FIXD  140 39 27.3  35 57 22.2    66.4
+ 7337  A 21739M001 L Miura      MIULAS      139 39  1.4  35 12 24.2    99.1
+ 7339  A 21740M001 L Tateyama   TATLAS      139 50 53.3  34 56 12.9   120.3
+ 7341  A   ---     L Bisei      HTLRS-1     133 34 15.1  34 40 47.0   549.4
+ 7343  A 21601M002 L Beijing    TROS        115 53 31.3  39 36 24.9    82.4
+ 7355  A 21612M002 L Urumqi     TROS         87 42 19.3  43 48 49.0   846.1
+ 7356  A 21613M003 L Lhasa      TROS         91  2 15.5  29 38  5.4  3601.5
+ 7357  A 21601S005 L Beijing    BEIJING-A   115 53 33.6  39 36 27.8    72.7
+ 7358  A 21749S001 L Tanegashim GUTS        131  0 55.5  30 33 30.4   140.7
+ 7359  A 23902S002 L Daedeok    DAEK        127 22 28.9  36 23 56.5   116.6
+ 7370  A 50186M001 L BurnieTS   FTLRS       145 52 53.0 -41 -3-44.0   129.6
+ 7394  A 23907S002 L Sejong     SEJL        127 18 10.5  36 31 15.6   176.4
+ 7395  A 23910S001 L Geochang   GEOL        127 55 12.4  35 35 24.7   934.1
+ 7396  A 21602S008 L Wuhan2     JFNL FIXED  114 29 24.7  30 30 59.5    77.4
+ 7400  A 41705M001 L Santiago   TLRS-1      289 19 52.9 -33 -8-58.6   723.4
+ 7401  A 41706M001 L Cerro Tolo TLRS-1      289 11 59.8 -30-10-20.8  2155.9
+ 7403  A 42202M003 L Arequipa   TLRS-3      288 30 25.3 -16-27-56.5  2489.5
+ 7404  A 41705M004 L Santiago   TLRS-2      289 19 53.5 -33 -8-58.6   724.5
+ 7405  A 41719M001 L Concepcion TIGO        286 58 28.8 -36-50-34.8   170.0
+ 7406  A 41508S003 L San Juan   BEIJING-A   291 22 36.6 -31-30-31.0   727.2
+ 7407  A 48081S001 L Brazilia   BRAL        312 08 04.9 -15 46 23.0  1028.8
+ 7410  A 40104M003 L Algonquin  TLRS-4      281 55 46.9  45 57 20.1   195.9
+ 7411  A 40132M001 L La Grande  TLRS-4      281 25 43.4  53 41 53.6    20.2
+ 7501  A 30302M003 L Hartebeest MTLRS-1      27 41 10.2 -25-53-22.9  1407.5
+ 7502  A 30314M001 L Sutherland MTLRS-1      20 48  8.9 -32-22-45.0  1730.0
+ 7503  A 30301S010 L HartRTL    HRTL         27 41 10.0 -25-53-21.1  1414.0
+ 7505  A 11101M001 L Sofia      MTLRS-1      23 23 41.0  42 33 20.4  1113.9
+ 7510  A 12612M001 L Askites    MTLRS-1      25 33 58.4  40 55 40.8   183.2
+ 7512  A 12615M001 L Katavia    MTLRS-1      27 46 50.8  35 57  5.4    74.6
+ 7515  A 12602M002 L Dionysos   MTLRS-1      23 55 56.8  38  4 42.9   511.2
+ 7517  A 12613M001 L Roumelli   TLRS-1       24 41 39.0  35 24 15.2   103.3
+ 7520  A 12614M001 L Karitsa    MTLRS-1      20 39 53.4  39 44  3.3   599.3
+ 7525  A 12616M001 L Xrisokelar TLRS-1       21 52 39.4  36 47 29.2   476.8
+ 7530  A 20702M001 L Bar Giyyor MOBLAS-2     35  5 18.7  31 43 20.6   773.7
+ 7540  A 12734M005 L Matera     MTLRS-1      16 42 16.1  40 38 54.7   529.3
+ 7541  A 12734M004 L Matera     TLRS-1       16 42 15.4  40 38 54.7   529.0
+ 7542  A 12749M001 L Monte Vend MTLRS-2      11 41 34.9  45 19 18.6   524.0
+ 7543  A 12717M001 L Noto       TLRS-1       14 59 18.2  36 52 35.7   126.4
+ 7544  A 12706M001 L Lampedusa  MTLRS-1      12 34  2.8  35 31  3.9   112.6
+ 7545  A 12725M002 L Punta Sa M TLRS-1        8 58 22.7  39  8  7.7   230.7
+ 7546  A 12711M002 L Medicina   TLRS-1       11 38 47.3  44 31 12.1    50.1
+ 7548  A 12725S013 L Cagliari   CAGLAS        8 58 19.3  39  8 11.9   252.8
+ 7550  A 12718M002 L Basovizza  MTLRS-2      13 52 32.0  45 38 34.6   447.9
+ 7560  A 12302M001 L Riga       MTLRS-1      24  3 30.9  56 56 54.4    30.0
+ 7561  A 12337M001 L Simeiz     MTLRS-1      33 59 29.7  44 24 55.2   387.1
+ 7575  A 20801M001 L Diyarbakir MTLRS-1      40 11 41.6  37 55 12.8   725.5
+ 7580  A 20803M001 L Melengicli TLRS-1       33 11 28.5  37 22 39.5  1358.3
+ 7585  A 20802M001 L Yozgat     MTLRS-1      34 48 46.8  39 48  1.9  1677.6
+ 7587  A 20804M001 L Yigilca    TLRS-1       31 26 19.6  40 56 13.1   823.3
+ 7589  A 20805M001 L Ankara     TLRS-1       32 45 30.8  39 53 15.0   974.5
+ 7590  A 14005M002 L Monte Gene MTLRS-2       9 01 04.3  45 55 39.5  1663.4
+ 7594  A 14201M200 L Wettzell   TIGO         12 52 38.0  49  8 39.4   659.3
+ 7596  A 14201M004 L Wettzell   MTLRS-1      12 52 43.2  49  8 38.9   659.4
+ 7597  A 14201M005 L Wettzell   MTLRS-1      12 52 42.5  49  8 38.3   660.9
+ 7599  A 14201M007 L Wettzell   MTLRS-1      12 52 39.9  49  8 42.5   657.8
+ 7602  A 10302M002 L Tromso     MTLRS-2      18 56 21.9  69 39 46.7   133.7
+ 7604  A 10004M002 L Brest      FTLRS       355 29 46.2  48 24 28.2   104.8
+ 7701  A 31336S001 L Izana      IZ1L        343 29 21.8  28 17 58.6  2429.7
+ 7801  A 30101S001 L Helwan     EGY1 FIXED   31 20 33.7  29 51 32.4   132.5
+ 7805  A 10503S001 L Metsahovi  FIN. FIXED   24 23 40.3  60 13  2.3    79.0
+ 7806  A 10503S014 L Metsahovi  METLAS       24 23 40.3  60 13  1.7    74.7
+ 7807  A 10503S018 L Metsahovi3 METNSLR      24 23 40.3  60 13  1.7    74.7
+ 7810  A 14001S001 L Zimmerwald SWI. FIXED    7 27 54.7  46 52 38.0   951.7
+ 7810  B 14001S007 L Zimmerwald SWI2 FIXED    7 27 54.7  46 52 38.0   951.7
+ 7811  A 12205S001 L Borowiec   POL. FIXED   17  4 28.5  52 16 37.1   123.3
+ 7816  A 10916S001 L Stuttgart2 SMILAS        9 06 09.4  48 44 56.0   533.2
+ 7817  A 13420S021 L Yebes      YLARA       356 54 34.2  40 31 28.2   915.0
+ 7819  A 21609S004 L Kunming2   KUNMING2    102 47 50.7  25  1 47.8  1993.6
+ 7820  A 21609S002 L Kunming    KUNMING     102 47 50.7  25  1 47.8  1993.6
+ 7821  A 21605S010 L Shanghai   SO FIXED    121 11 11.8  31  5 45.9   100.9
+ 7822  A 92201M017 L Punaaia    FTLRS       210 23 37.6 -17-34-36.5    95.1
+ 7823  A 13402M005 L San Fernan FTLRS       353 47 40.8  36 27 54.9    98.6
+ 7824  A 13402S004 L San Fernan SPN. FIXED  353 47 40.8  36 27 54.9    98.6
+ 7824  B 13402S007 L San Fernan SPN. FIXED  353 47 40.8  36 27 54.9    98.6
+ 7825  A 50119S003 L Mount Stro STR2 FIXED  149  0 35.5 -35-18-58.1   805.6
+ 7826  A 50119S007 L Mount Stro STR3 FIXED  149  0 35.5 -35-18-58.1   805.6
+ 7827  A 14201S045 L Wettzell   SOSW         12 52 41.2  49  8 41.8   663.2
+ 7829  A 10002S017 L Grasse     FTLRS         6 55 14.9  43 45 16.8  1319.4
+ 7830  A 12617M002 L Chania     FTLRS        24  4 13.9  35 31 58.9   160.9
+ 7831  A 30101S001 L Helwan     EGY. FIXED   31 20 33.7  29 51 32.4   132.5
+ 7832  A 20101S001 L Riyadh     SALRO        46 24  1.3  24 54 37.9   760.8
+ 7833  A 13504S001 L Kootwijk   NL. FIXED     5 48 35.3  52 10 42.2    94.5
+ 7834  A 14201S002 L Wettzell   GER. FIXED   12 52 41.1  49  8 41.7   661.8
+ 7835  A 10002S001 L Grasse     FRA. FIXED    6 55 16.0  43 45 16.8  1323.5
+ 7836  A 14106S009 L Potsdam    GFZLAS       13  3 53.6  52 22 48.0   134.2
+ 7837  A 21605S001 L Shanghai   SO FIXED    121 11 30.2  31  5 51.1    28.5
+ 7838  A 21726S001 L Simosato   SHO FIXED   135 56 13.3  33 34 39.6   102.3
+ 7839  A 11001S002 L Graz       GRAZ FIXED   15 29 36.0  47  4  1.6   540.1
+ 7840  A 13212S001 L Herstmonce RGO FIXED     0 20 10.0  50 52  2.5    76.1
+ 7841  A 14106S011 L Potsdam    GFZLAS3      13  3 41.1  52 22 58.8   127.9
+ 7843  A 50103S007 L Orroral    NLRS        148 56 21.5 -35-38-10.5  1350.6
+ 7844  A 21732S002 L Chichi Jim HTLRS-1     142 11 52.4  27  5 54.0    53.0
+ 7845  A 10002S002 L Grasse     GRASLLR       6 55 17.6  43 45 16.6  1324.0
+ 7846  A 10002M004 L Grasse     FTLRS         6 55 14.9  43 45 16.8  1319.4
+ 7847  A 50107S009 L Yarragadee PSLR        115 20 48.5 -29 -2-46.6   243.1
+ 7848  A 10077M002 L Ajaccio    FTLRS         8 45 45.6  41 55 38.5    97.5
+ 7849  A 50119S001 L Mount Stro STR. FIXED  149  0 35.5 -35-18-58.1   804.7
+ 7850  A 40442M008 L Mcdonald   TLRS-4      255 59  5.6  30 40 49.7  2004.9
+ 7853  A 40439M004 L Owens Vall MTLRS-1     241 42 22.3  37 13 57.3  1178.7
+ 7865  A 49654M001 L NRL OTF    STAL        282 37 44.0  38 29 57.1    24.6
+ 7882  A 40505M001 L Cabo San L TLRS-1      250  8  8.0  22 55  3.1   112.3
+ 7883  A 40506M001 L Ensenada   TLRS-4      243 50 21.3  31 15 23.9   165.6
+ 7884  A 40429S001 L Albuquerqu STARFIRE    253 32  9.9  34 57 51.2  1876.1
+ 7885  A 40442M005 L Mcdonald   TLRS-1      255 59  2.6  30 40 37.3  1962.0
+ 7886  A 40433M005 L Quincy     TLRS-1      239  3 18.7  39 58 30.0  1107.3
+ 7887  A 40420M004 L Vandenberg TLRS-1      239 29 58.0  34 33 58.4   601.6
+ 7888  A 40434M002 L Mount Hopk TLRS-1      249  7 18.6  31 41  6.4  2330.8
+ 7889  A 40451M118 L Greenbelt  TLRS-2      283 10 21.1  39  1 15.2    19.2
+ 7890  A 40412M001 L Austin     TLRS-1      262 08 01.5  30 18 46.8   244.6
+ 7891  A 40491M002 L Flagstaff  TLRS-1      248 21 55.7  35 12 52.3  2145.1
+ 7892  A 40492M001 L Vernal     TLRS-1      250 25 45.0  40 19 36.6  1589.8
+ 7894  A 40493M001 L Yuma       TLRS-1      245 47 48.7  32 56 20.8   237.6
+ 7895  A   ---     L Mount Wils TLRS-1      283 10 19.7  39  1 14.5    21.9
+ 7896  A 40400M001 L Pasadena   TLRS-1      241 49 39.7  34 12 19.9   442.9
+ 7897  A 40442M010 L Mcdonald   TLRS-1      255 59  5.6  30 40 49.7  2004.9
+ 7899  A 40451M111 L Greenbelt  TLRS-1      283 10 48.1  39  1 15.3    10.2
+ 7902  A 30304S001 L Olifantsfo SAO-3        27 41 10.2 -25-53-22.9  1407.5
+ 7907  A 42202S001 L Arequipa   SAO-2       288 30 24.7 -16-27-56.6  2492.9
+ 7917  A 40451M119 L Greenbelt  SAO-3       283 10 18.9  39  1 17.7    25.7
+ 7918  A 40451M120 L Greenbelt  MOBLAS-6    283 10 19.7  39  1 14.5    19.4
+ 7919  A 40451M121 L Greenbelt  TLRS-4      283 10 19.7  39  1 14.5    21.9
+ 7920  A 40451M117 L Greenbelt  TLRS-1      283 10 21.0  39  1 12.9    19.3
+ 7921  A 40434S001 L Mount Hopk SAO-4       249  7 18.9  31 41  3.2  2358.2
+ 7929  A 41604S001 L Natal      SAO-1       324 50  7.3  -5-55-40.1    42.6
+ 7935  A 21705S001 L Dodair     DDR FIXED   139 11 30.6  36  0 20.7   903.2
+ 7939  A 12734S001 L Matera     SAO-1        16 42 16.8  40 38 55.7   536.5
+ 7940  A 12602S001 L Dionysos   GRE. FIXED   23 55 57.9  38  4 42.3   511.9
+ 7941  A 12734S008 L Matera     MLRO         16 42 16.5  40 38 55.2   537.6
+ 7943  A 50103S003 L Orroral    SAO-3       148 57 17.2 -35-37-29.7   950.3
+ 7944  A   ---     L Tidbinbill SALRO       148 57 17.3 -35 37 29.7   689.0
+ 7999  A   ---     L Mcdonald   TLRS-1      255 59  5.6  30 40 49.7  2004.9
+ 8833  A 13504M002 L Kootwijk   MTLRS-1       5 48 36.6  52 10 41.4    89.2
+ 8834  A 14201S018 L Wettzell   WLRS         12 52 40.8  49  8 39.9   666.0
+-SITE/ID
+*-------------------------------------------------------------------------------
+********************************************************************************
+** SECTION WITH MANDATORY CORRECTIONS
+********************************************************************************
+*-------------------------------------------------------------------------------
+*
+*  ===============================
+*  LONG-TERM MEAN RANGE BIAS MODEL
+*  ===============================
+*
+*  List of mandatory systematic errors to be applied on observations based on 
+*  the 2020 results (v230/v231) of the ILRS/ASC SSEM Pilot Project on LAGEOS 1/2
+*  and Etalon-1/2 observations from 1993 to 2020/06 and its extension SSEM-X via
+*  the operational product series v280 and, most recently, the new v320 which 
+*  includes LARES-2 observations as well.
+*  
+*  The model is valid only if the prerequisites mentioned at the very beginning 
+*  of this DHF are complied.
+*
+*  The pre-1993 model comes from old systematic errors estimates.
+*
+*  The 2-digit 'point code' "PT" in the sections:
+*
+*        a) MODEL/RANGE_BIAS
+*        b) SOLUTION/DATA_HANDLING
+*        c) MODEL/TIME_BIAS
+*
+*  contains the 2 rightmost characters (numbers) of the SP3c s/c ID.
+*
+*-------------------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+*-------------------------------------------------------------------------------
++MODEL/RANGE_BIAS
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+ 1874 51  501 A 14:019:00000 00:000:00000 R        -16.8     0.7             mm
+ 1879 51  501 A 13:188:00000 18:322:00000 R         17.8     1.2             mm
+ 1887 51  501 A 11:296:00000 15:249:00000 R         21.4     1.7             mm
+ 1887 51  501 A 16:101:00000 18:343:00000 R        -21.6     1.4             mm
+ 1890 51  501 A 12:001:00000 00:000:00000 R         11.4     1.1             mm
+ 1893 51  501 A 05:212:00000 00:000:00000 R        -33.3     1.4             mm
+ 7080 51  501 A 96:133:00000 01:140:00000 R         -8.4     0.5             mm
+ 7090 51  501 A 93:001:00000 96:364:00000 R          3.8     0.3             mm
+ 7090 51  501 A 02:116:00000 10:059:00000 R         -1.7     0.2             mm
+ 7090 51  501 A 14:208:00000 19:363:00000 R          2.0     0.2             mm
+ 7090 51  501 A 21:066:00000 22:324:00000 R          2.6     0.3             mm
+ 7105 51  501 A 93:017:00000 95:253:00000 R         -6.3     0.7             mm
+ 7105 51  501 A 96:056:00000 98:193:00000 R          3.4     0.7             mm
+ 7105 51  501 A 98:193:00000 10:122:00000 R         -2.9     0.3             mm
+ 7105 51  501 A 10:339:00000 17:029:00000 R         -7.1     0.3             mm
+ 7105 51  501 A 20:047:00000 00:000:00000 R         -5.1     0.4             mm
+ 7109 51  501 A 97:009:00000 97:018:00000 R        164.9                     mm   CDDIS
+ 7110 51  501 A 93:001:00000 96:175:00000 R         -3.0     0.6             mm
+ 7110 51  501 A 96:240:00000 96:277:00000 R        163.6                     mm   CDDIS
+ 7110 51  501 A 96:287:00000 20:201:00000 R         -5.2     0.2             mm
+ 7119 51  501 A 06:316:00000 13:223:00000 R          1.4     0.4             mm
+ 7119 51  501 A 13:223:00000 15:018:00000 R          5.1     1.0             mm
+ 7119 51  501 A 15:067:00000 00:000:00000 R          9.9     0.4             mm
+ 7124 51  501 A 98:011:00000 03:362:00000 R         -5.1     0.8             mm
+ 7124 51  501 A 04:122:00000 04:183:63240 R        163.9                     mm   CDDIS
+ 7124 51  501 A 04:186:00000 18:105:00000 R         -3.2     0.6             mm
+ 7210 51  501 A 94:023:00000 99:220:00000 R        -12.0     0.7             mm
+ 7210 51  501 A 00:261:00000 04:158:00000 R          6.5     0.6             mm
+ 7237 51  501 A 96:056:00000 97:222:00000 R         19.4     4.8             mm
+ 7237 51  501 A 97:222:00000 02:195:00000 R        -22.9     1.3             mm
+ 7237 51  501 A 02:195:00000 12:120:00000 R         13.1     0.8             mm
+ 7237 51  501 A 12:120:00000 20:033:00000 R          4.3     0.4             mm
+ 7237 51  501 A 20:033:00000 23:085:00000 R         10.3     0.8             mm
+ 7403 51  501 A 93:038:00000 03:355:00000 R         -4.7     0.5             mm
+ 7403 51  501 A 06:267:00000 13:001:00000 R          9.2     0.7             mm
+ 7405 51  401 A 08:279:00000 09:004:00000 R       -267.4    12.4             mm
+ 7405 51  801 A 04:278:00000 06:071:00000 R         14.0     1.7             mm
+ 7405 51  801 A 08:279:00000 14:089:00000 R         11.1     0.6             mm
+ 7406 51  501 A 06:057:00000 12:288:00000 R         -4.0     0.5             mm
+ 7501 51  501 A 00:219:00000 17:050:00000 R          1.7     0.3             mm
+ 7501 51  501 A 17:057:00000 19:041:00000 R          6.0     0.6             mm
+ 7501 51  501 A 19:041:00000 21:001:00000 R         13.1     1.1             mm
+ 7810 51  401 B 97:362:00000 02:153:00000 R        -25.1     0.6             mm
+ 7810 51  401 B 02:153:00000 05:044:00000 R        -17.2     0.6             mm
+ 7810 51  501 B 08:111:00000 12:302:00000 R          4.3     0.2             mm
+ 7810 51  501 B 16:080:00000 00:000:00000 R          7.0     0.3             mm
+ 7811 51  501 A 93:179:00000 03:096:00000 R        -34.1     1.7             mm
+ 7821 51  501 A 16:017:00000 22:075:00000 R         -6.0     0.7             mm
+ 7824 51  501 B 03:313:00000 10:339:00000 R         19.0     1.1             mm
+ 7825 51  501 A 04:214:00000 00:000:00000 R          0.7     0.2             mm
+ 7832 51  501 A 00:247:00000 11:001:00000 R         18.3     0.3             mm
+ 7835 51  501 A 94:009:00000 97:194:00000 R         18.2     1.5             mm
+ 7835 51  501 A 97:250:00000 05:191:00000 R          6.3     0.4             mm
+ 7836 51  501 A 99:171:00000 04:165:00000 R         -4.5     0.9             mm
+ 7838 51  501 A 03:285:00000 11:051:00000 R         20.7     0.8             mm
+ 7838 51  501 A 11:079:00000 18:070:00000 R         -3.9     0.6             mm
+ 7839 51  501 A 98:151:00000 03:285:00000 R          7.9     0.3             mm
+ 7839 51  501 A 03:285:00000 00:000:00000 R          3.9     0.1             mm
+ 7840 51  501 A 93:003:00000 02:272:00000 R         -6.4     0.3             mm
+ 7840 51  501 A 02:272:00000 07:035:00000 R        -11.4     0.3             mm
+ 7840 51  501 A 07:035:00000 00:000:00000 R         -2.2     0.1             mm
+ 7841 51  501 A 04:053:00000 00:000:00000 R          1.9     0.3             mm
+ 7843 51  501 A 93:017:00000 95:001:00000 R         14.6     3.4             mm
+ 7843 51  501 A 95:008:00000 97:257:00000 R        -11.1     1.4             mm
+ 7843 51  501 A 97:257:00000 98:305:00000 R         26.5     1.4             mm
+ 7845 51  501 A 01:126:00000 04:270:00000 R         17.9     0.8             mm
+ 7845 51  501 A 15:004:00000 19:041:00000 R         -7.9     0.5             mm
+ 7845 51  501 A 19:041:00000 00:000:00000 R         -1.9     0.3             mm
+ 7849 51  501 A 98:186:00000 03:005:00000 R          2.4     0.4             mm
+ 7939 51  601 A 93:003:00000 00:331:00000 R         -9.9     1.7             mm
+ 7941 51  501 A 01:182:00000 07:049:00000 R         -2.1     0.5             mm
+ 7941 51  501 A 07:049:00000 07:189:00000 R        -25.4     0.8             mm
+ 7941 51  501 A 07:189:00000 07:301:00000 R        -12.7     1.6             mm
+ 8834 51  501 A 00:289:00000 14:334:00000 R         -7.8     0.5             mm
+ 8834 51  501 A 15:011:00000 19:181:00000 R        -18.0     0.9             mm
+ 8834 51 1001 A 19:153:00000 00:000:00000 R          2.4     0.3             mm
+*
+ 1874 52  501 A 14:019:00000 00:000:00000 R        -17.3     0.9             mm
+ 1879 52  501 A 13:188:00000 18:322:00000 R         18.1     1.3             mm
+ 1887 52  501 A 11:296:00000 15:249:00000 R         16.3     1.7             mm
+ 1887 52  501 A 16:101:00000 18:343:00000 R        -22.1     1.8             mm
+ 1890 52  501 A 12:001:00000 00:000:00000 R         12.1     1.2             mm
+ 1893 52  501 A 05:212:00000 00:000:00000 R        -32.5     1.5             mm
+ 7080 52  501 A 96:133:00000 01:140:00000 R         -8.7     0.6             mm
+ 7090 52  501 A 93:001:00000 96:364:00000 R          2.9     0.3             mm
+ 7090 52  501 A 02:116:00000 10:059:00000 R         -1.5     0.2             mm
+ 7090 52  501 A 14:208:00000 19:363:00000 R          2.2     0.2             mm
+ 7090 52  501 A 21:066:00000 22:324:00000 R          3.2     0.3             mm
+ 7105 52  501 A 93:017:00000 95:253:00000 R         -6.2     0.6             mm
+ 7105 52  501 A 96:056:00000 98:193:00000 R          3.0     0.7             mm
+ 7105 52  501 A 98:193:00000 10:122:00000 R         -2.9     0.3             mm
+ 7105 52  501 A 10:339:00000 17:029:00000 R         -6.0     0.3             mm
+ 7105 52  501 A 20:047:00000 00:000:00000 R         -4.3     0.4             mm
+ 7109 52  501 A 97:009:00000 97:018:00000 R        164.9                     mm   CDDIS
+ 7110 52  501 A 93:001:00000 96:175:00000 R         -2.3     0.6             mm
+ 7110 52  501 A 96:240:00000 96:277:00000 R        163.6                     mm   CDDIS
+ 7110 52  501 A 96:287:00000 20:201:00000 R         -4.8     0.2             mm
+ 7119 52  501 A 06:316:00000 13:223:00000 R          1.5     0.4             mm
+ 7119 52  501 A 13:223:00000 15:018:00000 R          4.8     1.0             mm
+ 7119 52  501 A 15:067:00000 00:000:00000 R         10.9     0.4             mm
+ 7124 52  501 A 98:011:00000 03:362:00000 R         -4.9     0.8             mm
+ 7124 52  501 A 04:122:00000 04:183:63240 R        163.9                     mm   CDDIS
+ 7124 52  501 A 04:186:00000 18:105:00000 R         -2.1     0.7             mm
+ 7210 52  501 A 94:023:00000 99:220:00000 R        -12.7     0.7             mm
+ 7210 52  501 A 00:261:00000 04:158:00000 R          6.6     0.7             mm
+ 7237 52  501 A 96:056:00000 97:222:00000 R         21.1     3.4             mm
+ 7237 52  501 A 97:222:00000 02:195:00000 R        -22.1     1.3             mm
+ 7237 52  501 A 02:195:00000 12:120:00000 R         13.2     0.8             mm
+ 7237 52  501 A 12:120:00000 20:033:00000 R          5.4     0.4             mm
+ 7237 52  501 A 20:033:00000 23:085:00000 R         11.5     0.8             mm
+ 7403 52  501 A 93:038:00000 03:355:00000 R         -5.0     0.5             mm
+ 7403 52  501 A 06:267:00000 13:001:00000 R          8.3     0.7             mm
+ 7405 52  401 A 08:279:00000 09:004:00000 R       -213.1     6.7             mm
+ 7405 52  801 A 04:278:00000 06:071:00000 R         13.7     1.9             mm
+ 7405 52  801 A 08:279:00000 14:089:00000 R         10.3     0.7             mm
+ 7406 52  501 A 06:057:00000 12:288:00000 R         -3.5     0.5             mm
+ 7501 52  501 A 00:219:00000 17:050:00000 R          2.1     0.3             mm
+ 7501 52  501 A 17:057:00000 19:041:00000 R          6.8     0.7             mm
+ 7501 52  501 A 19:041:00000 21:001:00000 R         13.0     1.1             mm
+ 7810 52  401 B 97:362:00000 02:153:00000 R        -25.0     0.7             mm
+ 7810 52  401 B 02:153:00000 05:044:00000 R        -17.5     0.7             mm
+ 7810 52  501 B 08:111:00000 12:302:00000 R          4.1     0.2             mm
+ 7810 52  501 B 16:080:00000 00:000:00000 R          8.2     0.3             mm
+ 7811 52  501 A 93:179:00000 03:096:00000 R        -32.5     1.9             mm
+ 7821 52  501 A 16:017:00000 22:075:00000 R         -3.4     0.7             mm
+ 7824 52  501 B 03:313:00000 10:339:00000 R         19.5     1.3             mm
+ 7825 52  501 A 04:214:00000 00:000:00000 R          1.4     0.2             mm
+ 7832 52  501 A 00:247:00000 11:001:00000 R         18.8     0.4             mm
+ 7835 52  501 A 94:009:00000 97:194:00000 R         17.3     1.5             mm
+ 7835 52  501 A 97:250:00000 05:191:00000 R          7.1     0.4             mm
+ 7836 52  501 A 99:171:00000 04:165:00000 R         -4.5     0.9             mm
+ 7838 52  501 A 03:285:00000 11:051:00000 R         22.0     0.9             mm
+ 7838 52  501 A 11:079:00000 18:070:00000 R         -2.4     0.6             mm
+ 7839 52  501 A 98:151:00000 03:285:00000 R          8.5     0.3             mm
+ 7839 52  501 A 03:285:00000 00:000:00000 R          4.7     0.1             mm
+ 7840 52  501 A 93:003:00000 02:272:00000 R         -6.5     0.3             mm
+ 7840 52  501 A 02:272:00000 07:035:00000 R        -11.1     0.3             mm
+ 7840 52  501 A 07:035:00000 00:000:00000 R         -0.7     0.1             mm
+ 7841 52  501 A 04:053:00000 00:000:00000 R          3.0     0.3             mm
+ 7843 52  501 A 93:017:00000 95:001:00000 R         11.9     3.6             mm
+ 7843 52  501 A 95:008:00000 97:257:00000 R        -11.6     1.5             mm
+ 7843 52  501 A 97:257:00000 98:305:00000 R         25.4     1.3             mm
+ 7845 52  501 A 01:126:00000 04:270:00000 R         18.2     0.8             mm
+ 7845 52  501 A 15:004:00000 19:041:00000 R         -5.7     0.5             mm
+ 7845 52  501 A 19:041:00000 00:000:00000 R         -2.2     0.3             mm
+ 7849 52  501 A 98:186:00000 03:019:00000 R          2.6     0.4             mm
+ 7939 52  601 A 93:003:00000 00:331:00000 R        -12.7     1.7             mm
+ 7941 52  501 A 01:182:00000 07:049:00000 R         -2.3     0.5             mm
+ 7941 52  501 A 07:049:00000 07:189:00000 R        -25.2     1.0             mm
+ 7941 52  501 A 07:189:00000 07:301:00000 R        -12.7     1.5             mm
+ 8834 52  501 A 00:289:00000 14:334:00000 R         -6.4     0.4             mm
+ 8834 52  501 A 15:011:00000 19:181:00000 R        -17.7     0.7             mm
+ 8834 52 1001 A 19:153:00000 00:000:00000 R          2.3     0.3             mm
+*
+ 1874 53  501 A 14:103:00000 00:000:00000 R        -12.8     1.5             mm
+ 1879 53  501 A 13:188:00000 18:322:00000 R         16.2     2.1             mm
+ 1887 53  501 A 11:313:00000 15:256:00000 R         16.6     3.0             mm
+ 1887 53  501 A 16:101:00000 18:154:00000 R        -29.5     2.5             mm
+ 1893 53  501 A 11:149:00000 00:000:00000 R        -22.6     3.2             mm
+ 7080 53  501 A 00:002:00000 15:165:00000 R          4.1     0.8             mm
+ 7090 53  501 A 03:201:00000 14:208:00000 R         -7.8     0.3             mm
+ 7105 53  501 A 00:226:00000 16:346:00000 R          2.6     0.6             mm
+ 7105 53  501 A 17:029:00000 20:047:00000 R         17.5     0.8             mm
+ 7105 53  501 A 20:047:00000 00:000:00000 R          7.4     0.8             mm
+ 7110 53  501 A 96:237:00000 96:274:00000 R        163.6                     mm   CDDIS
+ 7110 53  501 A 01:252:00000 22:156:00000 R        -14.5     0.5             mm
+ 7124 53  501 A 08:343:00000 18:105:00000 R         12.1     1.3             mm
+ 7210 53  501 A 01:077:00000 04:123:00000 R         18.7     1.6             mm
+ 7237 53  501 A 97:257:00000 02:188:00000 R        -21.9     2.5             mm
+ 7237 53  501 A 02:195:00000 12:092:00000 R         12.1     1.4             mm
+ 7237 53  501 A 12:092:00000 23:085:00000 R         -6.5     0.7             mm
+ 7405 53  401 A 02:104:00000 04:032:00000 R        -11.8     3.7             mm
+ 7405 53  401 A 07:021:00000 09:004:00000 R       -210.1     5.2             mm
+ 7405 53  801 A 04:278:00000 14:089:00000 R         37.9     1.3             mm
+ 7406 53  501 A 06:057:00000 09:032:00000 R        -11.2     1.2             mm
+ 7406 53  501 A 09:032:00000 12:274:00000 R        -22.5     1.5             mm
+ 7501 53  501 A 01:111:00000 00:000:00000 R         13.5     0.6             mm
+ 7810 53  401 B 97:061:00000 06:050:00000 R        -29.8     1.1             mm
+ 7810 53  501 B 01:091:00000 16:080:00000 R          1.3     0.4             mm
+ 7810 53  501 B 16:080:00000 22:051:00000 R          7.2     0.5             mm
+ 7825 53  501 A 04:221:00000 07:168:00000 R         -8.5     1.0             mm
+ 7825 53  501 A 12:022:00000 00:000:00000 R         -8.8     0.7             mm
+ 7827 53  801 A 18:154:00000 20:313:00000 R         11.0     1.2             mm
+ 7832 53  501 A 01:021:00000 11:001:00000 R         15.5     0.8             mm
+ 7835 53  501 A 97:299:00000 02:069:00000 R         -9.8     1.6             mm
+ 7839 53  501 A 96:294:00000 00:000:00000 R         15.9     0.4             mm
+ 7840 53  501 A 96:140:00000 07:028:00000 R        -10.5     0.7             mm
+ 7840 53  501 A 07:028:00000 00:000:00000 R         -1.7     0.3             mm
+ 7841 53  501 A 04:172:00000 00:000:00000 R         12.1     0.9             mm
+ 7845 53  501 A 99:150:00000 01:119:00000 R        -10.9     1.9             mm
+ 7845 53  501 A 01:126:00000 04:270:00000 R         12.8     1.1             mm
+ 7845 53  501 A 08:349:00000 17:022:00000 R         -8.7     0.7             mm
+ 7849 53  501 A 98:186:00000 02:363:00000 R         -8.2     1.2             mm
+ 7941 53  501 A 01:182:00000 07:049:00000 R         13.8     1.2             mm
+ 7941 53  501 A 08:013:00000 00:000:00000 R         12.3     0.3             mm
+ 8834 53  501 A 00:289:00000 09:039:00000 R        -11.9     1.1             mm
+ 8834 53  501 A 10:325:00000 19:181:00000 R        -18.8     0.6             mm
+*
+ 1874 54  501 A 14:103:00000 00:000:00000 R        -12.8     1.5             mm
+ 1879 54  501 A 13:188:00000 18:322:00000 R         16.2     2.1             mm
+ 1887 54  501 A 11:313:00000 15:256:00000 R         16.6     3.0             mm
+ 1887 54  501 A 16:101:00000 18:154:00000 R        -29.5     2.5             mm
+ 1893 54  501 A 11:149:00000 00:000:00000 R        -22.6     3.2             mm
+ 7080 54  501 A 00:002:00000 15:165:00000 R          4.1     0.8             mm
+ 7090 54  501 A 03:201:00000 14:208:00000 R         -7.8     0.3             mm
+ 7105 54  501 A 00:226:00000 16:346:00000 R          2.6     0.6             mm
+ 7105 54  501 A 17:029:00000 20:047:00000 R         17.5     0.8             mm
+ 7105 54  501 A 20:047:00000 00:000:00000 R          7.4     0.8             mm
+ 7110 54  501 A 96:237:00000 96:274:00000 R        163.6                     mm   CDDIS
+ 7110 54  501 A 01:252:00000 22:156:00000 R        -14.5     0.5             mm
+ 7124 54  501 A 08:343:00000 18:105:00000 R         12.1     1.3             mm
+ 7210 54  501 A 01:077:00000 04:123:00000 R         18.7     1.6             mm
+ 7237 54  501 A 97:257:00000 02:188:00000 R        -21.9     2.5             mm
+ 7237 54  501 A 02:195:00000 12:092:00000 R         12.1     1.4             mm
+ 7237 54  501 A 12:092:00000 23:085:00000 R         -6.5     0.7             mm
+ 7405 54  401 A 02:104:00000 04:032:00000 R        -11.8     3.7             mm
+ 7405 54  401 A 07:021:00000 09:004:00000 R       -210.1     5.2             mm
+ 7405 54  801 A 04:278:00000 14:089:00000 R         37.9     1.3             mm
+ 7406 54  501 A 06:057:00000 09:032:00000 R        -11.2     1.2             mm
+ 7406 54  501 A 09:032:00000 12:274:00000 R        -22.5     1.5             mm
+ 7501 54  501 A 01:111:00000 00:000:00000 R         13.5     0.6             mm
+ 7810 54  401 B 97:061:00000 06:050:00000 R        -29.8     1.1             mm
+ 7810 54  501 B 01:091:00000 16:080:00000 R          1.3     0.4             mm
+ 7810 54  501 B 16:080:00000 22:051:00000 R          7.2     0.5             mm
+ 7825 54  501 A 04:221:00000 07:168:00000 R         -8.5     1.0             mm
+ 7825 54  501 A 12:022:00000 00:000:00000 R         -8.8     0.7             mm
+ 7827 54  801 A 18:154:00000 20:313:00000 R         11.0     1.2             mm
+ 7832 54  501 A 01:021:00000 11:001:00000 R         15.5     0.8             mm
+ 7835 54  501 A 97:299:00000 02:069:00000 R         -9.8     1.6             mm
+ 7839 54  501 A 96:294:00000 00:000:00000 R         15.9     0.4             mm
+ 7840 54  501 A 96:140:00000 07:028:00000 R        -10.5     0.7             mm
+ 7840 54  501 A 07:028:00000 00:000:00000 R         -1.7     0.3             mm
+ 7841 54  501 A 04:172:00000 00:000:00000 R         12.1     0.9             mm
+ 7845 54  501 A 99:150:00000 01:119:00000 R        -10.9     1.9             mm
+ 7845 54  501 A 01:126:00000 04:270:00000 R         12.8     1.1             mm
+ 7845 54  501 A 08:349:00000 17:022:00000 R         -8.7     0.7             mm
+ 7849 54  501 A 98:186:00000 02:363:00000 R         -8.2     1.2             mm
+ 7941 54  501 A 01:182:00000 07:049:00000 R         13.8     1.2             mm
+ 7941 54  501 A 08:013:00000 00:000:00000 R         12.3     0.3             mm
+ 8834 54  501 A 00:289:00000 09:039:00000 R        -11.9     1.1             mm
+ 8834 54  501 A 10:325:00000 19:181:00000 R        -18.8     0.6             mm
+*
+ 1874 67  501 A 23:316:00000 00:000:00000 R        -22.4     1.2             mm
+ 1893 67  501 A 22:261:00000 00:000:00000 R        -30.6     4.0             mm
+ 7090 67  501 A 22:212:00000 00:000:00000 R          3.6     0.3             mm
+ 7105 67  501 A 22:212:00000 00:000:00000 R         -9.9     0.5             mm
+ 7119 67  501 A 22:212:00000 00:000:00000 R          7.5     0.7             mm
+ 7237 67  501 A 24:105:00000 00:000:00000 R          9.5     1.4             mm
+ 7237 67  501 A 23:064:00000 24:105:00000 R         30.9     1.6             mm
+ 7237 67  501 A 22:212:00000 23:064:00000 R          9.4     1.0             mm
+ 7839 67  501 A 22:212:00000 00:000:00000 R          1.4     0.3             mm
+ 7840 67  501 A 22:212:00000 00:000:00000 R         -4.1     0.2             mm
+ 7845 67  501 A 22:212:00000 00:000:00000 R         -4.9     0.4             mm
+ 7941 67  501 A 24:007:00000 00:000:00000 R         -5.2     0.4             mm
+ 7941 67  501 A 23:127:00000 24:007:00000 R         -9.6     0.6             mm
+ 8834 67  501 A 22:212:00000 00:000:00000 R         -2.5     0.4             mm
+*-----------------
+* pre-1993 RB model
+*-----------------
+*--------------------------------------------------------------------------------------
+ 7080 -- ---- A 88:001:00000 89:349:00000 R       -40.00                     mm
+ 7080 -- ---- A 90:094:00000 93:168:00000 R        25.00                     mm
+ 7110 -- ---- A 84:001:00000 84:136:00000 R        30.00                     mm
+ 7110 -- ---- A 87:300:00000 88:025:00000 R        30.00                     mm
+ 7122 -- ---- A 84:122:00000 87:074:00000 R        30.00                     mm
+ 7123 -- ---- A 87:195:00000 87:282:00000 R       -30.00                     mm
+ 7210 -- ---- A 83:001:00000 87:255:00000 R        25.00                     mm
+ 7210 -- ---- A 87:255:00000 93:001:00000 R       -37.00                     mm
+ 7512 -- ---- A 92:061:00000 92:153:00000 R       -30.00                     mm
+ 7517 -- ---- A 92:153:00000 92:245:00000 R       -80.00                     mm
+ 7525 -- ---- A 92:061:00000 92:183:00000 R        11.00                     mm
+ 7544 -- ---- A 92:245:00000 93:001:00000 R       -60.00                     mm
+ 7545 -- ---- A 93:274:00000 94:091:00000 R        15.00                     mm
+ 7580 -- ---- A 92:306:00000 93:032:00000 R        68.00                     mm
+ 7587 -- ---- A 92:214:00000 92:306:00000 R        30.00                     mm
+ 7810 -- ---- A 88:145:00000 89:273:00000 R        50.00                     mm
+ 7834 -- ---- A 85:070:00000 86:199:00000 R       -30.00                     mm
+*--------------------------
+********************************************************************************
+** SECTION WITH OPTIONAL CORRECTIONS COMMENTED with "*" in col. #1 (Van Husson)
+** If applied, the mandatory model must be subtracted
+********************************************************************************
+*--------------------------------------------------------------------------------------
+*7090 -- ---- A 01:353:43920 01:353:46800 R   -290381.00                     mm
+*7090 -- ---- A 03:196:78720 03:196:79440 R     -8534.00                     mm
+*7090 -- ---- A 03:220:77580 03:220:78480 R     -8531.00                     mm
+*7090 -- ---- A 03:229:74400 03:229:75600 R     -8531.00                     mm
+*7090 -- ---- A 04:033:75720 04:033:76800 R     -8518.00                     mm
+*7090 -- ---- A 04:048:73080 04:048:73740 R     -8521.00                     mm
+*7090 -- ---- A 06:184:72480 06:184:75600 R      8523.00                     mm
+*7090 -- ---- A 07:026:65340 07:026:65880 R     -8520.00                     mm
+*7090 -- ---- A 07:050:73380 07:050:73800 R      8525.00                     mm
+*7090 -- ---- A 07:275:44400 07:275:44760 R     -8518.00                     mm
+*7090 -- ---- A 08:244:65220 08:244:65760 R     -8524.00                     mm
+*7090 -- ---- A 10:118:64320 10:118:64800 R     -2779.00                     mm
+*7090 -- ---- A 10:118:69000 10:118:72000 R     -2779.00                     mm
+*7090 -- ---- A 10:148:27000 10:148:27540 R     -8523.00                     mm
+*7090 -- ---- A 10:297:78600 10:297:79500 R      8533.00                     mm
+*7090 -- ---- A 13:025:59040 13:025:59460 R     -8493.00                     mm
+*7090 -- ---- A 13:287:59880 13:287:63000 R      8515.00                     mm
+*7090 -- ---- A 19:267:62220 19:267:62400 R      8806.00                     mm
+*7105 -- ---- A 00:006:24900 00:006:28800 R     -9197.00                     mm
+*7105 -- ---- A 00:007:19320 00:007:21600 R     -9208.00                     mm
+*7105 -- ---- A 02:092:01800 02:092:14000 R     -9199.00                     mm
+*7105 -- ---- A 03:308:80940 03:308:81660 R     -9224.00                     mm
+*7105 -- ---- A 08:142:22260 08:142:23400 R      9265.00                     mm
+*7105 -- ---- A 08:150:21180 08:150:21900 R      9265.00                     mm
+*7105 -- ---- A 08:150:22140 08:150:22740 R      9265.00                     mm
+*7105 -- ---- A 08:150:23820 08:150:24600 R      9265.00                     mm
+*7105 -- ---- A 09:131:03600 09:131:05040 R      9125.00                     mm
+*7105 -- ---- A 10:076:35160 10:076:36240 R     -4837.00                     mm
+*7105 -- ---- A 10:076:36780 10:076:37440 R     -4837.00                     mm
+*7105 -- ---- A 11:211:04860 11:211:06480 R      9094.00                     mm
+*7105 -- ---- A 11:222:11880 11:222:12300 R      9098.00                     mm
+*7105 -- ---- A 12:006:04560 12:006:05400 R      9098.00                     mm
+*7105 -- ---- A 12:006:84120 12:007:02400 R      9098.00                     mm
+*7105 -- ---- A 12:016:17160 12:016:19500 R     -9107.00                     mm
+*7105 -- ---- A 13:035:39060 13:035:40080 R      9098.00                     mm
+*7124 -- ---- A 16:271:27420 16:271:30300 R     -9066.00                     mm
+*7124 -- ---- A 16:280:41370 16:280:43000 R     -9057.00                     mm
+*7501 -- ---- A 12:071:00000 12:073:64080 R       -66.00                     mm
+*7501 -- ---- A 12:074:21600 12:074:79200 R       -66.00                     mm
+*7501 -- ---- A 12:077:57600 12:079:08400 R       -66.00                     mm
+*7501 -- ---- A 12:079:36000 12:080:05400 R       -66.00                     mm
+*7501 -- ---- A 12:080:14400 12:089:75600 R       -66.00                     mm
+*7501 -- ---- A 12:090:43000 12:092:07800 R       -66.00                     mm
+*7501 -- ---- A 12:092:64800 12:094:28800 R       -66.00                     mm
+*7501 -- ---- A 14:157:24720 14:157:30060 R   -199806.00                     mm
+*7501 -- ---- A 14:322:55560 14:322:65400 R   -199815.00                     mm
+-MODEL/RANGE_BIAS
+*
+*-------------------------------------------------------------------------------
++SOLUTION/DATA_HANDLING
+*-------------------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+*   list of data to be deleted
+*-------------------------------------------------------------------------------
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+*-------------------------------------------------------------------------------
+*CODE PT SOLN T START_DATE__ END_DATE____ M ____________ _______ _________ ____   CMNTS
+ 1863 -- ---- A 00:000:00000 94:001:00000 X
+ 1864 -- ---- A 02:070:00000 02:101:00000 X
+ 1873 -- ---- A 00:000:00000 95:001:00000 X
+ 1873 -- ---- A 09:244:00000 12:001:00000 X
+ 1873 -- ---- A 11:182:00000 12:153:00000 X                                       ITB
+ 1873 -- ---- A 13:056:00000 13:064:00000 X                                       VLB
+ 1884 -- ---- A 00:000:00000 94:212:00000 X
+ 1889 -- ---- A 00:000:00000 12:172:00000 X
+ 1893 51 ---- A 00:000:00000 98:001:00000 X
+ 1893 52 ---- A 00:000:00000 98:001:00000 X
+ 1893 53 ---- A 00:000:00000 02:001:00000 X
+ 1893 54 ---- A 00:000:00000 02:001:00000 X
+ 7080 -- ---- A 16:106:00000 00:000:00000 X
+ 7090 -- ---- A 02:200:43200 02:201:00000 X                                       Tb
+ 7090 -- ---- A 03:102:28800 03:105:00000 X                                       Rb
+ 7090 -- ---- A 09:333:00000 09:337:05400 X                                       Tb
+ 7090 -- ---- A 09:338:63000 09:339:10800 X                                       Tb
+ 7090 -- ---- A 09:341:37680 09:342:45240 X                                       Tb
+ 7090 -- ---- A 17:152:29160 17:152:68100 X                                       WMD
+ 7105 -- ---- A 99:119:18000 99:123:52620 X
+ 7105 -- ---- A 06:336:18000 06:342:10800 X                                       TUF
+ 7105 -- ---- A 15:313:00000 15:321:64800 X                                       TCP
+ 7110 -- ---- A 00:079:00000 00:080:00000 X                                       VLB
+ 7110 -- ---- A 12:054:16200 12:081:00000 X                                       NTU
+ 7110 -- ---- A 12:183:00000 12:216:61200 X                                       VLB
+ 7110 -- ---- A 13:164:00000 13:173:00000 X                                       VLB
+ 7110 -- ---- A 13:178:54000 13:183:00000 X                                       VLB
+ 7112 -- ---- A 00:000:00000 85:001:00000 X
+ 7119 -- ---- A 10:182:00000 10:240:82800 X                                       URB
+ 7119 -- ---- A 12:030:70800 12:031:00900 X                                       WPR
+ 7119 -- ---- A 13:065:16691 13:065:24826 X                                       WMD
+ 7119 55 ---- A 13:068:66759 13:068:67003 X                                       WMD
+ 7119 -- ---- A 13:239:09673 13:239:13199 X                                       WMD
+ 7119 -- ---- A 13:274:11719 13:274:13270 X                                       WMD
+ 7119 -- ---- A 13:337:83551 13:338:03158 X                                       WMD
+ 7119 -- ---- A 13:345:13361 13:345:22187 X                                       WMD
+ 7119 -- ---- A 14:180:82522 14:180:82573 X                                       HRV
+ 7123 -- ---- A 88:238:00000 88:248:00000 X                                       HRV
+ 7123 -- ---- A 93:132:00000 93:132:86400 X                                       HRV
+ 7236 -- ---- A 98:001:00000 00:000:00000 X
+ 7237 -- ---- A 00:000:00000 96:001:00000 X
+ 7249 -- ---- A 00:000:00000 99:001:00000 X
+ 7249 -- ---- A 99:011:64898 99:215:00000 X                                       HRV
+ 7249 -- ---- A 12:001:00000 12:066:00000 X                                       SUB
+ 7355 -- ---- A 00:000:00000 03:001:00000 X
+ 7355 -- ---- A 04:001:00000 00:000:00000 X
+ 7403 -- ---- A 01:175:73994 01:266:00000 X                                       EQK
+ 7403 -- ---- A 11:293:00000 11:365:00000 X                                       UDP
+ 7403 -- ---- A 16:175:26160 16:176:39600 X                                       VLB
+ 7405 -- ---- A 00:000:00000 04:278:00000 X
+ 7406 -- ---- A 12:287:00000 12:307:00000 X                                       VLB
+ 7501 -- ---- A 01:013:64800 01:014:25200 X                                       TDP
+ 7501 -- ---- A 07:083:72000 07:086:10800 X                                       TDP
+ 7510 -- ---- A 92:175:00000 92:274:00000 X
+ 7548 -- ---- A 92:180:00000 00:195:00000 X
+ 7585 -- ---- A 92:175:00000 92:274:00000 X
+ 7810 --  501 A 93:001:00000 96:001:00000 X
+ 7810 --  401 B 96:353:00000 97:363:00000 X
+ 7810 -- ---- B 15:184:00000 15:187:28800 X                                       TDP
+ 7811 -- ---- A 00:000:00000 93:201:00000 X
+ 7820 -- ---- A 00:000:00000 00:293:00000 X
+ 7824 -- ---- A 00:000:00000 96:001:00000 X
+ 7824 -- ---- B 99:181:81828 99:186:02301 X
+ 7824 -- ---- B 15:168:75600 15:169:14400 X
+ 7831 -- ---- A 00:000:00000 84:001:00000 X
+ 7831 -- ---- A 99:006:00000 99:075:00000 X
+ 7831 51 ---- A 99:331:79421 99:338:83087 X
+ 7832 -- ---- A 00:000:00000 98:001:00000 X
+ 7832 -- ---- A 11:001:00000 00:000:00000 X
+ 7835 -- ---- A 00:000:00000 88:275:00000 X
+ 7837 -- ---- A 00:000:00000 90:001:00000 X
+ 7838 -- ---- A 18:070:00000 20:171:00000 X                                       SUB
+ 7841 -- ---- A 00:000:00000 04:050:00000 X
+ 7941 -- ---- A 11:267:64800 11:268:28800 X                                       TDP
+ 8834 -- ---- A 09:046:00000 10:319:00000 X
+*
+*-------------------------------------------------------------------------------
+*  list of sites with mandatory arc dependent biases to be estimated
+*-------------------------------------------------------------------------------
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+*-------------------------------------------------------------------------------
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+ 1824 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1864 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1868 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1873 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1879 --  501 A 08:279:00000 13:188:00000 E                                  mm
+ 1884 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1886 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1887 --  501 A 18:343:00000 00:000:00000 E                                  mm
+ 1890 53  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1890 54  501 A 00:000:00000 00:000:00000 E                                  mm
+ 1893 --  501 A 98:001:00000 05:001:00000 E                                  mm
+ 1953 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7080 51  501 A 93:001:00000 96:133:00000 E                                  mm
+ 7080 52  501 A 93:001:00000 96:133:00000 E                                  mm
+ 7080 53  501 A 93:001:00000 99:339:00000 E                                  mm
+ 7080 54  501 A 93:001:00000 99:339:00000 E                                  mm
+ 7090 51  501 A 19:356:00000 21:066:00000 E                                  mm
+ 7090 51  501 A 22:324:00000 00:000:00000 E                                  mm
+ 7090 52  501 A 19:356:00000 21:066:00000 E                                  mm
+ 7090 52  501 A 22:324:00000 00:000:00000 E                                  mm
+ 7090 53  501 A 93:001:00000 99:185:00000 E                                  mm
+ 7090 54  501 A 93:001:00000 99:185:00000 E                                  mm
+ 7105 53  501 A 93:001:00000 00:044:00000 E                                  mm
+ 7105 54  501 A 93:001:00000 00:044:00000 E                                  mm
+ 7110 51  501 A 20:201:00000 00:000:00000 E                                  mm
+ 7110 52  501 A 20:201:00000 00:000:00000 E                                  mm
+ 7110 53  501 A 93:001:00000 01:252:00000 E                                  mm
+ 7110 53  501 A 22:156:00000 00:000:00000 E                                  mm
+ 7110 54  501 A 93:001:00000 01:252:00000 E                                  mm
+ 7110 54  501 A 22:156:00000 00:000:00000 E                                  mm
+ 7110 67  501 A 22:212:00000 00:000:00000 E                                  mm
+ 7124 51  501 A 18:105:00000 00:000:00000 E                                  mm
+ 7124 52  501 A 18:105:00000 00:000:00000 E                                  mm
+ 7124 53  501 A 18:105:00000 00:000:00000 E                                  mm
+ 7124 54  501 A 18:105:00000 00:000:00000 E                                  mm
+ 7124 67  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7210 51  501 A 93:003:00000 94:023:00000 E                                  mm
+ 7210 52  501 A 93:003:00000 94:023:00000 E                                  mm
+ 7210 53  501 A 93:001:00000 00:001:00000 E                                  mm
+ 7210 54  501 A 93:001:00000 00:001:00000 E                                  mm
+ 7236 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7237 53  501 A 96:070:00000 97:222:00000 E                                  mm
+ 7237 54  501 A 96:070:00000 97:222:00000 E                                  mm
+ 7237 51  501 A 23:085:00000 00:000:00000 E                                  mm
+ 7237 52  501 A 23:085:00000 00:000:00000 E                                  mm
+ 7237 53  501 A 23:085:00000 00:000:00000 E                                  mm
+ 7237 54  501 A 23:085:00000 00:000:00000 E                                  mm
+ 7249 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7308 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7358 51  501 A 17:001:00000 00:000:00000 E                                  mm
+ 7358 52  501 A 17:001:00000 00:000:00000 E                                  mm
+ 7358 53  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7358 54  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7396 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7403 --  501 A 13:001:00000 00:000:00000 E                                  mm
+ 7406 --  501 A 12:288:00000 14:330:00000 E                                  mm
+ 7501 51  501 A 21:001:00000 00:000:00000 E                                  mm
+ 7501 52  501 A 21:001:00000 00:000:00000 E                                  mm
+ 7501 67  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7548 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7827 51  801 A 22:213:00000 00:000:00000 E                                  mm
+ 7827 52  801 A 22:213:00000 00:000:00000 E                                  mm
+ 7806 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7810 --  801 B 00:000:00000 07:001:00000 E                                  mm
+ 7810 51  401 B 05:100:00000 06:043:00000 E                                  mm
+ 7810 52  401 B 05:100:00000 06:043:00000 E                                  mm
+ 7810 --  501 B 23:060:00000 00:000:00000 E                                  mm
+ 7811 51  501 A 22:075:00000 00:000:00000 E                                  mm
+ 7811 52  501 A 22:075:00000 00:000:00000 E                                  mm
+ 7811 53  501 A 00:000:00000 03:001:00000 E                                  mm
+ 7811 54  501 A 00:000:00000 03:001:00000 E                                  mm
+ 7811 67  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7819 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7820 --  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7821 --  501 A 00:000:00000 16:017:00000 E                                  mm
+ 7821 51  501 A 22:075:00000 00:000:00000 E                                  mm
+ 7821 52  501 A 22:075:00000 00:000:00000 E                                  mm
+ 7821 53  501 A 22:075:00000 00:000:00000 E                                  mm
+ 7821 54  501 A 22:075:00000 00:000:00000 E                                  mm 
+ 7824 --  501 A 97:117:00000 00:000:00000 E                                  mm
+ 7824 --  501 B 00:000:00000 03:177:00000 E                                  mm
+ 7824 --  501 B 19:139:00000 00:000:00000 E                                  mm
+ 7827 --  801 A 14:103:00000 15:193:00000 E                                  mm
+ 7835 --  501 A 00:000:00000 94:009:00000 E                                  mm
+ 7837 53  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7837 54  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7838 51  501 A 93:003:00000 03:285:00000 E                                  mm
+ 7838 51  501 A 18:070:00000 00:000:00000 E                                  mm
+ 7838 52  501 A 93:003:00000 03:285:00000 E                                  mm
+ 7838 52  501 A 18:070:00000 00:000:00000 E                                  mm
+ 7838 53  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7838 54  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7838 67  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7839 --  501 A 00:000:00000 96:294:00000 E                                  mm
+ 7840 53  501 A 00:000:00000 96:140:00000 E                                  mm
+ 7840 54  501 A 00:000:00000 96:140:00000 E                                  mm
+ 7843 53  501 A 00:000:00000 00:000:00000 E                                  mm
+ 7843 54  501 A 00:000:00000 00:000:00000 E                                  mm
+ 8834 --  501 A 00:000:00000 96:115:00000 E                                  mm
+*
+*-------------------------------------------------------------------------------
+*  list of new sites with preliminary coordinates (not included in current ITRF)
+*-------------------------------------------------------------------------------
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+*-------------------------------------------------------------------------------
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+ 7306 -- ---- A 22:174:00000 00:000:00000 E                                  mm   NSP
+ 7317 -- ---- A 25:040:00000 00:000:00000 E                                  mm
+ 7329 -- ---- A 25:045:00000 00:000:00000 E                                  mm
+ 7395 -- ---- A 17:223:00000 00:000:00000 E                                  mm   NSP
+ 7701 -- ---- A 21:172:00000 00:000:00000 E                                  mm   NSP
+ 7807 -- ---- A 23:060:00000 00:000:00000 E                                  mm   NSP
+ 7816 -- ---- A 22:032:00000 00:000:00000 E                                  mm   NSP
+ 7817 -- ---- A 23:060:00000 00:000:00000 E                                  mm   NSP
+ 7865 -- ---- A 20:072:00000 00:000:00000 E                                  mm   NSP
+*
+*-------------------------------------------------------------------------------
+*  list of mandatory systematic errors to be applied on observation
+*  with updates from ILRS/AWG reprocessing results
+*-------------------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+ 7090 -- ---- A 09:344:31560 09:345:70200 T      0.90920                     ms
+ 7105 -- ---- A 12:296:55000 12:297:02400 T       7.0470                     ms
+ 7110 -- ---- A 10:173:00000 10:208:27000 T      0.00640                     ms
+ 7110 -- ---- A 11:115:00000 11:316:00000 T      0.00780                     ms
+ 7110 -- ---- A 13:164:00000 13:173:00000 T      0.89990                     ms
+ 7124 -- ---- A 19:295:00000 19:324:00000 T        -1.00                     ms
+ 7237 -- ---- A 17:038:04000 17:038:60600 U      +1.0000                     ms   ETO
+ 7237 -- ---- A 17:037:43200 17:037:86400 U      +1.0000                     ms   ETO
+ 7501 -- ---- A 00:183:00000 04:279:86399 T     -0.00605                     ms
+ 7501 -- ---- A 04:280:00000 06:059:86399 T     -0.00615                     ms
+ 7501 -- ---- A 06:060:00000 08:182:86399 T     -0.00595                     ms
+ 7831 -- ---- A 87:001:00000 90:182:00000 T       0.0850                     ms
+ 7941 -- ---- A 10:221:61200 10:223:43200 U       100.00                     ms   TDP
+*--------------------------------------------------------------------------------------
+ 7840 -- ---- A 95:358:00000 95:358:86400 H     -20.00                        %   HER
+ 7840 -- ---- A 95:359:00000 95:361:54000 H     -10.00                        %   HER
+ 7840 -- ---- A 95:361:54000 95:363:57600 H     -20.00                        %   HER
+ 7840 -- ---- A 95:363:57600 96:017:00000 H     -30.00                        %   HER
+ 7840 -- ---- A 96:017:39600 96:022:00000 H     -15.00                        %   HER
+ 7840 -- ---- A 96:022:00000 96:043:54000 H     -30.00                        %   HER
+*--------------------------------------------------------------------------------------
+ 7080 -- ---- A 95:065:00000 96:025:86400 P      -2.10                       mB   BRE
+ 7080 -- ---- A 96:026:00000 96:115:86400 P     -10.30                       mB   BRE
+ 7080 -- ---- A 96:116:00000 96:129:72000 P      -9.70                       mB   BRE
+ 7109 -- ---- A 95:284:00000 95:287:65700 P     -50.00                       mB   BRE
+ 7110 -- ---- A 95:105:00000 95:355:65700 P       2.00                       mB   BRE
+ 7105 -- ---- A 19:074:79380 19:074:79800 P         5.20                     mB   FPR
+ 7105 -- ---- A 19:074:79800 19:074:81000 P         4.90                     mB   FPR
+ 7105 -- ---- A 19:074:81000 19:074:82740 P         4.70                     mB   FPR
+ 7105 -- ---- A 19:074:82740 19:074:85320 P         4.60                     mB   FPR
+ 7105 -- ---- A 19:074:85320 19:074:86160 P         4.20                     mB   FPR
+ 7105 -- ---- A 19:077:09240 19:077:12300 P       -13.10                     mB   FPR
+ 7105 -- ---- A 19:077:12300 19:077:13020 P       -13.40                     mB   FPR
+ 7105 -- ---- A 19:077:13020 19:077:13380 P       -13.60                     mB   FPR
+ 7105 -- ---- A 19:077:13380 19:077:13980 P       -13.70                     mB   FPR
+ 7105 -- ---- A 19:077:19500 19:077:19920 P       -13.30                     mB   FPR
+ 7105 -- ---- A 19:077:19920 19:077:22800 P       -13.20                     mB   FPR
+ 7105 -- ---- A 19:077:22800 19:077:27240 P       -13.00                     mB   FPR
+ 7105 -- ---- A 19:077:27240 19:077:31620 P       -12.75                     mB   FPR
+ 7811 -- ---- A 00:000:00000 98:182:00000 P         3.40    .2               mB
+ 1864 -- ---- A 90:270:00000 00:359:00000 P       -6.8     1.0               mB
+ 7105 -- ---- A 99:058:21180 99:058:37180 P      -2.00     1.0               mB   FPR
+ 7105 52 ---- A 99:038:09540 99:038:13140 P      -4.00     1.0               mB   FPR
+ 7105 52 ---- A 99:060:34860 99:060:53100 P      021.0     1.0               mB   FPR
+ 7105 51 ---- A 99:061:56340 99:061:59940 P      07.00     1.0               mB   FPR
+ 7105 52 ---- A 99:138:73380 99:138:76980 P      05.60     1.0               mB   FPR
+ 7105 51 ---- A 99:159:20580 99:159:24180 P      0.600     .50               mB   FPR
+ 7105 51 ---- A 99:159:32580 99:159:36180 P      01.20     .50               mB   FPR
+ 7105 51 ---- A 99:159:44820 99:159:48420 P      0.900     .50               mB   FPR
+ 7105 51 ---- A 99:190:21300 99:190:35940 P      -1.00     .50               mB   FPR
+ 7105 51 ---- A 99:191:15720 99:191:19320 P      04.00     1.0               mB   FPR
+ 7105 52 ---- A 99:192:51720 99:192:70260 P      -7.50     1.0               mB   FPR
+ 7105 51 ---- A 99:205:10020 99:205:13620 P      02.20     .50               mB   FPR
+ 7105 52 ---- A 99:206:28620 99:206:32220 P      06.50     1.0               mB   FPR
+ 7105 51 ---- A 99:206:29580 99:206:33180 P      06.20     1.0               mB   FPR
+ 7105 52 ---- A 99:206:56940 99:206:60540 P      04.80     1.0               mB   FPR
+ 7105 51 ---- A 99:216:07020 99:216:10620 P      -.400     .50               mB   FPR
+ 7105 52 ---- A 99:216:31020 99:216:34620 P      0.700     .50               mB   FPR
+ 7105 52 ---- A 99:216:47460 99:216:51060 P      0.800     .50               mB   FPR
+ 7105 51 ---- A 99:266:02460 99:266:06060 P      -1.50     .50               mB   FPR
+ 7105 51 ---- A 99:266:14700 99:266:18300 P      -3.20     1.0               mB   FPR
+ 7105 52 ---- A 99:266:08100 99:266:11700 P      -2.00     .50               mB   FPR
+ 7105 51 ---- A 99:266:27060 99:266:30660 P      -4.10     1.0               mB   FPR
+ 7105 52 ---- A 99:266:23100 99:266:26700 P      -3.70     1.0               mB   FPR
+ 7105 52 ---- A 99:266:39780 99:266:43380 P      -5.10     1.0               mB   FPR
+ 7839 -- ---- A 02:161:00000 02:344:00000 P        -.5      .1               mB
+ 7845 51 ---- A 99:237:59628 99:237:63228 P     -878.5     .30               mB
+ 7849 51 ---- A 99:125:39176 99:125:42776 P      69.20     .50               mB
+ 7849 51 ---- A 99:300:05234 99:300:08834 P      87.00     1.5               mB
+ 7849 52 ---- A 99:300:01885 99:300:05485 P      86.00     1.5               mB
+-SOLUTION/DATA_HANDLING
++MODEL/TIME_BIAS
+*-------------------------------------------------------------------------------
+*  T2L2 Tb and Tb-rate DATA RECORDS
+*  which are significant for LARES and higher orbits (range equivalent >10 mm)
+*
+*  IMPORTANT:   These Tb and Tb-rate values are in MICROSEC and MICROSEC/day
+*-------------------------------------------------------------------------------
+*
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+ 1824 -- ---- A 10:126:00000 10:127:00000 T      -17.750   1.000    0.0      us   -----
+ 1824 -- ---- A 10:132:00000 10:133:00000 T       -5.750   1.000    0.0      us   -----
+ 1824 -- ---- A 12:084:68460 12:085:00000 T      -24.400   5.000    0.0      us   -----
+ 1873 -- ---- A 09:059:00000 09:110:00000 T      -21.750  50.000   -0.2600   us   drift
+ 1873 -- ---- A 09:111:00000 09:160:00000 T       -3.300  50.000   -0.1000   us   drift
+ 1873 -- ---- A 09:324:00000 10:095:00000 T        2.000  50.000    0.0750   us   drift
+ 1873 -- ---- A 10:096:00000 10:159:00000 T        6.150  50.000    0.4000   us   drift
+ 1873 -- ---- A 10:201:00000 10:224:00000 T      906.000  50.000    0.4500   us   drift
+ 1873 -- ---- A 10:225:00000 10:280:00000 T       11.600  50.000    0.5800   us   drift
+ 1873 -- ---- A 10:306:00000 10:325:00000 T      -50.000  50.000   -5.0000   us   drift
+ 1873 -- ---- A 10:350:00000 11:064:00000 T     -380.000  50.000   -9.0000   us   drift
+ 1873 -- ---- A 11:101:00000 11:112:00000 T    -3400.000  50.000  -60.0000   us   drift
+ 1873 -- ---- A 11:113:00000 11:136:00000 T    -3000.000  50.000 -135.0000   us   drift
+ 1873 -- ---- A 11:137:00000 11:150:00000 T     -600.000  50.000  -75.0000   us   drift
+ 1873 -- ---- A 11:192:00000 11:214:00000 T    -1000.000  50.000  -75.0000   us   drift
+ 1873 -- ---- A 11:218:00000 11:276:00000 T    -2100.000  50.000  -75.0000   us   drift
+ 1873 -- ---- A 11:329:00000 11:346:00000 T     -800.000  50.000  -75.0000   us   drift
+ 1873 -- ---- A 12:108:00000 12:132:00000 T    -1370.000  50.000  -75.0000   us   drift
+ 1873 -- ---- A 12:262:00000 12:325:00000 T      -12.000  50.000   -0.1700   us   drift
+ 1893 -- ---- A 10:142:00000 10:143:00000 T       -3.465   0.030    0.0      us   -----
+ 7090 -- ---- A 11:363:00000 12:011:00000 T        0.775   0.035    0.0180   us   drift
+ 7105 -- ---- A 11:111:00000 11:113:00000 T       -2.150   0.025    0.0      us   -----
+ 7110 -- ---- A 12:164:00000 12:168:00000 T       36.325   0.050    0.0      us   -----
+ 7237 -- ---- A 10:022:00000 10:121:00000 T       -3.100   0.030    0.0      us   -----
+ 7237 -- ---- A 10:121:00000 10:174:00000 T       -2.830   0.030    0.0075   us   drift
+ 7237 -- ---- A 10:174:00000 10:219:00000 T       -2.500   0.030    0.0      us   -----
+ 7237 -- ---- A 10:219:00000 11:087:00000 T       -2.850   0.030   -0.0030   us   drift
+ 7501 -- ---- A 08:183:00000 08:254:00000 T       -5.700   0.040    0.0      us   -----
+ 7501 -- ---- A 08:257:00000 09:184:00000 T       -6.000   0.040    0.0      us   -----
+ 7501 -- ---- A 09:184:00000 10:019:00000 T       -6.070   0.040    0.0      us   -----
+ 7501 -- ---- A 10:019:00000 10:231:00000 T       -6.000   0.040    0.0      us   -----
+ 7501 -- ---- A 10:231:00000 10:348:00000 T       -5.840   0.040    0.0      us   -----
+ 7501 -- ---- A 10:348:00000 11:313:00000 T       -5.400   0.050    0.0      us   -----
+ 7501 -- ---- A 11:313:00000 12:203:00000 T       -5.850   0.050    0.0      us   -----
+ 7501 -- ---- A 12:203:00000 12:301:00000 T       -6.000   0.040    0.0      us   -----
+ 7501 -- ---- A 12:301:00000 13:001:00000 T       -4.150   0.040    0.0      us   -----
+ 7838 -- ---- A 09:131:00000 10:008:00000 T       11.000   5.000    0.0      us   -----
+ 7838 -- ---- A 10:008:00000 10:009:00000 T        5.000   0.400    0.0      us   -----
+ 7845 -- ---- A 10:291:00000 10:298:00000 T        2.000   0.030    0.0280   us   drift
+ 7845 -- ---- A 10:298:00000 10:305:00000 T        2.200   0.030    0.0280   us   drift
+ 7845 -- ---- A 10:305:00000 10:312:00000 T        2.400   0.030    0.0280   us   drift
+ 7845 -- ---- A 10:312:00000 10:319:00000 T        2.600   0.030    0.0280   us   drift
+ 7845 -- ---- A 10:319:00000 10:326:00000 T        2.850   0.030    0.0280   us   drift
+ 7845 -- ---- A 10:326:00000 10:333:00000 T        3.100   0.030    0.0280   us   drift
+ 7845 -- ---- A 10:333:00000 10:340:00000 T        3.435   0.030    0.0320   us   drift
+ 7845 -- ---- A 10:340:00000 10:356:00000 T        3.800   0.030    0.0320   us   drift
+ 7845 -- ---- A 11:172:00000 11:180:00000 T        2.020   0.030    0.0300   us   drift
+ 7845 -- ---- A 11:180:00000 11:187:00000 T        2.250   0.030    0.0300   us   drift
+ 7845 -- ---- A 11:187:00000 11:194:00000 T        2.450   0.030    0.0300   us   drift
+ 7845 -- ---- A 11:194:00000 11:201:00000 T        2.650   0.030    0.0300   us   drift
+ 7941 -- ---- A 11:212:72060 11:212:82800 T       13.550   0.050    0.0      us   -----
+ 7941 -- ---- A 11:216:68460 11:217:21600 T       13.000   0.050    0.0      us   -----
+ 1873 -- ---- A 13:172:00000 13:196:00000 T        3.630  30.000    0.0      us   -----
+ 1873 -- ---- A 15:001:00000 15:135:00000 T       -3.000  12.000    0.0      us   -----
+ 1873 -- ---- A 15:135:00000 15:196:00000 T      -12.000   5.000    0.0      us   -----
+ 1873 -- ---- A 15:196:00000 15:197:00000 T     -121.000   2.000    0.0      us   -----
+ 1873 -- ---- A 15:197:00000 15:242:00000 T      -11.800   5.000    0.0      us   -----
+ 1873 -- ---- A 15:242:00000 16:033:00000 T       -8.000   5.000    0.0      us   -----
+ 1873 -- ---- A 16:033:00000 16:122:00000 T      -11.000   5.000    0.0      us   -----
+ 1889 -- ---- A 16:327:55560 16:327:63480 T       10.100   0.100    0.0      us   -----
+ 7105 -- ---- A 15:194:57000 15:199:00000 T       14.450   0.100    0.0      us   -----
+ 7105 -- ---- A 15:199:00000 15:206:07200 T       14.600   0.100    0.0      us   -----
+ 7124 -- ---- A 15:264:00000 16:021:00000 T        8.260   0.030    0.0      us   -----
+ 7124 -- ---- A 16:021:00000 16:044:00000 T       16.265   0.030    0.0      us   -----
+ 7124 -- ---- A 16:044:00000 16:176:00000 T        8.260   0.030    0.0      us   -----
+ 7237 -- ---- A 14:353:00000 15:001:00000 T        0.080   0.030    0.0245   us   drift
+ 7237 -- ---- A 15:364:00000 16:002:00000 T       -0.025   0.035    0.0270   us   drift
+ 7237 -- ---- A 16:026:00000 16:027:01800 T       26.100   0.040    0.0      us   -----
+ 7403 -- ---- A 14:167:00000 14:190:00000 T        2.185   0.040    0.0      us   -----
+ 7403 -- ---- A 14:190:00000 14:225:00000 T        2.260   0.040    0.0      us   -----
+ 7403 -- ---- A 14:225:00000 14:342:00000 T        2.156   0.040    0.0      us   -----
+ 7501 -- ---- A 13:001:00000 13:060:00000 T       -4.125   0.045    0.0      us   -----
+ 7501 -- ---- A 13:060:00000 13:100:00000 T       -4.075   0.045    0.0      us   -----
+ 7501 -- ---- A 13:100:00000 13:213:00000 T       -3.990   0.045   -0.0005   us   drift
+ 7501 -- ---- A 13:213:00000 13:339:00000 T       -4.005   0.045    0.0      us   -----
+ 7501 -- ---- A 13:339:00000 14:129:00000 T       -4.045   0.045    0.0      us   -----
+ 7501 -- ---- A 14:129:00000 15:001:00000 T       -6.045   0.045    0.0      us   -----
+ 7810 -- ---- B 15:187:00000 15:188:28800 T       -2.650   0.050    0.0      us   -----
+ 7838 -- ---- A 13:219:00000 13:260:00000 T       -2.000   0.030   -0.0750   us   drift
+ 7838 -- ---- A 13:260:00000 13:292:00000 T       -4.850   0.030    0.0650   us   drift
+ 7838 -- ---- A 13:292:00000 13:324:00000 T       -4.100   0.030   -0.0350   us   drift
+ 7838 -- ---- A 13:324:00000 13:337:00000 T       -5.200   0.030   -0.0250   us   drift
+ 7838 -- ---- A 13:337:00000 14:001:00000 T       -8.100   0.030   -0.0150   us   drift
+ 7838 -- ---- A 14:001:00000 14:015:00000 T       -9.400   0.030   -0.0150   us   drift
+ 7838 -- ---- A 14:015:00000 14:052:00000 T      -13.900   0.030   -0.0150   us   drift
+ 7838 -- ---- A 14:052:00000 14:071:00000 T      -15.800   0.030   -0.0250   us   drift
+ 7838 -- ---- A 14:071:00000 14:090:00000 T      -16.500   0.030   -0.0450   us   drift
+ 7845 -- ---- A 14:317:00000 14:326:00000 T      -61.330   0.025    0.0      us   -----
+ 8834 -- ---- A 13:011:00000 13:047:00000 T       -2.250   0.025   -0.0014   us   drift
+ 8834 -- ---- A 13:047:00000 13:125:43200 T       -2.350   0.025   -0.0014   us   drift
+ 8834 -- ---- A 13:125:43260 13:126:00000 T      -29.090   0.025    0.0      us   -----
+ 8834 -- ---- A 14:249:00000 14:264:00000 T       -2.050   0.025   -0.0065   us   drift
+ 8834 -- ---- A 14:264:00000 14:279:00000 T       -2.150   0.025   -0.0065   us   drift
+ 8834 -- ---- A 14:279:00000 14:295:00000 T       -2.250   0.025   -0.0065   us   drift
+ 8834 -- ---- A 14:295:00000 14:310:00000 T       -2.350   0.025   -0.0065   us   drift
+ 8834 -- ---- A 14:310:00000 14:325:00000 T       -2.450   0.025   -0.0065   us   drift
+ 8834 -- ---- A 14:325:00000 14:338:00000 T       -2.550   0.025   -0.0065   us   drift
+ 8834 -- ---- A 14:338:00000 14:352:00000 T       -2.650   0.025   -0.0065   us   drift
+ 8834 -- ---- A 14:352:00000 15:001:00000 T       -2.750   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:001:00000 15:014:00000 T       -2.850   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:014:00000 15:027:00000 T       -2.950   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:027:00000 15:040:00000 T       -3.050   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:040:00000 15:054:00000 T       -3.150   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:054:00000 15:068:00000 T       -3.250   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:068:00000 15:081:00000 T       -3.370   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:081:00000 15:095:00000 T       -3.500   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:095:00000 15:107:00000 T       -3.600   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:107:00000 15:122:00000 T       -3.710   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:122:00000 15:136:00000 T       -3.810   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:136:00000 15:150:00000 T       -3.930   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:150:00000 15:158:00000 T       -4.040   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:158:00000 15:170:00000 T       -4.110   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:170:00000 15:182:00000 T       -4.220   0.025   -0.0065   us   drift
+ 8834 -- ---- A 15:360:00000 16:007:00000 T       -0.900   0.025   -0.0084   us   drift
+ 8834 -- ---- A 16:358:00000 16:363:00000 T       -2.000   0.025   -0.0179   us   drift
+ 8834 -- ---- A 16:363:00000 17:001:00000 T       -2.100   0.025   -0.0179   us   drift
+ 8834 -- ---- A 17:006:00000 17:010:00000 T       -2.300   0.010   -0.0200   us   drift
+ 1873 -- ---- A 17:340:00000 17:340:00000 T     1300.000   0.000    0.0      us   -----
+ 1873 -- ---- A 17:328:00000 17:328:00000 T       51.000   0.000    0.0      us   -----
+ 1873 -- ---- A 17:030:00000 17:360:00000 T       -5.000   5.500    0.0      us   -----
+*
+*===============================================================================
+*  list of RECOMMENDED Tb corrections converted from CDDIS data base free format
+*
+*        Station clock correct time = NP_time - Tb_correction
+*
+*-------------------------------------------------------------------------------
+*        1         2         3         4         5         6         7         8
+*2345678901234567890123456789012345678901234567890123456789012345678901234567890
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+ 7090 -- ---- A 96:206:00000 96:206:86400 T    -0.0020                       ms   CCD
+ 7090 -- ---- A 96:207:00000 96:207:86400 T    -0.0021                       ms   CCD
+ 7090 -- ---- A 96:208:00000 96:208:86400 T    -0.0023                       ms   CCD
+ 7090 -- ---- A 96:209:00000 96:209:86400 T    -0.0023                       ms   CCD
+ 7090 -- ---- A 96:210:00000 96:210:86400 T    -0.0024                       ms   CCD
+ 7090 -- ---- A 96:211:00000 96:211:86400 T    -0.0024                       ms   CCD
+ 7090 -- ---- A 96:212:00000 96:212:86400 T    -0.0025                       ms   CCD
+ 7090 -- ---- A 96:213:00000 96:213:86400 T    -0.0025                       ms   CCD
+ 7090 -- ---- A 96:214:00000 96:214:86400 T    -0.0025                       ms   CCD
+ 7090 -- ---- A 96:215:00000 96:215:79020 T    -0.0025                       ms   CCD
+ 7403 -- ---- A 97:026:00000 97:026:86400 T     0.0020                       ms   Tb
+ 7403 -- ---- A 97:027:00000 97:027:86400 T     0.0024                       ms   Tb
+ 7403 -- ---- A 97:028:00000 97:028:86400 T     0.0028                       ms   Tb
+ 7403 -- ---- A 97:029:00000 97:029:86400 T     0.0033                       ms   Tb
+ 7403 -- ---- A 97:030:00000 97:030:86400 T     0.0037                       ms   Tb
+ 7403 -- ---- A 97:031:00000 97:031:86400 T     0.0041                       ms   Tb
+ 7403 -- ---- A 97:032:00000 97:032:86400 T     0.0046                       ms   Tb
+ 7403 -- ---- A 97:033:00000 97:033:86400 T     0.0050                       ms   Tb
+ 7403 -- ---- A 97:034:00000 97:034:86400 T     0.0054                       ms   Tb
+ 7403 -- ---- A 97:035:00000 97:035:86400 T     0.0058                       ms   Tb
+ 7403 -- ---- A 97:036:00000 97:036:86400 T     0.0055                       ms   Tb
+ 7403 -- ---- A 97:037:00000 97:037:86400 T     0.0051                       ms   Tb
+ 7403 -- ---- A 97:038:00000 97:038:86400 T     0.0046                       ms   Tb
+ 7403 -- ---- A 97:039:00000 97:039:86400 T     0.0042                       ms   Tb
+ 7403 -- ---- A 97:040:00000 97:040:86400 T     0.0038                       ms   Tb
+ 7403 -- ---- A 97:041:00000 97:041:86400 T     0.0034                       ms   Tb
+ 7403 -- ---- A 97:042:00000 97:042:86400 T     0.0029                       ms   Tb
+ 7403 -- ---- A 97:043:00000 97:043:86400 T     0.0025                       ms   Tb
+ 7403 -- ---- A 97:044:00000 97:044:86400 T     0.0021                       ms   Tb
+ 7403 -- ---- A 97:054:00000 97:054:86400 T    -0.0022                       ms   Tb
+ 7403 -- ---- A 97:055:00000 97:055:86400 T    -0.0027                       ms   Tb
+ 7403 -- ---- A 97:060:00000 97:060:86400 T    -0.0022                       ms   Tb
+ 7403 -- ---- A 97:061:00000 97:061:86400 T    -0.0026                       ms   Tb
+ 7403 -- ---- A 97:062:00000 97:062:86400 T    -0.0031                       ms   Tb
+ 7403 -- ---- A 97:063:00000 97:063:86400 T    -0.0035                       ms   Tb
+ 7403 -- ---- A 97:064:00000 97:064:86400 T    -0.0040                       ms   Tb
+ 7403 -- ---- A 97:065:00000 97:065:86400 T    -0.0044                       ms   Tb
+ 7403 -- ---- A 97:066:00000 97:066:86400 T    -0.0048                       ms   Tb
+ 7403 -- ---- A 97:067:00000 97:067:86400 T    -0.0053                       ms   Tb
+ 7403 -- ---- A 97:068:00000 97:068:76200 T    -0.0057                       ms   Tb
+ 7210 -- ---- A 88:012:00000 88:337:86400 T    -0.0541                       ms   Tb
+ 7832 -- ---- A 97:149:00000 97:176:86400 T    -0.0410                       ms   Tb
+ 7810 51 ---- B 97:277:83937 97:277:84287 T     64.500                       ms   Tb
+ 7090 -- ---- A 98:355:00000 98:355:86400 T     0.3875                       ms   Tb
+ 7105 -- ---- A 99:063:72900 99:067:41720 T      .2015                       ms   Tb
+*===============================================================================
+*  list of data corrections converted from CDDIS data base (Van Husson`s tables)
+*-------------------------------------------------------------------------------
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+ 7109 -- ---- A 97:009:00000 97:012:00000 T     -.0024                       ms   SCD
+ 7109 -- ---- A 97:012:00000 97:015:00000 T     -.0025                       ms   SCD
+ 7109 -- ---- A 97:015:00000 97:018:00000 T     -.0026                       ms   SCD
+ 7210 -- ---- A 94:353:00000 94:353:86400 T     .00200                       ms   SCD
+ 7210 -- ---- A 94:354:00000 94:354:86400 T     .00210                       ms   SCD
+ 7210 -- ---- A 94:355:00000 94:355:86400 T     .00220                       ms   SCD
+ 7210 -- ---- A 94:356:00000 94:356:86400 T     .00220                       ms   SCD
+ 7210 -- ---- A 95:003:00000 95:003:86400 T     .00200                       ms   SCD
+ 7210 -- ---- A 95:004:00000 95:004:86400 T     .00210                       ms   SCD
+ 7210 -- ---- A 95:005:00000 95:005:86400 T     .00230                       ms   SCD
+ 7210 -- ---- A 95:006:00000 95:006:86400 T     .00240                       ms   SCD
+ 7210 -- ---- A 95:007:00000 95:007:86400 T     .00260                       ms   SCD
+ 7210 -- ---- A 95:008:00000 95:008:86400 T     .00270                       ms   SCD
+ 7210 -- ---- A 95:009:00000 95:009:32400 T     .00290                       ms   SCD
+ 7210 -- ---- A 95:025:00000 95:025:86400 T     .00210                       ms   SCD
+ 7210 -- ---- A 95:026:00000 95:026:86400 T     .00220                       ms   SCD
+ 7210 -- ---- A 95:027:00000 95:027:86400 T     .00230                       ms   SCD
+ 7210 -- ---- A 95:028:00000 95:028:86400 T     .00250                       ms   SCD
+ 7210 -- ---- A 95:029:00000 95:029:86400 T     .00260                       ms   SCD
+ 7210 -- ---- A 95:030:00000 95:030:86400 T     .00270                       ms   SCD
+ 7210 -- ---- A 95:031:00000 95:031:86400 T     .00290                       ms   SCD
+ 7210 -- ---- A 95:032:00000 95:032:86400 T     .00300                       ms   SCD
+ 7210 -- ---- A 95:033:00000 95:033:86400 T     .00310                       ms   SCD
+ 7210 -- ---- A 95:034:00000 95:034:86400 T     .00330                       ms   SCD
+ 7210 -- ---- A 95:035:00000 95:035:86400 T     .00340                       ms   SCD
+ 7210 -- ---- A 95:036:00000 95:036:86400 T     .00350                       ms   SCD
+ 7210 -- ---- A 95:037:00000 95:037:86400 T     .00370                       ms   SCD
+ 7210 -- ---- A 95:038:00000 95:038:86400 T     .00380                       ms   SCD
+ 7210 -- ---- A 95:039:00000 95:039:86400 T     .00390                       ms   SCD
+ 7210 -- ---- A 95:040:00000 95:040:86400 T     .00410                       ms   SCD
+ 7210 -- ---- A 95:041:00000 95:041:86400 T     .00420                       ms   SCD
+ 7210 -- ---- A 95:042:00000 95:042:86400 T     .00430                       ms   SCD
+ 7210 -- ---- A 95:043:00000 95:043:86400 T     .00450                       ms   SCD
+ 7210 -- ---- A 95:044:00000 95:044:86400 T     .00460                       ms   SCD
+ 7210 -- ---- A 95:045:00000 95:045:86400 T     .00470                       ms   SCD
+ 7210 -- ---- A 95:046:00000 95:046:86400 T     .00490                       ms   SCD
+ 7210 -- ---- A 95:047:00000 95:047:32400 T     .00500                       ms   SCD
+ 7210 -- ---- A 95:061:00000 95:061:86400 T     .00220                       ms   SCD
+ 7210 -- ---- A 95:062:00000 95:062:86400 T     .00210                       ms   SCD
+ 7210 -- ---- A 95:069:00000 95:069:86400 T     .00220                       ms   SCD
+ 7210 -- ---- A 95:070:00000 95:070:86400 T     .00240                       ms   SCD
+ 7210 -- ---- A 95:071:00000 95:071:86400 T     .00260                       ms   SCD
+ 7210 -- ---- A 95:072:00000 95:072:86400 T     .00280                       ms   SCD
+ 7210 -- ---- A 95:073:00000 95:073:86400 T     .00300                       ms   SCD
+ 7210 -- ---- A 95:074:00000 95:074:86400 T     .00330                       ms   SCD
+ 7210 -- ---- A 95:075:00000 95:075:86400 T     .00350                       ms   SCD
+ 7210 -- ---- A 95:076:00000 95:076:86400 T     .00370                       ms   SCD
+ 7210 -- ---- A 95:077:00000 95:077:86400 T     .00390                       ms   SCD
+ 7210 -- ---- A 95:078:00000 95:078:86400 T     .00410                       ms   SCD
+ 7210 -- ---- A 95:079:00000 95:079:86400 T     .00440                       ms   SCD
+ 7210 -- ---- A 95:080:00000 95:080:86400 T     .00460                       ms   SCD
+ 7210 -- ---- A 95:081:00000 95:081:86400 T     .00480                       ms   SCD
+ 7210 -- ---- A 95:082:00000 95:082:86400 T     .00500                       ms   SCD
+ 7210 -- ---- A 95:083:00000 95:083:86400 T     .00520                       ms   SCD
+ 7210 -- ---- A 95:084:00000 95:084:86400 T     .00550                       ms   SCD
+ 7210 -- ---- A 95:085:00000 95:085:86400 T     .00570                       ms   SCD
+ 7210 -- ---- A 95:086:00000 95:086:86400 T     .00590                       ms   SCD
+ 7210 -- ---- A 95:087:00000 95:087:86400 T     .00580                       ms   SCD
+ 7210 -- ---- A 95:088:00000 95:088:86400 T     .00600                       ms   SCD
+ 7210 -- ---- A 95:089:00000 95:089:86400 T     .00610                       ms   SCD
+ 7210 -- ---- A 95:090:00000 95:090:86400 T     .00630                       ms   SCD
+ 7210 -- ---- A 95:091:00000 95:091:86400 T     .00640                       ms   SCD
+ 7210 -- ---- A 95:092:00000 95:092:86400 T     .00660                       ms   SCD
+ 7210 -- ---- A 95:093:00000 95:093:86400 T     .00670                       ms   SCD
+ 7210 -- ---- A 95:094:00000 95:094:86400 T     .00690                       ms   SCD
+ 7210 -- ---- A 95:095:00000 95:095:86400 T     .00710                       ms   SCD
+ 7210 -- ---- A 95:096:00000 95:096:86400 T     .00720                       ms   SCD
+ 7210 -- ---- A 95:097:00000 95:097:86400 T     .00740                       ms   SCD
+ 7210 -- ---- A 95:098:00000 95:098:86400 T     .00750                       ms   SCD
+ 7210 -- ---- A 95:099:00000 95:099:86400 T     .00770                       ms   SCD
+ 7210 -- ---- A 95:100:00000 95:100:86400 T     .00790                       ms   SCD
+ 7210 -- ---- A 95:101:00000 95:101:86400 T     .00800                       ms   SCD
+ 7210 -- ---- A 95:102:00000 95:102:86400 T     .00820                       ms   SCD
+ 7210 -- ---- A 95:103:00000 95:103:86400 T     .00830                       ms   SCD
+ 7210 -- ---- A 95:104:00000 95:104:86400 T     .00850                       ms   SCD
+ 7210 -- ---- A 95:105:00000 95:105:86400 T     .00850                       ms   SCD
+ 7210 -- ---- A 95:106:00000 95:106:86400 T     .00860                       ms   SCD
+ 7210 -- ---- A 95:107:00000 95:107:86400 T     .00840                       ms   SCD
+ 7210 -- ---- A 95:108:00000 95:108:86400 T     .00820                       ms   SCD
+ 7210 -- ---- A 95:109:00000 95:109:86400 T     .00800                       ms   SCD
+ 7210 -- ---- A 95:110:00000 95:110:86400 T     .00780                       ms   SCD
+ 7210 -- ---- A 95:111:00000 95:111:86400 T     .00770                       ms   SCD
+ 7210 -- ---- A 95:112:00000 95:112:86400 T     .00780                       ms   SCD
+ 7210 -- ---- A 95:113:00000 95:113:86400 T     .00790                       ms   SCD
+ 7210 -- ---- A 95:114:00000 95:114:86400 T     .00810                       ms   SCD
+ 7210 -- ---- A 95:115:00000 95:115:86400 T     .00820                       ms   SCD
+ 7210 -- ---- A 95:116:00000 95:116:86400 T     .00830                       ms   SCD
+ 7210 -- ---- A 95:117:00000 95:117:86400 T     .00830                       ms   SCD
+ 7210 -- ---- A 95:118:00000 95:118:86400 T     .00830                       ms   SCD
+ 7210 -- ---- A 95:119:00000 95:119:86400 T     .00820                       ms   SCD
+ 7210 -- ---- A 95:120:00000 95:120:86400 T     .00820                       ms   SCD
+ 7210 -- ---- A 95:121:00000 95:121:86400 T     .00810                       ms   SCD
+ 7210 -- ---- A 95:122:00000 95:122:86400 T     .00810                       ms   SCD
+ 7210 -- ---- A 95:123:00000 95:123:86400 T     .00800                       ms   SCD
+ 7210 -- ---- A 95:124:00000 95:124:86400 T     .00810                       ms   SCD
+ 7210 -- ---- A 95:125:00000 95:125:86400 T     .00820                       ms   SCD
+ 7210 -- ---- A 95:126:00000 95:126:86400 T     .00830                       ms   SCD
+ 7210 -- ---- A 95:127:00000 95:127:86400 T     .00840                       ms   SCD
+ 7210 -- ---- A 95:128:00000 95:128:86400 T     .00850                       ms   SCD
+ 7210 -- ---- A 95:129:00000 95:129:86400 T     .00870                       ms   SCD
+ 7210 -- ---- A 95:130:00000 95:130:86400 T     .00880                       ms   SCD
+ 7210 -- ---- A 95:131:00000 95:131:86400 T     .00890                       ms   SCD
+ 7210 -- ---- A 95:132:00000 95:132:86400 T     .00880                       ms   SCD
+ 7210 -- ---- A 95:133:00000 95:133:86400 T     .00870                       ms   SCD
+ 7210 -- ---- A 95:134:00000 95:134:86400 T     .00850                       ms   SCD
+ 7210 -- ---- A 95:135:00000 95:135:86400 T     .00840                       ms   SCD
+ 7210 -- ---- A 95:136:00000 95:136:86400 T     .00830                       ms   SCD
+ 7210 -- ---- A 95:137:00000 95:137:86400 T     .00820                       ms   SCD
+ 7210 -- ---- A 95:138:00000 95:138:86400 T     .00830                       ms   SCD
+ 7210 -- ---- A 95:139:00000 95:139:86400 T     .00840                       ms   SCD
+ 7210 -- ---- A 95:140:00000 95:140:86400 T     .00850                       ms   SCD
+ 7210 -- ---- A 95:141:00000 95:141:86400 T     .00860                       ms   SCD
+ 7210 -- ---- A 95:142:00000 95:142:58560 T     .00870                       ms   SCD
+ 7210 -- ---- A 95:142:58560 95:144:19620 T   19.53600                       ms   SCD
+*-------------------------------------------------------------------------------
+*    For the listed cases below, see SLRmails #0396,#0398 for details
+*-------------------------------------------------------------------------------
+ 7210 -- ---- A 99:168:00000 99:169:00000 T      .0058                       ms   TDP
+ 7210 -- ---- A 99:169:00000 99:180:00000 T      .0073                       ms   TDP
+ 7210 -- ---- A 99:180:00000 99:181:00000 T      .0032                       ms   TDP
+ 7210 -- ---- A 99:181:00000 99:182:00000 T      .0041                       ms   TDP
+ 7210 -- ---- A 99:182:00000 99:183:00000 T      .0049                       ms   TDP
+ 7210 -- ---- A 99:183:00000 99:188:00000 T      .0056                       ms   TDP
+ 7210 -- ---- A 99:188:00000 99:189:00000 T      .0091                       ms   TDP
+ 7210 -- ---- A 99:189:00000 99:190:00000 T      .0098                       ms   TDP
+ 7210 -- ---- A 99:195:00000 99:196:00000 T      .0056                       ms   TDP
+ 7210 -- ---- A 99:196:00000 99:197:00000 T      .0066                       ms   TDP
+ 7210 -- ---- A 99:197:00000 99:202:00000 T      .0075                       ms   TDP
+ 7210 -- ---- A 99:202:00000 99:203:00000 T      .0122                       ms   TDP
+ 7210 -- ---- A 99:203:00000 99:204:00000 T      .0136                       ms   TDP
+ 7210 -- ---- A 99:204:00000 99:210:00000 T      .0146                       ms   TDP
+ 7210 -- ---- A 99:210:00000 99:211:00000 T      .0124                       ms   TDP
+ 7210 -- ---- A 99:211:00000 99:215:00000 T      .0154                       ms   TDP
+ 7210 -- ---- A 99:215:00000 99:216:00000 T      .0269                       ms   TDP
+ 7210 -- ---- A 99:216:00000 99:217:00000 T      .0308                       ms   TDP
+*##############################################################################*
+********************************************************************************
+** SECTION WITH OPTIONAL CORRECTIONS COMMENTED with "*"   in col. #1
+********************************************************************************
+* * ---------------------------------------------------------------------------*
+*  T2L2 Tb and Tb-rate *** OPTIONAL DATA RECORDS *** which are not
+*  significant for LARES and higher orbits (range equivalent <10 mm)
+*  COMMENTED with a "*" in col. #1
+*  IMPORTANT:   These Tb and Tb-rate values are in MICROSEC and MICROSEC/day
+*
+********************************************************************************
+* NOTE: SLR data users of other (lower) targets should evaluate by themselves
+*       the significance of these Tb errors for their particular circumstances.
+********************************************************************************
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+*1824 -- ---- A 08:183:00000 10:126:00000 T        0.000   1.000    0.0      us   -----
+*1824 -- ---- A 10:127:00000 10:132:00000 T       -0.900   1.000    0.0      us   -----
+*1824 -- ---- A 10:133:00000 12:084:68400 T       -2.000   5.000    0.0      us   -----
+*1824 -- ---- A 12:085:00000 13:001:00000 T        0.145   0.200    0.0      us   -----
+*1831 -- ---- A 08:183:00000 10:001:00000 T        0.000   0.250    0.0      us   -----
+*1873 -- ---- A 09:161:00000 09:234:00000 T       -1.200  50.000    0.1100   us   drift
+*1873 -- ---- A 09:235:00000 09:323:00000 T       -1.200  50.000    0.1200   us   drift
+*1873 -- ---- A 12:172:00000 12:262:00000 T       -1.000  50.000    0.0      us   -----
+*1893 -- ---- A 08:183:00000 10:124:64800 T        0.075   0.040    0.0      us   -----
+*1893 -- ---- A 10:124:64860 10:125:03600 T        0.480   0.040    0.0      us   -----
+*1893 -- ---- A 10:125:03660 10:142:00000 T        0.075   0.040    0.0      us   -----
+*1893 -- ---- A 10:143:00000 12:292:00000 T        0.060   0.040    0.0      us   -----
+*1893 -- ---- A 12:292:00000 12:293:00000 T       -0.650   0.050    0.0      us   -----
+*1893 -- ---- A 12:293:00000 13:001:00000 T        0.075   0.030    0.0      us   -----
+*7080 -- ---- A 08:183:00000 09:122:00000 T       -0.100   0.050    0.0      us   -----
+*7080 -- ---- A 09:122:00000 13:001:00000 T        0.150   0.050    0.0      us   -----
+*7090 -- ---- A 08:183:00000 08:281:00000 T       -0.250   0.035    0.0      us   -----
+*7090 -- ---- A 08:281:00000 08:334:00000 T       -0.150   0.035    0.0      us   -----
+*7090 -- ---- A 08:334:00000 08:336:00000 T       -0.290   0.035    0.0      us   -----
+*7090 -- ---- A 08:336:00000 09:007:00000 T       -0.150   0.035    0.0      us   -----
+*7090 -- ---- A 09:007:00000 09:083:72000 T       -0.350   0.035    0.0      us   -----
+*7090 -- ---- A 09:083:72060 09:204:00000 T       -0.150   0.035    0.0      us   -----
+*7090 -- ---- A 09:204:00000 09:330:00000 T        0.850   0.035    0.0      us   -----
+*7090 -- ---- A 09:330:00000 09:337:00000 T        0.000   0.035    0.0      us   -----
+*7090 -- ---- A 09:337:00000 09:339:00000 T       -0.525   0.035    0.0      us   -----
+*7090 -- ---- A 09:339:00000 09:349:43200 T        0.000   0.035    0.0      us   -----
+*7090 -- ---- A 09:349:43260 10:004:00000 T       -0.250   0.035    0.0      us   -----
+*7090 -- ---- A 10:004:00000 10:041:07200 T       -0.450   0.035    0.0      us   -----
+*7090 -- ---- A 10:041:07260 10:240:00000 T       -0.085   0.035    0.0      us   -----
+*7090 -- ---- A 10:240:00000 11:013:00000 T       -0.270   0.035    0.0      us   -----
+*7090 -- ---- A 11:013:00000 11:020:00000 T       -0.085   0.035    0.0      us   -----
+*7090 -- ---- A 11:020:00000 11:052:00000 T       -0.160   0.035    0.0100   us   drift
+*7090 -- ---- A 11:052:00000 11:080:00000 T        0.000   0.035    0.0      us   -----
+*7090 -- ---- A 11:080:00000 11:096:00000 T        0.035   0.035    0.0050   us   drift
+*7090 -- ---- A 11:096:00000 11:112:00000 T        0.135   0.035    0.0093   us   drift
+*7090 -- ---- A 11:112:00000 11:128:00000 T        0.270   0.035    0.0093   us   drift
+*7090 -- ---- A 11:128:00000 11:144:00000 T        0.450   0.035    0.0093   us   drift
+*7090 -- ---- A 11:144:00000 11:157:00000 T        0.640   0.035    0.0093   us   drift
+*7090 -- ---- A 11:157:00000 11:169:00000 T        0.760   0.035    0.0093   us   drift
+*7090 -- ---- A 11:169:00000 11:216:00000 T        0.870   0.035    0.0035   us   drift
+*7090 -- ---- A 11:216:00000 11:256:00000 T        1.035   0.035    0.0035   us   drift
+*7090 -- ---- A 11:256:00000 11:319:00000 T        0.450   0.035    0.0120   us   drift
+*7090 -- ---- A 11:319:00000 11:348:00000 T        0.075   0.035    0.0150   us   drift
+*7090 -- ---- A 11:348:00000 11:363:00000 T        0.300   0.035    0.0150   us   drift
+*7090 -- ---- A 12:011:00000 12:025:00000 T        0.100   0.035    0.0220   us   drift
+*7090 -- ---- A 12:025:00000 12:046:00000 T        0.330   0.035    0.0220   us   drift
+*7090 -- ---- A 12:046:00000 12:100:00000 T        0.510   0.035    0.0280   us   drift
+*7090 -- ---- A 12:100:00000 12:178:00000 T       -0.950   0.035   -0.0080   us   drift
+*7090 -- ---- A 12:178:00000 12:234:00000 T       -1.300   0.035    0.0      us   -----
+*7090 -- ---- A 12:234:00000 12:278:00000 T       -1.230   0.035    0.0070   us   drift
+*7090 -- ---- A 12:278:00000 12:335:00000 T       -1.260   0.035    0.0035   us   drift
+*7090 -- ---- A 12:335:00000 13:001:00000 T       -1.145   0.035    0.0      us   -----
+*7105 -- ---- A 08:183:00000 08:317:00000 T        0.015   0.025    0.0      us   -----
+*7105 -- ---- A 08:317:00000 09:034:00000 T       -0.140   0.025    0.0      us   -----
+*7105 -- ---- A 09:034:00000 09:047:00000 T        0.070   0.025    0.0      us   -----
+*7105 -- ---- A 09:047:00000 09:217:00000 T       -0.140   0.025    0.0      us   -----
+*7105 -- ---- A 09:217:00000 09:233:00000 T       -0.440   0.025    0.0      us   -----
+*7105 -- ---- A 09:233:00000 09:302:00000 T       -0.350   0.025    0.0      us   -----
+*7105 -- ---- A 09:302:00000 10:120:00000 T        0.125   0.025    0.0      us   -----
+*7105 -- ---- A 10:120:00000 11:104:00000 T       -0.025   0.025    0.0      us   -----
+*7105 -- ---- A 11:104:00000 11:107:00000 T       -0.750   0.025    0.0      us   -----
+*7105 -- ---- A 11:107:00000 11:111:00000 T       -1.700   0.025    0.0      us   -----
+*7105 -- ---- A 11:113:00000 12:183:00000 T       -0.050   0.025    0.0      us   -----
+*7105 -- ---- A 12:183:00000 12:348:00000 T        0.050   0.025    0.0      us   -----
+*7105 -- ---- A 12:348:00000 13:001:00000 T       -0.075   0.025    0.0      us   -----
+*7110 -- ---- A 08:183:00000 08:326:00000 T        0.250   0.030    0.0      us   -----
+*7110 -- ---- A 08:326:00000 09:315:00000 T        0.350   0.100    0.0      us   -----
+*7110 -- ---- A 09:315:00000 09:338:00000 T        0.250   0.050    0.0      us   -----
+*7110 -- ---- A 09:338:00000 10:043:00000 T       -0.650   0.040    0.0      us   -----
+*7110 -- ---- A 10:043:00000 10:175:00000 T       -0.180   0.040    0.0      us   -----
+*7110 -- ---- A 10:177:00000 10:205:00000 T        1.250   0.100    0.0      us   -----
+*7110 -- ---- A 10:205:00000 10:223:00000 T       -0.180   0.030    0.0      us   -----
+*7110 -- ---- A 10:223:00000 10:238:00000 T        0.810   0.035    0.0      us   -----
+*7110 -- ---- A 10:238:00000 11:001:00000 T        0.425   0.035    0.0      us   -----
+*7110 -- ---- A 11:001:00000 11:049:00000 T        0.600   0.035    0.0      us   -----
+*7110 -- ---- A 11:049:00000 11:114:00000 T        0.400   0.035    0.0      us   -----
+*7110 -- ---- A 11:114:00000 11:317:00000 T        1.450   0.500    0.0      us   -----
+*7110 -- ---- A 11:317:00000 11:335:00000 T        0.420   0.050    0.0      us   -----
+*7110 -- ---- A 11:335:00000 12:013:00000 T        0.185   0.035    0.0      us   -----
+*7110 -- ---- A 12:013:00000 12:073:00000 T        0.485   0.035    0.0      us   -----
+*7110 -- ---- A 12:073:00000 12:122:00000 T        0.225   0.035    0.0      us   -----
+*7110 -- ---- A 12:122:00000 12:164:00000 T        0.350   0.035    0.0      us   -----
+*7110 -- ---- A 12:168:00000 12:194:00000 T        0.540   0.035    0.0      us   -----
+*7110 -- ---- A 12:194:00000 12:204:00000 T        0.200   0.035    0.0      us   -----
+*7110 -- ---- A 12:204:00000 12:284:00000 T        0.350   0.035    0.0      us   -----
+*7110 -- ---- A 12:284:00000 13:001:00000 T        0.480   0.035    0.0      us   -----
+*7119 -- ---- A 10:244:00000 10:253:00000 T        0.000   0.025    0.0      us   -----
+*7119 -- ---- A 10:253:00000 11:089:00000 T        0.000   0.030    0.0      us   -----
+*7119 -- ---- A 11:089:00000 12:175:00000 T        0.230   0.035    0.0      us   -----
+*7119 -- ---- A 12:175:00000 12:245:00000 T        0.350   0.035    0.0      us   -----
+*7119 -- ---- A 12:245:00000 12:263:00000 T        0.650   0.035    0.0      us   -----
+*7119 -- ---- A 12:263:00000 12:312:00000 T        0.300   0.035    0.0      us   -----
+*7119 -- ---- A 12:312:00000 12:352:00000 T        0.050   0.035    0.0      us   -----
+*7119 -- ---- A 12:352:00000 13:001:00000 T        0.285   0.035    0.0      us   -----
+*7124 -- ---- A 08:183:00000 10:091:00000 T        0.200   0.030    0.0      us   -----
+*7124 -- ---- A 10:091:00000 11:274:00000 T        0.065   0.030    0.0      us   -----
+*7124 -- ---- A 11:274:00000 12:270:00000 T        0.450   0.040    0.0      us   -----
+*7124 -- ---- A 12:270:00000 12:306:00000 T        0.200   0.030    0.0      us   -----
+*7124 -- ---- A 12:306:00000 13:001:00000 T        0.450   0.035    0.0      us   -----
+*7124 -- ---- A 16:176:00000 17:001:00000 T        0.760   0.030    0.0      us   -----
+*7237 -- ---- A 08:183:00000 08:282:00000 T       -0.050   0.030    0.0      us   -----
+*7237 -- ---- A 08:282:00000 10:022:00000 T        0.050   0.030    0.0      us   -----
+*7237 -- ---- A 11:087:00000 12:193:00000 T        0.075   0.030    0.0      us   -----
+*7237 -- ---- A 12:193:00000 12:291:00000 T        0.080   0.030    0.0180   us   drift
+*7237 -- ---- A 12:291:00000 13:001:00000 T        0.075   0.030    0.0      us   -----
+*7308 -- ---- A 09:152:00000 09:261:00000 T       -0.300   0.045    0.0      us   -----
+*7308 -- ---- A 09:261:00000 09:282:00000 T       -0.530   0.035    0.0      us   -----
+*7308 -- ---- A 09:282:00000 09:314:00000 T       -0.260   0.035    0.0      us   -----
+*7308 -- ---- A 09:314:00000 09:347:00000 T       -0.485   0.030    0.0      us   -----
+*7308 -- ---- A 09:347:00000 10:167:00000 T       -0.300   0.030    0.0      us   -----
+*7308 -- ---- A 10:167:00000 10:224:00000 T        0.000   0.030    0.0      us   -----
+*7308 -- ---- A 10:224:00000 10:285:00000 T       -0.200   0.030    0.0      us   -----
+*7308 -- ---- A 10:285:00000 11:258:00000 T       -0.450   0.030    0.0      us   -----
+*7308 -- ---- A 11:258:00000 11:350:00000 T       -0.550   0.035    0.0      us   -----
+*7308 -- ---- A 11:350:00000 12:148:00000 T       -0.165   0.035    0.0      us   -----
+*7308 -- ---- A 12:148:00000 12:275:00000 T       -0.280   0.035    0.0      us   -----
+*7308 -- ---- A 12:275:00000 13:001:00000 T       -0.140   0.035    0.0      us   -----
+*7358 -- ---- A 10:305:00000 11:121:00000 T       -0.233   0.030    0.0      us   -----
+*7403 -- ---- A 08:183:00000 08:353:00000 T        0.120   0.035    0.0      us   -----
+*7403 -- ---- A 08:353:00000 09:236:00000 T       -0.050   0.035    0.0      us   -----
+*7403 -- ---- A 09:236:00000 10:035:00000 T        0.035   0.035    0.0      us   -----
+*7403 -- ---- A 10:035:00000 10:084:00000 T        0.200   0.050    0.0      us   -----
+*7403 -- ---- A 10:084:00000 10:164:00000 T        0.050   0.050    0.0      us   -----
+*7403 -- ---- A 10:164:00000 10:215:00000 T        0.150   0.050    0.0      us   -----
+*7403 -- ---- A 10:215:00000 11:198:00000 T       -0.050   0.050    0.0      us   -----
+*7403 -- ---- A 11:198:00000 12:070:00000 T        0.075   0.050    0.0      us   -----
+*7403 -- ---- A 12:070:00000 12:127:00000 T        0.185   0.050    0.0      us   -----
+*7403 -- ---- A 12:127:00000 12:273:00000 T        0.000   0.050    0.0      us   -----
+*7403 -- ---- A 12:273:00000 12:336:00000 T        0.180   0.050    0.0      us   -----
+*7403 -- ---- A 12:336:00000 13:001:00000 T        0.000   0.045    0.0      us   -----
+*7406 -- ---- A 12:060:00000 13:001:00000 T        0.050   0.035    0.0      us   -----
+*7501 -- ---- A 08:254:00000 08:257:00000 T        0.350   0.040    0.0      us   -----
+*7810 -- ---- B 08:183:00000 08:231:00000 T        0.120   0.045    0.0      us   -----
+*7810 -- ---- B 08:231:00000 13:001:00000 T        0.210   0.045    0.0      us   -----
+*7811 -- ---- A 08:183:00000 13:001:00000 T        0.200   0.030    0.0      us   -----
+*7821 -- ---- A 08:183:00000 13:001:00000 T       -0.050   0.035    0.0      us   -----
+*7822 -- ---- A 11:128:00000 11:163:00000 T       -0.110   0.035   -0.0132   us   drift
+*7822 -- ---- A 11:163:00000 11:179:00000 T       -0.050   0.035   -0.0367   us   drift
+*7822 -- ---- A 11:179:00000 11:191:00000 T       -0.075   0.040    0.0      us   -----
+*7822 -- ---- A 11:191:00000 11:289:00000 T        0.100   0.075    0.0      us   -----
+*7824 -- ---- B 08:183:00000 09:070:00000 T       -0.850   0.040    0.0      us   -----
+*7824 -- ---- B 09:070:00000 09:153:00000 T       -1.350   0.040    0.0      us   -----
+*7824 -- ---- B 09:153:00000 12:079:00000 T        0.950   0.040    0.0      us   -----
+*7824 -- ---- B 12:079:00000 12:324:28800 T        0.550   0.065    0.0      us   -----
+*7824 -- ---- B 12:324:28860 13:001:00000 T        0.850   0.045    0.0      us   -----
+*7825 -- ---- A 08:183:00000 09:332:00000 T        0.000   0.035   -0.0001   us   drift
+*7825 -- ---- A 09:332:00000 09:337:00000 T       -0.300   0.055    0.0      us   -----
+*7825 -- ---- A 09:337:00000 09:346:00000 T        0.000   0.060    0.0      us   -----
+*7825 -- ---- A 09:346:00000 09:357:00000 T       -1.950   0.060    0.0      us   -----
+*7825 -- ---- A 09:357:00000 10:010:00000 T       -0.120   0.060    0.0      us   -----
+*7825 -- ---- A 10:010:00000 10:013:00000 T        1.300   0.035    0.0      us   -----
+*7825 -- ---- A 10:013:00000 10:029:00000 T       -1.280   0.060    0.0      us   -----
+*7825 -- ---- A 10:029:00000 10:033:00000 T       -1.930   0.035    0.0      us   -----
+*7825 -- ---- A 10:033:00000 10:075:00000 T       -0.065   0.080    0.0      us   -----
+*7825 -- ---- A 10:075:00000 10:085:00000 T       -0.250   0.080   -0.0100   us   drift
+*7825 -- ---- A 10:085:00000 10:087:00000 T       -0.485   0.080    0.0      us   -----
+*7825 -- ---- A 10:087:00000 10:112:00000 T       -0.065   0.080    0.0      us   -----
+*7825 -- ---- A 10:112:00000 10:119:00000 T       -0.170   0.035    0.0      us   -----
+*7825 -- ---- A 10:119:00000 10:202:00000 T       -0.040   0.035    0.0      us   -----
+*7825 -- ---- A 10:202:00000 10:208:00000 T        1.350   0.100    0.0      us   -----
+*7825 -- ---- A 10:208:00000 10:305:00000 T       -0.060   0.080    0.0005   us   drift
+*7825 -- ---- A 10:305:00000 11:139:00000 T       -0.045   0.080    0.0      us   -----
+*7825 -- ---- A 11:139:00000 11:202:00000 T       -0.045   2.000    0.0      us   -----
+*7825 -- ---- A 11:202:00000 11:310:00000 T       -0.515   0.500   -0.0050   us   drift
+*7832 -- ---- A 08:226:00000 11:319:00000 T       -0.080   0.040    0.0      us   -----
+*7838 -- ---- A 10:009:00000 10:266:00000 T       -0.150   0.050    0.0      us   -----
+*7838 -- ---- A 10:266:00000 10:336:00000 T       -0.450   0.030    0.0      us   -----
+*7838 -- ---- A 10:336:00000 12:060:00000 T       -1.250   1.000    0.0      us   -----
+*7838 -- ---- A 12:061:00000 13:001:00000 T       -0.085   0.030    0.0      us   -----
+*7840 -- ---- A 08:183:00000 10:112:00000 T        0.220   0.045    0.0      us   -----
+*7840 -- ---- A 10:112:00000 13:001:00000 T        0.120   0.045    0.0      us   -----
+*7841 -- ---- A 08:183:00000 09:091:00000 T       -0.050   0.040    0.0      us   -----
+*7841 -- ---- A 09:091:00000 10:060:00000 T        0.000   0.030    0.0      us   -----
+*7841 -- ---- A 10:060:00000 13:001:00000 T        0.000   0.099    0.0      us   -----
+*7845 -- ---- A 08:183:00000 09:075:00000 T       -0.050   0.030    0.0010   us   drift
+*7845 -- ---- A 09:075:00000 09:188:00000 T       -0.250   0.030    0.0      us   -----
+*7845 -- ---- A 09:188:00000 10:082:00000 T        0.370   0.030    0.0045   us   drift
+*7845 -- ---- A 10:082:00000 10:180:00000 T       -0.200   0.030    0.0      us   -----
+*7845 -- ---- A 10:180:00000 10:193:00000 T       -0.050   0.030    0.0120   us   drift
+*7845 -- ---- A 10:193:00000 10:207:00000 T        0.050   0.030    0.0120   us   drift
+*7845 -- ---- A 10:207:00000 10:220:00000 T        0.200   0.030    0.0130   us   drift
+*7845 -- ---- A 10:220:00000 10:228:00000 T        0.300   0.030    0.0200   us   drift
+*7845 -- ---- A 10:228:00000 10:235:00000 T        0.500   0.030    0.0220   us   drift
+*7845 -- ---- A 10:235:00000 10:242:00000 T        0.650   0.030    0.0260   us   drift
+*7845 -- ---- A 10:242:00000 10:249:00000 T        0.800   0.030    0.0260   us   drift
+*7845 -- ---- A 10:249:00000 10:256:00000 T        0.900   0.030    0.0280   us   drift
+*7845 -- ---- A 10:256:00000 10:263:00000 T        1.050   0.030    0.0280   us   drift
+*7845 -- ---- A 10:263:00000 10:270:00000 T        1.200   0.030    0.0280   us   drift
+*7845 -- ---- A 10:270:00000 10:277:00000 T        1.400   0.030    0.0280   us   drift
+*7845 -- ---- A 10:277:00000 10:284:00000 T        1.600   0.030    0.0280   us   drift
+*7845 -- ---- A 10:284:00000 10:291:00000 T        1.800   0.030    0.0280   us   drift
+*7845 -- ---- A 10:356:00000 11:071:00000 T       -0.100   0.030    0.0035   us   drift
+*7845 -- ---- A 11:071:00000 11:080:00000 T        0.130   0.030    0.0155   us   drift
+*7845 -- ---- A 11:080:00000 11:089:00000 T        0.250   0.030    0.0185   us   drift
+*7845 -- ---- A 11:089:00000 11:098:00000 T        0.350   0.030    0.0185   us   drift
+*7845 -- ---- A 11:098:00000 11:107:00000 T        0.460   0.030    0.0205   us   drift
+*7845 -- ---- A 11:107:00000 11:116:00000 T        0.620   0.030    0.0205   us   drift
+*7845 -- ---- A 11:116:00000 11:125:00000 T        0.750   0.030    0.0225   us   drift
+*7845 -- ---- A 11:125:00000 11:134:00000 T        0.900   0.030    0.0225   us   drift
+*7845 -- ---- A 11:134:00000 11:143:00000 T        1.100   0.030    0.0225   us   drift
+*7845 -- ---- A 11:143:00000 11:153:00000 T        1.280   0.030    0.0225   us   drift
+*7845 -- ---- A 11:153:00000 11:164:00000 T        1.500   0.030    0.0250   us   drift
+*7845 -- ---- A 11:164:00000 11:172:00000 T        1.800   0.030    0.0290   us   drift
+*7845 -- ---- A 11:201:00000 11:335:00000 T       -0.050   0.050    0.0023   us   drift
+*7845 -- ---- A 11:335:00000 13:001:00000 T       -0.250   0.035    0.0      us   -----
+*7848 -- ---- A 08:192:00000 08:345:00000 T        0.250   0.030    0.0      us   -----
+*7941 -- ---- A 08:232:00000 08:361:00000 T        0.000   0.060    0.0      us   -----
+*7941 -- ---- A 08:361:00000 09:257:00000 T       -0.100   0.060    0.0      us   -----
+*7941 -- ---- A 09:257:00000 10:011:00000 T        0.150   0.060    0.0      us   -----
+*7941 -- ---- A 10:011:00000 10:078:00000 T        0.000   0.060    0.0      us   -----
+*7941 -- ---- A 10:078:00000 10:334:00000 T       -0.050   0.060    0.0      us   -----
+*7941 -- ---- A 10:334:00000 11:212:00000 T       -0.150   0.060    0.0      us   -----
+*7941 -- ---- A 11:212:82860 11:216:68400 T       -0.150   0.060    0.0      us   -----
+*7941 -- ---- A 11:217:21660 12:011:00000 T        0.050   0.055    0.0      us   -----
+*7941 -- ---- A 12:025:21660 12:164:00000 T       -0.150   0.055    0.0      us   -----
+*7941 -- ---- A 12:164:00000 12:321:00000 T        0.050   0.000    0.0      us   -----
+*7941 -- ---- A 12:321:21660 13:001:00000 T       -0.150   0.055    0.0      us   -----
+*8834 -- ---- A 08:183:00000 10:001:00000 T        0.100   0.035    0.0      us   -----
+*8834 -- ---- A 10:197:00000 13:001:00000 T        0.050   0.030    0.0      us   -----
+*1824 -- ---- A 13:001:00000 17:001:00000 T        0.050   0.300    0.0      us   -----
+*1868 -- ---- A 16:001:00000 17:001:00000 T        0.025   0.030    0.0      us   -----
+*1873 -- ---- A 13:001:00000 13:172:00000 T       -0.270  10.000    0.0      us   -----
+*1873 -- ---- A 13:196:00000 15:001:00000 T       -1.600   7.500    0.0      us   -----
+*1873 -- ---- A 16:122:00000 16:174:00000 T       -1.700   7.500    0.0      us   -----
+*1873 -- ---- A 16:174:00000 16:177:00000 T        0.000   0.200    0.0      us   -----
+*1873 -- ---- A 16:177:00000 16:190:72000 T       -1.700   7.500    0.0      us   -----
+*1873 -- ---- A 16:190:75600 17:001:00000 T       -1.700   7.500    0.0      us   -----
+*1873 -- ---- A 16:177:00000 17:001:00000 T       -1.500   7.500    0.0      us   -----
+*1874 -- ---- A 16:001:00000 16:071:00000 T        0.100   0.050    0.0      us   -----
+*1874 -- ---- A 16:071:00000 16:092:00000 T        0.065   0.050    0.0      us   -----
+*1874 -- ---- A 16:092:00000 16:183:00000 T        0.000   0.050    0.0      us   -----
+*1874 -- ---- A 16:183:00000 17:001:00000 T        0.050   0.050    0.0      us   -----
+*1879 -- ---- A 16:001:00000 17:001:00000 T        0.240   0.030    0.0      us   -----
+*1884 -- ---- A 16:001:00000 16:153:00000 T       -0.350   0.030    0.0      us   -----
+*1884 -- ---- A 16:153:00000 16:171:00000 T       -0.400   0.030    0.0      us   -----
+*1884 -- ---- A 16:171:00000 16:264:00000 T       -0.350   0.030    0.0      us   -----
+*1884 -- ---- A 16:264:00000 17:001:00000 T        0.260   0.030    0.0      us   -----
+*1886 -- ---- A 16:001:00000 16:189:00000 T        0.050   0.040    0.0      us   -----
+*1886 -- ---- A 16:189:00000 17:001:00000 T        0.000   0.040    0.0      us   -----
+*1888 -- ---- A 16:001:00000 16:032:00000 T        0.150   0.060    0.0      us   -----
+*1888 -- ---- A 16:032:00000 16:092:00000 T        0.050   0.060    0.0      us   -----
+*1888 -- ---- A 16:092:00000 17:001:00000 T        0.110   0.060    0.0      us   -----
+*1889 -- ---- A 16:001:00000 16:326:55500 T        0.100   0.100    0.0      us   -----
+*1889 -- ---- A 16:327:63540 17:001:00000 T        0.100   0.100    0.0      us   -----
+*1890 -- ---- A 16:001:00000 16:028:00000 T       -1.200   0.050    0.0      us   -----
+*1890 -- ---- A 16:028:00000 16:085:00000 T       -1.450   0.050    0.0      us   -----
+*1890 -- ---- A 16:085:00000 16:129:00000 T       -1.550   0.050    0.0      us   -----
+*1890 -- ---- A 16:129:00000 16:158:00000 T       -1.450   0.050    0.0      us   -----
+*1890 -- ---- A 16:158:00000 16:304:52380 T       -0.050   0.050    0.0      us   -----
+*1890 -- ---- A 16:304:52440 16:311:41580 T        0.100   0.050    0.0      us   -----
+*1890 -- ---- A 16:311:41640 17:001:00000 T       -0.050   0.050    0.0      us   -----
+*1891 -- ---- A 16:001:00000 16:229:00000 T        0.150   0.050    0.0      us   -----
+*1891 -- ---- A 16:229:00000 17:001:00000 T        0.050   0.050    0.0      us   -----
+*1893 -- ---- A 13:001:00000 13:213:00000 T        0.150   0.075    0.0      us   -----
+*1893 -- ---- A 14:213:00000 15:001:00000 T        0.175   0.075    0.0      us   -----
+*1893 -- ---- A 15:001:00000 15:194:00000 T        0.200   0.050    0.0      us   -----
+*1893 -- ---- A 15:194:00000 17:001:00000 T        0.106   0.050    0.0      us   -----
+*7080 -- ---- A 13:001:00000 17:001:00000 T        0.220   0.075    0.0      us   -----
+*7090 -- ---- A 13:001:00000 13:021:00000 T       -1.050   0.030    0.0050   us   drift
+*7090 -- ---- A 13:021:00000 13:042:00000 T       -0.950   0.030    0.0050   us   drift
+*7090 -- ---- A 13:042:00000 13:061:00000 T       -0.850   0.030    0.0050   us   drift
+*7090 -- ---- A 13:061:00000 13:066:00000 T       -0.750   0.030    0.0      us   -----
+*7090 -- ---- A 13:066:00000 13:099:00000 T       -0.550   0.030    0.0      us   -----
+*7090 -- ---- A 13:099:00000 13:112:00000 T       -0.400   0.030    0.0090   us   drift
+*7090 -- ---- A 13:112:00000 13:123:00000 T       -0.300   0.030    0.0090   us   drift
+*7090 -- ---- A 13:123:00000 13:163:00000 T       -0.200   0.030    0.0018   us   drift
+*7090 -- ---- A 13:163:00000 13:181:00000 T       -0.125   0.030    0.0050   us   drift
+*7090 -- ---- A 13:181:00000 13:188:00000 T       -0.350   0.030    0.0      us   -----
+*7090 -- ---- A 13:188:00000 13:244:00000 T       -0.420   0.030    0.0      us   -----
+*7090 -- ---- A 13:244:00000 13:277:00000 T       -0.350   0.030    0.0032   us   drift
+*7090 -- ---- A 13:277:00000 13:310:00000 T       -0.250   0.030    0.0032   us   drift
+*7090 -- ---- A 13:310:00000 13:320:00000 T       -0.125   0.030    0.0094   us   drift
+*7090 -- ---- A 13:320:00000 13:335:00000 T       -0.025   0.030    0.0094   us   drift
+*7090 -- ---- A 13:335:00000 13:345:00000 T        0.050   0.030    0.0094   us   drift
+*7090 -- ---- A 13:345:00000 13:355:00000 T        0.150   0.030    0.0094   us   drift
+*7090 -- ---- A 13:355:00000 14:001:00000 T        0.250   0.030    0.0094   us   drift
+*7090 -- ---- A 14:001:00000 14:009:00000 T        0.350   0.025    0.0094   us   drift
+*7090 -- ---- A 14:009:00000 14:016:00000 T        0.450   0.025    0.0094   us   drift
+*7090 -- ---- A 14:016:00000 14:023:00000 T        0.525   0.025    0.0094   us   drift
+*7090 -- ---- A 14:023:00000 14:030:00000 T        0.600   0.025    0.0094   us   drift
+*7090 -- ---- A 14:030:00000 14:042:00000 T       -0.300   0.025    0.0139   us   drift
+*7090 -- ---- A 14:042:00000 14:050:00000 T       -0.150   0.025    0.0139   us   drift
+*7090 -- ---- A 14:050:00000 14:057:00000 T       -0.050   0.025    0.0139   us   drift
+*7090 -- ---- A 14:057:00000 14:064:00000 T        0.040   0.025    0.0139   us   drift
+*7090 -- ---- A 14:064:00000 14:072:00000 T        0.160   0.025    0.0145   us   drift
+*7090 -- ---- A 14:072:00000 14:080:00000 T        0.280   0.025    0.0145   us   drift
+*7090 -- ---- A 14:080:00000 14:087:00000 T        0.400   0.025    0.0145   us   drift
+*7090 -- ---- A 14:087:00000 14:094:00000 T        0.520   0.025    0.0145   us   drift
+*7090 -- ---- A 14:094:00000 14:101:00000 T        0.640   0.025    0.0145   us   drift
+*7090 -- ---- A 14:101:00000 14:107:00000 T        0.760   0.025    0.0145   us   drift
+*7090 -- ---- A 14:107:00000 14:114:00000 T        0.880   0.025    0.0145   us   drift
+*7090 -- ---- A 14:114:00000 14:122:00000 T        1.020   0.025    0.0145   us   drift
+*7090 -- ---- A 14:122:00000 14:129:00000 T        1.150   0.025    0.0145   us   drift
+*7090 -- ---- A 14:129:00000 14:136:00000 T        0.150   0.025    0.0233   us   drift
+*7090 -- ---- A 14:136:00000 14:140:00000 T        0.250   0.025    0.0233   us   drift
+*7090 -- ---- A 14:140:00000 14:145:00000 T        0.350   0.025    0.0233   us   drift
+*7090 -- ---- A 14:145:00000 14:149:00000 T        0.450   0.025    0.0233   us   drift
+*7090 -- ---- A 14:149:00000 14:154:00000 T        0.550   0.025    0.0233   us   drift
+*7090 -- ---- A 14:154:00000 14:158:00000 T        0.650   0.025    0.0233   us   drift
+*7090 -- ---- A 14:158:00000 14:163:00000 T        0.750   0.025    0.0233   us   drift
+*7090 -- ---- A 14:163:00000 14:166:00000 T        0.850   0.025    0.0233   us   drift
+*7090 -- ---- A 14:166:00000 14:171:00000 T        0.950   0.025    0.0233   us   drift
+*7090 -- ---- A 14:171:00000 14:177:00000 T        1.050   0.025    0.0233   us   drift
+*7090 -- ---- A 14:177:00000 14:242:00000 T        0.010   0.025    0.0      us   -----
+*7090 -- ---- A 14:242:00000 14:259:00000 T        0.050   0.025    0.0030   us   drift
+*7090 -- ---- A 14:259:00000 14:274:00000 T        0.100   0.025    0.0040   us   drift
+*7090 -- ---- A 14:274:00000 14:294:00000 T        0.180   0.025    0.0050   us   drift
+*7090 -- ---- A 14:294:00000 14:300:00000 T        0.265   0.025    0.0050   us   drift
+*7090 -- ---- A 14:300:00000 14:323:00000 T        0.210   0.025   -0.0060   us   drift
+*7090 -- ---- A 14:323:00000 14:341:00000 T        0.090   0.025   -0.0050   us   drift
+*7090 -- ---- A 14:341:00000 15:005:00000 T        0.010   0.025   -0.0040   us   drift
+*7090 -- ---- A 15:005:00000 15:051:00000 T       -0.050   0.045    0.0      us   -----
+*7090 -- ---- A 15:051:00000 15:096:00000 T       -0.180   0.045    0.0      us   -----
+*7090 -- ---- A 15:096:00000 15:173:00000 T        0.030   0.045    0.0      us   -----
+*7090 -- ---- A 15:173:00000 15:190:00000 T       -0.080   0.045    0.0      us   -----
+*7090 -- ---- A 15:190:00000 15:319:62940 T        0.030   0.045    0.0      us   -----
+*7090 -- ---- A 15:319:63000 15:326:14400 T        0.250   0.045    0.0      us   -----
+*7090 -- ---- A 15:326:14460 15:350:00000 T        0.050   0.045    0.0      us   -----
+*7090 -- ---- A 15:350:00000 16:003:00000 T        0.250   0.045    0.0      us   -----
+*7090 -- ---- A 16:003:00000 16:055:00000 T        0.030   0.045    0.0      us   -----
+*7090 -- ---- A 16:055:00000 16:069:00000 T        0.420   0.045    0.0      us   -----
+*7090 -- ---- A 16:069:00000 16:238:00000 T        0.530   0.045    0.0      us   -----
+*7090 -- ---- A 16:238:00000 17:001:00000 T        0.400   0.045    0.0      us   -----
+*7105 -- ---- A 13:001:00000 13:091:00000 T       -0.012   0.030    0.0      us   -----
+*7105 -- ---- A 13:091:00000 13:152:00000 T        0.112   0.030    0.0      us   -----
+*7105 -- ---- A 13:152:00000 14:027:00000 T        0.025   0.030    0.0      us   -----
+*7105 -- ---- A 14:027:00000 14:079:00000 T        0.070   0.030    0.0      us   -----
+*7105 -- ---- A 14:079:00000 14:082:00000 T        0.250   0.030    0.0      us   -----
+*7105 -- ---- A 14:082:00000 14:223:00000 T        0.000   0.030    0.0      us   -----
+*7105 -- ---- A 14:223:00000 14:343:00000 T        0.150   0.030    0.0      us   -----
+*7105 -- ---- A 14:343:00000 15:105:00000 T       -0.070   0.030    0.0      us   -----
+*7105 -- ---- A 15:105:00000 15:137:00000 T        0.090   0.030    0.0      us   -----
+*7105 -- ---- A 15:137:00000 15:182:00000 T        0.025   0.030    0.0      us   -----
+*7105 -- ---- A 15:182:00000 15:194:00000 T        0.400   0.030    0.0      us   -----
+*7105 -- ---- A 15:206:00000 15:211:00000 T        0.250   0.030    0.0      us   -----
+*7105 -- ---- A 15:211:00000 15:216:00000 T        0.390   0.030    0.0      us   -----
+*7105 -- ---- A 15:216:00000 16:122:00000 T        0.190   0.030    0.0      us   -----
+*7105 -- ---- A 16:122:00000 16:214:00000 T        0.248   0.030    0.0      us   -----
+*7105 -- ---- A 16:214:00000 17:001:00000 T        0.047   0.030    0.0      us   -----
+*7110 -- ---- A 13:001:00000 13:207:00000 T        0.517   0.075    0.0      us   -----
+*7110 -- ---- A 13:207:00000 13:254:00000 T        0.660   0.075    0.0      us   -----
+*7110 -- ---- A 13:254:00000 13:276:00000 T        0.600   0.075    0.0      us   -----
+*7110 -- ---- A 13:276:00000 13:341:00000 T        0.397   0.075    0.0      us   -----
+*7110 -- ---- A 13:341:00000 14:023:00000 T        0.527   0.075    0.0      us   -----
+*7110 -- ---- A 14:023:00000 14:057:00000 T        0.450   0.075    0.0      us   -----
+*7110 -- ---- A 14:057:00000 14:068:00000 T        0.350   0.075    0.0      us   -----
+*7110 -- ---- A 14:068:00000 14:122:00000 T        0.420   0.075    0.0      us   -----
+*7110 -- ---- A 14:122:00000 14:154:00000 T        0.490   0.075    0.0      us   -----
+*7110 -- ---- A 14:154:00000 14:190:00000 T        0.400   0.075    0.0      us   -----
+*7110 -- ---- A 14:190:00000 15:160:00000 T        0.545   0.075    0.0      us   -----
+*7110 -- ---- A 15:160:00000 15:218:00000 T        0.425   0.075    0.0      us   -----
+*7110 -- ---- A 15:218:00000 15:241:00000 T        0.340   0.075    0.0      us   -----
+*7110 -- ---- A 15:241:00000 15:248:00000 T        0.525   0.075    0.0      us   -----
+*7110 -- ---- A 15:248:00000 16:001:00000 T        0.440   0.075    0.0      us   -----
+*7110 -- ---- A 16:001:00000 16:049:00000 T        0.600   0.075    0.0      us   -----
+*7110 -- ---- A 16:049:00000 16:092:00000 T        0.700   0.075    0.0      us   -----
+*7110 -- ---- A 16:092:00000 16:198:00000 T        0.650   0.075    0.0      us   -----
+*7110 -- ---- A 16:198:00000 16:270:00000 T        0.530   0.075    0.0      us   -----
+*7110 -- ---- A 16:270:00000 17:001:00000 T        0.654   0.075    0.0      us   -----
+*7119 -- ---- A 13:001:00000 13:075:00000 T        0.330   0.075    0.0      us   -----
+*7119 -- ---- A 13:075:00000 13:152:00000 T        0.430   0.075    0.0      us   -----
+*7119 -- ---- A 13:152:00000 14:001:00000 T        0.390   0.075    0.0      us   -----
+*7119 -- ---- A 14:001:00000 14:032:00000 T        0.400   0.075    0.0      us   -----
+*7119 -- ---- A 14:032:00000 14:091:00000 T        0.250   0.075    0.0      us   -----
+*7119 -- ---- A 14:091:00000 14:140:00000 T        0.350   0.075    0.0      us   -----
+*7119 -- ---- A 14:140:00000 14:284:00000 T        0.145   0.075    0.0      us   -----
+*7119 -- ---- A 14:284:00000 15:014:00000 T        0.335   0.075    0.0      us   -----
+*7119 -- ---- A 15:014:00000 15:184:00000 T        0.450   0.075    0.0      us   -----
+*7119 -- ---- A 15:184:00000 16:317:00000 T        0.120   0.075    0.0      us   -----
+*7119 -- ---- A 16:317:00000 17:001:00000 T        0.360   0.075    0.0      us   -----
+*7124 -- ---- A 13:001:00000 13:106:00000 T        0.250   0.035    0.0      us   -----
+*7124 -- ---- A 13:106:00000 13:180:00000 T        0.350   0.035    0.0      us   -----
+*7124 -- ---- A 13:180:00000 13:313:00000 T        0.300   0.035    0.0      us   -----
+*7124 -- ---- A 13:313:00000 14:001:00000 T        0.500   0.035    0.0      us   -----
+*7124 -- ---- A 14:001:00000 14:091:00000 T        0.440   0.050    0.0      us   -----
+*7124 -- ---- A 14:091:00000 14:148:00000 T        0.530   0.050    0.0      us   -----
+*7124 -- ---- A 14:148:00000 14:283:00000 T        0.460   0.050    0.0      us   -----
+*7124 -- ---- A 14:283:00000 15:121:00000 T        0.350   0.050    0.0      us   -----
+*7124 -- ---- A 15:121:00000 15:264:00000 T        0.430   0.040    0.0      us   -----
+*7124 -- ---- A 16:173:00000 17:001:00000 T        0.760   0.030    0.0      us   -----
+*7237 -- ---- A 13:001:00000 13:091:00000 T        0.100   0.030    0.0      us   -----
+*7237 -- ---- A 13:091:00000 13:222:00000 T        0.180   0.030    0.0      us   -----
+*7237 -- ---- A 13:222:00000 13:340:00000 T        0.050   0.030    0.0      us   -----
+*7237 -- ---- A 13:340:00000 14:126:00000 T        0.075   0.030    0.0      us   -----
+*7237 -- ---- A 14:126:00000 14:322:00000 T        0.035   0.030    0.0      us   -----
+*7237 -- ---- A 14:322:00000 14:327:00000 T       -0.650   0.030    0.0245   us   drift
+*7237 -- ---- A 14:327:00000 14:331:00000 T       -0.550   0.030    0.0245   us   drift
+*7237 -- ---- A 14:331:00000 14:336:00000 T       -0.450   0.030    0.0245   us   drift
+*7237 -- ---- A 14:336:00000 14:340:00000 T       -0.350   0.030    0.0245   us   drift
+*7237 -- ---- A 14:340:00000 14:344:00000 T       -0.250   0.030    0.0245   us   drift
+*7237 -- ---- A 14:344:00000 14:349:00000 T       -0.150   0.030    0.0245   us   drift
+*7237 -- ---- A 14:349:00000 14:353:00000 T       -0.030   0.030    0.0245   us   drift
+*7237 -- ---- A 15:001:00000 15:068:00000 T        0.035   0.035    0.0      us   -----
+*7237 -- ---- A 15:068:00000 15:069:00000 T       -0.425   0.035    0.0      us   -----
+*7237 -- ---- A 15:069:00000 15:281:00000 T        0.035   0.035    0.0      us   -----
+*7237 -- ---- A 15:281:00000 15:285:00000 T       -0.550   0.030   -0.0357   us   drift
+*7237 -- ---- A 15:285:00000 15:288:00000 T       -0.650   0.030   -0.0357   us   drift
+*7237 -- ---- A 15:288:00000 15:290:00000 T       -0.710   0.030   -0.0357   us   drift
+*7237 -- ---- A 15:290:00000 15:293:00000 T       -0.800   0.030   -0.0357   us   drift
+*7237 -- ---- A 15:293:00000 15:296:00000 T       -0.880   0.030   -0.0357   us   drift
+*7237 -- ---- A 15:296:00000 15:350:00000 T       -0.585   0.035    0.0      us   -----
+*7237 -- ---- A 15:350:00000 15:353:00000 T       -0.390   0.035    0.0270   us   drift
+*7237 -- ---- A 15:353:00000 15:357:00000 T       -0.290   0.035    0.0270   us   drift
+*7237 -- ---- A 15:357:00000 15:360:00000 T       -0.210   0.035    0.0270   us   drift
+*7237 -- ---- A 15:360:00000 15:364:00000 T       -0.120   0.035    0.0270   us   drift
+*7237 -- ---- A 16:002:00000 16:005:00000 T        0.075   0.035    0.0270   us   drift
+*7237 -- ---- A 16:005:00000 16:008:00000 T        0.140   0.035    0.0270   us   drift
+*7237 -- ---- A 16:008:00000 16:011:00000 T        0.230   0.035    0.0270   us   drift
+*7237 -- ---- A 16:011:00000 16:013:18000 T        0.320   0.035    0.0270   us   drift
+*7237 -- ---- A 16:014:00000 16:026:00000 T        0.050   0.040    0.0      us   -----
+*7237 -- ---- A 16:027:01860 16:045:00000 T        0.050   0.065    0.0      us   -----
+*7237 -- ---- A 16:045:01860 16:062:00000 T        0.150   0.065    0.0      us   -----
+*7237 -- ---- A 16:062:01860 16:141:00000 T        0.075   0.065    0.0      us   -----
+*7237 -- ---- A 16:141:01860 16:187:00000 T        0.000   0.065    0.0      us   -----
+*7237 -- ---- A 16:187:00000 16:194:00000 T       -0.545   0.035    0.0293   us   drift
+*7237 -- ---- A 16:194:00000 16:200:00000 T        0.000   0.030    0.0      us   -----
+*7237 -- ---- A 16:200:00000 16:201:00000 T       -0.600   0.030    0.0293   us   drift
+*7237 -- ---- A 16:201:00000 16:204:00000 T       -0.550   0.030    0.0293   us   drift
+*7237 -- ---- A 16:204:00000 16:207:00000 T       -0.460   0.030    0.0293   us   drift
+*7237 -- ---- A 16:207:00000 16:210:00000 T       -0.350   0.030    0.0293   us   drift
+*7237 -- ---- A 16:210:00000 16:214:00000 T       -0.250   0.030    0.0293   us   drift
+*7237 -- ---- A 16:214:00000 16:218:00000 T       -0.150   0.030    0.0293   us   drift
+*7237 -- ---- A 16:218:00000 16:221:00000 T       -0.025   0.030    0.0293   us   drift
+*7237 -- ---- A 16:221:00000 16:224:00000 T        0.075   0.030    0.0293   us   drift
+*7237 -- ---- A 16:224:00000 16:226:00000 T        0.170   0.030    0.0293   us   drift
+*7237 -- ---- A 16:226:00000 16:229:00000 T        0.270   0.030    0.0293   us   drift
+*7237 -- ---- A 16:229:00000 16:231:00000 T        0.375   0.030    0.0293   us   drift
+*7237 -- ---- A 16:231:00000 16:233:00000 T        0.450   0.030    0.0293   us   drift
+*7237 -- ---- A 16:233:00000 16:236:00000 T        0.550   0.030    0.0293   us   drift
+*7237 -- ---- A 16:236:00000 16:239:00000 T        0.000   0.030    0.0      us   -----
+*7237 -- ---- A 16:239:00000 16:243:00000 T       -0.550   0.030    0.0361   us   drift
+*7237 -- ---- A 16:243:00000 16:246:00000 T       -0.450   0.030    0.0361   us   drift
+*7237 -- ---- A 16:246:00000 16:249:00000 T       -0.350   0.030    0.0361   us   drift
+*7237 -- ---- A 16:249:00000 16:251:00000 T       -0.250   0.030    0.0361   us   drift
+*7237 -- ---- A 16:251:00000 16:254:00000 T       -0.150   0.030    0.0361   us   drift
+*7237 -- ---- A 16:254:00000 16:257:00000 T       -0.050   0.030    0.0361   us   drift
+*7237 -- ---- A 16:257:00000 16:260:00000 T        0.050   0.030    0.0361   us   drift
+*7237 -- ---- A 16:260:00000 16:262:00000 T        0.150   0.030    0.0361   us   drift
+*7237 -- ---- A 16:262:00000 16:265:00000 T        0.250   0.030    0.0361   us   drift
+*7237 -- ---- A 16:265:00000 16:268:00000 T        0.350   0.030    0.0361   us   drift
+*7237 -- ---- A 16:268:00000 16:271:00000 T        0.450   0.030    0.0361   us   drift
+*7237 -- ---- A 16:271:00000 16:274:00000 T        0.550   0.030    0.0361   us   drift
+*7237 -- ---- A 16:274:00000 16:276:00000 T        0.650   0.030    0.0361   us   drift
+*7237 -- ---- A 16:276:00000 17:001:00000 T        0.100   0.030    0.0      us   -----
+*7308 -- ---- A 13:001:00000 13:182:00000 T       -0.185   0.020    0.0      us   -----
+*7308 -- ---- A 13:182:00000 17:001:00000 T       -0.045   0.020    0.0      us   -----
+*7394 -- ---- A 16:001:00000 17:001:00000 T        0.260   0.020    0.0      us   -----
+*7403 -- ---- A 13:001:00000 13:099:00000 T        0.000   0.045    0.0      us   -----
+*7403 -- ---- A 13:099:00000 13:227:00000 T        0.100   0.045    0.0      us   -----
+*7403 -- ---- A 13:227:00000 13:323:00000 T        0.200   0.045    0.0      us   -----
+*7403 -- ---- A 13:323:00000 14:167:00000 T        0.130   0.045    0.0      us   -----
+*7403 -- ---- A 14:342:00000 15:108:00000 T        0.150   0.040    0.0      us   -----
+*7403 -- ---- A 15:108:00000 15:362:00000 T        0.215   0.040    0.0      us   -----
+*7403 -- ---- A 15:362:00000 16:034:00000 T        0.100   0.040    0.0      us   -----
+*7403 -- ---- A 16:034:00000 16:246:00000 T        0.250   0.040    0.0      us   -----
+*7403 -- ---- A 16:246:00000 17:001:00000 T        0.150   0.040    0.0      us   -----
+*7406 -- ---- A 13:001:00000 17:001:00000 T        0.130   0.040    0.0      us   -----
+*7407 -- ---- A 16:001:00000 17:001:00000 T       -0.060   0.030    0.0      us   -----
+*7501 -- ---- A 15:001:00000 15:142:00000 T       -0.020   0.045   -0.0005   us   drift
+*7501 -- ---- A 15:142:00000 15:251:00000 T        0.025   0.045    0.0      us   -----
+*7501 -- ---- A 15:251:00000 15:264:00000 T       -0.440   0.045    0.0      us   -----
+*7501 -- ---- A 15:264:00000 17:001:00000 T        0.345   0.045    0.0      us   -----
+*7810 -- ---- B 13:001:00000 13:090:00000 T        0.210   0.065    0.0      us   -----
+*7810 -- ---- B 13:090:00000 13:230:00000 T        0.320   0.065    0.0      us   -----
+*7810 -- ---- B 13:230:00000 14:001:00000 T        0.415   0.065    0.0      us   -----
+*7810 -- ---- B 14:001:00000 15:001:00000 T        0.400   0.065    0.0      us   -----
+*7810 -- ---- B 15:001:00000 15:187:00000 T        0.375   0.065    0.0      us   -----
+*7810 -- ---- B 15:188:28860 15:264:00000 T        0.250   0.045    0.0      us   -----
+*7810 -- ---- B 15:264:00000 16:001:00000 T        0.350   0.045    0.0      us   -----
+*7810 -- ---- B 16:001:00000 17:001:00000 T        0.395   0.045    0.0      us   -----
+*7811 -- ---- A 13:001:00000 17:001:00000 T        0.210   0.045    0.0      us   -----
+*7821 -- ---- A 13:001:00000 17:001:00000 T        0.130   0.045    0.0      us   -----
+*7824 -- ---- B 13:001:00000 14:001:00000 T        0.860   0.105    0.0      us   -----
+*7824 -- ---- B 14:001:00000 17:001:00000 T        0.960   0.095    0.0      us   -----
+*7825 -- ---- A 13:001:00000 13:188:00000 T       -0.070   0.500    0.0      us   -----
+*7825 -- ---- A 13:188:00000 14:126:00000 T        0.065   0.500    0.0      us   -----
+*7825 -- ---- A 14:126:00000 17:001:00000 T        0.000   1.500    0.0      us   -----
+*7838 -- ---- A 13:001:00000 13:136:00000 T       -0.100   0.030    0.0      us   -----
+*7838 -- ---- A 13:136:00000 13:198:00000 T       -1.450   0.030   -0.0350   us   drift
+*7838 -- ---- A 13:198:00000 13:219:00000 T       -1.100   0.030    0.0650   us   drift
+*7838 -- ---- A 14:090:00000 14:116:00000 T        0.000   0.045   -0.0350   us   drift
+*7838 -- ---- A 14:116:00000 15:216:00000 T        0.275   0.045    0.0      us   -----
+*7838 -- ---- A 15:216:00000 17:001:00000 T       -0.090   0.045    0.0      us   -----
+*7840 -- ---- A 13:001:00000 13:021:00000 T        0.150   0.045    0.0      us   -----
+*7840 -- ---- A 13:021:00000 13:075:00000 T        0.110   0.045    0.0      us   -----
+*7840 -- ---- A 13:075:00000 14:001:00000 T        0.210   0.045    0.0      us   -----
+*7840 -- ---- A 14:001:00000 14:035:00000 T        0.210   0.045    0.0      us   -----
+*7840 -- ---- A 14:035:00000 14:051:00000 T        0.250   0.045    0.0      us   -----
+*7840 -- ---- A 14:051:00000 14:165:00000 T        0.215   0.045    0.0      us   -----
+*7840 -- ---- A 14:165:00000 14:201:00000 T        0.180   0.045    0.0      us   -----
+*7840 -- ---- A 14:201:00000 14:264:00000 T        0.220   0.045    0.0      us   -----
+*7840 -- ---- A 14:264:00000 14:345:00000 T        0.168   0.045    0.0      us   -----
+*7840 -- ---- A 14:345:00000 15:011:00000 T        0.200   0.045    0.0      us   -----
+*7840 -- ---- A 15:011:00000 16:139:00000 T        0.170   0.045    0.0      us   -----
+*7840 -- ---- A 16:139:00000 17:001:00000 T       -0.016   0.045    0.0      us   -----
+*7841 -- ---- A 13:001:00000 17:001:00000 T        0.640   0.045    0.0      us   -----
+*7845 -- ---- A 13:001:00000 13:034:00000 T       -0.210   0.025    0.0      us   -----
+*7845 -- ---- A 13:034:00000 13:070:00000 T       -0.260   0.025    0.0      us   -----
+*7845 -- ---- A 13:070:00000 13:083:00000 T       -0.170   0.025    0.0      us   -----
+*7845 -- ---- A 13:083:00000 14:011:00000 T       -0.080   0.025    0.0      us   -----
+*7845 -- ---- A 14:011:00000 14:023:00000 T        0.400   0.025    0.0      us   -----
+*7845 -- ---- A 14:023:00000 14:150:00000 T       -0.063   0.025    0.0      us   -----
+*7845 -- ---- A 14:150:00000 14:164:00000 T       -1.376   0.025    0.0      us   -----
+*7845 -- ---- A 14:164:00000 14:210:00000 T       -0.100   0.025   -0.0010   us   drift
+*7845 -- ---- A 14:210:00000 14:213:00000 T        0.330   0.025    0.0      us   -----
+*7845 -- ---- A 14:213:00000 14:317:00000 T       -0.205   0.025   -0.0010   us   drift
+*7845 -- ---- A 14:326:00000 17:001:00000 T       -0.220   0.030    0.0      us   -----
+*7941 -- ---- A 13:001:00000 13:083:00000 T       -0.165   0.045    0.0      us   -----
+*7941 -- ---- A 13:083:00000 13:102:00000 T        0.000   0.045    0.0      us   -----
+*7941 -- ---- A 13:102:00000 17:001:00000 T        0.250   0.045    0.0      us   -----
+*8834 -- ---- A 13:126:00000 13:157:00000 T       -1.100   0.025   -0.0032   us   drift
+*8834 -- ---- A 13:157:00000 13:188:00000 T       -1.200   0.025   -0.0032   us   drift
+*8834 -- ---- A 13:188:00000 13:220:00000 T       -1.300   0.025   -0.0032   us   drift
+*8834 -- ---- A 13:220:00000 13:252:00000 T       -1.400   0.025   -0.0032   us   drift
+*8834 -- ---- A 13:252:00000 13:283:00000 T       -1.500   0.025   -0.0032   us   drift
+*8834 -- ---- A 13:283:00000 13:307:00000 T       -0.215   0.025   -0.0052   us   drift
+*8834 -- ---- A 13:307:00000 13:325:00000 T       -0.300   0.025   -0.0052   us   drift
+*8834 -- ---- A 13:325:00000 14:007:00000 T       -0.450   0.025   -0.0052   us   drift
+*8834 -- ---- A 14:007:00000 14:024:00000 T       -0.620   0.025   -0.0052   us   drift
+*8834 -- ---- A 14:024:00000 14:042:00000 T       -0.730   0.025   -0.0054   us   drift
+*8834 -- ---- A 14:042:00000 14:060:00000 T       -0.830   0.025   -0.0054   us   drift
+*8834 -- ---- A 14:060:00000 14:078:00000 T       -0.930   0.025   -0.0054   us   drift
+*8834 -- ---- A 14:078:00000 14:096:00000 T       -1.010   0.025   -0.0056   us   drift
+*8834 -- ---- A 14:096:00000 14:112:00000 T       -1.110   0.025   -0.0056   us   drift
+*8834 -- ---- A 14:112:00000 14:130:00000 T       -1.210   0.025   -0.0056   us   drift
+*8834 -- ---- A 14:130:00000 14:148:00000 T       -1.320   0.025   -0.0056   us   drift
+*8834 -- ---- A 14:148:00000 14:167:00000 T       -1.430   0.025   -0.0056   us   drift
+*8834 -- ---- A 14:167:00000 14:185:00000 T       -1.550   0.025   -0.0056   us   drift
+*8834 -- ---- A 14:185:00000 14:203:00000 T       -1.650   0.025   -0.0056   us   drift
+*8834 -- ---- A 14:203:00000 14:218:00000 T       -1.750   0.025   -0.0065   us   drift
+*8834 -- ---- A 14:218:00000 14:233:00000 T       -1.850   0.025   -0.0065   us   drift
+*8834 -- ---- A 14:233:00000 14:249:00000 T       -1.950   0.025   -0.0065   us   drift
+*8834 -- ---- A 15:182:00000 15:194:00000 T       -0.320   0.025   -0.0090   us   drift
+*8834 -- ---- A 15:194:00000 15:205:00000 T       -0.420   0.025   -0.0090   us   drift
+*8834 -- ---- A 15:205:00000 15:208:00000 T        0.150   0.025    0.0      us   -----
+*8834 -- ---- A 15:208:00000 15:220:00000 T       -0.350   0.025   -0.0089   us   drift
+*8834 -- ---- A 15:220:00000 15:231:00000 T       -0.450   0.025   -0.0089   us   drift
+*8834 -- ---- A 15:231:00000 15:243:00000 T       -0.550   0.025   -0.0089   us   drift
+*8834 -- ---- A 15:243:00000 15:254:00000 T       -0.650   0.025   -0.0089   us   drift
+*8834 -- ---- A 15:254:00000 15:266:00000 T       -0.750   0.025   -0.0089   us   drift
+*8834 -- ---- A 15:266:00000 15:277:00000 T       -0.850   0.025   -0.0089   us   drift
+*8834 -- ---- A 15:277:00000 15:285:72000 T       -0.950   0.025   -0.0089   us   drift
+*8834 -- ---- A 15:285:72060 15:300:00000 T       -0.300   0.025   -0.0084   us   drift
+*8834 -- ---- A 15:300:00000 15:312:00000 T       -0.400   0.025   -0.0084   us   drift
+*8834 -- ---- A 15:312:00000 15:324:00000 T       -0.500   0.025   -0.0084   us   drift
+*8834 -- ---- A 15:324:00000 15:336:00000 T       -0.600   0.025   -0.0084   us   drift
+*8834 -- ---- A 15:336:00000 15:348:00000 T       -0.700   0.025   -0.0084   us   drift
+*8834 -- ---- A 15:348:00000 15:360:00000 T       -0.800   0.025   -0.0084   us   drift
+*8834 -- ---- A 16:007:00000 16:019:00000 T       -1.000   0.025   -0.0084   us   drift
+*8834 -- ---- A 16:019:00000 16:031:00000 T       -1.150   0.025   -0.0084   us   drift
+*8834 -- ---- A 16:031:00000 16:042:00000 T       -1.250   0.025   -0.0084   us   drift
+*8834 -- ---- A 16:042:00000 16:054:00000 T       -1.350   0.025   -0.0084   us   drift
+*8834 -- ---- A 16:054:00000 16:065:00000 T       -1.450   0.025   -0.0084   us   drift
+*8834 -- ---- A 16:065:00000 16:075:00000 T       -1.550   0.025   -0.0084   us   drift
+*8834 -- ---- A 16:075:00000 16:086:00000 T       -0.350   0.025   -0.0067   us   drift
+*8834 -- ---- A 16:086:00000 16:095:00000 T       -0.450   0.025   -0.0067   us   drift
+*8834 -- ---- A 16:095:00000 16:105:00000 T       -0.550   0.025   -0.0067   us   drift
+*8834 -- ---- A 16:105:00000 16:128:00000 T       -0.075   0.025   -0.0043   us   drift
+*8834 -- ---- A 16:128:00000 16:150:00000 T       -0.150   0.025   -0.0043   us   drift
+*8834 -- ---- A 16:150:00000 16:172:00000 T       -0.250   0.025   -0.0043   us   drift
+*8834 -- ---- A 16:172:00000 16:193:00000 T       -0.350   0.025   -0.0043   us   drift
+*8834 -- ---- A 16:193:00000 16:204:00000 T       -0.150   0.025   -0.0050   us   drift
+*8834 -- ---- A 16:204:00000 16:215:00000 T       -0.210   0.025   -0.0050   us   drift
+*8834 -- ---- A 16:215:00000 16:222:00000 T       -0.075   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:222:00000 16:229:00000 T       -0.150   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:229:00000 16:236:00000 T       -0.250   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:236:00000 16:243:00000 T       -0.320   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:243:00000 16:250:00000 T       -0.400   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:250:00000 16:257:00000 T       -0.480   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:257:00000 16:264:00000 T       -0.580   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:264:00000 16:271:00000 T       -0.660   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:271:00000 16:278:00000 T       -0.750   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:278:00000 16:285:00000 T       -0.850   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:285:00000 16:292:00000 T       -0.950   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:292:00000 16:299:00000 T       -1.050   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:299:00000 16:306:00000 T       -1.150   0.025   -0.0120   us   drift
+*8834 -- ---- A 16:306:00000 16:313:00000 T       -1.270   0.025   -0.0140   us   drift
+*8834 -- ---- A 16:313:00000 16:320:00000 T       -1.385   0.025   -0.0140   us   drift
+*8834 -- ---- A 16:320:00000 16:327:00000 T       -1.500   0.025   -0.0140   us   drift
+*8834 -- ---- A 16:327:00000 16:334:00000 T       -1.400   0.025   -0.0179   us   drift
+*8834 -- ---- A 16:334:00000 16:339:00000 T       -1.500   0.025   -0.0179   us   drift
+*8834 -- ---- A 16:339:00000 16:344:00000 T       -1.600   0.025   -0.0179   us   drift
+*8834 -- ---- A 16:344:00000 16:349:00000 T       -1.700   0.025   -0.0179   us   drift
+*8834 -- ---- A 16:349:00000 16:354:00000 T       -1.800   0.025   -0.0179   us   drift
+*8834 -- ---- A 16:354:00000 16:358:00000 T       -1.900   0.025   -0.0179   us   drift
+*8834 -- ---- A 17:025:00000 17:047:00000 T       -0.210   0.012   -0.0240   us   drift
+*8834 -- ---- A 17:047:00000 17:061:00000 T       -0.032   0.010   -0.0250   us   drift
+*8834 -- ---- A 17:063:00000 17:072:00000 T       -0.022   0.007   -0.0250   us   drift
+*8834 -- ---- A 17:092:00000 17:111:00000 T       -0.070   0.018   -0.0290   us   drift
+*8834 -- ---- A 17:114:00000 17:123:00000 T       -0.200   0.030   -0.0250   us   drift
+*8834 -- ---- A 17:125:00000 17:130:00000 T       -0.065   0.019   -0.0285   us   drift
+*8834 -- ---- A 17:130:00000 17:137:00000 T       -0.022   0.016    0.0018   us   drift
+*8834 -- ---- A 17:194:00000 17:211:00000 T        0.150   0.020    0.0014   us   drift
+*8834 -- ---- A 17:226:00000 17:230:00000 T       -0.120   0.006    0.0014   us   drift
+*8834 -- ---- A 17:237:00000 17:256:00000 T        0.100   0.017    0.0      us   -----
+*8834 -- ---- A 17:287:00000 17:347:00000 T        0.018   0.019   -0.0012   us   drift
+*1884 -- ---- A 17:116:00000 17:136:00000 T        0.010   0.036    0.0      us   -----
+*1874 -- ---- A 17:073:00000 17:073:00000 T        0.026   0.000    0.0      us   -----
+*1889 -- ---- A 17:300:00000 17:336:00000 T        0.026   0.070    0.0      us   -----
+*1890 -- ---- A 17:071:00000 17:073:00000 T       -0.060   0.025    0.0      us   -----
+*1890 -- ---- A 17:289:00000 17:363:00000 T       -0.160   0.030    0.0      us   -----
+*1891 -- ---- A 17:072:00000 17:074:00000 T        0.067   0.020    0.0      us   -----
+*1893 -- ---- A 17:042:00000 17:067:00000 T        0.140   0.017    0.0      us   -----
+*1893 -- ---- A 17:102:00000 17:136:00000 T        0.040   0.018    0.0      us   -----
+*7080 -- ---- A 17:052:00000 17:347:00000 T        0.200   0.078    0.0      us   -----
+*7090 -- ---- A 17:001:00000 17:015:00000 T        0.400   0.017    0.0      us   -----
+*7090 -- ---- A 17:025:00000 17:074:00000 T        0.400   0.019    0.0      us   -----
+*7090 -- ---- A 17:091:00000 17:137:00000 T        0.350   0.020   -0.0010   us   drift
+*7090 -- ---- A 17:194:00000 17:254:00000 T        0.400   0.020    0.0      us   -----
+*7090 -- ---- A 17:255:00000 17:256:00000 T        0.750   0.030    0.0      us   -----
+*7090 -- ---- A 17:287:00000 17:345:00000 T        0.670   0.020    0.0      us   -----
+*7090 -- ---- A 17:346:00000 17:365:00000 T        0.570   0.017    0.0      us   -----
+*7105 -- ---- A 17:025:00000 17:072:00000 T        0.050   0.015    0.0      us   -----
+*7105 -- ---- A 17:093:00000 17:108:00000 T       -0.050   0.020    0.0      us   -----
+*7105 -- ---- A 17:121:00000 17:137:00000 T        0.045   0.014    0.0      us   -----
+*7105 -- ---- A 17:194:00000 17:256:00000 T        0.015   0.016    0.0      us   -----
+*7105 -- ---- A 17:289:00000 17:355:00000 T        0.070   0.018    0.0      us   -----
+*7110 -- ---- A 17:006:00000 17:027:00000 T        0.550   0.020    0.0      us   -----
+*7110 -- ---- A 17:031:00000 17:067:00000 T        0.700   0.020    0.0      us   -----
+*7110 -- ---- A 17:091:00000 17:131:00000 T        0.600   0.013    0.0      us   -----
+*7110 -- ---- A 17:193:00000 17:255:00000 T        0.700   0.020    0.0      us   -----
+*7110 -- ---- A 17:289:00000 17:339:00000 T        0.500   0.020    0.0      us   -----
+*7110 -- ---- A 17:345:00000 17:363:00000 T        0.550   0.020    0.0      us   -----
+*7119 -- ---- A 17:002:00000 17:012:00000 T        0.350   0.012    0.0      us   -----
+*7119 -- ---- A 17:026:00000 17:065:00000 T        0.350   0.018    0.0      us   -----
+*7119 -- ---- A 17:092:00000 17:137:00000 T        0.006   0.012    0.0      us   -----
+*7119 -- ---- A 17:193:00000 17:256:00000 T        0.100   0.016    0.0      us   -----
+*7119 -- ---- A 17:287:00000 17:289:00000 T        0.000   0.010    0.0      us   -----
+*7119 -- ---- A 17:292:00000 17:314:00000 T        0.070   0.013    0.0      us   -----
+*7119 -- ---- A 17:320:00000 17:365:00000 T        0.280   0.014    0.0      us   -----
+*7124 -- ---- A 17:026:00000 17:074:00000 T        0.750   0.014    0.0      us   -----
+*7124 -- ---- A 17:101:00000 17:131:00000 T        0.670   0.014    0.0      us   -----
+*7124 -- ---- A 17:194:00000 17:207:00000 T        0.750   0.020    0.0      us   -----
+*7124 -- ---- A 17:244:00000 17:256:00000 T        0.800   0.010    0.0      us   -----
+*7124 -- ---- A 17:297:00000 17:362:00000 T        0.700   0.020    0.0      us   -----
+*7237 -- ---- A 17:002:00000 17:015:00000 T        0.200   0.013    0.0      us   -----
+*7237 -- ---- A 17:025:00000 17:055:00000 T        0.200   0.300    0.0      us   -----
+*7237 -- ---- A 17:071:00000 17:074:00000 T        0.200   0.015    0.0      us   -----
+*7237 -- ---- A 17:092:00000 17:132:00000 T        0.070   0.020    0.0      us   -----
+*7237 -- ---- A 17:196:00000 17:221:00000 T        0.020   0.020    0.0      us   -----
+*7237 -- ---- A 17:229:00000 17:256:00000 T        0.090   0.016   -0.0010   us   drift
+*7237 -- ---- A 17:287:00000 17:365:00000 T       -0.050   0.030   -0.0004   us   drift
+*7394 -- ---- A 17:073:00000 17:074:00000 T        0.290   0.000    0.0      us   -----
+*7403 -- ---- A 17:094:00000 17:096:00000 T        0.085   0.007    0.0      us   -----
+*7403 -- ---- A 17:097:00000 17:133:00000 T       -0.080   0.012    0.0      us   -----
+*7403 -- ---- A 17:193:00000 17:242:00000 T        0.170   0.034    0.0      us   -----
+*7403 -- ---- A 17:294:00000 17:348:00000 T        0.020   0.020    0.0      us   -----
+*7501 -- ---- A 17:011:00000 17:073:00000 T        0.600   0.020    0.0      us   -----
+*7501 -- ---- A 17:091:00000 17:137:00000 T        0.500   0.010   -0.0008   us   drift
+*7501 -- ---- A 17:208:00000 17:256:00000 T        0.600   0.016    0.0      us   -----
+*7501 -- ---- A 17:287:00000 17:333:00000 T        0.500   0.040   -0.0140   us   drift
+*7501 -- ---- A 17:346:00000 17:348:00000 T        0.100   0.002    0.0      us   -----
+*7810 -- ---- A 17:057:00000 17:074:00000 T        0.400   0.030    0.0      us   -----
+*7810 -- ---- A 17:093:00000 17:137:00000 T        0.320   0.030   -0.0120   us   drift
+*7810 -- ---- A 17:326:00000 17:365:00000 T        0.200   0.050    0.0      us   -----
+*7811 -- ---- A 17:003:00000 17:062:00000 T        0.200   0.012    0.0      us   -----
+*7811 -- ---- A 17:119:00000 17:137:00000 T        0.110   0.010    0.0      us   -----
+*7811 -- ---- A 17:241:00000 17:243:00000 T        0.230   0.007    0.0      us   -----
+*7811 -- ---- A 17:289:00000 17:303:00000 T        0.100   0.010    0.0      us   -----
+*7811 -- ---- A 17:364:00000 17:364:00000 T        0.120   0.000    0.0      us   -----
+*7825 -- ---- A 17:004:00000 17:074:00000 T        0.000   2.000    0.0      us   -----
+*7825 -- ---- A 17:091:00000 17:135:00000 T        0.000   2.000    0.0      us   -----
+*7825 -- ---- A 17:250:00000 17:256:00000 T       -0.100   0.200    0.0      us   -----
+*7825 -- ---- A 17:288:00000 17:350:00000 T        0.050   0.200    0.0      us   -----
+*7838 -- ---- A 17:004:00000 17:067:00000 T       -0.040   0.030    0.0      us   -----
+*7838 -- ---- A 17:093:00000 17:137:00000 T       -0.150   0.030    0.0      us   -----
+*7838 -- ---- A 17:203:00000 17:244:00000 T       -0.010   0.030    0.0      us   -----
+*7838 -- ---- A 17:303:00000 17:361:00000 T       -0.130   0.035    0.0      us   -----
+*7839 -- ---- A 17:287:00000 17:293:00000 T       -0.070   0.030    0.0      us   -----
+*7840 -- ---- A 17:002:00000 17:014:00000 T       -0.060   0.005   -0.0050   us   drift
+*7840 -- ---- A 17:026:00000 17:063:00000 T       -0.030   0.010   -0.0030   us   drift
+*7840 -- ---- A 17:066:00000 17:074:00000 T       -0.004   0.015    0.0      us   -----
+*7840 -- ---- A 17:091:00000 17:134:00000 T       -0.100   0.020    0.0      us   -----
+*7840 -- ---- A 17:194:00000 17:256:00000 T        0.030   0.020    0.0      us   -----
+*7840 -- ---- A 17:287:00000 17:365:00000 T       -0.100   0.050    0.0      us   -----
+*7841 -- ---- A 17:288:00000 17:363:00000 T        0.090   0.020    0.0      us   -----
+*7845 -- ---- A 17:030:00000 17:074:00000 T       -0.230   0.015    0.0      us   -----
+*7845 -- ---- A 17:093:00000 17:136:00000 T        0.300   0.020    0.0      us   -----
+*7845 -- ---- A 17:194:00000 17:255:00000 T       -0.230   0.015    0.0      us   -----
+*7845 -- ---- A 17:289:00000 17:290:00000 T       -1.300   0.007    0.0      us   -----
+*7845 -- ---- A 17:293:00000 17:355:00000 T       -0.330   0.020    0.0      us   -----
+*7941 -- ---- A 17:001:00000 17:365:00000 T        0.230   0.060    0.0      us   -----
+*-------------------------------------------------------------------------------
+*===============================================================================
+* list of data corrections converted from CDDIS database free format
+*-------------------------------------------------------------------------------
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+*7090 -- ---- A 96:200:00000 96:200:86400 T    -0.0010                       ms   CCD
+*7090 -- ---- A 96:201:00000 96:201:86400 T    -0.0012                       ms   CCD
+*7090 -- ---- A 96:202:00000 96:202:86400 T    -0.0013                       ms   CCD
+*7090 -- ---- A 96:203:00000 96:203:86400 T    -0.0015                       ms   CCD
+*7090 -- ---- A 96:204:00000 96:204:86400 T    -0.0016                       ms   CCD
+*7090 -- ---- A 96:205:00000 96:205:86400 T    -0.0018                       ms   CCD
+*7090 -- ---- A 96:215:79021 96:215:86400 T     0.0005                       ms   CCD
+*7403 -- ---- A 97:024:00000 97:024:86400 T     0.0011                       ms   Tb
+*7403 -- ---- A 97:025:00000 97:025:86400 T     0.0015                       ms   Tb
+*7403 -- ---- A 97:045:00000 97:045:86400 T     0.0016                       ms   Tb
+*7403 -- ---- A 97:046:00000 97:046:86400 T     0.0012                       ms   Tb
+*7403 -- ---- A 97:047:00000 97:047:86400 T     0.0008                       ms   Tb
+*7403 -- ---- A 97:048:00000 97:048:86400 T     0.0003                       ms   Tb
+*7403 -- ---- A 97:049:00000 97:049:86400 T    -0.0001                       ms   Tb
+*7403 -- ---- A 97:050:00000 97:050:86400 T    -0.0005                       ms   Tb
+*7403 -- ---- A 97:051:00000 97:051:86400 T    -0.0010                       ms   Tb
+*7403 -- ---- A 97:052:00000 97:052:86400 T    -0.0014                       ms   Tb
+*7403 -- ---- A 97:053:00000 97:053:86400 T    -0.0018                       ms   Tb
+*7403 -- ---- A 97:056:00000 97:056:86400 T    -0.0004                       ms   Tb
+*7403 -- ---- A 97:057:00000 97:057:86400 T    -0.0009                       ms   Tb
+*7403 -- ---- A 97:058:00000 97:058:86400 T    -0.0013                       ms   Tb
+*7403 -- ---- A 97:059:00000 97:059:86400 T    -0.0018                       ms   Tb
+*===============================================================================
+*  list of data corrections converted from CDDIS data base (Van Husson`s tables)
+*-------------------------------------------------------------------------------
+*CODE PT SOLN T START_DATE__ END_DATE____ M __E-VALUE___ STD_DEV _E-RATE__ UNIT   CMNTS
+*7109 -- ---- A 96:338:00000 96:340:00000 T     -.0011                       ms   SCD
+*7109 -- ---- A 96:340:00000 96:343:00000 T     -.0012                       ms   SCD
+*7109 -- ---- A 96:343:00000 96:346:00000 T     -.0013                       ms   SCD
+*7109 -- ---- A 96:346:00000 96:348:00000 T     -.0014                       ms   SCD
+*7109 -- ---- A 96:348:00000 96:351:00000 T     -.0015                       ms   SCD
+*7109 -- ---- A 96:351:00000 96:352:00000 T     -.0016                       ms   SCD
+*7210 -- ---- A 94:347:00000 94:347:86400 T      .0015                       ms   SCD
+*7210 -- ---- A 94:348:00000 94:348:86400 T     .00160                       ms   SCD
+*7210 -- ---- A 94:349:00000 94:349:86400 T     .00160                       ms   SCD
+*7210 -- ---- A 94:350:00000 94:350:86400 T     .00170                       ms   SCD
+*7210 -- ---- A 94:351:00000 94:351:86400 T     .00180                       ms   SCD
+*7210 -- ---- A 94:352:00000 94:352:86400 T     .00190                       ms   SCD
+*7210 -- ---- A 94:356:00000 94:356:86400 T     .00020                       ms   SCD
+*7210 -- ---- A 94:357:00000 94:357:86400 T     .00030                       ms   SCD
+*7210 -- ---- A 94:358:00000 94:358:86400 T     .00050                       ms   SCD
+*7210 -- ---- A 94:359:00000 94:359:86400 T     .00060                       ms   SCD
+*7210 -- ---- A 94:360:00000 94:360:86400 T     .00080                       ms   SCD
+*7210 -- ---- A 94:361:00000 94:361:86400 T     .00090                       ms   SCD
+*7210 -- ---- A 94:362:00000 94:362:86400 T     .00110                       ms   SCD
+*7210 -- ---- A 94:363:00000 94:363:86400 T     .00120                       ms   SCD
+*7210 -- ---- A 94:364:00000 94:364:86400 T     .00140                       ms   SCD
+*7210 -- ---- A 94:365:00000 94:365:86400 T     .00150                       ms   SCD
+*7210 -- ---- A 95:001:00000 95:001:86400 T     .00170                       ms   SCD
+*7210 -- ---- A 95:002:00000 95:002:86400 T     .00180                       ms   SCD
+*7210 -- ---- A 95:010:00000 95:010:86400 T     .00010                       ms   SCD
+*7210 -- ---- A 95:011:00000 95:011:86400 T     .00020                       ms   SCD
+*7210 -- ---- A 95:012:00000 95:012:86400 T     .00040                       ms   SCD
+*7210 -- ---- A 95:013:00000 95:013:86400 T     .00050                       ms   SCD
+*7210 -- ---- A 95:014:00000 95:014:86400 T     .00060                       ms   SCD
+*7210 -- ---- A 95:015:00000 95:015:86400 T     .00080                       ms   SCD
+*7210 -- ---- A 95:016:00000 95:016:86400 T     .00090                       ms   SCD
+*7210 -- ---- A 95:017:00000 95:017:86400 T     .00100                       ms   SCD
+*7210 -- ---- A 95:018:00000 95:018:86400 T     .00120                       ms   SCD
+*7210 -- ---- A 95:019:00000 95:019:86400 T     .00130                       ms   SCD
+*7210 -- ---- A 95:020:00000 95:020:86400 T     .00140                       ms   SCD
+*7210 -- ---- A 95:021:00000 95:021:86400 T     .00160                       ms   SCD
+*7210 -- ---- A 95:022:00000 95:022:86400 T     .00170                       ms   SCD
+*7210 -- ---- A 95:023:00000 95:023:86400 T     .00180                       ms   SCD
+*7210 -- ---- A 95:024:00000 95:024:86400 T     .00190                       ms   SCD
+*7210 -- ---- A 95:048:00000 95:048:86400 T    -.00030                       ms   SCD
+*7210 -- ---- A 95:049:00000 95:049:86400 T    -.00060                       ms   SCD
+*7210 -- ---- A 95:050:00000 95:050:86400 T    -.00080                       ms   SCD
+*7210 -- ---- A 95:051:00000 95:051:86400 T    -.00110                       ms   SCD
+*7210 -- ---- A 95:052:00000 95:052:48600 T    -.00130                       ms   SCD
+*7210 -- ---- A 95:052:48600 95:052:86400 T    -.00010                       ms   SCD
+*7210 -- ---- A 95:053:00000 95:053:86400 T     .00020                       ms   SCD
+*7210 -- ---- A 95:054:00000 95:054:86400 T     .00040                       ms   SCD
+*7210 -- ---- A 95:055:00000 95:055:86400 T     .00070                       ms   SCD
+*7210 -- ---- A 95:056:00000 95:056:86400 T     .00090                       ms   SCD
+*7210 -- ---- A 95:057:00000 95:057:86400 T     .00120                       ms   SCD
+*7210 -- ---- A 95:058:00000 95:058:86400 T     .00140                       ms   SCD
+*7210 -- ---- A 95:059:00000 95:059:86400 T     .00170                       ms   SCD
+*7210 -- ---- A 95:060:00000 95:060:86400 T     .00190                       ms   SCD
+*7210 -- ---- A 95:063:00000 95:063:86400 T     .00190                       ms   SCD
+*7210 -- ---- A 95:064:00000 95:064:86400 T     .00180                       ms   SCD
+*7210 -- ---- A 95:065:00000 95:065:86400 T     .00170                       ms   SCD
+*7210 -- ---- A 95:066:00000 95:066:86400 T     .00160                       ms   SCD
+*7210 -- ---- A 95:067:00000 95:067:86400 T     .00170                       ms   SCD
+*7210 -- ---- A 95:068:00000 95:068:86400 T     .00190                       ms   SCD
+*7210 -- ---- A 95:144:19620 95:144:86400 T   -.000200                       ms   SCD
+*7210 -- ---- A 95:145:00000 95:145:86400 T   -.000100                       ms   SCD
+*7210 -- ---- A 95:147:00000 95:147:86400 T    .000100                       ms   SCD
+*7210 -- ---- A 95:148:00000 95:148:86400 T    .000200                       ms   SCD
+*7210 -- ---- A 95:149:00000 95:149:86400 T    .000300                       ms   SCD
+*7210 -- ---- A 95:150:00000 95:150:86400 T    .000400                       ms   SCD
+*7210 -- ---- A 95:151:00000 95:151:86400 T    .000500                       ms   SCD
+*7210 -- ---- A 95:152:00000 95:152:86400 T    .000600                       ms   SCD
+*7210 -- ---- A 95:153:00000 95:153:86400 T    .000700                       ms   SCD
+*7210 -- ---- A 95:154:00000 95:154:86400 T    .000800                       ms   SCD
+*7210 -- ---- A 95:155:00000 95:155:86400 T    .000900                       ms   SCD
+*7210 -- ---- A 95:156:00000 95:156:86400 T    .001000                       ms   SCD
+*7210 -- ---- A 95:157:00000 95:157:86400 T    .001100                       ms   SCD
+*7210 -- ---- A 95:158:00000 95:158:86400 T    .001200                       ms   SCD
+*7210 -- ---- A 95:159:00000 95:159:86400 T    .001300                       ms   SCD
+*7210 -- ---- A 95:160:00000 95:160:86400 T    .001300                       ms   SCD
+*7210 -- ---- A 95:161:00000 95:161:86400 T    .001300                       ms   SCD
+*7210 -- ---- A 95:162:00000 95:165:52380 T    .001400                       ms   SCD
+*7210 -- ---- A 99:153:00000 99:154:00000 T     -.0006                       ms   Tb
+*-------------------------------------------------------------------------------
+*    For the listed cases below, see SLRmails #0396,#0398 for details
+*-------------------------------------------------------------------------------
+*7210 -- ---- A 99:154:00000 99:155:00000 T     -.0005                       ms   TDP
+*7210 -- ---- A 99:155:00000 99:159:00000 T      .0007                       ms   TDP
+*7210 -- ---- A 99:159:00000 99:168:00000 T      .0006                       ms   TDP
+*7210 -- ---- A 99:190:00000 99:195:00000 T      .0011                       ms   TDP
+*-------------------------------------------------------------------------------
+-MODEL/TIME_BIAS
+*-------------------------------------------------------------------------------
+%ENDSNX

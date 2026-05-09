@@ -1,0 +1,13 @@
+{
+    "step_id": "step_000",
+    "timestamp": "2026-05-10T01:59:31.434273",
+    "files_found": [
+        "INPOP19a_APO_residuals.txt",
+        "INPOP19a_Grasse_residuals.txt",
+        "INPOP19a_Matera_residuals.txt",
+        "INPOP19a_McDonald2_residuals.txt",
+        "INPOP19a_Haleakala_residuals.txt"
+    ],
+    "files_missing": [],
+    "status": "PASS"
+}

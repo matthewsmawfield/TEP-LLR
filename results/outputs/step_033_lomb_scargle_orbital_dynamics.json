@@ -1,0 +1,219 @@
+{
+    "step_id": "step_033",
+    "status": "PASS",
+    "params": {
+        "n_observations": 26207,
+        "freq_range_c_d": [
+            0.015,
+            0.05
+        ],
+        "delaunay_references": {
+            "D_synodic": 29.530588,
+            "l_anomalistic": 27.55455,
+            "lp_solar": 365.2596,
+            "F_draconic": 27.21222
+        }
+    },
+    "peaks": [
+        {
+            "rank": 1,
+            "power_norm": 0.011547019699748268,
+            "period_days": 26.826748943591117,
+            "freq_cycles_day": 0.03727622762276228,
+            "nu_ratio": 1.1007889201220125,
+            "harmonic_mapping": {
+                "formula": "3D + -2l + 3l' + 0F",
+                "coefficients": [
+                    3,
+                    -2,
+                    3,
+                    0
+                ],
+                "exact_freq": 0.0372196215349917,
+                "exact_period": 26.867548856182186,
+                "error_cyc_day": 5.660608777058318e-05,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 2,
+            "power_norm": 0.009216042224443066,
+            "period_days": 30.907376783147612,
+            "freq_cycles_day": 0.03235473547354736,
+            "nu_ratio": 0.9554543631183119,
+            "harmonic_mapping": {
+                "formula": "2D + -3l + 0l' + 2F",
+                "coefficients": [
+                    2,
+                    -3,
+                    0,
+                    2
+                ],
+                "exact_freq": 0.032347837572929625,
+                "exact_period": 30.913967517780932,
+                "error_cyc_day": 6.8979006177319335e-06,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 3,
+            "power_norm": 0.007980143690292152,
+            "period_days": 30.84397556912826,
+            "freq_cycles_day": 0.03242124212421242,
+            "nu_ratio": 0.9574183436183619,
+            "harmonic_mapping": {
+                "formula": "1D + 3l + 0l' + -3F",
+                "coefficients": [
+                    1,
+                    3,
+                    0,
+                    -3
+                ],
+                "exact_freq": 0.032493545126186046,
+                "exact_period": 30.775343106348696,
+                "error_cyc_day": 7.230300197362538e-05,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 4,
+            "power_norm": 0.007884131003363857,
+            "period_days": 30.678366520418493,
+            "freq_cycles_day": 0.0325962596259626,
+            "nu_ratio": 0.9625867133553356,
+            "harmonic_mapping": {
+                "formula": "0D + 3l + -1l' + -2F",
+                "coefficients": [
+                    0,
+                    3,
+                    -1,
+                    -2
+                ],
+                "exact_freq": 0.03264076954058849,
+                "exact_period": 30.636532596344257,
+                "error_cyc_day": 4.450991462589399e-05,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 5,
+            "power_norm": 0.006928323774292736,
+            "period_days": 26.761411537998313,
+            "freq_cycles_day": 0.03736723672367237,
+            "nu_ratio": 1.1034764723852386,
+            "harmonic_mapping": {
+                "formula": "2D + -2l + 2l' + 1F",
+                "coefficients": [
+                    2,
+                    -2,
+                    2,
+                    1
+                ],
+                "exact_freq": 0.03736684594939417,
+                "exact_period": 26.76169140296983,
+                "error_cyc_day": 3.907742782000012e-07,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 6,
+            "power_norm": 0.006752033507976253,
+            "period_days": 28.298923118287178,
+            "freq_cycles_day": 0.03533703370337034,
+            "nu_ratio": 1.0435233834363438,
+            "harmonic_mapping": {
+                "formula": "0D + 3l + 0l' + -2F",
+                "coefficients": [
+                    0,
+                    3,
+                    0,
+                    -2
+                ],
+                "exact_freq": 0.03537854836967334,
+                "exact_period": 28.265715979946894,
+                "error_cyc_day": 4.1514666303005265e-05,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 7,
+            "power_norm": 0.006317084287991759,
+            "period_days": 27.657838323767372,
+            "freq_cycles_day": 0.03615611561156116,
+            "nu_ratio": 1.0677113538053806,
+            "harmonic_mapping": {
+                "formula": "1D + 1l + 1l' + -1F",
+                "coefficients": [
+                    1,
+                    1,
+                    1,
+                    -1
+                ],
+                "exact_freq": 0.036144422518681184,
+                "exact_period": 27.666785919270165,
+                "error_cyc_day": 1.1693092879974665e-05,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 8,
+            "power_norm": 0.00629049140928426,
+            "period_days": 27.609725117698225,
+            "freq_cycles_day": 0.03621912191219122,
+            "nu_ratio": 1.0695719669106911,
+            "harmonic_mapping": {
+                "formula": "0D + 1l + 0l' + 0F",
+                "coefficients": [
+                    0,
+                    1,
+                    0,
+                    0
+                ],
+                "exact_freq": 0.03629164693308365,
+                "exact_period": 27.55455,
+                "error_cyc_day": 7.252502089243051e-05,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 9,
+            "power_norm": 0.006193562771040259,
+            "period_days": 31.830264058446208,
+            "freq_cycles_day": 0.03141664166416642,
+            "nu_ratio": 0.9277519013281329,
+            "harmonic_mapping": {
+                "formula": "-1D + 0l + -3l' + 2F",
+                "coefficients": [
+                    -1,
+                    0,
+                    -3,
+                    2
+                ],
+                "exact_freq": 0.031419862971021575,
+                "exact_period": 31.82700067541021,
+                "error_cyc_day": 3.2213068551570356e-06,
+                "name": "Complex Harmonic"
+            }
+        },
+        {
+            "rank": 10,
+            "power_norm": 0.006178407417439087,
+            "period_days": 31.685521437398993,
+            "freq_cycles_day": 0.03156015601560156,
+            "nu_ratio": 0.9319899645124513,
+            "harmonic_mapping": {
+                "formula": "1D + -1l + -1l' + 1F",
+                "coefficients": [
+                    1,
+                    -1,
+                    -1,
+                    1
+                ],
+                "exact_freq": 0.03158196342392179,
+                "exact_period": 31.663642522065267,
+                "error_cyc_day": 2.180740832023048e-05,
+                "name": "Complex Harmonic"
+            }
+        }
+    ]
+}

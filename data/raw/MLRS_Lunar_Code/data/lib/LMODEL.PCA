@@ -1,0 +1,22 @@
+ 0 MIT               
+ 0 JPL          
+ 0 JPL-421
+ 0 NOT CREATED       
+ 0 NOT CREATED       
+ 0 NOT CREATED       
+ 0 NOT CREATED       
+ 0 NOT CREATED       
+ 0 NOT CREATED       
+ 0 NOT CREATED       
+ 1 MIT                                                                          
+ 1  T T  0.100E-13    10                                                        
+ 1   0.299792458000E+06   0.149597870650E+09   0.813005979100E+02               
+ 1  0.290E+00 NOT DEFINED . . .   F                                             
+ 2 JPL                                                                          
+ 2  T T  0.100E-13    10                                                        
+ 2   0.299792458000E+06   0.149597870691E+09   0.813005560100E+02               
+ 2  0.290E+00 NOT DEFINED . . .   F                                             
+ 3 jpl_de-421
+ 3  T T  0.100E-13    10                                                        
+ 3   0.299792458000E+06   0.149597870691E+09   0.813005690700E+02               
+ 3  0.216+00 NOT DEFINED . . .   F                                             

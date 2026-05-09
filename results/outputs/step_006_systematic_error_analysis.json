@@ -1,0 +1,88 @@
+{
+    "step_id": "step_006",
+    "systematics": {
+        "APO": {
+            "n_obs": 2595,
+            "residual_rms": 0.031601798760565084,
+            "clean_profile": true
+        },
+        "Grasse": {
+            "n_obs": 19390,
+            "residual_rms": 0.09870697444379005,
+            "clean_profile": true
+        },
+        "Matera": {
+            "n_obs": 346,
+            "residual_rms": 0.0619324718317995,
+            "clean_profile": true
+        },
+        "McDonald2": {
+            "n_obs": 3139,
+            "residual_rms": 0.09555025387360164,
+            "clean_profile": true
+        },
+        "Haleakala": {
+            "n_obs": 737,
+            "residual_rms": 0.1383762784480651,
+            "clean_profile": true
+        }
+    },
+    "error_budget": {
+        "ephemeris_modeling": {
+            "source": "Ephemeris modeling (INPOP19a)",
+            "magnitude_cm": 1.5,
+            "description": "Uncertainty in lunar and planetary ephemeris fitting",
+            "reference": "Fienga et al. 2019",
+            "percentage": 50.0,
+            "variance_contribution": 0.000225
+        },
+        "atmospheric_delay": {
+            "source": "Atmospheric delay modeling",
+            "magnitude_cm": 0.5,
+            "description": "Tropospheric delay correction uncertainties",
+            "reference": "Degnan 1993",
+            "percentage": 16.666666666666664,
+            "variance_contribution": 2.5e-05
+        },
+        "instrumental": {
+            "source": "Instrumental systematic",
+            "magnitude_cm": 0.3,
+            "description": "Detector calibration and timing electronics",
+            "reference": "Murphy et al. 2014",
+            "percentage": 10.0,
+            "variance_contribution": 9e-06
+        },
+        "center_of_mass": {
+            "source": "Retroreflector center-of-mass",
+            "magnitude_cm": 0.2,
+            "description": "Uncertainty in retroreflector array center-of-mass position",
+            "reference": "Murphy et al. 2010",
+            "percentage": 6.666666666666667,
+            "variance_contribution": 4e-06
+        },
+        "tidal_modeling": {
+            "source": "Tidal modeling",
+            "magnitude_cm": 0.4,
+            "description": "Solid Earth and ocean tide model uncertainties",
+            "reference": "Williams et al. 2013",
+            "percentage": 13.333333333333334,
+            "variance_contribution": 1.6e-05
+        },
+        "thermal_expansion": {
+            "source": "Thermal expansion",
+            "magnitude_cm": 0.1,
+            "description": "Telescope and retroreflector thermal expansion",
+            "reference": "Murphy 2012",
+            "percentage": 3.3333333333333335,
+            "variance_contribution": 1e-06
+        },
+        "unexplained": {
+            "source": "Unexplained residual variance",
+            "magnitude_cm": 0,
+            "description": "Residual variance not accounted for by known systematics",
+            "percentage": 0.0,
+            "variance_contribution": 0
+        }
+    },
+    "status": "PASS"
+}

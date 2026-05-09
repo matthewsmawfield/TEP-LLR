@@ -1,0 +1,351 @@
+[02:10:33] ═══ Starting Null Tests...
+[02:10:33]     Spectral analysis complete (N_scan=400):
+[02:10:33]       Peak 1: f=1.0677 * synodic, SNR=9.13
+[02:10:33]       Peak 2: f=3.0714 * synodic, SNR=8.48
+[02:10:33]       Peak 3: f=0.8917 * synodic, SNR=7.79
+[02:10:33]       Peak 4: f=0.1586 * synodic, SNR=7.50
+[02:10:33]       Peak 5: f=0.7549 * synodic, SNR=7.49
+[02:10:33] >>> Found 60 non-physical harmonics for pre-whitening:
+[02:10:33]       Factor 1.0677 * Synodic (~27.7 days)
+[02:10:33]       Factor 3.0714 * Synodic (~9.6 days)
+[02:10:33]       Factor 0.8917 * Synodic (~33.1 days)
+[02:10:33]       Factor 0.1586 * Synodic (~186.1 days)
+[02:10:33]       Factor 0.7549 * Synodic (~39.1 days)
+[02:10:33]       Factor 0.4000 * Synodic (~73.8 days)
+[02:10:33]       Factor 0.4500 * Synodic (~65.6 days)
+[02:10:33]       Factor 0.5000 * Synodic (~59.1 days)
+[02:10:33]       Factor 0.5500 * Synodic (~53.7 days)
+[02:10:33]       Factor 0.6000 * Synodic (~49.2 days)
+[02:10:33]       Factor 0.6500 * Synodic (~45.4 days)
+[02:10:33]       Factor 0.7000 * Synodic (~42.2 days)
+[02:10:33]       Factor 0.7500 * Synodic (~39.4 days)
+[02:10:33]       Factor 0.8000 * Synodic (~36.9 days)
+[02:10:33]       Factor 0.8500 * Synodic (~34.7 days)
+[02:10:33]       Factor 0.9000 * Synodic (~32.8 days)
+[02:10:33]       Factor 1.1000 * Synodic (~26.8 days)
+[02:10:33]       Factor 1.1500 * Synodic (~25.7 days)
+[02:10:33]       Factor 1.2000 * Synodic (~24.6 days)
+[02:10:33]       Factor 1.2300 * Synodic (~24.0 days)
+[02:10:33]       Factor 1.2500 * Synodic (~23.6 days)
+[02:10:33]       Factor 1.3000 * Synodic (~22.7 days)
+[02:10:33]       Factor 1.3500 * Synodic (~21.9 days)
+[02:10:33]       Factor 1.4000 * Synodic (~21.1 days)
+[02:10:33]       Factor 1.4500 * Synodic (~20.4 days)
+[02:10:33]       Factor 1.5000 * Synodic (~19.7 days)
+[02:10:33]       Factor 1.5500 * Synodic (~19.1 days)
+[02:10:33]       Factor 1.6000 * Synodic (~18.5 days)
+[02:10:33]       Factor 1.6500 * Synodic (~17.9 days)
+[02:10:33]       Factor 1.7000 * Synodic (~17.4 days)
+[02:10:33]       Factor 1.7500 * Synodic (~16.9 days)
+[02:10:33]       Factor 1.8000 * Synodic (~16.4 days)
+[02:10:33]       Factor 1.8500 * Synodic (~16.0 days)
+[02:10:33]       Factor 1.9000 * Synodic (~15.5 days)
+[02:10:33]       Factor 1.9500 * Synodic (~15.1 days)
+[02:10:33]       Factor 2.0000 * Synodic (~14.8 days)
+[02:10:33]       Factor 2.0500 * Synodic (~14.4 days)
+[02:10:33]       Factor 2.1000 * Synodic (~14.1 days)
+[02:10:33]       Factor 2.1500 * Synodic (~13.7 days)
+[02:10:33]       Factor 2.2000 * Synodic (~13.4 days)
+[02:10:33]       Factor 2.2500 * Synodic (~13.1 days)
+[02:10:33]       Factor 2.3000 * Synodic (~12.8 days)
+[02:10:33]       Factor 2.3500 * Synodic (~12.6 days)
+[02:10:33]       Factor 2.4000 * Synodic (~12.3 days)
+[02:10:33]       Factor 2.4500 * Synodic (~12.1 days)
+[02:10:33]       Factor 2.5000 * Synodic (~11.8 days)
+[02:10:33]       Factor 2.5500 * Synodic (~11.6 days)
+[02:10:33]       Factor 2.6000 * Synodic (~11.4 days)
+[02:10:33]       Factor 2.6500 * Synodic (~11.1 days)
+[02:10:33]       Factor 2.7000 * Synodic (~10.9 days)
+[02:10:33]       Factor 2.7500 * Synodic (~10.7 days)
+[02:10:33]       Factor 2.8000 * Synodic (~10.5 days)
+[02:10:33]       Factor 2.8500 * Synodic (~10.4 days)
+[02:10:33]       Factor 2.9000 * Synodic (~10.2 days)
+[02:10:33]       Factor 2.9500 * Synodic (~10.0 days)
+[02:10:33]       Factor 3.0000 * Synodic (~9.8 days)
+[02:10:33]       Factor 3.0500 * Synodic (~9.7 days)
+[02:10:33]       Factor 3.1000 * Synodic (~9.5 days)
+[02:10:33]       Factor 3.1500 * Synodic (~9.4 days)
+[02:10:33]       Factor 3.2000 * Synodic (~9.2 days)
+[02:10:33] ✓   Jointly whitened 60 harmonics (N_params=121)
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.188006e+02, MSE=8.349573e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.06e+00
+[02:10:33]       Final η = 5.48677024e-04 ± 8.40857700e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.187985e+02, MSE=8.349495e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.72e+00
+[02:10:33]       Final η = 4.83413401e-04 ± 7.38703446e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.187972e+02, MSE=8.349445e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.56e+00
+[02:10:33]       Final η = 4.42672537e-04 ± 6.75210069e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.187974e+02, MSE=8.349451e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.54e+00
+[02:10:33]       Final η = 4.19230181e-04 ± 6.39604793e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.188002e+02, MSE=8.349560e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.61e+00
+[02:10:33]       Final η = 4.08800765e-04 ± 6.26182942e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.188077e+02, MSE=8.349845e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.71e+00
+[02:10:33]       Final η = 4.08397736e-04 ± 6.32247151e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.188229e+02, MSE=8.350427e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.83e+00
+[02:10:33]       Final η = 4.14910915e-04 ± 6.56903524e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.188509e+02, MSE=8.351493e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.96e+00
+[02:10:33]       Final η = 4.23092083e-04 ± 6.99877907e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.188978e+02, MSE=8.353285e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.09e+00
+[02:10:33]       Final η = 4.22219319e-04 ± 7.59388288e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189684e+02, MSE=8.355979e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.20e+00
+[02:10:33]       Final η = 3.92351349e-04 ± 8.27943174e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190552e+02, MSE=8.359291e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.27e+00
+[02:10:33]       Final η = 3.08133028e-04 ± 8.87148424e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190892e+02, MSE=8.360587e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.74e+00
+[02:10:33]       Final η = -2.13984799e-04 ± 7.56583837e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190411e+02, MSE=8.358751e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.60e+00
+[02:10:33]       Final η = -2.57623627e-04 ± 6.94533986e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190007e+02, MSE=8.357210e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.51e+00
+[02:10:33]       Final η = -2.78414442e-04 ± 6.45679176e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189817e+02, MSE=8.356484e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.47e+00
+[02:10:33]       Final η = -2.84599405e-04 ± 6.22962991e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189713e+02, MSE=8.356088e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.45e+00
+[02:10:33]       Final η = -2.87050320e-04 ± 6.10394823e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189533e+02, MSE=8.355401e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.42e+00
+[02:10:33]       Final η = -2.89238414e-04 ± 5.87111381e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189464e+02, MSE=8.355137e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.39e+00
+[02:10:33]       Final η = -2.87528695e-04 ± 5.73928815e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189499e+02, MSE=8.355272e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.37e+00
+[02:10:33]       Final η = -2.82723723e-04 ± 5.69148730e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189629e+02, MSE=8.355768e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.35e+00
+[02:10:33]       Final η = -2.74735254e-04 ± 5.71395968e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.189839e+02, MSE=8.356569e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.35e+00
+[02:10:33]       Final η = -2.63104679e-04 ± 5.79620497e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190107e+02, MSE=8.357593e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.37e+00
+[02:10:33]       Final η = -2.47337020e-04 ± 5.93076119e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190407e+02, MSE=8.358737e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.42e+00
+[02:10:33]       Final η = -2.27105686e-04 ± 6.11284070e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190709e+02, MSE=8.359889e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.51e+00
+[02:10:33]       Final η = -2.02346345e-04 ± 6.33947062e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.190986e+02, MSE=8.360945e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.64e+00
+[02:10:33]       Final η = -1.73278712e-04 ± 6.60760732e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191215e+02, MSE=8.361822e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.78e+00
+[02:10:33]       Final η = -1.40448120e-04 ± 6.91071696e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191385e+02, MSE=8.362468e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.95e+00
+[02:10:33]       Final η = -1.04912027e-04 ± 7.23371645e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191492e+02, MSE=8.362876e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.11e+00
+[02:10:33]       Final η = -6.86309878e-05 ± 7.54748613e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191544e+02, MSE=8.363076e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.24e+00
+[02:10:33]       Final η = -3.48574409e-05 ± 7.80695162e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191560e+02, MSE=8.363136e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.33e+00
+[02:10:33]       Final η = -7.89277970e-06 ± 7.95937922e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191560e+02, MSE=8.363136e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.34e+00
+[02:10:33]       Final η = 8.39253030e-06 ± 7.96565037e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191559e+02, MSE=8.363131e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.29e+00
+[02:10:33]       Final η = 1.26316052e-05 ± 7.82297480e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191560e+02, MSE=8.363137e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.18e+00
+[02:10:33]       Final η = 6.68944626e-06 ± 7.56856878e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191560e+02, MSE=8.363138e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 2.03e+00
+[02:10:33]       Final η = -5.72321248e-06 ± 7.26015358e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191553e+02, MSE=8.363110e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.88e+00
+[02:10:33]       Final η = -2.10297133e-05 ± 6.95155931e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191535e+02, MSE=8.363043e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.73e+00
+[02:10:33]       Final η = -3.68083319e-05 ± 6.67984341e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191507e+02, MSE=8.362935e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.61e+00
+[02:10:33]       Final η = -5.17784885e-05 ± 6.46454648e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191471e+02, MSE=8.362797e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.51e+00
+[02:10:33]       Final η = -6.53704989e-05 ± 6.31220485e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191432e+02, MSE=8.362647e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.45e+00
+[02:10:33]       Final η = -7.73079469e-05 ± 6.22098509e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191394e+02, MSE=8.362503e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.42e+00
+[02:10:33]       Final η = -8.73302754e-05 ± 6.18371161e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191363e+02, MSE=8.362387e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.43e+00
+[02:10:33]       Final η = -9.50532932e-05 ± 6.18944097e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191345e+02, MSE=8.362317e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.46e+00
+[02:10:33]       Final η = -9.99518191e-05 ± 6.22436772e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191342e+02, MSE=8.362305e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.50e+00
+[02:10:33]       Final η = -1.01461718e-04 ± 6.27292784e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191355e+02, MSE=8.362354e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.53e+00
+[02:10:33]       Final η = -9.91847979e-05 ± 6.31971895e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191381e+02, MSE=8.362454e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.56e+00
+[02:10:33]       Final η = -9.31252503e-05 ± 6.35222578e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191416e+02, MSE=8.362586e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.57e+00
+[02:10:33]       Final η = -8.38309427e-05 ± 6.36348213e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191452e+02, MSE=8.362726e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.57e+00
+[02:10:33]       Final η = -7.23348092e-05 ± 6.35334854e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191486e+02, MSE=8.362853e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.56e+00
+[02:10:33]       Final η = -5.99114669e-05 ± 6.32762595e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191513e+02, MSE=8.362956e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.53e+00
+[02:10:33]       Final η = -4.77836069e-05 ± 6.29543764e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191532e+02, MSE=8.363029e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.51e+00
+[02:10:33]       Final η = -3.69195450e-05 ± 6.26613527e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191544e+02, MSE=8.363076e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.48e+00
+[02:10:33]       Final η = -2.79712230e-05 ± 6.24684570e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191551e+02, MSE=8.363102e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.46e+00
+[02:10:33]       Final η = -2.13118550e-05 ± 6.24109739e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191554e+02, MSE=8.363116e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.45e+00
+[02:10:33]       Final η = -1.71037632e-05 ± 6.24843577e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191556e+02, MSE=8.363120e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.45e+00
+[02:10:33]       Final η = -1.53465988e-05 ± 6.26480879e-05
+[02:10:33]     Linear Regression Complete (N=26207, DOF=26205):
+[02:10:33]       RSS=2.191555e+02, MSE=8.363119e-03, χ²_red=0.008
+[02:10:33]       Birge Ratio = 0.091 (Scaling factor applied: 1.000)
+[02:10:33]       Condition Number κ(R) = 1.45e+00
+[02:10:33]       Final η = -1.58903807e-05 ± 6.28360504e-05
+[02:10:33]     Deep Scan Multi-frequency Null Test Summary:
+[02:10:33]       Primary factor (1.23×) SNR: 4.57σ
+[02:10:33]       Worst clean null factor: 0.50×, SNR=6.56σ
+[02:10:33]       Detected Systematic Peaks (Expected):
+[02:10:33]         Lunar Orbital (Sidereal/Anomalistic) (f=0.90×): SNR=3.47σ
+[02:10:33] Results saved to results/outputs/step_015_null_tests.json
+[02:10:33] ✓   Null Tests Complete.

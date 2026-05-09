@@ -5,7 +5,7 @@
 
 set -e
 
-echo "🚀 Deploying TEP-JWST to GitHub Pages..."
+echo "🚀 Deploying TEP-LLR to GitHub Pages..."
 
 # Ensure we're in the right directory
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

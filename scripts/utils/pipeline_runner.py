@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 """
-Shared pipeline runner utility for TEP-JWST sub-pipelines.
+Shared pipeline runner utility for TEP-LLR pipeline.
 
-Provides run_step() and run_pipeline() so that the focused runner scripts
-(run_core_evidence.py, run_kinematics.py, run_photometry_anomalies.py)
-do not each duplicate this logic.
+Provides run_step() and run_pipeline() for executing the 33-step
+Lunar Laser Ranging analysis pipeline.
 """
 
 import datetime
+import os
 import subprocess
 import sys
 import time
+import json
+import platform
+import hashlib
+import psutil
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-STEPS_DIR    = PROJECT_ROOT / "scripts" / "steps"
+STEPS_DIR = PROJECT_ROOT / "scripts" / "steps"
 
 
 def _fmt_elapsed(seconds: float) -> str:
@@ -22,6 +26,59 @@ def _fmt_elapsed(seconds: float) -> str:
         return f"{seconds:.1f}s"
     m, s = divmod(int(seconds), 60)
     return f"{m}m{s:02d}s"
+
+
+def _get_file_hash(path: Path) -> str:
+    """Compute SHA-256 hash of a file for reproducibility auditing."""
+    if not path.exists():
+        return "MISSING"
+    sha256 = hashlib.sha256()
+    with open(path, "rb") as f:
+        while chunk := f.read(8192):
+            sha256.update(chunk)
+    return sha256.hexdigest()[:12]
+
+
+def generate_audit_report(pipeline_name: str, results: list, elapsed_total: float) -> Path:
+    """
+    Generate a formal Research-Grade Audit Report (JSON).
+    Captures system state, dependency hashes, and pipeline telemetry.
+    """
+    audit_data = {
+        "report_metadata": {
+            "pipeline_name": pipeline_name,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "elapsed_total_s": round(elapsed_total, 2),
+            "status": "PASS" if all(r["status"] == "PASS" for r in results) else "FAIL"
+        },
+        "system_telemetry": {
+            "os": platform.system(),
+            "os_release": platform.release(),
+            "machine": platform.machine(),
+            "processor": platform.processor(),
+            "cpu_count_logical": psutil.cpu_count(logical=True),
+            "cpu_count_physical": psutil.cpu_count(logical=False),
+            "memory_total_gb": round(psutil.virtual_memory().total / (1024**3), 2),
+            "python_version": sys.version.split()[0],
+            "is_m4_pro": "Apple M4 Pro" in platform.processor() or os.uname().machine == 'arm64' # Heuristic for Apple Silicon
+        },
+        "dependency_audit": {
+            "scripts": {r["name"]: _get_file_hash(STEPS_DIR / r["name"]) for r in results},
+            "utils": {
+                "statistical_utils.py": _get_file_hash(PROJECT_ROOT / "scripts" / "utils" / "statistical_utils.py"),
+                "llr_constants.py": _get_file_hash(PROJECT_ROOT / "scripts" / "utils" / "llr_constants.py"),
+            }
+        },
+        "step_telemetry": results
+    }
+    
+    audit_path = PROJECT_ROOT / "results" / "audits" / f"RESEARCH_AUDIT_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    audit_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(audit_path, "w") as f:
+        json.dump(audit_data, f, indent=4)
+        
+    return audit_path
 
 
 def run_step(script_name: str, step_idx: int, total: int, label: str = "STEP") -> dict:
@@ -32,17 +89,20 @@ def run_step(script_name: str, step_idx: int, total: int, label: str = "STEP") -
     Never raises — failures are captured in the return dict.
     """
     script_path = STEPS_DIR / script_name
-    phase       = f"[{step_idx:>3}/{total}]"
+    phase = f"[{step_idx:>3}/{total}]"
 
     print(f"\n{'─'*70}")
     print(f" {phase}  {label}: {script_name}")
     print(f"{'─'*70}\n")
 
     t0 = time.perf_counter()
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(PROJECT_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
     result = subprocess.run(
         [sys.executable, str(script_path)],
         cwd=str(PROJECT_ROOT),
         capture_output=False,
+        env=env,
     )
     elapsed = time.perf_counter() - t0
 
@@ -84,7 +144,7 @@ def run_pipeline(
     n = len(steps)
 
     print("╔" + "═" * 68 + "╗")
-    print(f"║  TEP-JWST: {pipeline_name:<57}  ║")
+    print(f"║  TEP-LLR: {pipeline_name:<58}  ║")
     if description:
         print(f"║  {description:<66}  ║")
     print(f"║  Steps: {n:<60}  ║")
@@ -103,13 +163,16 @@ def run_pipeline(
     n_pass = sum(1 for r in results if r["status"] == "PASS")
     n_fail = sum(1 for r in results if r["status"] == "FAIL")
 
+    # Generate Audit Report
+    audit_path = generate_audit_report(pipeline_name, results, total_elapsed)
+
     print()
     print("╔" + "═" * 68 + "╗")
     print(f"║  {pipeline_name} — COMPLETE" + " " * (42 - len(pipeline_name)) + "  ║")
     print("╠" + "═" * 68 + "╣")
     for r in results:
         icon = "✓" if r["status"] == "PASS" else "✗"
-        t    = _fmt_elapsed(r["elapsed_s"])
+        t = _fmt_elapsed(r["elapsed_s"])
         name = r["name"][:52]
         stat = r["status"]
         print(f"║  {icon} {name:<52}  {stat:<8}  {t:>5}  ║")
@@ -117,6 +180,7 @@ def run_pipeline(
     pct = 100 * n_pass // len(results) if results else 0
     print(f"║  PASS {n_pass}/{len(results)} ({pct}%)   FAIL: {n_fail}   "
           f"Total: {_fmt_elapsed(total_elapsed):<37}  ║")
+    print(f"║  AUDIT: {str(audit_path.relative_to(PROJECT_ROOT)):<58}  ║")
     print("╚" + "═" * 68 + "╝")
 
     return results

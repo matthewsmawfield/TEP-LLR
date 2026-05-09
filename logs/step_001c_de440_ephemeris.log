@@ -1,0 +1,7 @@
+[01:59:46] ═══ Checking DE440 Ephemeris...
+[01:59:46]     DE440 found: de440.bsp (119.8 MB)
+[01:59:46]     DE440 file check:
+[01:59:46]       Size: 119799808 bytes
+[01:59:46]       Status: PASS
+[01:59:46] Results saved to results/outputs/step_001c_de440_ephemeris.json
+[01:59:46] ✓   DE440 Validation Complete.

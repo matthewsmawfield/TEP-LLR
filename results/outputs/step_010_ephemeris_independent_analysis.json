@@ -1,0 +1,10 @@
+{
+    "step_id": "step_010",
+    "analysis_results": {
+        "eta": -0.0004524792725699484,
+        "eta_err": 9.177544502117292e-05,
+        "snr": 4.9302868808269995,
+        "significant": true
+    },
+    "status": "PASS"
+}

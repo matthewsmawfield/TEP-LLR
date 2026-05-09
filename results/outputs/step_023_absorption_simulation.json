@@ -1,0 +1,22 @@
+{
+    "step_id": "step_023",
+    "data_type": "SYNTHETIC (METHODOLOGY VALIDATION)",
+    "status": "PASS",
+    "simulation_parameters": {
+        "n_obs": 26000,
+        "period": "1985-2020",
+        "eta_dynamic_range": 0.0029999999958210664
+    },
+    "ephemeris_fit_results": {
+        "constant_eta_estimate": -6.926272463322989e-06,
+        "p_value": 0.8016660623577627,
+        "is_significant": false
+    },
+    "residual_analysis_results": {
+        "subsample_era": "1991.5-1997.0",
+        "residual_eta_estimate": -0.00091739050869913,
+        "p_value": 0.0,
+        "is_significant": true
+    },
+    "conclusion": "Standard LLR constraints naturally mask a dynamic TEP signal through time-averaging while preserving it in localized post-fit residuals."
+}

@@ -1,0 +1,30 @@
+[02:10:27] ═══ Starting Systematic Control Analysis...
+[02:10:27]     ============================================================
+[02:10:27] ═══ SYSTEMATIC CONTROL ANALYSIS - DETAILED TRACE
+[02:10:27]     ============================================================
+[02:10:27]     [DATA] Dataset: N=26,207 observations
+[02:10:27]     [DATA] Residual range: [-1.036197, 1.554217] m
+[02:10:27]     [DATA] cos(elongation) range: [-1.000000, 0.988628]
+[02:10:27]     [DATA] JD range: [2445797.9497, 2458767.9708]
+[02:10:27] 
+[02:10:27] >>> TEST 1: UNCONTROLLED CORRELATION (BASELINE)
+[02:10:27]       [CALC] r_original = -3.044239e-02
+[02:10:27]       [CALC] p_original = 8.26e-07
+[02:10:27]       [CALC] Significance: 4.93σ
+[02:10:27] 
+[02:10:27] >>> TEST 2: CONTROLLING FOR LINEAR TIME TREND
+[02:10:27]       [CALC] Time trend coefficient: -1.967789e-02
+[02:10:27]       [CALC] r_partial (time controlled): -2.760101e-02
+[02:10:27]       [CALC] p_partial: 7.86e-06
+[02:10:27]       [CALC] Signal attenuation: 9.3%
+[02:10:27] 
+[02:10:27] >>> TEST 3: CONTROLLING FOR QUADRATIC TIME TREND
+[02:10:27]       [CALC] r_partial (quad controlled): -3.214985e-02
+[02:10:27]       [CALC] p_partial: 1.93e-07
+[02:10:27] 
+[02:10:27] >>> TEST 4: CONTROLLING FOR SEASONAL AND LUNAR CYCLES
+[02:10:27]       [CALC] Controlled for: Annual, Sidereal (27.32d), Anomalistic (27.55d)
+[02:10:27]       [CALC] r_combined (all controlled): -3.478067e-02
+[02:10:27]       [CALC] p_combined: 1.78e-08
+[02:10:27] Results saved to results/outputs/step_011_systematic_control_analysis.json
+[02:10:27] ✓   Control Analysis Complete.

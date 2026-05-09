@@ -1,0 +1,70 @@
+{
+    "step_id": "step_012",
+    "data_type": "SYNTHETIC (PIPELINE VALIDATION)",
+    "injection_results": {
+        "null_test_eta": 3.0304188554222085e-05,
+        "null_test_eta_error": 9.18178097174584e-05,
+        "null_test_snr": 0.33004695545966606,
+        "null_test_pass": true,
+        "noise_robustness_tests": [
+            {
+                "noise_multiplier": 0.5,
+                "total_rms": 0.10614700121680148,
+                "eta": -0.00041336151916983137,
+                "eta_error": 0.00010276686741553133,
+                "snr": 4.022322851376117,
+                "significant": true
+            },
+            {
+                "noise_multiplier": 1.0,
+                "total_rms": 0.13401256394492714,
+                "eta": -0.00043249104844082575,
+                "eta_error": 0.00012975762673787756,
+                "snr": 3.333068423904652,
+                "significant": true
+            },
+            {
+                "noise_multiplier": 2.0,
+                "total_rms": 0.2142268127836872,
+                "eta": -0.00042472590041288573,
+                "eta_error": 0.00020745242266405784,
+                "snr": 2.0473412407464338,
+                "significant": false
+            },
+            {
+                "noise_multiplier": 3.0,
+                "total_rms": 0.3015485425343074,
+                "eta": -0.0002548401950862156,
+                "eta_error": 0.00029203193019366894,
+                "snr": 0.8726449704222802,
+                "significant": false
+            }
+        ],
+        "signal_recovery": {
+            "eta_injected": -0.00031697982024903585,
+            "eta_recovered": -0.0002853922681056865,
+            "recovery_error_percent": 9.965161857474877,
+            "recovery_pass": true
+        },
+        "detection_thresholds": [
+            {
+                "confidence_sigma": 1.0,
+                "min_detectable_eta": 9.181449692036822e-05
+            },
+            {
+                "confidence_sigma": 2.0,
+                "min_detectable_eta": 0.00018362899384073643
+            },
+            {
+                "confidence_sigma": 3.0,
+                "min_detectable_eta": 0.0002754434907611046
+            },
+            {
+                "confidence_sigma": 5.0,
+                "min_detectable_eta": 0.00045907248460184106
+            }
+        ],
+        "injection_valid": true
+    },
+    "status": "PASS"
+}

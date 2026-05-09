@@ -1,0 +1,31 @@
+{
+    "step_id": "step_016",
+    "bayesian_summary": {
+        "posterior_mean_eta": -0.0003156553841649181,
+        "posterior_std_eta": 6.005652260454145e-05,
+        "posterior_mean_b": -0.0010427015965485827,
+        "posterior_std_b": 0.000410665119341888,
+        "credible_interval_95": [
+            -0.0004334036510410063,
+            -0.0001976224995963733
+        ],
+        "credible_interval_68": [
+            -0.0003751453174412184,
+            -0.0002558020464151969
+        ],
+        "bayes_factor_savage_dickey": 820010271422376.9,
+        "bayes_factor_bic": 5937.251760805345,
+        "n_samples": 25600,
+        "gelman_rubin_eta": 1.0002411751654405,
+        "gelman_rubin_b": 1.0003772288175314,
+        "mean_acceptance_fraction": 0.71604375,
+        "outlier_cleaning": {
+            "method": "6\u03c3 MAD (detect_outliers_sigma)",
+            "sigma_threshold": 6.0,
+            "n_outliers_removed": 762,
+            "n_original": 26207,
+            "n_cleaned": 25445
+        }
+    },
+    "status": "PASS"
+}

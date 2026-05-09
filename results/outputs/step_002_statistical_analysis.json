@@ -1,0 +1,74 @@
+{
+    "eta_ols": -0.00031697982024903585,
+    "eta_ols_error": 6.040658378191678e-05,
+    "eta_mcmc": -0.00031681724633455383,
+    "eta_err_mcmc": 5.9855092159498134e-05,
+    "snr": 5.293070896797199,
+    "status": "STRONG DETECTION",
+    "ar1_gls": {
+        "eta": -0.00032795350349234257,
+        "eta_error": 9.7885560934959e-05,
+        "rho": 0.4291179120392002,
+        "rho_error": 0.005662582549006842,
+        "durbin_watson": 1.1417482797269214,
+        "interpretation": "Significant autocorrelation"
+    },
+    "convergence_diagnostics": {
+        "autocorr_time": 30.15588998047683,
+        "convergence_status": "CONVERGED",
+        "n_steps_after_burnin": 2000,
+        "steps_per_autocorr": 66.3220353070268,
+        "acceptance_fraction": 0.7165833333333333,
+        "n_walkers": 32,
+        "n_steps": 3000,
+        "burn_in": 1000
+    },
+    "regression_metrics": {
+        "amplitude": -0.004120737663237466,
+        "amplitude_error": 0.0007852855891649182,
+        "intercept": -0.0010498850653991696,
+        "intercept_error": 0.00040816500088771107,
+        "eta": -0.00031697982024903585,
+        "eta_error": 6.040658378191678e-05,
+        "chi2_red": 0.003799026904781622,
+        "birge_ratio": 0.061636246679868674,
+        "condition_number": 2.106690889136098,
+        "rss": 96.65864153835881,
+        "n_obs": 25445,
+        "method": "QR-Decomposition with Birge Scaling",
+        "regression_metrics": {
+            "coefficients": [
+                -0.004120737663237466,
+                -0.0010498850653991696
+            ],
+            "errors": [
+                0.0007852855891649182,
+                0.00040816500088771107
+            ],
+            "chi2_red": 0.003799026904781622,
+            "birge_ratio": 0.061636246679868674,
+            "condition_number": 2.106690889136098,
+            "n_obs": 25445,
+            "dof": 25443,
+            "rss": 96.65864153835881,
+            "mse": 0.003799026904781622,
+            "cov": [
+                [
+                    6.166734565500926e-07,
+                    1.0327384383337554e-07
+                ],
+                [
+                    1.0327384383337554e-07,
+                    1.6659866794966518e-07
+                ]
+            ]
+        }
+    },
+    "outlier_cleaning": {
+        "method": "6\u03c3 MAD (detect_outliers_sigma)",
+        "sigma_threshold": 6.0,
+        "n_outliers_removed": 762,
+        "n_original": 26207,
+        "n_cleaned": 25445
+    }
+}

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 class HTMLToMarkdownConverter {
     constructor() { this.output = ''; }
@@ -63,11 +64,24 @@ class HTMLToMarkdownConverter {
     }
 
     htmlToMarkdown(html) {
+        // Preserve LaTeX math expressions
+        const mathBlocks = [];
+        html = html.replace(/\$\$([\s\S]*?)\$\$/g, (match, content) => {
+            mathBlocks.push(`$$${content}$$`);
+            return `___MATH_BLOCK_${mathBlocks.length - 1}___`;
+        });
+        html = html.replace(/\$([^$\n]+?)\$/g, (match, content) => {
+            mathBlocks.push(`$${content}$`);
+            return `___MATH_INLINE_${mathBlocks.length - 1}___`;
+        });
+
         html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gis, '');
         html = html.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gis, '');
         html = html.replace(/<!--[\s\S]*?-->/g, '');
         html = html.replace(/<nav\b[\s\S]*?<\/nav>/gi, '');
-        html = html.replace(/<div[^>]*class=["']manuscript-section[^"']*["'][^>]*data-section=["']([^"']*)["'][^>]*>/gi, '\n\n## $1\n\n');
+        html = html.replace(/<div[^>]*class=["']manuscript-section[^"']*["'][^>]*>/gi, '\n\n');
+        html = html.replace(/<div[^>]*class=["']abstract[^"']*["'][^>]*>/gi, '\n\n');
+        html = html.replace(/<\/div>/gi, '\n\n');
 
         html = html.replace(/<pre[^>]*>\s*<code(?: class=["']language-([^"']+)["'])?[^>]*>([\s\S]*?)<\/code>\s*<\/pre>/gi, (match, lang, code) => {
             const language = (lang || '').trim();
@@ -96,7 +110,11 @@ class HTMLToMarkdownConverter {
         });
 
         html = html.replace(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi, '\n> $1\n\n');
-        html = html.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, '$1\n\n');
+        html = html.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (match, content) => {
+            // Strip leading whitespace from each line in paragraph content
+            const stripped = content.split('\n').map(line => line.trim()).join(' ').trim();
+            return `${stripped}\n\n`;
+        });
 
         html = html.replace(/<(strong|b)[^>]*>([\s\S]*?)<\/(strong|b)>/gi, '**$2**');
         html = html.replace(/<(em|i)[^>]*>([\s\S]*?)<\/(em|i)>/gi, '*$2*');
@@ -108,21 +126,50 @@ class HTMLToMarkdownConverter {
 
         html = html.replace(/<\/?[a-zA-Z][^>]*>/g, '');
         html = this.decodeEntities(html);
+        
+        // Restore LaTeX math expressions
+        html = html.replace(/___MATH_BLOCK_(\d+)___/g, (match, index) => mathBlocks[parseInt(index)]);
+        html = html.replace(/___MATH_INLINE_(\d+)___/g, (match, index) => mathBlocks[parseInt(index)]);
+        
         html = html.replace(/@@@CODEBLOCK_START:([^@]*)@@@[\r\n]+([\s\S]*?)[\r\n]+@@@CODEBLOCK_END@@@/g, (match, lang, code) => {
             const language = lang.trim();
             return `\n\n\`\`\`${language}\n${code}\n\`\`\`\n\n`;
         });
 
+        // Final cleanup: strip leading spaces from all lines
+        html = html.split('\n').map(line => line.replace(/^\s+/, '')).join('\n');
         return html.replace(/\n{3,}/g, '\n\n').trim();
     }
 
     async convertSiteToMarkdown() {
-        console.log('🔄 Converting HTML site to markdown (TEP-JWST)...');
+            console.log('🔄 Converting HTML site to markdown (TEP-LLR)...');
         try {
             const manifestPath = path.join(__dirname, 'manifest.json');
             if (!fs.existsSync(manifestPath)) throw new Error('manifest.json not found.');
             const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
             const sections = manifest.sections.sort((a, b) => a.order - b.order);
+
+            // Load citation metadata for header
+            const citationPath = path.join(__dirname, '..', 'CITATION.cff');
+            let author = 'Matthew Lukin Smawfield';
+            let version = 'v0.1 (Lucknow)';
+            let dateReleased = '2026-04-20';
+            let doi = '';
+            
+            if (fs.existsSync(citationPath)) {
+                const citationData = yaml.load(fs.readFileSync(citationPath, 'utf8'));
+                if (citationData.authors && citationData.authors[0]) {
+                    const firstAuthor = citationData.authors[0];
+                    author = `${firstAuthor['given-names']} ${firstAuthor['family-names']}`;
+                }
+                version = citationData.version || version;
+                const rawDate = citationData['date-released'] || dateReleased;
+                // Format date as "DD Month YYYY"
+                const dateObj = new Date(rawDate);
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                dateReleased = dateObj.toLocaleDateString('en-GB', options);
+                doi = citationData.doi || '';
+            }
 
             let allHtml = '';
             for (const section of sections) {
@@ -137,11 +184,23 @@ class HTMLToMarkdownConverter {
             }
 
             console.log(`  Total HTML: ${(allHtml.length / 1024).toFixed(1)} KB`);
-            const markdownTitle = manifest.title || 'The Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies';
-            const markdown = `# ${markdownTitle}\n\n` + this.htmlToMarkdown(allHtml);
-            const outputPath = path.join(__dirname, '..', '13manuscript-tep-jwst.md');
-            fs.writeFileSync(outputPath, markdown, 'utf8');
-            console.log(`✅ Markdown saved to: ${outputPath} (${(markdown.length / 1024).toFixed(1)} KB)`);
+            const markdown = this.htmlToMarkdown(allHtml);
+            
+            // Add title and header metadata from citation
+            const title = manifest.title || 'Untitled';
+            const header = `# ${title}
+**${author}**
+Version: ${version}
+First published: ${dateReleased}${doi ? `\nDOI: ${doi}` : ''}
+
+---
+
+`;
+            const finalMarkdown = header + markdown;
+            
+            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.1-Lucknow.md');
+            fs.writeFileSync(outputPath, finalMarkdown, 'utf8');
+            console.log(`✅ Markdown saved to: ${outputPath} (${(finalMarkdown.length / 1024).toFixed(1)} KB)`);
         } catch (error) {
             console.error('❌ Markdown conversion failed:', error.message);
         }
