@@ -1,51 +1,51 @@
-[14:43:53] ═══ Starting Systematic Error Analysis...
-[14:43:53]     Loaded 26,207 observations from data/processed/INPOP19a_all_stations_residuals.csv
-[14:43:53] 
-[14:43:53]     Analyzing 5 stations for systematic errors...
-[14:43:53]     Total observations: 26,207
-[14:43:53]     Residual threshold for 'clean' status: 0.15 m
-[14:43:53] 
-[14:43:53]     ✓ Station APO:
-[14:43:53]         N obs     = 2,595
-[14:43:53]         RMS       = 0.0316 m
-[14:43:53]         Status    = CLEAN
-[14:43:53]     ✓ Station Grasse:
-[14:43:53]         N obs     = 19,390
-[14:43:53]         RMS       = 0.0987 m
-[14:43:53]         Status    = CLEAN
-[14:43:53]     ✓ Station Matera:
-[14:43:53]         N obs     = 346
-[14:43:53]         RMS       = 0.0619 m
-[14:43:53]         Status    = CLEAN
-[14:43:53]     ✓ Station McDonald2:
-[14:43:53]         N obs     = 3,139
-[14:43:53]         RMS       = 0.0956 m
-[14:43:53]         Status    = CLEAN
-[14:43:53]     ✓ Station Haleakala:
-[14:43:53]         N obs     = 737
-[14:43:53]         RMS       = 0.1384 m
-[14:43:53]         Status    = CLEAN
-[14:43:53] 
-[14:43:53] ═══ Systematic Analysis Summary:
-[14:43:53]       Clean stations:  5/5
-[14:43:53]       Noisy stations:  0/5
-[14:43:53]       Overall status:  PASS
-[14:43:53] 
-[14:43:53] ═══ Generating Systematic Error Budget...
-[14:43:53] 
-[14:43:53] ═══ Systematic Error Budget Table:
-[14:43:53]     Source                              Magnitude (cm)     % Contribution 
-[14:43:53]     ----------------------------------------------------------------------
-[14:43:53]     Ephemeris modeling (INPOP19a)       1.50               50.0           
-[14:43:53]     Atmospheric delay modeling          0.50               16.7           
-[14:43:53]     Instrumental systematic             0.30               10.0           
-[14:43:53]     Retroreflector center-of-mass       0.20               6.7            
-[14:43:53]     Tidal modeling                      0.40               13.3           
-[14:43:53]     Thermal expansion                   0.10               3.3            
-[14:43:53]     Unexplained residual variance       0.00               0.0            
-[14:43:53]     ----------------------------------------------------------------------
-[14:43:53]     Total Budget                        3.00               100.0          
-[14:43:53]     Observed RMS                        9.48               -              
-[14:43:53] 
-[14:43:53] Results saved to results/outputs/step_008_systematic_error_analysis.json
-[14:43:53] ✓   Systematic Error Analysis Complete.
+[18:37:22] ═══ Starting Systematic Error Analysis...
+[18:37:22]     Loaded 26,207 observations from data/processed/INPOP19a_all_stations_residuals.csv
+[18:37:22] 
+[18:37:22]     Analyzing 5 stations for systematic errors...
+[18:37:22]     Total observations: 26,207
+[18:37:22]     Residual threshold for 'clean' status: 0.15 m
+[18:37:22] 
+[18:37:22]     ✓ Station APO:
+[18:37:22]         N obs     = 2,595
+[18:37:22]         RMS       = 0.0316 m
+[18:37:22]         Status    = CLEAN
+[18:37:22]     ✓ Station Grasse:
+[18:37:22]         N obs     = 19,390
+[18:37:22]         RMS       = 0.0987 m
+[18:37:22]         Status    = CLEAN
+[18:37:22]     ✓ Station Matera:
+[18:37:22]         N obs     = 346
+[18:37:22]         RMS       = 0.0619 m
+[18:37:22]         Status    = CLEAN
+[18:37:22]     ✓ Station McDonald2:
+[18:37:22]         N obs     = 3,139
+[18:37:22]         RMS       = 0.0956 m
+[18:37:22]         Status    = CLEAN
+[18:37:22]     ✓ Station Haleakala:
+[18:37:22]         N obs     = 737
+[18:37:22]         RMS       = 0.1384 m
+[18:37:22]         Status    = CLEAN
+[18:37:22] 
+[18:37:22] ═══ Systematic Analysis Summary:
+[18:37:22]       Clean stations:  5/5
+[18:37:22]       Noisy stations:  0/5
+[18:37:22]       Overall status:  PASS
+[18:37:22] 
+[18:37:22] ═══ Generating Data-Driven Systematic Error Budget...
+[18:37:22] 
+[18:37:22] ═══ Systematic Error Budget Table (DATA-DRIVEN):
+[18:37:22]     Source                                   Magnitude (cm)     % Contribution 
+[18:37:22]     ---------------------------------------------------------------------------
+[18:37:22]     Ephemeris modeling (cross-ephemeris scatter) 0.25               13.5           
+[18:37:22]     Atmospheric delay modeling               1.00               54.1           
+[18:37:22]     Instrumental systematic                  0.05               2.7            
+[18:37:22]     Tidal modeling                           0.02               1.1            
+[18:37:22]     Thermal expansion                        0.53               28.6           
+[18:37:22]     Unexplained residual variance            0.00               0.0            
+[18:37:22]     ---------------------------------------------------------------------------
+[18:37:22]     Total Budget (quadrature)                1.16               -              
+[18:37:22]     Total Budget (linear sum)                1.85               -              
+[18:37:22]     Observed RMS                             9.48               -              
+[18:37:22] 
+[18:37:22] Results saved to results/outputs/step_008_systematic_error_analysis.json
+[18:37:22] ✓   Systematic Error Analysis Complete.

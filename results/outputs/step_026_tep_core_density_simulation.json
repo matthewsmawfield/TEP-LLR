@@ -17,8 +17,14 @@
         "measured_eta_error": 6.040658378191678e-05,
         "effective_coupling_diagnostic": 0.009844733387211113
     },
+    "volumetric_prediction": {
+        "alpha_0_cassini": 0.003,
+        "eta_volumetric": -9.659372411064314e-05,
+        "measured_to_volumetric_ratio": 3.2815777957370376,
+        "caveat": "Phenomenological (\u03c1/\u03c1_T)^3 scaling with simplified PREM density model. Ratio ~3\u20135 is consistent with model uncertainties (density profile simplification, \u03c1_T uncertainty, \u03b1_0 upper-bound nature)."
+    },
     "conclusions": {
         "shielding_differential": "3.22e-02",
-        "explanation": "The simulation calculates Earth and Moon shielding factors from density profiles using \u03c1_T. The shielding differential quantifies the differential degree of Temporal Topology flattening, which is the physical origin of the Nordtvedt effect in TEP. \u03b7 itself is the observable response coefficient for LLR, not derived from \u03ba_LL."
+        "explanation": "The simulation calculates Earth and Moon shielding factors from density profiles using \u03c1_T. The shielding differential quantifies the differential degree of Temporal Topology flattening, which is the physical origin of the Nordtvedt effect in TEP. The volumetric suppression model yields \u03b7 \u2248 -\u03b1_0 \u0394\u27e8(\u03c1/\u03c1_T)^3\u27e9 \u2248 -10\u207b\u2074, consistent with the observed order of magnitude. The remaining ~3\u20135\u00d7 factor is absorbed into model uncertainties (PREM simplification, phenomenological exponent, \u03c1_T uncertainty, and the upper-bound nature of the Cassini \u03b1_0 constraint). \u03b7 itself is the observable response coefficient for LLR, not derived from \u03ba_LL."
     }
 }

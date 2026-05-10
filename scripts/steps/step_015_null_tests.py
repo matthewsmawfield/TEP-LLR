@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
 Step 015: Comprehensive Null Tests for TEP-LLR
+
+Tests for false positives by scanning non-synodic frequencies and checking
+that the primary TEP signal is not an artifact of uncontrolled systematics.
+Pre-whitening is applied using the elongation_rad phase basis to ensure the
+filter shares the same basis as the detection regression.
 """
 
 
@@ -71,6 +76,9 @@ def run_null_tests(
     exclude_synodic_window=0.08,
     exclude_bands=None,
 ):
+    # NOTE: exclude_bands does NOT remove frequencies from the actual test.
+    # All candidate_factors (except the synodic window) are tested regardless.
+    # exclude_bands only affects reporting metadata (frequencies_excluded_by_bands).
     # In Deep Scan mode, we scan all frequencies but label known systematic regions
     # Sidereal ~ 0.925 synodic, Anomalistic ~ 0.933 synodic
     # Annual ~ 0.08 synodic
@@ -88,12 +96,13 @@ def run_null_tests(
     candidate_factors = np.linspace(scan_min_factor, scan_max_factor, scan_points)
     
     # Exclude only the immediate synodic window to avoid self-nulling
+    excluded_by_synodic = [f for f in candidate_factors if abs(float(f) - 1.0) <= exclude_synodic_window]
     test_frequency_factors = sorted({
         float(f)
         for f in candidate_factors
         if abs(float(f) - 1.0) > exclude_synodic_window
     } | {primary_test_frequency_factor})
-    
+
     n_tests = len(test_frequency_factors)
 
     # Apply joint pre-whitening
@@ -143,7 +152,7 @@ def run_null_tests(
     # Worst case EXCLUDING known systematic regions
     non_systematic_results = [r for r in test_results if r["label"] == "Null Region"]
     worst_null_result = max(non_systematic_results, key=lambda r: r["snr"]) if non_systematic_results else primary_result
-    
+
     pass_null = bool(
         primary_result["snr"] < 5.0 and
         worst_null_result["snr"] < 5.0
@@ -161,6 +170,11 @@ def run_null_tests(
             for r in systematic_peaks:
                 print_status(f"    {r['label']} (f={r['frequency_factor']:.2f}×): SNR={r['snr']:.2f}σ", "INFO")
 
+    # Count exclusions by bands
+    excluded_by_bands = [f for f in candidate_factors
+                         if any(lo <= f <= hi for lo, hi in (exclude_bands or []))
+                         and f not in excluded_by_synodic]
+
     return {
         "correction_mode": correction_mode,
         "primary_test_frequency_factor": float(primary_test_frequency_factor),
@@ -168,7 +182,20 @@ def run_null_tests(
         "max_null_region_snr": float(worst_null_result["snr"]),
         "pass_null": pass_null,
         "systematic_peaks": [r for r in test_results if r["snr"] > 3.0],
-        "test_results": test_results
+        "test_results": test_results,
+        "scan_metadata": {
+            "scan_min_factor": float(scan_min_factor),
+            "scan_max_factor": float(scan_max_factor),
+            "total_candidate_frequencies": int(scan_points),
+            "frequencies_excluded_by_synodic_window": len(excluded_by_synodic),
+            "frequencies_excluded_by_bands": len(excluded_by_bands),
+            "total_frequencies_tested": int(n_tests),
+            "exclude_synodic_window": float(exclude_synodic_window),
+            "exclude_bands": [list(b) for b in (exclude_bands or [])],
+            "systematic_regions_defined": [(lo, hi, name) for lo, hi, name in systematic_regions],
+            "fdr_threshold": float(fdr_threshold),
+            "n_tests": int(n_tests)
+        }
     }
 
 if __name__ == "__main__":

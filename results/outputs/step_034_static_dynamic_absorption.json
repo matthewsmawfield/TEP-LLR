@@ -1,6 +1,4 @@
 {
-    "step_id": "step_034",
-    "status": "PASS",
     "simulation": {
         "n_obs": 26000,
         "eta_injected": -0.00031697982024903585,

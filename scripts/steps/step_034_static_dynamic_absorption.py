@@ -142,8 +142,6 @@ def run_absorption_comparison():
         print_status("CONCLUSION: Static solver absorbed the bulk of the signal.", "WARNING")
 
     results = {
-        "step_id": "step_034",
-        "status": "PASS",
         "simulation": {
             "n_obs": n_obs,
             "eta_injected": float(eta_base),
@@ -160,8 +158,6 @@ def run_absorption_comparison():
             "residual_rms_m": float(resid_std_dyn),
             "absorbed_power_fraction": float((np.std(obs_dynamic)**2 - resid_std_dyn**2) / np.std(S_dynamic)**2)
         },
-        "step_id": "step_034",
-        "status": "PASS",
         "comparison": {
             "efficiency_loss_to_dynamics": float(recovery_static - recovery_dyn),
             "residual_leakage": bool(resid_std_dyn > resid_std_static * 1.05)

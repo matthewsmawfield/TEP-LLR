@@ -53,6 +53,7 @@ def main():
         sep = sun.separation(moon).radian
         true_elongations = sep
     except Exception as e:
+        print_status(f"WARNING: True elongation computation failed: {e}. Dropping {len(df)} observations.", "WARNING")
         true_elongations = np.full(len(df), np.nan)
 
     df['true_elong_rad'] = true_elongations

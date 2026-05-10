@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Step 008: Systematic Error Analysis for TEP Nordtvedt Signal Detection
-Enhanced with comprehensive systematic error budget table (DATA-DRIVEN)
+Step 006: Systematic Error Analysis for TEP Nordtvedt Signal Detection
+Enhanced with comprehensive systematic error budget table
 """
 
 import sys
@@ -257,12 +257,12 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Step 008: Systematic Error Analysis with Error Budget")
+        description="Step 006: Systematic Error Analysis with Error Budget")
     args = parser.parse_args()
 
     log_dir = PROJECT_ROOT / "logs"
-    logger = TEPLogger("step_008", str(
-        log_dir / "step_008_systematic_error_analysis.log"))
+    logger = TEPLogger("step_006", str(
+        log_dir / "step_006_systematic_error_analysis.log"))
     set_step_logger(logger)
 
     print_status("Starting Systematic Error Analysis...", "TITLE")
@@ -283,7 +283,7 @@ if __name__ == "__main__":
                     for v in sys_results.values())
 
     results = {
-        "step_id": "step_008",
+        "step_id": "step_006",
         "systematics": sys_results,
         "error_budget": error_budget,
         "total_systematic_cm": total_systematic_cm,
@@ -294,5 +294,5 @@ if __name__ == "__main__":
     }
 
     logger.save_step_results(results, PROJECT_ROOT,
-                             "step_008_systematic_error_analysis")
+                             "step_006_systematic_error_analysis")
     print_status("Systematic Error Analysis Complete.", "SUCCESS")

@@ -366,7 +366,7 @@ def main():
             ],
             'formal_cooks_d_excision': cooks_d_results,
             'recommended_reporting': f'η = {cooks_d_results["eta_clean_ols"]:.2e} ± {cooks_d_results["eta_clean_se"]:.2e} (Leverage-Excised OLS)',
-            'key_finding': 'Cooks D excision converges OLS cleanly towards robust estimates while maintaining >8 sigma detection.'
+            'key_finding': 'Cooks D excision converges OLS cleanly towards robust estimates while maintaining ~5.7 sigma detection.'
         }
     }
 

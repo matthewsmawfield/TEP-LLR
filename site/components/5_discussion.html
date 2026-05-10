@@ -5,11 +5,13 @@
 
     <p>
         The full-sample OLS finding of a $\cos(\text{elongation})$ modulation in
-        INPOP19a LLR residuals (4.92$\sigma$ correlation; $\eta_{\rm OLS} = -3.17 \times
-        10^{-4} \pm 5.97 \times 10^{-5}$ (4.92$\sigma$), with the leverage-excised robust parameter of $\eta = -3.31
-        \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$), provides evidence for a violation of the Strong Equivalence
-        Principle. The Bayesian evidence is decisive: Savage-Dickey Bayes factor = $8.2 \times 10^{14}$,
-        BIC-based Bayes factor = 5937.
+        INPOP19a LLR residuals (Pearson correlation $r = -0.0304$, $4.93\sigma$;
+        $\eta_{\rm OLS} = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$, $5.25\sigma$),
+        with the leverage-excised robust parameter of $\eta = -3.31 \times 10^{-4}
+        \pm 5.84 \times 10^{-5}$ ($5.67\sigma$), provides evidence for a violation of
+        the Strong Equivalence Principle. The Bayesian evidence is decisive:
+        Savage-Dickey Bayes factor = $3.82 \times 10^{2}$, BIC-based Bayes factor =
+        $1.83 \times 10^{3}$.
     </p>
 
     <p>
@@ -56,9 +58,9 @@
         Frequency-Specific Null Testing (Step 015): The TEP
         framework predicts the Nordtvedt effect should appear at the synodic
         frequency (1×) and not at other frequency factors. The multi-frequency
-        null scan tested 44 non-synodic frequencies (0.4× to 3.2×) and found
+        null scan tested 55 non-synodic frequencies (0.4× to 3.2×) and found
         zero significant detections after multiple-testing correction (maximum
-        SNR = 0.60$\sigma$ at 0.5$\times$ synodic, versus 4.92$\sigma$ at 1$\times$ synodic). This frequency
+        SNR ≈ 0.00$\sigma$ at 0.60$\times$ synodic, versus 4.92$\sigma$ at 1$\times$ synodic). This frequency
         pattern — strong signal at the predicted frequency, null results
         elsewhere — is expected for a phase-locked physical effect, whereas
         broadband systematic artifacts would typically generate spurious power
@@ -88,10 +90,11 @@
         Robustness tests (detailed in Results section 4.6) suggest the finding
         is not an artifact of outliers or systematic errors. Outlier detection,
         bootstrap confidence intervals, permutation tests, cross-validation, and
-        holdout testing all support the finding. A systematic error budget
-        quantifying contributions from ephemeris modeling, atmospheric delays,
-        timing calibration, and tidal modeling yields a combined uncertainty of
-        2.0 cm, which does not correlate with synodic phase. The
+        holdout testing all support the finding. A data-driven systematic error
+        budget (Step 008) quantifying contributions from ephemeris modeling,
+        atmospheric delays, instrumental systematics, tidal modeling, and
+        thermal expansion yields a combined uncertainty of 1.16 cm, which does
+        not correlate with synodic phase. The
         station-by-station analysis shows that the two stations with sufficient
         data (APO and Grasse) both detect the signal in the expected direction,
         supporting a gravitational origin of the signal.
@@ -931,12 +934,12 @@
         The TEP framework reinterprets the AU increase as a direct tracking of
         the global cosmological evolution of the proper time field,
         $\dot{\phi}(t)$. This is not a "recession" of the Earth from the Sun in
-        the gravitational sense ($g_{\mu\nu}$), but an emergent metric scaling
-        of the matter metric ($\tilde{g}_{\mu\nu}$) relative to the background
-        geometry. The expansion represents the evolving relationship between
-        atomic measurement standards and the underlying gravitational potential
-        well. TEP thus identifies the "unexplained" meters per century as an
-        unassailable signature of the field’s macroscopic dynamics.
+        the gravitational sense ($g_{\mu\nu}$), but rather a consequence of the
+        evolving relationship between the matter metric ($\tilde{g}_{\mu\nu}$) and
+        the background geometry. The expansion represents a measurable change in
+        the relationship between atomic measurement standards and the underlying
+        gravitational potential well. TEP thus identifies the observed increase
+        in the AU as a signature of the field's macroscopic dynamics.
     </p>
 
     <h3>5.14 The Synodic Sampling Blind-Spot</h3>
@@ -1040,7 +1043,7 @@
         frequency, they are algebraically incapable of absorbing the power
         deposited in the $D \pm l'$ sidebands. The detection of residual power
         at 32.13 days ($D-l'$), a frequency that resides in a "geophysical quiet
-        space" (Step 034), constitutes an unassailable signature of dynamic
+        space" (Step 034), constitutes a distinctive signature of dynamic
         environmental coupling. Standard tidal or thermal mechanics cannot
         produce this specific non-linear sideband structure, effectively
         falsifying the static-GR baseline.
@@ -1086,15 +1089,15 @@
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:bayes_factor} K = \frac{P(D|H_1)}{P(D|H_0)} \approx 8.20 \times 10^{14} \end{equation}
+        \begin{equation} \label{eq:bayes_factor} K = \frac{P(D|H_1)}{P(D|H_0)} \approx 3.82 \times 10^{2} \end{equation}
     </div>
 
     <p>
         In the Jeffreys scale for the strength of evidence, $K > 100$ is
-        categorized as "decisive." This result of $K \approx 8.20 \times 10^{14}$ places the
-        TEP resolution beyond the threshold of statistical doubt. The LLR data
+        categorized as "decisive." This result of $K \approx 3.82 \times 10^{2}$ indicates
+        strong evidence against the null hypothesis. The LLR data
         itself, when viewed through the lens of Bayesian information theory,
-        decisively prefers a dynamical scalar field interpretation over the
+        strongly favours a dynamical scalar field interpretation over the
         ad-hoc accumulation of unmodeled geophysical systematics. The Temporal
         Equivalence Principle emerges not merely as a viable hypothesis, but as
         the most parsimonious and mathematically robust explanation for the

@@ -34,25 +34,27 @@ def parse_mini_file(filepath: Path, station_name: str) -> pd.DataFrame:
             try:
                 date_julian_year = float(parts[0])
                 residual_m = float(parts[1])
-                reflector = int(parts[2])
+                # Handle newer format (2018+) where reflector is concatenated
+                # with the following ID field, e.g. '5<timestamp...>'
+                reflector = int(parts[2][0])
                 timestamp = parts[3]
 
                 # Convert decimal year to Julian date using astropy
                 time = Time(date_julian_year, format='decimalyear')
 
-                # Extract uncertainty if available (index 6 in INPOP MINI)
-                # CRITICAL: If uncertainty is missing, we should either:
-                # 1. Use a data-driven estimate (e.g., RMS of residuals for that station/epoch)
-                # 2. Mark the observation as having unknown uncertainty and handle downstream
-                # Using an arbitrary default (e.g., 5cm) can bias the weighted regression
-                sigma_m = None  # Default: unknown
-                if len(parts) >= 7:
-                    try:
-                        sigma_mm = float(parts[6])
-                        # Enforce floor to prevent infinite weights in regression
-                        sigma_m = max(sigma_mm, SIGMA_UNCERTAINTY_FLOOR_MM) / 1000.0
-                    except ValueError:
-                        pass
+                # Do not extract uncertainty from parts[6].
+                # Empirical investigation across all five INPOP19a station files
+                # shows parts[6] values are 10^5–10^6 times larger than the
+                # residual RMS and do not represent measurement uncertainties:
+                #   APO:     mean ~ 20,700  (ratio_to_rms ~ 656,000x)
+                #   Grasse:  mean ~ 342,500 (ratio_to_rms ~ 3,194,000x)
+                #   Matera:  mean ~ 2,581   (ratio_to_rms ~ 40,800x)
+                #   McDonald2: mean ~ 22,859 (ratio_to_rms ~ 239,000x)
+                #   Haleakala: mean ~ 7,616 (ratio_to_rms ~ 55,000x)
+                # These values appear to be return-rate counts or other metadata.
+                # Using them as sigma_m would produce unphysical uncertainties.
+                # Fall back to the data-driven station-RMS estimate below.
+                sigma_m = None
 
                 data.append({
                     'date_julian': time.jd,

@@ -81,12 +81,10 @@ def run_bayesian_analysis(verbose=False):
     y = df_clean['residual_m'].values
     n = len(y)
 
-    # CRITICAL FIX: Do NOT use sigma_m as y_err - sigma_m values are unreliable
-    # (mean 224 m vs residual RMS 0.093 m, i.e., 2405x larger than actual noise)
-    # Use global residual RMS as the uncertainty for all observations
-    # This matches the approach in step_002_statistical_analysis.py (unweighted regression)
-    y_err = np.std(y)
-    y_err = np.full_like(y, y_err)
+    # Use the fixed per-observation sigma_m for the MCMC likelihood.
+    # sigma_m is now station-specific RMS estimated from the data itself
+    # (fixed in parse_inpop_mini.py; previously parts[6] was incorrectly interpreted).
+    y_err = df_clean['sigma_m'].values
 
     if verbose:
         print_status(f"[DATA] Dataset: N={n} observations", "INFO")
@@ -255,6 +253,38 @@ def run_bayesian_analysis(verbose=False):
     bayes_factor_sd = prior_density / \
         posterior_density_at_zero if posterior_density_at_zero > 0 else np.inf
 
+    # KDE Bandwidth Sensitivity Check
+    # Verify that the Savage-Dickey BF is robust to bandwidth choice.
+    # Test Scott (default), Silverman, narrow (0.5x), and wide (2.0x).
+    bf_sensitivity = {}
+    for bw_label, bw_method in [
+        ("scott_default", "scott"),
+        ("silverman", "silverman"),
+        ("narrow_0.5x", 0.5),
+        ("wide_2.0x", 2.0),
+    ]:
+        kde_test = gaussian_kde(eta_samples, bw_method=bw_method)
+        post_d_zero = kde_test.evaluate(0.0)[0]
+        bf_test = prior_density / post_d_zero if post_d_zero > 0 else np.inf
+        bf_sensitivity[bw_label] = float(bf_test)
+
+    bf_sd_values = list(bf_sensitivity.values())
+    bf_sd_min = min(bf_sd_values)
+    bf_sd_max = max(bf_sd_values)
+    bf_sd_range_ratio = bf_sd_max / bf_sd_min if bf_sd_min > 0 else np.inf
+
+    if verbose:
+        print_status("  [CALC] Savage-Dickey Bandwidth Sensitivity:", "CALC")
+        for label, val in bf_sensitivity.items():
+            print_status(f"  [CALC]    {label}: {val:.2e}", "CALC")
+        print_status(
+            f"  [CALC]    Range: {bf_sd_min:.2e} – {bf_sd_max:.2e} (ratio {bf_sd_range_ratio:.1f}x)",
+            "CALC")
+        if bf_sd_range_ratio < 10:
+            print_status("  [CALC]    Verdict: Robust to bandwidth choice", "SUCCESS")
+        else:
+            print_status("  [CALC]    Verdict: Sensitive to bandwidth choice", "WARNING")
+
     # Alternative: BIC approximation
     rss_1 = np.sum((y - (mean_eta * 13.0 * x + mean_b))**2)
     rss_0 = np.sum((y - np.mean(y))**2)
@@ -319,6 +349,13 @@ def run_bayesian_analysis(verbose=False):
         "credible_interval_68": ci_68,
         "bayes_factor_savage_dickey": float(bayes_factor_sd),
         "bayes_factor_bic": float(bayes_factor_bic),
+        "bayes_factor_sensitivity": {
+            "bandwidth_methods": bf_sensitivity,
+            "min": float(bf_sd_min),
+            "max": float(bf_sd_max),
+            "range_ratio": float(bf_sd_range_ratio),
+            "robust": bool(bf_sd_range_ratio < 10) if np.isfinite(bf_sd_range_ratio) else None
+        },
         "n_samples": n_effective,
         "gelman_rubin_eta": float(R_hat[0]) if 'R_hat' in locals() else None,
         "gelman_rubin_b": float(R_hat[1]) if 'R_hat' in locals() else None,

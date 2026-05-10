@@ -98,6 +98,6 @@
             "eta_clean_theilsen": -7.979044728702211e-05
         },
         "recommended_reporting": "\u03b7 = -3.31e-04 \u00b1 5.84e-05 (Leverage-Excised OLS)",
-        "key_finding": "Cooks D excision converges OLS cleanly towards robust estimates while maintaining >8 sigma detection."
+        "key_finding": "Cooks D excision converges OLS cleanly towards robust estimates while maintaining ~5.7 sigma detection."
     }
 }

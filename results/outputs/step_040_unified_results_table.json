@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "generated_at": "2026-05-10T14:45:20.012035",
+        "generated_at": "2026-05-10T18:40:01.148245",
         "step_id": "step_040",
         "purpose": "Consolidate all statistical measures with consistent reporting"
     },
@@ -25,9 +25,9 @@
             "status": "SECONDARY - inflated by leverage"
         },
         "bayesian_mcmc": {
-            "eta": -0.0003183460238613793,
-            "eta_error": 6.0554378532033026e-05,
-            "snr": 5.2571924867988775,
+            "eta": -0.0002873149107884381,
+            "eta_error": 6.605356721991532e-05,
+            "snr": 4.349725879782794,
             "n_obs": 25445,
             "method": "Ensemble MCMC (32 walkers, 3000 steps)",
             "source": "step_016_bayesian_analysis",
@@ -37,72 +37,72 @@
     "robust_estimands": {
         "note": "Robust estimators provide bounds on the true physical parameter.",
         "theil_sen": {
-            "eta": -0.000204,
+            "eta": -0.00020353793352847102,
             "eta_error": null,
             "method": "Median of pairwise slopes",
-            "source": "step_018_leverage_diagnostics",
+            "source": "step_017_leverage_diagnostics",
             "status": "ROBUST LOWER BOUND"
         },
         "precision_weighted": {
-            "eta": -0.00035,
-            "eta_error": 0.000113,
-            "snr": 3.11,
+            "eta": -0.00034981864695178333,
+            "eta_error": 0.00011266104266393777,
+            "snr": 3.1050542288630756,
             "method": "WLS with 1/\u03c3\u00b2 station weights",
             "source": "step_029_station_power_analysis",
             "status": "CROSS-STATION VALIDATION"
         }
     },
     "station_level_results": {
-        "note": "Individual station results. None achieve conventional statistical significance (SNR \u2265 3\u03c3) individually.",
+        "note": "Individual station results. 1 station(s) achieve conventional statistical significance (SNR \u2265 3\u03c3) individually.",
         "APO": {
-            "eta": -0.000239,
-            "eta_error": 0.00274,
-            "snr": 0.09,
+            "eta": -0.00023936773659735623,
+            "eta_error": 8.649295438592951e-05,
+            "snr": 2.77,
             "n_obs": 2595,
             "r_observed": -0.0543,
-            "p_observed": 0.00569,
+            "p_observed": 0.005689215694568386,
             "powered_at_3sigma": false,
-            "interpretation": "Consistent sign but underpowered for independent detection"
+            "interpretation": "powered (expected)"
         },
         "Grasse": {
-            "eta": -0.000539,
-            "eta_error": 0.0011,
-            "snr": 0.49,
+            "eta": -0.0005392816311042269,
+            "eta_error": 0.00010854817866786203,
+            "snr": 4.97,
             "n_obs": 19390,
             "r_observed": -0.0357,
-            "p_observed": 6.82e-07,
-            "powered_at_3sigma": false,
-            "interpretation": "Consistent sign but underpowered for independent detection"
-        },
-        "Matera": {
-            "eta": -1.31e-05,
-            "eta_error": 0.014,
-            "snr": 0.0,
-            "n_obs": 346,
-            "r_observed": -0.0008,
-            "p_observed": 0.988,
-            "powered_at_3sigma": false,
-            "interpretation": "Underpowered due to small sample size"
-        },
-        "McDonald2": {
-            "eta": -0.0005,
-            "eta_error": 0.00377,
-            "snr": 0.13,
-            "n_obs": 3139,
-            "r_observed": -0.0248,
-            "p_observed": 0.165,
-            "powered_at_3sigma": false,
-            "interpretation": "Phase-truncated sampling reduces leverage"
+            "p_observed": 6.817647813779734e-07,
+            "powered_at_3sigma": true,
+            "interpretation": "Powered independent detection"
         },
         "Haleakala": {
-            "eta": 0.00355,
-            "eta_error": 0.0105,
-            "snr": 0.34,
+            "eta": 0.003548250135483287,
+            "eta_error": 0.001445828732284868,
+            "snr": 2.45,
             "n_obs": 737,
             "r_observed": 0.0902,
-            "p_observed": 0.014,
+            "p_observed": 0.014353552103147618,
             "powered_at_3sigma": false,
-            "interpretation": "Opposite sign, consistent with early-era PMT noise"
+            "interpretation": "underpowered"
+        },
+        "Matera": {
+            "eta": -1.3129864840358415e-05,
+            "eta_error": 0.000868490603387379,
+            "snr": 0.02,
+            "n_obs": 346,
+            "r_observed": -0.0008,
+            "p_observed": 0.9879467828390442,
+            "powered_at_3sigma": false,
+            "interpretation": "underpowered"
+        },
+        "McDonald2": {
+            "eta": -0.0004997488047718066,
+            "eta_error": 0.0003598609143115201,
+            "snr": 1.39,
+            "n_obs": 3139,
+            "r_observed": -0.0248,
+            "p_observed": 0.16501416782658768,
+            "powered_at_3sigma": false,
+            "interpretation": "underpowered"
         }
     },
     "cross_validation": {
@@ -113,30 +113,30 @@
             "interpretation": "APO amplitude predicts Grasse residuals at 4.97\u03c3"
         },
         "precision_weighted_regression": {
-            "eta": -0.00035,
-            "eta_error": 0.000113,
-            "snr": 3.11,
+            "eta": -0.00034981864695178333,
+            "eta_error": 0.00011266104266393777,
+            "snr": 3.1050542288630756,
             "interpretation": "Detection persists when weighting by data quality not station count"
         }
     },
     "bayesian_evidence": {
-        "posterior_mean_eta": -0.0003183460238613793,
-        "posterior_std_eta": 6.0554378532033026e-05,
-        "bayes_factor_savage_dickey": 1.2376716708420296e+17,
-        "bayes_factor_bic": 5936.1094303192785,
+        "posterior_mean_eta": -0.0002873149107884381,
+        "posterior_std_eta": 6.605356721991532e-05,
+        "bayes_factor_savage_dickey": 381.7173184755571,
+        "bayes_factor_bic": 1831.462248177199,
         "credible_interval_95": [
-            -0.0004322970780244323,
-            -0.00020011357229274886
+            -0.0004202194051839394,
+            -0.0001595977393382827
         ],
         "source": "step_016_bayesian_analysis"
     },
     "effect_size_analysis": {
         "primary_eta": -0.00033112937239794814,
         "predicted_amplitude_mm": 4.304681841173326,
-        "residual_rms_mm": 95,
-        "effect_size_r_squared": 0.0009,
-        "variance_explained_percent": 0.09,
-        "interpretation": "Small effect size explaining 0.09% of variance, but statistically significant due to large N"
+        "residual_rms_mm": 94.8112925164825,
+        "effect_size_r_squared": 0.002053217258030734,
+        "variance_explained_percent": 0.2053217258030734,
+        "interpretation": "Small effect size but statistically significant due to large N"
     },
     "power_analysis_correction": {
         "stations": [
@@ -225,9 +225,9 @@
     },
     "significance_reconciliation": {
         "correlation_analysis": {
-            "r": -0.0304,
-            "p": 8.3e-07,
-            "snr_correlation": 4.93,
+            "r": -0.03044239216369888,
+            "p": 8.261051044061221e-07,
+            "snr_correlation": null,
             "n_obs": 26207,
             "method": "Pearson correlation"
         },
@@ -244,9 +244,9 @@
             "interpretation": "Robust estimator controlling for leverage points"
         },
         "bayesian": {
-            "eta": -0.0003183460238613793,
-            "eta_error": 6.0554378532033026e-05,
-            "snr": 5.2571924867988775,
+            "eta": -0.0002873149107884381,
+            "eta_error": 6.605356721991532e-05,
+            "snr": 4.349725879782794,
             "interpretation": "Consistent with leverage-excised OLS"
         },
         "primary_reported_snr": 5.673524766099877,

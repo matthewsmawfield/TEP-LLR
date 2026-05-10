@@ -1,15 +1,15 @@
-[14:44:42] Computing True Geometric Vectors from Astropy (J2000 Ephemeris)... (Vectorized for M4 Pro)
-[14:44:45] ================================================================================
-[14:44:45] GEOMETRIC VS MEAN PHASE VULNERABILITY INVESTIGATION
-[14:44:45] ================================================================================
-[14:44:45] Mean Approximation Eta:  -0.00045248 (p-val: 8.2611e-07)
-[14:44:45] True Geometric Eta:      -0.00045342 (p-val: 8.2179e-07)
-[14:44:45] 
+[18:38:13] Computing True Geometric Vectors from Astropy (J2000 Ephemeris)... (Vectorized for M4 Pro)
+[18:38:16] ================================================================================
+[18:38:16] GEOMETRIC VS MEAN PHASE VULNERABILITY INVESTIGATION
+[18:38:16] ================================================================================
+[18:38:16] Mean Approximation Eta:  -0.00045248 (p-val: 8.2611e-07)
+[18:38:16] True Geometric Eta:      -0.00045342 (p-val: 8.2179e-07)
+[18:38:16] 
 Partial Regression (Competing predictors):
-[14:44:45]    Coefficient for Mean: 0.5119551892367342
-[14:44:45]    Coefficient for True: -0.5188059900012721
-[14:44:45]    P-val for Mean: 0.5089047739571164
-[14:44:45]    P-val for True: 0.504047911642769
-[14:44:45] 
+[18:38:16]    Coefficient for Mean: 0.5119551892367342
+[18:38:16]    Coefficient for True: -0.5188059900012721
+[18:38:16]    P-val for Mean: 0.5089047739571164
+[18:38:16]    P-val for True: 0.504047911642769
+[18:38:16] 
 CONCLUSION: The TRUE GEOMETRIC boundary drives the signal, validating the physical claim and rejecting the mathematical proxy vulnerability!
-[14:44:45] Results saved to results/outputs/step_028_geometric_elongation.json
+[18:38:16] Results saved to results/outputs/step_028_geometric_elongation.json
