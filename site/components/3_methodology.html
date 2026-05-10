@@ -393,7 +393,7 @@
         for every regression. If $R_B > 1$, the formal statistical errors are 
         scaled upwards by $R_B$ to account for non-Gaussian noise tails and 
         unmodeled variance. This conservative policy ensures that the 14-sigma 
-        TEP detection is unassailable and accounts for the heteroscedasticity 
+        TEP detection is robust and accounts for the heteroscedasticity 
         of the 35-year dataset. All reported p-values are two-tailed and scaled 
         by the Birge-corrected variance.
     </p>
@@ -415,11 +415,13 @@
     <p>
         where $r_i$ is the residual, $D_i$ is the elongation, and $\sigma$ is
         the noise standard deviation. Uniform priors were adopted: $\eta \in
-        [-10^{-3}, +10^{-3}]$ and $\sigma \in [0.05, 0.15]$ m. The sampler used
-        32 walkers with 10,000 steps each (320,000 total samples). Convergence
-        was verified using the Gelman-Rubin statistic ($\hat{R} < 1.01$
-        required). The Savage-Dickey Bayes Factor was computed by comparing the
-        posterior density at $\eta = 0$ to the prior density at $\eta = 0$:
+        [-0.01, +0.01]$ and $b \in [-0.1, +0.1]$ m, enforced by returning
+        $-\infty$ log-probability outside these bounds. The sampler used
+        32 walkers with 3,000 steps each (1,000 burn-in, 64,000 post-burnin
+        samples). Convergence was verified using the Gelman-Rubin statistic
+        ($\hat{R} < 1.01$ required). The Savage-Dickey Bayes Factor was computed
+        by comparing the posterior density at $\eta = 0$ to the prior density
+        at $\eta = 0$:
     </p>
 
     <div class="equation">
@@ -584,19 +586,24 @@
 
     <h4>3.4.5 Systematic Error Budget</h4>
     <p>
-        A systematic error budget is constructed to quantify potential biases
-        from known sources. Ephemeris modeling errors are estimated at the 1–2
-        cm level for INPOP19a. Atmospheric delay modeling uncertainties
-        contribute at the 0.5–1 cm level. Station timing calibration drift adds
-        uncertainty at the 0.2–0.5 cm level. Tidal modeling errors contribute at
-        the 0.3–0.8 cm level.
+        A data-driven systematic error budget is constructed directly from the
+        INPOP19a residuals and upstream pipeline outputs (Step 008).  Ephemeris
+        modeling uncertainty is derived from cross-ephemeris scatter
+        (INPOP19a vs DE430): 0.25 cm.  Atmospheric delay uncertainty is
+        estimated from seasonal (monthly) variation in detrended residuals:
+        1.00 cm.  Instrumental systematic uncertainty is derived from
+        station-to-station mean scatter after TEP removal: 0.05 cm.  Tidal
+        modeling uncertainty is bounded by the cos(2*elongation) harmonic
+        amplitude in the residuals: 0.02 cm.  Thermal expansion uncertainty
+        is estimated from the diurnal (24-hour) sinusoidal amplitude in
+        detrended residuals: 0.53 cm.
     </p>
 
     <p>
-        The combined systematic uncertainty of 2.0 cm exceeds the detected
-        signal amplitude of 0.89 cm in absolute terms. However, systematic
-        errors are not expected to produce a phase-correlated modulation at the
-        synodic frequency.
+        The combined systematic uncertainty of 1.16 cm (quadrature sum) exceeds
+        the detected signal amplitude of 0.59–0.89 cm in absolute terms.
+        However, systematic errors are not expected to produce a
+        phase-correlated modulation at the synodic frequency.
     </p>
 
     <p>
@@ -713,23 +720,22 @@
         Earth-Moon-Sun geometry at sub-millimeter scales.
     </p>
 
-    <h4>3.4.8 Systematic Error Budget Analysis (Step 006)</h4>
+    <h4>3.4.8 Systematic Error Budget Analysis (Step 008)</h4>
     
     <p>
-        To quantify contributions from various error sources and establish a comprehensive error budget, Step 006 performs a systematic error analysis. The analysis quantifies contributions from:
+        To quantify contributions from various error sources and establish a comprehensive error budget, Step 008 performs a data-driven systematic error analysis directly on the INPOP19a residuals. Each component is computed from an observable proxy in the data, replacing the previous hardcoded literature estimates:
     </p>
     
     <ul>
-        <li>Ephemeris modeling (INPOP19a): ~1.5 cm uncertainty from lunar and planetary ephemeris fitting</li>
-        <li>Atmospheric delay modeling: ~0.5 cm from tropospheric delay correction uncertainties</li>
-        <li>Instrumental systematic: ~0.3 cm from detector calibration and timing electronics</li>
-        <li>Retroreflector center-of-mass: ~0.2 cm uncertainty in reflector position</li>
-        <li>Tidal modeling: ~0.4 cm from solid Earth and ocean tide model uncertainties</li>
-        <li>Thermal expansion: ~0.1 cm from telescope and retroreflector thermal expansion</li>
+        <li>Ephemeris modeling (cross-ephemeris scatter): 0.25 cm, derived from the standard deviation of eta across INPOP19a and DE430</li>
+        <li>Atmospheric delay modeling: 1.00 cm, derived from seasonal (monthly) scatter of detrended residuals</li>
+        <li>Instrumental systematic: 0.05 cm, derived from powered-station mean scatter after TEP removal</li>
+        <li>Tidal modeling: 0.02 cm, bounded by the cos(2*elongation) harmonic amplitude in the residuals</li>
+        <li>Thermal expansion: 0.53 cm, derived from the diurnal (24-hour) sinusoidal amplitude in detrended residuals</li>
     </ul>
     
     <p>
-        The systematic error budget table quantifies each component's contribution as a percentage of total variance, allowing for rigorous assessment of whether the TEP signal exceeds known systematic uncertainties. The analysis also identifies unexplained residual variance not accounted for by known systematics.
+        The data-driven systematic error budget quantifies each component's contribution as a percentage of total variance, allowing for rigorous assessment of whether the TEP signal exceeds known systematic uncertainties. The analysis also identifies unexplained residual variance not accounted for by known systematics.
     </p>
 
     <h4>3.4.9 Temporal Autocorrelation Analysis (Step 004)</h4>
@@ -764,7 +770,7 @@
     </ul>
     
     <p>
-        This threshold is applied consistently across steps 002, 003, 005, 016, 024, 025, and 052, ensuring standardization throughout the analysis pipeline.
+        This threshold is applied consistently across steps 002, 003, 005, 006b, 016, 024, 025, and 052, ensuring standardization throughout the analysis pipeline. Step 006b additionally performs a threshold sweep (3σ–10σ) to verify the DE430 signal is not an artifact of a single cutoff choice.
     </p>
 
     <h4>3.4.11 Autocorrelation-Aware Error Estimation</h4>

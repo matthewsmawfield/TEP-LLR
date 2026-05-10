@@ -70,6 +70,7 @@ def main():
             # Store results
             solar_alt_map[station_name] = altaz.alt.degree
         except Exception as e:
+            print_status(f"WARNING: Solar altitude computation failed for {station_name}: {e}. Dropping {len(jds)} observations.", "WARNING")
             solar_alt_map[station_name] = np.full(len(jds), np.nan)
 
     # Map back to dataframe

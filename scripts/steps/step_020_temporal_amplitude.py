@@ -52,9 +52,10 @@ def sliding_window_eta(df: pd.DataFrame, window_years: int = 5,
         coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
         eta = coeffs[0] / ETA_SCALE_FACTOR
 
-        # Error estimate
+        # Error estimate (unbiased MSE: divide by n-2, not n)
         resid_fit = residuals - X @ coeffs
-        mse = np.mean(resid_fit**2)
+        n_win = len(resid_fit)
+        mse = np.sum(resid_fit**2) / (n_win - 2) if n_win > 2 else np.nan
         cos_centered = cos_elong - np.mean(cos_elong)
         var_A = mse / np.sum(cos_centered ** 2) if np.sum(cos_centered**2) > 0 else np.nan
         eta_error = np.sqrt(var_A) / ETA_SCALE_FACTOR if np.isfinite(var_A) and var_A > 0 else np.nan

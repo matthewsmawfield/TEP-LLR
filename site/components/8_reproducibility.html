@@ -86,7 +86,7 @@ TEP-LLR/
     
     <ul>
         <li>Step 004: Temporal autocorrelation analysis with Durbin-Watson statistic and significance testing</li>
-        <li>Step 006: Comprehensive systematic error budget table quantifying contributions from ephemeris, atmospheric, instrumental, and other error sources</li>
+        <li>Step 008: Data-driven systematic error budget computed directly from residuals (cross-ephemeris scatter, seasonal variation, station means, tidal harmonics, diurnal amplitude)</li>
         <li>Outlier detection: Enhanced documentation of 6σ MAD threshold with methodological justification and statistical rationale</li>
     </ul>
     
@@ -131,6 +131,12 @@ TEP-LLR/
                 <td><code>step_004_detection_analysis_advanced.py</code></td>
                 <td>Advanced robust analysis with 20 complementary methods (bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, holdout)</td>
                 <td>~5.4s</td>
+            </tr>
+            <tr>
+                <td>006b</td>
+                <td><code>step_006b_de430_outlier_robustness.py</code></td>
+                <td>DE430 outlier robustness: threshold sweep (3σ–10σ MAD), phase-bin chi-square, bootstrap CI, permutation test</td>
+                <td>~15s</td>
             </tr>
             <tr>
                 <td>005-043</td>
@@ -289,7 +295,7 @@ python scripts/steps/run_all_steps.py
             <li>Key result: Pearson correlation $r = -0.0304$ ($p = 8.6 \times 10^{-7}$), 4.92$\sigma$</li>
             <li>Key result: Leverage-excised $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (SNR = 5.67$\sigma$)</li>
             <li>Key result: Full-sample OLS $\eta = -3.17 \times 10^{-4}$ (for comparison)</li>
-            <li>Key result: MCMC estimate $\eta = -3.18 \times 10^{-4} \pm 6.06 \times 10^{-5}$ (SNR = 5.26$\sigma$)</li>
+            <li>Key result: MCMC estimate $\eta = -2.87 \times 10^{-4} \pm 6.61 \times 10^{-5}$ (SNR = 4.35$\sigma$)</li>
             <li>Key result: AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (SNR = 3.71$\sigma$)</li>
             <li>Key result: AR(1) parameter $\rho = 0.43$ (significant temporal autocorrelation)</li>
             <li>Key result: Precision-weighted regression $\eta = -3.50 \times 10^{-4} \pm 1.13 \times 10^{-4}$ (SNR = 3.11$\sigma$)</li>

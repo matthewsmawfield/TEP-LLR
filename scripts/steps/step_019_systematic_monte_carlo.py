@@ -286,12 +286,42 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
         step_002_data = json.load(f)
     final_stat_error = step_002_data.get('eta_err_mcmc', 0.001)
     
-    # Total uncertainty: systematic dominates for LLR at this precision level
-    # The systematic error floor from literature is ~5e-4 in eta (from ~5-10mm LLR floor / 13m scale)
-    literature_systematic_floor_eta = 5e-4  # From Murphy 2013, Williams et al. 2014
-    effective_systematic = max(combined_systematic_error, literature_systematic_floor_eta)
+    # Load data-driven systematic error budget from step_008 (preferred)
+    # Falls back to step_006 for backward compatibility.
+    step_008_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_008_systematic_error_analysis.json'
+    step_006_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_006_systematic_error_analysis.json'
+    data_driven_systematic_cm = None
+    data_driven_source = None
+    if step_008_path.exists():
+        with open(step_008_path, 'r') as f:
+            step_008_data = json.load(f)
+        data_driven_systematic_cm = step_008_data.get('total_systematic_cm')
+        data_driven_source = 'step_008_systematic_error_analysis.json'
+    elif step_006_path.exists():
+        with open(step_006_path, 'r') as f:
+            step_006_data = json.load(f)
+        data_driven_systematic_cm = step_006_data.get('total_systematic_cm')
+        data_driven_source = 'step_006_systematic_error_analysis.json'
     
-    # Total uncertainty is dominated by systematic floor for LLR
+    if data_driven_systematic_cm is not None:
+        # Convert cm -> m -> eta (using ETA_SCALE_FACTOR = 13.0 m per unit eta)
+        data_driven_systematic_eta = (data_driven_systematic_cm / 100.0) / ETA_SCALE_FACTOR
+        effective_systematic = float(np.sqrt(combined_systematic_error**2 + data_driven_systematic_eta**2))
+        floor_note = (
+            f"Data-driven systematic budget from {data_driven_source} "
+            f"({data_driven_systematic_cm:.2f} cm → {data_driven_systematic_eta:.2e} in eta) "
+            f"combined in quadrature with MC-derived systematic ({combined_systematic_error:.2e})."
+        )
+        literature_floor_applied = False
+    else:
+        # No upstream budget available: use MC-derived systematic alone
+        effective_systematic = combined_systematic_error
+        floor_note = (
+            "No data-driven systematic budget found (step_006/008 output missing). "
+            "Using MC-derived systematic error alone."
+        )
+        literature_floor_applied = False
+    
     total_uncertainty_corrected = np.sqrt(final_stat_error**2 + effective_systematic**2)
     
     results['error_budget'] = {
@@ -302,8 +332,10 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
         'signal_to_total_ratio': float(abs(eta_baseline) / total_uncertainty_corrected),
         'systematic_to_statistical_ratio': float(effective_systematic / final_stat_error),
         'dominant_error_source': 'systematic' if effective_systematic > final_stat_error else 'statistical',
-        'literature_systematic_floor_applied': True,
-        'systematic_floor_source': 'Murphy 2013; Williams et al. 2014 LLR error budgets'
+        'literature_systematic_floor_applied': literature_floor_applied,
+        'data_driven_systematic_source': data_driven_source,
+        'data_driven_systematic_cm': data_driven_systematic_cm,
+        'floor_note': floor_note
     }
 
     results['conclusion'] = {
@@ -313,7 +345,7 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
         'total_uncertainty': float(total_uncertainty_corrected),
         'assessment': 'systematic_errors_dominant' if effective_systematic > final_stat_error else 'statistical_errors_dominant',
         'recommendation': f"Report: η = {eta_baseline:.2e} ± {final_stat_error:.2e} (stat) ± {effective_systematic:.2e} (sys)",
-        'note': 'Systematic error floor from LLR literature (~5mm) dominates over statistical precision.'
+        'note': floor_note
     }
 
     return results
@@ -375,7 +407,10 @@ def main():
 
     print_status("═══ INTERPRETATION", "INFO")
     print_status(f"    Systematic errors dominate over statistical precision at LLR precision levels", "INFO")
-    print_status(f"    Literature systematic floor (~5mm) applied from Murphy 2013; Williams et al. 2014", "INFO")
+    if budget.get('data_driven_systematic_source'):
+        print_status(f"    Data-driven systematic budget: {budget['data_driven_systematic_cm']:.2f} cm from {budget['data_driven_systematic_source']}", "INFO")
+    else:
+        print_status(f"    No data-driven systematic budget found; using MC-derived systematic alone", "INFO")
     print_status(f"    Recommendation: Report both statistical and systematic uncertainties", "INFO")
 
     print_status("═══ REPRODUCIBILITY", "INFO")

@@ -28,10 +28,18 @@ from typing import Dict, Tuple
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
 def compute_leverage(X: np.ndarray) -> np.ndarray:
-    """Compute hat matrix diagonal (leverage values)."""
+    """Compute hat matrix diagonal (leverage values) in O(n) memory.
+
+    CRITICAL FIX: The original implementation materialised the full n×n hat
+    matrix (26000² ≈ 676M entries ≈ 5.4 GB), which crashes on memory-constrained
+    systems. Leverage h_ii = (X (X'X)^(-1) X')_ii can be computed as the row-wise
+    sum of (X @ (X'X)^(-1)) * X without forming the full n×n matrix.
+    """
     X = np.column_stack([np.ones(len(X)), X])  # Add intercept
-    H = X @ np.linalg.inv(X.T @ X) @ X.T
-    return np.diag(H)
+    XtX_inv = np.linalg.inv(X.T @ X)
+    # h_ii = sum_j [X_ij * (XtX_inv @ X.T)_ji] = sum_j [(X @ XtX_inv)_ij * X_ij]
+    leverage = np.sum((X @ XtX_inv) * X, axis=1)
+    return leverage
 
 def theil_sen_regression(x: np.ndarray, y: np.ndarray, sample_size: int = 10000) -> Tuple[float, float]:
     """Compute Theil-Sen robust regression (median of pairwise slopes).
@@ -366,7 +374,7 @@ def main():
             ],
             'formal_cooks_d_excision': cooks_d_results,
             'recommended_reporting': f'η = {cooks_d_results["eta_clean_ols"]:.2e} ± {cooks_d_results["eta_clean_se"]:.2e} (Leverage-Excised OLS)',
-            'key_finding': 'Cooks D excision converges OLS cleanly towards robust estimates while maintaining >8 sigma detection.'
+            'key_finding': 'Cooks D excision converges OLS cleanly towards robust estimates while maintaining ~5.7 sigma detection.'
         }
     }
 

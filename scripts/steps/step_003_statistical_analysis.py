@@ -152,17 +152,14 @@ def run_statistical_analysis(verbose=False):
     y = df_clean['residual_m'].values
     n = len(y)
     
-    # CRITICAL FIX: Do NOT use sigma_m as y_err - sigma_m values are unreliable
-    # (mean 218 m vs residual RMS 0.095 m, i.e., 2300x larger than actual noise)
-    # Use global residual RMS as the uncertainty for all observations
-    # This matches the unweighted OLS approach used below
-    y_err = np.std(y)
-    y_err = np.full_like(y, y_err)
-    
-    # OLS Regression WITHOUT weights (sigma_m values are unreliable)
-    # The sigma_m column contains values that are not actual measurement uncertainties
-    # (mean 218 m vs residual RMS 0.095 m), which would bias weighted regression
-    # Using unweighted regression for consistency with simple regression
+    # Use the fixed per-observation sigma_m for the MCMC likelihood.
+    # sigma_m is now station-specific RMS estimated from the data itself
+    # (fixed in parse_inpop_mini.py; previously parts[6] was incorrectly interpreted).
+    y_err = df_clean['sigma_m'].values
+
+    # OLS Regression WITHOUT weights — kept unweighted so the Birge ratio
+    # remains a meaningful diagnostic of model fit. Using station-specific
+    # weights would drive the Birge ratio to approximately 1.0 by construction.
     reg = linear_regression(y, x, weights=None)
     eta_ols = reg['eta']
     eta_err_ols = reg['eta_error']
@@ -182,6 +179,7 @@ def run_statistical_analysis(verbose=False):
     n_steps = TEP_CONFIG.get("MCMC_STANDARD_STEPS", 3000)
     burn_in = TEP_CONFIG.get("MCMC_BURN_IN", 1000)
     initial = np.array([eta_ols, reg['intercept']])
+    np.random.seed(42)
     pos = initial + 1e-6 * np.random.randn(n_walkers, 2)
 
     print_status(">>> Running Bayesian MCMC analysis", "PROCESS")
@@ -195,7 +193,7 @@ def run_statistical_analysis(verbose=False):
     sampler.run_mcmc(pos, n_steps, progress=False)
 
     # Convergence diagnostics for emcee
-    # For emcee, we use autocorrelation time as the primary convergence diagnostic
+    # Autocorrelation time serves as the primary convergence diagnostic
     try:
         tau = sampler.get_autocorr_time()
         tau_mean = np.mean(tau)
@@ -244,7 +242,7 @@ def run_statistical_analysis(verbose=False):
     print_status(f"    Convergence: {convergence_status}", "PASS" if convergence_status == "CONVERGED" else "WARNING")
     print_status(f"    Temporal autocorrelation: ρ = {ar1_gls_results['rho']:.4f} (DW = {ar1_gls_results['durbin_watson']:.3f})", "INFO")
     print_status(f"    Autocorrelation impact: Error inflation factor = {eta_err_mcmc / ar1_gls_results['eta_error']:.2f}x if significant", "INFO" if abs(ar1_gls_results['rho']) > 0.1 else "INFO")
-    print_status(f"    Limitations: Uses unweighted regression due to unreliable sigma_m values", "INFO")
+    print_status(f"    Limitations: OLS is unweighted (Birge ratio diagnostic); MCMC uses fixed station-specific sigma_m", "INFO")
 
     results = {
         "eta_ols": float(eta_ols),

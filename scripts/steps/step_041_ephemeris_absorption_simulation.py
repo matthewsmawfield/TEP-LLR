@@ -191,9 +191,10 @@ def main():
         injected_eta = step_017_data['conclusion']['formal_cooks_d_excision']['eta_clean_ols']
         print_status(f"Loaded measured η from step_017: {injected_eta:.4e}", "INFO")
     else:
-        # Fallback to hardcoded value if JSON not available
-        injected_eta = -3.31e-4
-        print_status("Using fallback η value: -3.31e-4", "WARNING")
+        raise FileNotFoundError(
+            f"Step 017 results not found: {step_017_path}. "
+            "Run pipeline step 017 first or pass --injected-eta."
+        )
     
     results = {
         'step_id': 'step_041',

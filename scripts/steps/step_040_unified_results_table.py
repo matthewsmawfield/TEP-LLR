@@ -145,47 +145,85 @@ def create_unified_results_table():
     step_017 = load_json('results/outputs/step_017_leverage_diagnostics.json')
     step_002 = load_json('results/outputs/step_002_statistical_analysis.json')
     step_016 = load_json('results/outputs/step_016_bayesian_analysis.json')
+    step_010 = load_json('results/outputs/step_010_systematic_control_analysis.json')
     
     # Extract leverage-excised results from step_017
-    if step_017 and 'conclusion' in step_017 and 'formal_cooks_d_excision' in step_017['conclusion']:
-        cooks_d = step_017['conclusion']['formal_cooks_d_excision']
-        leverage_eta = cooks_d['eta_clean_ols']
-        leverage_error = cooks_d['eta_clean_se']
-        leverage_snr = cooks_d['eta_clean_snr']
-        leverage_n = cooks_d['n_clean']
-    else:
-        # Fallback to hardcoded values if JSON not available
-        leverage_eta = -3.31e-4
-        leverage_error = 5.84e-5
-        leverage_snr = 5.67
-        leverage_n = 25177
-    
+    if not (step_017 and 'conclusion' in step_017 and 'formal_cooks_d_excision' in step_017['conclusion']):
+        raise RuntimeError("step_017_leverage_diagnostics.json missing required keys. Run upstream steps first.")
+    cooks_d = step_017['conclusion']['formal_cooks_d_excision']
+    leverage_eta = cooks_d['eta_clean_ols']
+    leverage_error = cooks_d['eta_clean_se']
+    leverage_snr = cooks_d['eta_clean_snr']
+    leverage_n = cooks_d['n_clean']
+
     # Extract full-sample OLS from step_002
-    if step_002 and 'eta_ols' in step_002:
-        full_eta = step_002['eta_ols']
-        full_error = step_002['eta_ols_error']
-        full_n = step_002.get('regression_metrics', {}).get('n_obs', 25445)
-        full_snr = abs(full_eta) / full_error if full_error > 0 else 0.32
-    else:
-        # Fallback to hardcoded values if JSON not available
-        full_eta = -3.17e-4
-        full_error = 9.80e-4
-        full_snr = 0.32
-        full_n = 25445
-    
+    if not (step_002 and 'eta_ols' in step_002 and 'regression_metrics' in step_002):
+        raise RuntimeError("step_002_statistical_analysis.json missing required keys. Run upstream steps first.")
+    full_eta = step_002['eta_ols']
+    full_error = step_002['eta_ols_error']
+    full_n = step_002['regression_metrics']['n_obs']
+    if full_error <= 0:
+        raise RuntimeError("step_002 reported non-positive OLS error. Upstream step may be corrupted.")
+    full_snr = abs(full_eta) / full_error
+
     # Extract Bayesian MCMC from step_016
-    if step_016 and 'bayesian_summary' in step_016:
-        bayes_eta = step_016['bayesian_summary']['posterior_mean_eta']
-        bayes_error = step_016['bayesian_summary']['posterior_std_eta']
-        bayes_n = step_002.get('regression_metrics', {}).get('n_obs', 25445) if step_002 else 25445
-        bayes_snr = abs(bayes_eta) / bayes_error if bayes_error > 0 else 5.26
+    if not (step_016 and 'bayesian_summary' in step_016):
+        raise RuntimeError("step_016_bayesian_analysis.json missing required keys. Run upstream steps first.")
+    bayes_eta = step_016['bayesian_summary']['posterior_mean_eta']
+    bayes_error = step_016['bayesian_summary']['posterior_std_eta']
+    bayes_n = step_002['regression_metrics']['n_obs']
+    if bayes_error <= 0:
+        raise RuntimeError("step_016 reported non-positive posterior std. Upstream step may be corrupted.")
+    bayes_snr = abs(bayes_eta) / bayes_error
+
+    # Load station-level results from step_029 (authoritative per-station analysis)
+    step_029 = load_json('results/outputs/step_029_station_power_analysis.json')
+    step_004 = load_json('results/outputs/step_004_detection_analysis_advanced.json')
+
+    if not (step_029 and 'per_station_power' in step_029):
+        raise RuntimeError("step_029_station_power_analysis.json missing required keys. Run upstream steps first.")
+
+    station_rows = step_029['per_station_power']['stations']
+    station_level = {}
+    powered_count = 0
+    for s in station_rows:
+        name = s['station']
+        snr = s['snr_observed']
+        if snr >= 3.0:
+            powered_count += 1
+        station_level[name] = {
+            'eta': s['eta_obs'],
+            'eta_error': s['eta_err_obs'],
+            'snr': snr,
+            'n_obs': s['n_obs'],
+            'r_observed': s['r_observed'],
+            'p_observed': s['p_observed'],
+            'powered_at_3sigma': snr >= 3.0,
+            'interpretation': 'Powered independent detection' if snr >= 3.0 else s.get('detection_verdict', 'Underpowered')
+        }
+
+    # Load precision-weighted from step_029 summary
+    pw_eta = step_029['summary']['precision_weighted_eta']
+    pw_snr = step_029['summary']['precision_weighted_snr']
+    pw_error = abs(pw_eta) / pw_snr if pw_snr > 0 else None
+
+    # Compute global residual RMS dynamically from per-station RMS
+    per_station_rms = step_029['precision_weighted_regression']['per_station_rms']
+    station_n_map = {s['station']: s['n_obs'] for s in station_rows}
+    weighted_rms_sq = sum(
+        station_n_map.get(station, 0) * (rms_m ** 2)
+        for station, rms_m in per_station_rms.items()
+    )
+    total_n_rms = sum(station_n_map.get(station, 0) for station in per_station_rms.keys())
+    global_rms_mm = float(np.sqrt(weighted_rms_sq / total_n_rms) * 1000) if total_n_rms > 0 else None
+
+    # Load Theil-Sen from step_017 (robust lower bound)
+    step_017_full = load_json('results/outputs/step_017_leverage_diagnostics.json')
+    if step_017_full and 'summary' in step_017_full:
+        theilsen_eta = step_017_full['summary'].get('full_sample_eta_theilsen', None)
     else:
-        # Fallback to hardcoded values if JSON not available
-        bayes_eta = -3.16e-4
-        bayes_error = 6.01e-5
-        bayes_snr = 5.26
-        bayes_n = 25445
-    
+        theilsen_eta = None
+
     results = {
         'metadata': {
             'generated_at': datetime.now().isoformat(),
@@ -225,118 +263,61 @@ def create_unified_results_table():
         'robust_estimands': {
             'note': 'Robust estimators provide bounds on the true physical parameter.',
             'theil_sen': {
-                'eta': -2.04e-4,  # From step_018 conclusion true_eta_range
-                'eta_error': None,  # Theil-Sen uses different error estimation
+                'eta': theilsen_eta,
+                'eta_error': None,
                 'method': 'Median of pairwise slopes',
-                'source': 'step_018_leverage_diagnostics',
+                'source': 'step_017_leverage_diagnostics',
                 'status': 'ROBUST LOWER BOUND'
             },
             'precision_weighted': {
-                'eta': -3.50e-4,
-                'eta_error': 1.13e-4,
-                'snr': 3.11,
+                'eta': pw_eta,
+                'eta_error': pw_error,
+                'snr': pw_snr,
                 'method': 'WLS with 1/σ² station weights',
                 'source': 'step_029_station_power_analysis',
                 'status': 'CROSS-STATION VALIDATION'
             }
         },
         'station_level_results': {
-            'note': 'Individual station results. None achieve conventional statistical significance (SNR ≥ 3σ) individually.',
-            'APO': {
-                'eta': -2.39e-4,
-                'eta_error': 2.74e-3,
-                'snr': 0.09,
-                'n_obs': 2595,
-                'r_observed': -0.0543,
-                'p_observed': 5.69e-3,
-                'powered_at_3sigma': False,
-                'interpretation': 'Consistent sign but underpowered for independent detection'
-            },
-            'Grasse': {
-                'eta': -5.39e-4,
-                'eta_error': 1.10e-3,
-                'snr': 0.49,
-                'n_obs': 19390,
-                'r_observed': -0.0357,
-                'p_observed': 6.82e-7,
-                'powered_at_3sigma': False,
-                'interpretation': 'Consistent sign but underpowered for independent detection'
-            },
-            'Matera': {
-                'eta': -1.31e-5,
-                'eta_error': 1.40e-2,
-                'snr': 0.0,
-                'n_obs': 346,
-                'r_observed': -0.0008,
-                'p_observed': 0.988,
-                'powered_at_3sigma': False,
-                'interpretation': 'Underpowered due to small sample size'
-            },
-            'McDonald2': {
-                'eta': -5.00e-4,
-                'eta_error': 3.77e-3,
-                'snr': 0.13,
-                'n_obs': 3139,
-                'r_observed': -0.0248,
-                'p_observed': 0.165,
-                'powered_at_3sigma': False,
-                'interpretation': 'Phase-truncated sampling reduces leverage'
-            },
-            'Haleakala': {
-                'eta': 3.55e-3,
-                'eta_error': 1.05e-2,
-                'snr': 0.34,
-                'n_obs': 737,
-                'r_observed': 0.0902,
-                'p_observed': 0.014,
-                'powered_at_3sigma': False,
-                'interpretation': 'Opposite sign, consistent with early-era PMT noise'
-            }
+            'note': f'Individual station results. {powered_count} station(s) achieve conventional statistical significance (SNR ≥ 3σ) individually.',
+            **station_level
         },
         'cross_validation': {
             'de430': reconcile_de430_results(),
             'cross_station_prediction': {
-                'apo_to_grasse_r': 0.0357,
-                'apo_to_grasse_p': 6.82e-7,
-                'interpretation': 'APO amplitude predicts Grasse residuals at 4.97σ'
+                'apo_to_grasse_r': step_029['summary'].get('cross_station_r', 0.0357),
+                'apo_to_grasse_p': step_029['summary'].get('cross_station_p', 6.82e-7),
+                'interpretation': f'APO amplitude predicts Grasse residuals at {station_level.get("Grasse", {}).get("snr", 0):.2f}σ'
             },
             'precision_weighted_regression': {
-                'eta': -3.50e-4,
-                'eta_error': 1.13e-4,
-                'snr': 3.11,
+                'eta': pw_eta,
+                'eta_error': pw_error,
+                'snr': pw_snr,
                 'interpretation': 'Detection persists when weighting by data quality not station count'
             }
         },
         'bayesian_evidence': reconcile_bayesian_results(),
         'effect_size_analysis': {
             'primary_eta': leverage_eta,
-            'predicted_amplitude_mm': 13 * abs(leverage_eta) * 1000,  # Convert to mm
-            'residual_rms_mm': 95,  # 9.5 cm = 95 mm
-            'effect_size_r_squared': 0.0009,  # From manuscript
-            'variance_explained_percent': 0.09,
-            'interpretation': 'Small effect size explaining 0.09% of variance, but statistically significant due to large N'
+            'predicted_amplitude_mm': 13 * abs(leverage_eta) * 1000,
+            'residual_rms_mm': global_rms_mm,
+            'effect_size_r_squared': calculate_effect_size_r_squared(leverage_eta, 13 * abs(leverage_eta) * 100),
+            'variance_explained_percent': calculate_effect_size_r_squared(leverage_eta, 13 * abs(leverage_eta) * 100) * 100,
+            'interpretation': 'Small effect size but statistically significant due to large N'
         },
-        'power_analysis_correction': address_station_power_contradiction() or {
-            'original_claim': 'No stations meet 3σ powered-detection threshold',
-            'step_029_flags': {
-                'n_powered_flagged': 2,  # APO and Grasse flagged as powered
-                'n_actually_powered': 0,  # None have SNR ≥ 3σ
-                'contradiction': 'Step_029 flags APO and Grasse as "powered" despite SNR < 3σ'
-            },
-            'corrected_interpretation': 'No individual station achieves conventional statistical significance (SNR ≥ 3σ). Detection relies on combined analysis with N = 25,177 observations.'
-        },
+        'power_analysis_correction': address_station_power_contradiction(),
         'significance_reconciliation': {
             'correlation_analysis': {
-                'r': -0.0304,
-                'p': 8.3e-7,
-                'snr_correlation': 4.93,  # From correlation t-test
-                'n_obs': 26207,
+                'r': step_010.get('control_results', {}).get('r_original', None) if step_010 else None,
+                'p': step_010.get('control_results', {}).get('p_original', None) if step_010 else None,
+                'snr_correlation': step_004.get('bootstrap', {}).get('snr', None) if step_004 else None,
+                'n_obs': step_004.get('n_observations', None) if step_004 else None,
                 'method': 'Pearson correlation'
             },
             'ols_regression': {
                 'eta': full_eta,
                 'eta_error': full_error,
-                'snr_ols': full_snr,  # Birge-scaled
+                'snr_ols': full_snr,
                 'interpretation': 'Inflated by heavy-tailed 1980s PMT variance'
             },
             'leverage_excised': {
@@ -351,7 +332,7 @@ def create_unified_results_table():
                 'snr': bayes_snr,
                 'interpretation': 'Consistent with leverage-excised OLS'
             },
-            'primary_reported_snr': leverage_snr,  # Leverage-excised OLS
+            'primary_reported_snr': leverage_snr,
             'rationale': 'Leverage-excised OLS is primary as it balances robustness with power'
         }
     }

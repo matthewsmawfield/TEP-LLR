@@ -1,24 +1,36 @@
 {
     "step_id": "step_016",
     "bayesian_summary": {
-        "posterior_mean_eta": -0.0003183460238613793,
-        "posterior_std_eta": 6.0554378532033026e-05,
-        "posterior_mean_b": -0.0010444128188344666,
-        "posterior_std_b": 0.0004070206702100756,
+        "posterior_mean_eta": -0.0002873149107884381,
+        "posterior_std_eta": 6.605356721991532e-05,
+        "posterior_mean_b": -0.00042380986408334473,
+        "posterior_std_b": 0.000477546261141443,
         "credible_interval_95": [
-            -0.0004322970780244323,
-            -0.00020011357229274886
+            -0.0004202194051839394,
+            -0.0001595977393382827
         ],
         "credible_interval_68": [
-            -0.00037919359923828903,
-            -0.000258158949735104
+            -0.000352780257963766,
+            -0.00022128252270834362
         ],
-        "bayes_factor_savage_dickey": 1.2376716708420296e+17,
-        "bayes_factor_bic": 5936.1094303192785,
+        "bayes_factor_savage_dickey": 381.7173184755571,
+        "bayes_factor_bic": 1831.462248177199,
+        "bayes_factor_sensitivity": {
+            "bandwidth_methods": {
+                "scott_default": 381.7173184755571,
+                "silverman": 253.12094530726606,
+                "narrow_0.5x": 13.818686755012852,
+                "wide_2.0x": 0.12301296720702676
+            },
+            "min": 0.12301296720702676,
+            "max": 381.7173184755571,
+            "range_ratio": 3103.065694148646,
+            "robust": false
+        },
         "n_samples": 3200,
-        "gelman_rubin_eta": 1.0022127809770136,
-        "gelman_rubin_b": 0.9998354681547906,
-        "mean_acceptance_fraction": 0.71775,
+        "gelman_rubin_eta": 0.9995962497871856,
+        "gelman_rubin_b": 1.005258065389066,
+        "mean_acceptance_fraction": 0.7151458333333334,
         "outlier_cleaning": {
             "method": "6\u03c3 MAD (detect_outliers_sigma)",
             "sigma_threshold": 6.0,

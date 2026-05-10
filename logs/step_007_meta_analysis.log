@@ -1,17 +1,17 @@
-[14:43:53] ═══ Meta-Analysis of INPOP19a and DE430 Results
-[14:43:53] ═══ ================================================================================
-[14:43:53]     INPOP19a (from step_002): η = -3.170e-04 ± 6.041e-05 (5.25σ)
-[14:43:53]     DE430 (from step_005): η = -7.028e-04 ± 1.180e-04 (5.96σ)
-[14:43:53]     Sign consistency: True
-[14:43:53]     INPOP19a weight: 0.968 (baseline: 35.5 years)
-[14:43:53]     DE430 weight:   0.032 (baseline: 4.5 years)
-[14:43:53]     Meta-Analysis Results:
-[14:43:53]       Combined η (statistical only): -3.294e-04 ± 5.859e-05 (5.62σ)
-[14:43:53]       Systematic uncertainty: 3.858e-04
-[14:43:53]       Combined η (total uncertainty): -3.294e-04 ± 3.902e-04 (0.84σ)
-[14:43:53]       Sign-weighted η: -3.294e-04 ± 5.859e-05 (5.62σ)
-[14:43:53] ✓   Meta-Analysis Complete
-[14:43:53]     Primary result: η = -3.294e-04 ± 3.902e-04 (0.84σ)
-[14:43:53]     Sign-weighted: η = -3.294e-04 ± 5.859e-05 (5.62σ)
-[14:43:53] Results saved to results/outputs/step_007_meta_analysis.json
-[14:43:53] ✓   Step 007 Complete
+[18:37:22] ═══ Meta-Analysis of INPOP19a and DE430 Results
+[18:37:22] ═══ ================================================================================
+[18:37:22]     INPOP19a (from step_002): η = -3.170e-04 ± 6.041e-05 (5.25σ)
+[18:37:22]     DE430 (from step_005): η = -7.028e-04 ± 1.180e-04 (5.96σ)
+[18:37:22]     Sign consistency: True
+[18:37:22]     INPOP19a weight: 0.968 (baseline: 35.5 years)
+[18:37:22]     DE430 weight:   0.032 (baseline: 4.5 years)
+[18:37:22]     Meta-Analysis Results:
+[18:37:22]       Combined η (statistical only): -3.294e-04 ± 5.859e-05 (5.62σ)
+[18:37:22]       Systematic uncertainty: 3.858e-04
+[18:37:22]       Combined η (total uncertainty): -3.294e-04 ± 3.902e-04 (0.84σ)
+[18:37:22]       Sign-weighted η: -3.294e-04 ± 5.859e-05 (5.62σ)
+[18:37:22] ✓   Meta-Analysis Complete
+[18:37:22]     Primary result: η = -3.294e-04 ± 3.902e-04 (0.84σ)
+[18:37:22]     Sign-weighted: η = -3.294e-04 ± 5.859e-05 (5.62σ)
+[18:37:22] Results saved to results/outputs/step_007_meta_analysis.json
+[18:37:22] ✓   Step 007 Complete

@@ -86,7 +86,7 @@ def main() -> None:
         "step_002_de430_preprocessing.py",
         # 003 — Primary statistical analysis: Pearson r, OLS regression,
         #        differential (new moon vs full moon) analysis.  Produces the
-        #        headline 7.9σ result.
+        #        primary detection result (SNR ~4.3σ MCMC, ~5.25σ OLS).
         "step_003_statistical_analysis.py",
         # 004 — Advanced multi-method detection: bootstrap, permutation,
         #        Theil-Sen, leverage, outlier detection, station-by-station,
@@ -104,6 +104,11 @@ def main() -> None:
         #        ephemeris consistency (both INPOP19a and cleaned DE430 are
         #        significant at >7σ).
         "step_006_multi_ephemeris_comparison.py",
+        # 006b — DE430 outlier robustness: threshold sweep (3σ–10σ MAD),
+        #         phase-bin chi-square, bootstrap CI, permutation test.
+        #         Verifies the DE430 signal is not an artefact of a single
+        #         outlier cutoff.
+        "step_006b_de430_outlier_robustness.py",
         # 007 — Meta-analysis of ephemeris results: Bayesian combination of
         #        INPOP19a and DE430 with baseline-weighted uncertainties and
         #        systematic error quantification. Provides methodological
@@ -140,7 +145,7 @@ def main() -> None:
         #        Initialised from fresh OLS estimate to ensure Gelman-Rubin
         #        convergence diagnostics are a genuine test of mixing
         #        (not biased by a hardcoded starting position).
-        #        Savage-Dickey Bayes Factor B = 1.8×10¹¹ (Decisive evidence).
+        #        Savage-Dickey Bayes Factor B ≈ 3.8×10² (Strong evidence);
         "step_016_bayesian_analysis.py",
         # 017 — Leverage diagnostics: Cook's distance, hat-matrix, DFFITS.
         #        Identifies 5,016 high-leverage points (19.1%) whose presence

@@ -104,31 +104,31 @@ def robust_regression(y: np.ndarray, X: np.ndarray, weights: np.ndarray = None,
         # (RᵀR)⁻¹ = R⁻¹ (R⁻ᵀ)
         R_inv = linalg.inv(R)
         cov_raw = (R_inv @ R_inv.T)
-        errors_raw = np.sqrt(np.diag(cov_raw))
-        
+        errors_formal = np.sqrt(np.diag(cov_raw))
+
         # Scale by sqrt(MSE) to get standard errors (CRITICAL FIX)
         # Standard formula: error = sqrt(diag((X'X)^-1)) * sqrt(MSE)
         chi2_red = rss / dof
-        mse = chi2_red  # Since we're using standardized residuals
-        errors_raw = errors_raw * np.sqrt(mse)
-        
+        mse_unbiased = chi2_red  # Since we're using standardized residuals
+        errors_ols = errors_formal * np.sqrt(mse_unbiased)
+
         # Birge Scaling (only scale up if chi2_red > 1)
         birge_ratio = np.sqrt(chi2_red)
         scaling_factor = max(1.0, birge_ratio) if scale_errors_by_birge else 1.0
-        
-        errors = errors_raw * scaling_factor
-        cov_scaled = cov_raw * (mse * scaling_factor**2)
+
+        errors_birge = errors_ols * scaling_factor
+        cov_scaled = cov_raw * (mse_unbiased * scaling_factor**2)
         
         return {
             'coefficients': beta,
-            'errors': errors,
+            'errors': errors_birge,
             'chi2_red': chi2_red,
             'birge_ratio': birge_ratio,
             'condition_number': cond,
             'n_obs': n,
             'dof': dof,
             'rss': rss,
-            'mse': chi2_red,
+            'mse': mse_unbiased,
             'cov': cov_scaled
         }
     except (linalg.LinAlgError, ValueError):

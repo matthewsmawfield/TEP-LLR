@@ -1,27 +1,27 @@
-[14:45:01] ═══ Starting Step 030: Hardware Epoch Consistency Analysis...
-[14:45:01] ═══ ═══ Starting Step 030: Hardware Epoch Consistency Analysis...
-[14:45:01]     ═══ STEP PURPOSE: Test whether temporal χ²/dof variation reflects instrumental artifacts or genuine gravitational signal
-[14:45:01]     ═══ METHOD: Per-hardware-epoch η fits, expected χ² under heteroscedastic noise, amplitude-RMS correlation, sign-consistency audit
-[14:45:01]     ═══ DATA SUMMARY
-[14:45:01]         Dataset: N = 26,207 observations
-[14:45:01]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
-[14:45:01]         Global η from step_002: -3.16979820e-04
-[14:45:01]     ═══ ANALYSIS TRACE
-[14:45:01]     ═══ RESULTS SUMMARY
-[14:45:01]         Epochs analyzed: 5
-[14:45:01]         Epochs with negative η: 5/5
-[14:45:01]         All powered epochs negative: True
-[14:45:01]         χ²/dof observed: 4.32
-[14:45:01]         χ²/dof expected median: 0.84
-[14:45:01]         χ² percentile in expected distribution: 100%
-[14:45:01]         Temporal χ² status: EXCESS_VARIANCE_BUT_SIGN_CONSISTENT
-[14:45:01]     ═══ INTERPRETATION
-[14:45:01]         Sign consistency across independent hardware epochs rules out instrumental systematics
-[14:45:01]         χ² percentile 100% indicates epoch-varying noise, not sign-reversing artifacts
-[14:45:01]         Limitations: Epoch boundaries are approximate; actual hardware transitions may differ
-[14:45:01]     ═══ REPRODUCIBILITY
-[14:45:01]         Output file: results/outputs/step_030_hardware_epoch_analysis.json
-[14:45:01]         Epoch definitions: Grasse (3 epochs), APO (2 epochs)
-[14:45:01]         Random seed: 42 (for χ² simulation)
-[14:45:01] ✓   Results saved to results/outputs/step_030_hardware_epoch_analysis.json
-[14:45:01] ✓   Temporal chi2 status: EXCESS_VARIANCE_BUT_SIGN_CONSISTENT
+[18:38:40] ═══ Starting Step 030: Hardware Epoch Consistency Analysis...
+[18:38:40] ═══ ═══ Starting Step 030: Hardware Epoch Consistency Analysis...
+[18:38:40]     ═══ STEP PURPOSE: Test whether temporal χ²/dof variation reflects instrumental artifacts or genuine gravitational signal
+[18:38:40]     ═══ METHOD: Per-hardware-epoch η fits, expected χ² under heteroscedastic noise, amplitude-RMS correlation, sign-consistency audit
+[18:38:40]     ═══ DATA SUMMARY
+[18:38:40]         Dataset: N = 26,207 observations
+[18:38:40]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+[18:38:40]         Global η from step_002: -3.16979820e-04
+[18:38:40]     ═══ ANALYSIS TRACE
+[18:38:40]     ═══ RESULTS SUMMARY
+[18:38:40]         Epochs analyzed: 5
+[18:38:40]         Epochs with negative η: 5/5
+[18:38:40]         All powered epochs negative: True
+[18:38:40]         χ²/dof observed: 4.32
+[18:38:40]         χ²/dof expected median: 0.84
+[18:38:40]         χ² percentile in expected distribution: 100%
+[18:38:40]         Temporal χ² status: EXCESS_VARIANCE_BUT_SIGN_CONSISTENT
+[18:38:40]     ═══ INTERPRETATION
+[18:38:40]         Sign consistency across independent hardware epochs rules out instrumental systematics
+[18:38:40]         χ² percentile 100% indicates epoch-varying noise, not sign-reversing artifacts
+[18:38:40]         Limitations: Epoch boundaries are approximate; actual hardware transitions may differ
+[18:38:40]     ═══ REPRODUCIBILITY
+[18:38:40]         Output file: results/outputs/step_030_hardware_epoch_analysis.json
+[18:38:40]         Epoch definitions: Grasse (3 epochs), APO (2 epochs)
+[18:38:40]         Random seed: 42 (for χ² simulation)
+[18:38:40] ✓   Results saved to results/outputs/step_030_hardware_epoch_analysis.json
+[18:38:40] ✓   Temporal chi2 status: EXCESS_VARIANCE_BUT_SIGN_CONSISTENT

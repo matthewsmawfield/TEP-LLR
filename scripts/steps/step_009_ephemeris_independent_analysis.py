@@ -25,7 +25,7 @@ def run_differential_analysis(df, verbose=False):
     
     print_status("═══ DATA SUMMARY", "INFO")
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
-    print_status(f"    Data source: INPOP19a_all_stations_residuals_corrected.csv", "DATA")
+    print_status(f"    Data source: INPOP19a_all_stations_residuals.csv", "DATA")
     
     # Perform new moon vs full moon differential
     df['cos_elong'] = np.cos(df['elongation_rad'])
@@ -54,7 +54,7 @@ def run_differential_analysis(df, verbose=False):
     
     print_status("═══ REPRODUCIBILITY", "INFO")
     print_status(f"    Output file: results/outputs/step_009_ephemeris_independent_analysis.json", "INFO")
-    print_status(f"    Data source: INPOP19a_all_stations_residuals_corrected.csv", "INFO")
+    print_status(f"    Data source: INPOP19a_all_stations_residuals.csv", "INFO")
 
     return {
         "eta": float(reg['eta']),
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     print_status("Starting Ephemeris-Independent Analysis...", "TITLE")
 
     input_path = PROJECT_ROOT / \
-        'data/processed/INPOP19a_all_stations_residuals_corrected.csv'
+        'data/processed/INPOP19a_all_stations_residuals.csv'
     if not input_path.exists():
         print_status(f"Input file not found: {input_path}", "ERROR")
         sys.exit(1)

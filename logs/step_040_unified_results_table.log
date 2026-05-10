@@ -1,5 +1,5 @@
-[14:45:20] ═══ Step 040: Unified Results Table with Consistent Statistical Measures
-[14:45:20] Results saved to results/outputs/step_040_unified_results_table.json
-[14:45:20]     Markdown table saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_040_unified_results_table.md
-[14:45:20]     Interpretation: Small effect size explaining 0.09% of variance, but statistically significant due to large N
-[14:45:20] ✓   Step 040 completed successfully
+[18:40:01] ═══ Step 040: Unified Results Table with Consistent Statistical Measures
+[18:40:01] Results saved to results/outputs/step_040_unified_results_table.json
+[18:40:01]     Markdown table saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_040_unified_results_table.md
+[18:40:01]     Interpretation: Small effect size but statistically significant due to large N
+[18:40:01] ✓   Step 040 completed successfully

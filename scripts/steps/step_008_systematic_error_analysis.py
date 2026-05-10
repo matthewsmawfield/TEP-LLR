@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Step 006: Systematic Error Analysis for TEP Nordtvedt Signal Detection
-Enhanced with comprehensive systematic error budget table
+Step 008: Systematic Error Analysis for TEP Nordtvedt Signal Detection
+Enhanced with comprehensive systematic error budget table (DATA-DRIVEN)
 """
 
 import sys
@@ -62,91 +62,198 @@ def analyze_systematics(df, verbose=False, logger=None):
 def generate_systematic_error_budget(df, systematics, verbose=False, logger=None):
     """
     Generate comprehensive systematic error budget table
-    Quantifies contributions from various error sources
+    Quantifies contributions from various error sources using DATA-DRIVEN
+    estimates computed directly from the residuals and upstream pipeline
+    outputs.  Replaces the previous hardcoded literature values.
     """
     print_status("", "INFO")
-    print_status("Generating Systematic Error Budget...", "TITLE")
+    print_status("Generating Data-Driven Systematic Error Budget...", "TITLE")
     print_status("", "INFO")
 
-    # Calculate global statistics
+    import json
+    from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+
     global_rms = df['residual_m'].std()
     global_mean = df['residual_m'].mean()
     n_total = len(df)
 
-    # Error budget components (quantitative estimates based on LLR literature)
+    # ------------------------------------------------------------------
+    # Detrend residuals: remove the best-fit TEP cos(elongation) signal
+    # so that the remaining variance isolates systematic sources.
+    # ------------------------------------------------------------------
+    cos_elong = np.cos(df['elongation_rad'].values)
+    residuals = df['residual_m'].values
+    X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
+    coeffs_tep, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    detrended = residuals - coeffs_tep[0] * cos_elong  # m
+    eta_fit = coeffs_tep[0] / ETA_SCALE_FACTOR
+
+    # ------------------------------------------------------------------
+    # 1. Ephemeris modeling uncertainty
+    #    Estimated from cross-ephemeris scatter in eta (Step 006 output).
+    #    With only two ephemerides available, we take half the absolute
+    #    difference as a conservative upper bound.
+    # ------------------------------------------------------------------
+    ephem_json = PROJECT_ROOT / 'results/outputs/step_006_multi_ephemeris_comparison.json'
+    ephem_uncertainty_cm = None
+    n_ephem = 0
+    if ephem_json.exists():
+        with open(ephem_json, 'r') as f:
+            ephem_data = json.load(f)
+        etas = [v['eta'] for v in ephem_data.get('comparisons', {}).values() if 'eta' in v]
+        n_ephem = len(etas)
+        if n_ephem >= 2:
+            ephem_eta_std = float(np.std(etas))
+            ephem_uncertainty_cm = ephem_eta_std * ETA_SCALE_FACTOR * 100.0
+        elif n_ephem == 1:
+            ephem_uncertainty_cm = abs(etas[0]) * ETA_SCALE_FACTOR * 100.0 * 0.5
+        else:
+            raise RuntimeError("step_006_multi_ephemeris_comparison.json contains no ephemeris eta values; cannot compute data-driven ephemeris uncertainty.")
+    else:
+        raise FileNotFoundError(
+            f"Required upstream data not found: {ephem_json}. "
+            "Run step_006_multi_ephemeris_comparison.py first."
+        )
+
+    # ------------------------------------------------------------------
+    # 2. Atmospheric delay modeling uncertainty
+    #    Estimated from seasonal (monthly) variation in detrended residuals.
+    #    Tropospheric delay has a strong annual cycle; the scatter of monthly
+    #    means quantifies the atmospheric systematic amplitude.
+    # ------------------------------------------------------------------
+    df_temp = df.copy()
+    df_temp['detrended'] = detrended
+    # Julian day 2451545.0 = 2000-01-01 noon; derive month crudely
+    df_temp['month'] = (np.floor((df_temp['date_julian'] - 2451545.0) % 365.25 / 30.44).astype(int) % 12) + 1
+    monthly_means = df_temp.groupby('month')['detrended'].mean()
+    atmos_uncertainty_cm = float(monthly_means.std() * 100.0)
+
+    # ------------------------------------------------------------------
+    # 3. Instrumental systematic uncertainty
+    #    Estimated from station-to-station mean scatter after TEP removal.
+    #    Different hardware configurations (Nd:glass/PMT, Nd:YAG/SPAD,
+    #    C-SPAD) produce different residual biases; the RMS of station
+    #    means captures the instrumental floor.
+    # ------------------------------------------------------------------
+    station_means = df_temp.groupby('station')['detrended'].mean()
+    # Exclude underpowered stations (Matera, Haleakala) from the floor
+    # because their means are noise-dominated.
+    powered_stations = [s for s in station_means.index
+                        if systematics.get(s, {}).get('n_obs', 0) >= 1000]
+    if len(powered_stations) >= 2:
+        inst_uncertainty_cm = float(station_means[powered_stations].std() * 100.0)
+    else:
+        inst_uncertainty_cm = float(station_means.std() * 100.0)
+
+    # ------------------------------------------------------------------
+    # 4. Tidal modeling uncertainty
+    #    Estimated from the amplitude of the cos(2*elongation) harmonic
+    #    in the raw residuals.  Solid-Earth and ocean tides produce
+    #    perturbations at twice the synodic frequency; their amplitude
+    #    directly bounds the tidal model error.
+    # ------------------------------------------------------------------
+    cos_2elong = np.cos(2.0 * df['elongation_rad'].values)
+    X_tidal = np.column_stack([cos_2elong, np.ones(len(cos_2elong))])
+    tidal_coeffs, _, _, _ = np.linalg.lstsq(X_tidal, residuals, rcond=None)
+    tidal_uncertainty_cm = float(abs(tidal_coeffs[0]) * 100.0)
+
+    # ------------------------------------------------------------------
+    # 5. Thermal expansion uncertainty
+    #    Estimated from the diurnal (24-hour) sinusoidal amplitude in
+    #    detrended residuals.  Telescope and mount thermal expansion
+    #    varies with local solar heating.
+    # ------------------------------------------------------------------
+    # Hour angle from fractional Julian day (0 = noon UT, 0.5 = midnight)
+    hour_frac = ((df['date_julian'].values - 0.5) % 1.0) * 24.0  # hours from midnight
+    omega = 2.0 * np.pi / 24.0
+    X_thermal = np.column_stack([np.cos(omega * hour_frac),
+                                  np.sin(omega * hour_frac),
+                                  np.ones(len(hour_frac))])
+    thermal_coeffs, _, _, _ = np.linalg.lstsq(X_thermal, detrended, rcond=None)
+    thermal_amplitude_m = np.sqrt(thermal_coeffs[0]**2 + thermal_coeffs[1]**2)
+    thermal_uncertainty_cm = float(thermal_amplitude_m * 100.0)
+
+    # ------------------------------------------------------------------
+    # Assemble budget
+    # ------------------------------------------------------------------
     error_budget = {
         "ephemeris_modeling": {
-            "source": "Ephemeris modeling (INPOP19a)",
-            "magnitude_cm": 1.5,  # ~1.5 cm from INPOP19a orbit determination
-            "description": "Uncertainty in lunar and planetary ephemeris fitting",
-            "reference": "Fienga et al. 2019"
+            "source": "Ephemeris modeling (cross-ephemeris scatter)",
+            "magnitude_cm": round(ephem_uncertainty_cm, 2),
+            "description": "Uncertainty in lunar and planetary ephemeris fitting, derived from scatter of eta across INPOP19a and DE430",
+            "reference": f"Data-driven from {n_ephem} ephemerides (step_006_multi_ephemeris_comparison)",
+            "method": "std(eta_ephem) * 13.0 * 100",
+            "data_driven": True
         },
         "atmospheric_delay": {
             "source": "Atmospheric delay modeling",
-            "magnitude_cm": 0.5,  # ~0.5 cm typical for modern corrections
-            "description": "Tropospheric delay correction uncertainties",
-            "reference": "Degnan 1993"
+            "magnitude_cm": round(atmos_uncertainty_cm, 2),
+            "description": "Tropospheric delay correction uncertainties, derived from seasonal (monthly) scatter of detrended residuals",
+            "reference": "Data-driven from monthly mean residual variation",
+            "method": "std(monthly_means(detrended)) * 100",
+            "data_driven": True
         },
         "instrumental": {
             "source": "Instrumental systematic",
-            "magnitude_cm": 0.3,  # ~0.3 cm for modern SPAD detectors
-            "description": "Detector calibration and timing electronics",
-            "reference": "Murphy et al. 2014"
-        },
-        "center_of_mass": {
-            "source": "Retroreflector center-of-mass",
-            "magnitude_cm": 0.2,  # ~0.2 cm uncertainty in reflector position
-            "description": "Uncertainty in retroreflector array center-of-mass position",
-            "reference": "Murphy et al. 2010"
+            "magnitude_cm": round(inst_uncertainty_cm, 2),
+            "description": "Detector calibration and timing electronics, derived from station mean scatter after TEP removal",
+            "reference": "Data-driven from powered-station mean residual variation",
+            "method": "std(station_means(detrended)) * 100",
+            "data_driven": True
         },
         "tidal_modeling": {
             "source": "Tidal modeling",
-            "magnitude_cm": 0.4,  # ~0.4 cm from solid Earth and ocean tides
-            "description": "Solid Earth and ocean tide model uncertainties",
-            "reference": "Williams et al. 2013"
+            "magnitude_cm": round(tidal_uncertainty_cm, 2),
+            "description": "Solid Earth and ocean tide model uncertainties, derived from cos(2*elongation) harmonic amplitude",
+            "reference": "Data-driven from 2nd-synodic-harmonic residual amplitude",
+            "method": "abs(coeff(cos(2*elongation))) * 100",
+            "data_driven": True
         },
         "thermal_expansion": {
             "source": "Thermal expansion",
-            "magnitude_cm": 0.1,  # ~0.1 cm from telescope thermal effects
-            "description": "Telescope and retroreflector thermal expansion",
-            "reference": "Murphy 2012"
+            "magnitude_cm": round(thermal_uncertainty_cm, 2),
+            "description": "Telescope and retroreflector thermal expansion, derived from diurnal (24-hr) sinusoidal amplitude in detrended residuals",
+            "reference": "Data-driven from diurnal residual variation",
+            "method": "sqrt(A_cos^2 + A_sin^2) * 100 for 24-hr sinusoid",
+            "data_driven": True
         }
     }
 
-    # Calculate contributions as percentages of total RMS
     total_budget_cm = sum(v["magnitude_cm"] for v in error_budget.values())
     for key in error_budget:
-        error_budget[key]["percentage"] = (error_budget[key]["magnitude_cm"] / total_budget_cm) * 100
-        error_budget[key]["variance_contribution"] = (error_budget[key]["magnitude_cm"] / 100.0) ** 2  # Convert to meters
+        error_budget[key]["percentage"] = round((error_budget[key]["magnitude_cm"] / total_budget_cm) * 100, 1)
+        error_budget[key]["variance_contribution"] = (error_budget[key]["magnitude_cm"] / 100.0) ** 2
 
-    # Add observed residual RMS
-    observed_variance = (global_rms / 100.0) ** 2  # Convert cm to m
+    observed_variance = (global_rms / 100.0) ** 2
     budget_variance = sum(v["variance_contribution"] for v in error_budget.values())
-    unexplained_variance = max(0, observed_variance - budget_variance)
-    unexplained_rms_cm = np.sqrt(unexplained_variance) * 100 if unexplained_variance > 0 else 0
+    unexplained_variance = max(0.0, observed_variance - budget_variance)
+    unexplained_rms_cm = float(np.sqrt(unexplained_variance) * 100) if unexplained_variance > 0 else 0.0
 
     error_budget["unexplained"] = {
         "source": "Unexplained residual variance",
-        "magnitude_cm": unexplained_rms_cm,
+        "magnitude_cm": round(unexplained_rms_cm, 2),
         "description": "Residual variance not accounted for by known systematics",
-        "percentage": (unexplained_rms_cm / total_budget_cm) * 100 if total_budget_cm > 0 else 0,
-        "variance_contribution": unexplained_variance
+        "percentage": round((unexplained_rms_cm / total_budget_cm) * 100, 1) if total_budget_cm > 0 else 0.0,
+        "variance_contribution": unexplained_variance,
+        "data_driven": True
     }
 
+    # Summary statistics
+    total_systematic_cm = float(np.sqrt(budget_variance) * 100)
+
     # Print error budget table
-    print_status("Systematic Error Budget Table:", "TITLE")
-    print_status(f"{'Source':<35} {'Magnitude (cm)':<18} {'% Contribution':<15}", "INFO")
-    print_status("-" * 70, "INFO")
-    
+    print_status("Systematic Error Budget Table (DATA-DRIVEN):", "TITLE")
+    print_status(f"{'Source':<40} {'Magnitude (cm)':<18} {'% Contribution':<15}", "INFO")
+    print_status("-" * 75, "INFO")
     for key, value in error_budget.items():
-        print_status(f"{value['source']:<35} {value['magnitude_cm']:<18.2f} {value['percentage']:<15.1f}", "INFO")
-    
-    print_status("-" * 70, "INFO")
-    print_status(f"{'Total Budget':<35} {total_budget_cm:<18.2f} {'100.0':<15}", "INFO")
-    print_status(f"{'Observed RMS':<35} {global_rms * 100:<18.2f} {'-':<15}", "INFO")
+        print_status(f"{value['source']:<40} {value['magnitude_cm']:<18.2f} {value['percentage']:<15.1f}", "INFO")
+    print_status("-" * 75, "INFO")
+    print_status(f"{'Total Budget (quadrature)':<40} {total_systematic_cm:<18.2f} {'-':<15}", "INFO")
+    print_status(f"{'Total Budget (linear sum)':<40} {total_budget_cm:<18.2f} {'-':<15}", "INFO")
+    print_status(f"{'Observed RMS':<40} {global_rms * 100:<18.2f} {'-':<15}", "INFO")
     print_status("", "INFO")
 
-    return error_budget
+    return error_budget, total_systematic_cm, eta_fit
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -154,7 +261,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     log_dir = PROJECT_ROOT / "logs"
-    logger = TEPLogger("step_008", str(log_dir / "step_008_systematic_error_analysis.log"))
+    logger = TEPLogger("step_008", str(
+        log_dir / "step_008_systematic_error_analysis.log"))
     set_step_logger(logger)
 
     print_status("Starting Systematic Error Analysis...", "TITLE")
@@ -169,7 +277,7 @@ if __name__ == "__main__":
     print_status("", "INFO")
 
     sys_results = analyze_systematics(df)
-    error_budget = generate_systematic_error_budget(df, sys_results)
+    error_budget, total_systematic_cm, eta_fit = generate_systematic_error_budget(df, sys_results, logger=logger)
     
     all_clean = all(v.get("clean_profile", False)
                     for v in sys_results.values())
@@ -178,6 +286,10 @@ if __name__ == "__main__":
         "step_id": "step_008",
         "systematics": sys_results,
         "error_budget": error_budget,
+        "total_systematic_cm": total_systematic_cm,
+        "eta_fit": float(eta_fit),
+        "n_observations": len(df),
+        "data_driven": True,
         "status": "PASS" if all_clean else "WARNING"
     }
 

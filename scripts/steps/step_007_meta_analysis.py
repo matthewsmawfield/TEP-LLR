@@ -169,30 +169,13 @@ def meta_analysis_ephemerides(verbose=False):
         print_status(f"  Systematic uncertainty: {systematic_uncertainty:.3e}", "CALC")
         print_status(f"  Combined η (total uncertainty): {eta_combined:.3e} ± {eta_error_total:.3e} ({snr_total:.2f}σ)", "CALC")
 
-    # Alternative: Sign-weighted combination (emphasize sign consistency)
-    eta_sign_weighted = eta_combined
-    eta_error_sign_weighted = eta_error_combined
-    snr_sign_weighted = snr_combined
-    
-    if sign_consistent:
-        # Give more weight to the sign-consistent result
-        # Sign consistency is strong evidence against random fluctuation
-        # 20% boost is conservative - could be justified by Bayesian model averaging
-        sign_weight = 1.2  # Conservative boost for sign consistency
-        weight_inpop_sign = weight_inpop_norm * sign_weight
-        weight_de430_sign = weight_de430_norm * sign_weight
-        
-        total_weight_sign = weight_inpop_sign + weight_de430_sign
-        weight_inpop_sign_norm = weight_inpop_sign / total_weight_sign
-        weight_de430_sign_norm = weight_de430_sign / total_weight_sign
-        
-        eta_sign_weighted = weight_inpop_sign_norm * stats_inpop['eta'] + weight_de430_sign_norm * stats_de430['eta']
-        var_sign_weighted = (weight_inpop_sign_norm**2 * var_inpop) + (weight_de430_sign_norm**2 * var_de430)
-        eta_error_sign_weighted = np.sqrt(var_sign_weighted)
-        snr_sign_weighted = abs(eta_sign_weighted) / eta_error_sign_weighted if eta_error_sign_weighted > 0 else 0
-        
-        if verbose:
-            print_status(f"  Sign-weighted η: {eta_sign_weighted:.3e} ± {eta_error_sign_weighted:.3e} ({snr_sign_weighted:.2f}σ)", "CALC")
+    # Sign consistency check (qualitative only — not used for quantitative weighting)
+    # Both ephemerides showing the same sign is evidence against random fluctuation,
+    # but applying a multiplicative factor to both weights and renormalising is a no-op.
+    # The proper way to incorporate sign consistency would be Bayesian model averaging
+    # with a sign-consistency prior, which is beyond the scope of this meta-analysis.
+    if sign_consistent and verbose:
+        print_status("  Sign consistency: both ephemerides show same sign (qualitative check)", "CALC")
 
     # Results summary
     results = {
@@ -219,6 +202,7 @@ def meta_analysis_ephemerides(verbose=False):
         },
         "meta_analysis": {
             "sign_consistent": bool(sign_consistent),
+            "sign_consistent_note": "Qualitative check only; not used for quantitative weighting (identical weights after renormalisation)",
             "eta_combined_statistical": float(eta_combined),
             "eta_error_statistical": float(eta_error_combined),
             "snr_statistical": float(snr_combined),
@@ -226,9 +210,6 @@ def meta_analysis_ephemerides(verbose=False):
             "eta_combined_total": float(eta_combined),
             "eta_error_total": float(eta_error_total),
             "snr_total": float(snr_total),
-            "eta_sign_weighted": float(eta_sign_weighted),
-            "eta_error_sign_weighted": float(eta_error_sign_weighted),
-            "snr_sign_weighted": float(snr_sign_weighted),
             "weights": {
                 "INPOP19a": float(weight_inpop_norm),
                 "DE430": float(weight_de430_norm)
@@ -236,7 +217,6 @@ def meta_analysis_ephemerides(verbose=False):
         },
         "interpretation": {
             "primary_result": f"η = {eta_combined:.3e} ± {eta_error_total:.3e} ({snr_total:.2f}σ)",
-            "sign_weighted_result": f"η = {eta_sign_weighted:.3e} ± {eta_error_sign_weighted:.3e} ({snr_sign_weighted:.2f}σ)",
             "conclusion": "Sign-consistent ephemerides strengthen evidence" if sign_consistent else "Ephemerides show inconsistent signs"
         },
         "status": "PASS"
@@ -244,7 +224,6 @@ def meta_analysis_ephemerides(verbose=False):
 
     print_status("Meta-Analysis Complete", "SUCCESS")
     print_status(f"Primary result: {results['interpretation']['primary_result']}", "INFO")
-    print_status(f"Sign-weighted: {results['interpretation']['sign_weighted_result']}", "INFO")
 
     return results
 
