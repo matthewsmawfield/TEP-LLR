@@ -1,28 +1,28 @@
-[20:46:28] ═══ Starting Station Decomposition Analysis...
-[20:46:28]     Linear Regression Complete (N=2595, DOF=2593):
-[20:46:28]       RSS=2.582930e+00, MSE=9.961166e-04, χ²_red=0.001
-[20:46:28]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
-[20:46:28]       Condition Number κ(R) = 1.95e+00
-[20:46:28]       Final η = -2.39367737e-04 ± 8.64929544e-05
-[20:46:28]     Linear Regression Complete (N=19390, DOF=19388):
-[20:46:28]       RSS=1.886681e+02, MSE=9.731181e-03, χ²_red=0.010
-[20:46:28]       Birge Ratio = 0.099 (Scaling factor applied: 1.000)
-[20:46:28]       Condition Number κ(R) = 2.04e+00
-[20:46:28]       Final η = -5.39281631e-04 ± 1.08548179e-04
-[20:46:28]     Linear Regression Complete (N=346, DOF=344):
-[20:46:28]       RSS=1.323292e+00, MSE=3.846779e-03, χ²_red=0.004
-[20:46:28]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
-[20:46:28]       Condition Number κ(R) = 3.39e+00
-[20:46:28]       Final η = -1.31298648e-05 ± 8.68490603e-04
-[20:46:28]     Linear Regression Complete (N=3139, DOF=3137):
-[20:46:28]       RSS=2.863187e+01, MSE=9.127150e-03, χ²_red=0.009
-[20:46:28]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
-[20:46:28]       Condition Number κ(R) = 3.06e+00
-[20:46:28]       Final η = -4.99748805e-04 ± 3.59860914e-04
-[20:46:28]     Linear Regression Complete (N=737, DOF=735):
-[20:46:28]       RSS=1.397838e+01, MSE=1.901821e-02, χ²_red=0.019
-[20:46:28]       Birge Ratio = 0.138 (Scaling factor applied: 1.000)
-[20:46:28]       Condition Number κ(R) = 4.14e+00
-[20:46:28]       Final η = 3.54825014e-03 ± 1.44582873e-03
-[20:46:28] Results saved to results/outputs/step_013_station_decomposition.json
-[20:46:28] ✓   Decomposition Complete.
+[21:06:54] ═══ Starting Station Decomposition Analysis...
+[21:06:54]     Linear Regression Complete (N=2595, DOF=2593):
+[21:06:54]       RSS=2.582930e+00, MSE=9.961166e-04, χ²_red=0.001
+[21:06:54]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+[21:06:54]       Condition Number κ(R) = 1.95e+00
+[21:06:54]       Final η = -2.39367737e-04 ± 8.64929544e-05
+[21:06:54]     Linear Regression Complete (N=19390, DOF=19388):
+[21:06:54]       RSS=1.886681e+02, MSE=9.731181e-03, χ²_red=0.010
+[21:06:54]       Birge Ratio = 0.099 (Scaling factor applied: 1.000)
+[21:06:54]       Condition Number κ(R) = 2.04e+00
+[21:06:54]       Final η = -5.39281631e-04 ± 1.08548179e-04
+[21:06:54]     Linear Regression Complete (N=346, DOF=344):
+[21:06:54]       RSS=1.323292e+00, MSE=3.846779e-03, χ²_red=0.004
+[21:06:54]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+[21:06:54]       Condition Number κ(R) = 3.39e+00
+[21:06:54]       Final η = -1.31298648e-05 ± 8.68490603e-04
+[21:06:54]     Linear Regression Complete (N=3139, DOF=3137):
+[21:06:54]       RSS=2.863187e+01, MSE=9.127150e-03, χ²_red=0.009
+[21:06:54]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+[21:06:54]       Condition Number κ(R) = 3.06e+00
+[21:06:54]       Final η = -4.99748805e-04 ± 3.59860914e-04
+[21:06:54]     Linear Regression Complete (N=737, DOF=735):
+[21:06:54]       RSS=1.397838e+01, MSE=1.901821e-02, χ²_red=0.019
+[21:06:54]       Birge Ratio = 0.138 (Scaling factor applied: 1.000)
+[21:06:54]       Condition Number κ(R) = 4.14e+00
+[21:06:54]       Final η = 3.54825014e-03 ± 1.44582873e-03
+[21:06:54] Results saved to results/outputs/step_013_station_decomposition.json
+[21:06:54] ✓   Decomposition Complete.

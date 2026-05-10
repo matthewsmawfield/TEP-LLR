@@ -1,28 +1,28 @@
-[20:47:48]     Step 041: Dust Model Sensitivity Analysis
-[20:47:48]     Formal parameter sweep of Sabhlok et al. thermal/dust model
-[20:47:48]     Loaded measured η from step_002: -3.1698e-04
-[20:47:48]     Computed observed signal amplitude: 4.12 mm
-[20:47:48]     Running parameter sweep (thermal conductivity, dust coverage)...
-[20:47:48]     Analyzing logical structure...
-[20:47:48]     Testing robustness of 4.0× mismatch...
-[20:47:48]     Results saved to: results/outputs/step_039_dust_sensitivity_analysis.json
-[20:47:48]     
+[21:08:06]     Step 041: Dust Model Sensitivity Analysis
+[21:08:06]     Formal parameter sweep of Sabhlok et al. thermal/dust model
+[21:08:06]     Loaded measured η from step_002: -3.1698e-04
+[21:08:06]     Computed observed signal amplitude: 4.12 mm
+[21:08:06]     Running parameter sweep (thermal conductivity, dust coverage)...
+[21:08:06]     Analyzing logical structure...
+[21:08:06]     Testing robustness of 4.0× mismatch...
+[21:08:06]     Results saved to: results/outputs/step_039_dust_sensitivity_analysis.json
+[21:08:06]     
 === Dust Model Sensitivity Analysis Summary ===
-[20:47:48]     Sabhlok et al. (2024) Model Critique:
-[20:47:48]       - Claimed dust coverage: ~50%
-[20:47:48] ⚠     - Actual range (sensitivity analysis): 22% - 95%
-[20:47:48] ⚠     - Model is underdetermined (4 parameters, 2 constraints)
-[20:47:48]     
+[21:08:06]     Sabhlok et al. (2024) Model Critique:
+[21:08:06]       - Claimed dust coverage: ~50%
+[21:08:06] ⚠     - Actual range (sensitivity analysis): 22% - 95%
+[21:08:06] ⚠     - Model is underdetermined (4 parameters, 2 constraints)
+[21:08:06]     
 Quantitative Mismatch:
-[20:47:48]       - Observed signal: 4.12 mm
-[20:47:48]       - Maximum thermal (best case): 2.24 mm
-[20:47:48] ⚠     - Mismatch factor: 1.8×
-[20:47:48] ✗     - Thermal mechanism CANNOT explain signal
-[20:47:48]     
+[21:08:06]       - Observed signal: 4.12 mm
+[21:08:06]       - Maximum thermal (best case): 2.24 mm
+[21:08:06] ⚠     - Mismatch factor: 1.8×
+[21:08:06] ✗     - Thermal mechanism CANNOT explain signal
+[21:08:06]     
 Logical Analysis:
-[20:47:48] ⚠     - Circular reasoning: Affirming the consequent
-[20:47:48]       - Alternative (TEP): Makes independent predictions
-[20:47:48]       - Perihelion test: 3.07σ confirmed
-[20:47:48]     
+[21:08:06] ⚠     - Circular reasoning: Affirming the consequent
+[21:08:06]       - Alternative (TEP): Makes independent predictions
+[21:08:06]       - Perihelion test: 3.07σ confirmed
+[21:08:06]     
 Verdict: Dust attribution unreliable; TEP superior
-[20:47:48]     Step 041 completed successfully
+[21:08:06]     Step 041 completed successfully

@@ -1,11 +1,11 @@
-[20:47:50] ═══ Step 042: Formal Multiple Testing Correction
-[20:47:52]     Collected 18 significance tests from the analysis pipeline
-[20:47:52] ✓   
+[21:08:08] ═══ Step 042: Formal Multiple Testing Correction
+[21:08:09]     Collected 18 significance tests from the analysis pipeline
+[21:08:09] ✓   
 The pipeline collected 18 significance measures. Of these, 4 are independent hypotheses and 14 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The primary detection (4.93σ) is a pre-specified analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
-[20:47:52]     
+[21:08:09]     
 Results saved to results/outputs/step_042_multiple_testing_correction.json
-[20:47:52]     
+[21:08:09]     
 ======================================================================
-[20:47:52] ✓   Step 042 completed successfully
-[20:47:52]     ======================================================================
-[20:47:52] Results saved to results/outputs/step_042_multiple_testing_correction.json
+[21:08:09] ✓   Step 042 completed successfully
+[21:08:09]     ======================================================================
+[21:08:09] Results saved to results/outputs/step_042_multiple_testing_correction.json

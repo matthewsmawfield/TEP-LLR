@@ -1,37 +1,37 @@
-[20:47:52] ═══ Starting Systematic Projection Analysis...
-[20:47:52] ═══ ═══ Starting Step 024: Systematic Projection Analysis...
-[20:47:52]     ═══ STEP PURPOSE: Compute cos(elongation)-projected systematic bias for each error source
-[20:47:52]     ═══ METHOD: Project each systematic component onto cos(elongation); phase-locked differential
-[20:47:52]     ═══ DATA SUMMARY
-[20:47:52]         Dataset: N = 26,207 observations
-[20:47:52]         Using per-observation weights (1/σ²) from 'sigma_m'
-[20:47:52]     Linear Regression Complete (N=26207, DOF=26205):
-[20:47:52]       RSS=2.617449e+04, MSE=9.988357e-01, χ²_red=0.999
-[20:47:52]       Birge Ratio = 0.999 (Scaling factor applied: 1.000)
-[20:47:52]       Condition Number κ(R) = 2.02e+00
-[20:47:52]       Final η = -3.49776480e-04 ± 6.57578075e-05
-[20:47:52]         Baseline η = -3.498e-04 ± 6.576e-05 (5.32σ)
-[20:47:52]         Ephemeris scatter: N=2, std(η) = 2.728e-04
-[20:47:52] ═══ ═══ SYSTEMATIC PROJECTION RESULTS
-[20:47:52]     Source                          bias_η     r(cos)          p
-[20:47:52]     ------------------------------------------------------------
-[20:47:52]     Cross-ephemeris residual     2.728e-04     0.0000   1.00e+00
-[20:47:52]     Monthly mean variation (    -6.140e-05    -0.0411   2.97e-11
-[20:47:52]     Station-to-station mean      7.508e-06     0.1109   1.54e-72
-[20:47:52]     cos(2*elongation) harmon    -7.027e-06    -0.3583   0.00e+00
-[20:47:52]     Diurnal (24-hr) sinusoid    -4.263e-05    -0.0725   6.75e-32
-[20:47:52]     ------------------------------------------------------------
-[20:47:52]     Combined (quadrature)        7.545e-05
-[20:47:52]     Upper bound (linear sum)     3.914e-04
-[20:47:52] ═══ ═══ PHASE-LOCKED DIFFERENTIAL ANALYSIS
-[20:47:53]         New moon:  N=397,  mean=-1.207e-02 ± 1.533e-03 m
-[20:47:53]         Full moon: N=1531, mean=2.857e-03 ± 1.965e-03 m
-[20:47:53]         Differential η = -5.739e-04 ± 9.586e-05 (5.99σ)
-[20:47:53]         Permutation p = 0.0050 (n=1000)
-[20:47:53] ═══ ═══ COMBINED UNCERTAINTY
-[20:47:53]         Statistical:   ±6.576e-05
-[20:47:53]         Systematic:    ±2.831e-04 (quadrature(ephemeris_scatter + projected_non_ephemeris))
-[20:47:53]         Total:         ±2.906e-04
-[20:47:53]         SNR (total):   1.20σ
-[20:47:53] Results saved to results/outputs/step_024_systematic_projection_analysis.json
-[20:47:53] ✓   Systematic Projection Analysis Complete.
+[21:08:10] ═══ Starting Systematic Projection Analysis...
+[21:08:10] ═══ ═══ Starting Step 024: Systematic Projection Analysis...
+[21:08:10]     ═══ STEP PURPOSE: Compute cos(elongation)-projected systematic bias for each error source
+[21:08:10]     ═══ METHOD: Project each systematic component onto cos(elongation); phase-locked differential
+[21:08:10]     ═══ DATA SUMMARY
+[21:08:10]         Dataset: N = 26,207 observations
+[21:08:10]         Using per-observation weights (1/σ²) from 'sigma_m'
+[21:08:10]     Linear Regression Complete (N=26207, DOF=26205):
+[21:08:10]       RSS=2.617449e+04, MSE=9.988357e-01, χ²_red=0.999
+[21:08:10]       Birge Ratio = 0.999 (Scaling factor applied: 1.000)
+[21:08:10]       Condition Number κ(R) = 2.02e+00
+[21:08:10]       Final η = -3.49776480e-04 ± 6.57578075e-05
+[21:08:10]         Baseline η = -3.498e-04 ± 6.576e-05 (5.32σ)
+[21:08:10]         Ephemeris scatter: N=2, std(η) = 2.728e-04
+[21:08:10] ═══ ═══ SYSTEMATIC PROJECTION RESULTS
+[21:08:10]     Source                          bias_η     r(cos)          p
+[21:08:10]     ------------------------------------------------------------
+[21:08:10]     Cross-ephemeris residual     2.728e-04     0.0000   1.00e+00
+[21:08:10]     Monthly mean variation (    -6.140e-05    -0.0411   2.97e-11
+[21:08:10]     Station-to-station mean      7.508e-06     0.1109   1.54e-72
+[21:08:10]     cos(2*elongation) harmon    -7.027e-06    -0.3583   0.00e+00
+[21:08:10]     Diurnal (24-hr) sinusoid    -4.263e-05    -0.0725   6.75e-32
+[21:08:10]     ------------------------------------------------------------
+[21:08:10]     Combined (quadrature)        7.545e-05
+[21:08:10]     Upper bound (linear sum)     3.914e-04
+[21:08:10] ═══ ═══ PHASE-LOCKED DIFFERENTIAL ANALYSIS
+[21:08:11]         New moon:  N=397,  mean=-1.207e-02 ± 1.533e-03 m
+[21:08:11]         Full moon: N=1531, mean=2.857e-03 ± 1.965e-03 m
+[21:08:11]         Differential η = -5.739e-04 ± 9.586e-05 (5.99σ)
+[21:08:11]         Permutation p = 0.0050 (n=1000)
+[21:08:11] ═══ ═══ COMBINED UNCERTAINTY
+[21:08:11]         Statistical:   ±6.576e-05
+[21:08:11]         Systematic:    ±2.831e-04 (quadrature(ephemeris_scatter + projected_non_ephemeris))
+[21:08:11]         Total:         ±2.906e-04
+[21:08:11]         SNR (total):   1.20σ
+[21:08:11] Results saved to results/outputs/step_024_systematic_projection_analysis.json
+[21:08:11] ✓   Systematic Projection Analysis Complete.

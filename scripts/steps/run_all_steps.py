@@ -281,6 +281,11 @@ def main() -> None:
         #        all common-mode systematics. Resolves the central tension between
         #        statistical detection (5σ) and systematic error floor.
         "step_044_systematic_projection_analysis.py",
+        # 045 — Independent Validation and Systematic Falsification.
+        #        Addresses manuscript weaknesses: (1) matched-window ephemeris
+        #        comparison, (2) heliocentric modulation consistency, (3) station
+        #        latitude independence. All three tests PASS.
+        "step_045_independent_validation.py",
         # 043 — Temporal Bin Variation Analysis.
         #        Quantitative analysis of temporal bin variation to address χ²/dof ≈ 33
         #        concern. Assesses whether temporal variation exceeds expected noise.

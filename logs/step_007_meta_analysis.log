@@ -1,16 +1,16 @@
-[20:46:24] ═══ Meta-Analysis of INPOP19a and DE430 Results
-[20:46:24] ═══ ================================================================================
-[20:46:24]     INPOP19a (from step_002): η = -3.170e-04 ± 6.041e-05 (5.25σ)
-[20:46:24]     DE430 (from step_005): η = -7.028e-04 ± 1.180e-04 (5.96σ)
-[20:46:24]     Sign consistency: True
-[20:46:24]     INPOP19a weight: 0.968 (baseline: 35.5 years)
-[20:46:24]     DE430 weight:   0.032 (baseline: 4.5 years)
-[20:46:24]     Meta-Analysis Results:
-[20:46:24]       Combined η (statistical only): -3.294e-04 ± 5.859e-05 (5.62σ)
-[20:46:24]       Systematic uncertainty: 3.858e-04
-[20:46:24]       Combined η (total uncertainty): -3.294e-04 ± 3.902e-04 (0.84σ)
-[20:46:24]       Sign consistency: both ephemerides show same sign (qualitative check)
-[20:46:24] ✓   Meta-Analysis Complete
-[20:46:24]     Primary result: η = -3.294e-04 ± 3.902e-04 (0.84σ)
-[20:46:24] Results saved to results/outputs/step_007_meta_analysis.json
-[20:46:24] ✓   Step 007 Complete
+[21:06:51] ═══ Meta-Analysis of INPOP19a and DE430 Results
+[21:06:51] ═══ ================================================================================
+[21:06:51]     INPOP19a (from step_002): η = -3.170e-04 ± 6.041e-05 (5.25σ)
+[21:06:51]     DE430 (from step_005): η = -7.028e-04 ± 1.180e-04 (5.96σ)
+[21:06:51]     Sign consistency: True
+[21:06:51]     INPOP19a weight: 0.968 (baseline: 35.5 years)
+[21:06:51]     DE430 weight:   0.032 (baseline: 4.5 years)
+[21:06:51]     Meta-Analysis Results:
+[21:06:51]       Combined η (statistical only): -3.294e-04 ± 5.859e-05 (5.62σ)
+[21:06:51]       Systematic uncertainty: 3.858e-04
+[21:06:51]       Combined η (total uncertainty): -3.294e-04 ± 3.902e-04 (0.84σ)
+[21:06:51]       Sign consistency: both ephemerides show same sign (qualitative check)
+[21:06:51] ✓   Meta-Analysis Complete
+[21:06:51]     Primary result: η = -3.294e-04 ± 3.902e-04 (0.84σ)
+[21:06:51] Results saved to results/outputs/step_007_meta_analysis.json
+[21:06:51] ✓   Step 007 Complete
