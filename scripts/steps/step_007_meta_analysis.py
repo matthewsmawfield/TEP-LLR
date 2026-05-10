@@ -85,12 +85,7 @@ def meta_analysis_ephemerides(verbose=False):
         de430_cos_elong = np.cos(df_de430['elongation_rad'].values)
         de430_r, de430_p = stats.pearsonr(de430_residuals, de430_cos_elong)
     else:
-        # Fallback to computing from eta if data file not available
-        # For linear regression r = eta * sigma_cos / sigma_residual
-        # Approximate: r ≈ eta / eta_error * (eta_error / std_residual)
-        # This is a rough approximation, better to compute from data
-        de430_r = de430_data['eta'] / de430_data['eta_error'] * (de430_data['eta_error'] / 0.266)  # Using DE430 RMS from preprocessing
-        de430_p = 2 * (1 - stats.norm.cdf(abs(de430_r) * np.sqrt(len(de430_residuals) - 2) / np.sqrt(1 - de430_r**2))) if 'de430_residuals' in locals() else None
+        raise ValueError("step_006 DE430 comparison missing required fields for correlation computation.")
     
     stats_de430 = {
         'name': 'DE430',

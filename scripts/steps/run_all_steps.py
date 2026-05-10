@@ -275,6 +275,12 @@ def main() -> None:
         #        values (Bonferroni, Benjamini-Hochberg). Addresses "researcher
         #        degrees of freedom" concern for 20+ complementary methods.
         "step_042_multiple_testing_correction.py",
+        # 044 — Systematic Projection Analysis.
+        #        Computes cos(elongation)-projected systematic bias for each error
+        #        source and performs phase-locked differential analysis that cancels
+        #        all common-mode systematics. Resolves the central tension between
+        #        statistical detection (5σ) and systematic error floor.
+        "step_044_systematic_projection_analysis.py",
         # 043 — Temporal Bin Variation Analysis.
         #        Quantitative analysis of temporal bin variation to address χ²/dof ≈ 33
         #        concern. Assesses whether temporal variation exceeds expected noise.

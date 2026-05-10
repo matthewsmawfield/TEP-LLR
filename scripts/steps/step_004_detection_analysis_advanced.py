@@ -332,27 +332,28 @@ def robust_regression(residuals: np.ndarray, cos_elong: np.ndarray) -> Dict:
 def leverage_analysis(residuals: np.ndarray, cos_elong: np.ndarray) -> dict:
     n = len(residuals)
 
-    # Hat matrix: H = X(X'X)^(-1)X'
-    # For single predictor without intercept: H_ii = x_i^2 / sum(x_j^2)
-    x_sq_sum = np.sum(cos_elong**2)
-    leverage = cos_elong**2 / x_sq_sum
+    # Hat matrix: H = X(X'X)^(-1)X' using same design matrix as linear_regression
+    # (includes intercept column, p = 2 parameters)
+    X = np.column_stack([np.ones(n), cos_elong])
+    XtX_inv = np.linalg.inv(X.T @ X)
+    leverage = np.sum((X @ XtX_inv) * X, axis=1)
 
-    # OLS fit for residuals
-    A = np.sum(residuals * cos_elong) / x_sq_sum
-    predicted = A * cos_elong
+    # OLS fit for residuals (full model with intercept)
+    beta = XtX_inv @ X.T @ residuals
+    predicted = X @ beta
     residuals_ols = residuals - predicted
 
     # MSE
-    mse = np.sum(residuals_ols**2) / (n - 1)  # 1 parameter estimated
+    p = 2  # number of parameters (slope + intercept)
+    mse = np.sum(residuals_ols**2) / (n - p)
 
     # Cook's distance: D_i = (r_i^2 / (p * MSE)) * (h_ii / (1 - h_ii)^2)
-    # where p = number of parameters = 1
-    cooks_distance = (residuals_ols**2 / (1 * mse)) * \
+    cooks_distance = (residuals_ols**2 / (p * mse)) * \
         (leverage / (1 - leverage)**2)
 
-    # Threshold for high leverage: 2 * p / n = 2 / n (standard leverage criterion)
+    # Threshold for high leverage: 2 * p / n (standard leverage criterion)
     # Source: Belsley et al. 1980, Regression Diagnostics
-    leverage_threshold = 2 / n
+    leverage_threshold = 2 * p / n
 
     # Threshold for high Cook's distance: 4 / n (standard Cook's distance criterion)
     # Source: Cook & Weisberg 1982, standard diagnostic for influential points

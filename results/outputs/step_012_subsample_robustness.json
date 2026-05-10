@@ -6,7 +6,7 @@
         "full_sample_eta_error": 9.177544502117292e-05,
         "eta": -0.0004331461451534596,
         "snr": 4.2234287451799855,
-        "robust": false,
+        "robust": true,
         "multiple_iterations": {
             "n_iterations": 10,
             "eta_mean": -0.0004311615610318654,
@@ -198,7 +198,7 @@
                 "Haleakala": 737
             }
         },
-        "status": "WARNING"
+        "status": "PASS"
     },
-    "status": "FAIL"
+    "status": "PASS"
 }

@@ -30,7 +30,7 @@ def _log_likelihood(theta, x, y, y_err):
 
 def _log_prior(theta):
     eta, intercept = theta
-    if -0.01 < eta < 0.01 and -0.1 < intercept < 0.1:
+    if -0.01 <= eta <= 0.01 and -0.1 <= intercept <= 0.1:
         return 0.0
     return -np.inf
 
@@ -77,8 +77,8 @@ def ar1_gls_regression(y, x, verbose=False):
     # rho = sum(residuals[t] * residuals[t-1]) / sum(residuals[t-1]^2)
     rho = np.sum(residuals[1:] * residuals[:-1]) / np.sum(residuals[:-1]**2)
     
-    # Standard error of rho (Bartlett's formula for large samples)
-    rho_error = np.sqrt((1 - rho**2) / (n - 1))
+    # Standard error of rho (asymptotic formula for AR(1))
+    rho_error = np.sqrt((1 - rho**2) / n)
     
     # Durbin-Watson statistic
     dw_stat = np.sum(np.diff(residuals)**2) / np.sum(residuals**2)

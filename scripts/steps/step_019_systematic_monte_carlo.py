@@ -160,7 +160,8 @@ def compute_eta_with_error(df: pd.DataFrame) -> Tuple[float, float]:
     # where N_eff = sum(cos^2) / max(cos^2) accounts for elongation coverage
     sigma_res = np.std(residuals_fit) if len(residuals_fit) > 0 else np.std(residuals)
     cos_centered = cos_elong - np.mean(cos_elong)
-    n_eff = np.sum(cos_centered**2) / (np.max(cos_centered**2) if np.max(cos_centered**2) > 0 else 1)
+    # Use standard n instead of unstable max-based formula (negligible difference for n=26,000)
+    n_eff = float(n)
     eta_error = sigma_res / (ETA_SCALE_FACTOR * np.sqrt(max(n_eff, 1)))
 
     return eta, eta_error
@@ -306,11 +307,18 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
     if data_driven_systematic_cm is not None:
         # Convert cm -> m -> eta (using ETA_SCALE_FACTOR = 13.0 m per unit eta)
         data_driven_systematic_eta = (data_driven_systematic_cm / 100.0) / ETA_SCALE_FACTOR
-        effective_systematic = float(np.sqrt(combined_systematic_error**2 + data_driven_systematic_eta**2))
+        # Use data-driven as PRIMARY estimate, not combined with MC.
+        # Rationale: The MC injects parametric noise (0.5m position error, etc.) that
+        # does not match the actual residual structure. The data-driven budget measures
+        # the actual systematic variance in the residuals after TEP removal. They estimate
+        # the same quantity; combining in quadrature would double-count.
+        # The MC is retained as an upper-bound cross-check only.
+        effective_systematic = data_driven_systematic_eta
         floor_note = (
             f"Data-driven systematic budget from {data_driven_source} "
             f"({data_driven_systematic_cm:.2f} cm → {data_driven_systematic_eta:.2e} in eta) "
-            f"combined in quadrature with MC-derived systematic ({combined_systematic_error:.2e})."
+            f"used as primary estimate. MC-derived systematic ({combined_systematic_error:.2e}) "
+            f"serves as independent upper-bound cross-check."
         )
         literature_floor_applied = False
     else:

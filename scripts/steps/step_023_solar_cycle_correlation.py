@@ -21,9 +21,33 @@ from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, p
 
 
 def solar_activity_index(years_array):
-    # Simple sine wave scaled from 0 (Min) to 1 (Max)
-    # Average period ~11 years. Phase offset: max at ~1990
-    return 0.5 * (1.0 + np.cos(2 * np.pi * (years_array - 1990.0) / 11.0))
+    """Return normalized solar activity index (0 = min, 1 = max) using SILSO
+    sunspot number lookup table with linear interpolation.
+
+    Replaces the previous rigid cosine approximation, which was systematically
+    misaligned with actual solar extrema during 1985-2020.
+    Data source: SILSO World Data Center (Royal Observatory of Belgium).
+    """
+    # SILSO 13-month smoothed sunspot number (SSN) at annual resolution
+    _years = np.array([
+        1985.0, 1986.0, 1987.0, 1988.0, 1989.0, 1990.0, 1991.0,
+        1992.0, 1993.0, 1994.0, 1995.0, 1996.0, 1997.0, 1998.0,
+        1999.0, 2000.0, 2001.0, 2002.0, 2003.0, 2004.0, 2005.0,
+        2006.0, 2007.0, 2008.0, 2009.0, 2010.0, 2011.0, 2012.0,
+        2013.0, 2014.0, 2015.0, 2016.0, 2017.0, 2018.0, 2019.0, 2020.0
+    ])
+    _ssn = np.array([
+        17.9, 13.4, 29.2, 100.2, 157.6, 142.6, 145.7,
+        94.3, 54.6, 29.9, 17.5, 8.6, 21.5, 64.3,
+        93.3, 119.6, 111.0, 104.0, 63.7, 40.4, 29.8,
+        15.2, 7.5, 2.9, 4.2, 16.5, 55.7, 66.9,
+        85.1, 116.4, 69.8, 39.8, 21.7, 7.0, 3.6, 8.8
+    ])
+    # Normalize to [0, 1] using the observed range in the data span
+    ssn_min = np.min(_ssn)
+    ssn_max = np.max(_ssn)
+    ssn_norm = (_ssn - ssn_min) / (ssn_max - ssn_min)
+    return np.interp(years_array, _years, ssn_norm, left=ssn_norm[0], right=ssn_norm[-1])
 
 def run_solar_correlation(df, verbose=False):
     print_status("═══ Starting Step 023: Solar Cycle Correlation & Haleakala Station Anomaly...", "TITLE")

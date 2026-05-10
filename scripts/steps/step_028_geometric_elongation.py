@@ -18,6 +18,7 @@ from astropy.coordinates import get_sun, get_body, EarthLocation
 import astropy.units as u
 import statsmodels.api as sm
 import json
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
 # Add project root to path
@@ -65,12 +66,12 @@ def main():
     # OLS
     X_mean = sm.add_constant(df['cos_mean_elong'])
     model_mean = sm.OLS(df['residual_m'], X_mean).fit()
-    eta_mean = model_mean.params['cos_mean_elong'] / 13.0
+    eta_mean = model_mean.params['cos_mean_elong'] / ETA_SCALE_FACTOR
     p_mean = model_mean.pvalues['cos_mean_elong']
 
     X_true = sm.add_constant(df['cos_true_elong'])
     model_true = sm.OLS(df['residual_m'], X_true).fit()
-    eta_true = model_true.params['cos_true_elong'] / 13.0
+    eta_true = model_true.params['cos_true_elong'] / ETA_SCALE_FACTOR
     p_true = model_true.pvalues['cos_true_elong']
 
     logger.info("="*80)

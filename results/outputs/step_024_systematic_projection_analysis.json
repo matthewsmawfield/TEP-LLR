@@ -1,0 +1,77 @@
+{
+    "step_id": "step_044",
+    "baseline_eta": -0.0003497764801829893,
+    "baseline_eta_error": 6.575780746644752e-05,
+    "baseline_snr": 5.319162752825364,
+    "systematic_projections": {
+        "ephemeris": {
+            "source": "Cross-ephemeris residual difference (INPOP19a \u2212 DE430)",
+            "bias_A_m": 0.0035466145861222428,
+            "bias_eta": 0.0002728165066247879,
+            "r_cos_elong": 0.0,
+            "p_value": 1.0,
+            "available": true,
+            "note": "Direct bias: ephemeris difference IS the systematic"
+        },
+        "atmospheric": {
+            "source": "Monthly mean variation (seasonal tropospheric delay)",
+            "bias_A_m": -0.0007981813651938736,
+            "bias_eta": -6.139856655337489e-05,
+            "r_cos_elong": -0.04105060169663086,
+            "p_value": 2.971162890564691e-11,
+            "available": true,
+            "note": "Annual cycle is incommensurate with synodic period; projection should be small"
+        },
+        "instrumental": {
+            "source": "Station-to-station mean differences (hardware calibration)",
+            "bias_A_m": 9.760436713868742e-05,
+            "bias_eta": 7.508028241437494e-06,
+            "r_cos_elong": 0.11093229908471035,
+            "p_value": 1.5371264413136992e-72,
+            "available": true,
+            "note": "Constant offsets per station are orthogonal to cos(elongation) over full cycle"
+        },
+        "tidal": {
+            "source": "cos(2*elongation) harmonic (solid Earth / ocean tides)",
+            "bias_A_m": -9.13494604429373e-05,
+            "bias_eta": -7.0268815725336385e-06,
+            "r_cos_elong": -0.3582505932204847,
+            "p_value": 0.0,
+            "available": true,
+            "note": "cos(2D) is mathematically orthogonal to cos(D) over [0, 2\u03c0]"
+        },
+        "thermal": {
+            "source": "Diurnal (24-hr) sinusoidal amplitude (thermal expansion)",
+            "bias_A_m": -0.0005542495062144887,
+            "bias_eta": -4.263457740111451e-05,
+            "r_cos_elong": -0.07251326249640708,
+            "p_value": 6.75294356533992e-32,
+            "available": true,
+            "note": "Diurnal (1 day) and synodic (29.5 day) are incommensurate; averages to zero"
+        }
+    },
+    "combined_projected_systematic_eta": 7.545355338013887e-05,
+    "linear_sum_upper_bound": 0.00039138456039324845,
+    "systematic_error_used": 0.0002830584480361652,
+    "systematic_error_source": "quadrature(ephemeris_scatter + projected_non_ephemeris)",
+    "statistical_error": 6.575780746644752e-05,
+    "total_uncertainty": 0.00029059623921764163,
+    "total_snr": 1.2036510903399018,
+    "phase_locked_differential": {
+        "n_new_moon": 397,
+        "n_full_moon": 1531,
+        "mean_new_moon_m": -0.012065351196811236,
+        "mean_new_moon_sem_m": 0.00153263374587001,
+        "mean_full_moon_m": 0.0028571317512280565,
+        "mean_full_moon_sem_m": 0.0019653114695827307,
+        "amplitude_differential_m": -0.014922482948039292,
+        "amplitude_differential_error_m": 0.002492271127195629,
+        "eta_differential": -0.000573941651847665,
+        "eta_differential_error": 9.58565818152165e-05,
+        "snr_differential": 5.987503841458242,
+        "permutation_p_value": 0.005,
+        "n_permutations": 1000,
+        "method": "mean_difference (common-mode systematic cancellation)"
+    },
+    "status": "PASS"
+}

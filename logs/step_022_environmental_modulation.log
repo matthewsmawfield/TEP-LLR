@@ -1,22 +1,22 @@
-[18:37:55]     Computing Earth-Sun distances via Skyfield...
-[18:37:55]     Using ephemeris: de421.bsp
-[18:37:55]     Computed distances for 25,445 cleaned observations.
-[18:37:55]     Distance range: 0.9832 AU to 1.0168 AU
-[18:37:55]     Removed 762 outliers (6σ threshold)
-[18:37:55] 
-[18:37:55] >>> --- DIFFERENTIAL SUPPRESSION ANALYSIS ---
-[18:37:55]     Hypothesis: Eta magnitude should scale with solar scalar gradient (varies with solar distance)
-[18:37:55]     Perihelion threshold: r <= 15th percentile
-[18:37:55]     Aphelion threshold: r >= 85th percentile
-[18:37:55] 
-[18:37:55]     DEEP PERIHELION (High Shear, r <= 15th percentile):
-[18:37:55]       N = 3,817
-[18:37:55]       η = -2.8075e-04 ± 1.9147e-04
-[18:37:55]       SNR = 1.47σ
-[18:37:55] 
-[18:37:55]     DEEP APHELION (Low Shear, r >= 85th percentile):
-[18:37:55]       N = 3,818
-[18:37:55]       η = 7.0761e-05 ± 1.5706e-04
-[18:37:55]       SNR = 0.45σ
-[18:37:55] Results saved to results/outputs/step_022_environmental_modulation.json
-[18:37:55] ✓   Environmental Modulation Tests Complete.
+[20:46:49]     Computing Earth-Sun distances via Skyfield...
+[20:46:49]     Using ephemeris: de421.bsp
+[20:46:49]     Computed distances for 25,445 cleaned observations.
+[20:46:49]     Distance range: 0.9832 AU to 1.0168 AU
+[20:46:49]     Removed 762 outliers (6σ threshold)
+[20:46:49] 
+[20:46:49] >>> --- DIFFERENTIAL SUPPRESSION ANALYSIS ---
+[20:46:49]     Hypothesis: Eta magnitude should scale with solar scalar gradient (varies with solar distance)
+[20:46:49]     Perihelion threshold: r <= 15th percentile
+[20:46:49]     Aphelion threshold: r >= 85th percentile
+[20:46:49] 
+[20:46:49]     DEEP PERIHELION (High Shear, r <= 15th percentile):
+[20:46:49]       N = 3,817
+[20:46:49]       η = -2.8075e-04 ± 1.9147e-04
+[20:46:49]       SNR = 1.47σ
+[20:46:49] 
+[20:46:49]     DEEP APHELION (Low Shear, r >= 85th percentile):
+[20:46:49]       N = 3,818
+[20:46:49]       η = 7.0761e-05 ± 1.5706e-04
+[20:46:49]       SNR = 0.45σ
+[20:46:49] Results saved to results/outputs/step_022_environmental_modulation.json
+[20:46:49] ✓   Environmental Modulation Tests Complete.

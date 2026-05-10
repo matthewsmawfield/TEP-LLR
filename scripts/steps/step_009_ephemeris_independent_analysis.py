@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
-Step 010: Ephemeris-Independent TEP Detection
+Step 009: Systematic-Corrected Residual Analysis
+
+Note: The elongation angle used here is computed from Skyfield/DE421 during
+preprocessing. This step tests TEP detection on residuals after systematic
+corrections, not with an independently-derived elongation.
 """
 
 
@@ -19,8 +23,8 @@ from scripts.utils.statistical_utils import linear_regression
 # Add project root to path
 
 def run_differential_analysis(df, verbose=False):
-    print_status("═══ Starting Step 009: Ephemeris-Independent Analysis...", "TITLE")
-    print_status("═══ STEP PURPOSE: Test TEP detection without ephemeris-dependent elongation calculation", "INFO")
+    print_status("═══ Starting Step 009: Systematic-Corrected Residual Analysis...", "TITLE")
+    print_status("═══ STEP PURPOSE: Test TEP detection on residuals after systematic corrections", "INFO")
     print_status("═══ METHOD: Linear regression using corrected residuals (systematic errors removed)", "INFO")
     
     print_status("═══ DATA SUMMARY", "INFO")

@@ -98,9 +98,11 @@ def compute_ipw_eta(data: Dict) -> Dict:
     coeffs, _, _, _ = np.linalg.lstsq(Xw, yw, rcond=None)
     eta_ipw = coeffs[0] / ETA_SCALE_FACTOR
 
-    # Compute error
+    # Compute error using effective sample size for weighted regression
     resid_w = yw - Xw @ coeffs
-    mse = np.sum(resid_w**2) / len(resid_w) if len(resid_w) > 0 else 0
+    n_eff = np.sum(weights)**2 / np.sum(weights**2)
+    dof = n_eff - 2
+    mse = np.sum(resid_w**2) / dof if dof > 0 else np.nan
     XtWX = Xw.T @ Xw
     try:
         cov = mse * np.linalg.inv(XtWX)

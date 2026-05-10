@@ -22,6 +22,7 @@
     },
     "meta_analysis": {
         "sign_consistent": true,
+        "sign_consistent_note": "Qualitative check only; not used for quantitative weighting (identical weights after renormalisation)",
         "eta_combined_statistical": -0.0003293839963058887,
         "eta_error_statistical": 5.8587466402732164e-05,
         "snr_statistical": 5.622089783533091,
@@ -29,9 +30,6 @@
         "eta_combined_total": -0.0003293839963058887,
         "eta_error_total": 0.0003902437492047723,
         "snr_total": 0.8440468219596037,
-        "eta_sign_weighted": -0.0003293839963058887,
-        "eta_error_sign_weighted": 5.8587466402732164e-05,
-        "snr_sign_weighted": 5.622089783533091,
         "weights": {
             "INPOP19a": 0.9678499035364618,
             "DE430": 0.03215009646353817
@@ -39,7 +37,6 @@
     },
     "interpretation": {
         "primary_result": "\u03b7 = -3.294e-04 \u00b1 3.902e-04 (0.84\u03c3)",
-        "sign_weighted_result": "\u03b7 = -3.294e-04 \u00b1 5.859e-05 (5.62\u03c3)",
         "conclusion": "Sign-consistent ephemerides strengthen evidence"
     },
     "status": "PASS"

@@ -202,21 +202,25 @@ def collect_reported_significance_values():
             })
 
     # --- Robustness tests ---
-    # Bootstrap CI: derive p from the live CI reported in step_004
-    if step_004:
-        boot = step_004.get('bootstrap', {})
-        r_obs = boot.get('r_observed')
-        ci_lo = boot.get('ci_95_lower')
-        ci_hi = boot.get('ci_95_upper')
-        n_boot = step_004.get('n_observations', 26207)
-        if r_obs is not None and ci_lo is not None and ci_hi is not None:
-            se = (ci_hi - ci_lo) / (2 * 1.96)
-            if se > 0:
-                z = abs(r_obs) / se
-                p_boot = 2 * (1 - stats.norm.cdf(z))
-            else:
-                z = None
-                p_boot = 0.05
+    input_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
+    # Bootstrap: compute non-parametric p-value on the fly
+    if input_path.exists():
+        try:
+            df = pd.read_csv(input_path)
+            residuals = df['residual_m'].values
+            cos_elong = np.cos(df['elongation_rad'].values)
+            n_boot = len(residuals)
+            r_obs, _ = stats.pearsonr(residuals, cos_elong)
+            np.random.seed(42)
+            n_draws = 2000
+            boot_r = np.zeros(n_draws)
+            for i in range(n_draws):
+                idx = np.random.choice(n_boot, n_boot, replace=True)
+                boot_r[i], _ = stats.pearsonr(residuals[idx], cos_elong[idx])
+            n_less = np.sum(boot_r < 0)
+            n_greater = np.sum(boot_r > 0)
+            p_boot = 2 * min(n_less, n_greater) / n_draws
+            z = abs(r_obs) / np.std(boot_r, ddof=1) if np.std(boot_r, ddof=1) > 0 else None
             tests.append({
                 'name': 'Bootstrap CI (excludes zero)',
                 'sigma': float(z) if z is not None else None,
@@ -224,9 +228,10 @@ def collect_reported_significance_values():
                 'n_obs': int(n_boot),
                 'category': 'robustness'
             })
+        except Exception as e:
+            print_status(f"WARNING: Bootstrap computation failed: {e}", "WARNING")
 
     # Permutation test: compute on the fly because step_004 does not persist it
-    input_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     if input_path.exists():
         try:
             df = pd.read_csv(input_path)

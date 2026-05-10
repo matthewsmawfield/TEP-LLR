@@ -16,9 +16,11 @@ import numpy as np
 from astropy.time import Time
 from astropy.coordinates import EarthLocation, get_sun, AltAz
 import astropy.units as u
-import statsmodels.api as sm
+from scipy import stats
 import json
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
 # Add project root to path
 
@@ -30,6 +32,28 @@ STATION_COORDS = {
     'McDonald2': EarthLocation(lat=30.6714*u.deg, lon=-104.0226*u.deg, height=2070*u.m),
     'Matera': EarthLocation(lat=40.6488*u.deg, lon=16.7047*u.deg, height=493*u.m)
 }
+
+def _multiple_regression(y, X, param_names):
+    """Fit y = X @ beta using np.linalg.lstsq with proper diagnostics.
+
+    Returns dict with coefficients, standard errors, and p-values,
+    matching the diagnostics available in linear_regression.
+    """
+    n, k = X.shape
+    beta, residuals, rank, _ = np.linalg.lstsq(X, y, rcond=None)
+    if rank < k:
+        return {name: {'coeff': np.nan, 'se': np.nan, 'p': 1.0} for name in param_names}
+    resid = y - X @ beta
+    mse = np.sum(resid**2) / (n - k)
+    XtX_inv = np.linalg.inv(X.T @ X)
+    cov = mse * XtX_inv
+    se = np.sqrt(np.diag(cov))
+    t_stats = beta / se
+    pvals = 2 * (1 - stats.t.cdf(np.abs(t_stats), n - k))
+    return {
+        name: {'coeff': float(beta[i]), 'se': float(se[i]), 'p': float(pvals[i])}
+        for i, name in enumerate(param_names)
+    }
 
 def main():
     # Setup TEPLogger
@@ -99,29 +123,31 @@ def main():
         day_night_diff = mean_day - mean_night
         
         # Simple regression of residual ~ day_night
-        X = d_sta['is_day']
-        X = sm.add_constant(X)
-        model = sm.OLS(d_sta['residual_m'], X).fit()
-        dn_coeff = model.params.get('is_day', 0)
-        dn_p = model.pvalues.get('is_day', 1.0)
-        
+        reg_dn = linear_regression(d_sta['residual_m'].values, d_sta['is_day'].values)
+        dn_coeff = reg_dn['amplitude']
+        dn_p = 2 * (1 - stats.t.cdf(abs(dn_coeff) / reg_dn['amplitude_error'], len(d_sta) - 2)) if reg_dn['amplitude_error'] > 0 else 1.0
+
         # Standard regression: residual ~ cos(elongation)
-        X_cos = d_sta['cos_elong']
-        X_cos = sm.add_constant(X_cos)
-        model_cos = sm.OLS(d_sta['residual_m'], X_cos).fit()
-        eta_calc = model_cos.params.get('cos_elong', 0) / 13.0
-        eta_p = model_cos.pvalues.get('cos_elong', 1.0)
-        
+        reg_cos = linear_regression(d_sta['residual_m'].values, d_sta['cos_elong'].values)
+        eta_calc = reg_cos['eta']
+        eta_p = 2 * (1 - stats.t.cdf(abs(reg_cos['amplitude']) / reg_cos['amplitude_error'], len(d_sta) - 2)) if reg_cos['amplitude_error'] > 0 else 1.0
+
         # Partial regression: residual ~ cos(elongation) + is_day + solar_alt
-        X_partial = sm.add_constant(d_sta[['cos_elong', 'solar_alt', 'is_day']])
-        model_part = sm.OLS(d_sta['residual_m'], X_partial).fit()
-        partial_eta = model_part.params.get('cos_elong', 0) / 13.0
-        partial_eta_p = model_part.pvalues.get('cos_elong', 1.0)
+        X_partial = np.column_stack([
+            np.ones(len(d_sta)),
+            d_sta['cos_elong'].values,
+            d_sta['solar_alt'].values,
+            d_sta['is_day'].values
+        ])
+        part_res = _multiple_regression(d_sta['residual_m'].values, X_partial,
+                                        ['intercept', 'cos_elong', 'solar_alt', 'is_day'])
+        partial_eta = part_res['cos_elong']['coeff'] / ETA_SCALE_FACTOR
+        partial_eta_p = part_res['cos_elong']['p']
 
         # Calculate what day/night bias does to the apparent Eta
         # Because New Moon (which predicts negative eta) is strictly day-ranged,
         # mapping Day-Night directly to a spurious eta:
-        spurious_eta = day_night_diff / 13.0
+        spurious_eta = day_night_diff / ETA_SCALE_FACTOR
         
         results.append({
             'Station': station,
@@ -140,15 +166,22 @@ def main():
     
     # Global test
     logger.info("GLOBAL ANALYSIS:")
-    X_global = sm.add_constant(df[['cos_elong', 'is_day', 'solar_alt']])
-    model_global = sm.OLS(df['residual_m'], X_global).fit()
-    
-    original_eta = sm.OLS(df['residual_m'], sm.add_constant(df['cos_elong'])).fit().params['cos_elong'] / 13.0
+    X_global = np.column_stack([
+        np.ones(len(df)),
+        df['cos_elong'].values,
+        df['solar_alt'].values,
+        df['is_day'].values
+    ])
+    global_res = _multiple_regression(df['residual_m'].values, X_global,
+                                      ['intercept', 'cos_elong', 'solar_alt', 'is_day'])
+
+    reg_orig_global = linear_regression(df['residual_m'].values, df['cos_elong'].values)
+    original_eta = reg_orig_global['eta']
     logger.info(f"Original Global Eta: {original_eta}")
-    logger.info(f"Solar Altitude Parameter: {model_global.params['solar_alt']} p-val: {model_global.pvalues['solar_alt']}")
-    logger.info(f"Cleaned Global Eta (Controlling for Sun Altitude/Thermal): {model_global.params['cos_elong']/13.0}")
-    logger.info(f"Cleaned Global P-Value for Cos(Elongation): {model_global.pvalues['cos_elong']}")
-    
+    logger.info(f"Solar Altitude Parameter: {global_res['solar_alt']['coeff']} p-val: {global_res['solar_alt']['p']}")
+    logger.info(f"Cleaned Global Eta (Controlling for Sun Altitude/Thermal): {global_res['cos_elong']['coeff']/ETA_SCALE_FACTOR}")
+    logger.info(f"Cleaned Global P-Value for Cos(Elongation): {global_res['cos_elong']['p']}")
+
     # Save results
     output_data = {
         "step_id": "step_027",
@@ -156,10 +189,10 @@ def main():
         "station_results": results,
         "global_analysis": {
             "original_eta": float(original_eta),
-            "solar_altitude_param": float(model_global.params['solar_alt']),
-            "solar_altitude_pval": float(model_global.pvalues['solar_alt']),
-            "cleaned_eta": float(model_global.params['cos_elong']/13.0),
-            "cleaned_pval": float(model_global.pvalues['cos_elong'])
+            "solar_altitude_param": float(global_res['solar_alt']['coeff']),
+            "solar_altitude_pval": float(global_res['solar_alt']['p']),
+            "cleaned_eta": float(global_res['cos_elong']['coeff']/ETA_SCALE_FACTOR),
+            "cleaned_pval": float(global_res['cos_elong']['p'])
         }
     }
     

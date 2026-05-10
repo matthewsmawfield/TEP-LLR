@@ -30,9 +30,9 @@ def compute_cooks_distance(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     residuals = y - y_pred
     mse = np.sum(residuals**2) / (n - p)
     
-    # compute leverage
-    H = X @ np.linalg.inv(X.T @ X) @ X.T
-    leverage = np.diag(H)
+    # compute leverage using O(n) memory computation
+    XtX_inv = np.linalg.inv(X.T @ X)
+    leverage = np.sum((X @ XtX_inv) * X, axis=1)
     
     # Cook's Distance formula
     cooks_d = (residuals**2 / (p * mse)) * (leverage / ((1 - leverage)**2))

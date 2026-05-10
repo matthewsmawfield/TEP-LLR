@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 005: Multi-Ephemeris Comparison for TEP Nordtvedt Signal Detection
+Step 006: Multi-Ephemeris Comparison for TEP Nordtvedt Signal Detection
 """
 
 import sys
