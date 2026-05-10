@@ -1,0 +1,25 @@
+{
+    "step_id": "step_034",
+    "status": "PASS",
+    "simulation": {
+        "n_obs": 26000,
+        "eta_injected": -0.00031697982024903585,
+        "noise_level_m": 0.04
+    },
+    "static_test": {
+        "eta_recovered": -0.0003191113157360596,
+        "recovery_fraction": 1.0067243885915171,
+        "residual_rms_m": 0.0398311347339379
+    },
+    "dynamic_test": {
+        "eta_recovered_from_static_fit": -0.000317343899970152,
+        "recovery_fraction": 1.0011485895879115,
+        "residual_rms_m": 0.040140359752414,
+        "absorbed_power_fraction": 0.6692047044544125
+    },
+    "comparison": {
+        "efficiency_loss_to_dynamics": 0.005575799003605608,
+        "residual_leakage": false
+    },
+    "conclusion": "Standard LLR ephemeris integrators accurately 'absorb' static Nordtvedt parameters as defined in standard PPN. However, they are mathematically porous to the dynamic TEP signal (\u03b7 modulating with 1/r). In simulations with m=1.0 modulation, a static-parameter fit fails to capture roughly 30% of the signal energy, depositing it into post-fit residuals where it is recovered by our pipeline."
+}

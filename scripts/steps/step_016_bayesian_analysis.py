@@ -107,8 +107,8 @@ def run_bayesian_analysis(verbose=False):
     intercept_init = ols_coeffs[1]
     initial = np.array([eta_init, intercept_init])
 
-    n_walkers = TEP_CONFIG["MCMC_HEAVY_WALKERS"]
-    n_steps = TEP_CONFIG["MCMC_HEAVY_STEPS"]
+    n_walkers = TEP_CONFIG["MCMC_STANDARD_WALKERS"]
+    n_steps = TEP_CONFIG["MCMC_STANDARD_STEPS"]
     burn_in = TEP_CONFIG["MCMC_BURN_IN"]
     thin = 20
 

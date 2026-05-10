@@ -1,0 +1,22 @@
+{
+    "step_id": "step_006",
+    "comparisons": {
+        "INPOP19a": {
+            "n_obs": 26207,
+            "n_used": 25445,
+            "n_outliers_removed": 762,
+            "eta": -0.0003169798202490359,
+            "eta_error": 6.040658378191678e-05,
+            "snr": 5.247438282446399
+        },
+        "DE430": {
+            "n_obs": 4597,
+            "n_used": 4560,
+            "n_outliers_removed": 37,
+            "eta": -0.0007028006239570603,
+            "eta_error": 0.00011800196006775877,
+            "snr": 5.955838560253576
+        }
+    },
+    "status": "PASS"
+}

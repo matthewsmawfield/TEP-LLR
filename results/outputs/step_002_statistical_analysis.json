@@ -1,24 +1,24 @@
 {
     "eta_ols": -0.00031697982024903585,
     "eta_ols_error": 6.040658378191678e-05,
-    "eta_mcmc": -0.00031681724633455383,
-    "eta_err_mcmc": 5.9855092159498134e-05,
-    "snr": 5.293070896797199,
+    "eta_mcmc": -0.00031594258008794273,
+    "eta_err_mcmc": 5.9529995152823216e-05,
+    "snr": 5.307283820145904,
     "status": "STRONG DETECTION",
     "ar1_gls": {
-        "eta": -0.00032795350349234257,
-        "eta_error": 9.7885560934959e-05,
+        "eta": -0.00032808332668428743,
+        "eta_error": 8.841697834159359e-05,
         "rho": 0.4291179120392002,
         "rho_error": 0.005662582549006842,
         "durbin_watson": 1.1417482797269214,
         "interpretation": "Significant autocorrelation"
     },
     "convergence_diagnostics": {
-        "autocorr_time": 30.15588998047683,
+        "autocorr_time": 28.09451143186111,
         "convergence_status": "CONVERGED",
         "n_steps_after_burnin": 2000,
-        "steps_per_autocorr": 66.3220353070268,
-        "acceptance_fraction": 0.7165833333333333,
+        "steps_per_autocorr": 71.18828191231196,
+        "acceptance_fraction": 0.7164583333333333,
         "n_walkers": 32,
         "n_steps": 3000,
         "burn_in": 1000

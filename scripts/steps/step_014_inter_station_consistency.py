@@ -31,18 +31,18 @@ from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, p
 def run_consistency_analysis():
     print_status("Initiating Inter-Station Consistency Deep Scan...", "TITLE")
 
-    # Load step_003 results which contain station-by-station breakdowns
-    step003_path = PROJECT_ROOT / "results" / "outputs" / "step_003_detection_analysis_advanced.json"
-    if not step003_path.exists():
-        print_status("Step 003 results not found. Run advanced analysis first.", "ERROR")
+    # Load step_004 results which contain station-by-station breakdowns
+    step004_path = PROJECT_ROOT / "results" / "outputs" / "step_004_detection_analysis_advanced.json"
+    if not step004_path.exists():
+        print_status("Step 004 results not found. Run advanced analysis first.", "ERROR")
         return None
 
-    with open(step003_path, "r") as f:
-        s003 = json.load(f)
+    with open(step004_path, "r") as f:
+        s004 = json.load(f)
 
-    station_data = s003.get("station_by_station", {})
+    station_data = s004.get("station_by_station", {})
     if not station_data:
-        print_status("No station-by-station data found in Step 003.", "ERROR")
+        print_status("No station-by-station data found in Step 004.", "ERROR")
         return None
 
     # Filter for stations with enough data (N > 100)

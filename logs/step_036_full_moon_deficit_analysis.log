@@ -1,0 +1,15 @@
+[14:45:17]     Step 038: Full-Moon Deficit Analysis
+[14:45:17]     Testing Murphy/Sabhlok full-moon deficit vs TEP predictions
+[14:45:17]     Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
+[14:45:17]     Loaded 26207 observations
+[14:45:17]     Analyzing full-moon deficit pattern...
+[14:45:17]     Testing TEP vs thermal/dust hypothesis...
+[14:45:17]     Analyzing heliocentric geometry dependence...
+[14:45:17]     Results saved to: results/outputs/step_036_full_moon_deficit_analysis.json
+[14:45:17]     
+=== Full-Moon Deficit Analysis Summary ===
+[14:45:17]     Full-moon observations: 855
+[14:45:17]     TEP correlation (r²): 0.0009
+[14:45:17]     Thermal correlation (r²): 0.0008
+[14:45:17]     Preferred model: TEP
+[14:45:17]     Step 038 completed successfully

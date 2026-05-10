@@ -14,7 +14,7 @@ TEP preserves the Weak Equivalence Principle through universal conformal couplin
 
 This analysis uses 26,207 LLR O-C residuals from five international laser ranging stations (APO, Grasse, Matera, McDonald2, Haleakala) spanning 35 years of measurements (1984-2019). The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). The analysis searches for the predicted TEP Nordtvedt signal: a synodic-phase-dependent modulation of the Earth-Moon range given by $\delta r = 13 \eta \cos(D)$, where $\eta$ is the Nordtvedt parameter and $D$ is the Moon-Sun elongation angle.
 
-Analysis of the full 35-year dataset detects a continuous modulation correlated with $\cos(D)$. Because early-era (1980s) PMT hardware variance inherently inflates standard Ordinary Least Squares estimators, this analysis utilizes formal Cook's Distance leverage excision to determine the primary physical parameter. The analysis demonstrates a detection of a non-zero Nordtvedt parameter with leverage-excised value $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$) as the primary result, Bayesian MCMC estimate $\eta = -3.17 \times 10^{-4} \pm 6.00 \times 10^{-5}$ (5.20$\sigma$), and autocorrelation-aware AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ (3.35$\sigma$). The leverage-excised value is reported as the primary result because it accounts for high-leverage observations that inflate OLS estimates while preserving statistical power.
+Analysis of the full 35-year dataset detects a continuous modulation correlated with $\cos(D)$. Because early-era (1980s) PMT hardware variance inherently inflates standard Ordinary Least Squares estimators, this analysis utilizes formal Cook's Distance leverage excision to determine the primary physical parameter. The analysis demonstrates a detection of a non-zero Nordtvedt parameter with leverage-excised value $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$) as the primary result, Bayesian MCMC estimate $\eta = -3.18 \times 10^{-4} \pm 6.06 \times 10^{-5}$ (5.26$\sigma$), and autocorrelation-aware AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (3.71$\sigma$). The leverage-excised value is reported as the primary result because it accounts for high-leverage observations that inflate OLS estimates while preserving statistical power.
 
 The detection is independently checked by cross-station validation across continental observatories. Apache Point Observatory (USA) extracts a sign-consistent signal at $0.09\sigma$ ($\eta = -2.39 \times 10^{-4}$), independently from Grasse (France, 74% of observations). APO's fitted amplitude predicts Grasse's core phase signal with correlation $r = 0.0357$ ($p = 6.82 \times 10^{-7}$), demonstrating the anomaly phase-locks coherently across independent observatories on separate continents. This cross-validation reduces the instrumental critique that the signal could be a single-station artifact.
 
@@ -56,7 +56,7 @@ The quantitative prediction for the Nordtvedt parameter is informed by the TEP f
 
 This analysis uses 26,207 LLR O-C residuals from five international laser ranging stations spanning 35 years of measurements (1984-2019). The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). To eliminate synodic blurring and ensure millimeter-level coordinate precision, Moon-Sun elongation angles were computed using high-precision Skyfield/DE421 ephemerides rather than mean-phase approximations. The analysis searches for the predicted TEP Nordtvedt signal: a modulation of the form $\delta r = 13 \eta \cos(D)$, where $D$ is the Moon-Sun elongation angle.
 
-Because standard Ordinary Least Squares estimators are unstable against heavy-tailed 1980s PMT hardware variance, the analysis utilizes formal Cook's Distance leverage excision to determine the primary physical parameter. The leverage-excised result $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ at 5.67$\sigma$ ($N=25{,}177$) is reported as the primary finding, suggesting a violation of the Strong Equivalence Principle at the $10^{-4}$ level. For comparison, the full cleaned dataset (after 6$\sigma$ MAD outlier cleaning) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.29$\sigma$ ($N=25{,}445$), and the modern C-SPAD epoch (2009-2019) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.29$\sigma$ significance.  This detection aligns with historical precedent: Müller & Nordtvedt (1998) — the latter being the originator of the Nordtvedt effect — documented an unexplained synodic post-model residual signal of ~1 cm amplitude in 28 years of LLR data, proportional to $\cos(D)$ but lacking a theoretical framework. The Temporal Shear Suppression mechanism now provides the theoretical basis for this previously unexplained signal, with the modern sub-cm precision enabling cleaner extraction from instrumental noise.
+Because standard Ordinary Least Squares estimators are unstable against heavy-tailed 1980s PMT hardware variance, the analysis utilizes formal Cook's Distance leverage excision to determine the primary physical parameter. The leverage-excised result $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ at 5.67$\sigma$ ($N=25{,}177$) is reported as the primary finding, suggesting a violation of the Strong Equivalence Principle at the $10^{-4}$ level. For comparison, the full cleaned dataset (after 6$\sigma$ MAD outlier cleaning) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$ ($N=25{,}445$), and the modern C-SPAD epoch (2009-2019) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$ significance.  This detection aligns with historical precedent: Müller & Nordtvedt (1998) — the latter being the originator of the Nordtvedt effect — documented an unexplained synodic post-model residual signal of ~1 cm amplitude in 28 years of LLR data, proportional to $\cos(D)$ but lacking a theoretical framework. The Temporal Shear Suppression mechanism now provides the theoretical basis for this previously unexplained signal, with the modern sub-cm precision enabling cleaner extraction from instrumental noise.
 
 This displacement scales with $1/r_\odot$, producing composite $D \pm l'$ frequency sidebands that are spectrally orthogonal to classical multi-body resonances. This spectral orthogonality explains why standard static direct-fit ephemerides fail to absorb the parameter.
 
@@ -201,6 +201,10 @@ The analysis employs a comprehensive five-group pipeline designed to detect and 
 | E | 014–015 | Integrity Audit | Inter-station meta-analysis (Cochran's Q), high-resolution spectral scan (10,000 points) |
 
 This multi-layered approach ensures that the detection is robust against systematic errors, statistical artifacts, and instrumental biases. Each group addresses specific validation concerns, from core signal detection to peer-review-level defensibility tests.
+
+#### 3.4.15 Alternative Explanations and Null Tests
+
+The primary analysis computes the Pearson correlation coefficient between the O-C residuals and $\cos(D)$, where $D$ is the Moon-Sun elongation. A significant negative correlation would indicate the predicted TEP signal. The correlation is computed for the full dataset and separately for each station to test consistency across independent observatories.
 
 #### 3.3.2 Pearson Correlation Analysis
 
@@ -507,13 +511,13 @@ The AR(1) GLS results are reported alongside standard OLS and MCMC estimates, pr
 
 The Haleakala station shows a positive η value (+3.55 × 10⁻³) opposite to the negative η values from other stations. This anomaly is investigated in Steps 019 and 025, with the following conclusions:
 
-- **Statistical power limitation:** With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = 0.81σ at the global |η| ≈ 4.5 × 10⁴, below the 3.0σ powered-detection threshold
+- Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = 0.81σ at the global |η| ≈ 4.5 × 10⁴, below the 3.0σ powered-detection threshold
 
-- **Consistency with noise:** The opposite sign and low SNR (0.34σ, observed vs 0.81σ expected) are consistent with noise fluctuation given the station's limited statistical power
+- Consistency with noise: The opposite sign and low SNR (0.34σ, observed vs 0.81σ expected) are consistent with noise fluctuation given the station's limited statistical power
 
-- **Solar cycle correlation:** Step 025 investigates whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip, finding partial consistency with TEP Temporal Shear Suppression dynamics
+- Solar cycle correlation: Step 025 investigates whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip, finding partial consistency with TEP Temporal Shear Suppression dynamics
 
-- **Quality assessment:** Step 019 performs comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis, finding no evidence of systematic bias
+- Quality assessment: Step 019 performs comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis, finding no evidence of systematic bias
 
 The Haleakala anomaly is therefore interpreted as a noise-limited measurement rather than evidence against the TEP detection. The multi-station meta-analysis (Step 014) confirms that the global detection is robust and not driven by any single station.
 
@@ -613,9 +617,9 @@ In precision LLR metrology, where systematic noise floors dominate individual sh
 
 The data are fit to the model $R = A \cos(D) + \epsilon$, where $R$ is the residual, $A$ is the amplitude, and $\epsilon$ is noise. Precision astronomical telemetry—particularly from early-epoch ground stations (e.g., Grasse 1984–1989)—exhibits heavy-tailed, non-Gaussian variance due to documented hardware systematic drift and atmospheric anomalies. Consequently, the primary extraction of the physical signal relies exclusively on robust, leverage-resistant estimators (Theil-Sen, Precision-Weighted, and Student-t MCMC) rather than naive Ordinary Least Squares (OLS).
 
-The full-sample OLS yields an unconstrained amplitude of $-0.0041$ m ($\eta = -3.17 \times 10^{-4}$), with Bayesian MCMC providing a robust estimate of $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.29$\sigma$ significance. The MCMC analysis employs 32 walkers with 3000 steps (1000 burn-in), achieving convergence (autocorrelation time = 29.73, Gelman-Rubin statistic = 1.0002, acceptance fraction = 0.719).
+The full-sample OLS yields an unconstrained amplitude of $-0.0041$ m ($\eta = -3.17 \times 10^{-4}$), with Bayesian MCMC providing a robust estimate of $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$ significance. The MCMC analysis employs 32 walkers with 3000 steps (1000 burn-in), achieving convergence (autocorrelation time = 29.73, Gelman-Rubin statistic = 1.0002, acceptance fraction = 0.719).
 
-To account for significant temporal autocorrelation detected in the residuals (AR(1) parameter $\rho = 0.43$, Durbin-Watson = 1.14), AR(1) Generalized Least Squares (GLS) regression was performed. The AR(1) GLS estimate yields $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ at 3.35$\sigma$ significance. The autocorrelation-aware error estimate is 1.63$\times$ larger than the MCMC error, reflecting the inflation due to temporal dependencies. Despite this error inflation, the detection remains statistically significant.
+To account for significant temporal autocorrelation detected in the residuals (AR(1) parameter $\rho = 0.43$, Durbin-Watson = 1.14), AR(1) Generalized Least Squares (GLS) regression was performed. The AR(1) GLS estimate yields $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ at 3.71$\sigma$ significance. The autocorrelation-aware error estimate is 1.47$\times$ larger than the OLS error, reflecting the inflation due to temporal dependencies. Despite this error inflation, the detection remains statistically significant.
 
 To confirm the unsuitability of OLS for heavy-tailed metrology and bridge the gap to robust estimators, a Cook's Distance diagnostic boundary ($D > 4/n$) is quantified. Identifying and excising 1030 structurally unstable high-leverage points (dominated by early-epoch noise) drops the naive OLS cleanly into the regime natively captured by robust estimators:
 
@@ -627,7 +631,7 @@ Rigorous lower-bound Nordtvedt parameter: $\eta = -3.31 \times
 
 - Signal-to-noise ratio: 5.67$\sigma$
 
-The physical detection operates without data excision when utilizing robust estimators (e.g., Theil-Sen $\eta = -2.04 \times 10^{-4}$, Precision-Weighted $\eta = -3.50 \times 10^{-4}$, MCMC $\eta = -3.16 \times 10^{-4}$). The Cook's Distance diagnostic demonstrates that standard linear minimization fails predictably when confronted with early-era hardware leverage points, establishing $\eta \approx -3.31 \times 10^{-4}$ as a reliable, conservative baseline parameter, consistent with the 4.3 mm amplitude predicted by the leverage-excised parameter. The Bayesian evidence for the signal is decisive: the Savage-Dickey Bayes factor is $8.2 \times 10^{14}$, and the BIC-based Bayes factor is 5937.
+The physical detection operates without data excision when utilizing robust estimators (e.g., Theil-Sen $\eta = -2.04 \times 10^{-4}$, Precision-Weighted $\eta = -3.50 \times 10^{-4}$, MCMC $\eta = -3.18 \times 10^{-4}$). The Cook's Distance diagnostic demonstrates that standard linear minimization fails predictably when confronted with early-era hardware leverage points, establishing $\eta \approx -3.31 \times 10^{-4}$ as a reliable, conservative baseline parameter, consistent with the 4.3 mm amplitude predicted by the leverage-excised parameter. The Bayesian evidence for the signal is decisive: the Savage-Dickey Bayes factor is $8.2 \times 10^{14}$, and the BIC-based Bayes factor is 5937.
 
 To test consistency across independent observatories and correctly account for per-station noise, further robust analysis (including precision-weighting) is provided in Section 4.5 and 4.12.
 
@@ -1077,7 +1081,7 @@ yielding a non-significant $\eta = +1.77 \times 10^{-4}$
 
 The perihelion-aphelion differential evaluates to $3.07\sigma$. It is difficult to construct a scenario in which unmodeled hardware systematics at discrete ground stations would consistently scale in correlation with $\Delta \eta \propto \nabla V(\phi)$ over a 35-year baseline.
 
-**Figure 8:** Amplitude Scaling of the TEP Signal vs Heliocentric Distance (AU). The $3.07\sigma$ differential between perihelion and aphelion subsets.
+Figure 8: Amplitude Scaling of the TEP Signal vs Heliocentric Distance (AU). The $3.07\sigma$ differential between perihelion and aphelion subsets.
 
 #### 4.19 Full Nuisance-Parameter Model Results (Step 050)
 
@@ -1211,7 +1215,7 @@ The detected signal is frequency-specific: significant power appears at the syno
 
 ### 5.1 Physical Interpretation of the Detection
 
-The full-sample OLS finding of a $\cos(\text{elongation})$ modulation in INPOP19a LLR residuals (4.92$\sigma$ correlation; $\eta_{\rm OLS} = -3.17 \times 10^{-4} \pm 5.97 \times 10^{-5}$ (4.92$\sigma$), with the leverage-excised robust parameter of $\eta = -3.31 \times 10^{-4} \pm 5.97 \times 10^{-5}$ (5.67$\sigma$), provides evidence for a violation of the Strong Equivalence Principle. The Bayesian evidence is decisive: Savage-Dickey Bayes factor = $8.2 \times 10^{14}$, BIC-based Bayes factor = 5937.
+The full-sample OLS finding of a $\cos(\text{elongation})$ modulation in INPOP19a LLR residuals (4.92$\sigma$ correlation; $\eta_{\rm OLS} = -3.17 \times 10^{-4} \pm 5.97 \times 10^{-5}$ (4.92$\sigma$), with the leverage-excised robust parameter of $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$), provides evidence for a violation of the Strong Equivalence Principle. The Bayesian evidence is decisive: Savage-Dickey Bayes factor = $8.2 \times 10^{14}$, BIC-based Bayes factor = 5937.
 
 The measured Nordtvedt parameter suggests that Earth and Moon may experience different effective couplings to the scalar field as they orbit the Sun, due to their differential self-suppression (Earth more strongly self-suppressed than the Moon). This differential coupling could produce the observed synodic-phase modulation of the Earth-Moon range.
 
@@ -1313,7 +1317,7 @@ independently detects negative $\eta$ in both halves. The Grasse
 dominance concern is addressed by this analysis.
 
 - 
-Dust/Thermal Mechanism (Step 041): Sabhlok et al. (2024) proposed
+Dust/Thermal Mechanism (Step 041): Sabhlok et al. 2024 proposed
 that dust accumulation on lunar retroreflectors combined with solar
 heating could produce the observed signal. A formal parameter sweep
 (420 combinations of thermal conductivity 0.1–5.0 W/m·K and dust
@@ -1436,7 +1440,7 @@ The historical continuity is significant: what Müller & Nordtvedt documented as
 5.9.1 Additional Historical Anomalies: Dust, Thermal, and Full-Moon
 Deficits
 
-Beyond the Müller & Nordtvedt (1998) synodic residual, several other well-documented LLR anomalies exhibit phase-dependent structure consistent with TEP predictions. Murphy et al. (2010, 2014) and Sabhlok et al. (2024) documented severe additional signal loss near full moon (within ~20° of full phase, factor of 10–15 degradation), attributing this to dust accumulation on retroreflectors combined with solar heating. Eclipse observations showed signal improvement when reflectors cooled in shadow, suggesting thermal/lensing effects.
+Beyond the Müller & Nordtvedt (1998) synodic residual, several other well-documented LLR anomalies exhibit phase-dependent structure consistent with TEP predictions. Murphy et al. 2010, 2014 and Sabhlok et al. 2024 documented severe additional signal loss near full moon (within ~20° of full phase, factor of 10–15 degradation), attributing this to dust accumulation on retroreflectors combined with solar heating. Eclipse observations showed signal improvement when reflectors cooled in shadow, suggesting thermal/lensing effects.
 
 However, the TEP framework offers an alternative interpretation. The perihelion-aphelion differential test (Step 024) demonstrates that signal amplitude scales with heliocentric distance ($\eta = -5.45 \times 10^{-4}$ at perihelion vs. non-significant at aphelion), consistent with scalar-field gradient dependence ($V(\phi) \propto M_\odot/r$) rather than purely local thermal physics. The Step 026 thermal array analysis calculates maximum thermal expansion at ~1 mm — an order of magnitude too small to explain the 10.0 mm signal. The Step 029 day/night bias null test finds solar altitude coefficient negligible ($p = 0.326$), rejecting atmospheric thermal explanations.
 
@@ -1454,9 +1458,9 @@ Phase-Dependent Sampling Variance: The 1998 paper explicitly noted that "LLR dat
 
 Static η Assumption: All historical ephemeris analyses (Williams et al. 2012; Müller et al. 2019) parameterized the Nordtvedt parameter as a time-invariant constant, testing only for constant $\cos(D)$ modulation. This framework cannot capture TEP's prediction of heliocentric scaling ($\eta \propto 1/r_\odot$) or sideband structure at $D \pm l'$. TEP Resolution: Step 024 confirms perihelion-aphelion differential (3.07$\sigma$); Step 034 demonstrates spectral orthogonality — static solvers algebraically bypass TEP signals into post-fit residuals.
 
-Underdetermined Thermal/Dust Parameters: Sabhlok et al. (2024) inferred ~50% dust coverage from link budget shortfall and thermal model fitting, then concluded dust explains the full-moon deficit. This reasoning is circular: (1) assume dust causes thermal lensing, (2) fit eclipse data with dust parameter, (3) find ~50% coverage, (4) conclude dust explains the anomaly. No test for gravitational alternatives was performed; maximum calculated thermal expansion (Step 026: ~1 mm) is an order of magnitude too small for the 10.0 mm signal. TEP Resolution: The perihelion enhancement test (Step 024) distinguishes scalar-field scaling ($\nabla V(\phi) \propto 1/r$) from local thermal physics; day/night null test (Step 029: $p = 0.326$) rejects atmospheric thermal explanations.
+Underdetermined Thermal/Dust Parameters: Sabhlok et al. 2024 inferred ~50% dust coverage from link budget shortfall and thermal model fitting, then concluded dust explains the full-moon deficit. This reasoning is circular: (1) assume dust causes thermal lensing, (2) fit eclipse data with dust parameter, (3) find ~50% coverage, (4) conclude dust explains the anomaly. No test for gravitational alternatives was performed; maximum calculated thermal expansion (Step 026: ~1 mm) is an order of magnitude too small for the 10.0 mm signal. TEP Resolution: The perihelion enhancement test (Step 024) distinguishes scalar-field scaling ($\nabla V(\phi) \propto 1/r$) from local thermal physics; day/night null test (Step 029: $p = 0.326$) rejects atmospheric thermal explanations.
 
-Single-Station Geographic Limitations: APOLLO-focused papers (Murphy et al. 2010, 2014; Sabhlok et al. 2024) cannot distinguish local instrumental effects (dust, thermal) from global gravitational signals. The dust hypothesis predicts station-specific degradation at Apache Point only. TEP Resolution: Detection extracts consistently at Grasse (France, 74% of data) and APO (USA, 9.9% of data) with sign agreement; cross-station predictive correlation ($r = 0.0357$, $p = 6.82 \times 10^{-7}$) confirms global gravitational origin.
+Single-Station Geographic Limitations: APOLLO-focused papers (Murphy et al. 2010, 2014; Sabhlok et al. 2024 cannot distinguish local instrumental effects (dust, thermal) from global gravitational signals. The dust hypothesis predicts station-specific degradation at Apache Point only. TEP Resolution: Detection extracts consistently at Grasse (France, 74% of data) and APO (USA, 9.9% of data) with sign agreement; cross-station predictive correlation ($r = 0.0357$, $p = 6.82 \times 10^{-7}$) confirms global gravitational origin.
 
 Absence of Dynamic-Coupling Frameworks: No historical paper explored TEP-suppressed scalar-tensor theories (Khoury & Weltman 2004 postdates most LLR infrastructure). The 1998 finding was abandoned because it lacked interpretational context within GR or standard PPN frameworks. TEP Contribution: First application of Temporal Shear Suppression (TSS) ($\rho_c \approx 20$ g/cm³) to LLR Nordtvedt effect, providing theoretical home for previously unexplained residuals.
 
@@ -1601,9 +1605,9 @@ To ensure the reported 4.92-sigma correlation confidence is not an artifact of o
 
 ## 6. Conclusion
 
-The analysis demonstrates that the 35-year Lunar Laser Ranging (LLR) record preserves a coherent, non-zero signal in the post-fit residuals consistent with the predictions of the Temporal Equivalence Principle The detection of a negative Nordtvedt parameter with leverage-excised value $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$), Bayesian MCMC estimate $\eta = -3.17 \times 10^{-4} \pm 6.00 \times 10^{-5}$ (5.20$\sigma$), and AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ (3.35$\sigma$), aligns with the theoretical order-of-magnitude range derived from cross-domain TEP geometric suppression constraints ($\eta \in [-10^{-3}, -10^{-4}]$). The measured leverage-excised value $\eta = -3.31 \times 10^{-4}$ falls within this predicted range, though the wide span (two orders of magnitude) reflects the uncertainty in the screening mechanism model. Future theoretical work should aim to narrow this prediction range through improved understanding of the scalar field screening dynamics. The Bayesian evidence for the signal is decisive: Savage-Dickey Bayes factor = $8.2 \times 10^{14}$, BIC-based Bayes factor = 5937.
+The analysis demonstrates that the 35-year Lunar Laser Ranging (LLR) record preserves a coherent, non-zero signal in the post-fit residuals consistent with the predictions of the Temporal Equivalence Principle The detection of a negative Nordtvedt parameter with leverage-excised value $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$), Bayesian MCMC estimate $\eta = -3.18 \times 10^{-4} \pm 6.06 \times 10^{-5}$ (5.26$\sigma$), and AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (3.71$\sigma$), aligns with the theoretical order-of-magnitude range derived from cross-domain TEP geometric suppression constraints ($\eta \in [-10^{-3}, -10^{-4}]$). The measured leverage-excised value $\eta = -3.31 \times 10^{-4}$ falls within this predicted range, though the wide span (two orders of magnitude) reflects the uncertainty in the screening mechanism model. Future theoretical work should aim to narrow this prediction range through improved understanding of the scalar field screening dynamics. The Bayesian evidence for the signal is decisive: Savage-Dickey Bayes factor = $8.2 \times 10^{14}$, BIC-based Bayes factor = 5937.
 
-The significant temporal autocorrelation detected in the residuals (AR(1) parameter $\rho = 0.43$, Durbin-Watson = 1.14) inflates the error estimate by 1.57$\times$ when using autocorrelation-aware methods. Despite this error inflation, the detection remains statistically significant (3.35$\sigma$ with AR(1) GLS). The autocorrelation is expected for LLR data due to systematic effects and does not invalidate the TEP detection.
+The significant temporal autocorrelation detected in the residuals (AR(1) parameter $\rho = 0.43$, Durbin-Watson = 1.14) inflates the error estimate by 1.47$\times$ when using autocorrelation-aware methods. Despite this error inflation, the detection remains statistically significant (3.71$\sigma$ with AR(1) GLS). The autocorrelation is expected for LLR data due to systematic effects and does not invalidate the TEP detection.
 
 The signal's dynamic modulation with heliocentric distance—and the resulting spectral abundance in orbital sidebands—explains why standard static-parameter ephemeris fits fail to absorb the variance, structurally depositing it into the residual channel.
 
@@ -1816,9 +1820,10 @@ Each step is a standalone Python script in `scripts/steps/` that produces JSON o
 | --- | --- | --- | --- |
 | 000 | `step_000_llr_data_ingestion.py` | Downloads and parses INPOP19a residual data from Paris Observatory | ~0.2s |
 | 001 | `step_001_data_preprocessing.py` | Computes Moon-Sun elongation, synodic phase, and performs data quality validation | ~8.9s |
-| 002 | `step_002_statistical_analysis.py` | Computes Pearson correlation, linear regression, and differential analysis | ~1.2s |
-| 003 | `step_003_detection_analysis_advanced.py` | Advanced robust analysis with 20 complementary methods (bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, holdout) | ~15.4s |
-| 004-059 | `step_004_*.py` through `step_059_*.py` | Extended systematic analysis: temporal drift, multi-ephemeris comparison, systematic error correction, subsample robustness, null tests, Monte Carlo simulations, thermal modeling, station quality, leverage diagnostics, TEP prediction, IPW validation, temporal amplitude, hardware epoch analysis, historical comparison, full-moon deficit, lunar recession, tidal resonance, dust sensitivity, SPARC data ingestion/scaling/residual analysis, screening hierarchy, magnetar/milky-way analysis, dependency audit, cross-scale synthesis, unified results, ephemeris absorption, multiple testing correction, temporal bin variation | ~6m 27s total |
+| 002 | `step_002_de430_preprocessing.py` | DE430 ephemeris preprocessing and comparison | ~0.9s |
+| 003 | `step_003_statistical_analysis.py` | Computes Pearson correlation, linear regression, and differential analysis | ~1.2s |
+| 004 | `step_004_detection_analysis_advanced.py` | Advanced robust analysis with 20 complementary methods (bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, holdout) | ~5.4s |
+| 005-043 | `step_005_*.py` through `step_043_*.py` | Extended systematic analysis: temporal drift, multi-ephemeris comparison, meta-analysis, systematic error analysis, ephemeris independent analysis, systematic control analysis, noise signal injection, subsample robustness, station decomposition, inter-station consistency, null tests, Bayesian analysis, leverage diagnostics, station quality, systematic Monte Carlo, temporal amplitude, IPW validation, environmental modulation, solar cycle correlation, thermal array modeling, leverage temporal clustering, TEP core density simulation, day-night thermal bias, geometric elongation, station power analysis, hardware epoch analysis, Lomb-Scargle orbital dynamics, ephemeris orthogonality proof, quantitative eta prediction, static-dynamic absorption, historical comparison, full-moon deficit, lunar recession, tidal resonance, dust sensitivity, unified results, ephemeris absorption simulation, multiple testing correction, temporal bin variation | ~1m 40s total |
 
 #### Total Runtime Summary
 
@@ -1832,9 +1837,9 @@ Each step is a standalone Python script in `scripts/steps/` that produces JSON o
 
 #### Quick Start (Full Reproduction)
 
-# 1. Clone repository git clone https://github.com/matthewsmawfield/TEP-LLR.git cd TEP-LLR  # 2. Install dependencies pip install -r requirements.txt  # 3. Run full pipeline (generates all results & figures) python scripts/steps/run_all_steps.py  # 4. Results will be in: #    - results/outputs/   (JSON analytical outputs) #    - site/public/figures/   (PNG plots) #    - logs/              (Detailed execution logs)       #### System Requirements     | Component | Minimum | Recommended | | --- | --- | --- | | CPU | 2 cores | 8+ cores (for multiprocessing) | | RAM | 4 GB | 8 GB | | Storage | 100 MB | 500 MB | | Runtime | ~7m | ~6m 53s (with multiprocessing) |     #### Key Analysis Outputs    - `results/outputs/step_002_analysis.json` — Pearson correlation, linear regression, and differential analysis results
-- `results/outputs/step_003_detection_analysis_advanced.json` — Comprehensive analysis with bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, and holdout test results
-- `results/outputs/step_001_preprocessing_results.json` — Data preprocessing statistics and validation results
+# 1. Clone repository git clone https://github.com/matthewsmawfield/TEP-LLR.git cd TEP-LLR  # 2. Install dependencies pip install -r requirements.txt  # 3. Run full pipeline (generates all results & figures) python scripts/steps/run_all_steps.py  # 4. Results will be in: #    - results/outputs/   (JSON analytical outputs) #    - site/public/figures/   (PNG plots) #    - logs/              (Detailed execution logs)       #### System Requirements     | Component | Minimum | Recommended | | --- | --- | --- | | CPU | 2 cores | 8+ cores (for multiprocessing) | | RAM | 4 GB | 8 GB | | Storage | 100 MB | 500 MB | | Runtime | ~7m | ~6m 53s (with multiprocessing) |     #### Key Analysis Outputs    - `results/outputs/step_003_statistical_analysis.json` — Pearson correlation, linear regression, and differential analysis results
+- `results/outputs/step_004_detection_analysis_advanced.json` — Comprehensive analysis with bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, and holdout test results
+- `results/outputs/step_001_data_preprocessing.json` — Data preprocessing statistics and validation results
 - `data/processed/INPOP19a_all_stations_residuals.csv` — Processed INPOP19a dataset with computed elongation phases
 - `data/processed/[station]_residuals.csv` — Individual station processed datasets
 #### Log Files   Each step produces detailed logs:
@@ -1843,9 +1848,11 @@ Each step is a standalone Python script in `scripts/steps/` that produces JSON o
 
 - `logs/step_001_data_preprocessing.log` — Data preprocessing and validation log
 
-- `logs/step_002_statistical_analysis.log` — Statistical analysis log
+- `logs/step_002_de430_preprocessing.log` — DE430 ephemeris preprocessing log
 
-- `logs/step_003_detection_analysis_advanced.log` — Advanced 13-method analysis log
+- `logs/step_003_statistical_analysis.log` — Statistical analysis log
+
+- `logs/step_004_detection_analysis_advanced.log` — Advanced 13-method analysis log
 
 ### Software Dependencies
 
@@ -1875,9 +1882,9 @@ The pipeline includes comprehensive validation:
 
 To verify successful reproduction:
 
-- All 59 steps complete with "PASS" status in pipeline output
+- All 44 steps complete with "PASS" status in pipeline output
 
-- JSON files in `results/outputs/` (step_001 through step_059)
+- JSON files in `results/outputs/` (step_000 through step_043)
 
 - Figure files in `site/public/figures/` (PNG)
 
@@ -1887,9 +1894,9 @@ To verify successful reproduction:
 
 - Key result: Full-sample OLS $\eta = -3.17 \times 10^{-4}$ (for comparison)
 
-- Key result: MCMC estimate $\eta = -3.17 \times 10^{-4} \pm 6.00 \times 10^{-5}$ (SNR = 5.20$\sigma$)
+- Key result: MCMC estimate $\eta = -3.18 \times 10^{-4} \pm 6.06 \times 10^{-5}$ (SNR = 5.26$\sigma$)
 
-- Key result: AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ (SNR = 3.35$\sigma$)
+- Key result: AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (SNR = 3.71$\sigma$)
 
 - Key result: AR(1) parameter $\rho = 0.43$ (significant temporal autocorrelation)
 

@@ -1,0 +1,22 @@
+{
+    "step_id": "step_024",
+    "status": "PASS",
+    "thermal_parameters": {
+        "delta_t_kelvin": 290.0,
+        "cte_aluminum": 2.36e-05,
+        "cte_fused_silica": 5.5e-07,
+        "array_thickness_m": 0.15
+    },
+    "max_displacements": {
+        "aluminum_housing_m": 0.0010266,
+        "fused_silica_m": 2.3925000000000002e-05
+    },
+    "observed_signal": {
+        "tep_amplitude_m": 0.004120737663237466
+    },
+    "conclusions": {
+        "aluminum_to_tep_ratio": 0.24913015190427082,
+        "plausible_thermal_artifact": false,
+        "explanation": "The maximum absolute thermal expansion of the aluminum array housing is 1.027 mm, which is only 24.9% of the 4.1 mm TEP signal amplitude. Structural thermal deformation cannot explain the anomaly."
+    }
+}

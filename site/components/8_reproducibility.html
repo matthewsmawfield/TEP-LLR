@@ -116,21 +116,27 @@ TEP-LLR/
             </tr>
             <tr>
                 <td>002</td>
-                <td><code>step_002_statistical_analysis.py</code></td>
+                <td><code>step_002_de430_preprocessing.py</code></td>
+                <td>DE430 ephemeris preprocessing and comparison</td>
+                <td>~0.9s</td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td><code>step_003_statistical_analysis.py</code></td>
                 <td>Computes Pearson correlation, linear regression, and differential analysis</td>
                 <td>~1.2s</td>
             </tr>
             <tr>
-                <td>003</td>
-                <td><code>step_003_detection_analysis_advanced.py</code></td>
+                <td>004</td>
+                <td><code>step_004_detection_analysis_advanced.py</code></td>
                 <td>Advanced robust analysis with 20 complementary methods (bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, holdout)</td>
-                <td>~15.4s</td>
+                <td>~5.4s</td>
             </tr>
             <tr>
-                <td>004-059</td>
-                <td><code>step_004_*.py</code> through <code>step_059_*.py</code></td>
-                <td>Extended systematic analysis: temporal drift, multi-ephemeris comparison, systematic error correction, subsample robustness, null tests, Monte Carlo simulations, thermal modeling, station quality, leverage diagnostics, TEP prediction, IPW validation, temporal amplitude, hardware epoch analysis, historical comparison, full-moon deficit, lunar recession, tidal resonance, dust sensitivity, SPARC data ingestion/scaling/residual analysis, screening hierarchy, magnetar/milky-way analysis, dependency audit, cross-scale synthesis, unified results, ephemeris absorption, multiple testing correction, temporal bin variation</td>
-                <td>~6m 27s total</td>
+                <td>005-043</td>
+                <td><code>step_005_*.py</code> through <code>step_043_*.py</code></td>
+                <td>Extended systematic analysis: temporal drift, multi-ephemeris comparison, meta-analysis, systematic error analysis, ephemeris independent analysis, systematic control analysis, noise signal injection, subsample robustness, station decomposition, inter-station consistency, null tests, Bayesian analysis, leverage diagnostics, station quality, systematic Monte Carlo, temporal amplitude, IPW validation, environmental modulation, solar cycle correlation, thermal array modeling, leverage temporal clustering, TEP core density simulation, day-night thermal bias, geometric elongation, station power analysis, hardware epoch analysis, Lomb-Scargle orbital dynamics, ephemeris orthogonality proof, quantitative eta prediction, static-dynamic absorption, historical comparison, full-moon deficit, lunar recession, tidal resonance, dust sensitivity, unified results, ephemeris absorption simulation, multiple testing correction, temporal bin variation</td>
+                <td>~1m 40s total</td>
             </tr>
         </tbody>
     </table>
@@ -212,9 +218,9 @@ python scripts/steps/run_all_steps.py
 
     <h4>Key Analysis Outputs</h4>
     <ul>
-        <li><code>results/outputs/step_002_analysis.json</code> — Pearson correlation, linear regression, and differential analysis results</li>
-        <li><code>results/outputs/step_003_detection_analysis_advanced.json</code> — Comprehensive analysis with bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, and holdout test results</li>
-        <li><code>results/outputs/step_001_preprocessing_results.json</code> — Data preprocessing statistics and validation results</li>
+        <li><code>results/outputs/step_003_statistical_analysis.json</code> — Pearson correlation, linear regression, and differential analysis results</li>
+        <li><code>results/outputs/step_004_detection_analysis_advanced.json</code> — Comprehensive analysis with bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, and holdout test results</li>
+        <li><code>results/outputs/step_001_data_preprocessing.json</code> — Data preprocessing statistics and validation results</li>
         <li><code>data/processed/INPOP19a_all_stations_residuals.csv</code> — Processed INPOP19a dataset with computed elongation phases</li>
         <li><code>data/processed/[station]_residuals.csv</code> — Individual station processed datasets</li>
     </ul>
@@ -224,8 +230,9 @@ python scripts/steps/run_all_steps.py
     <ul>
         <li><code>logs/step_000_llr_data_ingestion.log</code> — Data ingestion log</li>
         <li><code>logs/step_001_data_preprocessing.log</code> — Data preprocessing and validation log</li>
-        <li><code>logs/step_002_statistical_analysis.log</code> — Statistical analysis log</li>
-        <li><code>logs/step_003_detection_analysis_advanced.log</code> — Advanced 13-method analysis log</li>
+        <li><code>logs/step_002_de430_preprocessing.log</code> — DE430 ephemeris preprocessing log</li>
+        <li><code>logs/step_003_statistical_analysis.log</code> — Statistical analysis log</li>
+        <li><code>logs/step_004_detection_analysis_advanced.log</code> — Advanced 13-method analysis log</li>
     </ul>
 
     <h3>Software Dependencies</h3>
@@ -276,14 +283,14 @@ python scripts/steps/run_all_steps.py
     <div class="checklist-box" style="background: #f9f9f9; padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
         <p>To verify successful reproduction:</p>
         <ol>
-            <li>All 59 steps complete with "PASS" status in pipeline output</li>
-            <li>JSON files in <code>results/outputs/</code> (step_001 through step_059)</li>
+            <li>All 44 steps complete with "PASS" status in pipeline output</li>
+            <li>JSON files in <code>results/outputs/</code> (step_000 through step_043)</li>
             <li>Figure files in <code>site/public/figures/</code> (PNG)</li>
             <li>Key result: Pearson correlation $r = -0.0304$ ($p = 8.6 \times 10^{-7}$), 4.92$\sigma$</li>
             <li>Key result: Leverage-excised $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (SNR = 5.67$\sigma$)</li>
             <li>Key result: Full-sample OLS $\eta = -3.17 \times 10^{-4}$ (for comparison)</li>
-            <li>Key result: MCMC estimate $\eta = -3.17 \times 10^{-4} \pm 6.00 \times 10^{-5}$ (SNR = 5.20$\sigma$)</li>
-            <li>Key result: AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ (SNR = 3.35$\sigma$)</li>
+            <li>Key result: MCMC estimate $\eta = -3.18 \times 10^{-4} \pm 6.06 \times 10^{-5}$ (SNR = 5.26$\sigma$)</li>
+            <li>Key result: AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (SNR = 3.71$\sigma$)</li>
             <li>Key result: AR(1) parameter $\rho = 0.43$ (significant temporal autocorrelation)</li>
             <li>Key result: Precision-weighted regression $\eta = -3.50 \times 10^{-4} \pm 1.13 \times 10^{-4}$ (SNR = 3.11$\sigma$)</li>
             <li>Key result: Bootstrap 95% CI = [-0.0411, -0.0197] (excludes zero)</li>

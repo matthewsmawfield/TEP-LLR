@@ -1,0 +1,24 @@
+{
+    "step_id": "step_026",
+    "data_type": "SYNTHETIC (THEORETICAL MODELING)",
+    "status": "PASS",
+    "independent_prior_note": "\u03c1_T = 20.0 g/cm\u00b3 from GNSS atomic clock correlations (Paper 6, UCD) (independent prior from terrestrial geodesy)",
+    "parameters": {
+        "rho_T_g_cm3": 20.0,
+        "rho_T_source": "GNSS atomic clock correlations (Paper 6, UCD)"
+    },
+    "simulation_results": {
+        "earth_shielding_factor": 0.03709808625414764,
+        "moon_shielding_factor": 0.004900178217266597,
+        "shielding_differential": 0.032197908036881044
+    },
+    "comparison_with_measurement": {
+        "measured_eta": -0.00031697982024903585,
+        "measured_eta_error": 6.040658378191678e-05,
+        "effective_coupling_diagnostic": 0.009844733387211113
+    },
+    "conclusions": {
+        "shielding_differential": "3.22e-02",
+        "explanation": "The simulation calculates Earth and Moon shielding factors from density profiles using \u03c1_T. The shielding differential quantifies the differential degree of Temporal Topology flattening, which is the physical origin of the Nordtvedt effect in TEP. \u03b7 itself is the observable response coefficient for LLR, not derived from \u03ba_LL."
+    }
+}

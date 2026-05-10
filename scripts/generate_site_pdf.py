@@ -101,7 +101,7 @@ def copy_pdf_to_docs(source_pdf: Path, docs_dir: Path):
 
     # Load metadata from CITATION.cff
     metadata = load_citation_metadata()
-    version_str = f"v{metadata['version']}_{metadata['codename']}"
+    version_str = f"v{metadata['version']}-{metadata['codename']}"
 
     # Primary PDF name (using new naming convention)
     target_name = f"17-TEP-LLR-{version_str}.pdf"
@@ -121,7 +121,7 @@ def copy_pdf_to_root(source_pdf: Path, base_dir: Path):
     """Copy PDF to the project root directory."""
     # Load metadata from CITATION.cff
     metadata = load_citation_metadata()
-    version_str = f"v{metadata['version']}_{metadata['codename']}"
+    version_str = f"v{metadata['version']}-{metadata['codename']}"
 
     # Primary PDF name (using new naming convention)
     target_name = f"17-TEP-LLR-{version_str}.pdf"
@@ -244,7 +244,7 @@ async def generate_pdf(quality: str = 'high', wait_time: float = 5.0, skip_build
 
         # Load metadata for display
         metadata = load_citation_metadata()
-        version_str = f"v{metadata['version']}_{metadata['codename']}"
+        version_str = f"v{metadata['version']}-{metadata['codename']}"
         print(f"   Version: {version_str}")
 
         # Copy to docs directory

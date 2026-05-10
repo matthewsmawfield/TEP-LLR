@@ -1,0 +1,14 @@
+[14:45:02] Starting Lomb-Scargle Orbital Mapping...
+[14:45:02] Computing high-resolution Lomb-Scargle periodogram...
+[14:45:14] Mapping top 10 spectral peaks to Delaunay harmonics:
+[14:45:14] [1] Period: 26.83d | Power: 0.0115 | Match: 3D + -2l + 3l' + 0F (Complex Harmonic) | Err: 5.66e-05 cyc/d
+[14:45:14] [2] Period: 30.91d | Power: 0.0092 | Match: 2D + -3l + 0l' + 2F (Complex Harmonic) | Err: 6.90e-06 cyc/d
+[14:45:14] [3] Period: 30.84d | Power: 0.0080 | Match: 1D + 3l + 0l' + -3F (Complex Harmonic) | Err: 7.23e-05 cyc/d
+[14:45:14] [4] Period: 30.68d | Power: 0.0079 | Match: 0D + 3l + -1l' + -2F (Complex Harmonic) | Err: 4.45e-05 cyc/d
+[14:45:14] [5] Period: 26.76d | Power: 0.0069 | Match: 2D + -2l + 2l' + 1F (Complex Harmonic) | Err: 3.91e-07 cyc/d
+[14:45:14] [6] Period: 28.30d | Power: 0.0068 | Match: 0D + 3l + 0l' + -2F (Complex Harmonic) | Err: 4.15e-05 cyc/d
+[14:45:14] [7] Period: 27.66d | Power: 0.0063 | Match: 1D + 1l + 1l' + -1F (Complex Harmonic) | Err: 1.17e-05 cyc/d
+[14:45:14] [8] Period: 27.61d | Power: 0.0063 | Match: 0D + 1l + 0l' + 0F (Complex Harmonic) | Err: 7.25e-05 cyc/d
+[14:45:14] [9] Period: 31.83d | Power: 0.0062 | Match: -1D + 0l + -3l' + 2F (Complex Harmonic) | Err: 3.22e-06 cyc/d
+[14:45:14] [10] Period: 31.69d | Power: 0.0062 | Match: 1D + -1l + -1l' + 1F (Complex Harmonic) | Err: 2.18e-05 cyc/d
+[14:45:14] Results saved to results/outputs/step_031_lomb_scargle_orbital_dynamics.json

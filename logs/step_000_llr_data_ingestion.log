@@ -1,9 +1,9 @@
-[01:59:31] ═══ Starting data integrity check...
-[01:59:31]     Found: INPOP19a_APO_residuals.txt          (   236.8 KB)
-[01:59:31]     Found: INPOP19a_Grasse_residuals.txt       (  1676.7 KB)
-[01:59:31]     Found: INPOP19a_Matera_residuals.txt       (    31.2 KB)
-[01:59:31]     Found: INPOP19a_McDonald2_residuals.txt    (   263.4 KB)
-[01:59:31]     Found: INPOP19a_Haleakala_residuals.txt    (    60.8 KB)
-[01:59:31]     Data audit complete. Station coverage: 5/5
-[01:59:31] ✓   All 5 core LLR residual files found.
-[01:59:31] Results saved to results/outputs/step_000_llr_data_ingestion.json
+[14:43:09] ═══ Starting data integrity check...
+[14:43:09]     Found: INPOP19a_APO_residuals.txt          (   236.8 KB)
+[14:43:09]     Found: INPOP19a_Grasse_residuals.txt       (  1676.7 KB)
+[14:43:09]     Found: INPOP19a_Matera_residuals.txt       (    31.2 KB)
+[14:43:09]     Found: INPOP19a_McDonald2_residuals.txt    (   263.4 KB)
+[14:43:09]     Found: INPOP19a_Haleakala_residuals.txt    (    60.8 KB)
+[14:43:09]     Data audit complete. Station coverage: 5/5
+[14:43:09] ✓   All 5 core LLR residual files found.
+[14:43:09] Results saved to results/outputs/step_000_llr_data_ingestion.json

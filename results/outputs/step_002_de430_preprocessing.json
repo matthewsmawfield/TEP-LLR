@@ -1,0 +1,13 @@
+{
+    "step_id": "step_002",
+    "summary": {
+        "n_obs": 4597,
+        "residual_rms_m": 0.26625676679014865,
+        "date_range": [
+            2014.1753424657534,
+            2018.6931506849314
+        ],
+        "output_file": "data/processed/DE430_all_residuals.csv"
+    },
+    "status": "PASS"
+}

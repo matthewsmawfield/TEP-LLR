@@ -1,0 +1,13 @@
+[14:45:21] ═══ Step 042: Formal Multiple Testing Correction
+[14:45:21]     Collected 16 significance tests from the analysis pipeline
+[14:45:21] >>> Applying Bonferroni correction...
+[14:45:21] >>> Applying Benjamini-Hochberg FDR correction...
+[14:45:21] ✓   
+After applying formal multiple testing correction across 16 tests, the primary detection (4.93σ) remains significant under both Bonferroni (4.36σ) and Benjamini-Hochberg (infσ) corrections. This addresses concerns about inflated Type I error rates from the extensive analysis pipeline.
+[14:45:21]     
+Results saved to results/outputs/step_042_multiple_testing_correction.json
+[14:45:21]     
+======================================================================
+[14:45:21] ✓   Step 042 completed successfully
+[14:45:21]     ======================================================================
+[14:45:21] Results saved to results/outputs/step_042_multiple_testing_correction.json

@@ -1,0 +1,11 @@
+[14:44:38] >>> Starting TEP Core Density Simulation...
+[14:44:38] Using ρ_T = 20.0 g/cm³ from GNSS atomic clock correlations (Paper 6, UCD) (independent prior from GNSS)
+[14:44:38] Calculating Earth and Moon shielding factors from density profiles...
+[14:44:38]     Earth shielding factor: 3.7098e-02
+[14:44:38]     Moon shielding factor: 4.9002e-03
+[14:44:38]     Measured η from LLR: -3.1698e-04 ± 6.0407e-05
+[14:44:38]     Effective coupling (diagnostic): η/Δshielding = 9.8447e-03
+[14:44:38]     Shielding differential: 3.2198e-02
+[14:44:38]     Shielding differential: 3.22e-02
+[14:44:38] ✓   TEP Core Density Simulation Complete.
+[14:44:38]     Saved results to results/outputs/step_026_tep_core_density_simulation.json

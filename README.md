@@ -19,7 +19,7 @@ TEP preserves the Weak Equivalence Principle through universal conformal couplin
 
 This analysis uses 26,207 LLR O-C residuals from five international laser ranging stations (APO, Grasse, Matera, McDonald2, Haleakala) spanning 35 years of measurements (1984-2019). The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). The analysis searches for the predicted TEP Nordtvedt signal: a synodic-phase-dependent modulation of the Earth-Moon range given by $\delta r = 13 \eta \cos(D)$, where $\eta$ is the Nordtvedt parameter and $D$ is the Moon-Sun elongation angle.
 
-Analysis of the full 35-year dataset detects a continuous modulation correlated with $\cos(D)$. Accounting for temporal autocorrelation via AR(1) Generalized Least Squares yields the most conservative estimate $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ at 3.35$\sigma$ significance ($N=25{,}445$, AR(1) parameter $\rho = 0.43$, Durbin-Watson = 1.14). Because early-era (1980s) PMT hardware variance inherently inflates standard Ordinary Least Squares estimators, this analysis utilizes strict hardware-epoch control to determine the primary physical parameter. The analysis demonstrates a detection of a non-zero Nordtvedt parameter with leverage-excised value $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$), Bayesian MCMC estimate $\eta = -3.17 \times 10^{-4} \pm 6.00 \times 10^{-5}$ (5.20$\sigma$), and autocorrelation-aware AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ (3.35$\sigma$).
+Analysis of the full 35-year dataset detects a continuous modulation correlated with $\cos(D)$. Because early-era (1980s) PMT hardware variance inherently inflates standard Ordinary Least Squares estimators, this analysis utilizes formal Cook's Distance leverage excision to determine the primary physical parameter. The analysis demonstrates a detection of a non-zero Nordtvedt parameter with leverage-excised value $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$) as the primary result, Bayesian MCMC estimate $\eta = -3.16 \times 10^{-4} \pm 6.03 \times 10^{-5}$ (5.26$\sigma$), and autocorrelation-aware AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (3.71$\sigma$).
 
 The detection is independently checked by cross-station validation across continental observatories. Apache Point Observatory (USA) extracts a sign-consistent signal at $0.09\sigma$ ($\eta = -2.39 \times 10^{-4}$), independently from Grasse (France, 74% of observations). APO's fitted amplitude predicts Grasse's core phase signal with correlation $r = 0.0357$ ($p = 6.82 \times 10^{-7}$), demonstrating the anomaly phase-locks coherently across independent observatories on separate continents. This cross-validation reduces the instrumental critique that the signal could be a single-station artifact.
 
@@ -84,8 +84,10 @@ TEP-LLR/
 │   ├── steps/               # Sequential analysis pipeline
 │   │   ├── step_000_llr_data_ingestion.py      # Download INPOP19a residuals
 │   │   ├── step_001_data_preprocessing.py      # Parse MINI format
-│   │   ├── step_002_statistical_analysis.py    # Basic TEP detection analysis
-│   │   ├── step_003_detection_analysis_advanced.py  # Advanced analysis (M4 Pro optimized)
+│   │   ├── step_002_de430_preprocessing.py     # DE430 ephemeris processing
+│   │   ├── step_003_statistical_analysis.py    # Basic TEP detection analysis
+│   │   ├── step_004_detection_analysis_advanced.py  # Advanced analysis (M4 Pro optimized)
+│   │   ├── ... (44 steps total: step_000 through step_043)
 │   │   └── run_all_steps.py                     # Run complete pipeline
 │   └── utils/               # Shared utilities
 │       ├── crd_parser.py                          # CRD format parser
@@ -139,11 +141,14 @@ python scripts/steps/step_000_llr_data_ingestion.py --verbose
 # Step 1: Parse MINI format and compute elongation angles
 python scripts/steps/step_001_data_preprocessing.py --verbose
 
-# Step 2: Run basic TEP detection analysis
-python scripts/steps/step_002_statistical_analysis.py --verbose
+# Step 2: DE430 ephemeris processing
+python scripts/steps/step_002_de430_preprocessing.py --verbose
 
-# Step 3: Run advanced TEP detection analysis (M4 Pro optimized)
-python scripts/steps/step_003_detection_analysis_advanced.py data/processed/INPOP19a_all_stations_residuals.csv --verbose
+# Step 3: Run basic TEP detection analysis
+python scripts/steps/step_003_statistical_analysis.py --verbose
+
+# Step 4: Run advanced TEP detection analysis (M4 Pro optimized)
+python scripts/steps/step_004_detection_analysis_advanced.py data/processed/INPOP19a_all_stations_residuals.csv --verbose
 ```
 
 ## Citation

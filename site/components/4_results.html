@@ -195,13 +195,13 @@
         The full-sample OLS yields an unconstrained amplitude of $-0.0041$
         m ($\eta = -3.17 \times 10^{-4}$), with Bayesian MCMC providing a
         robust estimate of $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$
-        at 5.29$\sigma$ significance. The MCMC analysis employs 32 walkers with
+        at 5.25$\sigma$ significance. The MCMC analysis employs 32 walkers with
         3000 steps (1000 burn-in), achieving convergence (autocorrelation time
         = 29.73, Gelman-Rubin statistic = 1.0002, acceptance fraction = 0.719).
     </p>
 
     <p>
-        To account for significant temporal autocorrelation detected in the residuals (AR(1) parameter $\rho = 0.43$, Durbin-Watson = 1.14), AR(1) Generalized Least Squares (GLS) regression was performed. The AR(1) GLS estimate yields $\eta = -3.28 \times 10^{-4} \pm 9.79 \times 10^{-5}$ at 3.35$\sigma$ significance. The autocorrelation-aware error estimate is 1.63$\times$ larger than the MCMC error, reflecting the inflation due to temporal dependencies. Despite this error inflation, the detection remains statistically significant.
+        To account for significant temporal autocorrelation detected in the residuals (AR(1) parameter $\rho = 0.43$, Durbin-Watson = 1.14), AR(1) Generalized Least Squares (GLS) regression was performed. The AR(1) GLS estimate yields $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ at 3.71$\sigma$ significance. The autocorrelation-aware error estimate is 1.47$\times$ larger than the OLS error, reflecting the inflation due to temporal dependencies. Despite this error inflation, the detection remains statistically significant.
     </p>
 
     <p>
@@ -224,7 +224,7 @@
     <p>
         The physical detection operates without data excision when utilizing
         robust estimators (e.g., Theil-Sen $\eta = -2.04 \times 10^{-4}$,
-        Precision-Weighted $\eta = -3.50 \times 10^{-4}$, MCMC $\eta = -3.16
+        Precision-Weighted $\eta = -3.50 \times 10^{-4}$, MCMC $\eta = -3.18
         \times 10^{-4}$). The Cook's Distance diagnostic demonstrates that
         standard linear minimization fails predictably when confronted with
         early-era hardware leverage points, establishing $\eta \approx -3.31
@@ -1251,7 +1251,7 @@
         "
     >
         <p>
-            <strong>Figure 8:</strong> Amplitude Scaling of the TEP Signal vs
+            Figure 8: Amplitude Scaling of the TEP Signal vs
             Heliocentric Distance (AU). The $3.07\sigma$ differential between
             perihelion and aphelion subsets.
         </p>

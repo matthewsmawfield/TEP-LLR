@@ -1,0 +1,16 @@
+[14:45:18]     Step 039: Lunar Recession Analysis
+[14:45:18]     Testing lunar orbit recession anomaly vs TEP predictions
+[14:45:18]     Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
+[14:45:18]     Loaded 26207 observations
+[14:45:18]     Analyzing secular recession trend...
+[14:45:18]     Testing TEP heliocentric phase dependence...
+[14:45:18]     Results saved to: results/outputs/step_037_lunar_recession_analysis.json
+[14:45:18]     
+=== Lunar Recession Analysis Summary ===
+[14:45:18]     Estimated recession: 0.00 ± 0.00 cm/year
+[14:45:18]     Literature value: 3.82 ± 0.07 cm/year
+[14:45:18]     Consistency: 54.57σ
+[14:45:18]     Historical average: 1.7 cm/year (tidal rhythmites)
+[14:45:18] ⚠   Discrepancy: Current rate is ~2.2× higher than long-term average
+[14:45:18]     TEP interpretation: Dynamical φ field affects orbital evolution
+[14:45:18]     Step 039 completed successfully

@@ -13,10 +13,10 @@ Thumbs.db
 *.swo
 *~
 .vscode/
+.windsurf/
 .idea/
 
 # Logs
-*.log
 npm-debug.log*
 
 # Temporary files

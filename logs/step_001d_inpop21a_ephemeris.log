@@ -1,7 +1,0 @@
-[01:59:46] ═══ Checking INPOP21a Ephemeris...
-[01:59:46]     INPOP21a found: inpop21a_TDB_m1000_p1000_littleendian.dat (175.9 MB)
-[01:59:46]     INPOP21a file check:
-[01:59:46]       Size: 175863744 bytes
-[01:59:46]       Status: PASS
-[01:59:46] Results saved to results/outputs/step_001d_inpop21a_ephemeris.json
-[01:59:46] ✓   INPOP21a Validation Complete.
