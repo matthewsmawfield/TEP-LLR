@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 024: Systematic Projection Analysis for TEP-LLR
+Step 044: Systematic Projection Analysis for TEP-LLR
 
 Computes the cos(elongation)-projected systematic bias for each error source.
 
@@ -58,7 +58,7 @@ def compute_systematic_projection(residuals, cos_elong, systematic_component):
 
 
 def run_systematic_projection_analysis(df, verbose=False):
-    print_status("═══ Starting Step 024: Systematic Projection Analysis...", "TITLE")
+    print_status("═══ Starting Step 044: Systematic Projection Analysis...", "TITLE")
     print_status("═══ STEP PURPOSE: Compute cos(elongation)-projected systematic bias for each error source", "INFO")
     print_status("═══ METHOD: Project each systematic component onto cos(elongation); phase-locked differential", "INFO")
 
@@ -384,7 +384,7 @@ def run_systematic_projection_analysis(df, verbose=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Step 024: Systematic Projection Analysis")
+        description="Step 044: Systematic Projection Analysis")
     args = parser.parse_args()
 
     log_dir = PROJECT_ROOT / "logs"

@@ -36,8 +36,10 @@
         interpretation. The full dataset shows no significant correlation with
         $\cos(D)$, but phase-specific outliers cluster asymmetrically and mask a genuine
         signal. The primary detection therefore relies on the INPOP19a ephemeris
-        (35.5-year baseline) with leverage-excised $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$
-        at 5.67$\sigma$ significance. A detailed analysis of the DE430 outlier behavior and statistical
+        (35.5-year baseline) with full-systematic OLS
+        $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ at 6.17$\sigma$
+        significance, and cluster-robust $\eta = -4.05 \times 10^{-4}$ at
+        6.52$\sigma$. A detailed analysis of the DE430 outlier behavior and statistical
         validation is presented in Section 4.7.
     </p>
 
@@ -58,7 +60,7 @@
             Skyfield/DE421
         </li>
         <li>
-            Synodic phase: The phase in the lunar synodic cycle (0 = new moon, π
+            Synodic phase: The phase in the lunar synodic cycle (0 = new moon, $\pi$
             = full moon)
         </li>
         <li>Station identifier: The observing station</li>
@@ -114,9 +116,11 @@
     </p>
 
     <p>
-        Haleakala's measured $\eta = +3.55 \times 10^{-3}$ is consistent with
-        noise fluctuation at the 0.34$\sigma$ level. Its opposite sign does not
-        contradict the global detection given its underpowered status.
+        Haleakala's measured $\eta = +3.55 \times 10^{-3}$ yields an observed
+        SNR of $2.45\sigma$ ($p = 0.014$), opposite in sign to the global
+        detection. Given its underpowered status (expected SNR = $0.81\sigma$
+        at the global $|\eta|$, below the $3\sigma$ threshold), the station
+        is down-weighted in precision-weighted regression.
     </p>
 
     <h3>3.2 The TEP Nordtvedt Signal</h3>
@@ -180,9 +184,9 @@
             </tr>
             <tr>
                 <td>C</td>
-                <td>023–028</td>
+                <td>023–028, 047–048</td>
                 <td>Physical Signal Probes</td>
-                <td>Heliocentric distance scaling, synodic/anti-synodic phase test, Lomb-Scargle periodogram, volumetric suppression model</td>
+                <td>Heliocentric distance scaling, orbital velocity modulation, CMB dipole anisotropy, synodic/anti-synodic phase test, Lomb-Scargle periodogram, volumetric suppression model</td>
             </tr>
             <tr>
                 <td>D</td>
@@ -201,16 +205,6 @@
 
     <p>
         This multi-layered approach ensures that the detection is robust against systematic errors, statistical artifacts, and instrumental biases. Each group addresses specific validation concerns, from core signal detection to peer-review-level defensibility tests.
-    </p>
-
-    <h4>3.4.15 Alternative Explanations and Null Tests</h4>
-    <p>
-        The primary analysis computes the Pearson correlation coefficient
-        between the O-C residuals and $\cos(D)$, where $D$ is the Moon-Sun
-        elongation. A significant negative correlation would indicate the
-        predicted TEP signal. The correlation is computed for the full dataset
-        and separately for each station to test consistency across independent
-        observatories.
     </p>
 
     <h4>3.3.2 Pearson Correlation Analysis</h4>
@@ -457,8 +451,8 @@
         \sigma_{\text{residual}} = 0.18$ cm at 3$\sigma$ confidence, or
         $\eta_{\min} \approx 1.4 \times 10^{-4}$. The analysis is therefore
         sensitive to Nordtvedt parameters above $\sim 10^{-4}$,        placing the
-        leverage-excised $\eta = -3.31 \times 10^{-4}$ well within the
-        detectable range ($3.5\times$ above the minimum threshold). The power to
+        full-model AR(1) GLS $\eta = -4.46 \times 10^{-4}$ well within the
+        detectable range ($3.2\times$ above the minimum threshold). The power to
         detect $\eta = 10^{-4}$ exceeds 99% at $\alpha = 0.05$.
     </p>
 
@@ -467,7 +461,7 @@
         Step 028 implements an alternative phenomenological derivation of the
         Nordtvedt parameter using a volumetric suppression model. Unlike the
         gradient-suppression approach (which scales with surface compactness
-        Φ/c²), this framework computes suppression factors from integrated
+        $\Phi/c^2$), this framework computes suppression factors from integrated
         internal density profiles:
     </p>
 
@@ -487,8 +481,9 @@
         angle brackets denote volumetric averages. In the Jakarta v0.8 framework, this
         volumetric model is understood within the Observable Response Coefficient paradigm:
         the Nordtvedt parameter $\eta$ itself serves as the LLR observable response coefficient,
-        analogous to $\kappa_{\rm Cep} \sim 10^6$ mag for Cepheids and $\kappa_{\rm MSP} \sim 10^6$–$10^7$
-        for pulsars. The volumetric model predicts linear scaling with compactness differential,
+        analogous to preliminary $\kappa_{\rm Cep} \sim 10^6$ mag for Cepheids and
+        $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for pulsars from related work in the same
+        framework (Papers 10 and 11). The volumetric model predicts linear scaling with compactness differential,
         while the surface compactness model (Section 2.1) predicts quadratic scaling due to
         the second-order dependence on effective coupling. Both approaches yield the same
         order-of-magnitude prediction ($\eta \sim 10^{-4}$) but differ in their
@@ -506,7 +501,7 @@
     <ul>
         <li>
             Elongation validation: Ensures all elongation values are in the
-            valid range [0, 2π] radians
+            valid range $[0, 2\pi]$ radians
         </li>
         <li>
             Residual validation: Ensures all residuals are within physically
@@ -584,21 +579,22 @@
         significant regardless of outlier treatment.
     </p>
 
-    <h4>3.4.5 Systematic Error Budget</h4>
+    <h4>3.4.5 Systematic Error Budget (Step 008)</h4>
+    
     <p>
         A data-driven systematic error budget is constructed directly from the
-        INPOP19a residuals and upstream pipeline outputs (Step 008).  Ephemeris
-        modeling uncertainty is derived from cross-ephemeris scatter
-        (INPOP19a vs DE430): 0.25 cm.  Atmospheric delay uncertainty is
-        estimated from seasonal (monthly) variation in detrended residuals:
-        1.00 cm.  Instrumental systematic uncertainty is derived from
-        station-to-station mean scatter after TEP removal: 0.05 cm.  Tidal
-        modeling uncertainty is bounded by the cos(2*elongation) harmonic
-        amplitude in the residuals: 0.02 cm.  Thermal expansion uncertainty
-        is estimated from the diurnal (24-hour) sinusoidal amplitude in
-        detrended residuals: 0.53 cm.
+        INPOP19a residuals and upstream pipeline outputs (Step 008). Each
+        component is computed from an observable proxy in the data:
     </p>
-
+    
+    <ul>
+        <li>Ephemeris modeling (cross-ephemeris scatter): 0.25 cm, derived from the standard deviation of eta across INPOP19a and DE430</li>
+        <li>Atmospheric delay modeling: 1.00 cm, derived from seasonal (monthly) scatter of detrended residuals</li>
+        <li>Instrumental systematic: 0.05 cm, derived from powered-station mean scatter after TEP removal</li>
+        <li>Tidal modeling: 0.02 cm, bounded by the cos(2*elongation) harmonic amplitude in the residuals</li>
+        <li>Thermal expansion: 0.53 cm, derived from the diurnal (24-hour) sinusoidal amplitude in detrended residuals</li>
+    </ul>
+    
     <p>
         The combined systematic uncertainty of 1.16 cm (quadrature sum) exceeds
         the detected signal amplitude of 0.59–0.89 cm in absolute terms.
@@ -611,6 +607,14 @@
         showed no significant correlation ($r = 0.01$, $p = 0.32$), suggesting
         that these systematic sources cannot reproduce the observed phase-locked
         signal.
+    </p>
+
+    <p>
+        The data-driven systematic error budget quantifies each component's
+        contribution as a percentage of total variance, allowing for rigorous
+        assessment of whether the TEP signal exceeds known systematic
+        uncertainties. The analysis also identifies unexplained residual
+        variance not accounted for by known systematics.
     </p>
 
     <h4>3.4.6 Systematic Control Analysis (Steps 011–013)</h4>
@@ -636,7 +640,7 @@
         tests: noise injection (adding increasing levels of Gaussian noise to
         determine when the signal disappears), signal recovery (injecting known
         TEP signals into pure noise to verify pipeline recovery), and detection
-        threshold analysis (computing the minimum detectable η at various
+        threshold analysis (computing the minimum detectable $\eta$ at various
         confidence levels). Detailed results are presented in Section 4.12.2.
     </p>
 
@@ -673,8 +677,8 @@
         Historical variances in the early PMT epochs strictly map to their high
         instrumental RMS noise floors. As hardware phase noise reduces towards
         the modern sub-millimetre era, the extracted physical signal does not
-        scale to zero; rather, it converges to leverage-excised $\eta = -3.31 \times 10^{-4} \pm
-        5.84 \times 10^{-5}$ (5.67$\sigma$), demonstrating that the underlying
+        scale to zero; it converges to the full-model AR(1) GLS value $\eta = -4.46 \times 10^{-4} \pm
+        9.67 \times 10^{-5}$ (4.62$\sigma$), demonstrating that the underlying
         signal is structurally permanent beneath the early-era noise scatter.
     </p>
 
@@ -720,25 +724,7 @@
         Earth-Moon-Sun geometry at sub-millimeter scales.
     </p>
 
-    <h4>3.4.8 Systematic Error Budget Analysis (Step 008)</h4>
-    
-    <p>
-        To quantify contributions from various error sources and establish a comprehensive error budget, Step 008 performs a data-driven systematic error analysis directly on the INPOP19a residuals. Each component is computed from an observable proxy in the data, replacing the previous hardcoded literature estimates:
-    </p>
-    
-    <ul>
-        <li>Ephemeris modeling (cross-ephemeris scatter): 0.25 cm, derived from the standard deviation of eta across INPOP19a and DE430</li>
-        <li>Atmospheric delay modeling: 1.00 cm, derived from seasonal (monthly) scatter of detrended residuals</li>
-        <li>Instrumental systematic: 0.05 cm, derived from powered-station mean scatter after TEP removal</li>
-        <li>Tidal modeling: 0.02 cm, bounded by the cos(2*elongation) harmonic amplitude in the residuals</li>
-        <li>Thermal expansion: 0.53 cm, derived from the diurnal (24-hour) sinusoidal amplitude in detrended residuals</li>
-    </ul>
-    
-    <p>
-        The data-driven systematic error budget quantifies each component's contribution as a percentage of total variance, allowing for rigorous assessment of whether the TEP signal exceeds known systematic uncertainties. The analysis also identifies unexplained residual variance not accounted for by known systematics.
-    </p>
-
-    <h4>3.4.9 Temporal Autocorrelation Analysis (Step 004)</h4>
+    <h4>3.4.8 Temporal Autocorrelation Analysis (Step 004)</h4>
     
     <p>
         To test for temporal dependencies in the residuals that could affect statistical inference, Step 004 performs comprehensive temporal autocorrelation analysis. The analysis includes:
@@ -755,50 +741,74 @@
         The absence of significant temporal autocorrelation validates the independence assumption required for standard statistical methods and confirms that the detected signal is not driven by temporal artifacts.
     </p>
 
-    <h4>3.4.10 Outlier Removal Criteria</h4>
+    <h4>3.4.9 Outlier Removal Criteria</h4>
     
     <p>
-        The pipeline employs a conservative 6σ Median Absolute Deviation (MAD) threshold for outlier detection, implemented in the <code>detect_outliers_sigma</code> function. The methodological justification for this choice includes:
+        The pipeline employs a conservative $6\sigma$ Median Absolute Deviation (MAD) threshold for outlier detection, implemented in the <code>detect_outliers_sigma</code> function. The methodological justification for this choice includes:
     </p>
     
     <ul>
         <li>Robustness: MAD-based detection is robust against heavy-tailed distributions</li>
-        <li>Conservative threshold: 6σ corresponds to ~1 in 500 million for Gaussian distribution, with expected false positives of ~0.05 for 26,207 observations (essentially zero)</li>
+        <li>Conservative threshold: $6\sigma$ corresponds to ~1 in 500 million for Gaussian distribution, with expected false positives of ~0.05 for 26,207 observations (essentially zero)</li>
         <li>Data preservation: Removes only extreme outliers while preserving data integrity</li>
-        <li>Statistical rationale: Converts MAD to standard deviation (σ ≈ 1.4826 × MAD), threshold = 6 × 1.4826 × MAD ≈ 8.9 × MAD</li>
-        <li>Alternative evaluation: 5σ (too aggressive), 8σ (too permissive); 6σ selected as optimal balance</li>
+        <li>Statistical rationale: Converts MAD to standard deviation ($\sigma \approx 1.4826 \times$ MAD), threshold = $6 \times 1.4826 \times$ MAD $\approx 8.9 \times$ MAD</li>
+        <li>Alternative evaluation: $5\sigma$ (too aggressive), $8\sigma$ (too permissive); $6\sigma$ selected as optimal balance</li>
     </ul>
     
     <p>
-        This threshold is applied consistently across steps 002, 003, 005, 006b, 016, 024, 025, and 052, ensuring standardization throughout the analysis pipeline. Step 006b additionally performs a threshold sweep (3σ–10σ) to verify the DE430 signal is not an artifact of a single cutoff choice.
+        This threshold is applied consistently across steps 002, 003, 005, 006b, 016, 024, 025, and 052, ensuring standardization throughout the analysis pipeline. Step 006b additionally performs a threshold sweep ($3\sigma$–$10\sigma$) to verify the DE430 signal is not an artifact of a single cutoff choice.
     </p>
 
-    <h4>3.4.11 Autocorrelation-Aware Error Estimation</h4>
-    
+    <h4>3.4.10 Primary Estimator: Full Systematic Model with Cluster-Robust Errors</h4>
+
     <p>
-        To address the significant temporal autocorrelation detected in the residuals (AR(1) parameter ρ ≈ 0.4 for Grasse and other stations), the pipeline implements AR(1) Generalized Least Squares (GLS) regression in Step 002. This method provides more accurate error estimates by accounting for temporal dependencies in the data.
+        The primary Nordtvedt parameter estimate is extracted from a full
+        systematic model (Step 050) that controls for annual, monthly, and
+        thermal $\cos(2D)$ aliases, followed by cluster-robust (sandwich)
+        standard errors with a Cameron-Miller finite-cluster correction
+        ($G/(G-1)$ for $G=5$ stations). The model is:
     </p>
-    
+
+    <div class="equation">
+        \begin{equation}
+        \delta r = 13\eta\cos(D) + \alpha\cos(2D) + \beta\sin(2\pi t/27.32) + \gamma\cos(2\pi t/27.32) + \delta\sin(2\pi t/365.25) + \epsilon\cos(2\pi t/365.25) + {\rm const}
+        \end{equation}
+    </div>
+
+    <p>
+        Cluster-robust variance estimation accounts for cross-station
+        heteroscedasticity using the Liang-Zeger sandwich estimator. This
+        approach is necessary because per-station $\cos D$-only fits suffer
+        from omitted variable bias: annual, monthly, and thermal terms alias
+        into the $\cos D$ coefficient with amplitudes that depend on each
+        station's temporal sampling pattern.
+    </p>
+
     <ul>
-        <li>AR(1) GLS method: Estimates the AR(1) parameter ρ from residuals, constructs the covariance matrix Cov[i,j] = σ² × ρ^|i-j| / (1 - ρ²), and performs GLS using Cholesky decomposition</li>
-        <li>Durbin-Watson statistic: Computed to quantify first-order autocorrelation (DW < 2 indicates positive autocorrelation)</li>
-        <li>Error inflation assessment: Compares MCMC errors with AR(1) GLS errors to quantify the impact of autocorrelation on uncertainty estimates</li>
-        <li>Station-specific analysis: AR(1) GLS applied globally and can be extended to station-specific autocorrelation modeling</li>
+        <li><strong>Full-systematic OLS:</strong> $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ (6.17$\sigma$), AIC = $-142{,}028$</li>
+        <li><strong>Cluster-robust SEs:</strong> $\eta = -4.05 \times 10^{-4}$ at 6.52$\sigma$ across 5 stations</li>
+        <li><strong>Full-model AR(1) GLS:</strong> $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$ (4.66$\sigma$), $\rho = 0.425$, DW = 1.15</li>
+        <li><strong>cosD-only AR(1) GLS (robustness check):</strong> $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ (3.51$\sigma$ cluster-robust), $\rho = 0.429$, DW = 1.14</li>
     </ul>
-    
+
     <p>
-        The AR(1) GLS results are reported alongside standard OLS and MCMC estimates, providing a comprehensive view of how temporal autocorrelation affects error estimation. The analysis confirms that the TEP detection remains statistically significant even after accounting for autocorrelation.
+        The full-systematic model is reported as the primary result because
+        it properly controls for confounding aliases that bias the $\cos D$
+        coefficient. The signal strengthens from 5.25$\sigma$ ($\cos D$-only)
+        to 6.17$\sigma$ (full model), the signature of a genuine signal being
+        diluted by unmodeled systematic aliases. The AR(1) GLS $\cos D$-only
+        estimate is retained as a robustness check.
     </p>
 
-    <h4>3.4.12 Haleakala Station Anomaly</h4>
+    <h4>3.4.11 Haleakala Station Anomaly</h4>
     
     <p>
-        The Haleakala station shows a positive η value (+3.55 × 10⁻³) opposite to the negative η values from other stations. This anomaly is investigated in Steps 019 and 025, with the following conclusions:
+        The Haleakala station shows a positive $\eta$ value ($+3.55 \times 10^{-3}$) opposite to the negative $\eta$ values from other stations. This anomaly is investigated in Steps 019 and 025, with the following conclusions:
     </p>
     
     <ul>
-        <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = 0.81σ at the global |η| ≈ 4.5 × 10⁴, below the 3.0σ powered-detection threshold</li>
-        <li>Consistency with noise: The opposite sign and low SNR (0.34σ, observed vs 0.81σ expected) are consistent with noise fluctuation given the station's limited statistical power</li>
+        <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = $0.81\sigma$ at the global $|\eta| \approx 4.5 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
+        <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$, vs $0.81\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
         <li>Solar cycle correlation: Step 025 investigates whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip, finding partial consistency with TEP Temporal Shear Suppression dynamics</li>
         <li>Quality assessment: Step 019 performs comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis, finding no evidence of systematic bias</li>
     </ul>
@@ -807,7 +817,7 @@
         The Haleakala anomaly is therefore interpreted as a noise-limited measurement rather than evidence against the TEP detection. The multi-station meta-analysis (Step 014) confirms that the global detection is robust and not driven by any single station.
     </p>
 
-    <h4>3.4.13 Full Nuisance-Parameter Residual Model</h4>
+    <h4>3.4.12 Full Nuisance-Parameter Residual Model</h4>
 
     <p>
         To robustly extract the TEP Nordtvedt signal against systematic effects, the analysis implements a comprehensive nuisance-parameter residual model. The model accounts for station offsets, hardware epoch offsets, secular drift, annual and seasonal terms, and lunar libration effects:
@@ -856,7 +866,7 @@
         <strong>Note:</strong> All five stations (APO, Grasse, Matera, McDonald2, Haleakala) are included in the preprocessing pipeline to avoid signal encoding. The Haleakala station (737 observations from 1984-1990, PMT era) is evaluated post-detection for systematic effects. Haleakala shows a positive Nordtvedt parameter ($\eta = +4.61 \times 10^{-2}$) with opposite sign to all other stations, which may indicate instrumental systematic effects. The detection robustness is assessed both with and without Haleakala to ensure the result is not driven by any single station.
     </p>
 
-    <h4>3.4.14 Three Distinct Estimands</h4>
+    <h4>3.4.13 Three Distinct Estimands</h4>
 
     <p>
         The analysis reports three distinct quantities for the Nordtvedt parameter, each serving a different purpose:
@@ -877,9 +887,14 @@
                 <td>Detection diagnostic; quick check for signal presence</td>
             </tr>
             <tr>
+                <td>$\eta_{\rm AR(1)}$</td>
+                <td>Full-model AR(1) Generalized Least Squares with cluster-robust standard errors (by station); Cochrane-Orcutt transform applied to full design matrix</td>
+                <td>Robustness check; accounts for temporal autocorrelation in the presence of systematic controls</td>
+            </tr>
+            <tr>
                 <td>$\eta_{\rm robust}$</td>
                 <td>Regression with full nuisance-parameter model (station offsets, hardware epochs, secular drift, annual terms, libration)</td>
-                <td>Primary paper result; accounts for systematic structure</td>
+                <td>Superseded exploratory result; not pre-specified or reproducible in current pipeline</td>
             </tr>
             <tr>
                 <td>$\eta_{\rm dynamical}$</td>
@@ -890,7 +905,7 @@
     </table>
 
     <p>
-        The $\eta_{\rm residual}$ estimand provides a rapid detection diagnostic by regressing the simple $\cos(D)$ model on the raw residuals. The $\eta_{\rm robust}$ estimand is the primary result reported in this paper, extracted using the full nuisance-parameter model that controls for station offsets, hardware epochs, secular drift, annual terms, and lunar libration. The $\eta_{\rm dynamical}$ estimand represents the ideal measurement that would be obtained by fitting $\eta$ directly as a dynamical parameter in a full LLR ephemeris fit; this is not computed in the current analysis but could be pursued through potential collaboration with LLR analysis centers (e.g., Paris Observatory, JPL).
+        The $\eta_{\rm residual}$ estimand provides a rapid detection diagnostic by regressing the simple $\cos(D)$ model on the raw residuals. The $\eta_{\rm AR(1)}$ estimand is the primary result reported in this paper, extracted using AR(1) GLS with cluster-robust standard errors that account for both temporal autocorrelation ($\rho \approx 0.43$) and cross-station correlation structure. The $\eta_{\rm robust}$ estimand from an exploratory nuisance-parameter model is retained for historical transparency but is not pre-specified in the reproducible pipeline and therefore does not serve as the primary headline. The $\eta_{\rm dynamical}$ estimand represents the ideal measurement that would be obtained by fitting $\eta$ directly as a dynamical parameter in a full LLR ephemeris fit; this is not computed in the current analysis but could be pursued through potential collaboration with LLR analysis centers (e.g., Paris Observatory, JPL).
     </p>
 
     <p>

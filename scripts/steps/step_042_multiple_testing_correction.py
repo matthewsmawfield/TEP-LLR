@@ -107,7 +107,7 @@ def collect_reported_significance_values():
     """
 
     # Load upstream step results
-    step_002 = load_json(str(PROJECT_ROOT / 'results/outputs/step_002_statistical_analysis.json'))
+    step_002 = load_json(str(PROJECT_ROOT / 'results/outputs/step_003_statistical_analysis.json'))
     step_004 = load_json(str(PROJECT_ROOT / 'results/outputs/step_004_detection_analysis_advanced.json'))
     step_010 = load_json(str(PROJECT_ROOT / 'results/outputs/step_010_systematic_control_analysis.json'))
     step_015 = load_json(str(PROJECT_ROOT / 'results/outputs/step_015_null_tests.json'))

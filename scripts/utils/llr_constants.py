@@ -380,15 +380,11 @@ def pole_tide_displacement(r_station, x_p, y_p):
     # Longitude
     lam = np.arctan2(y, x)
 
-    # Convert pole coordinates from arcsec to radians
-    x_p_rad = x_p * (np.pi / 648000)  # arcsec to rad
-    y_p_rad = y_p * (np.pi / 648000)
-
     # IERS2010 formula with Love number correction
-    # Theoretical amplitude: -0.033 m (solid Earth response)
-    # With Love number: approximately -0.025 to -0.030 m
-    amp = -0.033 * np.sin(2 * phi) * (x_p_rad *
-                                      np.cos(lam) + y_p_rad * np.sin(lam))
+    # Theoretical amplitude: -0.033 m per arcsec of polar motion (solid Earth response)
+    # With Love number: approximately -0.025 to -0.030 m per arcsec
+    # x_p, y_p are in arcseconds - DO NOT convert to radians
+    amp = -0.033 * np.sin(2 * phi) * (x_p * np.cos(lam) + y_p * np.sin(lam))
 
     # Radial displacement only (vertical)
     u_radial = r_station / R

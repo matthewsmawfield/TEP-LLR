@@ -275,17 +275,17 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
         'description': 'All systematic sources combined'
     }
 
-    # Load the proper statistical error from step_002 (MANDATORY)
-    step_002_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_002_statistical_analysis.json'
-    if not step_002_path.exists():
+    # Load the proper statistical error from step_003 (MANDATORY)
+    step_003_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
         raise FileNotFoundError(
-            f"Required upstream data not found: {step_002_path}. "
-            "Step 002 must be run before Step 020 to ensure methodological consistency."
+            f"Required upstream data not found: {step_003_path}. "
+            "Step 003 must be run before Step 019 to ensure methodological consistency."
         )
     
-    with open(step_002_path, 'r') as f:
-        step_002_data = json.load(f)
-    final_stat_error = step_002_data.get('eta_err_mcmc', 0.001)
+    with open(step_003_path, 'r') as f:
+        step_003_data = json.load(f)
+    final_stat_error = step_003_data.get('eta_err_mcmc', 0.001)
     
     # Load data-driven systematic error budget from step_008 (preferred)
     # Falls back to step_006 for backward compatibility.
@@ -425,7 +425,7 @@ def main():
     print_status(f"    Output file: results/outputs/step_019_systematic_monte_carlo.json", "INFO")
     print_status(f"    MC iterations: 500", "INFO")
     print_status(f"    Random seed: 42", "INFO")
-    print_status(f"    Statistical error source: step_002_statistical_analysis.json", "INFO")
+    print_status(f"    Statistical error source: step_003_statistical_analysis.json", "INFO")
 
     # Save results
     project_root = Path(__file__).parent.parent.parent

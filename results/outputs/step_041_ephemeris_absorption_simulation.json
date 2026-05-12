@@ -14,7 +14,7 @@
         "fitted_eta": -0.0002275043909468467,
         "fitted_eta_error": 6.573726454523316e-05,
         "snr": 3.4608131707443226,
-        "post_fit_sideband_fraction": 0.0,
+        "post_fit_sideband_fraction": 0.0005680848440622701,
         "interpretation": "Dynamic signal is not fully absorbed - sidebands remain in residuals"
     },
     "null_case": {
@@ -27,6 +27,6 @@
         "static_signals_absorbed": true,
         "tep_signals_not_absorbed": false,
         "null_case_no_false_positive": true,
-        "key_finding": "Static Nordtvedt signals are absorbed with 103.3% efficiency by standard ephemeris fitting, while dynamically modulated TEP signals leave 0.0% of power in sideband frequencies that are spectrally orthogonal to standard integrators. This validates the ephemeris absorption argument."
+        "key_finding": "Static Nordtvedt signals are absorbed with 103.3% efficiency by standard ephemeris fitting, while dynamically modulated TEP signals leave 0.1% of power in sideband frequencies that are spectrally orthogonal to standard integrators. This validates the ephemeris absorption argument."
     }
 }

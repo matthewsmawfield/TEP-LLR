@@ -258,7 +258,7 @@ def main():
 
     print_status("═══ DATA SUMMARY", "INFO")
     # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_002_statistical_analysis.json'
+    step_002_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
     if step_002_path.exists():
         with open(step_002_path, 'r') as f:
             step_002_results = json.load(f)
@@ -313,7 +313,7 @@ def main():
     print_status(f"    Output file: results/outputs/step_021_ipw_validation.json", "INFO")
     print_status(f"    MC iterations: 500", "INFO")
     print_status(f"    Random seed: 42", "INFO")
-    print_status(f"    η source: step_002_statistical_analysis.json", "INFO")
+    print_status(f"    η source: step_003_statistical_analysis.json", "INFO")
 
     # Save results
     output_path = Path(__file__).parent.parent.parent / \

@@ -50,12 +50,19 @@ from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
 # ---------------------------------------------------------------------------
 # Known Grasse hardware epoch boundaries (Julian years)
-# These are from published LLR literature; actual boundaries adapted to data
+# Based on published LLR literature:
+#   - Ruby laser (694 nm) until ~1986
+#   - Nd:YAG (1064 nm -> 532 nm green) from 1986, no SPAD until 1994
+#   - SPAD detector from 1994 (millimetric precision)
+#   - C-SPAD + timing upgrade from 2009
+#   - IR channel added from 2015
 # ---------------------------------------------------------------------------
 GRASSE_EPOCHS = [
-    {'name': 'Grasse-I',   'label': 'Nd:glass / PMT',          'start': 1984.0, 'end': 1994.0},
-    {'name': 'Grasse-II',  'label': 'Nd:YAG / SPAD',           'start': 1994.0, 'end': 2009.0},
-    {'name': 'Grasse-III', 'label': 'Nd:YAG / C-SPAD',         'start': 2009.0, 'end': 2020.0},
+    {'name': 'Grasse-Ruby',    'label': 'Ruby laser / PMT',       'start': 1984.0, 'end': 1986.5},
+    {'name': 'Grasse-Nd:YAG',  'label': 'Nd:YAG green / no SPAD', 'start': 1986.5, 'end': 1994.0},
+    {'name': 'Grasse-SPAD',    'label': 'Nd:YAG / SPAD',          'start': 1994.0, 'end': 2009.0},
+    {'name': 'Grasse-C-SPAD',  'label': 'Nd:YAG / C-SPAD',        'start': 2009.0, 'end': 2015.0},
+    {'name': 'Grasse-SPAD+IR', 'label': 'Nd:YAG / SPAD+IR',       'start': 2015.0, 'end': 2020.0},
 ]
 
 # APO commenced operations around 2000 — split into early/late
@@ -74,7 +81,7 @@ def _fit_epoch(df_slice: pd.DataFrame) -> dict:
     cos_elong = np.cos(df_slice['elongation_rad'].values)
     reg = linear_regression(residuals, cos_elong)
     snr = abs(reg['eta']) / reg['eta_error'] if reg['eta_error'] > 0 else 0.0
-    rms = float(np.sqrt(np.mean(residuals ** 2)))
+    rms = float(np.std(residuals))
     r, p = stats.pearsonr(residuals, cos_elong)
     return {
         'n_obs': int(len(df_slice)),
@@ -286,7 +293,7 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
     print_status(f"    Stations: {sorted(df['station'].unique())}", "DATA")
 
     # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_002_statistical_analysis.json'
+    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
     if step_002_path.exists():
         with open(step_002_path, 'r') as f:
             step_002_results = json.load(f)

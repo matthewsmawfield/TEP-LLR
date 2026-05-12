@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Flyby TEP Pipeline - Step 002: Statistical Analysis
+Flyby TEP Pipeline - Step 003: Statistical Analysis
 """
 
 import sys
@@ -12,7 +12,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, set_verbose_mode
 from scripts.utils.config import get_config
-from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma, cluster_robust_variance
 import argparse
 import pandas as pd
 import numpy as np
@@ -24,7 +25,7 @@ TEP_CONFIG = get_config()
 
 def _log_likelihood(theta, x, y, y_err):
     eta, intercept = theta
-    model = 13.0 * eta * x + intercept
+    model = ETA_SCALE_FACTOR * eta * x + intercept
     sigma2 = y_err**2
     return -0.5 * np.sum((y - model) ** 2 / sigma2 + np.log(sigma2))
 
@@ -40,81 +41,113 @@ def _log_probability(theta, x, y, y_err):
         return -np.inf
     return lp + _log_likelihood(theta, x, y, y_err)
 
-def ar1_gls_regression(y, x, verbose=False):
+def ar1_gls_regression(y, x, station_ids=None, verbose=False):
     """
-    Perform AR(1) Generalized Least Squares regression to account for temporal autocorrelation.
-    
-    This method estimates the AR(1) parameter rho from the residuals, then uses it to
-    construct the covariance matrix for GLS estimation. This provides more accurate
-    error estimates when temporal autocorrelation is present.
-    
+    Perform AR(1) Generalized Least Squares regression with optional
+    cluster-robust standard errors.
+
+    Estimates the AR(1) parameter rho from OLS residuals, applies a
+    Cochrane-Orcutt quasi-differencing transformation, and fits the
+    transformed model.  If station_ids are provided, cluster-robust
+    (sandwich) standard errors are computed by station.
+
     Parameters:
     -----------
     y : np.ndarray
         Dependent variable (residuals)
     x : np.ndarray
         Independent variable (cos(elongation))
+    station_ids : np.ndarray, optional
+        Cluster identifier for each observation (e.g. station name).
+        Used to compute cluster-robust standard errors.
     verbose : bool
         Whether to print diagnostic information
-    
+
     Returns:
     --------
     dict containing:
         - eta: Estimated Nordtvedt parameter
-        - eta_error: Standard error of eta
+        - eta_error: Standard error of eta (GLS, Birge-scaled)
+        - eta_error_cluster: Cluster-robust SE of eta (if station_ids given)
         - rho: Estimated AR(1) parameter
         - rho_error: Standard error of rho
         - durbin_watson: Durbin-Watson statistic
         - n_obs: Number of observations
+        - n_clusters: Number of clusters (if station_ids given)
     """
     n = len(y)
-    
+
     # First fit with OLS to get initial residuals
     reg_ols = linear_regression(y, x, weights=None)
     residuals = y - (13.0 * reg_ols['eta'] * x + reg_ols['intercept'])
-    
+
     # Estimate AR(1) parameter rho from residuals
     # rho = sum(residuals[t] * residuals[t-1]) / sum(residuals[t-1]^2)
     rho = np.sum(residuals[1:] * residuals[:-1]) / np.sum(residuals[:-1]**2)
-    
+
     # Standard error of rho (asymptotic formula for AR(1))
     rho_error = np.sqrt((1 - rho**2) / n)
-    
+
     # Durbin-Watson statistic
     dw_stat = np.sum(np.diff(residuals)**2) / np.sum(residuals**2)
-    
+
     # Cochrane-Orcutt transformation for AR(1) GLS (O(n) instead of O(n³) Cholesky)
     # Transform: y_t* = y_t - rho*y_{t-1}, x_t* = x_t - rho*x_{t-1}
-    # This avoids constructing the full n×n covariance matrix
     y_star = y[1:] - rho * y[:-1]
     x_star = x[1:] - rho * x[:-1]
-    
+
     # OLS on transformed variables
     reg_star = linear_regression(y_star, x_star, weights=None)
     eta_gls = reg_star['eta']
     intercept_gls = reg_star['intercept']
-    
+
     # Error estimation for transformed regression
     eta_error_gls = reg_star['eta_error']
-    
-    # Adjust intercept for original scale (intercept* = intercept*(1-rho))
+
+    # Adjust intercept for original scale
     intercept_gls = intercept_gls / (1 - rho)
-    
+
+    # Cluster-robust standard errors (by station)
+    eta_error_cluster = None
+    n_clusters = None
+    if station_ids is not None and len(station_ids) == n:
+        # Align cluster IDs with the transformed (differenced) observations.
+        # y_star[t] corresponds to y[t+1], so use station_ids[1:].
+        cluster_ids_star = station_ids[1:]
+        X_star = np.column_stack([x_star, np.ones(len(x_star))])
+        # Residuals on the transformed scale: y_star - (A_star*x_star + B_star)
+        A_star = reg_star['amplitude']
+        B_star = reg_star['intercept']
+        u_star = y_star - (A_star * x_star + B_star)
+        cr = cluster_robust_variance(
+            X_star, u_star, cluster_ids_star, small_sample_correction=True
+        )
+        # Convert amplitude SE to eta SE: eta = A / 13
+        from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+        eta_error_cluster = cr['se_cluster'][0] / ETA_SCALE_FACTOR
+        n_clusters = cr['n_clusters']
+
     if verbose:
         print_status(f"AR(1) GLS Regression Results:", "CALC")
         print_status(f"  η (GLS) = {eta_gls:.8e} ± {eta_error_gls:.8e}", "CALC")
+        if eta_error_cluster is not None:
+            print_status(f"  η (GLS, cluster-robust) = {eta_gls:.8e} ± {eta_error_cluster:.8e}", "CALC")
+            print_status(f"  Cluster-robust SE inflation: {eta_error_cluster/eta_error_gls:.2f}x", "CALC")
         print_status(f"  AR(1) parameter ρ = {rho:.4f} ± {rho_error:.4f}", "CALC")
         print_status(f"  Durbin-Watson = {dw_stat:.3f}", "CALC")
         print_status(f"  Interpretation: {'Significant autocorrelation' if abs(rho) > 0.1 else 'Weak autocorrelation'}", "CALC")
-    
-    return {
+
+    result = {
         "eta": eta_gls,
         "eta_error": eta_error_gls,
+        "eta_error_cluster": eta_error_cluster,
         "rho": rho,
         "rho_error": rho_error,
         "durbin_watson": dw_stat,
-        "n_obs": n
+        "n_obs": n,
+        "n_clusters": n_clusters
     }
+    return result
 
 def run_statistical_analysis(verbose=False):
     print_status("═══ Starting Step 003: Statistical Analysis...", "TITLE")
@@ -223,19 +256,29 @@ def run_statistical_analysis(verbose=False):
     
     status = "STRONG DETECTION" if snr > 5 else "DETECTION" if snr > 3 else "INCONCLUSIVE"
     
+    # Extract station IDs for cluster-robust SE computation
+    station_ids = df_clean['station'].values if 'station' in df_clean.columns else None
+
     # AR(1) GLS Regression to account for temporal autocorrelation
     print_status(">>> Performing AR(1) GLS regression (autocorrelation-aware error estimation)", "PROCESS")
-    ar1_gls_results = ar1_gls_regression(y, x, verbose=verbose)
-    
+    ar1_gls_results = ar1_gls_regression(y, x, station_ids=station_ids, verbose=verbose)
+
+    # Use cluster-robust error as the primary error if available
+    primary_eta_error = ar1_gls_results.get('eta_error_cluster') or ar1_gls_results['eta_error']
+    primary_snr = abs(ar1_gls_results['eta']) / primary_eta_error if primary_eta_error > 0 else 0.0
+
     print_status("═══ RESULTS SUMMARY", "INFO")
     print_status(f"    OLS η: {eta_ols:.8e} ± {eta_err_ols:.8e}", "CALC")
     print_status(f"    MCMC η: {eta_mcmc:.8e} ± {eta_err_mcmc:.8e}", "CALC")
     print_status(f"    AR(1) GLS η: {ar1_gls_results['eta']:.8e} ± {ar1_gls_results['eta_error']:.8e}", "CALC")
+    if ar1_gls_results.get('eta_error_cluster') is not None:
+        print_status(f"    AR(1) GLS η (cluster-robust): {ar1_gls_results['eta']:.8e} ± {ar1_gls_results['eta_error_cluster']:.8e}", "CALC")
+        print_status(f"    Cluster-robust SNR: {primary_snr:.2f}σ", "CALC")
     print_status(f"    AR(1) parameter ρ: {ar1_gls_results['rho']:.4f} ± {ar1_gls_results['rho_error']:.4f}", "CALC")
     print_status(f"    Durbin-Watson: {ar1_gls_results['durbin_watson']:.3f}", "CALC")
-    print_status(f"    SNR: {snr:.2f}σ", "CALC")
+    print_status(f"    SNR (MCMC): {snr:.2f}σ", "CALC")
     print_status(f"    Status: {status}", "PASS" if status == "STRONG DETECTION" else "INFO")
-    
+
     print_status("═══ INTERPRETATION", "INFO")
     print_status(f"    The negative η indicates TEP Nordtvedt violation is present", "INFO")
     print_status(f"    Statistical significance: {snr:.2f}σ ({status})", "INFO")
@@ -254,9 +297,12 @@ def run_statistical_analysis(verbose=False):
         "ar1_gls": {
             "eta": float(ar1_gls_results['eta']),
             "eta_error": float(ar1_gls_results['eta_error']),
+            "eta_error_cluster": float(ar1_gls_results['eta_error_cluster']) if ar1_gls_results.get('eta_error_cluster') is not None else None,
             "rho": float(ar1_gls_results['rho']),
             "rho_error": float(ar1_gls_results['rho_error']),
             "durbin_watson": float(ar1_gls_results['durbin_watson']),
+            "n_clusters": int(ar1_gls_results['n_clusters']) if ar1_gls_results.get('n_clusters') is not None else None,
+            "n_obs": int(len(y)),
             "interpretation": "Significant autocorrelation" if abs(ar1_gls_results['rho']) > 0.1 else "Weak autocorrelation"
         },
         "convergence_diagnostics": {
@@ -280,7 +326,7 @@ def run_statistical_analysis(verbose=False):
     }
     
     print_status("═══ REPRODUCIBILITY", "INFO")
-    print_status(f"    Output file: results/outputs/step_002_statistical_analysis.json", "INFO")
+    print_status(f"    Output file: results/outputs/step_003_statistical_analysis.json", "INFO")
     print_status(f"    MCMC walkers: {n_walkers}", "INFO")
     print_status(f"    MCMC steps: {n_steps}", "INFO")
     print_status(f"    MCMC burn-in: {burn_in}", "INFO")
@@ -300,5 +346,5 @@ if __name__ == "__main__":
             if isinstance(obj, np.ndarray): return obj.tolist()
             if isinstance(obj, (np.float64, np.float32)): return float(obj)
             return obj
-        logger.save_step_results(to_native(results), PROJECT_ROOT, "step_002_statistical_analysis")
+        logger.save_step_results(to_native(results), PROJECT_ROOT, "step_003_statistical_analysis")
         print_status(f"Statistical Analysis Complete. SNR = {results['snr']:.1f}σ", "SUCCESS")

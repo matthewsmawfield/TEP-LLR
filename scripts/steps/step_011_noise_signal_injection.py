@@ -88,14 +88,14 @@ def run_injection_test(df, verbose=False):
     pure_noise = np.random.normal(0, rms_original, n)
 
     # Load measured eta from step_002 output for injection test
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_002_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        eta_injected = step_002_results.get('eta_ols', 0)
-        print_status(f"  [DATA] Loaded measured η from step_002: {eta_injected:.4e}", "INFO")
+    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if step_003_path.exists():
+        with open(step_003_path, 'r') as f:
+            step_003_results = json.load(f)
+        eta_injected = step_003_results.get('eta_ols', 0)
+        print_status(f"  [DATA] Loaded measured η from step_003: {eta_injected:.4e}", "INFO")
     else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
+        raise FileNotFoundError(f"Step 003 results not found: {step_003_path}. Run pipeline step 003 first.")
 
     signal_injected = 13.0 * eta_injected * cos_elong
     res_with_signal = pure_noise + signal_injected

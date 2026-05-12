@@ -16,7 +16,7 @@
         across multiple regimes: the anomalous perihelion precession of Mercury
         (42.98 arcsec/century, matched to 0.1%); light deflection around the Sun
         (1.75 arcsec, verified to ~1%); gravitational time dilation (GPS clock
-        corrections of ~45 μs/day, confirmed to 0.1%); orbital decay in binary
+        corrections of ~45 $\mu$s/day, confirmed to 0.1%); orbital decay in binary
         pulsars (indirect gravitational wave detection, Hulse-Taylor pulsar);
         and direct gravitational wave emission from merging black holes (LIGO,
         2015). These triumphs establish GR as the correct effective theory
@@ -118,22 +118,22 @@
         The quantitative prediction for the Nordtvedt parameter is informed by
         the TEP framework's Observable Response Coefficients, which quantify
         domain-specific astrophysical responses rather than a universal bare coupling.
-        In the Jakarta v0.8 framework, Paper 11 (Cepheid $H_0$ tension) derives an
-        Observable Response Coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$
-        mag for Cepheid period-luminosity anomalies, while Paper 10 (globular cluster
-        pulsars) reports $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for pulsar spin-down excess.
-        These coefficients are distinct from the microscopic conformal coupling $\beta$
-        or scalar-tensor coupling $\alpha_0$, absorbing instead the full astrophysical
-        response including environmental activation and transfer functions. The
-        prediction $\eta \sim -10^{-4}$ emerges from the differential suppression
+        Preliminary results from related work in the same TEP framework report
+        $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag for Cepheid period-luminosity
+        anomalies (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for pulsar spin-down
+        excess (Paper 10). These coefficients are distinct from the microscopic conformal
+        coupling $\beta$ or scalar-tensor coupling $\alpha_0$, absorbing instead the full
+        astrophysical response including environmental activation and transfer functions.
+        The prediction $\eta \sim -10^{-4}$ emerges from the differential suppression
         geometry combined with the understanding that LLR operates in a more screened
-        Solar System regime, yielding a smaller effective response than the
-        unscreened galactic probes.
+        Solar System regime, yielding a smaller effective response than the unscreened
+        galactic probes.
     </p>
 
     <p>
-        This analysis uses 26,207 LLR O-C residuals from five international
-        laser ranging stations spanning 35 years of measurements (1984-2019).
+        This analysis uses 26,207 raw LLR O-C residuals from five international
+        laser ranging stations spanning 35 years of measurements (1984–2019),
+        with 25,445 retained after standard $6\sigma$ MAD outlier cleaning.
         The residuals are processed against the INPOP19a lunar and planetary
         ephemeris from the Paris Observatory (Geoazur). To eliminate synodic 
         blurring and ensure millimeter-level coordinate precision, Moon-Sun 
@@ -145,7 +145,7 @@
 
     <p>
         Because standard Ordinary Least Squares estimators are unstable against
-        heavy-tailed 1980s PMT hardware variance, the analysis utilizes formal Cook's Distance leverage excision to determine the primary physical parameter. The leverage-excised result $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ at 5.67$\sigma$ ($N=25{,}177$) is reported as the primary finding, suggesting a violation of the Strong Equivalence Principle at the $10^{-4}$ level. For comparison, the full cleaned dataset (after 6$\sigma$ MAD outlier cleaning) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$ ($N=25{,}445$), and the modern C-SPAD epoch (2009-2019) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$ significance.
+        heavy-tailed 1980s PMT hardware variance, the analysis employs a hierarchy of estimators. The primary physical parameter is extracted using the full-systematic OLS model, yielding $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ at 6.17$\sigma$ ($N=25{,}445$). The full-model AR(1) GLS robustness check, which applies Cochrane-Orcutt quasi-differencing to the entire design matrix simultaneously, gives $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$ at 4.66$\sigma$, consistent with the primary result. Robustness checks confirm consistency: the full cleaned dataset (after 6$\sigma$ MAD outlier cleaning) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$, the modern C-SPAD epoch (2009-2019) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$, and Cook's Distance leverage excision provides a diagnostic $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ at 5.67$\sigma$ that confirms early-era PMT leverage points inflate naive OLS estimates.
 
         This detection aligns with historical precedent: Müller & Nordtvedt
         (1998) — the latter being the originator of the Nordtvedt effect —

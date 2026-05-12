@@ -105,11 +105,11 @@
     <p>
         Two theoretically distinct predictions are evaluated. The
         <em>compactness-squared</em> expression above uses only the bare
-        microscopic coupling α_0 and the surface compactness differential.
-        With the Cassini-bound α_0 ≲ 3×10⁻³ and Δ(Φ²) ≈ 5×10⁻¹⁹, this
-        gives η ≈ 4×10⁻²⁴ — essentially zero. This baseline is not a
+        microscopic coupling $\alpha_0$ and the surface compactness differential.
+        With the Cassini-bound $\alpha_0 \lesssim 3\times10^{-3}$ and $\Delta(\Phi^2) \approx 5\times10^{-19}$, this
+        gives $\eta \approx 4\times10^{-24}$ — essentially zero. This baseline is not a
         physical prediction for LLR; it is a consistency check that confirms
-        the measured η cannot arise from the bare coupling alone. η is an
+        the measured $\eta$ cannot arise from the bare coupling alone. $\eta$ is an
         emergent observable response coefficient, not a microscopic parameter.
     </p>
 
@@ -126,28 +126,33 @@
     </div>
 
     <p>
-        Using a simplified PREM density model and ρ_T ≈ 20 g/cm³ from GNSS
+        Using a simplified PREM density model and $\rho_T \approx 20$ g/cm³ from GNSS
         calibration (Paper 6), the Earth-Moon shielding differential is
-        Δ⟨(ρ/ρ_T)³⟩ ≈ 3.2×10⁻², giving η ≈ -9.7×10⁻⁵. This is within the
-        predicted Nordtvedt violation range of $\eta \in [-10^{-3},
-        -10^{-4}]$. The measured value η = -3.17×10⁻⁴ is consistent with
-        this prediction, with a residual factor of ~3–5 absorbed into model
-        uncertainties (PREM simplification, phenomenological exponent in
-        (ρ/ρ_T)³, ρ_T = 20 ± 8 g/cm³ uncertainty, and the upper-bound nature
-        of the Cassini α_0 constraint).
+        $\Delta\langle(\rho/\rho_T)^3\rangle \approx 3.2\times10^{-2}$, giving $\eta \approx -9.7\times10^{-5}$. The current TEP
+        framework robustly predicts the sign of the effect under
+        compactness-driven TSS and gives an order-of-magnitude expectation
+        in the $10^{-4}$ regime under this phenomenological volumetric model.
+        It does not yet provide a first-principles, parameter-free
+        prediction of $\eta$. The naïve OLS measured value
+        $\eta = -3.17\times10^{-4}$ (naïve OLS robustness check) lies in the same
+        order-of-magnitude regime, but the phenomenological model
+        uncertainties — PREM simplification, the exponent in $(\rho/\rho_T)^3$,
+        $\rho_T = 20 \pm 8$ g/cm³, and the upper-bound nature of the Cassini
+        $\alpha_0$ constraint — preclude a precision comparison at this stage.
     </p>
 
     <p>
-        The measured η is also ~8.8× larger than the standard scalar-tensor
-        upper-bound prediction η ≈ 4α_0² ≈ 3.6×10⁻⁵ (with α_0 ≲ 3×10⁻³
-        from Cassini), indicating that the LLR observable response absorbs
-        contributions from the TEP screening mechanism beyond bare
-        scalar-tensor physics. The measured η is much smaller than κ_MSP
-        ~ 10⁶–10⁷ and κ_Cep ~ 10⁶, which is consistent with the screening
-        mechanism: LLR is in a more screened regime (Solar System) compared
-        to globular clusters and galactic disks, so the effective response
-        should be smaller. No separate κ_LL parameter is required;
-        η itself is the observable response coefficient for LLR.
+        The measured $\eta$ is also ~8.8× larger than the standard scalar-tensor
+        upper-bound prediction $\eta \approx 4\alpha_0^2 \approx 3.6\times10^{-5}$ (with $\alpha_0 \lesssim 3\times10^{-3}$
+        from Cassini), consistent with the interpretation that the LLR
+        observable response absorbs contributions from the TEP screening
+        mechanism beyond bare scalar-tensor physics. The measured $\eta$ is much
+        smaller than preliminary $\kappa_{\rm MSP} \sim 10^6$–$10^7$ and $\kappa_{\rm Cep} \sim 10^6$
+        from related work in the same framework (Papers 10 and 11), which is consistent
+        with the screening mechanism: LLR is in a more screened regime (Solar System)
+        compared to globular clusters and galactic disks, so the effective response
+        should be smaller. No separate $\kappa_{\rm LL}$ parameter is required; $\eta$ itself
+        is the observable response coefficient for LLR.
     </p>
 
     <h3>2.2 Predicted Signal in LLR</h3>
@@ -210,6 +215,80 @@
         orbital longitude), spectrally orthogonal to classical multi-body
         resonances. This provides a unique signature distinguishing TEP from
         standard PPN or systematic artifacts.
+    </p>
+
+    <p>
+        The TEP framework further predicts that the coupling depends not only
+        on the scalar gradient magnitude (distance) but also on the rate at
+        which the Earth-Moon system traverses the temporal topology. A body
+        moving through a spatial scalar gradient $\nabla\phi$ at velocity
+        $\mathbf{v}$ experiences an effective temporal shear rate
+        $d\phi/dt \approx \mathbf{v} \cdot \nabla\phi \approx v_r \, |\nabla\phi|$,
+        where $v_r$ is the heliocentric radial velocity. For a Kepler orbit with
+        small eccentricity, distance $r$ and radial velocity $v_r$ are
+        approximately in quadrature ($90°$ out of phase), making them
+        statistically distinguishable predictors. The full dynamical
+        modulation therefore takes the form:
+    </p>
+
+    <div class="equation">
+        \begin{equation} \label{eq:velocity_modulation} \eta(r_\odot, v_r) = \eta_0 \left( 1 + m_r \cdot \frac{r_{\rm mean} -
+        r_\odot}{r_{\rm mean} \cdot e_\oplus} + m_v \cdot \frac{v_r}{\bar{v}_r} \right) \end{equation}
+    </div>
+
+    <p>
+        where $\bar{v}_r$ is the characteristic radial velocity scale
+        ($\approx 0.5$ km/s for Earth's orbit) and $m_v$ is the velocity
+        modulation depth. A joint fit to both $r_\odot$ and $v_r$ determines
+        whether the temporal topology is purely static ($m_v = 0$) or
+        dynamically responsive ($m_v \neq 0$). Step 047 tests this prediction
+        directly, using DE421 ephemeris velocities computed via Skyfield for
+        every LLR observation epoch.
+    </p>
+
+    <p>
+        A further TEP prediction arises if the scalar field possesses a
+        cosmological rest frame, as defined by the CMB dipole. The Planck 2018
+        CMB dipole specifies a preferred direction $(l, b) = (264.02°,
+        48.25°)$ in galactic coordinates, equivalent to $(\alpha, \delta) =
+        (168.14°, -7.22°)$ in J2000 equatorial coordinates, with an
+        amplitude $v_{\rm CMB} \approx 369$ km/s. If the scalar field
+        $\phi$ originates from a cosmological potential with a preferred rest
+        frame, the Earth-Moon system should exhibit anisotropic coupling
+        depending on its velocity and orientation relative to that frame. Two
+        distinct predictions emerge:
+    </p>
+
+    <p>
+        First, an <em>annual velocity projection</em>: Earth's orbital
+        velocity ($\sim 30$ km/s) projects onto the CMB dipole direction with
+        a sinusoidally varying parallel component
+        $v_\parallel(t) = \mathbf{v}_{\rm orb} \cdot \hat{\mathbf{n}}_{\rm CMB}$.
+        The CMB dipole lies at ecliptic longitude $\approx 173°$, offset by
+        approximately $70°$ from the perihelion longitude ($\approx 103°$),
+        making the annual velocity projection phase-shifted relative to the
+        heliocentric distance modulation and therefore statistically
+        distinguishable.
+    </p>
+
+    <p>
+        Second, a <em>monthly orientation anisotropy</em>: the Earth-Moon
+        line sweeps across the celestial sphere with synodic period. If the
+        scalar gradient carries a preferred direction aligned with the CMB
+        dipole, the effective coupling should depend on the cosine of the
+        angle $\theta$ between the Earth-Moon vector and the CMB dipole:
+    </p>
+
+    <div class="equation">
+        \begin{equation} \label{eq:cmb_anisotropy} \eta = \eta_0 \left( 1 + m_{\rm CMB} \cdot \cos\theta_{\rm EM-CMB} \right) \end{equation}
+    </div>
+
+    <p>
+        where $\cos\theta_{\rm EM-CMB} = \hat{\mathbf{r}}_{\rm EM} \cdot
+        \hat{\mathbf{n}}_{\rm CMB}$. Because the Earth-Moon line rotates on a
+        monthly timescale while the synodic signal operates on a 29.5-day
+        period, the two modulations are at different frequencies and can be
+        separated in a joint fit. Step 048 tests both predictions directly.
     </p>
 
     <p>

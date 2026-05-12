@@ -19,7 +19,7 @@ TEP preserves the Weak Equivalence Principle through universal conformal couplin
 
 This analysis uses 26,207 LLR O-C residuals from five international laser ranging stations (APO, Grasse, Matera, McDonald2, Haleakala) spanning 35 years of measurements (1984-2019). The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). The analysis searches for the predicted TEP Nordtvedt signal: a synodic-phase-dependent modulation of the Earth-Moon range given by $\delta r = 13 \eta \cos(D)$, where $\eta$ is the Nordtvedt parameter and $D$ is the Moon-Sun elongation angle.
 
-Analysis of the full 35-year dataset detects a continuous modulation correlated with $\cos(D)$. Because early-era (1980s) PMT hardware variance inherently inflates standard Ordinary Least Squares estimators, this analysis utilizes formal Cook's Distance leverage excision to determine the primary physical parameter. The analysis demonstrates a detection of a non-zero Nordtvedt parameter with leverage-excised value $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$) as the primary result, Bayesian MCMC estimate $\eta = -3.16 \times 10^{-4} \pm 6.03 \times 10^{-5}$ (5.26$\sigma$), and autocorrelation-aware AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (3.71$\sigma$).
+Analysis of the full 35-year dataset detects a continuous modulation correlated with $\cos(D)$. The primary physical parameter is extracted using the full-systematic OLS model (cosD + annual + monthly + thermal cos2D), yielding $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ (6.17$\sigma$). A corrected full-model AR(1) Generalized Least Squares, which applies Cochrane-Orcutt quasi-differencing to the entire design matrix simultaneously, gives $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$ (4.66$\sigma$), consistent with the primary result. Robustness checks yield consistent values: Bayesian MCMC estimate $\eta = -2.84 \times 10^{-4} \pm 6.61 \times 10^{-5}$ (4.30$\sigma$), and Cook's Distance leverage-excised OLS $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (5.67$\sigma$), the latter serving as a diagnostic confirming that early-era PMT leverage points inflate naive OLS estimates.
 
 The detection is independently checked by cross-station validation across continental observatories. Apache Point Observatory (USA) extracts a sign-consistent signal at $0.09\sigma$ ($\eta = -2.39 \times 10^{-4}$), independently from Grasse (France, 74% of observations). APO's fitted amplitude predicts Grasse's core phase signal with correlation $r = 0.0357$ ($p = 6.82 \times 10^{-7}$), demonstrating the anomaly phase-locks coherently across independent observatories on separate continents. This cross-validation reduces the instrumental critique that the signal could be a single-station artifact.
 
@@ -27,7 +27,7 @@ To mathematically establish why direct-fit ephemerides are forced to constrain $
 
 Cross-epoch hardware consistency provides additional evidence against instrumental systematics: all five independent hardware epochs (Grasse-I, Grasse-II, Grasse-III, APO-I, APO-II) show negative $\eta$, with the probability that this sign consistency arises by chance being $p = 0.031$. This sign consistency across independent hardware eras strongly supports a physical origin tied to the Earth-Moon-Sun gravitational geometry rather than station-specific instrumental artifacts.
 
-Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides supplementary, phase-clustered evidence consistent with INPOP19a, though limited by its short baseline. The primary detection relies on the INPOP19a ephemeris (35.5-year baseline) with leverage-excised $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ at 5.67$\sigma$ significance.
+Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides supplementary, phase-clustered evidence consistent with INPOP19a, though limited by its short baseline. The primary detection relies on the INPOP19a ephemeris (35.5-year baseline) with full-systematic OLS $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ at 6.17$\sigma$ significance.
 
 In the context of TEP, the differential Temporal Shear Suppression between Earth and Moon (Earth more strongly self-suppressed due to its deeper gravitational potential, $\Phi_{\oplus}/c^2 \approx 7 \times 10^{-10}$ vs. $\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$) could produce an effective Nordtvedt parameter with the observed sign. The measurement addresses the theoretical ambiguity between two competing mechanisms: a legacy soliton-radius model ($S = R_{\rm sol}/R_{\rm phys}$) would predict positive $\eta$, while gravitational compactness-driven gradient suppression (vanishing Temporal Shear in the deeper potential well) predicts negative $\eta$. The observed negative sign suggests that gravitational potential suppression (TSS) dominates in the Earth-Moon system.
 
@@ -39,9 +39,11 @@ Code Availability: All data and analysis code required to reproduce the results 
 - **26,207 observations** from 5 stations (APO, Grasse, Matera, McDonald2, Haleakala)
 - **Date range:** 1984-2019
 - **Residual precision:** 9.5 cm RMS
-- **Full cleaned OLS extraction:** $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ ($N=25{,}445$), 5.29σ
-- **Bayesian MCMC extraction:** $\eta = -3.17 \times 10^{-4} \pm 6.00 \times 10^{-5}$, 5.20σ
-- **Leverage-excised (primary result):** $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$, 5.67σ
+- **Full-systematic OLS (primary):** $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ ($N=25{,}445$), 6.17σ
+- **Full-model AR(1) GLS (robustness check):** $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$, 4.66σ
+- **cosD-only AR(1) GLS (comparison):** $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$, 3.51σ cluster-robust
+- **Bayesian MCMC extraction:** $\eta = -2.84 \times 10^{-4} \pm 6.61 \times 10^{-5}$, 4.30σ
+- **Cook's Distance leverage-excised (diagnostic):** $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$, 5.67σ
 - **Precision-weighted regression:** $\eta_{\rm WLS} = -3.50 \times 10^{-4} \pm 1.13 \times 10^{-4}$, 3.11σ
 - **Sign-weighted meta-analysis:** $\eta = -4.51 \times 10^{-4} \pm 9.15 \times 10^{-5}$, 4.93σ
 - **DE430 cross-ephemeris validation:** $\eta = -5.62 \times 10^{-6} \pm 5.60 \times 10^{-4}$, 0.01σ

@@ -1,0 +1,39 @@
+[20:20:00] ═══ Starting Step 046: Station-Balanced TEP Analysis...
+[20:20:00]     Purpose: Test TEP signal persistence when Grasse dominance is removed
+[20:20:00]     Loaded 26,207 observations
+[20:20:00]       Station APO: 2,595 obs
+[20:20:00]       Station Grasse: 19,390 obs
+[20:20:00]       Station Haleakala: 737 obs
+[20:20:00]       Station Matera: 346 obs
+[20:20:00]       Station McDonald2: 3,139 obs
+[20:20:00] 
+[20:20:00] >>> >>> TEST 1: Full-sample baseline
+[20:20:00]         η = -3.170e-04 ± 6.041e-05 (5.25σ)
+[20:20:00] 
+[20:20:00] >>> >>> TEST 2: Equal-N subsample (all stations = min N)
+[20:20:00]         η = -1.749e-04 ± 3.437e-04 (0.51σ)
+[20:20:00]           APO: 346 obs
+[20:20:00]           Grasse: 346 obs
+[20:20:00]           Haleakala: 346 obs
+[20:20:00]           Matera: 346 obs
+[20:20:00]           McDonald2: 346 obs
+[20:20:00] 
+[20:20:00] >>> >>> TEST 3: Grasse-capped subsample (Grasse = APO N)
+[20:20:00]         η = -2.083e-04 ± 1.177e-04 (1.77σ)
+[20:20:00]           APO: 2595 obs
+[20:20:00]           Grasse: 2595 obs
+[20:20:00]           Haleakala: 737 obs
+[20:20:00]           Matera: 346 obs
+[20:20:00]           McDonald2: 3139 obs
+[20:20:00] 
+[20:20:00] >>> >>> TEST 4: Stratified bootstrap (200 iterations of equal-N)
+[20:20:01]         Mean η = -2.059e-06 ± 2.168e-04
+[20:20:01]         95% CI = [-4.133e-04, 4.799e-04]
+[20:20:01]         Mean SNR = 0.49σ
+[20:20:01]         All significant? False
+[20:20:01] 
+[20:20:01] ═══ ═══ SUMMARY
+[20:20:01] ⚠   Some balanced subsamples fail to detect TEP
+[20:20:01] ⚠   Conclusion: Signal may be sensitive to station weighting
+[20:20:01] Results saved to results/outputs/step_046_station_balanced_tep.json
+[20:20:01] ✓   Station-Balanced Analysis Complete.

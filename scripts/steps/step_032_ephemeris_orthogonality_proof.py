@@ -90,7 +90,7 @@ def explore_orthogonality():
 
     # 5. Static signal (baseline)
     # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_002_statistical_analysis.json'
+    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
     if step_002_path.exists():
         with open(step_002_path, 'r') as f:
             step_002_results = json.load(f)

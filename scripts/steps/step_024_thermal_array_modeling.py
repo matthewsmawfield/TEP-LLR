@@ -32,7 +32,7 @@ def run_thermal_model(logger):
 
     print_status("═══ DATA SUMMARY", "INFO")
     # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_002_statistical_analysis.json'
+    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
     if step_002_path.exists():
         with open(step_002_path, 'r') as f:
             step_002_results = json.load(f)
@@ -118,7 +118,7 @@ def run_thermal_model(logger):
     print_status(f"    Output file: results/outputs/step_024_thermal_array_modeling.json", "INFO")
     print_status(f"    Temperature range: {TEMP_NIGHT_K}K - {TEMP_DAY_K}K", "INFO")
     print_status(f"    Array thickness: {ARRAY_THICKNESS_M}m", "INFO")
-    print_status(f"    η source: step_002_statistical_analysis.json", "INFO")
+    print_status(f"    η source: step_003_statistical_analysis.json", "INFO")
 
     # Print summary
     logger.info(f"    Max Aluminum Expansion: {max_expansion_aluminum*1000:.3f} mm")

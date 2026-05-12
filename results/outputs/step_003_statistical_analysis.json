@@ -8,9 +8,12 @@
     "ar1_gls": {
         "eta": -0.00032808332668428743,
         "eta_error": 8.841697834159359e-05,
+        "eta_error_cluster": 9.357524796328936e-05,
         "rho": 0.4291179120392002,
         "rho_error": 0.0056624712768868655,
         "durbin_watson": 1.1417482797269214,
+        "n_clusters": 5,
+        "n_obs": 25445,
         "interpretation": "Significant autocorrelation"
     },
     "convergence_diagnostics": {

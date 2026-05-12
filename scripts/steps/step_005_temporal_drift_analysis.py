@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 004: Temporal Drift Analysis for TEP Nordtvedt Signal Detection
+Step 005: Temporal Drift Analysis for TEP Nordtvedt Signal Detection
 Enhanced with temporal autocorrelation analysis
 """
 

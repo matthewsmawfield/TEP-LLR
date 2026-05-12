@@ -1,5 +1,5 @@
 """
-Step 057: Rigorous Simulation Demonstrating Ephemeris Absorption Argument
+Step 041: Rigorous Simulation Demonstrating Ephemeris Absorption Argument
 
 This step provides quantitative evidence for the claim that standard LLR ephemeris
 fitting (which assumes static η) fails to absorb dynamically modulated TEP signals.
@@ -29,6 +29,11 @@ from scipy.fft import fft, fftfreq
 from scripts.utils.statistical_utils import linear_regression
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
+# Orbital constants (module-level for use across functions)
+SYNODIC_PERIOD_DAYS = 29.53
+LUNAR_ANOMALY_PERIOD_DAYS = 27.55
+DAYS_PER_YEAR = 365.25
+
 def generate_synthetic_llr_data(n_obs=25000, duration_years=35, 
                                 eta_static=None, eta_tep=None, 
                                 noise_rms=0.095, seed=42):
@@ -51,13 +56,11 @@ def generate_synthetic_llr_data(n_obs=25000, duration_years=35,
     # Generate time array (in years from 1984 to 2019)
     times = np.linspace(1984, 1984 + duration_years, n_obs)
     
-    # Synodic period: ~29.53 days
-    synodic_period_days = 29.53
-    synodic_freq = 2 * np.pi / (synodic_period_days / 365.25)  # rad/year
-    
-    # Lunar mean anomaly period: ~27.55 days
-    lunar_anomaly_period_days = 27.55
-    lunar_anomaly_freq = 2 * np.pi / (lunar_anomaly_period_days / 365.25)
+    # Synodic period
+    synodic_freq = 2 * np.pi / (SYNODIC_PERIOD_DAYS / DAYS_PER_YEAR)  # rad/year
+
+    # Lunar mean anomaly period
+    lunar_anomaly_freq = 2 * np.pi / (LUNAR_ANOMALY_PERIOD_DAYS / DAYS_PER_YEAR)
     
     # Generate synodic phase D (Moon-Sun elongation)
     D = synodic_freq * times + rng.uniform(0, 2*np.pi, n_obs)
@@ -149,10 +152,12 @@ def spectral_analysis(df, post_fit_residuals=None):
     # Find significant peaks
     # Look for peaks near synodic frequency (D) and sidebands (D ± l')
     # Synodic frequency in normalized units
-    synodic_freq_norm = 29.53 / (365.25 * 35 / n)  # Approximate
-    
+    # Synodic frequency in normalized FFT units (cycles per sample)
+    # Number of synodic cycles in duration_years / synodic_period_years, divided by n
+    synodic_freq_norm = (35 * DAYS_PER_YEAR / SYNODIC_PERIOD_DAYS) / n
+
     # Lunar anomaly frequency in normalized units
-    lunar_anomaly_freq_norm = 27.55 / (365.25 * 35 / n)
+    lunar_anomaly_freq_norm = (35 * DAYS_PER_YEAR / LUNAR_ANOMALY_PERIOD_DAYS) / n
     
     # Find peaks
     peaks, _ = signal.find_peaks(power, height=np.mean(power) + 3*np.std(power))

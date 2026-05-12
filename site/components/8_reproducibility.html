@@ -144,6 +144,12 @@ TEP-LLR/
                 <td>Extended systematic analysis: temporal drift, multi-ephemeris comparison, meta-analysis, systematic error analysis, ephemeris independent analysis, systematic control analysis, noise signal injection, subsample robustness, station decomposition, inter-station consistency, null tests, Bayesian analysis, leverage diagnostics, station quality, systematic Monte Carlo, temporal amplitude, IPW validation, environmental modulation, solar cycle correlation, thermal array modeling, leverage temporal clustering, TEP core density simulation, day-night thermal bias, geometric elongation, station power analysis, hardware epoch analysis, Lomb-Scargle orbital dynamics, ephemeris orthogonality proof, quantitative eta prediction, static-dynamic absorption, historical comparison, full-moon deficit, lunar recession, tidal resonance, dust sensitivity, unified results, ephemeris absorption simulation, multiple testing correction, temporal bin variation</td>
                 <td>~1m 40s total</td>
             </tr>
+            <tr>
+                <td>047-048</td>
+                <td><code>step_047_velocity_modulation.py</code>, <code>step_048_cmb_anisotropy.py</code></td>
+                <td>Physical signal probes: orbital velocity modulation of temporal shear (Step 047) and CMB dipole anisotropy test (Step 048)</td>
+                <td>~20s each</td>
+            </tr>
         </tbody>
     </table>
 
@@ -296,8 +302,9 @@ python scripts/steps/run_all_steps.py
             <li>Key result: Leverage-excised $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ (SNR = 5.67$\sigma$)</li>
             <li>Key result: Full-sample OLS $\eta = -3.17 \times 10^{-4}$ (for comparison)</li>
             <li>Key result: MCMC estimate $\eta = -2.87 \times 10^{-4} \pm 6.61 \times 10^{-5}$ (SNR = 4.35$\sigma$)</li>
-            <li>Key result: AR(1) GLS autocorrelation-aware estimate $\eta = -3.28 \times 10^{-4} \pm 8.84 \times 10^{-5}$ (SNR = 3.71$\sigma$)</li>
-            <li>Key result: AR(1) parameter $\rho = 0.43$ (significant temporal autocorrelation)</li>
+            <li>Key result: Full-model AR(1) GLS autocorrelation-aware estimate $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$ (SNR = 4.66$\sigma$)</li>
+            <li>Key result: cosD-only AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ (SNR = 3.51$\sigma$ cluster-robust)</li>
+            <li>Key result: AR(1) parameter $\rho = 0.425$ (full model), $\rho = 0.429$ (cosD-only); significant temporal autocorrelation</li>
             <li>Key result: Precision-weighted regression $\eta = -3.50 \times 10^{-4} \pm 1.13 \times 10^{-4}$ (SNR = 3.11$\sigma$)</li>
             <li>Key result: Bootstrap 95% CI = [-0.0411, -0.0197] (excludes zero)</li>
             <li>Key result: Permutation test p &lt; 10<sup>-4</sup> (no permutation achieved observed)</li>

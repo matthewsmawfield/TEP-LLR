@@ -1,0 +1,307 @@
+{
+  "step": "052_station_distribution_analysis",
+  "total_obs": 26207,
+  "station_coverage": {
+    "APO": {
+      "n_obs": 2595,
+      "date_range": [
+        2006.26356852,
+        2016.90088362
+      ],
+      "elongation_mean_rad": 3.014208786317034,
+      "elongation_std_rad": 1.4330742833503205,
+      "cosD_mean": -0.23124932721629726,
+      "cosD_std": 0.5511198036158494,
+      "residual_rms_m": 0.031601798760565084,
+      "phase_coverage": {
+        "q1_waxing_crescent": 0.1745664739884393,
+        "q2_waxing_gibbous": 0.38034682080924853,
+        "q3_waning_gibbous": 0.27630057803468205,
+        "q4_waning_crescent": 0.16878612716763006
+      },
+      "mean_abs_cosD": 0.5172712889276289
+    },
+    "Grasse": {
+      "n_obs": 19390,
+      "date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "elongation_mean_rad": 3.2848848545789386,
+      "elongation_std_rad": 1.5262588651849043,
+      "cosD_mean": -0.1310294924905844,
+      "cosD_std": 0.5020409851697103,
+      "residual_rms_m": 0.09870697444379005,
+      "phase_coverage": {
+        "q1_waxing_crescent": 0.18834450747808149,
+        "q2_waxing_gibbous": 0.26188757091284165,
+        "q3_waning_gibbous": 0.3298091799896854,
+        "q4_waning_crescent": 0.21995874161939144
+      },
+      "mean_abs_cosD": 0.43938830020630665
+    },
+    "Matera": {
+      "n_obs": 346,
+      "date_range": [
+        2003.14198213,
+        2019.23802473
+      ],
+      "elongation_mean_rad": 4.228047510620955,
+      "elongation_std_rad": 1.1381019866330386,
+      "cosD_mean": -0.025868237308176056,
+      "cosD_std": 0.29575396247418423,
+      "residual_rms_m": 0.0619324718317995,
+      "phase_coverage": {
+        "q1_waxing_crescent": 0.07514450867052024,
+        "q2_waxing_gibbous": 0.07225433526011561,
+        "q3_waning_gibbous": 0.42196531791907516,
+        "q4_waning_crescent": 0.430635838150289
+      },
+      "mean_abs_cosD": 0.251525301248748
+    },
+    "McDonald2": {
+      "n_obs": 3139,
+      "date_range": [
+        1988.16071428,
+        2013.93737637
+      ],
+      "elongation_mean_rad": 3.051460267830869,
+      "elongation_std_rad": 1.2857088497743792,
+      "cosD_mean": -0.31637031121753256,
+      "cosD_std": 0.3645550325204151,
+      "residual_rms_m": 0.09555025387360164,
+      "phase_coverage": {
+        "q1_waxing_crescent": 0.10258043963045556,
+        "q2_waxing_gibbous": 0.4374004460019114,
+        "q3_waning_gibbous": 0.3650844217903791,
+        "q4_waning_crescent": 0.0949346925772539
+      },
+      "mean_abs_cosD": 0.41060599906558676
+    },
+    "Haleakala": {
+      "n_obs": 737,
+      "date_range": [
+        1984.86808199,
+        1990.66064725
+      ],
+      "elongation_mean_rad": 3.7544721140583803,
+      "elongation_std_rad": 1.0881484370022383,
+      "cosD_mean": -0.33513124537390016,
+      "cosD_std": 0.2704491822582951,
+      "residual_rms_m": 0.1383762784480651,
+      "phase_coverage": {
+        "q1_waxing_crescent": 0.010854816824966078,
+        "q2_waxing_gibbous": 0.25237449118046135,
+        "q3_waning_gibbous": 0.6458616010854816,
+        "q4_waning_crescent": 0.09090909090909091
+      },
+      "mean_abs_cosD": 0.3553772248215495
+    }
+  },
+  "temporal_epochs": {
+    "pre_1990": {
+      "n_total": 2659,
+      "station_counts": {
+        "Grasse": 1855,
+        "McDonald2": 112,
+        "Haleakala": 692
+      },
+      "dominant_station": "Grasse",
+      "mean_abs_cosD": 0.3767848127997701
+    },
+    "1990_2000": {
+      "n_total": 7533,
+      "station_counts": {
+        "Grasse": 5212,
+        "McDonald2": 2276,
+        "Haleakala": 45
+      },
+      "dominant_station": "Grasse",
+      "mean_abs_cosD": 0.4172450278223245
+    },
+    "2000_2010": {
+      "n_total": 3716,
+      "station_counts": {
+        "APO": 707,
+        "Grasse": 2342,
+        "Matera": 6,
+        "McDonald2": 661
+      },
+      "dominant_station": "Grasse",
+      "mean_abs_cosD": 0.4069819756347768
+    },
+    "post_2010": {
+      "n_total": 12299,
+      "station_counts": {
+        "APO": 1888,
+        "Grasse": 9981,
+        "Matera": 340,
+        "McDonald2": 90
+      },
+      "dominant_station": "Grasse",
+      "mean_abs_cosD": 0.4750441907863175
+    }
+  },
+  "covariate_shift_pre_post": {
+    "split_jd": 2454600,
+    "pre": {
+      "n": 13466,
+      "stations": {
+        "APO": 365,
+        "Grasse": 9384,
+        "Matera": 6,
+        "McDonald2": 2974,
+        "Haleakala": 737
+      },
+      "elongation_mean": 3.2974710492409405,
+      "elongation_std": 1.362709527313983,
+      "cosD_mean": -0.24982337794905976,
+      "cosD_std": 0.4100065018245611,
+      "mean_abs_cosD": 0.4055418356432398
+    },
+    "post": {
+      "n": 12741,
+      "stations": {
+        "APO": 2230,
+        "Grasse": 10006,
+        "Matera": 340,
+        "McDonald2": 165
+      },
+      "elongation_mean": 3.2117202848408133,
+      "elongation_std": 1.6034659948383807,
+      "cosD_mean": -0.08050080848581054,
+      "cosD_std": 0.5503074179485962,
+      "mean_abs_cosD": 0.4739710208765434
+    },
+    "ks_test": {
+      "elongation_statistic": 0.13076367072516615,
+      "elongation_pvalue": 4.534846522941152e-98,
+      "cosD_statistic": 0.20090222955014136,
+      "cosD_pvalue": 4.196248686178389e-232
+    }
+  },
+  "leave_one_station_out_shift": {
+    "APO": {
+      "n_train": 23612,
+      "n_test": 2595,
+      "train_cosD_range": 1.9886274230591219,
+      "test_cosD_range": 1.841974847479328,
+      "train_mean_abs_cosD": 0.43018686011319296,
+      "test_mean_abs_cosD": 0.5172712889276289,
+      "train_date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "test_date_range": [
+        2006.26356852,
+        2016.90088362
+      ],
+      "ks_elongation_statistic": 0.1547207308128814,
+      "ks_elongation_pvalue": 2.4279234667069955e-49
+    },
+    "Grasse": {
+      "n_train": 6817,
+      "n_test": 19390,
+      "train_cosD_range": 1.841974847479328,
+      "test_cosD_range": 1.9886274230591219,
+      "train_mean_abs_cosD": 0.4371647344520497,
+      "test_mean_abs_cosD": 0.43938830020630665,
+      "train_date_range": [
+        1984.86808199,
+        2019.23802473
+      ],
+      "test_date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "ks_elongation_statistic": 0.08304484518764077,
+      "ks_elongation_pvalue": 1.0407355021080747e-30
+    },
+    "Matera": {
+      "n_train": 25861,
+      "n_test": 346,
+      "train_cosD_range": 1.9886276307381112,
+      "test_cosD_range": 1.200768173050093,
+      "train_mean_abs_cosD": 0.441315625131582,
+      "test_mean_abs_cosD": 0.251525301248748,
+      "train_date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "test_date_range": [
+        2003.14198213,
+        2019.23802473
+      ],
+      "ks_elongation_statistic": 0.431784375025844,
+      "ks_elongation_pvalue": 2.7405410714037405e-58
+    },
+    "McDonald2": {
+      "n_train": 23068,
+      "n_test": 3139,
+      "train_cosD_range": 1.9886276307381112,
+      "test_cosD_range": 1.7658454885842159,
+      "train_mean_abs_cosD": 0.44264777634355085,
+      "test_mean_abs_cosD": 0.41060599906558676,
+      "train_date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "test_date_range": [
+        1988.16071428,
+        2013.93737637
+      ],
+      "ks_elongation_statistic": 0.12115948399272525,
+      "ks_elongation_pvalue": 8.375778978249526e-36
+    },
+    "Haleakala": {
+      "n_train": 25470,
+      "n_test": 737,
+      "train_cosD_range": 1.9886276307381112,
+      "test_cosD_range": 1.365890781675771,
+      "train_mean_abs_cosD": 0.44122411154559976,
+      "test_mean_abs_cosD": 0.3553772248215495,
+      "train_date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "test_date_range": [
+        1984.86808199,
+        1990.66064725
+      ],
+      "ks_elongation_statistic": 0.2347763804385291,
+      "ks_elongation_pvalue": 3.392447058954299e-35
+    }
+  },
+  "per_station_cosD_regression": {
+    "APO": {
+      "eta": -0.00023936773659735615,
+      "eta_err": 8.645961734310859e-05,
+      "snr": 2.7685495720787543,
+      "n": 2595
+    },
+    "Grasse": {
+      "eta": -0.0005392816311042262,
+      "eta_err": 0.0001085425803709105,
+      "snr": 4.968387790868791,
+      "n": 19390
+    },
+    "Matera": {
+      "eta": -1.3129864840358525e-05,
+      "eta_err": 0.0008659768771212952,
+      "snr": 0.015161911578984872,
+      "n": 346
+    },
+    "McDonald2": {
+      "eta": -0.0004997488047718065,
+      "eta_err": 0.0003597462541479239,
+      "snr": 1.3891702804675072,
+      "n": 3139
+    },
+    "Haleakala": {
+      "eta": 0.0035482501354832875,
+      "eta_err": 0.001443865623800005,
+      "snr": 2.4574656235286674,
+      "n": 737
+    }
+  }
+}

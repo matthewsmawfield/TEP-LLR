@@ -1,40 +1,40 @@
-[21:06:53] ═══ Starting Noise/Signal Injection Tests...
-[21:06:53]     ============================================================
-[21:06:53] ═══ NOISE/SIGNAL INJECTION TESTS - PIPELINE VALIDATION
-[21:06:53] ⚠   WARNING: THESE RESULTS ARE BASED ON SYNTHETIC DATA
-[21:06:53]     PURPOSE: ALGORITHM ROBUSTNESS TESTING ONLY
-[21:06:53]     ============================================================
-[21:06:53]     [DATA] Original dataset: N=26,207 observations
-[21:06:53]     [DATA] Original RMS: 0.094809 m
-[21:06:53]     [DATA] Original residual range: [-1.036197, 1.554217] m
-[21:06:53] 
-[21:06:53] >>> TEST 1: NULL TEST (SHUFFLED RESIDUALS)
-[21:06:53]       Purpose: Verify that destroying phase correlation eliminates signal
-[21:06:53]       [CALC] Linear regression on shuffled data:
-[21:06:53]       [CALC]    η estimate: 3.030419e-05
-[21:06:53]       [CALC]    SNR: 0.33σ
-[21:06:53]       [CALC]    Expected: SNR < 3 (no signal in shuffled data)
-[21:06:53] ✓     [RESULT] PASS ✓
-[21:06:53] 
-[21:06:53] >>> TEST 2: NOISE ROBUSTNESS (ADDITIVE GAUSSIAN NOISE)
-[21:06:53]       Purpose: Determine how much noise signal can survive
-[21:06:53] ✓     [CALC] Noise level 0.5× RMS: η = -4.133615e-04, SNR = 4.02σ ✓
-[21:06:53] ✓     [CALC] Noise level 1.0× RMS: η = -4.324910e-04, SNR = 3.33σ ✓
-[21:06:53]       [CALC] Noise level 2.0× RMS: η = -4.247259e-04, SNR = 2.05σ 
-[21:06:53]       [CALC] Noise level 3.0× RMS: η = -2.548402e-04, SNR = 0.87σ 
-[21:06:53] 
-[21:06:53] >>> TEST 3: SIGNAL RECOVERY (INJECTION INTO PURE NOISE)
-[21:06:53]       Purpose: Validate pipeline can recover known injected signals
-[21:06:53]       [DATA] Loaded measured η from step_002: -3.1698e-04
-[21:06:53]       [CALC] Injected signal parameters:
-[21:06:53]       [CALC]    η_injected: -3.169798e-04
-[21:06:53]       [CALC] Recovery results:
-[21:06:53]       [CALC]    η_recovered: -3.351208e-04
-[21:06:53]       [CALC]    Recovery error: 5.7%
-[21:06:53]       [CALC]    SNR: 3.66σ
-[21:06:53] ✓     [RESULT] PASS ✓ (error < 20%)
-[21:06:53] 
-[21:06:53] >>> TEST 4: DETECTION THRESHOLD ANALYSIS
-[21:06:53]       Purpose: Compute minimum detectable η at various confidence levels
-[21:06:53] Results saved to results/outputs/step_011_noise_signal_injection.json
-[21:06:53] ✓   Injection Tests Complete.
+[20:18:26] ═══ Starting Noise/Signal Injection Tests...
+[20:18:26]     ============================================================
+[20:18:26] ═══ NOISE/SIGNAL INJECTION TESTS - PIPELINE VALIDATION
+[20:18:26] ⚠   WARNING: THESE RESULTS ARE BASED ON SYNTHETIC DATA
+[20:18:26]     PURPOSE: ALGORITHM ROBUSTNESS TESTING ONLY
+[20:18:26]     ============================================================
+[20:18:26]     [DATA] Original dataset: N=26,207 observations
+[20:18:26]     [DATA] Original RMS: 0.094809 m
+[20:18:26]     [DATA] Original residual range: [-1.036197, 1.554217] m
+[20:18:26] 
+[20:18:26] >>> TEST 1: NULL TEST (SHUFFLED RESIDUALS)
+[20:18:26]       Purpose: Verify that destroying phase correlation eliminates signal
+[20:18:26]       [CALC] Linear regression on shuffled data:
+[20:18:26]       [CALC]    η estimate: 3.030419e-05
+[20:18:26]       [CALC]    SNR: 0.33σ
+[20:18:26]       [CALC]    Expected: SNR < 3 (no signal in shuffled data)
+[20:18:26] ✓     [RESULT] PASS ✓
+[20:18:26] 
+[20:18:26] >>> TEST 2: NOISE ROBUSTNESS (ADDITIVE GAUSSIAN NOISE)
+[20:18:26]       Purpose: Determine how much noise signal can survive
+[20:18:26] ✓     [CALC] Noise level 0.5× RMS: η = -4.133615e-04, SNR = 4.02σ ✓
+[20:18:26] ✓     [CALC] Noise level 1.0× RMS: η = -4.324910e-04, SNR = 3.33σ ✓
+[20:18:26]       [CALC] Noise level 2.0× RMS: η = -4.247259e-04, SNR = 2.05σ 
+[20:18:26]       [CALC] Noise level 3.0× RMS: η = -2.548402e-04, SNR = 0.87σ 
+[20:18:26] 
+[20:18:26] >>> TEST 3: SIGNAL RECOVERY (INJECTION INTO PURE NOISE)
+[20:18:26]       Purpose: Validate pipeline can recover known injected signals
+[20:18:26]       [DATA] Loaded measured η from step_003: -3.1698e-04
+[20:18:26]       [CALC] Injected signal parameters:
+[20:18:26]       [CALC]    η_injected: -3.169798e-04
+[20:18:26]       [CALC] Recovery results:
+[20:18:26]       [CALC]    η_recovered: -3.351208e-04
+[20:18:26]       [CALC]    Recovery error: 5.7%
+[20:18:26]       [CALC]    SNR: 3.66σ
+[20:18:26] ✓     [RESULT] PASS ✓ (error < 20%)
+[20:18:26] 
+[20:18:26] >>> TEST 4: DETECTION THRESHOLD ANALYSIS
+[20:18:26]       Purpose: Compute minimum detectable η at various confidence levels
+[20:18:26] Results saved to results/outputs/step_011_noise_signal_injection.json
+[20:18:26] ✓   Injection Tests Complete.

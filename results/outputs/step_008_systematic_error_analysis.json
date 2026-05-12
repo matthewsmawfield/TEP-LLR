@@ -35,48 +35,48 @@
             "reference": "Data-driven from 2 ephemerides (step_006_multi_ephemeris_comparison)",
             "method": "std(eta_ephem) * 13.0 * 100",
             "data_driven": true,
-            "percentage": 13.5,
+            "percentage": 61.0,
             "variance_contribution": 6.25e-06
         },
         "atmospheric_delay": {
             "source": "Atmospheric delay modeling",
-            "magnitude_cm": 1.0,
-            "description": "Tropospheric delay correction uncertainties, derived from seasonal (monthly) scatter of detrended residuals",
-            "reference": "Data-driven from monthly mean residual variation",
-            "method": "std(monthly_means(detrended)) * 100",
+            "magnitude_cm": 0.08,
+            "description": "Tropospheric delay correction uncertainties: seasonal model projected onto cos(elongation). Only correlated component counts.",
+            "reference": "Data-driven from monthly mean residual variation, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(monthly_model, cos_elong) * 100",
             "data_driven": true,
-            "percentage": 54.1,
-            "variance_contribution": 0.0001
+            "percentage": 19.5,
+            "variance_contribution": 6.4e-07
         },
         "instrumental": {
             "source": "Instrumental systematic",
-            "magnitude_cm": 0.05,
-            "description": "Detector calibration and timing electronics, derived from station mean scatter after TEP removal",
-            "reference": "Data-driven from powered-station mean residual variation",
-            "method": "std(station_means(detrended)) * 100",
+            "magnitude_cm": 0.01,
+            "description": "Detector calibration and timing electronics: station-bias model projected onto cos(elongation).",
+            "reference": "Data-driven from powered-station mean residual variation, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(station_bias_model, cos_elong) * 100",
             "data_driven": true,
-            "percentage": 2.7,
-            "variance_contribution": 2.5e-07
+            "percentage": 2.4,
+            "variance_contribution": 1e-08
         },
         "tidal_modeling": {
             "source": "Tidal modeling",
-            "magnitude_cm": 0.02,
-            "description": "Solid Earth and ocean tide model uncertainties, derived from cos(2*elongation) harmonic amplitude",
-            "reference": "Data-driven from 2nd-synodic-harmonic residual amplitude",
-            "method": "abs(coeff(cos(2*elongation))) * 100",
+            "magnitude_cm": 0.01,
+            "description": "Solid Earth and ocean tide model uncertainties: cos(2*elongation) harmonic projected onto cos(elongation). Orthogonal component excluded.",
+            "reference": "Data-driven from 2nd-synodic-harmonic residual amplitude, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(tidal_model, cos_elong) * 100",
             "data_driven": true,
-            "percentage": 1.1,
-            "variance_contribution": 4e-08
+            "percentage": 2.4,
+            "variance_contribution": 1e-08
         },
         "thermal_expansion": {
             "source": "Thermal expansion",
-            "magnitude_cm": 0.53,
-            "description": "Telescope and retroreflector thermal expansion, derived from diurnal (24-hr) sinusoidal amplitude in detrended residuals",
-            "reference": "Data-driven from diurnal residual variation",
-            "method": "sqrt(A_cos^2 + A_sin^2) * 100 for 24-hr sinusoid",
+            "magnitude_cm": 0.06,
+            "description": "Telescope and retroreflector thermal expansion: diurnal model projected onto cos(elongation). Orthogonal component excluded.",
+            "reference": "Data-driven from diurnal residual variation, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(diurnal_model, cos_elong) * 100",
             "data_driven": true,
-            "percentage": 28.6,
-            "variance_contribution": 2.809e-05
+            "percentage": 14.6,
+            "variance_contribution": 3.5999999999999994e-07
         },
         "unexplained": {
             "source": "Unexplained residual variance",
@@ -87,7 +87,7 @@
             "data_driven": true
         }
     },
-    "total_systematic_cm": 1.1603016849078518,
+    "total_systematic_cm": 0.2696293752542553,
     "eta_fit": -0.0004524792725699482,
     "n_observations": 26207,
     "data_driven": true,

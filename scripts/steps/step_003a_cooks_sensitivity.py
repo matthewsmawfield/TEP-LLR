@@ -75,11 +75,13 @@ def cooks_d_threshold_sensitivity():
     
     # Compute Cook's D once from the FULL sample (standard for threshold sweep).
     # The influence of each point is measured relative to the full-sample fit.
-    Q, R = np.linalg.qr(X)
-    H = X @ np.linalg.inv(R.T @ R) @ X.T  # Hat matrix
+    # PERFORMANCE FIX: O(n) leverage computation avoids materialising the n×n hat
+    # matrix (26000² ≈ 676M entries ≈ 5.4 GB).
+    XtX_inv = np.linalg.inv(X.T @ X)
+    leverage = np.sum((X @ XtX_inv) * X, axis=1)
     residuals_full = y - (reg_ols['eta'] * 13.0 * x + reg_ols['intercept'])
     mse_full = np.sum(residuals_full**2) / (n - 2)
-    D_full = (residuals_full**2 / (2 * mse_full)) * (np.diag(H) / (1 - np.diag(H))**2)
+    D_full = (residuals_full**2 / (2 * mse_full)) * (leverage / (1 - leverage)**2)
 
     # Test different thresholds
     thresholds = [2/n, 4/n, 8/n, 16/n, 32/n, 64/n, 1e-4, 1e-3, 1e-2]

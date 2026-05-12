@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 018: Leverage Diagnostics Investigation
+Step 017: Leverage Diagnostics Investigation
 
 Investigates OLS/Theil-Sen factor-of-2 discrepancy by:
 1. Mapping high-leverage points to elongation phase
@@ -283,7 +283,7 @@ def main():
     print_status("═══ METHOD: High-leverage point phase mapping, phased leverage removal, Cook's D excision, bootstrap influence analysis", "INFO")
     print_status("═══ PARAMETERS: Cook's D threshold=4/n, Theil-Sen sample size=10000, bootstrap samples=500", "INFO")
 
-    logger.info("Step 018: Leverage Diagnostics Investigation")
+    logger.info("Step 017: Leverage Diagnostics Investigation")
 
     print_status("═══ DATA SUMMARY", "INFO")
     # Load data

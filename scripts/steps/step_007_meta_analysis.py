@@ -44,7 +44,7 @@ def meta_analysis_ephemerides(verbose=False):
     outputs_dir = PROJECT_ROOT / "results" / "outputs"
 
     # Load INPOP19a results from step_002 (CORRECTED with sqrt(MSE) scaling)
-    step_002_file = outputs_dir / "step_002_statistical_analysis.json"
+    step_002_file = outputs_dir / "step_003_statistical_analysis.json"
     if not step_002_file.exists():
         print_status("Step 002 results not found", "ERROR")
         return None

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 021: Temporal Amplitude Evolution Analysis
+Step 020: Temporal Amplitude Evolution Analysis
 
 Investigates whether the TEP signal amplitude varies over time:
 1. Sliding window correlation analysis
@@ -230,7 +230,7 @@ def main():
     print_status("═══ METHOD: Sliding window correlation analysis, secular trend testing, instrumental timeline correlation", "INFO")
     print_status("═══ PARAMETERS: Window size=5 years, step size=2 years, station window=7 years", "INFO")
 
-    logger.info("Step 021: Temporal Amplitude Evolution Analysis")
+    logger.info("Step 020: Temporal Amplitude Evolution Analysis")
 
     print_status("═══ DATA SUMMARY", "INFO")
     # Load data

@@ -1,41 +1,41 @@
-[21:07:05] ═══ ═══ Starting Step 020: Systematic Error Monte Carlo Propagation...
-[21:07:05]     ═══ STEP PURPOSE: Quantify systematic uncertainty through Monte Carlo error propagation for TEP detection
-[21:07:05]     ═══ METHOD: Ephemeris uncertainties, tidal model variations, atmospheric delay errors, instrumental calibration uncertainties
-[21:07:05]     ═══ PARAMETERS: MC iterations=500, seed=42, ephemeris position error=0.5m, tidal Love number error=0.01, atmospheric zenith error=5mm
-[21:07:05] Step 019: Systematic Error Monte Carlo Propagation
-[21:07:05]     ═══ DATA SUMMARY
-[21:07:05]         Dataset: N = 26,207 observations
-[21:07:05]         Data source: INPOP19a_all_stations_residuals.csv
-[21:07:05]     ═══ ANALYSIS TRACE
-[21:07:05] Loaded 26207 observations
-[21:07:05] >>> >>> Running ephemeris uncertainty MC
-[21:07:05] >>> >>> Running tidal uncertainty MC
-[21:07:05] >>> >>> Running atmospheric uncertainty MC
-[21:07:05] >>> >>> Running instrumental uncertainty MC
-[21:07:05] >>> >>> Running combined systematic MC
-[21:07:05] Running ephemeris uncertainty MC...
-[21:07:06] Running tidal uncertainty MC...
-[21:07:06] Running atmospheric uncertainty MC...
-[21:07:06] Running instrumental uncertainty MC...
-[21:07:07] Running combined systematic MC...
-[21:07:08]     ═══ RESULTS SUMMARY
-[21:07:08]         Statistical error: ±6.61e-05
-[21:07:08]         Systematic error: ±8.93e-04
-[21:07:08]         Total uncertainty: ±8.95e-04
-[21:07:08]         Signal/Total ratio: 0.5
-[21:07:08]         Dominant source: SYSTEMATIC
-[21:07:08]     ═══ INTERPRETATION
-[21:07:08]         Systematic errors dominate over statistical precision at LLR precision levels
-[21:07:08]         Data-driven systematic budget: 1.16 cm from step_008_systematic_error_analysis.json
-[21:07:08]         Recommendation: Report both statistical and systematic uncertainties
-[21:07:08]     ═══ REPRODUCIBILITY
-[21:07:08]         Output file: results/outputs/step_019_systematic_monte_carlo.json
-[21:07:08]         MC iterations: 500
-[21:07:08]         Random seed: 42
-[21:07:08]         Statistical error source: step_002_statistical_analysis.json
-[21:07:08] Results saved to results/outputs/step_019_systematic_monte_carlo.json
-[21:07:08] Statistical error: ±6.61e-05
-[21:07:08] Systematic error: ±8.93e-04
-[21:07:08] Total uncertainty: ±8.95e-04
-[21:07:08] Signal/Total ratio: 0.5
-[21:07:08] Dominant source: SYSTEMATIC
+[20:18:39] ═══ ═══ Starting Step 020: Systematic Error Monte Carlo Propagation...
+[20:18:39]     ═══ STEP PURPOSE: Quantify systematic uncertainty through Monte Carlo error propagation for TEP detection
+[20:18:39]     ═══ METHOD: Ephemeris uncertainties, tidal model variations, atmospheric delay errors, instrumental calibration uncertainties
+[20:18:39]     ═══ PARAMETERS: MC iterations=500, seed=42, ephemeris position error=0.5m, tidal Love number error=0.01, atmospheric zenith error=5mm
+[20:18:39] Step 019: Systematic Error Monte Carlo Propagation
+[20:18:39]     ═══ DATA SUMMARY
+[20:18:39]         Dataset: N = 26,207 observations
+[20:18:39]         Data source: INPOP19a_all_stations_residuals.csv
+[20:18:39]     ═══ ANALYSIS TRACE
+[20:18:39] Loaded 26207 observations
+[20:18:39] >>> >>> Running ephemeris uncertainty MC
+[20:18:39] >>> >>> Running tidal uncertainty MC
+[20:18:39] >>> >>> Running atmospheric uncertainty MC
+[20:18:39] >>> >>> Running instrumental uncertainty MC
+[20:18:39] >>> >>> Running combined systematic MC
+[20:18:39] Running ephemeris uncertainty MC...
+[20:18:39] Running tidal uncertainty MC...
+[20:18:40] Running atmospheric uncertainty MC...
+[20:18:40] Running instrumental uncertainty MC...
+[20:18:40] Running combined systematic MC...
+[20:18:41]     ═══ RESULTS SUMMARY
+[20:18:41]         Statistical error: ±6.61e-05
+[20:18:41]         Systematic error: ±2.07e-04
+[20:18:41]         Total uncertainty: ±2.18e-04
+[20:18:41]         Signal/Total ratio: 2.1
+[20:18:41]         Dominant source: SYSTEMATIC
+[20:18:41]     ═══ INTERPRETATION
+[20:18:41]         Systematic errors dominate over statistical precision at LLR precision levels
+[20:18:41]         Data-driven systematic budget: 0.27 cm from step_008_systematic_error_analysis.json
+[20:18:41]         Recommendation: Report both statistical and systematic uncertainties
+[20:18:41]     ═══ REPRODUCIBILITY
+[20:18:41]         Output file: results/outputs/step_019_systematic_monte_carlo.json
+[20:18:41]         MC iterations: 500
+[20:18:41]         Random seed: 42
+[20:18:41]         Statistical error source: step_003_statistical_analysis.json
+[20:18:41] Results saved to results/outputs/step_019_systematic_monte_carlo.json
+[20:18:41] Statistical error: ±6.61e-05
+[20:18:41] Systematic error: ±2.07e-04
+[20:18:41] Total uncertainty: ±2.18e-04
+[20:18:41] Signal/Total ratio: 2.1
+[20:18:41] Dominant source: SYSTEMATIC

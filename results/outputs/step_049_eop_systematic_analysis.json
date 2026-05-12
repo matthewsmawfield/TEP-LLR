@@ -1,0 +1,120 @@
+{
+    "step_id": "step_049",
+    "status": "SUCCESS",
+    "observations": 25445,
+    "pole_tide": {
+        "range_effect_mm": {
+            "min": -8.24702486717502,
+            "max": 10.31164160771561,
+            "rms": 3.148713297056644
+        },
+        "correlation_residuals": {
+            "r": 0.06816080222031716,
+            "p": 1.3621472992083441e-27
+        },
+        "cos_D_component": {
+            "eta": -2.4608427580725996e-05,
+            "eta_error": 3.0821580253880715e-06,
+            "snr": 7.984155055653765
+        },
+        "annual_part_cosD": {
+            "eta": -1.4156524781196324e-05,
+            "eta_error": 2.2672878892118695e-06,
+            "snr": 6.243814404229568
+        },
+        "residual_part_cosD": {
+            "eta": -1.0451902799529682e-05,
+            "eta_error": 2.090630199449973e-06,
+            "snr": 4.999402956237544
+        },
+        "randomization_z_score": -7.870732180837457
+    },
+    "tep_after_corrections": {
+        "original": {
+            "eta": -0.0003169798202490359,
+            "eta_error": 6.040658378191678e-05,
+            "snr": 5.247438282446399
+        },
+        "after_pole_tide": {
+            "eta": -0.0002923713926683098,
+            "eta_error": 6.027969797695365e-05,
+            "snr": 4.850246475688884
+        },
+        "after_annual_pole_tide": {
+            "eta": -0.0003028232954678396,
+            "eta_error": 6.0291176473771776e-05,
+            "snr": 5.022680152867403
+        }
+    },
+    "balanced_subsample": {
+        "original": {
+            "eta": 5.589880247987046e-05,
+            "eta_error": 0.0003106119423974795,
+            "snr": 0.17996346839858035,
+            "n_total": 1725,
+            "n_per_station": 345,
+            "n_stations": 5
+        },
+        "after_pole_tide": {
+            "eta": 7.471533032987114e-05,
+            "eta_error": 0.0003094333946313556,
+            "snr": 0.24145852266166512,
+            "n_total": 1725,
+            "n_per_station": 345,
+            "n_stations": 5
+        }
+    },
+    "per_station": {
+        "Grasse": {
+            "N": 18742,
+            "eta_orig": -0.0003774574964197612,
+            "eta_error_orig": 6.583075840780436e-05,
+            "snr_orig": 5.7337558543912035,
+            "eta_no_pole": -0.00035750826536198345,
+            "eta_error_no_pole": 6.562166186151376e-05,
+            "snr_no_pole": 5.448022119836885,
+            "pole_range_rms_mm": 2.8939706424641773
+        },
+        "APO": {
+            "N": 2595,
+            "eta_orig": -0.00023936773659735623,
+            "eta_error_orig": 8.649295438592951e-05,
+            "snr_orig": 2.7674824879874387,
+            "eta_no_pole": -0.0002583536869265332,
+            "eta_error_no_pole": 8.612252322595231e-05,
+            "snr_no_pole": 2.9998388023155416,
+            "pole_range_rms_mm": 2.0730491630026386
+        },
+        "McDonald2": {
+            "N": 3097,
+            "eta_orig": -8.690546395786213e-05,
+            "eta_error_orig": 0.00030583431185505475,
+            "snr_orig": 0.2841586460025766,
+            "eta_no_pole": -6.269043369632776e-05,
+            "eta_error_no_pole": 0.0003062391807096608,
+            "snr_no_pole": 0.20471068904721013,
+            "pole_range_rms_mm": 4.502966057961114
+        },
+        "Matera": {
+            "N": 345,
+            "eta_orig": 0.00038864676490794507,
+            "eta_error_orig": 0.0008280924220201608,
+            "snr_orig": 0.46932776411578253,
+            "eta_no_pole": 0.0003807783724166236,
+            "eta_error_no_pole": 0.0008220031010303274,
+            "snr_no_pole": 0.46323228214022877,
+            "pole_range_rms_mm": 3.8862249532737922
+        },
+        "Haleakala": {
+            "N": 666,
+            "eta_orig": 0.002571043086381623,
+            "eta_error_orig": 0.001162100105019658,
+            "snr_orig": 2.2124110266198898,
+            "eta_no_pole": 0.0023576635592721515,
+            "eta_error_no_pole": 0.001161991014685946,
+            "snr_no_pole": 2.0289860502143062,
+            "pole_range_rms_mm": 3.365682331132214
+        }
+    },
+    "conclusion": "Pole tide contributes modestly to TEP signal (0.4\u03c3 reduction). Balanced subsample eliminates signal regardless of EOP correction. Root cause is station-specific systematics, not EOP modeling."
+}

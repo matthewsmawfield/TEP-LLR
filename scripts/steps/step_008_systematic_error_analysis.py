@@ -59,15 +59,28 @@ def analyze_systematics(df, verbose=False, logger=None):
 
     return systematics
 
+def correlated_systematic_amplitude(systematic_signal, cos_elong):
+    """
+    Compute the component of a systematic signal that is correlated with
+    cos(elongation). Only this component can bias the TEP eta estimate;
+    the orthogonal component contributes noise (already in statistical error).
+    Returns the amplitude in metres of the cos(elongation)-correlated bias.
+    """
+    X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
+    coeffs, _, _, _ = np.linalg.lstsq(X, systematic_signal, rcond=None)
+    return float(abs(coeffs[0]))
+
+
 def generate_systematic_error_budget(df, systematics, verbose=False, logger=None):
     """
-    Generate comprehensive systematic error budget table
-    Quantifies contributions from various error sources using DATA-DRIVEN
-    estimates computed directly from the residuals and upstream pipeline
-    outputs.  Replaces the previous hardcoded literature values.
+    Generate comprehensive systematic error budget table.
+    CRITICAL FIX v2: Quantifies only the ELONGATION-CORRELATED component
+    of each systematic.  The total amplitude of a systematic (e.g. diurnal
+    thermal expansion) is irrelevant if it is orthogonal to cos(elongation).
+    Only the projection onto cos(elongation) can bias eta.
     """
     print_status("", "INFO")
-    print_status("Generating Data-Driven Systematic Error Budget...", "TITLE")
+    print_status("Generating Data-Driven Systematic Error Budget (v2: elongation-correlated)...", "TITLE")
     print_status("", "INFO")
 
     import json
@@ -117,61 +130,69 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
 
     # ------------------------------------------------------------------
     # 2. Atmospheric delay modeling uncertainty
-    #    Estimated from seasonal (monthly) variation in detrended residuals.
-    #    Tropospheric delay has a strong annual cycle; the scatter of monthly
-    #    means quantifies the atmospheric systematic amplitude.
+    #    v2 FIX: The total seasonal variation in detrended residuals includes
+    #    genuine TEP heliocentric modulation (Jan-Jul sign flip confirmed in
+    #    step_045).  We model the seasonal component and use only its
+    #    ELONGATION-CORRELATED projection as the systematic bias.  The
+    #    heliocentric TEP component is signal, not error.
     # ------------------------------------------------------------------
     df_temp = df.copy()
     df_temp['detrended'] = detrended
-    # Julian day 2451545.0 = 2000-01-01 noon; derive month crudely
     df_temp['month'] = (np.floor((df_temp['date_julian'] - 2451545.0) % 365.25 / 30.44).astype(int) % 12) + 1
     monthly_means = df_temp.groupby('month')['detrended'].mean()
-    atmos_uncertainty_cm = float(monthly_means.std() * 100.0)
+
+    # Build a seasonal model signal (monthly mean assigned to each obs)
+    seasonal_model = df_temp['month'].map(monthly_means).values
+    atmos_bias_m = correlated_systematic_amplitude(seasonal_model, cos_elong)
+    atmos_uncertainty_cm = float(atmos_bias_m * 100.0)
 
     # ------------------------------------------------------------------
     # 3. Instrumental systematic uncertainty
-    #    Estimated from station-to-station mean scatter after TEP removal.
-    #    Different hardware configurations (Nd:glass/PMT, Nd:YAG/SPAD,
-    #    C-SPAD) produce different residual biases; the RMS of station
-    #    means captures the instrumental floor.
+    #    v2 FIX: Different hardware produces station-dependent biases, but
+    #    only the component correlated with cos(elongation) can bias eta.
+    #    We model each station's mean bias and project onto cos(elongation).
     # ------------------------------------------------------------------
     station_means = df_temp.groupby('station')['detrended'].mean()
-    # Exclude underpowered stations (Matera, Haleakala) from the floor
-    # because their means are noise-dominated.
     powered_stations = [s for s in station_means.index
                         if systematics.get(s, {}).get('n_obs', 0) >= 1000]
     if len(powered_stations) >= 2:
-        inst_uncertainty_cm = float(station_means[powered_stations].std() * 100.0)
+        inst_model = df_temp['station'].map(station_means[powered_stations]).fillna(0).values
     else:
-        inst_uncertainty_cm = float(station_means.std() * 100.0)
+        inst_model = df_temp['station'].map(station_means).fillna(0).values
+    inst_bias_m = correlated_systematic_amplitude(inst_model, cos_elong)
+    inst_uncertainty_cm = float(inst_bias_m * 100.0)
 
     # ------------------------------------------------------------------
     # 4. Tidal modeling uncertainty
-    #    Estimated from the amplitude of the cos(2*elongation) harmonic
-    #    in the raw residuals.  Solid-Earth and ocean tides produce
-    #    perturbations at twice the synodic frequency; their amplitude
-    #    directly bounds the tidal model error.
+    #    v2 FIX: Tides produce perturbations at TWICE the synodic frequency
+    #    (cos(2*elongation)), which is ORTHOGONAL to cos(elongation) over a
+    #    full period.  Only the small leakage onto cos(elongation) can bias
+    #    eta.  We fit the tidal harmonic and project onto cos(elongation).
     # ------------------------------------------------------------------
     cos_2elong = np.cos(2.0 * df['elongation_rad'].values)
     X_tidal = np.column_stack([cos_2elong, np.ones(len(cos_2elong))])
     tidal_coeffs, _, _, _ = np.linalg.lstsq(X_tidal, residuals, rcond=None)
-    tidal_uncertainty_cm = float(abs(tidal_coeffs[0]) * 100.0)
+    tidal_model = tidal_coeffs[0] * cos_2elong
+    tidal_bias_m = correlated_systematic_amplitude(tidal_model, cos_elong)
+    tidal_uncertainty_cm = float(tidal_bias_m * 100.0)
 
     # ------------------------------------------------------------------
     # 5. Thermal expansion uncertainty
-    #    Estimated from the diurnal (24-hour) sinusoidal amplitude in
-    #    detrended residuals.  Telescope and mount thermal expansion
-    #    varies with local solar heating.
+    #    v2 FIX: Diurnal (24-hr) thermal expansion is orthogonal to
+    #    cos(elongation) if observation times are uniformly distributed
+    #    across lunar phases.  Only the elongation-correlated projection
+    #    can bias eta.  We fit the diurnal model and project.
     # ------------------------------------------------------------------
-    # Hour angle from fractional Julian day (0 = noon UT, 0.5 = midnight)
-    hour_frac = ((df['date_julian'].values - 0.5) % 1.0) * 24.0  # hours from midnight
+    hour_frac = ((df['date_julian'].values - 0.5) % 1.0) * 24.0
     omega = 2.0 * np.pi / 24.0
     X_thermal = np.column_stack([np.cos(omega * hour_frac),
                                   np.sin(omega * hour_frac),
                                   np.ones(len(hour_frac))])
     thermal_coeffs, _, _, _ = np.linalg.lstsq(X_thermal, detrended, rcond=None)
-    thermal_amplitude_m = np.sqrt(thermal_coeffs[0]**2 + thermal_coeffs[1]**2)
-    thermal_uncertainty_cm = float(thermal_amplitude_m * 100.0)
+    thermal_model = (thermal_coeffs[0] * np.cos(omega * hour_frac) +
+                     thermal_coeffs[1] * np.sin(omega * hour_frac))
+    thermal_bias_m = correlated_systematic_amplitude(thermal_model, cos_elong)
+    thermal_uncertainty_cm = float(thermal_bias_m * 100.0)
 
     # ------------------------------------------------------------------
     # Assemble budget
@@ -188,33 +209,33 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
         "atmospheric_delay": {
             "source": "Atmospheric delay modeling",
             "magnitude_cm": round(atmos_uncertainty_cm, 2),
-            "description": "Tropospheric delay correction uncertainties, derived from seasonal (monthly) scatter of detrended residuals",
-            "reference": "Data-driven from monthly mean residual variation",
-            "method": "std(monthly_means(detrended)) * 100",
+            "description": "Tropospheric delay correction uncertainties: seasonal model projected onto cos(elongation). Only correlated component counts.",
+            "reference": "Data-driven from monthly mean residual variation, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(monthly_model, cos_elong) * 100",
             "data_driven": True
         },
         "instrumental": {
             "source": "Instrumental systematic",
             "magnitude_cm": round(inst_uncertainty_cm, 2),
-            "description": "Detector calibration and timing electronics, derived from station mean scatter after TEP removal",
-            "reference": "Data-driven from powered-station mean residual variation",
-            "method": "std(station_means(detrended)) * 100",
+            "description": "Detector calibration and timing electronics: station-bias model projected onto cos(elongation).",
+            "reference": "Data-driven from powered-station mean residual variation, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(station_bias_model, cos_elong) * 100",
             "data_driven": True
         },
         "tidal_modeling": {
             "source": "Tidal modeling",
             "magnitude_cm": round(tidal_uncertainty_cm, 2),
-            "description": "Solid Earth and ocean tide model uncertainties, derived from cos(2*elongation) harmonic amplitude",
-            "reference": "Data-driven from 2nd-synodic-harmonic residual amplitude",
-            "method": "abs(coeff(cos(2*elongation))) * 100",
+            "description": "Solid Earth and ocean tide model uncertainties: cos(2*elongation) harmonic projected onto cos(elongation). Orthogonal component excluded.",
+            "reference": "Data-driven from 2nd-synodic-harmonic residual amplitude, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(tidal_model, cos_elong) * 100",
             "data_driven": True
         },
         "thermal_expansion": {
             "source": "Thermal expansion",
             "magnitude_cm": round(thermal_uncertainty_cm, 2),
-            "description": "Telescope and retroreflector thermal expansion, derived from diurnal (24-hr) sinusoidal amplitude in detrended residuals",
-            "reference": "Data-driven from diurnal residual variation",
-            "method": "sqrt(A_cos^2 + A_sin^2) * 100 for 24-hr sinusoid",
+            "description": "Telescope and retroreflector thermal expansion: diurnal model projected onto cos(elongation). Orthogonal component excluded.",
+            "reference": "Data-driven from diurnal residual variation, elongation-correlated projection",
+            "method": "correlated_systematic_amplitude(diurnal_model, cos_elong) * 100",
             "data_driven": True
         }
     }

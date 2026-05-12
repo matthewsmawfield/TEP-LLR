@@ -257,7 +257,35 @@ def main() -> None:
         #        thermal mechanism cannot explain observed 8.9 mm signal.
         "step_039_dust_sensitivity_analysis.py",
         # -------------------------------------------------------------------
-        # Group E: Results Consolidation & Validation
+        # Group E: Advanced Systematic Controls & Cross-Validation
+        # -------------------------------------------------------------------
+        # 049 — EOP Systematic Analysis.
+        #        Tests whether Earth Orientation Parameter (EOP) corrections
+        #        introduce systematic biases correlated with cos(D).
+        "step_049_eop_systematic_analysis.py",
+        # 050 — Corrected TEP Analysis.
+        #        Primary full-systematic OLS and AR(1) GLS models with
+        #        cluster-robust standard errors.  Produces the definitive
+        #        η estimate used by step_040.
+        "step_050_corrected_tep_analysis.py",
+        # 051 — Cross-Validation Analysis.
+        #        K-fold and leave-one-station-out cross-validation of the
+        #        TEP signal to assess out-of-sample predictive stability.
+        "step_051_cross_validation_analysis.py",
+        # 052 — Station Distribution Analysis.
+        #        Quantifies the impact of station geographic distribution
+        #        and observational sampling on detection robustness.
+        "step_052_station_distribution_analysis.py",
+        # 053 — Clean Subset Analysis.
+        #        Repeats primary analysis on the highest-quality data subset
+        #        to verify signal is not driven by low-quality observations.
+        "step_053_clean_subset_analysis.py",
+        # 054 — Toy Orbital TEP Perturbation.
+        #        Analytic toy-model simulation of orbital perturbations
+        #        induced by a temporally-varying Nordtvedt parameter.
+        "step_054_toy_orbital_tep_perturbation.py",
+        # -------------------------------------------------------------------
+        # Group F: Results Consolidation & Validation
         # -------------------------------------------------------------------
         # 040 — Unified Results Table.
         #        Consolidates results from all analysis steps into a unified table,
@@ -290,6 +318,28 @@ def main() -> None:
         #        Quantitative analysis of temporal bin variation to address χ²/dof ≈ 33
         #        concern. Assesses whether temporal variation exceeds expected noise.
         "step_043_temporal_bin_variation_analysis.py",
+        # 046 — Station-Balanced TEP Analysis.
+        #        Directly addresses Grasse-dominance concern by creating balanced
+        #        subsamples (equal-N per station, Grasse-capped). Tests whether
+        #        signal persists when station contributions are equalised.
+        "step_046_station_balanced_tep.py",
+        # 047 — Orbital Velocity Modulation of Temporal Shear.
+        #        Tests the TEP-specific prediction that temporal shear depends on
+        #        the Earth-Moon system's velocity through the solar scalar topology,
+        #        not merely heliocentric distance. In a Kepler orbit, radial velocity
+        #        v_r and distance r are in quadrature (~90° out of phase), making
+        #        them statistically distinguishable. Joint fit determines whether
+        #        the temporal topology is dynamical (velocity-dependent) or static.
+        "step_047_velocity_modulation.py",
+        # 048 — CMB Dipole Anisotropy Test.
+        #        Tests whether the TEP signal exhibits anisotropic modulation aligned
+        #        with the CMB dipole direction (l=264°, b=48°). Two predictions:
+        #        (1) annual velocity projection of Earth's orbital velocity onto the
+        #        CMB frame; (2) monthly orientation anisotropy of the Earth-Moon line
+        #        relative to the CMB dipole. The 70° orbital phase offset between
+        #        perihelion and CMB dipole longitude makes this distinguishable from
+        #        heliocentric distance modulation.
+        "step_048_cmb_anisotropy.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

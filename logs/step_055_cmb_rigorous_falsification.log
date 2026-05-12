@@ -1,0 +1,11 @@
+[20:18:31] ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
+[20:18:31] >>> Computing CMB-frame kinematics...
+[20:18:31]     r(cosD, cosθ) = 0.0499
+[20:18:31]     Cleaned dataset: 25,445 observations
+[20:18:31] ═══ ═══ A. Aliasing Simulation Falsification ═══
+[20:18:39]     Simulated η_θ (no CMB): mean=9.4233e-07, std=8.8033e-05, max|η|=3.2680e-04
+[20:18:39]     Simulated t (no CMB): mean=0.01, std=0.99, max|t|=3.70
+[20:18:39]     Observed: η_θ = -9.7601e-04, t = -11.03
+[20:18:39]     Aliasing p-value (coefficient): 0.0000
+[20:18:39]     Aliasing p-value (t-statistic): 0.0000
+[20:18:39] ═══ ═══ B. Multicollinearity Diagnostic Suite ═══

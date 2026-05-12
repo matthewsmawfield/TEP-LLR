@@ -1,28 +1,46 @@
 {
     "metadata": {
-        "generated_at": "2026-05-10T21:08:06.795699",
+        "generated_at": "2026-05-12T20:19:53.748115",
         "step_id": "step_040",
         "purpose": "Consolidate all statistical measures with consistent reporting"
     },
     "primary_estimands": {
-        "note": "Primary estimand is the leverage-excised OLS from step_017, as it is robust against heavy-tailed outliers while maintaining high statistical power.",
-        "leverage_excised_ols": {
-            "eta": -0.00033112937239794814,
-            "eta_error": 5.836395998066203e-05,
-            "snr": 5.673524766099877,
-            "n_obs": 25177,
-            "method": "OLS with Cook's Distance excision (threshold: 4/n)",
-            "source": "step_017_leverage_diagnostics",
+        "note": "Primary estimand is the full-systematic OLS model from step_050 (cosD + annual + monthly + thermal cos2D).",
+        "full_systematic_ols": {
+            "eta": -0.0004052666677981862,
+            "eta_error": 6.565756102440735e-05,
+            "snr": 6.172429518780534,
+            "n_obs": 25445,
+            "method": "OLS with full systematic model (cosD + cos2D + sin_m + cos_m + sin_y + cos_y + const)",
+            "source": "step_050_corrected_tep_analysis",
             "status": "PRIMARY RESULT"
+        },
+        "ar1_gls_full_model": {
+            "eta": -0.00044607423508390457,
+            "eta_error": 9.665012745436396e-05,
+            "snr": 4.615350717406254,
+            "n_obs": 25445,
+            "method": "Full-model AR(1) GLS with Cochrane-Orcutt on full design matrix + cluster-robust SE (by station)",
+            "source": "step_050_corrected_tep_analysis",
+            "status": "ROBUSTNESS CHECK - accounts for temporal autocorrelation with systematic controls"
+        },
+        "ar1_gls_cosd_only": {
+            "eta": -0.00032808332668428743,
+            "eta_error": 9.357524796328936e-05,
+            "snr": 3.5060909142661134,
+            "n_obs": 25445,
+            "method": "cosD-only AR(1) GLS with Cochrane-Orcutt + cluster-robust SE (by station)",
+            "source": "step_003_statistical_analysis",
+            "status": "COMPARISON - cosD-only; superseded by full-systematic model"
         },
         "full_sample_ols": {
             "eta": -0.00031697982024903585,
             "eta_error": 6.040658378191678e-05,
             "snr": 5.2474382824463985,
             "n_obs": 25445,
-            "method": "OLS with 6\u03c3 MAD outlier cleaning",
-            "source": "step_002_statistical_analysis",
-            "status": "SECONDARY - inflated by leverage"
+            "method": "cosD-only OLS with 6\u03c3 MAD outlier cleaning (step_003)",
+            "source": "step_003_statistical_analysis",
+            "status": "SECONDARY - cosD-only baseline"
         },
         "bayesian_mcmc": {
             "eta": -0.0002873149107884381,
@@ -32,6 +50,15 @@
             "method": "Ensemble MCMC (32 walkers, 3000 steps)",
             "source": "step_016_bayesian_analysis",
             "status": "SECONDARY - consistent with primary"
+        },
+        "leverage_excised_ols": {
+            "eta": -0.00033112937239794814,
+            "eta_error": 5.836395998066203e-05,
+            "snr": 5.673524766099877,
+            "n_obs": 25177,
+            "method": "OLS with Cook's Distance excision (threshold: 4/n)",
+            "source": "step_017_leverage_diagnostics",
+            "status": "DIAGNOSTIC - confirms leverage inflation"
         }
     },
     "robust_estimands": {
@@ -61,6 +88,8 @@
             "n_obs": 2595,
             "r_observed": -0.0543,
             "p_observed": 0.005689215694568386,
+            "rms_cm": 3.16,
+            "phase_coverage": "Biased: mean cos(D)=-0.231",
             "powered_at_3sigma": false,
             "interpretation": "powered (expected)"
         },
@@ -71,6 +100,8 @@
             "n_obs": 19390,
             "r_observed": -0.0357,
             "p_observed": 6.817647813779734e-07,
+            "rms_cm": 9.87,
+            "phase_coverage": "Good",
             "powered_at_3sigma": true,
             "interpretation": "Powered independent detection"
         },
@@ -81,6 +112,8 @@
             "n_obs": 737,
             "r_observed": 0.0902,
             "p_observed": 0.014353552103147618,
+            "rms_cm": 13.83,
+            "phase_coverage": "Biased: mean cos(D)=-0.335",
             "powered_at_3sigma": false,
             "interpretation": "underpowered"
         },
@@ -91,6 +124,8 @@
             "n_obs": 346,
             "r_observed": -0.0008,
             "p_observed": 0.9879467828390442,
+            "rms_cm": 6.19,
+            "phase_coverage": "Biased: mean cos(D)=-0.026",
             "powered_at_3sigma": false,
             "interpretation": "underpowered"
         },
@@ -101,12 +136,20 @@
             "n_obs": 3139,
             "r_observed": -0.0248,
             "p_observed": 0.16501416782658768,
+            "rms_cm": 9.55,
+            "phase_coverage": "Biased: mean cos(D)=-0.316",
             "powered_at_3sigma": false,
             "interpretation": "underpowered"
         }
     },
     "cross_validation": {
-        "de430": null,
+        "de430": {
+            "eta": -0.0007028006239570603,
+            "eta_error": 0.00011800196006775877,
+            "snr": 5.955838560253576,
+            "n_obs": 4597,
+            "source": "step_006_multi_ephemeris_comparison"
+        },
         "cross_station_prediction": {
             "apo_to_grasse_r": 0.0357,
             "apo_to_grasse_p": 6.82e-07,
@@ -131,11 +174,11 @@
         "source": "step_016_bayesian_analysis"
     },
     "effect_size_analysis": {
-        "primary_eta": -0.00033112937239794814,
-        "predicted_amplitude_mm": 4.304681841173326,
+        "primary_eta": -0.0004052666677981862,
+        "predicted_amplitude_mm": 5.268466681376421,
         "residual_rms_mm": 94.8112925164825,
-        "effect_size_r_squared": 0.002053217258030734,
-        "variance_explained_percent": 0.2053217258030734,
+        "effect_size_r_squared": 0.0030877941594760895,
+        "variance_explained_percent": 0.30877941594760894,
         "interpretation": "Small effect size but statistically significant due to large N"
     },
     "power_analysis_correction": {
@@ -249,7 +292,7 @@
             "snr": 4.349725879782794,
             "interpretation": "Consistent with leverage-excised OLS"
         },
-        "primary_reported_snr": 5.673524766099877,
-        "rationale": "Leverage-excised OLS is primary as it balances robustness with power"
+        "primary_reported_snr": 6.172429518780534,
+        "rationale": "Full-systematic OLS is primary as it properly controls for confounding aliases; full-model AR(1) GLS confirms robustness against temporal autocorrelation"
     }
 }

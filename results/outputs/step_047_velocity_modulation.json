@@ -1,0 +1,139 @@
+{
+    "step_id": "step_047",
+    "status": "PASS",
+    "n_observations": 25445,
+    "n_outliers_removed": 762,
+    "kinematic_ranges": {
+        "speed_kms_min": 29.279019191230976,
+        "speed_kms_max": 30.293672771326776,
+        "radial_velocity_kms_min": -0.5094186946034447,
+        "radial_velocity_kms_max": 0.5102520817390435,
+        "distance_au_min": 0.9832218156547028,
+        "distance_au_max": 1.0167580163618508
+    },
+    "correlation_r_vr": -0.08675461654374775,
+    "model_A_distance_only": {
+        "perihelion_eta": -0.0002807482205517673,
+        "perihelion_eta_error": 0.0001914660364176766,
+        "aphelion_eta": 7.076082849712825e-05,
+        "aphelion_eta_error": 0.00015705753139849636,
+        "delta_eta": -0.00035150904904889555,
+        "delta_eta_error": 0.0002476414974726262,
+        "significance_sigma": 1.4194270856714986
+    },
+    "model_B_velocity_only": {
+        "fast_recession_eta": 0.00028464713353422666,
+        "fast_recession_eta_error": 0.0001278148526212189,
+        "fast_approach_eta": -5.779630462181723e-06,
+        "fast_approach_eta_error": 0.00016135446919895776,
+        "delta_eta": 0.0002904267639964084,
+        "delta_eta_error": 0.00020584436179079893,
+        "significance_sigma": 1.410904634306045
+    },
+    "model_C_speed_only": {
+        "high_speed_eta": -0.00021045555759619956,
+        "high_speed_eta_error": 0.00019761701294714672,
+        "low_speed_eta": 9.854550255555702e-05,
+        "low_speed_eta_error": 0.00016224316124217316,
+        "delta_eta": -0.00030900106015175656,
+        "delta_eta_error": 0.0002556859933121221,
+        "significance_sigma": 1.2085177453367635
+    },
+    "model_D_joint_fit": {
+        "available": true,
+        "eta_0": -0.00032359741398508093,
+        "eta_0_error": 6.058286002298342e-05,
+        "eta_r": 0.012373480326234584,
+        "eta_r_error": 0.005175884803273643,
+        "eta_r_t": 2.39060195435737,
+        "eta_r_p": 0.01682800483865554,
+        "eta_vr": 0.000381488329902889,
+        "eta_vr_error": 0.00015658364320598531,
+        "eta_vr_t": 2.4363229906526205,
+        "eta_vr_p": 0.014844241567133709,
+        "intercept_m": -0.0010675943396713289,
+        "rss": 96.61867124048936,
+        "aic": -141809.77193738573,
+        "bic": -141777.19483922963,
+        "aic_simple": -141803.24774052927,
+        "bic_simple": -141786.95919145123,
+        "aic_vel_only": -141806.05670303662,
+        "bic_vel_only": -141781.62387941955,
+        "delta_aic_vel_vs_simple": -2.808962507348042,
+        "delta_aic_joint_vs_simple": -6.524196856451454,
+        "delta_bic_vel_vs_simple": 5.33531203167513,
+        "delta_bic_joint_vs_simple": 9.76435222159489,
+        "model_preference": "joint_preferred",
+        "n_params": 4
+    },
+    "model_E_cmb_controlled": {
+        "available": true,
+        "eta_0": -0.00025302064101077605,
+        "eta_0_error": 6.077757382101972e-05,
+        "eta_r": 0.00710613445607878,
+        "eta_r_error": 0.005185697455624412,
+        "eta_r_t": 1.3703334058510221,
+        "eta_r_p": 0.1705949412940031,
+        "eta_vr": 0.001099834848559604,
+        "eta_vr_error": 0.0001692488560227972,
+        "eta_vr_t": 6.498329586413631,
+        "eta_vr_p": 8.271872076193176e-11,
+        "eta_theta": -0.000976009913979665,
+        "eta_theta_error": 8.849698842741156e-05,
+        "eta_theta_t": -11.028735907552647,
+        "eta_theta_p": 0.0,
+        "intercept_m": -0.000582688654349746,
+        "rss": 96.15891890970235,
+        "aic": -141929.1389513289,
+        "bic": -141888.4175786338,
+        "delta_aic_vs_joint": -119.36701394317788,
+        "delta_bic_vs_joint": -111.22273940415471,
+        "n_params": 5
+    },
+    "binned_velocity_trend": {
+        "slope_eta_per_kms": 0.0012524013626897996,
+        "slope_error": 0.000587360350109061,
+        "t_statistic": 2.132253841202005,
+        "p_value": 0.06556249045804652,
+        "n_bins": 10
+    },
+    "quadrant_analysis": [
+        {
+            "quadrant": "QI_peri_away",
+            "n": 6987,
+            "eta": 0.00023689105254287885,
+            "eta_error": 0.00012732519149908535,
+            "snr": 1.8605198999019812
+        },
+        {
+            "quadrant": "QII_post_peri",
+            "n": 5614,
+            "eta": 0.00010870147140825536,
+            "eta_error": 0.00011684764810562798,
+            "snr": 0.9302837769570798
+        },
+        {
+            "quadrant": "QIII_aph_in",
+            "n": 7139,
+            "eta": -0.00039734051064066196,
+            "eta_error": 9.394479428141941e-05,
+            "snr": 4.229510678903565
+        },
+        {
+            "quadrant": "QIV_pre_peri",
+            "n": 5705,
+            "eta": -0.0010677497982338397,
+            "eta_error": 0.00015350285149457138,
+            "snr": 6.955895527918584
+        }
+    ],
+    "dynamical_shear_test": {
+        "high_shear_eta": 0.00020474637304699088,
+        "high_shear_eta_error": 0.00015008779752951525,
+        "low_shear_eta": -0.00033631901607120824,
+        "low_shear_eta_error": 0.00018730106508016724,
+        "delta_eta": 0.0005410653891181991,
+        "delta_eta_error": 0.0002400167409732617,
+        "significance_sigma": 2.2542818760232843
+    }
+}

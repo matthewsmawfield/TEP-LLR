@@ -1,0 +1,31 @@
+[20:19:48] ═══ Starting EOP Systematic Analysis (Step 049)...
+[20:19:48]     Working with 25445 observations after 6-sigma cleaning
+[20:19:48] >>> Loading IERS B polar motion data...
+[20:19:49]     Polar motion range: x=-0.225 to 0.313 arcsec, y=0.022 to 0.597 arcsec
+[20:19:49] >>> Computing Moon positions for range geometry...
+[20:19:49] >>> Computing pole tide range effects...
+[20:19:49]     Pole tide range effect: -8.25 to 10.31 mm
+[20:19:49] >>> Testing correlations with residuals...
+[20:19:49]     Pole tide vs residuals: r=0.0682, p=1.3621e-27
+[20:19:49]     Pole tide cos(D) component: η=-2.4608e-05 (7.98σ)
+[20:19:49]     Annual part of pole tide cos(D): η=-1.4157e-05 (6.24σ)
+[20:19:49]     Residual part of pole tide cos(D): η=-1.0452e-05 (5.00σ)
+[20:19:49] >>> Testing TEP signal with and without EOP corrections...
+[20:19:49]     Original:              η=-3.1698e-04 (5.25σ)
+[20:19:49]     After pole tide:         η=-2.9237e-04 (4.85σ)
+[20:19:49]     After annual pole tide:  η=-3.0282e-04 (5.02σ)
+[20:19:49]     After Chandler pole tide: η=-3.0653e-04 (5.08σ)
+[20:19:49] >>> Testing balanced subsample...
+[20:19:49]     Balanced original:       η=5.5899e-05 (0.18σ), N=1725
+[20:19:49]     Balanced after pole tide: η=7.4715e-05 (0.24σ), N=1725
+[20:19:49] >>> Per-station analysis after pole tide removal...
+[20:19:49]           Grasse: orig=-3.7746e-04(5.73σ)  no_pole=-3.5751e-04(5.45σ)  pole_rms=2.89mm
+[20:19:49]              APO: orig=-2.3937e-04(2.77σ)  no_pole=-2.5835e-04(3.00σ)  pole_rms=2.07mm
+[20:19:49]        McDonald2: orig=-8.6905e-05(0.28σ)  no_pole=-6.2690e-05(0.20σ)  pole_rms=4.50mm
+[20:19:49]           Matera: orig=3.8865e-04(0.47σ)  no_pole=3.8078e-04(0.46σ)  pole_rms=3.89mm
+[20:19:49]        Haleakala: orig=2.5710e-03(2.21σ)  no_pole=2.3577e-03(2.03σ)  pole_rms=3.37mm
+[20:19:49] >>> Randomization test for spurious correlation...
+[20:19:49]     Randomized pole tide cos(D): mean=4.4645e-07, std=3.1833e-06
+[20:19:49]     Actual vs random Z-score: -7.87
+[20:19:49] ✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_049_eop_systematic_analysis.json
+[20:19:49] Results saved to results/outputs/step_049_eop_systematic_analysis.json

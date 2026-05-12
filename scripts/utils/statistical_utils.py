@@ -69,42 +69,42 @@ def robust_regression(y: np.ndarray, X: np.ndarray, weights: np.ndarray = None,
     yw = y * sqrt_w
     Xw = X * sqrt_w[:, np.newaxis]
     
-    # QR Decomposition for stability
-    # Xw = Q @ R
-    Q, R = linalg.qr(Xw, mode='economic')
-    
-    # Check condition number
-    # Stability threshold: kappa < 1e12 for float64
-    s = linalg.svdvals(R)
-    cond = s[0] / s[-1] if s[-1] > 0 else np.inf
-    
-    if cond > 1e12:
-        return {
-            'coefficients': np.full(k, np.nan), 
-            'errors': np.full(k, np.nan), 
-            'chi2_red': np.nan, 
-            'birge_ratio': np.nan, 
-            'condition_number': cond,
-            'status': 'SINGULAR'
-        }
-    
-    # Solve R β = Qᵀ yw
-    qty = Q.T @ yw
     try:
-        beta = linalg.solve_triangular(R, qty)
-        
-        # Residuals and Statistics (suppress overflow warnings for large matrices)
+        # QR Decomposition for stability
+        # Suppress benign numerical warnings from LAPACK internals
         with np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+            Q, R = linalg.qr(Xw, mode='economic')
+            
+            # Check condition number
+            # Stability threshold: kappa < 1e12 for float64
+            s = linalg.svdvals(R)
+            cond = s[0] / s[-1] if s[-1] > 0 else np.inf
+            
+            if cond > 1e12:
+                return {
+                    'coefficients': np.full(k, np.nan), 
+                    'errors': np.full(k, np.nan), 
+                    'chi2_red': np.nan, 
+                    'birge_ratio': np.nan, 
+                    'condition_number': cond,
+                    'status': 'SINGULAR'
+                }
+            
+            # Solve R β = Qᵀ yw
+            qty = Q.T @ yw
+            beta = linalg.solve_triangular(R, qty)
+            
+            # Residuals and Statistics
             y_pred = X @ beta
             residuals = y - y_pred
             rss = np.sum(weights * residuals**2)
             mse = rss / dof
-        
-        # Formal Covariance Matrix: (XᵀWX)⁻¹ = (RᵀR)⁻¹
-        # (RᵀR)⁻¹ = R⁻¹ (R⁻ᵀ)
-        R_inv = linalg.inv(R)
-        cov_raw = (R_inv @ R_inv.T)
-        errors_formal = np.sqrt(np.diag(cov_raw))
+            
+            # Formal Covariance Matrix: (XᵀWX)⁻¹ = (RᵀR)⁻¹
+            # (RᵀR)⁻¹ = R⁻¹ (R⁻ᵀ)
+            R_inv = linalg.inv(R)
+            cov_raw = (R_inv @ R_inv.T)
+            errors_formal = np.sqrt(np.diag(cov_raw))
 
         # Scale by sqrt(MSE) to get standard errors (CRITICAL FIX)
         # Standard formula: error = sqrt(diag((X'X)^-1)) * sqrt(MSE)
@@ -133,7 +133,7 @@ def robust_regression(y: np.ndarray, X: np.ndarray, weights: np.ndarray = None,
         }
     except (linalg.LinAlgError, ValueError):
         return {'coefficients': np.full(k, np.nan), 'errors': np.full(k, np.nan), 
-                'chi2_red': np.nan, 'birge_ratio': np.nan, 'condition_number': cond}
+                'chi2_red': np.nan, 'birge_ratio': np.nan, 'condition_number': np.nan}
 
 def linear_regression(y: np.ndarray, x: np.ndarray, weights: np.ndarray = None) -> Dict:
     """
@@ -175,6 +175,66 @@ def linear_regression(y: np.ndarray, x: np.ndarray, weights: np.ndarray = None) 
         'method': 'QR-Decomposition with Birge Scaling',
         'regression_metrics': res
     }
+
+def cluster_robust_variance(X: np.ndarray, residuals: np.ndarray,
+                          cluster_ids: np.ndarray,
+                          small_sample_correction: bool = True) -> Dict:
+    """
+    Compute cluster-robust (sandwich) covariance matrix and standard errors.
+
+    Uses the Liang-Zeger sandwich estimator with an optional finite-cluster
+    correction (G/(G-1)).  Suitable for panel or grouped data where
+    observations within a cluster may be correlated.
+
+    Parameters
+    ----------
+    X : np.ndarray, shape (n, k)
+        Design matrix (including intercept column if needed).
+    residuals : np.ndarray, shape (n,)
+        Residuals from the regression model.
+    cluster_ids : np.ndarray, shape (n,)
+        Cluster identifier for each observation.
+    small_sample_correction : bool, default True
+        If True, multiply the meat matrix by G/(G-1) (Cameron-Miller
+        finite-cluster correction).
+
+    Returns
+    -------
+    dict with keys:
+        - cov_cluster: cluster-robust covariance matrix, shape (k, k)
+        - se_cluster: cluster-robust standard errors, shape (k,)
+        - n_clusters: number of distinct clusters
+    """
+    n, k = X.shape
+    XtX = X.T @ X
+    XtX_inv = np.linalg.inv(XtX)
+
+    unique_clusters = np.unique(cluster_ids)
+    G = int(len(unique_clusters))
+
+    meat = np.zeros((k, k))
+    for g in unique_clusters:
+        mask = cluster_ids == g
+        Xg = X[mask]
+        ug = residuals[mask]
+        # Numerically stable: (Xg * ug[:, None]).T @ (Xg * ug[:, None])
+        # avoids overflow from np.outer(ug, ug) with large residuals.
+        Xg_ug = Xg * ug[:, np.newaxis]
+        meat += Xg_ug.T @ Xg_ug
+
+    cov_cluster = XtX_inv @ meat @ XtX_inv
+
+    if small_sample_correction and G > 1:
+        cov_cluster *= G / (G - 1)
+
+    se_cluster = np.sqrt(np.diag(cov_cluster))
+
+    return {
+        'cov_cluster': cov_cluster,
+        'se_cluster': se_cluster,
+        'n_clusters': G
+    }
+
 
 def weighted_linear_regression(residuals: np.ndarray, cos_elong: np.ndarray,
                                weights: np.ndarray, logger=None) -> Dict:

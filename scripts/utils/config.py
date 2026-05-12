@@ -38,5 +38,5 @@ def get_config():
         except Exception as e:
             raise RuntimeError(f"Failed to load config.json: {e}. Fix or remove the file to use defaults.")
             
-    _CONFIG = config
-    return _CONFIG
+    _CONFIG = config.copy()
+    return _CONFIG.copy()

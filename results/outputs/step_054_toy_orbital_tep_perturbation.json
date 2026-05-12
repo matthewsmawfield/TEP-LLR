@@ -1,0 +1,61 @@
+{
+  "step": "054_toy_orbital_tep_perturbation",
+  "simulation": {
+    "n_points": 50000,
+    "span_years": 10.0,
+    "input_eta": -0.00054,
+    "perturbation_amplitude_mm": 7.0200000000000005
+  },
+  "ephemeris_fit": {
+    "a_km": 384400.00000000815,
+    "e": 2.1064029710661863e-14,
+    "omega_rad": 1.151530417762867,
+    "rss_m2": 1.232585649671723
+  },
+  "residuals": {
+    "rms_mm": 4.965049143103667,
+    "eta_recovered": -0.0005399992872764326,
+    "eta_err_recovered": 2.7856871220508596e-09,
+    "snr": 193847.78821782325,
+    "recovery_bias_percent": -0.0001319858458235579
+  },
+  "eta_sweep": [
+    {
+      "eta_input": -0.001,
+      "eta_recovered": -0.0009999986612828353,
+      "amplitude_mm": 13.000000000000002,
+      "residual_rms_mm": 9.19453527376542
+    },
+    {
+      "eta_input": -0.0005,
+      "eta_recovered": -0.0004999993365911412,
+      "amplitude_mm": 6.500000000000001,
+      "residual_rms_mm": 4.597267693475931
+    },
+    {
+      "eta_input": -0.0003,
+      "eta_recovered": -0.00029999959637152477,
+      "amplitude_mm": 3.9,
+      "residual_rms_mm": 2.758360582357115
+    },
+    {
+      "eta_input": -0.0001,
+      "eta_recovered": -9.999985979437701e-05,
+      "amplitude_mm": 1.3000000000000003,
+      "residual_rms_mm": 0.9194534715955776
+    },
+    {
+      "eta_input": -5e-05,
+      "eta_recovered": -4.999994308095456e-05,
+      "amplitude_mm": 0.6500000000000001,
+      "residual_rms_mm": 0.45972691908992236
+    },
+    {
+      "eta_input": -1e-05,
+      "eta_recovered": -9.999991945888163e-06,
+      "amplitude_mm": 0.13,
+      "residual_rms_mm": 0.09194541005831604
+    }
+  ],
+  "interpretation": "A synodic cos(D) perturbation of the Nordtvedt amplitude (~7 mm for \u03b7 = -5.4e-04) is NOT absorbed by standard orbital-element fitting. The fit optimises semi-major axis and eccentricity vector, which generate signals at the orbital period (~27.3 days), not at the Earth-Moon-Sun synodic period (~29.5 days).  Because cos(D) is orthogonal to the {1, cos(M), sin(M)} basis of Keplerian range modulation, the perturbation survives as an unabsorbed residual.  The recovered \u03b7 from the residuals matches the input to within -0.0%, confirming the signal cannot be eliminated by adjusting standard ephemeris parameters."
+}

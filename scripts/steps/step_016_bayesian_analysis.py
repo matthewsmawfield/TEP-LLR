@@ -293,7 +293,7 @@ def run_bayesian_analysis(verbose=False):
             print_status("  [CALC]    Verdict: Sensitive to bandwidth choice", "WARNING")
 
     # Alternative: BIC approximation
-    rss_1 = np.sum((y - (mean_eta * 13.0 * x + mean_b))**2)
+    rss_1 = np.sum((y - (mean_eta * ETA_SCALE_FACTOR * x + mean_b))**2)
     rss_0 = np.sum((y - np.mean(y))**2)
     bic_1 = n * np.log(rss_1/n) + 2 * np.log(n)
     bic_0 = n * np.log(rss_0/n) + 1 * np.log(n)

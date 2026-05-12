@@ -1,0 +1,68 @@
+{
+    "step_id": "step_046",
+    "status": "WARNING",
+    "tests": [
+        {
+            "name": "full_sample",
+            "n_total": 26207,
+            "n_used": 25445,
+            "n_outliers": 762,
+            "eta": -0.0003169798202490359,
+            "eta_error": 6.040658378191678e-05,
+            "snr": 5.247438282446399,
+            "significant": true,
+            "stations": {
+                "APO": 2595,
+                "Grasse": 19390,
+                "Matera": 346,
+                "McDonald2": 3139,
+                "Haleakala": 737
+            }
+        },
+        {
+            "name": "equal_n_subsample",
+            "n_total": 1730,
+            "n_used": 1710,
+            "n_outliers": 20,
+            "eta": -0.00017486871156335824,
+            "eta_error": 0.0003436770000722876,
+            "snr": 0.5088170332218248,
+            "significant": false,
+            "stations": {
+                "APO": 346,
+                "Grasse": 346,
+                "Matera": 346,
+                "McDonald2": 346,
+                "Haleakala": 346
+            }
+        },
+        {
+            "name": "grasse_capped",
+            "n_total": 9412,
+            "n_used": 9283,
+            "n_outliers": 129,
+            "eta": -0.00020834132483619314,
+            "eta_error": 0.00011770730629061967,
+            "snr": 1.7699948406074115,
+            "significant": false,
+            "stations": {
+                "APO": 2595,
+                "Grasse": 2595,
+                "Matera": 346,
+                "McDonald2": 3139,
+                "Haleakala": 737
+            }
+        }
+    ],
+    "bootstrap": {
+        "n_iterations": 200,
+        "eta_mean": -2.0586298260035246e-06,
+        "eta_std": 0.00021676080091455902,
+        "eta_ci95_lower": -0.00041331760083040037,
+        "eta_ci95_upper": 0.0004798724763157279,
+        "snr_mean": 0.49219386974574225,
+        "snr_std": 0.39955374016198614,
+        "all_significant": false
+    },
+    "conclusion": "Signal weakens when station balance is enforced"
+}

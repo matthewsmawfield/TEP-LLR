@@ -100,7 +100,7 @@ def run_core_simulation(logger, rho_T_input=None):
     logger.info(f"    Moon shielding factor: {moon_shielding:.4e}")
 
     # Load measured η from step_002 for comparison
-    step_002_path = PROJECT_ROOT / "results" / "outputs" / "step_002_statistical_analysis.json"
+    step_002_path = PROJECT_ROOT / "results" / "outputs" / "step_003_statistical_analysis.json"
     if step_002_path.exists():
         with open(step_002_path, "r") as f:
             step_002_results = json.load(f)

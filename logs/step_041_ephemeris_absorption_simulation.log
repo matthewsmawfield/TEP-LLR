@@ -1,27 +1,27 @@
-[21:08:07] ═══ Step 041: Rigorous Ephemeris Absorption Simulation
-[21:08:07]     Loaded measured η from step_017: -3.3113e-04
-[21:08:07] >>> Simulating STATIC Nordtvedt signal (η = -3.31e-04)...
-[21:08:07]     Linear Regression Complete (N=25000, DOF=24998):
-[21:08:07]       RSS=2.278858e+02, MSE=9.116163e-03, χ²_red=0.009
-[21:08:07]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[21:08:07]       Condition Number κ(R) = 1.41e+00
-[21:08:07]       Final η = -3.42041393e-04 ± 6.56173712e-05
-[21:08:07]     Fitted η: -3.42e-04 ± 6.56e-05
-[21:08:07]     Linear Regression Complete (N=25000, DOF=24998):
-[21:08:07]       RSS=2.271891e+02, MSE=9.088290e-03, χ²_red=0.009
-[21:08:07]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[21:08:07]       Condition Number κ(R) = 1.42e+00
-[21:08:07]       Final η = -2.27504391e-04 ± 6.57372645e-05
-[21:08:07]     Linear Regression Complete (N=25000, DOF=24998):
-[21:08:07]       RSS=2.223089e+02, MSE=8.893067e-03, χ²_red=0.009
-[21:08:07]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
-[21:08:07]       Condition Number κ(R) = 1.42e+00
-[21:08:07]       Final η = 9.63422111e-05 ± 6.49252268e-05
-[21:08:07]     SNR: 1.48σ
-[21:08:07] ═══ SUMMARY:
-[21:08:07]     Static signal absorption efficiency: 103.30%
-[21:08:07]     TEP signal post-fit sideband fraction: 0.00%
-[21:08:07]     Null case SNR: 1.48σ
-[21:08:07] ✓   Static Nordtvedt signals are absorbed with 103.3% efficiency by standard ephemeris fitting, while dynamically modulated TEP signals leave 0.0% of power in sideband frequencies that are spectrally orthogonal to standard integrators. This validates the ephemeris absorption argument.
-[21:08:07] Results saved to results/outputs/step_041_ephemeris_absorption_simulation.json
-[21:08:07] ✓   Step 041 completed successfully
+[20:19:54] ═══ Step 041: Rigorous Ephemeris Absorption Simulation
+[20:19:54]     Loaded measured η from step_017: -3.3113e-04
+[20:19:54] >>> Simulating STATIC Nordtvedt signal (η = -3.31e-04)...
+[20:19:54]     Linear Regression Complete (N=25000, DOF=24998):
+[20:19:54]       RSS=2.278858e+02, MSE=9.116163e-03, χ²_red=0.009
+[20:19:54]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[20:19:54]       Condition Number κ(R) = 1.41e+00
+[20:19:54]       Final η = -3.42041393e-04 ± 6.56173712e-05
+[20:19:54]     Fitted η: -3.42e-04 ± 6.56e-05
+[20:19:54]     Linear Regression Complete (N=25000, DOF=24998):
+[20:19:54]       RSS=2.271891e+02, MSE=9.088290e-03, χ²_red=0.009
+[20:19:54]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[20:19:54]       Condition Number κ(R) = 1.42e+00
+[20:19:54]       Final η = -2.27504391e-04 ± 6.57372645e-05
+[20:19:54]     Linear Regression Complete (N=25000, DOF=24998):
+[20:19:54]       RSS=2.223089e+02, MSE=8.893067e-03, χ²_red=0.009
+[20:19:54]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+[20:19:54]       Condition Number κ(R) = 1.42e+00
+[20:19:54]       Final η = 9.63422111e-05 ± 6.49252268e-05
+[20:19:54]     SNR: 1.48σ
+[20:19:54] ═══ SUMMARY:
+[20:19:54]     Static signal absorption efficiency: 103.30%
+[20:19:54]     TEP signal post-fit sideband fraction: 0.06%
+[20:19:54]     Null case SNR: 1.48σ
+[20:19:54] ✓   Static Nordtvedt signals are absorbed with 103.3% efficiency by standard ephemeris fitting, while dynamically modulated TEP signals leave 0.1% of power in sideband frequencies that are spectrally orthogonal to standard integrators. This validates the ephemeris absorption argument.
+[20:19:54] Results saved to results/outputs/step_041_ephemeris_absorption_simulation.json
+[20:19:54] ✓   Step 041 completed successfully

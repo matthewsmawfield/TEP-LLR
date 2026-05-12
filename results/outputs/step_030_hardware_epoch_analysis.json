@@ -3,31 +3,45 @@
   "status": "PASS",
   "summary": {
     "all_powered_epochs_show_negative_eta": true,
-    "chi2_dof_observed": 4.32,
-    "chi2_dof_expected_median": 0.84,
-    "chi2_percentile_in_expected_distribution": 99.9,
+    "chi2_dof_observed": 3.96,
+    "chi2_dof_expected_median": 0.89,
+    "chi2_percentile_in_expected_distribution": 100.0,
     "amplitude_scatter_tracks_rms": true,
-    "n_epochs_all_negative": 5,
-    "n_epochs_total": 5,
+    "n_epochs_all_negative": 6,
+    "n_epochs_total": 7,
     "temporal_chi2_status": "EXCESS_VARIANCE_BUT_SIGN_CONSISTENT",
-    "key_finding": "All 5/5 hardware epochs show negative \u03b7. All 4 powered epochs (SNR \u2265 1.5\u03c3) show negative \u03b7. The probability that this sign consistency arises by chance (random sign per epoch) is \u2264 0.0312. This is strong evidence that the observed modulation is tied to the gravitational geometry (Earth-Moon-Sun orientation), not to hardware-specific instrumental systematics which would produce random sign variations across independent hardware eras.",
+    "key_finding": "All 6/7 hardware epochs show negative \u03b7. All 6 powered epochs (SNR \u2265 1.5\u03c3) show negative \u03b7. The probability that this sign consistency arises by chance (random sign per epoch) is \u2264 0.0156. This is strong evidence that the observed modulation is tied to the gravitational geometry (Earth-Moon-Sun orientation), not to hardware-specific instrumental systematics which would produce random sign variations across independent hardware eras.",
     "systematic_discrimination": "Sign consistency across independent hardware epochs rules out instrumental systematics. Chi2 percentile 100% indicates epoch-varying noise, not sign-reversing artifacts."
   },
   "epoch_fits": {
     "grasse_epochs": [
       {
-        "n_obs": 3863,
+        "n_obs": 1167,
         "year_start": 1984.3,
-        "year_end": 1994.0,
-        "eta": -0.0007767220925758379,
-        "eta_error": 0.0005594916267683947,
-        "snr": 1.39,
-        "rms_cm": 20.29,
-        "r": -0.0223,
-        "p": 0.1651367567442794,
+        "year_end": 1986.4,
+        "eta": -0.003489402259333742,
+        "eta_error": 0.0016562525263732924,
+        "snr": 2.11,
+        "rms_cm": 32.56,
+        "r": -0.0616,
+        "p": 0.03534778612160578,
         "negative_eta": true,
-        "epoch_name": "Grasse-I",
-        "hardware_label": "Nd:glass / PMT"
+        "epoch_name": "Grasse-Ruby",
+        "hardware_label": "Ruby laser / PMT"
+      },
+      {
+        "n_obs": 2696,
+        "year_start": 1987.8,
+        "year_end": 1994.0,
+        "eta": 0.00028769442214194945,
+        "eta_error": 0.0003730397304161821,
+        "snr": 0.77,
+        "rms_cm": 11.36,
+        "r": 0.0149,
+        "p": 0.44064620798127957,
+        "negative_eta": false,
+        "epoch_name": "Grasse-Nd:YAG",
+        "hardware_label": "Nd:YAG green / no SPAD"
       },
       {
         "n_obs": 5521,
@@ -40,22 +54,36 @@
         "r": -0.0781,
         "p": 6.2870846713715545e-09,
         "negative_eta": true,
-        "epoch_name": "Grasse-II",
+        "epoch_name": "Grasse-SPAD",
         "hardware_label": "Nd:YAG / SPAD"
       },
       {
-        "n_obs": 10006,
+        "n_obs": 1410,
         "year_start": 2009.9,
-        "year_end": 2019.8,
-        "eta": -0.00030055111370837776,
-        "eta_error": 3.263308736979722e-05,
-        "snr": 9.21,
-        "rms_cm": 2.35,
-        "r": -0.0917,
-        "p": 3.915715845711798e-20,
+        "year_end": 2015.0,
+        "eta": -0.0003867608599955841,
+        "eta_error": 0.00016301064569207346,
+        "snr": 2.37,
+        "rms_cm": 3.05,
+        "r": -0.0631,
+        "p": 0.017796552939158813,
         "negative_eta": true,
-        "epoch_name": "Grasse-III",
+        "epoch_name": "Grasse-C-SPAD",
         "hardware_label": "Nd:YAG / C-SPAD"
+      },
+      {
+        "n_obs": 8596,
+        "year_start": 2015.0,
+        "year_end": 2019.8,
+        "eta": -0.000280854291886485,
+        "eta_error": 3.1805666471165465e-05,
+        "snr": 8.83,
+        "rms_cm": 2.21,
+        "r": -0.0948,
+        "p": 1.2499575378481257e-18,
+        "negative_eta": true,
+        "epoch_name": "Grasse-SPAD+IR",
+        "hardware_label": "Nd:YAG / SPAD+IR"
       }
     ],
     "apo_epochs": [
@@ -90,36 +118,36 @@
     ]
   },
   "chi2_noise_analysis": {
-    "chi2_observed": 4.32,
-    "dof": 4,
-    "chi2_obs_absolute": 17.3,
-    "chi2_sim_median": 0.84,
-    "chi2_sim_95th_percentile": 2.35,
-    "percentile_in_simulated_distribution": 99.9,
+    "chi2_observed": 3.96,
+    "dof": 6,
+    "chi2_obs_absolute": 23.8,
+    "chi2_sim_median": 0.89,
+    "chi2_sim_95th_percentile": 2.09,
+    "percentile_in_simulated_distribution": 100.0,
     "global_eta_used": -0.00031697982024903585,
-    "interpretation": "Observed chi2/dof = 4.3. Under the hypothesis of a constant eta = -3.17e-04 with epoch-varying noise, simulated chi2/dof has median = 0.8 and 95th percentile = 2.3. The observed chi2/dof is at the 100th percentile of the expected distribution under heteroscedastic noise \u2014 above the 95th percentile, suggesting additional variance beyond noise."
+    "interpretation": "Observed chi2/dof = 4.0. Under the hypothesis of a constant eta = -3.17e-04 with epoch-varying noise, simulated chi2/dof has median = 0.9 and 95th percentile = 2.1. The observed chi2/dof is at the 100th percentile of the expected distribution under heteroscedastic noise \u2014 above the 95th percentile, suggesting additional variance beyond noise."
   },
   "amplitude_rms_correlation": {
-    "n_epochs": 5,
+    "n_epochs": 7,
     "eta_vs_rms_correlation": {
-      "r": 0.607,
-      "p": 0.2777403268652368
+      "r": 0.946,
+      "p": 0.001262720479049977
     },
     "expected_se_vs_rms_correlation": {
-      "r": 0.969,
-      "p": 0.006605981034912259
+      "r": 0.987,
+      "p": 3.445103838781043e-05
     },
     "interpretation": "Amplitude scatter positively correlates with per-epoch RMS \u2014 consistent with noise-driven variation (not a systematic artifact)."
   },
   "sign_consistency_audit": {
-    "n_epochs_total": 5,
-    "n_epochs_negative_eta": 5,
-    "n_epochs_powered": 4,
+    "n_epochs_total": 7,
+    "n_epochs_negative_eta": 6,
+    "n_epochs_powered": 6,
     "all_powered_epochs_negative": true,
-    "p_chance_all_negative": 0.03125,
+    "p_chance_all_negative": 0.015625,
     "underpowered_epochs": [
-      "Grasse-I"
+      "Grasse-Nd:YAG"
     ],
-    "conclusion": "All 5/5 hardware epochs show negative \u03b7. All 4 powered epochs (SNR \u2265 1.5\u03c3) show negative \u03b7. The probability that this sign consistency arises by chance (random sign per epoch) is \u2264 0.0312. This is strong evidence that the observed modulation is tied to the gravitational geometry (Earth-Moon-Sun orientation), not to hardware-specific instrumental systematics which would produce random sign variations across independent hardware eras."
+    "conclusion": "All 6/7 hardware epochs show negative \u03b7. All 6 powered epochs (SNR \u2265 1.5\u03c3) show negative \u03b7. The probability that this sign consistency arises by chance (random sign per epoch) is \u2264 0.0156. This is strong evidence that the observed modulation is tied to the gravitational geometry (Earth-Moon-Sun orientation), not to hardware-specific instrumental systematics which would produce random sign variations across independent hardware eras."
   }
 }

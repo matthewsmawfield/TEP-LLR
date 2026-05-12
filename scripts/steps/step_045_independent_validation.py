@@ -30,7 +30,7 @@ from scipy import stats
 
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
-from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
 
 
 # Station latitudes (degrees) for latitude independence test
@@ -104,11 +104,14 @@ def run_independent_validation(df, verbose=False):
         print_status(f"    DE430 total: N = {len(df_de430):,}", "DATA")
 
         if len(df_inpop_window) >= 100:
-            # Compute η for INPOP19a window
-            res_iw = df_inpop_window['residual_m'].values
-            cos_iw = np.cos(df_inpop_window['elongation_rad'].values)
+            # Compute η for INPOP19a window — WITH consistent 6σ outlier cleaning
+            res_iw_raw = df_inpop_window['residual_m'].values
+            cos_iw_raw = np.cos(df_inpop_window['elongation_rad'].values)
+            mask_iw = ~detect_outliers_sigma(res_iw_raw, sigma_threshold=6.0)
+            res_iw = res_iw_raw[mask_iw]
+            cos_iw = cos_iw_raw[mask_iw]
             if 'sigma_m' in df_inpop_window.columns:
-                sig_iw = df_inpop_window['sigma_m'].values
+                sig_iw = df_inpop_window['sigma_m'].values[mask_iw]
                 w_iw = 1.0 / sig_iw**2
                 w_iw = np.where(np.isfinite(w_iw) & (w_iw > 0), w_iw, 1.0)
             else:
@@ -118,9 +121,12 @@ def run_independent_validation(df, verbose=False):
             eta_err_iw = reg_iw['eta_error']
             snr_iw = abs(eta_iw) / eta_err_iw if eta_err_iw > 0 else 0.0
 
-            # Compute η for DE430
-            res_de = df_de430['residual_m'].values
-            cos_de = np.cos(df_de430['elongation_rad'].values)
+            # Compute η for DE430 — WITH consistent 6σ outlier cleaning
+            res_de_raw = df_de430['residual_m'].values
+            cos_de_raw = np.cos(df_de430['elongation_rad'].values)
+            mask_de = ~detect_outliers_sigma(res_de_raw, sigma_threshold=6.0)
+            res_de = res_de_raw[mask_de]
+            cos_de = cos_de_raw[mask_de]
             reg_de = linear_regression(res_de, cos_de)
             eta_de = reg_de['eta']
             eta_err_de = reg_de['eta_error']
