@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 040: Tidal Resonance Analysis
+Step 038: Tidal Resonance Analysis
 
 Tests the "North Atlantic tidal resonance" explanation for the lunar recession
 anomaly (3.82 cm/yr vs. 1.7 cm/yr historical) against TEP predictions.
@@ -31,6 +31,18 @@ import argparse
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
 # Add project root to path
+
+def load_environmental_modulation_summary() -> str:
+    path = PROJECT_ROOT / "results/outputs/step_022_environmental_modulation.json"
+    with open(path, encoding="utf-8") as handle:
+        payload = json.load(handle)
+    peri = payload["perihelion"]
+    diff_sigma = payload["differential"]["significance_sigma"]
+    return (
+        f"Perihelion η = {peri['eta']:.4e} versus aphelion subset; "
+        f"{diff_sigma:.2f}σ cosD-only differential (Step 022)"
+    )
+
 
 def analyze_tidal_resonance_model() -> dict:
     
@@ -89,7 +101,7 @@ def analyze_tidal_resonance_model() -> dict:
         },
         "testability": {
             "description": "TEP makes specific predictions beyond post-hoc fitting",
-            "perihelion_enhancement": "Confirmed: 3.07σ (Step 024)",
+            "perihelion_enhancement": load_environmental_modulation_summary(),
             "heliocentric_scaling": "1/r⊙ dependence testable",
             "cross_domain": "GNSS, JWST, stellar dynamics consistency"
         },
@@ -171,7 +183,7 @@ def main():
     set_step_logger(logger)
     set_verbose_mode(args.verbose)
     
-    print_status("Step 040: Tidal Resonance Analysis", "STEP")
+    print_status("Step 038: Tidal Resonance Analysis", "STEP")
     print_status("Critiquing North Atlantic resonance explanation vs TEP", "INFO")
     
     # Analyze resonance model
@@ -225,10 +237,10 @@ def main():
     print_status("  - Physical mechanism (dynamical φ field)", "PASS")
     print_status("  - No fine-tuning required", "PASS")
     print_status("  - Makes multiple testable predictions", "PASS")
-    print_status(f"  - Perihelion enhancement: 3.07σ confirmed", "PASS")
+    print_status(f"  - Perihelion-aphelion split: {load_environmental_modulation_summary()}", "PASS")
     print_status("\nVerdict: TEP provides superior explanation", "PASS")
     
-    print_status("Step 040 completed successfully", "PASS")
+    print_status("Step 038 completed successfully", "PASS")
 
 if __name__ == "__main__":
     main()

@@ -56,5 +56,7 @@
         ],
         "residual_rms_m": 0.09481055785630182,
         "output_file": "data/processed/INPOP19a_all_stations_residuals.csv"
-    }
+    },
+    "step_id": "step_001",
+    "status": "PASS"
 }

@@ -9,7 +9,7 @@
     "start": "python3 -m http.server 8000",
     "build": "node build.js",
     "build:dev": "npm run build && cd dist && python3 -m http.server 8350",
-    "build:markdown": "npm run build && node html-to-markdown.js",
+    "build:markdown": "node build.js && node html-to-markdown.js",
     "markdown": "node html-to-markdown.js",
     "serve": "python3 -m http.server",
     "serve:dist": "cd dist && python3 -m http.server 8351"
@@ -39,5 +39,8 @@
   "engines": {
     "node": ">=16.0.0",
     "python": ">=3.10"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.1"
   }
 }

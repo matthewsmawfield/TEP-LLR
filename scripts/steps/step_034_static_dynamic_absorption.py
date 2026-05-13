@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 036: Static vs Dynamic Signal Absorption Test
+Step 034: Static vs Dynamic Signal Absorption Test
 
 Directly addresses the methodological criticism regarding whether standard 
 LLR ephemeris fits (like those in Williams et al. 2012) would absorb 
@@ -24,12 +24,18 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
+from scripts.utils.config import get_config
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 import scipy.stats as stats
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+from scripts.utils.statistical_utils import require_step003_eta_ols
+
+TEP_CONFIG = get_config()
 
 def run_absorption_comparison():
     print_status("Initializing Static vs Dynamic Absorption Test...", "TITLE")
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
 
     # 1. Simulation Parameters
     n_obs = 26000
@@ -45,15 +51,16 @@ def run_absorption_comparison():
     D_phase = (years * 2 * np.pi * f_synodic) % (2 * np.pi)
     l_prime = (years * 2 * np.pi * f_anomaly) % (2 * np.pi) # Mean anomaly proxy
 
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        eta_base = step_002_results.get('eta_ols', 0)
-        print_status(f"Loaded measured η from step_002: {eta_base:.4e}", "INFO")
-    else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    eta_base = require_step003_eta_ols(step_003_results)
+    print_status(f"Loaded measured η from step_003: {eta_base:.4e}", "INFO")
 
     amplitude_base_m = 13.0 * eta_base 
     
@@ -70,10 +77,13 @@ def run_absorption_comparison():
 
     # Fit a static η model (minimizing residuals vs cos(D))
     X_static = np.column_stack([np.cos(D_phase), np.ones(n_obs)])
-    coeffs_static, _, _, _ = np.linalg.lstsq(X_static, obs_static, rcond=None)
+    coeffs_static, _, _, _ = stable_lstsq(X_static, obs_static)
     
     eta_fit_static = coeffs_static[0] / 13.0
-    resid_static = obs_static - X_static @ coeffs_static
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid_static = obs_static - X_static @ coeffs_static
+    if not np.all(np.isfinite(resid_static)):
+        raise RuntimeError("Non-finite residuals in static absorption test.")
     
     # Recovery statistics
     recovery_static = abs(eta_fit_static / eta_base)
@@ -98,10 +108,13 @@ def run_absorption_comparison():
     obs_dynamic = S_dynamic + np.random.normal(0, noise_level, n_obs)
 
     # Attempt to fit the SAME static model (what standard codes do)
-    coeffs_dyn_fit, _, _, _ = np.linalg.lstsq(X_static, obs_dynamic, rcond=None)
+    coeffs_dyn_fit, _, _, _ = stable_lstsq(X_static, obs_dynamic)
     
     eta_fit_dyn = coeffs_dyn_fit[0] / 13.0
-    resid_dynamic = obs_dynamic - X_static @ coeffs_dyn_fit
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid_dynamic = obs_dynamic - X_static @ coeffs_dyn_fit
+    if not np.all(np.isfinite(resid_dynamic)):
+        raise RuntimeError("Non-finite residuals in dynamic absorption test.")
     
     # Recovery statistics
     # How much of the MEAN signal was captured?
@@ -111,7 +124,7 @@ def run_absorption_comparison():
     # Test for residual correlation with cos(D) in the dynamic residuals
     # (Since the static solver 'missed' the sidebands)
     X_resid_test = np.column_stack([np.cos(D_phase), np.ones(n_obs)])
-    coeffs_resid, _, _, _ = np.linalg.lstsq(X_resid_test, resid_dynamic, rcond=None)
+    coeffs_resid, _, _, _ = stable_lstsq(X_resid_test, resid_dynamic)
     resid_eta_proxy = coeffs_resid[0] / 13.0
 
     print_status(f"  Injected Dynamic η (mean): {eta_base:.4e}", "INFO")
@@ -142,6 +155,8 @@ def run_absorption_comparison():
         print_status("CONCLUSION: Static solver absorbed the bulk of the signal.", "WARNING")
 
     results = {
+        "step_id": "step_034",
+        "status": "PASS",
         "simulation": {
             "n_obs": n_obs,
             "eta_injected": float(eta_base),

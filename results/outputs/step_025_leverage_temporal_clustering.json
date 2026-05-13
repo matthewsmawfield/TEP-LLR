@@ -3,49 +3,49 @@
     "status": "PASS",
     "total_observations": 26207,
     "high_leverage_threshold": 0.00015263097645667187,
-    "total_high_leverage_points": 1030,
+    "total_high_leverage_points": 1031,
     "temporal_bins": {
         "1984-1989": {
             "total_obs": 2196,
             "high_lev_obs": 701,
-            "percent_of_all_high_lev": 68.05825242718446,
+            "percent_of_all_high_lev": 67.99224054316197,
             "expected_percent": 8.379440607471286,
-            "overrepresentation_factor": 8.122052009832528
+            "overrepresentation_factor": 8.11417417083172
         },
         "1989-1994": {
             "total_obs": 2833,
             "high_lev_obs": 213,
-            "percent_of_all_high_lev": 20.679611650485437,
+            "percent_of_all_high_lev": 20.659553831231815,
             "expected_percent": 10.810088907543786,
-            "overrepresentation_factor": 1.9129918197115137
+            "overrepresentation_factor": 1.9111363475294463
         },
         "1994-1999": {
             "total_obs": 4298,
-            "high_lev_obs": 79,
-            "percent_of_all_high_lev": 7.669902912621359,
+            "high_lev_obs": 80,
+            "percent_of_all_high_lev": 7.75945683802134,
             "expected_percent": 16.400198420269394,
-            "overrepresentation_factor": 0.4676713486064866
+            "overrepresentation_factor": 0.4731318877478484
         },
         "1999-2004": {
             "total_obs": 2748,
             "high_lev_obs": 17,
-            "percent_of_all_high_lev": 1.650485436893204,
+            "percent_of_all_high_lev": 1.6488845780795343,
             "expected_percent": 10.485748082573359,
-            "overrepresentation_factor": 0.15740273597037918
+            "overrepresentation_factor": 0.15725006600338556
         },
         "2004-2009": {
             "total_obs": 1601,
             "high_lev_obs": 16,
-            "percent_of_all_high_lev": 1.5533980582524272,
+            "percent_of_all_high_lev": 1.5518913676042678,
             "expected_percent": 6.109054832678292,
-            "overrepresentation_factor": 0.2542779694729629
+            "overrepresentation_factor": 0.2540313371068398
         },
         "2009-2014": {
             "total_obs": 2426,
             "high_lev_obs": 4,
-            "percent_of_all_high_lev": 0.3883495145631068,
+            "percent_of_all_high_lev": 0.38797284190106696,
             "expected_percent": 9.257068722097149,
-            "overrepresentation_factor": 0.04195167241613908
+            "overrepresentation_factor": 0.0419109821422146
         },
         "2014-2019": {
             "total_obs": 9031,
@@ -63,7 +63,7 @@
         }
     },
     "station_distribution": {
-        "Grasse": 852,
+        "Grasse": 853,
         "McDonald2": 104,
         "Haleakala": 73,
         "Matera": 1

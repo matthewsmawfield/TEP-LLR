@@ -23,5 +23,7 @@ if __name__ == "__main__":
     summary = process_all_stations()
 
     if summary:
+        summary["step_id"] = "step_001"
+        summary["status"] = "PASS"
         logger.save_step_results(summary, PROJECT_ROOT, "step_001_data_preprocessing")
         print_status("Preprocessing complete.", "SUCCESS")

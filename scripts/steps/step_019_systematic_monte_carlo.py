@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 020: Systematic Error Monte Carlo Propagation
+Step 019: Systematic Error Monte Carlo Propagation
 
 Quantifies systematic uncertainty through Monte Carlo error propagation:
 1. Ephemeris uncertainties (position, velocity errors)
@@ -22,6 +22,7 @@ import json
 from typing import Dict, Tuple
 
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
@@ -148,7 +149,7 @@ def compute_eta_with_error(df: pd.DataFrame) -> Tuple[float, float]:
     n = len(residuals)
 
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs, residuals_fit, rank, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs, residuals_fit, rank, _ = stable_lstsq(X, residuals)
 
     if rank < 2:
         return np.nan, np.nan
@@ -287,48 +288,40 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
         step_003_data = json.load(f)
     final_stat_error = step_003_data.get('eta_err_mcmc', 0.001)
     
-    # Load data-driven systematic error budget from step_008 (preferred)
-    # Falls back to step_006 for backward compatibility.
+    # Load data-driven systematic error budget from step_008.
     step_008_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_008_systematic_error_analysis.json'
-    step_006_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_006_systematic_error_analysis.json'
     data_driven_systematic_cm = None
     data_driven_source = None
-    if step_008_path.exists():
-        with open(step_008_path, 'r') as f:
-            step_008_data = json.load(f)
-        data_driven_systematic_cm = step_008_data.get('total_systematic_cm')
-        data_driven_source = 'step_008_systematic_error_analysis.json'
-    elif step_006_path.exists():
-        with open(step_006_path, 'r') as f:
-            step_006_data = json.load(f)
-        data_driven_systematic_cm = step_006_data.get('total_systematic_cm')
-        data_driven_source = 'step_006_systematic_error_analysis.json'
-    
-    if data_driven_systematic_cm is not None:
-        # Convert cm -> m -> eta (using ETA_SCALE_FACTOR = 13.0 m per unit eta)
-        data_driven_systematic_eta = (data_driven_systematic_cm / 100.0) / ETA_SCALE_FACTOR
-        # Use data-driven as PRIMARY estimate, not combined with MC.
-        # Rationale: The MC injects parametric noise (0.5m position error, etc.) that
-        # does not match the actual residual structure. The data-driven budget measures
-        # the actual systematic variance in the residuals after TEP removal. They estimate
-        # the same quantity; combining in quadrature would double-count.
-        # The MC is retained as an upper-bound cross-check only.
-        effective_systematic = data_driven_systematic_eta
-        floor_note = (
-            f"Data-driven systematic budget from {data_driven_source} "
-            f"({data_driven_systematic_cm:.2f} cm → {data_driven_systematic_eta:.2e} in eta) "
-            f"used as primary estimate. MC-derived systematic ({combined_systematic_error:.2e}) "
-            f"serves as independent upper-bound cross-check."
+    if not step_008_path.exists():
+        raise FileNotFoundError(
+            f"Required upstream data not found: {step_008_path}. "
+            "Step 008 must be run before Step 019."
         )
-        literature_floor_applied = False
-    else:
-        # No upstream budget available: use MC-derived systematic alone
-        effective_systematic = combined_systematic_error
-        floor_note = (
-            "No data-driven systematic budget found (step_006/008 output missing). "
-            "Using MC-derived systematic error alone."
+    with open(step_008_path, 'r') as f:
+        step_008_data = json.load(f)
+    data_driven_systematic_cm = step_008_data.get('total_systematic_cm')
+    data_driven_source = 'step_008_systematic_error_analysis.json'
+    if data_driven_systematic_cm is None:
+        raise ValueError(
+            f"{step_008_path} is missing required field total_systematic_cm."
         )
-        literature_floor_applied = False
+
+    # Convert cm -> m -> eta (using ETA_SCALE_FACTOR = 13.0 m per unit eta)
+    data_driven_systematic_eta = (data_driven_systematic_cm / 100.0) / ETA_SCALE_FACTOR
+    # Use data-driven as PRIMARY estimate, not combined with MC.
+    # Rationale: The MC injects parametric noise (0.5m position error, etc.) that
+    # does not match the actual residual structure. The data-driven budget measures
+    # the actual systematic variance in the residuals after TEP removal. They estimate
+    # the same quantity; combining in quadrature would double-count.
+    # The MC is retained as an upper-bound cross-check only.
+    effective_systematic = data_driven_systematic_eta
+    floor_note = (
+        f"Data-driven systematic budget from {data_driven_source} "
+        f"({data_driven_systematic_cm:.2f} cm → {data_driven_systematic_eta:.2e} in eta) "
+        f"used as primary estimate. MC-derived systematic ({combined_systematic_error:.2e}) "
+        f"serves as independent upper-bound cross-check."
+    )
+    literature_floor_applied = False
     
     total_uncertainty_corrected = np.sqrt(final_stat_error**2 + effective_systematic**2)
     
@@ -365,7 +358,7 @@ def main():
     logger = TEPLogger("step_019", str(log_dir / "step_019_systematic_monte_carlo.log"))
     set_step_logger(logger)
 
-    print_status("═══ Starting Step 020: Systematic Error Monte Carlo Propagation...", "TITLE")
+    print_status("═══ Starting Step 019: Systematic Error Monte Carlo Propagation...", "TITLE")
     print_status("═══ STEP PURPOSE: Quantify systematic uncertainty through Monte Carlo error propagation for TEP detection", "INFO")
     print_status("═══ METHOD: Ephemeris uncertainties, tidal model variations, atmospheric delay errors, instrumental calibration uncertainties", "INFO")
     print_status("═══ PARAMETERS: MC iterations=500, seed=42, ephemeris position error=0.5m, tidal Love number error=0.01, atmospheric zenith error=5mm", "INFO")

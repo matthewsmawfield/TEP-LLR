@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 019: Station Quality Diagnostics
+Step 018: Station Quality Diagnostics
 
 Investigates Haleakala and other station anomalies through:
 1. Quality metrics comparison (RMS, outlier rate, gaps)
@@ -21,6 +21,7 @@ import json
 from typing import Dict
 
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
@@ -156,7 +157,7 @@ def test_quality_cuts(df: pd.DataFrame, station: str, cuts: Dict) -> Dict:
     residuals = filtered_df['residual_m'].values
 
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs, _, _, _ = stable_lstsq(X, residuals)
     eta = coeffs[0] / ETA_SCALE_FACTOR
 
     # Error estimate
@@ -191,7 +192,7 @@ def compare_stations_quality(df: pd.DataFrame) -> Dict:
             cos_elong = np.cos(station_df['elongation_rad'].values)
             residuals = station_df['residual_m'].values
             X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-            coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+            coeffs, _, _, _ = stable_lstsq(X, residuals)
             eta = coeffs[0] / ETA_SCALE_FACTOR
         else:
             eta = None

@@ -12,6 +12,9 @@ from typing import Dict
 
 # Import constants from llr_constants module
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR, Z_ALPHA_2
+from scripts.utils.config import get_config
+
+TEP_CONFIG = get_config()
 
 def robust_regression(y: np.ndarray, X: np.ndarray, weights: np.ndarray = None, 
                       scale_errors_by_birge: bool = True) -> Dict:
@@ -70,55 +73,55 @@ def robust_regression(y: np.ndarray, X: np.ndarray, weights: np.ndarray = None,
     Xw = X * sqrt_w[:, np.newaxis]
     
     try:
-        # QR Decomposition for stability
-        # Suppress benign numerical warnings from LAPACK internals
-        with np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        # QR decomposition and covariance: suppress benign LAPACK overflow
+        # warnings from near-rank-deficient weighted designs (SciPy / NumPy 2.x).
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
             Q, R = linalg.qr(Xw, mode='economic')
-            
+
             # Check condition number
             # Stability threshold: kappa < 1e12 for float64
             s = linalg.svdvals(R)
             cond = s[0] / s[-1] if s[-1] > 0 else np.inf
-            
+
             if cond > 1e12:
                 return {
-                    'coefficients': np.full(k, np.nan), 
-                    'errors': np.full(k, np.nan), 
-                    'chi2_red': np.nan, 
-                    'birge_ratio': np.nan, 
+                    'coefficients': np.full(k, np.nan),
+                    'errors': np.full(k, np.nan),
+                    'chi2_red': np.nan,
+                    'birge_ratio': np.nan,
                     'condition_number': cond,
                     'status': 'SINGULAR'
                 }
-            
+
             # Solve R β = Qᵀ yw
             qty = Q.T @ yw
             beta = linalg.solve_triangular(R, qty)
-            
+
             # Residuals and Statistics
             y_pred = X @ beta
             residuals = y - y_pred
             rss = np.sum(weights * residuals**2)
             mse = rss / dof
-            
+
             # Formal Covariance Matrix: (XᵀWX)⁻¹ = (RᵀR)⁻¹
             # (RᵀR)⁻¹ = R⁻¹ (R⁻ᵀ)
             R_inv = linalg.inv(R)
             cov_raw = (R_inv @ R_inv.T)
             errors_formal = np.sqrt(np.diag(cov_raw))
 
-        # Scale by sqrt(MSE) to get standard errors (CRITICAL FIX)
-        # Standard formula: error = sqrt(diag((X'X)^-1)) * sqrt(MSE)
-        chi2_red = rss / dof
-        mse_unbiased = chi2_red  # Since we're using standardized residuals
-        errors_ols = errors_formal * np.sqrt(mse_unbiased)
+            # Scale by sqrt(MSE) to get standard errors (CRITICAL FIX)
+            # Standard formula: error = sqrt(diag((X'X)^-1)) * sqrt(MSE)
+            chi2_red = rss / dof
+            mse_unbiased = chi2_red  # Since we're using standardized residuals
+            errors_ols = errors_formal * np.sqrt(mse_unbiased)
 
-        # Birge Scaling (only scale up if chi2_red > 1)
-        birge_ratio = np.sqrt(chi2_red)
-        scaling_factor = max(1.0, birge_ratio) if scale_errors_by_birge else 1.0
+            # Birge Scaling (only scale up if chi2_red > 1)
+            birge_ratio = np.sqrt(chi2_red)
+            scaling_factor = max(1.0, birge_ratio) if scale_errors_by_birge else 1.0
 
-        errors_birge = errors_ols * scaling_factor
-        cov_scaled = cov_raw * (mse_unbiased * scaling_factor**2)
-        
+            errors_birge = errors_ols * scaling_factor
+            cov_scaled = cov_raw * (mse_unbiased * scaling_factor**2)
+
         return {
             'coefficients': beta,
             'errors': errors_birge,
@@ -207,7 +210,7 @@ def cluster_robust_variance(X: np.ndarray, residuals: np.ndarray,
     """
     n, k = X.shape
     XtX = X.T @ X
-    XtX_inv = np.linalg.inv(XtX)
+    XtX_inv = np.linalg.pinv(XtX, rcond=1e-10, hermitian=True)
 
     unique_clusters = np.unique(cluster_ids)
     G = int(len(unique_clusters))
@@ -345,7 +348,7 @@ def detect_outliers_isolation_forest(residuals: np.ndarray, elongation: np.ndarr
         X = np.column_stack([residuals, elongation])
 
         clf = IsolationForest(contamination=contamination,
-                              random_state=42, n_jobs=-1)
+                              random_state=TEP_CONFIG.get("RANDOM_SEED", 42), n_jobs=-1)
         outlier_pred = clf.fit_predict(X)
         return outlier_pred == -1  # -1 indicates outlier
     except ImportError:
@@ -356,14 +359,23 @@ def detect_outliers_isolation_forest(residuals: np.ndarray, elongation: np.ndarr
         )
 
 
-def compute_minimum_detectable_eta(n_obs: int, residual_rms: float,
-                                   confidence_level: float = 3.0) -> dict:
+def compute_minimum_detectable_eta(
+    n_obs: int,
+    residual_rms: float,
+    sigma_cos_elong: float,
+    confidence_level: float = 3.0,
+) -> dict:
     """
     Compute the minimum detectable Nordtvedt parameter.
 
+    For OLS of residuals y on x = cos(elongation), Pearson r and slope A satisfy
+    r = A * sigma_x / sigma_y (population analogue). Sensitivity must use both
+    sigma_y (residual scale) and sigma_x (predictor std).
+
     Args:
         n_obs: Number of observations
-        residual_rms: RMS of residuals in meters
+        residual_rms: RMS (or typical scale) of residuals in meters [sigma_y]
+        sigma_cos_elong: Standard deviation of cos(elongation) over the sample [sigma_x]
         confidence_level: Confidence level in sigma (default 3.0)
 
     Returns:
@@ -373,15 +385,20 @@ def compute_minimum_detectable_eta(n_obs: int, residual_rms: float,
         raise ValueError(f"n_obs must be positive, got {n_obs}")
     if residual_rms <= 0:
         raise ValueError(f"residual_rms must be positive, got {residual_rms}")
+    if sigma_cos_elong <= 0:
+        raise ValueError(
+            f"sigma_cos_elong must be positive, got {sigma_cos_elong}; "
+            "pass e.g. float(np.std(cos_elong)) from the same dataset."
+        )
 
-    # Standard error of correlation coefficient
+    # Standard error of correlation coefficient (null, large-n)
     sigma_r = 1.0 / np.sqrt(n_obs)
 
     # Minimum detectable correlation at given confidence level
     r_min = confidence_level * sigma_r
 
-    # Convert to minimum detectable amplitude
-    A_min = r_min * residual_rms
+    # A = r * sigma_y / sigma_x  =>  A_min = r_min * residual_rms / sigma_cos_elong
+    A_min = r_min * residual_rms / sigma_cos_elong
 
     # Convert to minimum detectable eta (A = 13 * eta)
     eta_min = A_min / ETA_SCALE_FACTOR
@@ -392,7 +409,7 @@ def compute_minimum_detectable_eta(n_obs: int, residual_rms: float,
 
     for eta_test in eta_test_values:
         A_test = ETA_SCALE_FACTOR * eta_test
-        r_test = A_test / residual_rms
+        r_test = A_test * sigma_cos_elong / residual_rms
         z_score = r_test / sigma_r
         # Two-tailed power at α=0.05 (Z_α/2 = 1.96)
         power = 1 - (stats.norm.cdf(Z_ALPHA_2 - z_score) -
@@ -410,6 +427,7 @@ def compute_minimum_detectable_eta(n_obs: int, residual_rms: float,
     return {
         'n_observations': n_obs,
         'residual_rms_m': residual_rms,
+        'sigma_cos_elong': float(sigma_cos_elong),
         'confidence_level_sigma': confidence_level,
         'sigma_r': sigma_r,
         'r_min': r_min,
@@ -419,14 +437,18 @@ def compute_minimum_detectable_eta(n_obs: int, residual_rms: float,
     }
 
 
-def compute_sensitivity_by_sample_size(residual_rms: float,
-                                       eta_target: float = 1e-4,
-                                       sample_sizes: list = None) -> dict:
+def compute_sensitivity_by_sample_size(
+    residual_rms: float,
+    sigma_cos_elong: float,
+    eta_target: float = 1e-4,
+    sample_sizes: list = None,
+) -> dict:
     """
     Compute required sample size to detect a given eta with 95% power.
 
     Args:
-        residual_rms: RMS of residuals in meters
+        residual_rms: RMS of residuals in meters [sigma_y]
+        sigma_cos_elong: Std. dev. of cos(elongation) [sigma_x]
         eta_target: Target Nordtvedt parameter to detect
         sample_sizes: List of sample sizes to test (default: log-spaced from 100 to 100000)
 
@@ -435,6 +457,8 @@ def compute_sensitivity_by_sample_size(residual_rms: float,
     """
     if residual_rms <= 0:
         raise ValueError(f"residual_rms must be positive, got {residual_rms}")
+    if sigma_cos_elong <= 0:
+        raise ValueError(f"sigma_cos_elong must be positive, got {sigma_cos_elong}")
     if eta_target <= 0:
         raise ValueError(f"eta_target must be positive, got {eta_target}")
 
@@ -446,7 +470,7 @@ def compute_sensitivity_by_sample_size(residual_rms: float,
     for n in sample_sizes:
         sigma_r = 1.0 / np.sqrt(n)
         A_target = ETA_SCALE_FACTOR * eta_target
-        r_target = A_target / residual_rms
+        r_target = A_target * sigma_cos_elong / residual_rms
         z_score = r_target / sigma_r
         # Two-tailed power at α=0.05 (Z_α/2 = 1.96)
         power = 1 - (stats.norm.cdf(Z_ALPHA_2 - z_score) -
@@ -471,18 +495,24 @@ def compute_sensitivity_by_sample_size(residual_rms: float,
     return {
         'eta_target': eta_target,
         'residual_rms_m': residual_rms,
+        'sigma_cos_elong': float(sigma_cos_elong),
         'sensitivity_by_n': results,
         'n_for_95_percent_power': n_for_95_power
     }
 
 
-def compute_sensitivity_by_precision(n_obs: int, eta_target: float = 1e-4,
-                                     rms_values: list = None) -> dict:
+def compute_sensitivity_by_precision(
+    n_obs: int,
+    sigma_cos_elong: float,
+    eta_target: float = 1e-4,
+    rms_values: list = None,
+) -> dict:
     """
     Compute required precision to detect a given eta with 95% power.
 
     Args:
         n_obs: Number of observations
+        sigma_cos_elong: Std. dev. of cos(elongation) [sigma_x]
         eta_target: Target Nordtvedt parameter to detect
         rms_values: List of RMS values to test in meters (default: 0.01 to 0.5 m)
 
@@ -491,6 +521,8 @@ def compute_sensitivity_by_precision(n_obs: int, eta_target: float = 1e-4,
     """
     if n_obs <= 0:
         raise ValueError(f"n_obs must be positive, got {n_obs}")
+    if sigma_cos_elong <= 0:
+        raise ValueError(f"sigma_cos_elong must be positive, got {sigma_cos_elong}")
     if eta_target <= 0:
         raise ValueError(f"eta_target must be positive, got {eta_target}")
 
@@ -502,7 +534,7 @@ def compute_sensitivity_by_precision(n_obs: int, eta_target: float = 1e-4,
     for rms in rms_values:
         sigma_r = 1.0 / np.sqrt(n_obs)
         A_target = ETA_SCALE_FACTOR * eta_target
-        r_target = A_target / rms
+        r_target = A_target * sigma_cos_elong / rms
         z_score = r_target / sigma_r
         # Two-tailed power at α=0.05 (Z_α/2 = 1.96)
         power = 1 - (stats.norm.cdf(Z_ALPHA_2 - z_score) -
@@ -527,6 +559,7 @@ def compute_sensitivity_by_precision(n_obs: int, eta_target: float = 1e-4,
     return {
         'eta_target': eta_target,
         'n_observations': n_obs,
+        'sigma_cos_elong': float(sigma_cos_elong),
         'sensitivity_by_rms': results,
         'rms_for_95_percent_power_m': rms_for_95_power
     }
@@ -651,11 +684,12 @@ def steiger_z_test(r1: float, r2: float, n: int, r12: float = None) -> Dict:
             'method': "Steiger's Z-test for dependent correlations (degenerate)"
         }
 
-    # Variance of each correlation (for large n): var(r) ≈ (1-r^2)^2 / n
-    var_r1 = (1 - r1**2)**2 / n
-    var_r2 = (1 - r2**2)**2 / n
+    # Variance of Fisher z then delta-method to r: Var(r) ≈ (1-r^2)^2 / (n-3)
+    denom = max(n - 3, 1)
+    var_r1 = (1 - r1**2) ** 2 / denom
+    var_r2 = (1 - r2**2) ** 2 / denom
 
-    # Covariance between correlations
+    # Covariance between correlations (Steiger 1980); leading scale ~ 1/n
     cov_r1_r2 = ((r12 * (1 - r1**2 - r2**2 - r12**2)) / 2.0 +
                  r1 * r2 * (1 - r1**2 - r2**2 - r12**2) / 2.0 +
                  r1 * r2 * r12**2) / (1 - r_mean**2)**2 / n
@@ -690,3 +724,33 @@ def steiger_z_test(r1: float, r2: float, n: int, r12: float = None) -> Dict:
         'se_diff': float(se_diff),
         'method': "Steiger's Z-test for dependent correlations"
     }
+
+
+def require_step003_eta_ols(payload: dict) -> float:
+    """Return finite eta_ols from step_003_statistical_analysis.json (strict)."""
+    if "eta_ols" not in payload:
+        raise KeyError(
+            "step_003_statistical_analysis.json missing required key 'eta_ols'"
+        )
+    v = payload["eta_ols"]
+    if v is None:
+        raise ValueError("eta_ols is null")
+    out = float(v)
+    if not np.isfinite(out):
+        raise ValueError("eta_ols must be finite")
+    return out
+
+
+def require_step003_eta_ols_error(payload: dict) -> float:
+    """Return positive finite eta_ols_error from step_003 output (strict)."""
+    if "eta_ols_error" not in payload:
+        raise KeyError(
+            "step_003_statistical_analysis.json missing required key 'eta_ols_error'"
+        )
+    v = payload["eta_ols_error"]
+    if v is None:
+        raise ValueError("eta_ols_error is null")
+    out = float(v)
+    if not np.isfinite(out) or out <= 0:
+        raise ValueError("eta_ols_error must be finite and positive")
+    return out

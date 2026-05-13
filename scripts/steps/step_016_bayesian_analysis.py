@@ -11,6 +11,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import argparse
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 import emcee
 from scipy import stats
@@ -107,7 +108,7 @@ def run_bayesian_analysis(verbose=False):
     # essential so that the Gelman-Rubin R̂ convergence diagnostic is a genuine
     # test of mixing rather than trivially satisfied by pre-positioning walkers.
     X_ols = np.column_stack([x, np.ones_like(x)])
-    ols_coeffs, _, _, _ = np.linalg.lstsq(X_ols, y, rcond=None)
+    ols_coeffs, _, _, _ = stable_lstsq(X_ols, y)
     eta_init = ols_coeffs[0] / ETA_SCALE_FACTOR  # η = A / 13
     intercept_init = ols_coeffs[1]
     initial = np.array([eta_init, intercept_init])
@@ -122,7 +123,7 @@ def run_bayesian_analysis(verbose=False):
             f"  [CALC] OLS-derived initial position: η={eta_init:.6e}, b={intercept_init:.6e}",
             "CALC")
 
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
     pos = initial + 1e-4 * np.random.randn(n_walkers, 2)
 
     if verbose:
@@ -279,6 +280,8 @@ def run_bayesian_analysis(verbose=False):
     bf_sd_min = min(bf_sd_values)
     bf_sd_max = max(bf_sd_values)
     bf_sd_range_ratio = bf_sd_max / bf_sd_min if bf_sd_min > 0 else np.inf
+    # Geometric mean across bandwidth methods (more stable than any single choice)
+    bf_sd_gmean = np.exp(np.mean(np.log([v for v in bf_sd_values if v > 0])))
 
     if verbose:
         print_status("  [CALC] Savage-Dickey Bandwidth Sensitivity:", "CALC")
@@ -292,13 +295,17 @@ def run_bayesian_analysis(verbose=False):
         else:
             print_status("  [CALC]    Verdict: Sensitive to bandwidth choice", "WARNING")
 
-    # Alternative: BIC approximation
+    # Alternative: BIC approximation (robust, no bandwidth ambiguity)
     rss_1 = np.sum((y - (mean_eta * ETA_SCALE_FACTOR * x + mean_b))**2)
     rss_0 = np.sum((y - np.mean(y))**2)
     bic_1 = n * np.log(rss_1/n) + 2 * np.log(n)
     bic_0 = n * np.log(rss_0/n) + 1 * np.log(n)
     delta_bic = bic_0 - bic_1
     bayes_factor_bic = np.exp(0.5 * delta_bic)
+
+    # Primary Bayes Factor: BIC approximation (robust, no bandwidth ambiguity)
+    # Savage-Dickey is reported as sensitivity analysis only.
+    bayes_factor_primary = float(bayes_factor_bic)
 
     if verbose:
         print_status("", "INFO")
@@ -354,12 +361,17 @@ def run_bayesian_analysis(verbose=False):
         "posterior_std_b": float(std_b),
         "credible_interval_95": ci_95,
         "credible_interval_68": ci_68,
-        "bayes_factor_savage_dickey": float(bayes_factor_sd),
+        "bayes_factor_primary": bayes_factor_primary,
+        "bayes_factor_primary_method": "BIC approximation (robust to bandwidth ambiguity)",
         "bayes_factor_bic": float(bayes_factor_bic),
+        "bayes_factor_savage_dickey": float(bayes_factor_sd),
+        "bayes_factor_savage_dickey_geometric_mean": float(bf_sd_gmean),
         "bayes_factor_sensitivity": {
+            "note": "Savage-Dickey is bandwidth-sensitive; BIC is the primary robust estimator.",
             "bandwidth_methods": bf_sensitivity,
             "min": float(bf_sd_min),
             "max": float(bf_sd_max),
+            "geometric_mean": float(bf_sd_gmean),
             "range_ratio": float(bf_sd_range_ratio),
             "robust": bool(bf_sd_range_ratio < 10) if np.isfinite(bf_sd_range_ratio) else None
         },

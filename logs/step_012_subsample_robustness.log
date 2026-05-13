@@ -1,119 +1,119 @@
-[20:18:27] ═══ Starting Subsample Robustness Test...
-[20:18:27]     Linear Regression Complete (N=26207, DOF=26205):
-[20:18:27]       RSS=2.353485e+02, MSE=8.981054e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.52479273e-04 ± 9.17754450e-05
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.883914e+02, MSE=8.986854e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.33146145e-04 ± 1.02557938e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.880137e+02, MSE=8.968833e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.12e+00
-[20:18:27]       Final η = -4.06788443e-04 ± 1.02763569e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.860187e+02, MSE=8.873668e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -3.92007407e-04 ± 1.02000324e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.949135e+02, MSE=9.297976e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.12e+00
-[20:18:27]       Final η = -4.68877715e-04 ± 1.04629804e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.888057e+02, MSE=9.006616e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.30005271e-04 ± 1.02817436e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.844065e+02, MSE=8.796761e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.75291900e-04 ± 1.01436439e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.820665e+02, MSE=8.685136e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.12e+00
-[20:18:27]       Final η = -4.51867353e-04 ± 1.01071099e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.871123e+02, MSE=8.925837e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.32543549e-04 ± 1.02201839e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.925336e+02, MSE=9.184448e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.12e+00
-[20:18:27]       Final η = -4.36132907e-04 ± 1.04028693e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.892642e+02, MSE=9.028488e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.04267985e-04 ± 1.02807473e-04
-[20:18:27]     Linear Regression Complete (N=20965, DOF=20963):
-[20:18:27]       RSS=1.935534e+02, MSE=9.233096e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.13833080e-04 ± 1.03815198e-04
-[20:18:27]     Linear Regression Complete (N=23612, DOF=23610):
-[20:18:27]       RSS=2.327587e+02, MSE=9.858479e-03, χ²_red=0.010
-[20:18:27]       Birge Ratio = 0.099 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.14e+00
-[20:18:27]       Final η = -4.82850874e-04 ± 1.02894800e-04
-[20:18:27]     Linear Regression Complete (N=6817, DOF=6815):
-[20:18:27]       RSS=4.665249e+01, MSE=6.845560e-03, χ²_red=0.007
-[20:18:27]       Birge Ratio = 0.083 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.47e+00
-[20:18:27]       Final η = -1.63919369e-04 ± 1.74956014e-04
-[20:18:27]     Linear Regression Complete (N=25861, DOF=25859):
-[20:18:27]       RSS=2.340236e+02, MSE=9.049985e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.53749823e-04 ± 9.23998470e-05
-[20:18:27]     Linear Regression Complete (N=23068, DOF=23066):
-[20:18:27]       RSS=2.067141e+02, MSE=8.961854e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.05e+00
-[20:18:27]       Final η = -4.54807225e-04 ± 9.55087978e-05
-[20:18:27]     Linear Regression Complete (N=25470, DOF=25468):
-[20:18:27]       RSS=2.212217e+02, MSE=8.686262e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.09e+00
-[20:18:27]       Final η = -4.89142083e-04 ± 9.07989713e-05
-[20:18:27]     Linear Regression Complete (N=24910, DOF=24908):
-[20:18:27]       RSS=2.340161e+02, MSE=9.395219e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.097 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.12e+00
-[20:18:27]       Final η = -4.62724773e-04 ± 9.69886401e-05
-[20:18:27]     Linear Regression Complete (N=16512, DOF=16510):
-[20:18:27]       RSS=1.398043e+02, MSE=8.467856e-03, χ²_red=0.008
-[20:18:27]       Birge Ratio = 0.092 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.18e+00
-[20:18:27]       Final η = -3.37487197e-04 ± 1.14695364e-04
-[20:18:27]     Linear Regression Complete (N=26034, DOF=26032):
-[20:18:27]       RSS=2.346336e+02, MSE=9.013276e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.11e+00
-[20:18:27]       Final η = -4.50212336e-04 ± 9.20798310e-05
-[20:18:27]     Linear Regression Complete (N=24638, DOF=24636):
-[20:18:27]       RSS=2.206140e+02, MSE=8.954946e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.08e+00
-[20:18:27]       Final η = -4.71851843e-04 ± 9.34617891e-05
-[20:18:27]     Linear Regression Complete (N=25838, DOF=25836):
-[20:18:27]       RSS=2.280039e+02, MSE=8.825047e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.10e+00
-[20:18:27]       Final η = -4.65225592e-04 ± 9.12352494e-05
-[20:18:27]     Linear Regression Complete (N=26207, DOF=26205):
-[20:18:27]       RSS=2.244278e+02, MSE=8.564313e-03, χ²_red=0.009
-[20:18:27]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
-[20:18:27]       Condition Number κ(R) = 2.46e+00
-[20:18:27]       Final η = -4.99716273e-05 ± 1.02720679e-04
-[20:18:27] Results saved to results/outputs/step_012_subsample_robustness.json
-[20:18:27] Results saved to results/outputs/step_012_station_dominance.json
-[20:18:27] ✓   Robustness Analysis Complete.
+[11:50:34] ═══ Starting Subsample Robustness Test...
+[11:50:34]     Linear Regression Complete (N=26207, DOF=26205):
+[11:50:34]       RSS=2.353485e+02, MSE=8.981055e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.12e+00
+[11:50:34]       Final η = -4.53298314e-04 ± 9.19473276e-05
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.883914e+02, MSE=8.986854e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.33964001e-04 ± 1.02748905e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.880137e+02, MSE=8.968837e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.12e+00
+[11:50:34]       Final η = -4.07446269e-04 ± 1.02956615e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.860187e+02, MSE=8.873668e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.12e+00
+[11:50:34]       Final η = -3.92741400e-04 ± 1.02191546e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.949134e+02, MSE=9.297975e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.12e+00
+[11:50:34]       Final η = -4.69780496e-04 ± 1.04825921e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.888057e+02, MSE=9.006619e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.12e+00
+[11:50:34]       Final η = -4.30732606e-04 ± 1.03009922e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.844065e+02, MSE=8.796762e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.76182486e-04 ± 1.01626733e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.820666e+02, MSE=8.685140e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.12e+00
+[11:50:34]       Final η = -4.52620317e-04 ± 1.01261339e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.871124e+02, MSE=8.925839e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.33319294e-04 ± 1.02393780e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.925336e+02, MSE=9.184450e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.12e+00
+[11:50:34]       Final η = -4.36908653e-04 ± 1.04223415e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.892642e+02, MSE=9.028488e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.05035940e-04 ± 1.02999697e-04
+[11:50:34]     Linear Regression Complete (N=20965, DOF=20963):
+[11:50:34]       RSS=1.935534e+02, MSE=9.233098e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.14543988e-04 ± 1.04010496e-04
+[11:50:34]     Linear Regression Complete (N=23612, DOF=23610):
+[11:50:34]       RSS=2.327587e+02, MSE=9.858480e-03, χ²_red=0.010
+[11:50:34]       Birge Ratio = 0.099 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.14e+00
+[11:50:34]       Final η = -4.83731989e-04 ± 1.03090078e-04
+[11:50:34]     Linear Regression Complete (N=6817, DOF=6815):
+[11:50:34]       RSS=4.665247e+01, MSE=6.845556e-03, χ²_red=0.007
+[11:50:34]       Birge Ratio = 0.083 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.48e+00
+[11:50:34]       Final η = -1.64531155e-04 ± 1.75279060e-04
+[11:50:34]     Linear Regression Complete (N=25861, DOF=25859):
+[11:50:34]       RSS=2.340236e+02, MSE=9.049987e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.54544471e-04 ± 9.25726428e-05
+[11:50:34]     Linear Regression Complete (N=23068, DOF=23066):
+[11:50:34]       RSS=2.067142e+02, MSE=8.961856e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.05e+00
+[11:50:34]       Final η = -4.55607763e-04 ± 9.56864963e-05
+[11:50:34]     Linear Regression Complete (N=25470, DOF=25468):
+[11:50:34]       RSS=2.212218e+02, MSE=8.686264e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.09e+00
+[11:50:34]       Final η = -4.90006895e-04 ± 9.09688660e-05
+[11:50:34]     Linear Regression Complete (N=24910, DOF=24908):
+[11:50:34]       RSS=2.340162e+02, MSE=9.395221e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.097 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.13e+00
+[11:50:34]       Final η = -4.63555777e-04 ± 9.71714935e-05
+[11:50:34]     Linear Regression Complete (N=16512, DOF=16510):
+[11:50:34]       RSS=1.398042e+02, MSE=8.467852e-03, χ²_red=0.008
+[11:50:34]       Birge Ratio = 0.092 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.18e+00
+[11:50:34]       Final η = -3.38282540e-04 ± 1.14907313e-04
+[11:50:34]     Linear Regression Complete (N=26034, DOF=26032):
+[11:50:34]       RSS=2.346336e+02, MSE=9.013278e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.51018978e-04 ± 9.22521729e-05
+[11:50:34]     Linear Regression Complete (N=24638, DOF=24636):
+[11:50:34]       RSS=2.206141e+02, MSE=8.954947e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.09e+00
+[11:50:34]       Final η = -4.72696335e-04 ± 9.36362055e-05
+[11:50:34]     Linear Regression Complete (N=25838, DOF=25836):
+[11:50:34]       RSS=2.280040e+02, MSE=8.825049e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.11e+00
+[11:50:34]       Final η = -4.66048969e-04 ± 9.14059865e-05
+[11:50:34]     Linear Regression Complete (N=26207, DOF=26205):
+[11:50:34]       RSS=2.244278e+02, MSE=8.564311e-03, χ²_red=0.009
+[11:50:34]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+[11:50:34]       Condition Number κ(R) = 2.46e+00
+[11:50:34]       Final η = -5.07552354e-05 ± 1.02917209e-04
+[11:50:34] Results saved to results/outputs/step_012_subsample_robustness.json
+[11:50:34] Results saved to results/outputs/step_012_station_dominance.json
+[11:50:34] ✓   Robustness Analysis Complete.

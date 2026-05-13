@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 029: Day/Night Thermal Bias Diagnostics
+Step 027: Day/Night Thermal Bias Diagnostics
 Maps the TEP-LLR purely to diurnal day/night cycles to test for unmodeled atmospheric/telescope thermal drift.
 """
 
@@ -13,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import pandas as pd
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 from astropy.time import Time
 from astropy.coordinates import EarthLocation, get_sun, AltAz
 import astropy.units as u
@@ -40,12 +41,13 @@ def _multiple_regression(y, X, param_names):
     matching the diagnostics available in linear_regression.
     """
     n, k = X.shape
-    beta, residuals, rank, _ = np.linalg.lstsq(X, y, rcond=None)
+    beta, residuals, rank, _ = stable_lstsq(X, y)
     if rank < k:
         return {name: {'coeff': np.nan, 'se': np.nan, 'p': 1.0} for name in param_names}
-    resid = y - X @ beta
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid = y - X @ beta
     mse = np.sum(resid**2) / (n - k)
-    XtX_inv = np.linalg.inv(X.T @ X)
+    XtX_inv = np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)
     cov = mse * XtX_inv
     se = np.sqrt(np.diag(cov))
     t_stats = beta / se

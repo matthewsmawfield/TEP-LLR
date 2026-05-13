@@ -24,8 +24,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.config import get_config
 from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression, cluster_robust_variance, robust_regression
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -33,6 +35,8 @@ from skyfield.api import load
 
 logger = TEPLogger("step_050")
 set_step_logger(logger)
+
+TEP_CONFIG = get_config()
 
 
 def fit_model(y, X, names):
@@ -42,7 +46,10 @@ def fit_model(y, X, names):
     c = result['coefficients']
     errs = result['errors']
     n, k = X.shape
-    resid = y - X @ c
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        resid = y - X @ c
+    if not np.all(np.isfinite(resid)):
+        raise RuntimeError("Non-finite residuals produced in fit_model; design matrix may be ill-conditioned.")
     mse = result['mse']
     snrs = np.abs(c) / np.maximum(errs, 1e-20)
     rss = np.sum(resid**2)
@@ -60,7 +67,10 @@ def cluster_robust_regression(y, X, cluster_ids, names):
     from scripts.utils.statistical_utils import robust_regression
     ols_result = robust_regression(y, X, scale_errors_by_birge=False)
     c = ols_result['coefficients']
-    resid = y - X @ c
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        resid = y - X @ c
+    if not np.all(np.isfinite(resid)):
+        raise RuntimeError("Non-finite residuals produced in cluster_robust_regression.")
     n, k = X.shape
     errs_ols = ols_result['errors']
 
@@ -75,6 +85,43 @@ def cluster_robust_regression(y, X, cluster_ids, names):
         'snrs_cluster': snrs_cluster,
         'n_clusters': cr['n_clusters'],
         'rss': np.sum(resid**2), 'n': n, 'k': k, 'names': names
+    }
+
+
+def station_block_bootstrap(
+    y: np.ndarray,
+    st: np.ndarray,
+    X: np.ndarray,
+    names: list[str],
+    n_bootstrap: int = 2000,
+    seed: int = 42,
+) -> dict:
+    """Resample station blocks with replacement and refit the full model."""
+    rng = np.random.default_rng(seed)
+    stations = np.unique(st)
+    eta_vals = np.empty(n_bootstrap, dtype=float)
+
+    for i in range(n_bootstrap):
+        drawn = rng.choice(stations, size=len(stations), replace=True)
+        boot_parts = []
+        for station in drawn:
+            idx = np.where(st == station)[0]
+            boot_parts.append(rng.choice(idx, size=len(idx), replace=True))
+        boot_idx = np.concatenate(boot_parts)
+        boot_fit = fit_model(y[boot_idx], X[boot_idx], names)
+        eta_vals[i] = boot_fit['coeffs'][0] / ETA_SCALE_FACTOR
+
+    eta_std = float(np.std(eta_vals, ddof=1))
+    eta_mean = float(np.mean(eta_vals))
+    return {
+        "eta_mean": eta_mean,
+        "eta_std": eta_std,
+        "eta_ci95_lower": float(np.percentile(eta_vals, 2.5)),
+        "eta_ci95_upper": float(np.percentile(eta_vals, 97.5)),
+        "snr_mean": float(abs(eta_mean) / max(eta_std, 1e-20)),
+        "p_negative": float(np.mean(eta_vals < 0.0)),
+        "n_bootstrap": int(n_bootstrap),
+        "n_clusters": int(len(stations)),
     }
 
 
@@ -166,6 +213,10 @@ def run_corrected_analysis():
     sin_m = np.sin(2 * np.pi * month)
     cos_m = np.cos(2 * np.pi * month)
     cos2d = np.cos(2 * el[~outlier_mask])
+    sidereal_month_days = 27.32166
+    mean_anomaly = np.mod(2 * np.pi * jd_c / sidereal_month_days, 2 * np.pi)
+    cos_M = np.cos(mean_anomaly)
+    sin_M = np.sin(mean_anomaly)
 
     # --- MODEL 1: Original cosD-only baseline ---
     print_status("--- Model 1: cosD only (baseline) ---", "INFO")
@@ -231,9 +282,29 @@ def run_corrected_analysis():
         print_status(f"  {name:>8s}: coeff={m5_cr['coeffs'][i]:.4e}, "
                      f"cluster-SE={m5_cr['errs_cluster'][i]:.4e} ({snr_cr:.2f}σ)", "RESULT")
 
+    # --- STATION BLOCK BOOTSTRAP ON FULL MODEL ---
+    print_status("--- Station Block Bootstrap (Model 5) ---", "INFO")
+    X_full = np.column_stack([cos_c, cos2d, sin_m, cos_m, sin_y, cos_y, np.ones(len(cos_c))])
+    full_names = ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'const']
+    station_bootstrap = station_block_bootstrap(
+        res_c,
+        st_c,
+        X_full,
+        full_names,
+        n_bootstrap=2000,
+        seed=TEP_CONFIG.get("RANDOM_SEED", 42),
+    )
+    print_status(
+        "  Station block bootstrap: "
+        f"η = {station_bootstrap['eta_mean']:.4e} ± {station_bootstrap['eta_std']:.4e} "
+        f"({station_bootstrap['snr_mean']:.2f}σ), "
+        f"95% CI [{station_bootstrap['eta_ci95_lower']:.4e}, {station_bootstrap['eta_ci95_upper']:.4e}], "
+        f"P(η<0) = {station_bootstrap['p_negative']:.4f}",
+        "RESULT",
+    )
+
     # --- AR(1) GLS ON FULL MODEL ---
     print_status("--- AR(1) GLS on full model ---", "INFO")
-    X_full = np.column_stack([cos_c, cos2d, sin_m, cos_m, sin_y, cos_y, np.ones(len(cos_c))])
     gls5 = ar1_gls_regression(res_c, X_full,
                               ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'const'],
                               target_name='cosD', cluster_ids=st_c)
@@ -383,10 +454,52 @@ def run_corrected_analysis():
     print_status(f"  Meta-analysis (Grasse+APO+McDonald2): η={eta_meta:.4e} ± {err_meta:.4e} ({abs(eta_meta)/err_meta:.2f}σ)", "RESULT")
     print_status(f"  Cochran Q={Q:.2f}, p_het={p_het:.4f}, I²={max(0, (Q - 2)/Q * 100):.1f}%", "RESULT")
 
+    # --- KEPLERIAN INCLUSION PROXY (η_dynamical) ---
+    print_status("--- Keplerian Inclusion Proxy (real INPOP residuals) ---", "INFO")
+    print_status("  Fit standard Keplerian basis {cos(M), sin(M)} then recover cos(D) on residuals.", "INFO")
+    kepler_design = np.column_stack([cos_M, sin_M, np.ones(len(res_c))])
+    kepler_fit = fit_model(res_c, kepler_design, ['cos_M', 'sin_M', 'const'])
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        kepler_residual = res_c - kepler_design @ kepler_fit['coeffs']
+    if not np.all(np.isfinite(kepler_residual)):
+        raise RuntimeError("Non-finite residuals produced after Keplerian partialing.")
+    kepler_rms_mm = float(np.sqrt(np.mean(kepler_residual**2)) * 1000.0)
+    kepler_r2 = float(1.0 - np.sum(kepler_residual**2) / np.sum((res_c - np.mean(res_c))**2))
+
+    m6 = fit_model(
+        kepler_residual,
+        np.column_stack([cos_c, cos2d, sin_m, cos_m, sin_y, cos_y, np.ones(len(cos_c))]),
+        ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'const'],
+    )
+    eta_dyn = m6['coeffs'][0] / ETA_SCALE_FACTOR
+    err_dyn = m6['errs'][0] / ETA_SCALE_FACTOR
+    print_status(
+        f"  Keplerian-only R² = {kepler_r2:.4f}, post-Kepler RMS = {kepler_rms_mm:.2f} mm",
+        "RESULT",
+    )
+    print_status(
+        f"  η after Keplerian partialing (full systematics) = {eta_dyn:.4e} ± {err_dyn:.4e} ({abs(eta_dyn)/err_dyn:.2f}σ)",
+        "RESULT",
+    )
+
+    m7 = fit_model(
+        res_c,
+        np.column_stack([cos_c, cos2d, sin_m, cos_m, sin_y, cos_y, cos_M, sin_M, np.ones(len(cos_c))]),
+        ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'cos_M', 'sin_M', 'const'],
+    )
+    eta_joint = m7['coeffs'][0] / ETA_SCALE_FACTOR
+    err_joint = m7['errs'][0] / ETA_SCALE_FACTOR
+    print_status(
+        f"  η with Keplerian terms in joint full model = {eta_joint:.4e} ± {err_joint:.4e} ({abs(eta_joint)/err_joint:.2f}σ)",
+        "RESULT",
+    )
+
     # --- SAVE RESULTS ---
     output_dir = PROJECT_ROOT / "results" / "outputs"
     output_dir.mkdir(parents=True, exist_ok=True)
     results = {
+        "step_id": "step_050",
+        "status": "PASS",
         "step": "050_corrected_tep_analysis",
         "n_obs": int(len(res_c)),
         "n_outliers_removed": int(n_outliers),
@@ -415,7 +528,8 @@ def run_corrected_analysis():
                     "eta_error_cluster": float(m5_cr['errs_cluster'][0] / ETA_SCALE_FACTOR),
                     "snr_cluster": float(abs(m5_cr['coeffs'][0]) / max(m5_cr['errs_cluster'][0], 1e-20)),
                     "n_clusters": int(m5_cr['n_clusters'])
-                }
+                },
+                "station_block_bootstrap": station_bootstrap
             }
         },
         "cross_validation": {
@@ -453,6 +567,23 @@ def run_corrected_analysis():
                 "p_het": float(p_het),
                 "I2": float(max(0, (Q - 2) / Q * 100))
             }
+        },
+        "keplerian_inclusion_proxy": {
+            "method": "Keplerian basis {cos(M), sin(M)} on real INPOP residuals, then full-systematic cos(D) recovery",
+            "sidereal_month_days": sidereal_month_days,
+            "keplerian_only_r2": kepler_r2,
+            "post_kepler_rms_mm": kepler_rms_mm,
+            "eta_after_kepler_partialing": {
+                "eta": float(eta_dyn),
+                "eta_error": float(err_dyn),
+                "snr": float(abs(eta_dyn) / err_dyn),
+            },
+            "eta_joint_with_kepler_terms": {
+                "eta": float(eta_joint),
+                "eta_error": float(err_joint),
+                "snr": float(abs(eta_joint) / err_joint),
+            },
+            "status": "INCLUSION PROXY (not a full INPOP/DE430 dynamical refit)",
         }
     }
     output_path = output_dir / "step_050_corrected_tep_analysis.json"

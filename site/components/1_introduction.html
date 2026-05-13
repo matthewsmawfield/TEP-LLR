@@ -35,7 +35,8 @@
         The present work extends this framework through the Temporal Equivalence
         Principle (TEP), a scalar-tensor theory where proper time becomes a
         dynamical field $\phi$ that couples universally to matter via conformal
-        metric $\tilde{g}_{\mu\nu} = A(\phi)g_{\mu\nu}$. Scalar-tensor theories
+        metric $\tilde{g}_{\mu\nu} = A^2(\phi)g_{\mu\nu}$, with
+        $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. Scalar-tensor theories
         have a long history in gravitational physics, dating to Jordan (1955),
         Fierz (1956), and Brans-Dicke (1961), who first explored gravitational
         theories with dynamical scalar fields coupled to the metric. The
@@ -98,15 +99,189 @@
         dataset for this search.
     </p>
 
+    <h3>1.1 Manuscript Series Context</h3>
+
+    <p>
+        This work is Paper 17 in the TEP program. Earlier installments
+        established the framework (Paper 0), clock-network phenomenology
+        (Papers 1–3), and domain-specific Observable Response Coefficients
+        (Papers 4–13). Three prior papers frame the present LLR analysis
+        without duplicating its estimand.
+    </p>
+
+    <p>
+        The role of the present paper within the series is therefore not to
+        restart the TEP argument from first principles, but to test whether the
+        same time-field architecture has a measurable, suppressed Solar-System
+        expression in the most precise available strong-equivalence-principle
+        observable.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Series strand</th>
+                <th>Prior result</th>
+                <th>Role in this paper</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Paper 0</td>
+                <td>Two-metric TEP framework with a dynamical time field,
+                    universal matter coupling, Temporal Topology, and Temporal
+                    Shear suppression.</td>
+                <td>Defines $\phi$, $A(\phi)$, the screened conformal sector,
+                    and the requirement that local Lorentz invariance is
+                    preserved while global time structure may remain dynamical.</td>
+            </tr>
+            <tr>
+                <td>Papers 1–3</td>
+                <td>Distance-structured and directionally structured
+                    clock-network correlations in GNSS products, with
+                    multi-center and raw-RINEX validation.</td>
+                <td>Establish the empirical motivation for treating precision
+                    timing residuals as a direct probe of Temporal Topology.</td>
+            </tr>
+            <tr>
+                <td>Paper 6</td>
+                <td>A candidate saturation scale $\rho_T \approx 20$
+                    g/cm$^3$ from cross-scale Temporal Topology consistency.</td>
+                <td>Supplies the density/screening scale used to interpret why
+                    LLR should lie in the strongly screened Solar-System
+                    response regime.</td>
+            </tr>
+            <tr>
+                <td>Paper 9</td>
+                <td>A taxonomy of precision relativity tests distinguishing
+                    direct-fit, two-way, residual-channel, and clock-sector
+                    observables.</td>
+                <td>Explains why a standard direct-fit $\eta$ bound and a
+                    post-fit residual-channel synodic test are related but not
+                    identical estimands.</td>
+            </tr>
+            <tr>
+                <td>Papers 10–11</td>
+                <td>Observable Response Coefficients for pulsar spin-down and
+                    Cepheid timing/distance-ladder observables.</td>
+                <td>Motivate treating the LLR Nordtvedt parameter $\eta$ as a
+                    Solar-System response coefficient rather than a bare
+                    microscopic scalar coupling.</td>
+            </tr>
+            <tr>
+                <td>Paper 13</td>
+                <td>Weak-field Temporal Shear recovery in Gaia DR3 wide
+                    binaries.</td>
+                <td>Provides the complementary weak-field, weakly screened
+                    limit to the compactness-suppressed Earth-Moon test here.</td>
+            </tr>
+            <tr>
+                <td>Paper 17</td>
+                <td>LLR residual-channel search for a synodic
+                    Nordtvedt-like component.</td>
+                <td>Tests the screened Solar-System SEP sector of TEP using
+                    public INPOP19a and DE430 lunar-ranging residual archives.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        Paper 5 (GTE) argued that Solar System tests remain compatible with
+        TEP when Temporal Shear is suppressed in dense environments, with a
+        microscopic Nordtvedt amplitude well below published direct-fit bounds.
+        Paper 8 (SLR) extended the conformal-sector program to two-way optical
+        ranging on passive geodetic targets, testing distance-structured
+        residual structure orthogonal to active-clock microwave networks.
+        Paper 9 (EXP) classified LLR as a reciprocity-even, orbital-dynamics
+        constraint that does not directly target clock-sector loop holonomy or
+        spatial clock correlations.
+    </p>
+
+    <p>
+        Paper 17 does not overturn those scope claims. It instead tests whether
+        a synodic $\cos(D)$ footprint survives in post-fit O-C residuals after
+        INPOP19a and DE430 solutions that assume $\eta=0$. The fitted Nordtvedt
+        parameter is treated as the Solar System Observable Response Coefficient
+        for LLR, not as the bare microscopic coupling. Steps 032, 041, and 054
+        supply the structural reason a static direct-fit $\eta$ and a residual
+        synodic channel need not coincide when the coupling scales with the
+        heliocentric environment. Paper 8 and Paper 17 therefore occupy
+        complementary optical-ranging lines: SLR probes conformal residual
+        coherence at terrestrial baselines; LLR probes suppressed-PPN
+        differential free fall in the Earth-Moon system.
+    </p>
+
+    <h3>1.2 Claim Hierarchy and Scope</h3>
+
+    <p>
+        The evidence is organized deliberately so that the empirical result,
+        the systematic stress tests, and the TEP interpretation are not
+        conflated. The paper advances a strong claim, but in a fixed hierarchy.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Level</th>
+                <th>Claim</th>
+                <th>Role in the argument</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Data integrity</td>
+                <td>Public INPOP19a and DE430 residual archives are processed
+                    through a deterministic, checksum-audited pipeline.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Residual-channel detection</td>
+                <td>A synodic $\cos(D)$ component is extracted from post-fit
+                    LLR residuals under the fixed estimator hierarchy.</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Systematic resistance</td>
+                <td>The same residual-channel component is tested against
+                    station concentration, hardware epochs, outliers,
+                    autocorrelation, spectral controls, and nuisance
+                    regressors.</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>TEP interpretation</td>
+                <td>The sign, scale, and screened Solar-System response are
+                    interpreted using the Temporal Shear Suppression and
+                    Observable Response Coefficient framework established in
+                    the preceding papers.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>External closure</td>
+                <td>Source-level INPOP or DE430 integrator refits with
+                    $\eta$ free, together with independent range-level
+                    reductions, remain the decisive external confirmation or
+                    falsification tests.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        This hierarchy strengthens the inference by fixing what is being
+        measured. The primary result is a residual-channel detection of a
+        Nordtvedt-like synodic component; the TEP claim is that this component
+        has the sign, order of magnitude, screening regime, and dynamical
+        structure expected for the Solar-System response of the same time-field
+        theory tested elsewhere in the series.
+    </p>
+
     <p>
         The LLR Nordtvedt test in this paper probes a complementary aspect of
         TEP: through the suppressed PPN sector, the compactness-dependent
         effective coupling $\alpha_{\rm eff}$ could differ between Earth and
-        Moon, producing a violation of the Strong Equivalence Principle. The
-        Earth-Moon system occupies a critical regime where $\Delta(\Phi/c^2)
-        \sim 10^{-10}$ — small enough that GR appears valid in local tests, yet
-        large enough to produce differential coupling detectable through Lunar
-        Laser Ranging. Earth's deeper gravitational potential ($\Phi_{\oplus}/c^2
+        Moon, producing a violation of the Strong Equivalence Principle.
+        Earth's deeper gravitational potential ($\Phi_{\oplus}/c^2
         \approx 7 \times 10^{-10}$) flattens Temporal Topology more strongly
         than the Moon's ($\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$),
         suppressing Temporal Shear and yielding a smaller $\alpha_{\rm eff}$.
@@ -144,23 +319,29 @@
     </p>
 
     <p>
-        Because standard Ordinary Least Squares estimators are unstable against
-        heavy-tailed 1980s PMT hardware variance, the analysis employs a hierarchy of estimators. The primary physical parameter is extracted using the full-systematic OLS model, yielding $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ at 6.17$\sigma$ ($N=25{,}445$). The full-model AR(1) GLS robustness check, which applies Cochrane-Orcutt quasi-differencing to the entire design matrix simultaneously, gives $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$ at 4.66$\sigma$, consistent with the primary result. Robustness checks confirm consistency: the full cleaned dataset (after 6$\sigma$ MAD outlier cleaning) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$, the modern C-SPAD epoch (2009-2019) yields $\eta = -3.17 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at 5.25$\sigma$, and Cook's Distance leverage excision provides a diagnostic $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$ at 5.67$\sigma$ that confirms early-era PMT leverage points inflate naive OLS estimates.
-
-        This detection aligns with historical precedent: Müller & Nordtvedt
-        (1998) — the latter being the originator of the Nordtvedt effect —
-        documented an unexplained synodic post-model residual signal of ~1 cm
-        amplitude in 28 years of LLR data, proportional to $\cos(D)$ but lacking
-        a theoretical framework. The Temporal Shear Suppression mechanism now
-        provides the theoretical basis for this previously unexplained
-        signal, with the modern sub-cm precision enabling cleaner extraction
-        from instrumental noise.
+        Because ordinary least squares is unstable against heavy-tailed 1980s
+        PMT variance, the analysis adopts a fixed estimator hierarchy
+        (Section 4.0, Step 040). The headline synodic amplitude is the pooled
+        full-systematic OLS estimand on 25,445 cleaned residuals; AR(1) GLS,
+        cosD-only slopes, leverage excision, and hardware-epoch splits bound
+        that amplitude without receiving equal multiplicity credit.
     </p>
 
     <p>
-        This displacement scales with $1/r_\odot$, producing composite $D \pm
-        l'$ frequency sidebands that are spectrally orthogonal to classical
-        multi-body resonances. This spectral orthogonality explains why standard
-        static direct-fit ephemerides fail to absorb the parameter.
+        Müller and Nordtvedt (1998) reported an unexplained synodic
+        post-model residual proportional to $\cos(D)$ in 28 years of LLR data.
+        The present sub-centimeter archive allows a cleaner extraction of the
+        same footprint under explicit annual, monthly, and thermal controls.
+    </p>
+
+    <p>
+        Standard orbital periods are incommensurate with the synodic month. In
+        the frequency domain, $\cos(D)$ therefore lies outside the classical
+        multi-body mean-motion basis used in static direct-fit ephemerides, and
+        a synodic coupling parameterized with $\eta$ fixed at zero is expected
+        to project into post-fit residuals. Source-level integrator refits that
+        leave $\eta$ free (Section 4.28) supply the decisive dynamical closure;
+        Steps 032, 041, and 054 supply the internal linearized and simulation
+        checks on that channel.
     </p>
 </div>

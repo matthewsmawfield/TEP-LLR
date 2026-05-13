@@ -115,7 +115,7 @@
 
     <p>
         The <em>phenomenological</em> TEP prediction is obtained from the
-        volumetric suppression model (Step 028), which integrates interior
+        volumetric suppression model (Step 026), which integrates interior
         density profiles rather than surface compactness:
     </p>
 
@@ -133,9 +133,10 @@
         compactness-driven TSS and gives an order-of-magnitude expectation
         in the $10^{-4}$ regime under this phenomenological volumetric model.
         It does not yet provide a first-principles, parameter-free
-        prediction of $\eta$. The naïve OLS measured value
-        $\eta = -3.17\times10^{-4}$ (naïve OLS robustness check) lies in the same
-        order-of-magnitude regime, but the phenomenological model
+        prediction of $\eta$. The primary full-systematic estimate
+        $\eta = -4.06\times10^{-4}$ and the naïve OLS robustness check
+        $\eta = -3.18\times10^{-4}$ lie in the same order-of-magnitude
+        regime, but the phenomenological model
         uncertainties — PREM simplification, the exponent in $(\rho/\rho_T)^3$,
         $\rho_T = 20 \pm 8$ g/cm³, and the upper-bound nature of the Cassini
         $\alpha_0$ constraint — preclude a precision comparison at this stage.
@@ -152,7 +153,10 @@
         with the screening mechanism: LLR is in a more screened regime (Solar System)
         compared to globular clusters and galactic disks, so the effective response
         should be smaller. No separate $\kappa_{\rm LL}$ parameter is required; $\eta$ itself
-        is the observable response coefficient for LLR.
+        is the observable response coefficient for LLR. The prediction hierarchy
+        is therefore: (i) bare compactness-squared null check, (ii) volumetric
+        phenomenological order-of-magnitude band, (iii) measured LLR response
+        coefficient $\eta$.
     </p>
 
     <h3>2.2 Predicted Signal in LLR</h3>
@@ -171,10 +175,12 @@
     <p>
         The predicted amplitude scales linearly: $|\delta r| = 13 |\eta|$
         meters. For the order-of-magnitude estimate $\eta \sim 10^{-4}$, this
-        gives $\sim$1.3 mm. The leverage-excised parameter obtained in this work
-        ($\eta \approx -3.6 \times 10^{-4}$, Section 4.2) predicts an amplitude
-        of $\sim$4.7 mm, while the full-sample OLS ($\eta \approx -3.17 \times
-        10^{-4}$) yields $\sim$6.4 mm. These amplitudes are small compared to
+        gives $\sim$1.3 mm. The primary full-systematic estimate
+        ($\eta = -4.06 \times 10^{-4}$, Section 4.0) predicts an amplitude
+        of $\sim$5.3 mm, while the leverage-excised robustness check
+        ($\eta \approx -3.6 \times 10^{-4}$) predicts $\sim$4.7 mm and the
+        naïve cosD-only OLS robustness check ($\eta \approx -3.18 \times
+        10^{-4}$) yields $\sim$4.1 mm. These amplitudes are small compared to
         the centimetre-level residual RMS, but with 26,207 observations over 35
         years, statistical averaging provides sensitivity well below the
         per-observation noise floor.
@@ -187,17 +193,31 @@
         suppresses scalar field effects in dense environments. The suppression
         transition is governed by the body's gravitational compactness
         ($\Phi/c^2$), which determines the degree of Temporal Shear suppression
-        and thus the effective scalar coupling. In the Solar System, the ambient
-        density ($\rho_{\rm amb} \sim 10^{-23}$ g/cm³) is far below any
-        suppression threshold, so the scalar field is unsuppressed at the orbital
-        system level. The TEP framework further predicts that this coupling is not
-        static but environmentally modulated by the local scalar potential
-        $\phi(r_\odot)$, which scales with heliocentric distance. Continuous TEP
-        suppression near a threshold transition (Step 024) implies that the
-        effective Nordtvedt parameter $\eta$ varies with heliocentric distance
-        $r_\odot$. When the Earth-Moon system moves through regions where the
-        background scalar field approaches a suppression threshold, the effective
-        coupling modulates as:
+        and thus the effective scalar coupling. Screening in TEP is tiered, not
+        a single ambient-density switch. The asymptotic saturation scale
+        $\rho_T \approx 20$ g/cm³ (Paper 6) marks where extended self-gravitating
+        sources flatten Temporal Topology and suppress Temporal Shear in the
+        Solar System. At galactic mean densities and in globular-cluster
+        environments, gradient coherence can remain active despite local
+        $\rho \ll \rho_T$, producing the larger observable response coefficients
+        $\kappa$ reported in Papers 10 and 11. LLR therefore probes the
+        strongly screened planetary channel: $\eta$ is the Solar System response
+        coefficient, expected to be smaller in magnitude than galactic $\kappa$
+        while sharing the same TSS ontology.
+    </p>
+
+    <p>
+        In the Earth-Moon orbit, the interplanetary ambient density
+        ($\rho_{\rm amb} \sim 10^{-23}$ g/cm³) is far below $\rho_T$, but
+        Earth and Moon remain differentially screened through their distinct
+        compactness and interior shielding profiles. The TEP framework further
+        predicts that this coupling is not static but environmentally modulated
+        by the local scalar potential $\phi(r_\odot)$, which scales with
+        heliocentric distance. Continuous TEP suppression near a threshold
+        transition (Step 022) implies that the effective Nordtvedt parameter
+        $\eta$ varies with heliocentric distance $r_\odot$. When the Earth-Moon
+        system moves through regions where the background scalar field
+        approaches a suppression threshold, the effective coupling modulates as:
     </p>
 
     <div class="equation">
@@ -210,7 +230,7 @@
         distance $r_{\rm mean}$, $e_\oplus \approx 0.0167$ is Earth's orbital
         eccentricity, and $m$ is the modulation depth characterizing the
         nonlinear threshold response. For $m \approx 1$ (consistent with the
-        observed sign-flip in Step 024), the orbital modulation generates
+        observed sign-flip in Step 022), the orbital modulation generates
         diagnostic sidebands at frequencies $D \pm l'$ (where $l'$ is the
         orbital longitude), spectrally orthogonal to classical multi-body
         resonances. This provides a unique signature distinguishing TEP from
@@ -226,7 +246,7 @@
         $d\phi/dt \approx \mathbf{v} \cdot \nabla\phi \approx v_r \, |\nabla\phi|$,
         where $v_r$ is the heliocentric radial velocity. For a Kepler orbit with
         small eccentricity, distance $r$ and radial velocity $v_r$ are
-        approximately in quadrature ($90°$ out of phase), making them
+        approximately in quadrature ($90^\circ$ out of phase), making them
         statistically distinguishable predictors. The full dynamical
         modulation therefore takes the form:
     </p>
@@ -249,9 +269,9 @@
     <p>
         A further TEP prediction arises if the scalar field possesses a
         cosmological rest frame, as defined by the CMB dipole. The Planck 2018
-        CMB dipole specifies a preferred direction $(l, b) = (264.02°,
-        48.25°)$ in galactic coordinates, equivalent to $(\alpha, \delta) =
-        (168.14°, -7.22°)$ in J2000 equatorial coordinates, with an
+        CMB dipole specifies a preferred direction $(l, b) = (264.02^\circ,
+        48.25^\circ)$ in galactic coordinates, equivalent to $(\alpha, \delta) =
+        (168.14^\circ, -7.22^\circ)$ in J2000 equatorial coordinates, with an
         amplitude $v_{\rm CMB} \approx 369$ km/s. If the scalar field
         $\phi$ originates from a cosmological potential with a preferred rest
         frame, the Earth-Moon system should exhibit anisotropic coupling
@@ -264,8 +284,8 @@
         velocity ($\sim 30$ km/s) projects onto the CMB dipole direction with
         a sinusoidally varying parallel component
         $v_\parallel(t) = \mathbf{v}_{\rm orb} \cdot \hat{\mathbf{n}}_{\rm CMB}$.
-        The CMB dipole lies at ecliptic longitude $\approx 173°$, offset by
-        approximately $70°$ from the perihelion longitude ($\approx 103°$),
+        The CMB dipole lies at ecliptic longitude $\approx 173^\circ$, offset by
+        approximately $70^\circ$ from the perihelion longitude ($\approx 103^\circ$),
         making the annual velocity projection phase-shifted relative to the
         heliocentric distance modulation and therefore statistically
         distinguishable.

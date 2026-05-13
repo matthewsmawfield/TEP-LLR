@@ -1,18 +1,18 @@
-[20:19:45] ═══ Initializing Static vs Dynamic Absorption Test...
-[20:19:45]     Loaded measured η from step_002: -3.1698e-04
-[20:19:45] >>> Scenario 1: Testing Static η absorption...
-[20:19:45]       Injected Static η: -3.1698e-04
-[20:19:45]       Recovered Static η:  -3.1911e-04 (100.7% recovery)
-[20:19:45]       Residual RMS:        3.98 cm
-[20:19:45] 
-[20:19:45] >>> Scenario 2: Testing Dynamic η (TEP) absorption...
-[20:19:45]       Injected Dynamic η (mean): -3.1698e-04
-[20:19:45]       Recovered η (Static Fit):  -3.1734e-04 (100.1% recovery)
-[20:19:45]       Residual RMS:              4.01 cm
-[20:19:45] 
-[20:19:45] ✓   --- ABSORPTION COMPARISON SUMMARY ---
-[20:19:45]     Static Fit Efficiency:   100.7%
-[20:19:45]     Dynamic Fit Efficiency:  100.1%
-[20:19:45] ⚠   CONCLUSION: Static solver absorbed the bulk of the signal.
-[20:19:45] Results saved to results/outputs/step_034_static_dynamic_absorption.json
-[20:19:45] ✓   Static vs Dynamic Absorption Test Complete.
+[11:51:38] ═══ Initializing Static vs Dynamic Absorption Test...
+[11:51:38]     Loaded measured η from step_003: -3.1773e-04
+[11:51:38] >>> Scenario 1: Testing Static η absorption...
+[11:51:38]       Injected Static η: -3.1773e-04
+[11:51:38]       Recovered Static η:  -3.1986e-04 (100.7% recovery)
+[11:51:38]       Residual RMS:        3.98 cm
+[11:51:38] 
+[11:51:38] >>> Scenario 2: Testing Dynamic η (TEP) absorption...
+[11:51:38]       Injected Dynamic η (mean): -3.1773e-04
+[11:51:38]       Recovered η (Static Fit):  -3.1809e-04 (100.1% recovery)
+[11:51:38]       Residual RMS:              4.01 cm
+[11:51:38] 
+[11:51:38] ✓   --- ABSORPTION COMPARISON SUMMARY ---
+[11:51:38]     Static Fit Efficiency:   100.7%
+[11:51:38]     Dynamic Fit Efficiency:  100.1%
+[11:51:38] ⚠   CONCLUSION: Static solver absorbed the bulk of the signal.
+[11:51:38] Results saved to results/outputs/step_034_static_dynamic_absorption.json
+[11:51:38] ✓   Static vs Dynamic Absorption Test Complete.

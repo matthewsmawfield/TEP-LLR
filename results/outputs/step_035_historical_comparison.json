@@ -1,7 +1,7 @@
 {
     "step_id": "step_035",
     "description": "Quantitative comparison of TEP detection to M\u00fcller & Nordtvedt (1998)",
-    "timestamp": "2026-05-12T20:19:45.731453",
+    "timestamp": "2026-05-13T11:51:38.810237",
     "muller_nordtvedt_1998": {
         "reported_amplitude_cm": 1.0,
         "functional_form": "predominately proportional to cos(D)",
@@ -12,33 +12,33 @@
     },
     "tep_analyses": {
         "1998_era": {
-            "amplitude_m": -0.005717808114074965,
-            "amplitude_error_m": 0.0038516267652141264,
-            "eta": -0.0004398313933903819,
-            "eta_error": 0.0002962789819395482,
-            "snr": 1.4845177019007165,
+            "amplitude_m": -0.005723381904742252,
+            "amplitude_error_m": 0.003859208164442839,
+            "eta": -0.0004402601465186348,
+            "eta_error": 0.000296862166495603,
+            "snr": 1.483045656224286,
             "n_observations": 7723,
             "year_range": "1984-1997",
             "n_years": 14,
             "n_obs": 7723
         },
         "full_sample": {
-            "amplitude_m": -0.005701015203281609,
-            "amplitude_error_m": 0.0011290831791446593,
-            "eta": -0.0004385396310216622,
-            "eta_error": 8.685255224189687e-05,
-            "snr": 5.04924288005108,
+            "amplitude_m": -0.0057113741895800565,
+            "amplitude_error_m": 0.0011311997120959393,
+            "eta": -0.0004393364761215428,
+            "eta_error": 8.701536246891841e-05,
+            "snr": 5.048953008481374,
             "n_observations": 26207,
             "year_range": "1984-2019",
             "n_years": 35,
             "n_obs": 26207
         },
         "modern_cspad": {
-            "amplitude_m": -0.0037658988228580852,
-            "amplitude_error_m": 0.0004595171794066491,
-            "eta": -0.00028968452483523735,
-            "eta_error": 3.534747533897301e-05,
-            "snr": 8.195338480534714,
+            "amplitude_m": -0.003776527688099906,
+            "amplitude_error_m": 0.0004603412681629119,
+            "eta": -0.00029050212985383894,
+            "eta_error": 3.5410866781762456e-05,
+            "snr": 8.20375653734224,
             "n_observations": 12531,
             "year_range": "2009-2019",
             "n_years": 10,
@@ -47,20 +47,20 @@
     },
     "comparison": {
         "1998_era": {
-            "amplitude_cm": 0.5717808114074965,
-            "error_cm": 0.3851626765214126
+            "amplitude_cm": 0.5723381904742252,
+            "error_cm": 0.3859208164442839
         },
         "modern_cspad": {
-            "amplitude_cm": 0.37658988228580853,
-            "error_cm": 0.04595171794066491,
-            "significance_sigma": 8.195338480534714
+            "amplitude_cm": 0.3776527688099906,
+            "error_cm": 0.04603412681629119,
+            "significance_sigma": 8.20375653734224
         }
     },
     "amplitude_evolution": {
         "muller_nordtvedt_1998_cm": 1.0,
-        "tep_1998_era_cm": 0.5717808114074965,
-        "tep_full_sample_cm": 0.5701015203281609,
-        "tep_modern_cspad_cm": 0.37658988228580853,
+        "tep_1998_era_cm": 0.5723381904742252,
+        "tep_full_sample_cm": 0.5711374189580056,
+        "tep_modern_cspad_cm": 0.3776527688099906,
         "interpretation": "Amplitude stable within ~1 cm bound; modern precision enables cleaner extraction"
     },
     "historical_assessment": {

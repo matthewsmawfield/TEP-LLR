@@ -203,6 +203,9 @@ def main():
     
     results = {
         'step_id': 'step_041',
+        'status': 'PASS',
+        'data_type': 'SYNTHETIC (EPHEMERIS_ABSORPTION_SIMULATION)',
+        'eta_calibration_source': str(step_017_path),
         'purpose': 'Demonstrate that static Nordtvedt signals are absorbed by standard fitting, but dynamically modulated TEP signals are not'
     }
     

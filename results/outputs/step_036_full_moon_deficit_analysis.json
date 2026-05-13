@@ -1,7 +1,7 @@
 {
     "step_id": "step_036",
     "description": "Tests Murphy/Sabhlok full-moon deficit against TEP scalar-field predictions",
-    "timestamp": "2026-05-12T20:19:46.332129",
+    "timestamp": "2026-05-13T11:51:39.462101",
     "references": {
         "murphy_2010": "Murphy et al. 2010, PASP, 122, 892",
         "murphy_2014": "Murphy et al. 2014, Icarus, 231, 183",
@@ -9,50 +9,50 @@
     },
     "phase_analysis": {
         "full_moon": {
-            "n_observations": 855,
-            "mean_residual_m": 0.0028344827260297087,
-            "std_residual_m": 0.0511674145324033,
-            "sem_residual_m": 0.0017498886547471035,
-            "correlation_r": 0.062228559734691165,
-            "correlation_p": 0.06895908167549313,
-            "eta": -0.00021733803998745456
+            "n_observations": 840,
+            "mean_residual_m": 0.0023104971163168345,
+            "std_residual_m": 0.049098157876712595,
+            "sem_residual_m": 0.0016940473888936447,
+            "correlation_r": 0.04701128703488216,
+            "correlation_p": 0.17343777322847573,
+            "eta": -0.00017776804763735185
         },
         "quarter_moon": {
-            "n_observations": 11011,
-            "mean_residual_m": -0.0005099766667629142,
-            "std_residual_m": 0.09912778159977637,
-            "sem_residual_m": 0.0009446740940811596,
-            "correlation_r": -0.03100816408171977,
-            "correlation_p": 0.0011371122345986283,
-            "eta": -0.0011716308250892921
+            "n_observations": 11033,
+            "mean_residual_m": -0.000524334319220351,
+            "std_residual_m": 0.09908197292051028,
+            "sem_residual_m": 0.000943295660611382,
+            "correlation_r": -0.030255278152309377,
+            "correlation_p": 0.0014812909184679641,
+            "eta": -0.0011413696702161462
         },
         "new_moon": {
             "n_observations": 160,
             "mean_residual_m": -0.020880286683742425,
             "std_residual_m": 0.013223344984590274,
             "sem_residual_m": 0.001045397210936735,
-            "correlation_r": -0.17839759892593388,
-            "correlation_p": 0.024007157363690735,
-            "eta": -0.0016643164702113496
+            "correlation_r": -0.18280286461813794,
+            "correlation_p": 0.020684469449640915,
+            "eta": -0.0016656739824366788
         }
     },
     "model_comparison": {
         "tep_correlation": {
-            "r": -0.03044239216369888,
-            "p": 8.261051044061221e-07
+            "r": -0.03044048752477968,
+            "p": 8.274105654898864e-07
         },
         "thermal_correlation": {
-            "r": 0.02880888718063969,
-            "p": 3.0937695121371205e-06
+            "r": 0.028827715425791062,
+            "p": 3.048214116130858e-06
         },
         "preferred_model": "TEP",
-        "r_tep_squared": 0.000926739240648435,
-        "r_thermal_squared": 0.0008299519805868258
+        "r_tep_squared": 0.0009266232807462674,
+        "r_thermal_squared": 0.0008310371766703919
     },
     "illumination_geometry": {
-        "full_moon_subset_n": 1698,
-        "perihelion_correlation_r": 0.025489594494116412,
-        "perihelion_correlation_p": 0.2938369432746715,
+        "full_moon_subset_n": 1678,
+        "perihelion_correlation_r": 0.0253636930377105,
+        "perihelion_correlation_p": 0.29909510303716014,
         "interpretation": "Inconclusive"
     },
     "assessment": {

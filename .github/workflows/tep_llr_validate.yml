@@ -1,0 +1,33 @@
+# Validates committed pipeline JSON artifacts and manuscript HTML placeholders.
+# Does not re-run the full numerical pipeline (requires raw data + long runtime).
+
+name: TEP-LLR validate
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+      - name: Pipeline output schema check
+        run: python3 scripts/utils/schema_validation.py
+
+      - name: Manuscript values vs canonical outputs
+        run: python3 scripts/utils/verify_value_consistency.py
+
+      - name: Byte-compile analysis scripts
+        run: python3 -m compileall -q scripts

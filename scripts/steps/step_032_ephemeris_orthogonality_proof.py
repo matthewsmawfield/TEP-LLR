@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 034: Ephemeris Orthogonality Proof (Mathematical Exploration)
+Step 032: Ephemeris Orthogonality Proof (Mathematical Exploration)
 
 This script computationally demonstrates that the TEP signal cannot be perfectly
 absorbed by standard ephemeris codes (INPOP, DE430). 
@@ -31,6 +31,7 @@ import pandas as pd
 from astropy.timeseries import LombScargle
 from skyfield.api import load
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+from scripts.utils.statistical_utils import require_step003_eta_ols
 
 # Setup paths
 
@@ -58,23 +59,29 @@ def explore_orthogonality():
     astrometric = earth.at(timestamps).observe(sun)
     r_au = astrometric.distance().au
     
-    # 3. Load Step 024 empirical data for modulation calibration
-    step024_path = PROJECT_ROOT / "results" / "outputs" / "step_022_environmental_modulation.json"
-    empirical_m = None
-    if step024_path.exists():
-        with open(step024_path) as f:
-            s024 = json.load(f)
-        eta_peri = s024['perihelion']['eta']
-        eta_aph = s024['aphelion']['eta']
-        eta_sum = eta_peri + eta_aph
-        if abs(eta_sum) > 1e-10:
-            empirical_m = abs((eta_peri - eta_aph) / eta_sum)
-        else:
-            empirical_m = float('inf')
-        print_status(f"Step 024 empirical modulation: eta_peri={eta_peri:.4e}, eta_aph={eta_aph:.4e}", "CALC")
-        print_status(f"Empirical modulation depth m = {empirical_m:.2f}", "CALC")
+    # 3. Load Step 022 empirical data for modulation calibration
+    step022_path = PROJECT_ROOT / "results" / "outputs" / "step_022_environmental_modulation.json"
+    if not step022_path.exists():
+        raise FileNotFoundError(
+            f"Step 022 environmental modulation output not found: {step022_path}"
+        )
+
+    with open(step022_path, encoding="utf-8") as handle:
+        s022 = json.load(handle)
+    eta_peri = s022["perihelion"]["eta"]
+    eta_aph = s022["aphelion"]["eta"]
+    eta_sum = eta_peri + eta_aph
+    if abs(eta_sum) > 1e-10:
+        empirical_m = abs((eta_peri - eta_aph) / eta_sum)
     else:
-        print_status("Step 024 output not found; using default m=1.0", "WARNING")
+        empirical_m = float("inf")
+    diff_sigma = s022["differential"]["significance_sigma"]
+    print_status(
+        f"Step 022 empirical modulation: eta_peri={eta_peri:.4e}, eta_aph={eta_aph:.4e}",
+        "CALC",
+    )
+    print_status(f"Empirical modulation depth m = {empirical_m:.2f}", "CALC")
+    print_status(f"Perihelion-aphelion differential = {diff_sigma:.2f}σ", "CALC")
     
     # 4. Frequency grid
     t_days = jad - jad[0]
@@ -89,15 +96,16 @@ def explore_orthogonality():
     lower_period_days = 1.0 / f_lower
 
     # 5. Static signal (baseline)
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        eta_0 = step_002_results.get('eta_ols', 0)
-        print_status(f"Loaded measured η from step_002: {eta_0:.4e}", "INFO")
-    else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    eta_0 = require_step003_eta_ols(step_003_results)
+    print_status(f"Loaded measured η from step_003: {eta_0:.4e}", "INFO")
 
     S_static = 13.0 * eta_0 * np.cos(D_phase)
     
@@ -170,7 +178,7 @@ def explore_orthogonality():
     print_status("", "INFO")
     print_status("--- EMPIRICAL CALIBRATION ---", "PROCESS")
     if empirical_m is not None:
-        print_status(f"Step 024 perihelion/aphelion data imply m = {empirical_m:.2f}", "CALC")
+        print_status(f"Step 022 perihelion/aphelion data imply m = {empirical_m:.2f}", "CALC")
         print_status(f"The m=1.0 model is CONSERVATIVE (empirical m > 1.0)", "SUCCESS")
     
     print_status("", "INFO")
@@ -187,7 +195,8 @@ def explore_orthogonality():
         "peak_frequencies": {
             "static_ratio_synodic": float(freqs[np.argmax(ls_static)] / f_synodic)
         },
-        "empirical_modulation_depth": float(empirical_m) if empirical_m is not None else None,
+        "empirical_modulation_depth": float(empirical_m),
+        "perihelion_aphelion_differential_sigma": float(diff_sigma),
         "primary_model_m1": primary_result,
         "modulation_depth_sweep": sweep_results,
         "sideband_period_days": float(lower_period_days),
@@ -198,7 +207,13 @@ def explore_orthogonality():
             "sideband_evection_separation_cpd": float(abs(f_lower - 1.0/31.81)),
             "separation_exceeds_rayleigh_by": float(abs(f_lower - 1.0/31.81) / (1.0 / (jad[-1] - jad[0])))
         },
-        "conclusion": "The TEP dynamic suppression model deposits significant sideband power at D±l' frequencies (32.13 days). The modulation depth m is empirically calibrated against Step 024 perihelion/aphelion data (m≈2.0; m=1.0 used conservatively). At m=1.0, 33% of the signal power resides in sidebands where standard static-η solvers lack degrees of freedom. The D-l' sideband at 32.13d is spectrally isolated from lunar evection (31.81d) by 4× the Rayleigh resolution."
+        "conclusion": (
+            "The TEP dynamic suppression model deposits significant sideband power at D±l' frequencies (32.13 days). "
+            f"The modulation depth m is empirically calibrated against Step 022 perihelion/aphelion data "
+            f"(m≈{empirical_m:.2f}; m=1.0 used conservatively). At m=1.0, 33% of the signal power resides in "
+            "sidebands where standard static-η solvers lack degrees of freedom. The D-l' sideband at 32.13d is "
+            "spectrally isolated from lunar evection (31.81d) by 4× the Rayleigh resolution."
+        )
     }
     return results
 

@@ -44,6 +44,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scipy import stats
 from skyfield.api import load
@@ -361,7 +362,7 @@ def velocity_modulation_analysis(df, verbose=False):
 
     X_joint = np.column_stack([cosD, r_c * cosD, vr_c * cosD, np.ones(n_clean)])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_joint, _, rank_joint, _ = np.linalg.lstsq(X_joint, res, rcond=None)
+        coeffs_joint, _, rank_joint, _ = stable_lstsq(X_joint, res)
 
     if rank_joint < 4:
         print_status("WARNING: Joint model rank-deficient", "WARNING")
@@ -370,7 +371,7 @@ def velocity_modulation_analysis(df, verbose=False):
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             resid_joint = res - X_joint @ coeffs_joint
         mse_joint = np.sum(resid_joint ** 2) / (n_clean - 4)
-        XtX_inv = np.linalg.inv(X_joint.T @ X_joint)
+        XtX_inv = np.linalg.pinv(X_joint.T @ X_joint, rcond=1e-10, hermitian=True)
         cov_joint = mse_joint * XtX_inv
         se_joint = np.sqrt(np.diag(cov_joint))
 
@@ -400,7 +401,7 @@ def velocity_modulation_analysis(df, verbose=False):
         # Simple model (distance only, 2 params: cosD + intercept)
         X_simple = np.column_stack([cosD, np.ones(n_clean)])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_simple, _, _, _ = np.linalg.lstsq(X_simple, res, rcond=None)
+            coeffs_simple, _, _, _ = stable_lstsq(X_simple, res)
             resid_simple = res - X_simple @ coeffs_simple
         rss_simple = np.sum(resid_simple ** 2)
         k_simple = 2
@@ -411,7 +412,7 @@ def velocity_modulation_analysis(df, verbose=False):
         # Actually: cosD, vr_c*cosD, intercept = 3 params
         X_vel = np.column_stack([cosD, vr_c * cosD, np.ones(n_clean)])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_vel, _, _, _ = np.linalg.lstsq(X_vel, res, rcond=None)
+            coeffs_vel, _, _, _ = stable_lstsq(X_vel, res)
             resid_vel = res - X_vel @ coeffs_vel
         rss_vel = np.sum(resid_vel ** 2)
         k_vel = 3
@@ -518,7 +519,7 @@ def velocity_modulation_analysis(df, verbose=False):
         cosD, r_c * cosD, vr_c * cosD, cos_theta_c * cosD, np.ones(n_clean)
     ])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_cmb, _, rank_cmb, _ = np.linalg.lstsq(X_cmb, res, rcond=None)
+        coeffs_cmb, _, rank_cmb, _ = stable_lstsq(X_cmb, res)
 
     if rank_cmb < 5:
         print_status("WARNING: CMB-controlled model rank-deficient", "WARNING")
@@ -527,7 +528,7 @@ def velocity_modulation_analysis(df, verbose=False):
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             resid_cmb = res - X_cmb @ coeffs_cmb
         mse_cmb = np.sum(resid_cmb ** 2) / (n_clean - 5)
-        XtX_cmb_inv = np.linalg.inv(X_cmb.T @ X_cmb)
+        XtX_cmb_inv = np.linalg.pinv(X_cmb.T @ X_cmb, rcond=1e-10, hermitian=True)
         cov_cmb = mse_cmb * XtX_cmb_inv
         se_cmb = np.sqrt(np.diag(cov_cmb))
 
@@ -629,13 +630,12 @@ def velocity_modulation_analysis(df, verbose=False):
     vel_trend = None
     if len(bin_centers) >= 4:
         X_trend = np.column_stack([np.ones(len(bin_centers)), bin_centers])
-        coeffs_trend, _, rank_trend, _ = np.linalg.lstsq(
-            X_trend, bin_etas, rcond=None
-        )
+        coeffs_trend, _, rank_trend, _ = stable_lstsq(
+            X_trend, bin_etas)
         if rank_trend == 2:
             resid_trend = np.array(bin_etas) - X_trend @ coeffs_trend
             mse_t = np.sum(resid_trend ** 2) / (len(bin_centers) - 2)
-            cov_t = mse_t * np.linalg.inv(X_trend.T @ X_trend)
+            cov_t = mse_t * np.linalg.pinv(X_trend.T @ X_trend, rcond=1e-10, hermitian=True)
             se_t = np.sqrt(np.diag(cov_t))
             slope = coeffs_trend[1]
             slope_err = se_t[1]

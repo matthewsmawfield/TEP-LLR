@@ -22,6 +22,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
+from scripts.utils.config import get_config
 import pandas as pd
 from astropy.utils.iers import IERS_B
 from scipy import stats
@@ -29,6 +31,9 @@ from skyfield.api import load
 from scripts.utils.llr_constants import STATION_COORDS, pole_tide_displacement
 from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, set_verbose_mode
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
+
+TEP_CONFIG = get_config()
 
 # Station name mapping
 STATION_MAP = {
@@ -94,7 +99,7 @@ def compute_pole_tide_range_effect(df, pm_x, pm_y, moon_positions):
     return range_effect
 
 
-def test_balanced_subsample(residuals, cos_elong, stations, n_per_station=None, seed=42):
+def test_balanced_subsample(residuals, cos_elong, stations, n_per_station=None, seed=TEP_CONFIG.get("RANDOM_SEED", 42)):
     """Create balanced subsample with equal N per station."""
     unique_stations = np.unique(stations)
     counts = [np.sum(stations == s) for s in unique_stations]
@@ -173,7 +178,8 @@ def main():
     
     # Correlation tests
     print_status("Testing correlations with residuals...", "PROCESS")
-    r_pole, p_pole = stats.pearsonr(res_c, pole_range)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_pole, p_pole = stats.pearsonr(res_c, pole_range)
     print_status(f"Pole tide vs residuals: r={r_pole:.4f}, p={p_pole:.4e}", "INFO")
     
     # cos(D) components
@@ -188,8 +194,11 @@ def main():
         np.cos(2*np.pi*t/365.25), np.sin(2*np.pi*t/365.25),
         np.ones(len(t))
     ])
-    c_annual, _, _, _ = np.linalg.lstsq(X_annual, pole_range, rcond=None)
-    pole_annual = X_annual @ c_annual
+    c_annual, _, _, _ = stable_lstsq(X_annual, pole_range)
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        pole_annual = X_annual @ c_annual
+    if not np.all(np.isfinite(pole_annual)):
+        raise RuntimeError("Annual pole-tide decomposition produced non-finite values (numerical instability).")
     pole_resid = pole_range - pole_annual
     
     reg_pole_ann = linear_regression(pole_annual, cos_c)

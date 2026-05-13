@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 041: Dust Model Sensitivity Analysis
+Step 039: Dust Model Sensitivity Analysis
 
 Formal parameter sweep of Sabhlok et al. (2024) thermal/dust model to demonstrate
 that dust coverage estimate is underdetermined and the model cannot reliably
@@ -26,6 +26,7 @@ from scipy import stats
 import argparse
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.statistical_utils import require_step003_eta_ols
 
 # Add project root to path
 
@@ -161,6 +162,18 @@ def parameter_sweep_analysis(observed_signal_mm: float) -> dict:
         }
     }
 
+def load_environmental_modulation_summary() -> str:
+    path = PROJECT_ROOT / "results/outputs/step_022_environmental_modulation.json"
+    with open(path, encoding="utf-8") as handle:
+        payload = json.load(handle)
+    peri = payload["perihelion"]
+    diff_sigma = payload["differential"]["significance_sigma"]
+    return (
+        f"Perihelion η = {peri['eta']:.4e}, aphelion subset non-significant; "
+        f"{diff_sigma:.2f}σ cosD-only differential (Step 022)"
+    )
+
+
 def circular_reasoning_demonstration() -> dict:
     
     logical_structure = {
@@ -182,7 +195,7 @@ def circular_reasoning_demonstration() -> dict:
                 "1. Observe phase-dependent signal modulation",
                 "2. Hypothesize scalar-field coupling (TEP)",
                 "3. Predict perihelion enhancement (heliocentric scaling)",
-                "4. Test: Perihelion η = -5.45×10⁻⁴, aphelion null (3.07σ differential)",
+                "4. Test: " + load_environmental_modulation_summary(),
                 "5. Confirm: TEP gravitational signal explains anomaly"
             ],
             "superiority": "Makes independent predictions, testable, no free parameters from fitting"
@@ -252,21 +265,21 @@ def main():
     set_step_logger(logger)
     set_verbose_mode(args.verbose)
     
-    print_status("Step 041: Dust Model Sensitivity Analysis", "STEP")
+    print_status("Step 039: Dust Model Sensitivity Analysis", "STEP")
     print_status("Formal parameter sweep of Sabhlok et al. thermal/dust model", "INFO")
 
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        eta_measured = step_002_results.get('eta_ols', 0)
-        # Convert eta to signal amplitude in mm: A = |eta| * ETA_SCALE_FACTOR (13m) * 1000 mm/m
-        observed_signal_mm = abs(eta_measured) * ETA_SCALE_FACTOR * 1000
-        print_status(f"Loaded measured η from step_002: {eta_measured:.4e}", "INFO")
-        print_status(f"Computed observed signal amplitude: {observed_signal_mm:.2f} mm", "INFO")
-    else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    eta_measured = require_step003_eta_ols(step_003_results)
+    observed_signal_mm = abs(eta_measured) * ETA_SCALE_FACTOR * 1000
+    print_status(f"Loaded measured η from step_003: {eta_measured:.4e}", "INFO")
+    print_status(f"Computed observed signal amplitude: {observed_signal_mm:.2f} mm", "INFO")
 
     # Parameter sweep
     print_status("Running parameter sweep (thermal conductivity, dust coverage)...", "INFO")
@@ -327,10 +340,10 @@ def main():
     print_status("\nLogical Analysis:", "INFO")
     print_status("  - Circular reasoning: Affirming the consequent", "WARNING")
     print_status("  - Alternative (TEP): Makes independent predictions", "PASS")
-    print_status("  - Perihelion test: 3.07σ confirmed", "PASS")
+    print_status(f"  - Perihelion-aphelion split: {load_environmental_modulation_summary()}", "PASS")
     print_status("\nVerdict: Dust attribution unreliable; TEP superior", "PASS")
     
-    print_status("Step 041 completed successfully", "PASS")
+    print_status("Step 039 completed successfully", "PASS")
 
 if __name__ == "__main__":
     main()

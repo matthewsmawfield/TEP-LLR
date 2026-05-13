@@ -4,8 +4,9 @@
     <p>
         The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in
         which proper time is a dynamical field $\phi$ that couples universally
-        to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A(\phi)
-        g_{\mu\nu}$. The coupling strength is density-dependent through a 
+        to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi)
+        g_{\mu\nu}$, with $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. The coupling
+        strength is density-dependent through a 
         Temporal Shear Suppression (TSS) mechanism. TSS operates via the 
         continuous spatial profile of the time field (Temporal Topology), in 
         which high ambient density in deep potential wells suppresses the 
@@ -41,78 +42,47 @@
         modulation correlated with $\cos(D)$. The primary physical
         parameter is extracted using a full systematic model that controls
         for annual, monthly, and thermal $\cos(2D)$ aliases:
-        $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ (6.17$\sigma$).
-        The signal strengthens as more systematics are controlled, from
-        5.25$\sigma$ ($\cos D$-only) to 6.17$\sigma$ (full model), the
-        signature of a genuine signal being diluted by unmodeled aliases.
-        Cluster-robust standard errors with Cameron-Miller finite-cluster
-        correction across five stations yield
-        $\eta = -4.05 \times 10^{-4}$ at 6.52$\sigma$.
+        $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$;
+        $6.52\sigma$ cluster-robust). The signal strengthens as more
+        systematics are controlled, from $5.25\sigma$ ($\cos D$-only) to
+        $6.17\sigma$ (full model). Step 040 fixes a single canonical estimator
+        hierarchy; nonparametric and precision-weighted checks bound the
+        amplitude without treating every diagnostic as a co-equal discovery.
+        A common-$\eta$ mixed model with station-specific systematics yields
+        $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ ($6.40\sigma$;
+        $F(4, 25,410) = 1.19$, $p = 0.31$). Independent synodic checks
+        include a phase-locked new/full-moon differential
+        ($\eta = -5.74 \times 10^{-4}$, $5.99\sigma$), a frequency null scan
+        with no significant power at 55 tested non-synodic factors after
+        correction, and a Grasse C-SPAD plus APO clean subset at
+        $7.25\sigma$ cluster-robust significance ($N = 12{,}576$).
     </p>
 
     <p>
-        Cross-station validation demonstrates signal universality when
-        systematic controls are properly applied. Per-station
-        $\cos D$-only fits suffer from omitted variable bias because annual,
-        monthly, and thermal terms alias differently into $\cos D$ at each
-        station depending on temporal sampling. A robustness check using a
-        common Nordtvedt parameter with station-specific annual, monthly,
-        and thermal terms (since stations have disjoint temporal coverage)
-        yields $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ (6.40$\sigma$;
-        common-$\eta$ robustness check). An F-test comparing common versus
-        station-specific $\eta$ gives $F(4, 25,410) = 1.19$ ($p = 0.31$),
-        showing no evidence for station-specific deviations. Per-station full
-        models (independent systematics) yield Grasse $\eta = -4.79 \times 10^{-4}$
-        (6.81$\sigma$), APO $\eta = -7.95 \times 10^{-5}$ (0.77$\sigma$), and
-        McDonald2 $\eta = -5.48 \times 10^{-4}$ (1.22$\sigma$), consistent with
-        a universal signal when statistical power is accounted for.
-        Haleakala remains underpowered (expected SNR = 0.81$\sigma$) and
-        does not independently constrain the signal.
+        On the same residual channel, Step 056 recovers the primary
+        $\eta$ by linearized post-fit parameter extraction on the published INPOP19a and
+        DE430 archives ($6.17\sigma$ and $5.04\sigma$). Matched-window
+        DE430 validation is consistent with INPOP19a. Joint regressions
+        conditioned on the synodic fit (Steps 047–048, 055) provide strong
+        corroborative CMB-orientation evidence while heliocentric distance is
+        non-significant ($p = 0.171$). Frequency-domain orthogonality tests
+        and ephemeris-absorption analysis (Steps 032, 041, 054) indicate why
+        a static direct-fit model with $\eta$ fixed at zero need not erase a
+        synodic $\cos(D)$ component in post-fit residuals. Source-level INPOP
+        or DE430 integrator refits with $\eta$ free, together with independent
+        range-level reductions on archived CRD normal points, are the
+        definitive external closure tests on that channel interpretation.
     </p>
 
     <p>
-        The signal does not vanish with station balance: year-matched
-        balanced subsamples with the full model yield a significant
-        negative detection. The signal strengthens with proper systematic
-        control, the signature of a genuine physical modulation.
-    </p>
-
-    <p>
-        To mathematically establish why direct-fit ephemerides are forced to
-        constrain $\eta=0$ while leaving this geometric footprint unabsorbed, a
-        frequency domain orthogonality proof is executed. Because the field
-        dynamically scales against the heliocentric gradient ($1/r_\odot$), the
-        interaction geometrically channels structural power into composite
-        periodogram sidebands at $D \pm l'$ (e.g., $32.13$ days). Standard
-        computational models inherently lack the necessary Keplerian degrees of
-        freedom at these exact frequencies. Consequently, standard solvers are
-        algebraically constrained to bypass the signal natively into the
-        post-fit residual matrices.
-    </p>
-
-    <p>
-        Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides
-        supplementary, phase-clustered evidence consistent with INPOP19a, though
-        limited by its short baseline. The primary detection relies on the INPOP19a
-        ephemeris (35.5-year baseline) with full-systematic OLS
-        $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ at 6.17$\sigma$
-        significance, and cluster-robust $\eta = -4.05 \times 10^{-4}$ at
-        6.52$\sigma$ with Cameron-Miller finite-cluster correction across 5 stations.
-    </p>
-
-    <p>
-        In the context of TEP, the differential Temporal Shear Suppression 
-        between Earth and Moon (Earth more strongly self-suppressed due to its 
-        deeper gravitational potential, $\Phi_{\oplus}/c^2 \approx 7 \times 
-        10^{-10}$ vs. $\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$) 
-        could produce an effective Nordtvedt parameter with the observed sign. 
-        The measurement addresses the theoretical ambiguity between two 
-        competing mechanisms: a legacy soliton-radius model ($S = 
-        R_{\rm sol}/R_{\rm phys}$) would predict positive $\eta$, while 
-        gravitational compactness-driven gradient suppression (vanishing 
-        Temporal Shear in the deeper potential well) predicts negative $\eta$. 
-        The observed negative sign suggests that gravitational potential 
-        suppression (TSS) dominates in the Earth-Moon system.
+        In the context of TEP, differential Temporal Shear Suppression between
+        Earth and Moon could produce an effective Nordtvedt parameter with the
+        observed negative sign, consistent with gravitational compactness-driven
+        gradient suppression (TSS) dominating in the Earth-Moon system.
+        Orthogonality analysis and the ephemeris-absorption simulation support
+        residual-channel survival under static Keplerian fitting in the
+        linearized and toy bases tested here, pending source-level integrator
+        refits with $\eta$ free.
     </p>
 
     <p>

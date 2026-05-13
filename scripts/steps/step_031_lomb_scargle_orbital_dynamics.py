@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 033: Lomb-Scargle Orbital Dynamics Mapping
+Step 031: Lomb-Scargle Orbital Dynamics Mapping
 ==============================================
 
 Computes the Lomb-Scargle periodogram over the primary LLR residuals 

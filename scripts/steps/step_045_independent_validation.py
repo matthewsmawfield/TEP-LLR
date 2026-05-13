@@ -25,12 +25,13 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import argparse
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
 import pandas as pd
 from scipy import stats
 
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
-from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
+from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma, robust_regression
 
 
 # Station latitudes (degrees) for latitude independence test
@@ -41,6 +42,36 @@ STATION_LATITUDES = {
     'Matera': 40.65,
     'McDonald2': 30.67,
 }
+
+
+def fit_full_systematic_eta(df_subset):
+  """Extract η from the canonical full-systematic model on a residual subset."""
+  res = df_subset['residual_m'].values
+  el = df_subset['elongation_rad'].values
+  jd = df_subset['date_julian'].values
+  mask = ~detect_outliers_sigma(res, sigma_threshold=6.0)
+  res = res[mask]
+  el = el[mask]
+  jd = jd[mask]
+  cos_c = np.cos(el)
+  cos2d = np.cos(2 * el)
+  year = jd / 365.25
+  sin_y = np.sin(2 * np.pi * year)
+  cos_y = np.cos(2 * np.pi * year)
+  month = jd / 27.32
+  sin_m = np.sin(2 * np.pi * month)
+  cos_m = np.cos(2 * np.pi * month)
+  X = np.column_stack([cos_c, cos2d, sin_m, cos_m, sin_y, cos_y, np.ones(len(cos_c))])
+  result = robust_regression(res, X, scale_errors_by_birge=False)
+  eta = result['coefficients'][0] / ETA_SCALE_FACTOR
+  eta_err = result['errors'][0] / ETA_SCALE_FACTOR
+  snr = abs(eta) / eta_err if eta_err > 0 else 0.0
+  return {
+    'eta': float(eta),
+    'eta_error': float(eta_err),
+    'snr': float(snr),
+    'n': int(len(res)),
+  }
 
 
 def run_independent_validation(df, verbose=False):
@@ -142,6 +173,33 @@ def run_independent_validation(df, verbose=False):
             print_status(f"    Difference:        Δη = {diff:.3e} ± {diff_err:.3e} ({diff_sigma:.2f}σ)", "CALC")
             print_status(f"    Consistent (<3σ)?  {'YES ✓' if consistent else 'NO ✗'}", "SUCCESS" if consistent else "WARNING")
 
+            full_iw = fit_full_systematic_eta(df_inpop_window)
+            full_de = fit_full_systematic_eta(df_de430)
+            diff_full = full_iw['eta'] - full_de['eta']
+            diff_full_err = np.sqrt(full_iw['eta_error'] ** 2 + full_de['eta_error'] ** 2)
+            diff_full_sigma = abs(diff_full) / diff_full_err if diff_full_err > 0 else np.inf
+            full_consistent = diff_full_sigma < 3.0
+
+            print_status(
+                f"    INPOP19a (full model): η = {full_iw['eta']:.3e} ± {full_iw['eta_error']:.3e} "
+                f"({full_iw['snr']:.2f}σ)",
+                "CALC",
+            )
+            print_status(
+                f"    DE430 (full model):    η = {full_de['eta']:.3e} ± {full_de['eta_error']:.3e} "
+                f"({full_de['snr']:.2f}σ)",
+                "CALC",
+            )
+            print_status(
+                f"    Full-model difference: Δη = {diff_full:.3e} ± {diff_full_err:.3e} "
+                f"({diff_full_sigma:.2f}σ)",
+                "CALC",
+            )
+            print_status(
+                f"    Full-model consistent (<3σ)? {'YES ✓' if full_consistent else 'NO ✗'}",
+                "SUCCESS" if full_consistent else "WARNING",
+            )
+
             ephem_matched = {
                 "available": True,
                 "inpop_window_eta": float(eta_iw),
@@ -154,6 +212,12 @@ def run_independent_validation(df, verbose=False):
                 "difference_error": float(diff_err),
                 "difference_sigma": float(diff_sigma),
                 "consistent": bool(consistent),
+                "inpop_window_full_systematic": full_iw,
+                "de430_full_systematic": full_de,
+                "full_systematic_difference": float(diff_full),
+                "full_systematic_difference_error": float(diff_full_err),
+                "full_systematic_difference_sigma": float(diff_full_sigma),
+                "full_systematic_consistent": bool(full_consistent),
                 "window_jd_min": float(jd_min),
                 "window_jd_max": float(jd_max),
                 "window_years": [float(year_min), float(year_max)],
@@ -184,15 +248,22 @@ def run_independent_validation(df, verbose=False):
     month_cos = month_centered * cos_elong
 
     X_season = np.column_stack([cos_elong, np.ones(n), month_centered, month_cos])
-    coeffs_season, _, rank, _ = np.linalg.lstsq(X_season, residuals, rcond=None)
+    coeffs_season, _, rank, _ = stable_lstsq(X_season, residuals)
 
     if rank < 4:
         print_status("    WARNING: Seasonal model rank-deficient", "WARNING")
         seasonal = {"available": False, "reason": "rank_deficient"}
     else:
-        resid_season = residuals - X_season @ coeffs_season
+        # NumPy/SciPy array-api matmul paths can emit benign RuntimeWarnings on large
+        # float64 arrays; suppress and then enforce finiteness explicitly.
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            resid_season = residuals - X_season @ coeffs_season
+        if not np.all(np.isfinite(resid_season)):
+            raise RuntimeError(
+                "Seasonal regression produced non-finite residuals; this indicates numerical instability."
+            )
         mse_season = np.sum(resid_season**2) / (n - 4)
-        XtX_inv = np.linalg.inv(X_season.T @ X_season)
+        XtX_inv = np.linalg.pinv(X_season.T @ X_season, rcond=1e-10, hermitian=True)
         cov_season = mse_season * XtX_inv
         se_season = np.sqrt(np.diag(cov_season))
 
@@ -322,7 +393,8 @@ def run_independent_validation(df, verbose=False):
         etas_err = np.array([s['eta_error'] for s in station_results])
 
         # Use Pearson correlation (robust, no weighting issues)
-        r_lat, p_pearson_lat = stats.pearsonr(lats, etas)
+        with suppress_scipy_array_api_matmul_runtime_warning():
+            r_lat, p_pearson_lat = stats.pearsonr(lats, etas)
 
         # Also test excluding Haleakala, which is known anomalous
         # (operated 1984-1991 near solar maximum; see step_023)
@@ -330,7 +402,8 @@ def run_independent_validation(df, verbose=False):
         if len(station_results_no_haleakala) >= 3:
             lats_nh = np.array([s['latitude'] for s in station_results_no_haleakala])
             etas_nh = np.array([s['eta'] for s in station_results_no_haleakala])
-            r_lat_nh, p_lat_nh = stats.pearsonr(lats_nh, etas_nh)
+            with suppress_scipy_array_api_matmul_runtime_warning():
+                r_lat_nh, p_lat_nh = stats.pearsonr(lats_nh, etas_nh)
         else:
             r_lat_nh, p_lat_nh = None, None
 

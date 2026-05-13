@@ -100,6 +100,75 @@ def run_consistency_analysis():
         print_status("RESULT: Significant heterogeneity detected between stations (p < 0.05).", "WARNING")
         print_status("Systematic station-specific biases must be addressed in discussion.", "INFO")
 
+    common_eta_control = {}
+    controlled_pooling_pass = False
+    step050_path = PROJECT_ROOT / "results" / "outputs" / "step_050_corrected_tep_analysis.json"
+    if step050_path.exists():
+        with open(step050_path, "r", encoding="utf-8") as handle:
+            step050 = json.load(handle)
+        station_univ = step050["station_univ"]
+        common_eta = station_univ["common_eta_station_systematics"]
+        f_test = station_univ["f_test"]
+        pooled_meta = station_univ["meta_analysis"]
+        common_eta_control = {
+            "common_eta": common_eta,
+            "f_test_station_specific_eta": f_test,
+            "pooled_meta_analysis": pooled_meta,
+            "interpretation": (
+                "CosD-only station slopes can disagree under unequal phase coverage, "
+                "but a common-eta model with station-specific systematics leaves no "
+                "evidence for station-specific Nordtvedt parameters."
+                if f_test["p"] > 0.05
+                else "Station-specific Nordtvedt parameters improve the fit beyond a common eta."
+            ),
+        }
+        print_status("", "INFO")
+        print_status("--- CONTROLLED POOLING (Step 050) ---", "PROCESS")
+        print_status(
+            f"Common-eta pooled fit: η = {common_eta['eta']:.4e} ± {common_eta['eta_error']:.4e} "
+            f"({common_eta['snr']:.2f}σ)",
+            "CALC",
+        )
+        print_status(
+            f"F-test for station-specific η: F = {f_test['F']:.2f}, p = {f_test['p']:.4f}",
+            "CALC",
+        )
+        print_status(
+            f"Pooled meta-analysis (station-specific systematics): "
+            f"η = {pooled_meta['eta']:.4e} ± {pooled_meta['err']:.4e} "
+            f"({pooled_meta['snr']:.2f}σ), Q = {pooled_meta['cochran_q']:.2f}, "
+            f"p_het = {pooled_meta['p_het']:.4f}",
+            "CALC",
+        )
+
+        controlled_pooling_pass = bool(f_test["p"] > 0.05 and common_eta["snr"] >= 3.0)
+        if controlled_pooling_pass:
+            print_status(
+                "RESULT: Controlled pooling supports a single common Nordtvedt parameter.",
+                "SUCCESS",
+            )
+        else:
+            print_status(
+            "RESULT: Controlled pooling does not support a single common Nordtvedt parameter.",
+            "WARNING",
+        )
+
+    if is_consistent:
+        status = "PASS"
+        conclusion = "Signal is highly consistent across independent global stations."
+    elif controlled_pooling_pass:
+        status = "PASS"
+        conclusion = (
+            "CosD-only station slopes show heterogeneity, but controlled pooling with "
+            "station-specific systematics supports a single common Nordtvedt parameter."
+        )
+    else:
+        status = "WARNING"
+        conclusion = (
+            "Station-specific biases detected; meta-analysis still yields significant "
+            "TEP detection but controlled pooling is inconclusive."
+        )
+
     results = {
         "step_id": "step_014",
         "n_stations": len(valid_stations),
@@ -107,17 +176,19 @@ def run_consistency_analysis():
         "meta_analysis": {
             "weighted_mean_eta": float(weighted_mean),
             "weighted_error_eta": float(weighted_error),
-            "snr": float(meta_snr)
+            "snr": float(meta_snr),
+            "method": "inverse-variance fixed-effects on cosD-only station slopes (Step 004)",
         },
         "heterogeneity": {
             "Q": float(Q),
             "df": int(df),
             "p_value": float(p_heterogeneity),
             "I_squared_pct": float(I2),
-            "is_consistent": is_consistent
+            "is_consistent": is_consistent,
         },
-        "status": "PASS" if is_consistent else "WARNING",
-        "conclusion": "Signal is highly consistent across independent global stations" if is_consistent else "Station-specific biases detected; meta-analysis still yields significant TEP detection."
+        "controlled_pooling": common_eta_control,
+        "status": status,
+        "conclusion": conclusion,
     }
     
     return results

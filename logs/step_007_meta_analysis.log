@@ -1,16 +1,18 @@
-[20:18:24] ═══ Meta-Analysis of INPOP19a and DE430 Results
-[20:18:24] ═══ ================================================================================
-[20:18:24]     INPOP19a (from step_002): η = -3.170e-04 ± 6.041e-05 (5.25σ)
-[20:18:24]     DE430 (from step_005): η = -7.028e-04 ± 1.180e-04 (5.96σ)
-[20:18:24]     Sign consistency: True
-[20:18:24]     INPOP19a weight: 0.968 (baseline: 35.5 years)
-[20:18:24]     DE430 weight:   0.032 (baseline: 4.5 years)
-[20:18:24]     Meta-Analysis Results:
-[20:18:24]       Combined η (statistical only): -3.294e-04 ± 5.859e-05 (5.62σ)
-[20:18:24]       Systematic uncertainty: 3.858e-04
-[20:18:24]       Combined η (total uncertainty): -3.294e-04 ± 3.902e-04 (0.84σ)
-[20:18:24]       Sign consistency: both ephemerides show same sign (qualitative check)
-[20:18:24] ✓   Meta-Analysis Complete
-[20:18:24]     Primary result: η = -3.294e-04 ± 3.902e-04 (0.84σ)
-[20:18:24] Results saved to results/outputs/step_007_meta_analysis.json
-[20:18:24] ✓   Step 007 Complete
+[11:50:31] ═══ Meta-Analysis of INPOP19a and DE430 Results
+[11:50:31] ═══ ================================================================================
+[11:50:31]     Sigma Outlier Detection: median=-0.000, MAD=0.027, sigma=0.040
+[11:50:31]       Threshold=0.239 (6.0σ), Count=762
+[11:50:31]     INPOP19a (from step_003): η = -3.177e-04 ± 6.052e-05 (5.25σ), r = -0.03290
+[11:50:31]     DE430 (from step_006): η = -7.041e-04 ± 1.182e-04 (5.96σ), r = -0.00015
+[11:50:31]     Sign consistency: True
+[11:50:31]     INPOP19a weight: 0.968 (baseline: 35.5 years)
+[11:50:31]     DE430 weight:   0.032 (baseline: 4.5 years)
+[11:50:31]     Meta-Analysis Results:
+[11:50:31]       Combined η (statistical only): -3.302e-04 ± 5.869e-05 (5.63σ)
+[11:50:31]       Systematic uncertainty: 3.864e-04
+[11:50:31]       Combined η (total uncertainty): -3.302e-04 ± 3.908e-04 (0.84σ)
+[11:50:31]       Sign consistency: both ephemerides show same sign (qualitative check)
+[11:50:31] ✓   Meta-Analysis Complete
+[11:50:31]     Primary result: η = -3.302e-04 ± 3.908e-04 (0.84σ)
+[11:50:31] Results saved to results/outputs/step_007_meta_analysis.json
+[11:50:31] ✓   Step 007 Complete

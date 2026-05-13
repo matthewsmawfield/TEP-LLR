@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
-Step 055: Meta-Analysis of Ephemeris Results
-Combines INPOP19a and DE430 results using Bayesian methods to strengthen evidence.
-
-This step provides methodological strengthening when extended DE430 data is not available.
-It combines the two ephemeris results using sign-weighted Bayesian combination,
-accounting for baseline differences and systematic uncertainties.
+Step 007: Meta-Analysis of Ephemeris Results
+Combines INPOP19a and DE430 results using inverse-variance weighting,
+baseline-aware weights, and an ephemeris-difference systematic term.
 
 Author: TEP-LLR Analysis Pipeline
 Date: 2026-05-10
@@ -21,37 +18,31 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, set_verbose_mode
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
+from scripts.utils.statistical_utils import detect_outliers_sigma
 
 import argparse
 
 
 def meta_analysis_ephemerides(verbose=False):
     """
-    Perform Bayesian meta-analysis of INPOP19a and DE430 results.
+    Combine INPOP19a and DE430 η estimates with baseline-aware weighting.
 
-    This combines the two ephemeris results using:
-    1. Sign-weighted combination (since both show negative η)
-    2. Hierarchical modeling accounting for ephemeris-specific systematics
-    3. Baseline-weighted uncertainty quantification
-
-    CRITICAL FIX: Load results from step_002 and step_005 instead of recomputing
-    to ensure consistency with the corrected error calculation.
-
-    Returns:
-        Dictionary with meta-analysis results
+    Loads η and formal errors from step_003 and step_006 outputs. Pearson r and
+    p-values for each ephemeris are computed from the corresponding processed
+    residual CSVs using the same 6σ MAD outlier mask as Step 003 for INPOP19a.
     """
     processed_dir = PROJECT_ROOT / "data" / "processed"
     outputs_dir = PROJECT_ROOT / "results" / "outputs"
 
-    # Load INPOP19a results from step_002 (CORRECTED with sqrt(MSE) scaling)
-    step_002_file = outputs_dir / "step_003_statistical_analysis.json"
-    if not step_002_file.exists():
-        print_status("Step 002 results not found", "ERROR")
+    step_003_file = outputs_dir / "step_003_statistical_analysis.json"
+    if not step_003_file.exists():
+        print_status("step_003_statistical_analysis.json not found", "ERROR")
         return None
 
     import json
-    with open(step_002_file, 'r') as f:
-        step_002_results = json.load(f)
+    with open(step_003_file, 'r') as f:
+        step_003_results = json.load(f)
 
     # Load DE430 results from step_006
     step_006_file = outputs_dir / "step_006_multi_ephemeris_comparison.json"
@@ -62,45 +53,78 @@ def meta_analysis_ephemerides(verbose=False):
     with open(step_006_file, 'r') as f:
         step_006_results = json.load(f)
 
-    # Extract INPOP19a statistics from step_002
+    inpop_csv = processed_dir / "INPOP19a_all_stations_residuals.csv"
+    if not inpop_csv.exists():
+        raise FileNotFoundError(f"Missing processed INPOP file: {inpop_csv}")
+
+    df_inpop = pd.read_csv(inpop_csv)
+    out_inpop = detect_outliers_sigma(df_inpop["residual_m"].values, sigma_threshold=6.0)
+    df_in_clean = df_inpop[~out_inpop]
+    y_in = df_in_clean["residual_m"].values
+    if "cos_elong_rad" in df_in_clean.columns:
+        x_in = df_in_clean["cos_elong_rad"].values
+    else:
+        x_in = np.cos(df_in_clean["elongation_rad"].values)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        inpop_r, inpop_p = stats.pearsonr(y_in, x_in)
+    baseline_inpop = float(
+        df_in_clean["date_julian_year"].max() - df_in_clean["date_julian_year"].min()
+    )
+
+    # Extract INPOP19a statistics from step_003 (η and errors; r from data above)
     stats_inpop = {
         'name': 'INPOP19a',
-        'n_obs': step_002_results['regression_metrics']['n_obs'],
-        'eta': step_002_results['eta_ols'],
-        'eta_error': step_002_results['eta_ols_error'],
-        'snr': abs(step_002_results['eta_ols']) / step_002_results['eta_ols_error'],
-        'baseline_years': 35.5,  # Approximate from data
-        'r': -0.0304,  # From correlation analysis
-        'p_value': 6.8e-7
+        'n_obs': step_003_results['regression_metrics']['n_obs'],
+        'eta': step_003_results['eta_ols'],
+        'eta_error': step_003_results['eta_ols_error'],
+        'snr': abs(step_003_results['eta_ols']) / step_003_results['eta_ols_error'],
+        'baseline_years': baseline_inpop,
+        'r': float(inpop_r),
+        'p_value': float(inpop_p)
     }
 
     # Extract DE430 statistics from step_006
     de430_data = step_006_results['comparisons']['DE430']
-    
+
     # Compute correlation for DE430 from actual data
     de430_file = processed_dir / "DE430_all_residuals.csv"
-    if de430_file.exists():
-        df_de430 = pd.read_csv(de430_file)
-        de430_residuals = df_de430['residual_m'].values
-        de430_cos_elong = np.cos(df_de430['elongation_rad'].values)
+    if not de430_file.exists():
+        raise FileNotFoundError(
+            f"DE430 processed residuals missing: {de430_file}. "
+            "Run DE430 preprocessing (step 002) before meta-analysis."
+        )
+
+    df_de430 = pd.read_csv(de430_file)
+    de430_residuals = df_de430['residual_m'].values
+    de430_cos_elong = np.cos(df_de430['elongation_rad'].values)
+    with suppress_scipy_array_api_matmul_runtime_warning():
         de430_r, de430_p = stats.pearsonr(de430_residuals, de430_cos_elong)
-    else:
-        raise ValueError("step_006 DE430 comparison missing required fields for correlation computation.")
-    
+    baseline_de430 = float(
+        df_de430["date_julian_year"].max() - df_de430["date_julian_year"].min()
+    )
+
     stats_de430 = {
         'name': 'DE430',
         'n_obs': de430_data['n_used'],
         'eta': de430_data['eta'],
         'eta_error': de430_data['eta_error'],
         'snr': de430_data['snr'],
-        'baseline_years': 4.5,  # Approximate from data
+        'baseline_years': baseline_de430,
         'r': float(de430_r) if de430_r is not None else None,
         'p_value': float(de430_p) if de430_p is not None else None
     }
 
     if verbose:
-        print_status(f"INPOP19a (from step_002): η = {stats_inpop['eta']:.3e} ± {stats_inpop['eta_error']:.3e} ({stats_inpop['snr']:.2f}σ)", "CALC")
-        print_status(f"DE430 (from step_005): η = {stats_de430['eta']:.3e} ± {stats_de430['eta_error']:.3e} ({stats_de430['snr']:.2f}σ)", "CALC")
+        print_status(
+            f"INPOP19a (from step_003): η = {stats_inpop['eta']:.3e} ± {stats_inpop['eta_error']:.3e} "
+            f"({stats_inpop['snr']:.2f}σ), r = {stats_inpop['r']:.5f}",
+            "CALC",
+        )
+        print_status(
+            f"DE430 (from step_006): η = {stats_de430['eta']:.3e} ± {stats_de430['eta_error']:.3e} "
+            f"({stats_de430['snr']:.2f}σ), r = {stats_de430['r']:.5f}",
+            "CALC",
+        )
 
     # Meta-analysis: Bayesian combination
     # Weight by inverse variance, but also account for baseline and sign consistency
@@ -208,7 +232,19 @@ def meta_analysis_ephemerides(verbose=False):
             "weights": {
                 "INPOP19a": float(weight_inpop_norm),
                 "DE430": float(weight_de430_norm)
-            }
+            },
+            "interpretation_notes": {
+                "headline_estimands": (
+                    "Primary inference is anchored in Step 040 (unified table) and "
+                    "Step 050 (corrected full-systematic / cluster-robust models), "
+                    "not in snr_total from this ephemeris-combination bookkeeping step."
+                ),
+                "snr_total": (
+                    "snr_total inflates the denominator by a conservative ephemeris-difference "
+                    "systematic term; it is not an independent discovery statistic and can be "
+                    "much smaller than snr_statistical even when both ephemerides are sign-consistent."
+                ),
+            },
         },
         "interpretation": {
             "primary_result": f"η = {eta_combined:.3e} ± {eta_error_total:.3e} ({snr_total:.2f}σ)",

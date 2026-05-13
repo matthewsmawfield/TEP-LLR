@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 039: Lunar Recession Analysis
+Step 037: Lunar Recession Analysis
 
 Tests the lunar orbit recession anomaly (3.82 ± 0.07 cm/year) documented in LLR literature
 against TEP predictions for time-varying orbital dynamics through the dynamical proper
@@ -31,6 +31,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scipy import stats
 import argparse
@@ -69,7 +70,7 @@ def analyze_recession_rate(df: pd.DataFrame) -> dict:
     W = np.diag(weights)
     
     # Weighted least squares
-    beta = np.linalg.lstsq(X.T @ W @ X, X.T @ W @ residuals, rcond=None)[0]
+    beta = stable_lstsq(X.T @ W @ X, X.T @ W @ residuals)[0]
     slope = beta[0]  # cm/year
     intercept = beta[1]
     
@@ -217,7 +218,7 @@ def main():
     set_step_logger(logger)
     set_verbose_mode(args.verbose)
     
-    print_status("Step 039: Lunar Recession Analysis", "STEP")
+    print_status("Step 037: Lunar Recession Analysis", "STEP")
     print_status("Testing lunar orbit recession anomaly vs TEP predictions", "INFO")
     
     # Load data
@@ -298,7 +299,7 @@ def main():
     print_status(f"Discrepancy: Current rate is ~2.2× higher than long-term average", "WARNING")
     print_status(f"TEP interpretation: Dynamical φ field affects orbital evolution", "INFO")
     
-    print_status("Step 039 completed successfully", "PASS")
+    print_status("Step 037 completed successfully", "PASS")
 
 if __name__ == "__main__":
     main()

@@ -2,41 +2,45 @@
     "step_id": "step_007",
     "individual_results": {
         "INPOP19a": {
-            "eta": -0.00031697982024903585,
-            "eta_error": 6.040658378191678e-05,
-            "snr": 5.2474382824463985,
+            "eta": -0.0003177266624680193,
+            "eta_error": 6.051938437639123e-05,
+            "snr": 5.249998256624125,
             "n_obs": 25445,
-            "baseline_years": 35.5,
-            "r": -0.0304,
-            "p_value": 6.8e-07
+            "baseline_years": 35.50749417999987,
+            "r": -0.032895757484115176,
+            "p_value": 1.5332126372717151e-07
         },
         "DE430": {
-            "eta": -0.0007028006239570603,
-            "eta_error": 0.00011800196006775877,
-            "snr": 5.955838560253576,
+            "eta": -0.0007041204781558812,
+            "eta_error": 0.00011823679986658583,
+            "snr": 5.955171984952109,
             "n_obs": 4560,
-            "baseline_years": 4.5,
-            "r": -0.00014820685430005573,
-            "p_value": 0.991984692694441
+            "baseline_years": 4.517808219177596,
+            "r": -0.00014558335525479207,
+            "p_value": 0.9921265718449307
         }
     },
     "meta_analysis": {
         "sign_consistent": true,
         "sign_consistent_note": "Qualitative check only; not used for quantitative weighting (identical weights after renormalisation)",
-        "eta_combined_statistical": -0.0003293839963058887,
-        "eta_error_statistical": 5.8587466402732164e-05,
-        "snr_statistical": 5.622089783533091,
-        "systematic_uncertainty": 0.0003858208037080245,
-        "eta_combined_total": -0.0003293839963058887,
-        "eta_error_total": 0.0003902437492047723,
-        "snr_total": 0.8440468219596037,
+        "eta_combined_statistical": -0.0003301913315887356,
+        "eta_error_statistical": 5.86911599095432e-05,
+        "snr_statistical": 5.625912524094559,
+        "systematic_uncertainty": 0.00038639381568786194,
+        "eta_combined_total": -0.0003301913315887356,
+        "eta_error_total": 0.0003908258346800439,
+        "snr_total": 0.8448554376121329,
         "weights": {
-            "INPOP19a": 0.9678499035364618,
-            "DE430": 0.03215009646353817
+            "INPOP19a": 0.9677410232393946,
+            "DE430": 0.03225897676060531
+        },
+        "interpretation_notes": {
+            "headline_estimands": "Primary inference is anchored in Step 040 (unified table) and Step 050 (corrected full-systematic / cluster-robust models), not in snr_total from this ephemeris-combination bookkeeping step.",
+            "snr_total": "snr_total inflates the denominator by a conservative ephemeris-difference systematic term; it is not an independent discovery statistic and can be much smaller than snr_statistical even when both ephemerides are sign-consistent."
         }
     },
     "interpretation": {
-        "primary_result": "\u03b7 = -3.294e-04 \u00b1 3.902e-04 (0.84\u03c3)",
+        "primary_result": "\u03b7 = -3.302e-04 \u00b1 3.908e-04 (0.84\u03c3)",
         "conclusion": "Sign-consistent ephemerides strengthen evidence"
     },
     "status": "PASS"

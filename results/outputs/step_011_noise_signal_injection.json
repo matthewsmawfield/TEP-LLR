@@ -1,67 +1,69 @@
 {
     "step_id": "step_011",
-    "data_type": "SYNTHETIC (PIPELINE VALIDATION)",
+    "data_type": "REAL_INPOP19A_RESIDUALS (INJECTION_PERTURBATIONS)",
+    "data_source": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv",
+    "n_observations": 26207,
     "injection_results": {
-        "null_test_eta": 3.0304188554222085e-05,
-        "null_test_eta_error": 9.18178097174584e-05,
-        "null_test_snr": 0.33004695545966606,
+        "null_test_eta": 3.0188571373416706e-05,
+        "null_test_eta_error": 9.198976846053882e-05,
+        "null_test_snr": 0.328173142281218,
         "null_test_pass": true,
         "noise_robustness_tests": [
             {
                 "noise_multiplier": 0.5,
                 "total_rms": 0.10614700121680148,
-                "eta": -0.00041336151916983137,
-                "eta_error": 0.00010276686741553133,
-                "snr": 4.022322851376117,
+                "eta": -0.0004140974448563345,
+                "eta_error": 0.00010295933527709377,
+                "snr": 4.021951421324514,
                 "significant": true
             },
             {
                 "noise_multiplier": 1.0,
                 "total_rms": 0.13401256394492714,
-                "eta": -0.00043249104844082575,
-                "eta_error": 0.00012975762673787756,
-                "snr": 3.333068423904652,
+                "eta": -0.00043324429813872877,
+                "eta_error": 0.0001300006442954951,
+                "snr": 3.3326319302999177,
                 "significant": true
             },
             {
                 "noise_multiplier": 2.0,
                 "total_rms": 0.2142268127836872,
-                "eta": -0.00042472590041288573,
-                "eta_error": 0.00020745242266405784,
-                "snr": 2.0473412407464338,
+                "eta": -0.00042590488333165425,
+                "eta_error": 0.00020784090999758067,
+                "snr": 2.049186963897588,
                 "significant": false
             },
             {
                 "noise_multiplier": 3.0,
                 "total_rms": 0.3015485425343074,
-                "eta": -0.0002548401950862156,
-                "eta_error": 0.00029203193019366894,
-                "snr": 0.8726449704222802,
+                "eta": -0.00025517902113135325,
+                "eta_error": 0.00029257885278734827,
+                "snr": 0.8721717878797689,
                 "significant": false
             }
         ],
         "signal_recovery": {
-            "eta_injected": -0.00031697982024903585,
-            "eta_recovered": -0.0003351207910605355,
-            "recovery_error_percent": 5.723068048069164,
+            "eta_injected": -0.0003177266624680193,
+            "eta_recovered": -0.00033585081738274954,
+            "recovery_error_percent": 5.704322946631691,
             "recovery_pass": true
         },
         "detection_thresholds": [
             {
                 "confidence_sigma": 1.0,
-                "min_detectable_eta": 9.181449692036822e-05
+                "min_detectable_eta": 9.198644729441954e-05
             },
             {
                 "confidence_sigma": 2.0,
-                "min_detectable_eta": 0.00018362899384073643
+                "min_detectable_eta": 0.0001839728945888391
             },
             {
                 "confidence_sigma": 3.0,
-                "min_detectable_eta": 0.0002754434907611046
+                "min_detectable_eta": 0.0002759593418832586
             },
             {
                 "confidence_sigma": 5.0,
-                "min_detectable_eta": 0.00045907248460184106
+                "min_detectable_eta": 0.00045993223647209774
             }
         ],
         "injection_valid": true

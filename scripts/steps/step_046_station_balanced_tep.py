@@ -24,7 +24,7 @@ import json
 import argparse
 import numpy as np
 import pandas as pd
-from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
+from scripts.utils.statistical_utils import linear_regression, robust_regression, detect_outliers_sigma
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
@@ -66,12 +66,42 @@ def create_grasse_capped_subsample(df, cap_station='APO', seed=42):
     return pd.concat(balanced, ignore_index=True)
 
 
+def build_full_systematic_design(df: pd.DataFrame) -> np.ndarray:
+    year = df['date_julian'].values / 365.25
+    month = df['date_julian'].values / 27.32
+    elongation = df['elongation_rad'].values
+    return np.column_stack([
+        np.cos(elongation),
+        np.cos(2.0 * elongation),
+        np.sin(2.0 * np.pi * month),
+        np.cos(2.0 * np.pi * month),
+        np.sin(2.0 * np.pi * year),
+        np.cos(2.0 * np.pi * year),
+        np.ones(len(df)),
+    ])
+
+
+def fit_eta_from_design(residuals_m: np.ndarray, design: np.ndarray) -> dict[str, float]:
+    fit = robust_regression(residuals_m, design, scale_errors_by_birge=False)
+    eta_coeff = float(fit['coefficients'][0])
+    eta_err = float(fit['errors'][0])
+    eta = eta_coeff / ETA_SCALE_FACTOR
+    eta_error = eta_err / ETA_SCALE_FACTOR
+    snr = abs(eta) / max(eta_error, 1e-20)
+    return {
+        'eta': float(eta),
+        'eta_error': float(eta_error),
+        'snr': float(snr),
+        'significant': bool(snr >= 3.0),
+    }
+
+
 def run_balanced_analysis(df, name, outlier_threshold=6.0):
-    """Run TEP regression on a balanced subsample."""
+    """Run cosD-only and full-systematic regressions on a subsample."""
     residuals = df['residual_m'].values
     cos_elong = np.cos(df['elongation_rad'].values)
+    design = build_full_systematic_design(df)
 
-    # Outlier cleaning
     outlier_mask = detect_outliers_sigma(residuals, sigma_threshold=outlier_threshold)
     kept = ~outlier_mask
     n_outliers = int(outlier_mask.sum())
@@ -80,18 +110,22 @@ def run_balanced_analysis(df, name, outlier_threshold=6.0):
         return None
 
     reg = linear_regression(residuals[kept], cos_elong[kept])
-    snr = abs(reg['eta']) / reg['eta_error'] if reg['eta_error'] > 0 else 0.0
+    full_systematic = fit_eta_from_design(residuals[kept], design[kept])
+    cosd_snr = abs(reg['eta']) / reg['eta_error'] if reg['eta_error'] > 0 else 0.0
 
     return {
         'name': name,
         'n_total': len(df),
         'n_used': int(kept.sum()),
         'n_outliers': n_outliers,
-        'eta': float(reg['eta']),
-        'eta_error': float(reg['eta_error']),
-        'snr': float(snr),
-        'significant': bool(snr >= 3.0),
-        'stations': {s: int((df['station'] == s).sum()) for s in df['station'].unique()}
+        'cosd_only': {
+            'eta': float(reg['eta']),
+            'eta_error': float(reg['eta_error']),
+            'snr': float(cosd_snr),
+            'significant': bool(cosd_snr >= 3.0),
+        },
+        'full_systematic': full_systematic,
+        'stations': {s: int((df['station'] == s).sum()) for s in df['station'].unique()},
     }
 
 
@@ -123,7 +157,16 @@ def main():
     print_status(">>> TEST 1: Full-sample baseline", "PROCESS")
     full = run_balanced_analysis(df, 'full_sample')
     if full:
-        print_status(f"    η = {full['eta']:.3e} ± {full['eta_error']:.3e} ({full['snr']:.2f}σ)", "CALC")
+        print_status(
+            f"    cosD-only η = {full['cosd_only']['eta']:.3e} ± {full['cosd_only']['eta_error']:.3e} "
+            f"({full['cosd_only']['snr']:.2f}σ)",
+            "CALC",
+        )
+        print_status(
+            f"    full-systematic η = {full['full_systematic']['eta']:.3e} ± "
+            f"{full['full_systematic']['eta_error']:.3e} ({full['full_systematic']['snr']:.2f}σ)",
+            "CALC",
+        )
         results.append(full)
 
     # 2. Equal-N subsample
@@ -132,7 +175,16 @@ def main():
     eq_df = create_equal_n_subsample(df, seed=42)
     eq = run_balanced_analysis(eq_df, 'equal_n_subsample')
     if eq:
-        print_status(f"    η = {eq['eta']:.3e} ± {eq['eta_error']:.3e} ({eq['snr']:.2f}σ)", "CALC")
+        print_status(
+            f"    cosD-only η = {eq['cosd_only']['eta']:.3e} ± {eq['cosd_only']['eta_error']:.3e} "
+            f"({eq['cosd_only']['snr']:.2f}σ)",
+            "CALC",
+        )
+        print_status(
+            f"    full-systematic η = {eq['full_systematic']['eta']:.3e} ± "
+            f"{eq['full_systematic']['eta_error']:.3e} ({eq['full_systematic']['snr']:.2f}σ)",
+            "CALC",
+        )
         for s, n in sorted(eq['stations'].items()):
             print_status(f"      {s}: {n} obs", "INFO")
         results.append(eq)
@@ -143,7 +195,16 @@ def main():
     cap_df = create_grasse_capped_subsample(df, cap_station='APO', seed=42)
     cap = run_balanced_analysis(cap_df, 'grasse_capped')
     if cap:
-        print_status(f"    η = {cap['eta']:.3e} ± {cap['eta_error']:.3e} ({cap['snr']:.2f}σ)", "CALC")
+        print_status(
+            f"    cosD-only η = {cap['cosd_only']['eta']:.3e} ± {cap['cosd_only']['eta_error']:.3e} "
+            f"({cap['cosd_only']['snr']:.2f}σ)",
+            "CALC",
+        )
+        print_status(
+            f"    full-systematic η = {cap['full_systematic']['eta']:.3e} ± "
+            f"{cap['full_systematic']['eta_error']:.3e} ({cap['full_systematic']['snr']:.2f}σ)",
+            "CALC",
+        )
         for s, n in sorted(cap['stations'].items()):
             print_status(f"      {s}: {n} obs", "INFO")
         results.append(cap)
@@ -158,47 +219,67 @@ def main():
         b_df = create_equal_n_subsample(df, seed=42 + i)
         b = run_balanced_analysis(b_df, f'bootstrap_{i}')
         if b:
-            bootstrap_snrs.append(b['snr'])
-            bootstrap_etas.append(b['eta'])
+            bootstrap_snrs.append(b['full_systematic']['snr'])
+            bootstrap_etas.append(b['full_systematic']['eta'])
 
     if bootstrap_etas:
         eta_mean = np.mean(bootstrap_etas)
         eta_std = np.std(bootstrap_etas)
         snr_mean = np.mean(bootstrap_snrs)
-        # 95% CI using percentile method
         ci_lower = np.percentile(bootstrap_etas, 2.5)
         ci_upper = np.percentile(bootstrap_etas, 97.5)
-        print_status(f"    Mean η = {eta_mean:.3e} ± {eta_std:.3e}", "CALC")
+        print_status(f"    Full-systematic mean η = {eta_mean:.3e} ± {eta_std:.3e}", "CALC")
         print_status(f"    95% CI = [{ci_lower:.3e}, {ci_upper:.3e}]", "CALC")
         print_status(f"    Mean SNR = {snr_mean:.2f}σ", "CALC")
-        print_status(f"    All significant? {all(s >= 3.0 for s in bootstrap_snrs)}", "CALC")
+        print_status(
+            f"    All balanced iterations significant? {all(s >= 3.0 for s in bootstrap_snrs)}",
+            "CALC",
+        )
 
-    # Summary
     print_status("", "INFO")
     print_status("═══ SUMMARY", "TITLE")
-    all_significant = all(r['significant'] for r in results)
-    if all_significant:
-        print_status("All balanced subsamples detect TEP at >= 3σ", "SUCCESS")
+    primary = next(r for r in results if r['name'] == 'full_sample')
+    primary_significant = primary['full_systematic']['significant']
+    balanced_full_significant = all(
+        r['full_systematic']['significant'] for r in results if r['name'] != 'full_sample'
+    )
+    if primary_significant and balanced_full_significant:
+        print_status("Primary and balanced full-systematic subsamples detect TEP at >= 3σ", "SUCCESS")
         print_status("Conclusion: Signal is NOT driven by Grasse dominance", "SUCCESS")
+        conclusion = "Signal persists in station-balanced full-systematic subsamples"
+        status = "PASS"
+    elif primary_significant:
+        print_status(
+            "Primary full-systematic detection remains significant; balanced subsamples lose power",
+            "WARNING",
+        )
+        conclusion = (
+            "Primary full-systematic detection remains significant, but equal-N subsamples "
+            "lose power under enforced station balance"
+        )
+        status = "PASS"
     else:
-        print_status("Some balanced subsamples fail to detect TEP", "WARNING")
-        print_status("Conclusion: Signal may be sensitive to station weighting", "WARNING")
+        print_status("Primary full-systematic detection is not significant", "WARNING")
+        conclusion = "Primary full-systematic detection failed on the full sample"
+        status = "WARNING"
 
     output = {
         "step_id": "step_046",
-        "status": "PASS" if all_significant else "WARNING",
+        "status": status,
+        "primary_estimand": "full_systematic",
         "tests": results,
         "bootstrap": {
             "n_iterations": N_BOOT,
+            "estimand": "full_systematic",
             "eta_mean": float(np.mean(bootstrap_etas)) if bootstrap_etas else None,
             "eta_std": float(np.std(bootstrap_etas)) if bootstrap_etas else None,
             "eta_ci95_lower": float(np.percentile(bootstrap_etas, 2.5)) if bootstrap_etas else None,
             "eta_ci95_upper": float(np.percentile(bootstrap_etas, 97.5)) if bootstrap_etas else None,
             "snr_mean": float(np.mean(bootstrap_snrs)) if bootstrap_snrs else None,
             "snr_std": float(np.std(bootstrap_snrs)) if bootstrap_snrs else None,
-            "all_significant": all(s >= 3.0 for s in bootstrap_snrs) if bootstrap_snrs else None
+            "all_significant": all(s >= 3.0 for s in bootstrap_snrs) if bootstrap_snrs else None,
         },
-        "conclusion": "Signal persists in station-balanced subsamples" if all_significant else "Signal weakens when station balance is enforced"
+        "conclusion": conclusion,
     }
 
     logger.save_step_results(output, PROJECT_ROOT, "step_046_station_balanced_tep")

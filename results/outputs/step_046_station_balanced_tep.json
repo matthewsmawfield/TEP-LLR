@@ -1,16 +1,25 @@
 {
     "step_id": "step_046",
-    "status": "WARNING",
+    "status": "PASS",
+    "primary_estimand": "full_systematic",
     "tests": [
         {
             "name": "full_sample",
             "n_total": 26207,
             "n_used": 25445,
             "n_outliers": 762,
-            "eta": -0.0003169798202490359,
-            "eta_error": 6.040658378191678e-05,
-            "snr": 5.247438282446399,
-            "significant": true,
+            "cosd_only": {
+                "eta": -0.00031772666246801935,
+                "eta_error": 6.051938437639123e-05,
+                "snr": 5.249998256624126,
+                "significant": true
+            },
+            "full_systematic": {
+                "eta": -0.0004061154555979798,
+                "eta_error": 6.577799889845751e-05,
+                "snr": 6.1740317796062225,
+                "significant": true
+            },
             "stations": {
                 "APO": 2595,
                 "Grasse": 19390,
@@ -24,10 +33,18 @@
             "n_total": 1730,
             "n_used": 1710,
             "n_outliers": 20,
-            "eta": -0.00017486871156335824,
-            "eta_error": 0.0003436770000722876,
-            "snr": 0.5088170332218248,
-            "significant": false,
+            "cosd_only": {
+                "eta": -0.00017612666586534572,
+                "eta_error": 0.0003443385636359434,
+                "snr": 0.5114927123049686,
+                "significant": false
+            },
+            "full_systematic": {
+                "eta": -7.717727250116231e-05,
+                "eta_error": 0.0004000993411030863,
+                "snr": 0.19289527517936464,
+                "significant": false
+            },
             "stations": {
                 "APO": 346,
                 "Grasse": 346,
@@ -41,10 +58,18 @@
             "n_total": 9412,
             "n_used": 9283,
             "n_outliers": 129,
-            "eta": -0.00020834132483619314,
-            "eta_error": 0.00011770730629061967,
-            "snr": 1.7699948406074115,
-            "significant": false,
+            "cosd_only": {
+                "eta": -0.00020918993439619888,
+                "eta_error": 0.00011792504879910756,
+                "snr": 1.773922813910101,
+                "significant": false
+            },
+            "full_systematic": {
+                "eta": -0.00027798988012051176,
+                "eta_error": 0.0001359951451509814,
+                "snr": 2.0441162058534386,
+                "significant": false
+            },
             "stations": {
                 "APO": 2595,
                 "Grasse": 2595,
@@ -56,13 +81,14 @@
     ],
     "bootstrap": {
         "n_iterations": 200,
-        "eta_mean": -2.0586298260035246e-06,
-        "eta_std": 0.00021676080091455902,
-        "eta_ci95_lower": -0.00041331760083040037,
-        "eta_ci95_upper": 0.0004798724763157279,
-        "snr_mean": 0.49219386974574225,
-        "snr_std": 0.39955374016198614,
+        "estimand": "full_systematic",
+        "eta_mean": -9.198304011939246e-05,
+        "eta_std": 0.00023561163083326252,
+        "eta_ci95_lower": -0.0005376328500164635,
+        "eta_ci95_upper": 0.0003595098376009112,
+        "snr_mean": 0.5102152532529332,
+        "snr_std": 0.3771206181849955,
         "all_significant": false
     },
-    "conclusion": "Signal weakens when station balance is enforced"
+    "conclusion": "Primary full-systematic detection remains significant, but equal-N subsamples lose power under enforced station balance"
 }

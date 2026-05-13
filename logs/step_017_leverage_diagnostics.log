@@ -1,41 +1,41 @@
-[20:18:33] ═══ ═══ Starting Step 017: Leverage Diagnostics Investigation...
-[20:18:33]     ═══ STEP PURPOSE: Investigate OLS/Theil-Sen factor-of-2 discrepancy and leverage influence on TEP detection
-[20:18:33]     ═══ METHOD: High-leverage point phase mapping, phased leverage removal, Cook's D excision, bootstrap influence analysis
-[20:18:33]     ═══ PARAMETERS: Cook's D threshold=4/n, Theil-Sen sample size=10000, bootstrap samples=500
-[20:18:33] Step 017: Leverage Diagnostics Investigation
-[20:18:33]     ═══ DATA SUMMARY
-[20:18:33]         Dataset: N = 26,207 observations
-[20:18:33]         Data source: INPOP19a_all_stations_residuals.csv
-[20:18:33]         Mean leverage: 7.631549e-05
-[20:18:33]         High-leverage threshold: 1.526310e-04
-[20:18:33]         High-leverage points: 1,429 (5.5%)
-[20:18:33]     ═══ ANALYSIS TRACE
-[20:18:33] >>> >>> Analyzing high-leverage point distribution across elongation phases
-[20:18:33]         Distribution pattern: distributed
-[20:18:33] High-leverage distribution: distributed
-[20:18:33] >>> >>> Testing signal persistence with phased leverage removal
-[20:18:33] >>> >>> Running bootstrap leverage influence analysis
-[20:18:33] Running bootstrap leverage analysis...
-[20:18:36] >>> >>> Executing formal Cook's D leverage excision
-[20:18:36] Executing Formal Cook's D Leverage Excision...
-[20:18:38]         Excised η (OLS): -3.311e-04 ± 5.836e-05 (SNR: 5.67σ)
-[20:18:38] Excised ETA (OLS): -3.311e-04 ± 5.836e-05 (SNR: 5.67σ)
-[20:18:38]     ═══ RESULTS SUMMARY
-[20:18:38]         Full sample η (OLS): -4.525e-04
-[20:18:38]         Full sample η (Theil-Sen): -2.035e-04
-[20:18:38]         OLS/Theil-Sen ratio: 2.22x
-[20:18:38]         Excised η (Cook's D): -3.311e-04 ± 5.836e-05
-[20:18:38]         Excised SNR: 5.67σ
-[20:18:38]         Points removed: 1,030 (3.9%)
-[20:18:38]     ═══ INTERPRETATION
-[20:18:38]         Leverage influence assessment: high
-[20:18:38]         Cook's D excision provides robust η estimate while maintaining high SNR
-[20:18:38]         Recommended for manuscript: η = -3.31e-04 ± 5.84e-05 (Leverage-Excised OLS)
-[20:18:38]     ═══ REPRODUCIBILITY
-[20:18:38]         Output file: results/outputs/step_017_leverage_diagnostics.json
-[20:18:38]         Cook's D threshold: 4/n
-[20:18:38]         Theil-Sen sample size: 10000
-[20:18:38]         Bootstrap samples: 1000
-[20:18:38] Results saved to results/outputs/step_017_leverage_diagnostics.json
-[20:18:38] Recommended reporting: η = -3.31e-04 ± 5.84e-05 (Leverage-Excised OLS)
-[20:18:38] ✓   Recommended reporting: η = -3.31e-04 ± 5.84e-05 (Leverage-Excised OLS)
+[11:50:40] ═══ ═══ Starting Step 017: Leverage Diagnostics Investigation...
+[11:50:40]     ═══ STEP PURPOSE: Investigate OLS/Theil-Sen factor-of-2 discrepancy and leverage influence on TEP detection
+[11:50:40]     ═══ METHOD: High-leverage point phase mapping, phased leverage removal, Cook's D excision, bootstrap influence analysis
+[11:50:40]     ═══ PARAMETERS: Cook's D threshold=4/n, Theil-Sen sample size=10000, bootstrap samples=500
+[11:50:40] Step 017: Leverage Diagnostics Investigation
+[11:50:40]     ═══ DATA SUMMARY
+[11:50:40]         Dataset: N = 26,207 observations
+[11:50:40]         Data source: INPOP19a_all_stations_residuals.csv
+[11:50:40]         Mean leverage: 7.631549e-05
+[11:50:40]         High-leverage threshold: 1.526310e-04
+[11:50:40]         High-leverage points: 1,432 (5.5%)
+[11:50:40]     ═══ ANALYSIS TRACE
+[11:50:40] >>> >>> Analyzing high-leverage point distribution across elongation phases
+[11:50:40]         Distribution pattern: distributed
+[11:50:40] High-leverage distribution: distributed
+[11:50:40] >>> >>> Testing signal persistence with phased leverage removal
+[11:50:40] >>> >>> Running bootstrap leverage influence analysis
+[11:50:40] Running bootstrap leverage analysis...
+[11:50:42] >>> >>> Executing formal Cook's D leverage excision
+[11:50:42] Executing Formal Cook's D Leverage Excision...
+[11:50:42]         Excised η (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
+[11:50:42] Excised ETA (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
+[11:50:42]     ═══ RESULTS SUMMARY
+[11:50:42]         Full sample η (OLS): -4.533e-04
+[11:50:42]         Full sample η (Theil-Sen): -2.041e-04
+[11:50:42]         OLS/Theil-Sen ratio: 2.22x
+[11:50:42]         Excised η (Cook's D): -3.305e-04 ± 5.847e-05
+[11:50:42]         Excised SNR: 5.65σ
+[11:50:42]         Points removed: 1,031 (3.9%)
+[11:50:42]     ═══ INTERPRETATION
+[11:50:42]         Leverage influence assessment: high
+[11:50:42]         Cook's D excision provides robust η estimate while maintaining high SNR
+[11:50:42]         Recommended for manuscript: η = -3.31e-04 ± 5.85e-05 (Leverage-Excised OLS)
+[11:50:42]     ═══ REPRODUCIBILITY
+[11:50:42]         Output file: results/outputs/step_017_leverage_diagnostics.json
+[11:50:42]         Cook's D threshold: 4/n
+[11:50:42]         Theil-Sen sample size: 10000
+[11:50:42]         Bootstrap samples: 1000
+[11:50:42] Results saved to results/outputs/step_017_leverage_diagnostics.json
+[11:50:42] Recommended reporting: η = -3.31e-04 ± 5.85e-05 (Leverage-Excised OLS)
+[11:50:42] ✓   Recommended reporting: η = -3.31e-04 ± 5.85e-05 (Leverage-Excised OLS)

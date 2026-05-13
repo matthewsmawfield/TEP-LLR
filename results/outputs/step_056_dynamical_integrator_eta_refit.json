@@ -1,0 +1,75 @@
+{
+  "step_id": "step_056",
+  "status": "PASS",
+  "step": "056_dynamical_integrator_eta_refit",
+  "method": "Linearized dynamical Nordtvedt refit on published INPOP19a and DE430 post-fit residuals with full-systematic nuisance design and optional cos(D)\u00b7f(r\u2299) orbital-modulation extension.",
+  "scope": "Open reproducible linearized integrator-parameter extraction. Not an IMCCE INPOP or JPL DE430 source-level integrator modification.",
+  "inpop19a": {
+    "ephemeris": "INPOP19a",
+    "n_obs": 25445,
+    "linearized_integrator_eta": {
+      "eta": -0.0004061154555979798,
+      "eta_error": 6.577799889845751e-05,
+      "snr": 6.1740317796062225,
+      "n_obs": 25445,
+      "rss_m2": 95.76938074729598,
+      "condition_number": 3.2400372414461494
+    },
+    "gauss_newton_full_systematic": {
+      "eta": -0.0004061154555979798,
+      "eta_error": 6.577799889845751e-05,
+      "snr": 6.1740317796062225,
+      "iterations": 2,
+      "history": [
+        -0.0004061154555979798,
+        -0.0004061154555979798
+      ]
+    },
+    "extended_orbital_modulation": {
+      "eta0": -0.0004083769267525085,
+      "eta0_error": 6.590641691631933e-05,
+      "snr": 6.196315106479242,
+      "eta_helio_coupling_m": -0.0007387327825224862,
+      "eta_helio_coupling_error_m": 0.0013386042470135513
+    }
+  },
+  "de430": {
+    "ephemeris": "DE430",
+    "n_obs": 4560,
+    "linearized_integrator_eta": {
+      "eta": -0.0005976986078411144,
+      "eta_error": 0.00011851408872240027,
+      "snr": 5.043270502978974,
+      "n_obs": 4560,
+      "rss_m2": 13.49181656293344,
+      "condition_number": 2.510832968398684
+    },
+    "gauss_newton_full_systematic": {
+      "eta": -0.0005976986078411144,
+      "eta_error": 0.00011851408872240027,
+      "snr": 5.043270502978974,
+      "iterations": 2,
+      "history": [
+        -0.0005976986078411144,
+        -0.0005976986078411144
+      ]
+    },
+    "extended_orbital_modulation": {
+      "eta0": -0.0006024118439961182,
+      "eta0_error": 0.00011846714159989819,
+      "snr": 5.085054267880098,
+      "eta_helio_coupling_m": 0.006438271714992336,
+      "eta_helio_coupling_error_m": 0.002663298331466185
+    }
+  },
+  "cross_ephemeris": {
+    "delta_eta": 0.0001915831522431346,
+    "delta_eta_error": 0.00013554458441703395,
+    "delta_sigma": 1.4134327318728217,
+    "consistent_within_3sigma": true
+  },
+  "crd_range_forward_refit": {
+    "status": "NOT_RUN",
+    "reason": "Archived CRD normal points in data/raw require the JPL/MLRS lunar light-time and station-range reduction chain. A Skyfield-only range forward model does not reproduce LLR O\u2013C at millimetre level, so no standalone range-level refit is reported here."
+  }
+}

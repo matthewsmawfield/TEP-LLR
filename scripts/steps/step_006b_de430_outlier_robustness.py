@@ -33,6 +33,7 @@ from scipy import stats
 from typing import Dict, List, Tuple
 
 from scripts.utils.config import get_config
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
@@ -42,7 +43,8 @@ TEP_CONFIG = get_config()
 
 def _fit_regression(residuals: np.ndarray, cos_elong: np.ndarray) -> Dict:
     """Fit OLS regression and return correlation + regression metrics."""
-    r, p = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r, p = stats.pearsonr(residuals, cos_elong)
     reg = linear_regression(residuals, cos_elong)
     snr = abs(reg['eta']) / reg['eta_error'] if reg['eta_error'] > 0 else 0.0
     return {
@@ -143,13 +145,14 @@ def bootstrap_ci(residuals: np.ndarray, cos_elong: np.ndarray,
     r_boot = np.zeros(n_bootstrap)
     eta_boot = np.zeros(n_bootstrap)
 
-    for i in range(n_bootstrap):
-        idx = rng.choice(n, size=n, replace=True)
-        y_s = residuals[idx]
-        x_s = cos_elong[idx]
-        r_boot[i], _ = stats.pearsonr(y_s, x_s)
-        reg = linear_regression(y_s, x_s)
-        eta_boot[i] = reg['eta']
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        for i in range(n_bootstrap):
+            idx = rng.choice(n, size=n, replace=True)
+            y_s = residuals[idx]
+            x_s = cos_elong[idx]
+            r_boot[i], _ = stats.pearsonr(y_s, x_s)
+            reg = linear_regression(y_s, x_s)
+            eta_boot[i] = reg['eta']
 
     return {
         'n_bootstrap': n_bootstrap,
@@ -176,16 +179,18 @@ def permutation_test(residuals: np.ndarray, cos_elong: np.ndarray,
 
     rng = np.random.RandomState(seed)
     n = len(residuals)
-    r_obs, _ = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_obs, _ = stats.pearsonr(residuals, cos_elong)
     r_obs = float(r_obs)
 
     n_exceed = 0
     r_perm = np.zeros(n_permutations)
-    for i in range(n_permutations):
-        y_shuffled = rng.permutation(residuals)
-        r_perm[i], _ = stats.pearsonr(y_shuffled, cos_elong)
-        if abs(r_perm[i]) >= abs(r_obs):
-            n_exceed += 1
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        for i in range(n_permutations):
+            y_shuffled = rng.permutation(residuals)
+            r_perm[i], _ = stats.pearsonr(y_shuffled, cos_elong)
+            if abs(r_perm[i]) >= abs(r_obs):
+                n_exceed += 1
 
     p_perm = (n_exceed + 1) / (n_permutations + 1)
 
@@ -225,7 +230,8 @@ def de430_outlier_robustness(verbose: bool = False) -> Dict:
     # ------------------------------------------------------------------
     # 1. Raw (uncleaned) correlation
     # ------------------------------------------------------------------
-    raw_r, raw_p = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        raw_r, raw_p = stats.pearsonr(residuals, cos_elong)
     if verbose:
         print_status("Raw DE430 correlation (no outlier removal):", "PROCESS")
         print_status(f"  r = {raw_r:.6f}, p = {raw_p:.4f}", "CALC")

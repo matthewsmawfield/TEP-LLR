@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 028: TEP Core Density Simulation
+Step 026: TEP Core Density Simulation
 
 Simulates Earth's and Moon's internal density profiles to understand the
 degree of Temporal Topology flattening in each planetary interior.
@@ -24,6 +24,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import json
 import numpy as np
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+from scripts.utils.statistical_utils import require_step003_eta_ols, require_step003_eta_ols_error
 from scripts.utils.llr_constants import (
     RHO_T,
     RHO_T_ERROR,
@@ -99,18 +100,18 @@ def run_core_simulation(logger, rho_T_input=None):
     logger.info(f"    Earth shielding factor: {earth_shielding:.4e}")
     logger.info(f"    Moon shielding factor: {moon_shielding:.4e}")
 
-    # Load measured η from step_002 for comparison
-    step_002_path = PROJECT_ROOT / "results" / "outputs" / "step_003_statistical_analysis.json"
-    if step_002_path.exists():
-        with open(step_002_path, "r") as f:
-            step_002_results = json.load(f)
-        measured_eta = float(step_002_results.get("eta_ols", 0))
-        measured_eta_error = float(step_002_results.get("eta_ols_error", 0))
-        logger.info(f"    Measured η from LLR: {measured_eta:.4e} ± {measured_eta_error:.4e}")
-    else:
-        measured_eta = None
-        measured_eta_error = None
-        logger.warning("    Step 002 results not found, cannot compare with measured η")
+    # Load measured η from step_003 statistical output
+    step_003_path = PROJECT_ROOT / "results" / "outputs" / "step_003_statistical_analysis.json"
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. "
+            "Run the empirical pipeline before the core-density comparison."
+        )
+    with open(step_003_path, "r") as f:
+        step_003_results = json.load(f)
+    measured_eta = require_step003_eta_ols(step_003_results)
+    measured_eta_error = require_step003_eta_ols_error(step_003_results)
+    logger.info(f"    Measured η from LLR: {measured_eta:.4e} ± {measured_eta_error:.4e}")
 
     # The shielding differential (Earth - Moon) quantifies the differential degree of
     # Temporal Topology flattening between Earth and Moon interiors. This differential

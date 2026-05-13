@@ -88,7 +88,7 @@
         }
     },
     "total_systematic_cm": 0.2696293752542553,
-    "eta_fit": -0.0004524792725699482,
+    "eta_fit": -0.00045329831411731363,
     "n_observations": 26207,
     "data_driven": true,
     "status": "PASS"

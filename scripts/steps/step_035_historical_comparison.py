@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 
-Step 037: Historical Comparison Analysis
+Step 035: Historical Comparison Analysis
 
 Compares the modern TEP detection to the 1998 Müller & Nordtvedt finding of an
 unexplained ~1 cm synodic residual signal in LLR data.
@@ -187,7 +187,7 @@ def main():
     set_step_logger(logger)
     set_verbose_mode(args.verbose)
     
-    print_status("Step 037: Historical Comparison Analysis", "STEP")
+    print_status("Step 035: Historical Comparison Analysis", "STEP")
     print_status("Comparing TEP detection to Müller & Nordtvedt (1998)", "INFO")
     
     # Load data
@@ -249,7 +249,7 @@ def main():
         print_status(f"TEP modern C-SPAD: {abs(results_modern['amplitude_m'])*100:.2f} ± {results_modern['amplitude_error_m']*100:.2f} cm at {results_modern['snr']:.1f}σ", "INFO")
     print_status(f"\nAssessment: {comparison['historical_assessment']['significance']}", "PASS")
     
-    print_status("Step 037 completed successfully", "PASS")
+    print_status("Step 035 completed successfully", "PASS")
 
 if __name__ == "__main__":
     main()

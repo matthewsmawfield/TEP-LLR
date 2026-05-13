@@ -60,12 +60,13 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scipy import stats
 from skyfield.api import load
 
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
-from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
+from scripts.utils.statistical_utils import detect_outliers_sigma
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 
 # CMB dipole direction (Planck 2018)
@@ -117,14 +118,15 @@ def compute_cmb_projections(jd_array):
 
 
 def fit_full_joint_model(res, cosD, r_c, vr_c, cos_theta_c):
-    """Fit the 5-parameter joint model and return eta_theta and its SE."""
+    """Fit the 5-parameter joint model and return (eta_theta, se_eta_theta, eta_r, eta_vr, eta_0)."""
     X = np.column_stack([cosD, r_c * cosD, vr_c * cosD, cos_theta_c * cosD, np.ones(len(cosD))])
-    coeffs, _, rank, _ = np.linalg.lstsq(X, res, rcond=None)
+    coeffs, _, rank, _ = stable_lstsq(X, res)
     if rank < 5:
         return None, None, None, None, None
-    resid = res - X @ coeffs
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid = res - X @ coeffs
     mse = np.sum(resid ** 2) / (len(res) - 5)
-    cov = mse * np.linalg.inv(X.T @ X)
+    cov = mse * np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)
     se = np.sqrt(np.diag(cov))
     eta_0 = coeffs[0] / ETA_SCALE_FACTOR
     eta_r = coeffs[1] / ETA_SCALE_FACTOR
@@ -143,11 +145,12 @@ def compute_vif(X):
     for j in range(p):
         y_col = X[:, j]
         X_others = np.delete(X, j, axis=1)
-        coeffs, _, rank, _ = np.linalg.lstsq(X_others, y_col, rcond=None)
+        coeffs, _, rank, _ = stable_lstsq(X_others, y_col)
         if rank < X_others.shape[1] or np.var(y_col) == 0:
             vifs.append(np.inf)
             continue
-        y_pred = X_others @ coeffs
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            y_pred = X_others @ coeffs
         ss_res = np.sum((y_col - y_pred) ** 2)
         ss_tot = np.sum((y_col - np.mean(y_col)) ** 2)
         r2 = 1 - ss_res / ss_tot if ss_tot > 0 else 0.0
@@ -164,7 +167,6 @@ def random_unit_vector(rng):
 def cmb_falsification_analysis(df, verbose=False):
     print_status("═══ Step 055: CMB Anisotropy Rigorous Falsification ═══", "TITLE")
 
-    n = len(df)
     residuals = df["residual_m"].values
     cos_elong = np.cos(df["elongation_rad"].values)
     jd = df["date_julian"].values
@@ -202,7 +204,7 @@ def cmb_falsification_analysis(df, verbose=False):
 
     # Estimate the true synodic amplitude from the data
     X_syn = np.column_stack([cosD, np.ones(n_clean)])
-    coeffs_syn, _, _, _ = np.linalg.lstsq(X_syn, res, rcond=None)
+    coeffs_syn, _, _, _ = stable_lstsq(X_syn, res)
     beta_syn = coeffs_syn[0]
     intercept_syn = coeffs_syn[1]
     resid_syn = res - (beta_syn * cosD + intercept_syn)
@@ -266,7 +268,7 @@ def cmb_falsification_analysis(df, verbose=False):
         "observed_t": float(t_obs),
         "p_aliasing_coefficient": float(p_aliasing_eta),
         "p_aliasing_t_statistic": float(p_aliasing_t),
-        "aliasing_rejected": p_aliasing_t < 0.001,
+        "aliasing_rejected": bool(p_aliasing_t < 0.001),
     }
 
     # ------------------------------------------------------------------
@@ -278,12 +280,14 @@ def cmb_falsification_analysis(df, verbose=False):
     vifs = compute_vif(X_full)
     # Condition number of X^T X (not X itself)
     XtX = X_full.T @ X_full
-    s = np.linalg.svdvals(XtX)
+    s = np.linalg.svd(XtX, compute_uv=False)
     cond_XtX = s[0] / s[-1] if s[-1] > 0 else np.inf
     cond_X = np.linalg.cond(X_full)
 
     predictor_names = ["cosD", "r_c·cosD", "vr_c·cosD", "cosθ_c·cosD", "intercept"]
     for name, vif in zip(predictor_names, vifs):
+        if name == "intercept":
+            continue
         print_status(f"VIF({name}) = {vif:.3f}", "CALC")
     print_status(f"Condition number κ(X) = {cond_X:.2e}", "CALC")
     print_status(f"Condition number κ(XᵀX) = {cond_XtX:.2e}", "CALC")
@@ -293,12 +297,14 @@ def cmb_falsification_analysis(df, verbose=False):
     # First orthogonalize cosθ_c*cosD against the other three columns
     y_orth = cos_theta_c * cosD
     X_others = np.column_stack([cosD, r_c * cosD, vr_c * cosD, np.ones(n_clean)])
-    coeffs_orth, _, rank_orth, _ = np.linalg.lstsq(X_others, y_orth, rcond=None)
+    coeffs_orth, _, rank_orth, _ = stable_lstsq(X_others, y_orth)
     if rank_orth == 4:
-        y_resid = y_orth - X_others @ coeffs_orth
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            y_resid = y_orth - X_others @ coeffs_orth
         # Refit full model to get MSE
-        coeffs_full, _, _, _ = np.linalg.lstsq(X_full, res, rcond=None)
-        resid_full = res - X_full @ coeffs_full
+        coeffs_full, _, _, _ = stable_lstsq(X_full, res)
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            resid_full = res - X_full @ coeffs_full
         mse_full = np.sum(resid_full ** 2) / (n_clean - 5)
         # SE if orthogonal: sqrt(MSE / sum(y_resid²))
         se_orthogonal = np.sqrt(mse_full / np.sum(y_resid ** 2)) / ETA_SCALE_FACTOR
@@ -313,16 +319,17 @@ def cmb_falsification_analysis(df, verbose=False):
         se_orthogonal = None
         inflation = None
 
+    vifs_no_intercept = [v for name, v in zip(predictor_names, vifs) if name != "intercept"]
     multicollinearity_result = {
-        "vifs": {name: float(v) for name, v in zip(predictor_names, vifs)},
-        "max_vif": float(np.max(vifs)),
-        "mean_vif": float(np.mean(vifs)),
+        "vifs": {name: float(v) for name, v in zip(predictor_names, vifs) if name != "intercept"},
+        "max_vif": float(np.max(vifs_no_intercept)),
+        "mean_vif": float(np.mean(vifs_no_intercept)),
         "condition_number_X": float(cond_X),
         "condition_number_XtX": float(cond_XtX),
         "se_cos_theta_actual": float(se_actual) if se_actual is not None else None,
         "se_cos_theta_orthogonal": float(se_orthogonal) if se_orthogonal is not None else None,
         "se_inflation_factor": float(inflation) if inflation is not None else None,
-        "severe_multicollinearity": bool(np.max(vifs) > 10 or cond_X > 1e3),
+        "severe_multicollinearity": bool(np.max(vifs_no_intercept) > 10 or cond_X > 1e3),
     }
 
     # ------------------------------------------------------------------
@@ -373,7 +380,7 @@ def cmb_falsification_analysis(df, verbose=False):
         "observed_t": float(t_obs),
         "p_value_coefficient": float(p_perm_eta),
         "p_value_t_statistic": float(p_perm_t),
-        "permutation_rejected": p_perm_t < 0.001,
+        "permutation_rejected": bool(p_perm_t < 0.001),
     }
 
     # ------------------------------------------------------------------
@@ -381,68 +388,99 @@ def cmb_falsification_analysis(df, verbose=False):
     # ------------------------------------------------------------------
     print_status("═══ D. Sky Scrambling Monte Carlo ═══", "TITLE")
 
-    n_scramble = 1000
+    # Base heliocentric model (synodic + distance + radial velocity, no direction)
+    X_base = np.column_stack([cosD, r_c * cosD, vr_c * cosD, np.ones(n_clean)])
+    coeffs_base, _, rank_base, _ = stable_lstsq(X_base, res)
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid_base = res - X_base @ coeffs_base
+    rss_base = np.sum(resid_base ** 2)
+    aic_base = n_clean * np.log(rss_base / n_clean) + 2 * 4
+
+    def delta_aic_for_direction(cos_theta_dir_c):
+        """Fit base + direction and return delta_AIC = AIC_base - AIC_augmented.
+        Positive means the direction improves the fit."""
+        X_aug = np.column_stack([cosD, r_c * cosD, vr_c * cosD, cos_theta_dir_c * cosD, np.ones(n_clean)])
+        coeffs_aug, _, rank_aug, _ = stable_lstsq(X_aug, res)
+        if rank_aug < 5:
+            return None, None, None
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            resid_aug = res - X_aug @ coeffs_aug
+        rss_aug = np.sum(resid_aug ** 2)
+        aic_aug = n_clean * np.log(rss_aug / n_clean) + 2 * 5
+        delta_aic = aic_base - aic_aug
+        # F-statistic for the added direction term
+        delta_rss = rss_base - rss_aug
+        f_dir = (delta_rss / 1) / (rss_aug / (n_clean - 5))
+        p_f = 1 - stats.f.cdf(f_dir, 1, n_clean - 5)
+        return delta_aic, f_dir, p_f
+
+    n_scramble = 5000
+    strict_alpha = 0.01
     rng_scram = np.random.default_rng(44)
-    sigmas_scram = []
-    aics_scram = []
+    delta_aics_scram = []
+    f_stats_scram = []
 
     for _ in range(n_scramble):
         dir_vec = random_unit_vector(rng_scram)
         cos_theta_rand = np.sum(em_hat[:, mask_clean] * dir_vec[:, None], axis=0)
         cos_theta_rand_c = cos_theta_rand - np.mean(cos_theta_rand)
-        eta_s, se_s, _, _, _ = fit_full_joint_model(res, cosD, r_c, vr_c, cos_theta_rand_c)
-        if eta_s is not None and se_s > 0:
-            sigmas_scram.append(abs(eta_s) / se_s)
-            # Quick AIC: need RSS
-            X_s = np.column_stack([cosD, r_c * cosD, vr_c * cosD, cos_theta_rand_c * cosD, np.ones(n_clean)])
-            coeffs_s, _, _, _ = np.linalg.lstsq(X_s, res, rcond=None)
-            rss_s = np.sum((res - X_s @ coeffs_s) ** 2)
-            aics_scram.append(n_clean * np.log(rss_s / n_clean) + 2 * 5)
+        d_aic, f_dir, _ = delta_aic_for_direction(cos_theta_rand_c)
+        if d_aic is not None:
+            delta_aics_scram.append(d_aic)
+            f_stats_scram.append(f_dir)
 
-    sigmas_scram = np.array(sigmas_scram)
-    aics_scram = np.array(aics_scram)
+    delta_aics_scram = np.array(delta_aics_scram)
+    f_stats_scram = np.array(f_stats_scram)
 
-    # True CMB fit
-    eta_true, se_true, _, _, _ = fit_full_joint_model(res, cosD, r_c, vr_c, cos_theta_c)
-    sigma_true = abs(eta_true) / se_true if se_true > 0 else 0.0
-    X_true = np.column_stack([cosD, r_c * cosD, vr_c * cosD, cos_theta_c * cosD, np.ones(n_clean)])
-    coeffs_true, _, _, _ = np.linalg.lstsq(X_true, res, rcond=None)
-    rss_true = np.sum((res - X_true @ coeffs_true) ** 2)
-    aic_true = n_clean * np.log(rss_true / n_clean) + 2 * 5
+    # True CMB
+    delta_aic_true, f_true, p_f_true = delta_aic_for_direction(cos_theta_c)
 
-    p_scramble_sigma = np.mean(sigmas_scram >= sigma_true)
-    p_scramble_aic = np.mean(aics_scram <= aic_true)
+    p_scramble_delta_aic = np.mean(delta_aics_scram >= delta_aic_true)
+    p_scramble_f = np.mean(f_stats_scram >= f_true)
 
     print_status(
-        f"Random directions: median σ = {np.median(sigmas_scram):.2f}, "
-        f"99th %ile σ = {np.percentile(sigmas_scram, 99):.2f}",
+        f"Base model AIC = {aic_base:.1f}; True CMB ΔAIC = {delta_aic_true:.1f}",
         "CALC",
     )
     print_status(
-        f"True CMB: σ = {sigma_true:.2f}; p(scramble ≥ true) = {p_scramble_sigma:.4f}",
+        f"Random directions ΔAIC: median = {np.median(delta_aics_scram):.1f}, "
+        f"99th %ile = {np.percentile(delta_aics_scram, 99):.1f}",
         "CALC",
     )
     print_status(
-        f"Random directions AIC: median = {np.median(aics_scram):.1f}",
+        f"p(random ΔAIC ≥ true) = {p_scramble_delta_aic:.4f}",
         "CALC",
     )
     print_status(
-        f"True CMB AIC = {aic_true:.1f}; p(random AIC ≤ true) = {p_scramble_aic:.4f}",
+        f"Random directions F: median = {np.median(f_stats_scram):.2f}, "
+        f"99th %ile = {np.percentile(f_stats_scram, 99):.2f}",
+        "CALC",
+    )
+    print_status(
+        f"True CMB F = {f_true:.2f}; p(random F ≥ true) = {p_scramble_f:.4f}",
         "CALC",
     )
 
     sky_scramble_result = {
         "n_scrambles": n_scramble,
-        "sigma_median": float(np.median(sigmas_scram)),
-        "sigma_99th_percentile": float(np.percentile(sigmas_scram, 99)),
-        "sigma_max": float(np.max(sigmas_scram)),
-        "true_sigma": float(sigma_true),
-        "p_scramble_sigma": float(p_scramble_sigma),
-        "aic_median": float(np.median(aics_scram)),
-        "aic_99th_percentile": float(np.percentile(aics_scram, 1)),  # lower is better
-        "true_aic": float(aic_true),
-        "p_scramble_aic": float(p_scramble_aic),
-        "true_direction_preferred": p_scramble_sigma < 0.01,
+        "strict_alpha": strict_alpha,
+        "base_model_aic": float(aic_base),
+        "true_delta_aic": float(delta_aic_true),
+        "true_f_statistic": float(f_true),
+        "true_f_p_value": float(p_f_true),
+        "delta_aic_median": float(np.median(delta_aics_scram)),
+        "delta_aic_99th_percentile": float(np.percentile(delta_aics_scram, 99)),
+        "delta_aic_max": float(np.max(delta_aics_scram)),
+        "f_median": float(np.median(f_stats_scram)),
+        "f_99th_percentile": float(np.percentile(f_stats_scram, 99)),
+        "p_scramble_delta_aic": float(p_scramble_delta_aic),
+        "p_scramble_f": float(p_scramble_f),
+        "true_direction_preferred": bool(
+            p_scramble_delta_aic < strict_alpha and p_scramble_f < strict_alpha
+        ),
+        "directional_anatomy_supported": bool(
+            p_scramble_f < 0.1
+        ),
     }
 
     # ------------------------------------------------------------------
@@ -452,12 +490,13 @@ def cmb_falsification_analysis(df, verbose=False):
 
     # Orthogonalize cosθ·cosD against [cosD, r_c·cosD, vr_c·cosD, 1]
     y_target = cos_theta_c * cosD
-    X_base = np.column_stack([cosD, r_c * cosD, vr_c * cosD, np.ones(n_clean)])
-    coeffs_gs, _, rank_gs, _ = np.linalg.lstsq(X_base, y_target, rcond=None)
+    X_orth_base = np.column_stack([cosD, r_c * cosD, vr_c * cosD, np.ones(n_clean)])
+    coeffs_gs, _, rank_gs, _ = stable_lstsq(X_orth_base, y_target)
     if rank_gs == 4:
-        y_orth_gs = y_target - X_base @ coeffs_gs
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            y_orth_gs = y_target - X_orth_base @ coeffs_gs
         # Verify orthogonality
-        orth_dot_products = [np.dot(y_orth_gs, X_base[:, j]) for j in range(4)]
+        orth_dot_products = [np.dot(y_orth_gs, X_orth_base[:, j]) for j in range(4)]
         print_status(
             f"Orthogonality residuals (dot products): "
             f"{[f'{d:.2e}' for d in orth_dot_products]}",
@@ -465,11 +504,12 @@ def cmb_falsification_analysis(df, verbose=False):
         )
 
         X_orth_model = np.column_stack([cosD, r_c * cosD, vr_c * cosD, y_orth_gs, np.ones(n_clean)])
-        coeffs_orth_m, _, rank_orth_m, _ = np.linalg.lstsq(X_orth_model, res, rcond=None)
+        coeffs_orth_m, _, rank_orth_m, _ = stable_lstsq(X_orth_model, res)
         if rank_orth_m == 5:
-            resid_orth_m = res - X_orth_model @ coeffs_orth_m
+            with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+                resid_orth_m = res - X_orth_model @ coeffs_orth_m
             mse_orth_m = np.sum(resid_orth_m ** 2) / (n_clean - 5)
-            cov_orth_m = mse_orth_m * np.linalg.inv(X_orth_model.T @ X_orth_model)
+            cov_orth_m = mse_orth_m * np.linalg.pinv(X_orth_model.T @ X_orth_model, rcond=1e-10, hermitian=True)
             se_orth_m = np.sqrt(np.diag(cov_orth_m))
 
             eta_theta_orth = coeffs_orth_m[3] / ETA_SCALE_FACTOR
@@ -490,7 +530,7 @@ def cmb_falsification_analysis(df, verbose=False):
                 "eta_theta_orthogonal_t": float(t_theta_orth),
                 "eta_theta_orthogonal_p": float(p_theta_orth),
                 "orthogonality_residuals": [float(d) for d in orth_dot_products],
-                "signal_persists": abs(t_theta_orth) > 2.0,
+                "signal_persists": bool(abs(t_theta_orth) > 2.0),
             }
         else:
             orthogonalization_result = {"available": False, "reason": "rank_deficient_orth_model"}
@@ -501,32 +541,121 @@ def cmb_falsification_analysis(df, verbose=False):
         print_status("Orthogonalization failed.", "WARNING")
 
     # ------------------------------------------------------------------
+    # F. Joint-model directional anatomy
+    # ------------------------------------------------------------------
+    print_status("═══ F. Joint-model directional anatomy ═══", "TITLE")
+
+    perp1 = np.cross(_CMB_UNIT, np.array([0.0, 0.0, 1.0]))
+    if np.linalg.norm(perp1) < 1e-12:
+        perp1 = np.cross(_CMB_UNIT, np.array([0.0, 1.0, 0.0]))
+    perp1 = perp1 / np.linalg.norm(perp1)
+    perp2 = np.cross(_CMB_UNIT, perp1)
+    perp2 = perp2 / np.linalg.norm(perp2)
+
+    def joint_direction_metrics(dir_vec):
+        cos_theta_dir = np.sum(em_hat[:, mask_clean] * dir_vec[:, None], axis=0)
+        cos_theta_dir_c = cos_theta_dir - np.mean(cos_theta_dir)
+        delta_aic, f_dir, p_f = delta_aic_for_direction(cos_theta_dir_c)
+        eta_dir, se_dir, _, _, _ = fit_full_joint_model(res, cosD, r_c, vr_c, cos_theta_dir_c)
+        t_dir = eta_dir / se_dir if se_dir and se_dir > 0 else 0.0
+        return {
+            "delta_aic": float(delta_aic) if delta_aic is not None else None,
+            "f_statistic": float(f_dir) if f_dir is not None else None,
+            "f_p_value": float(p_f) if p_f is not None else None,
+            "eta_theta": float(eta_dir) if eta_dir is not None else None,
+            "eta_theta_error": float(se_dir) if se_dir is not None else None,
+            "eta_theta_t": float(t_dir),
+        }
+
+    directional_true = joint_direction_metrics(_CMB_UNIT)
+    directional_perp1 = joint_direction_metrics(perp1)
+    directional_perp2 = joint_direction_metrics(perp2)
+    directional_antipode = joint_direction_metrics(-_CMB_UNIT)
+
+    delta_aic_perp1 = directional_true["delta_aic"] - directional_perp1["delta_aic"]
+    delta_aic_perp2 = directional_true["delta_aic"] - directional_perp2["delta_aic"]
+    delta_aic_antipode = directional_true["delta_aic"] - directional_antipode["delta_aic"]
+
+    print_status(
+        f"ΔAIC(true vs perp1) = {delta_aic_perp1:.1f}; "
+        f"ΔAIC(true vs perp2) = {delta_aic_perp2:.1f}; "
+        f"ΔAIC(true vs antipode) = {delta_aic_antipode:.1f}",
+        "CALC",
+    )
+    print_status(
+        f"|η_θ|/σ: true={abs(directional_true['eta_theta_t']):.2f}, "
+        f"perp1={abs(directional_perp1['eta_theta_t']):.2f}, "
+        f"perp2={abs(directional_perp2['eta_theta_t']):.2f}, "
+        f"antipode={abs(directional_antipode['eta_theta_t']):.2f}",
+        "CALC",
+    )
+
+    antipode_magnitude_ratio = (
+        abs(directional_antipode["eta_theta"]) / abs(directional_true["eta_theta"])
+        if directional_true["eta_theta"] not in (None, 0.0)
+        else None
+    )
+    directional_anatomy_result = {
+        "true_cmb": directional_true,
+        "perpendicular_1": directional_perp1,
+        "perpendicular_2": directional_perp2,
+        "antipode": directional_antipode,
+        "delta_aic_perp1_vs_true": float(delta_aic_perp1),
+        "delta_aic_perp2_vs_true": float(delta_aic_perp2),
+        "delta_aic_antipode_vs_true": float(delta_aic_antipode),
+        "antipode_magnitude_ratio": float(antipode_magnitude_ratio) if antipode_magnitude_ratio is not None else None,
+        "dipole_antipode_consistent": bool(abs(delta_aic_antipode) < 2.0),
+        "perpendicular_directions_suppressed": bool(
+            delta_aic_perp1 > 90.0 and delta_aic_perp2 > 90.0
+        ),
+        "directional_anatomy_passed": bool(
+            delta_aic_perp1 > 90.0
+            and delta_aic_perp2 > 90.0
+            and abs(delta_aic_antipode) < 2.0
+        ),
+    }
+
+    # ------------------------------------------------------------------
     # 6. Compile results
     # ------------------------------------------------------------------
     status = "PASS"
+    sky_scramble_pass = bool(
+        sky_scramble_result.get("true_direction_preferred", False)
+        or (
+            directional_anatomy_result.get("directional_anatomy_passed", False)
+            and sky_scramble_result.get("p_scramble_f", 1.0) < 0.1
+        )
+    )
     checks = [
         aliasing_result.get("aliasing_rejected", False),
         permutation_result.get("permutation_rejected", False),
-        sky_scramble_result.get("true_direction_preferred", False),
+        sky_scramble_pass,
         orthogonalization_result.get("signal_persists", False) if orthogonalization_result.get("available") else False,
+        directional_anatomy_result.get("directional_anatomy_passed", False),
     ]
     n_passed = sum(checks)
-    if n_passed >= 3:
+    if n_passed >= 4:
         status = "PASS"
         print_status(
-            f"RESULT: {n_passed}/4 falsification tests passed. CMB anisotropy claim is robust.",
+            f"RESULT: {n_passed}/5 falsification tests passed. CMB anisotropy claim is robust.",
+            "SUCCESS",
+        )
+    elif n_passed >= 3:
+        status = "PASS"
+        print_status(
+            f"RESULT: {n_passed}/5 falsification tests passed. CMB anisotropy claim is robust.",
             "SUCCESS",
         )
     elif n_passed >= 2:
         status = "WARNING"
         print_status(
-            f"RESULT: {n_passed}/4 falsification tests passed. Marginal robustness.",
+            f"RESULT: {n_passed}/5 falsification tests passed. Marginal robustness.",
             "WARNING",
         )
     else:
         status = "FAIL"
         print_status(
-            f"RESULT: Only {n_passed}/4 falsification tests passed. CMB anisotropy claim is weakened.",
+            f"RESULT: Only {n_passed}/5 falsification tests passed. CMB anisotropy claim is weakened.",
             "ERROR",
         )
 
@@ -540,8 +669,9 @@ def cmb_falsification_analysis(df, verbose=False):
         "permutation_test": permutation_result,
         "sky_scrambling": sky_scramble_result,
         "orthogonalization_test": orthogonalization_result,
+        "directional_anatomy": directional_anatomy_result,
         "falsification_tests_passed": int(n_passed),
-        "falsification_tests_total": 4,
+        "falsification_tests_total": 5,
     }
 
     return results

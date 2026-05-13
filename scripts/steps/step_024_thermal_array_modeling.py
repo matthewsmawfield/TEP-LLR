@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 026: Thermal Array Modeling
+Step 024: Thermal Array Modeling
 
 Calculates the theoretical thermal expansion of the Apollo retroreflector housings
 across the lunar synodic phase (maximum expansion near full moon).
@@ -18,6 +18,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import json
 import numpy as np
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+from scripts.utils.statistical_utils import require_step003_eta_ols
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
 # Add project root to path
@@ -31,20 +32,20 @@ def run_thermal_model(logger):
     logger.info(">>> Starting Thermal Array Modeling...")
 
     print_status("═══ DATA SUMMARY", "INFO")
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        eta_measured = step_002_results.get('eta_ols', 0)
-        # Compute TEP amplitude from measured eta: A = |eta| * ETA_SCALE_FACTOR
-        TEP_AMPLITUDE_M = abs(eta_measured) * ETA_SCALE_FACTOR
-        print_status(f"    Measured η from step_002: {eta_measured:.4e}", "DATA")
-        print_status(f"    Computed TEP amplitude: {TEP_AMPLITUDE_M*1000:.2f} mm", "DATA")
-        logger.info(f"Loaded measured η from step_002: {eta_measured:.4e}")
-        logger.info(f"Computed TEP amplitude: {TEP_AMPLITUDE_M*1000:.2f} mm")
-    else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    eta_measured = require_step003_eta_ols(step_003_results)
+    TEP_AMPLITUDE_M = abs(eta_measured) * ETA_SCALE_FACTOR
+    print_status(f"    Measured η from step_003: {eta_measured:.4e}", "DATA")
+    print_status(f"    Computed TEP amplitude: {TEP_AMPLITUDE_M*1000:.2f} mm", "DATA")
+    logger.info(f"Loaded measured η from step_003: {eta_measured:.4e}")
+    logger.info(f"Computed TEP amplitude: {TEP_AMPLITUDE_M*1000:.2f} mm")
 
     # Constants for Apollo Lunar Retroreflector Arrays
     # Temperatures from lunar dawn to subsolar noon

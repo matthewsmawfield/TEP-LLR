@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 012: Noise/Signal Injection Tests for TEP-LLR
+Step 011: Noise/Signal Injection Tests for TEP-LLR
 """
 
 
@@ -14,15 +14,18 @@ import json
 import argparse
 import pandas as pd
 import numpy as np
-from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.statistical_utils import linear_regression, require_step003_eta_ols
+from scripts.utils.config import get_config
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+
+TEP_CONFIG = get_config()
 
 # Add the project root to the Python path
 
 def run_injection_test(df, verbose=False):
     print_status("="*60, "INFO")
     print_status("NOISE/SIGNAL INJECTION TESTS - PIPELINE VALIDATION", "TITLE")
-    print_status("WARNING: THESE RESULTS ARE BASED ON SYNTHETIC DATA", "WARNING")
+    print_status("WARNING: INJECTION TESTS PERTURB REAL INPOP19A RESIDUALS", "WARNING")
     print_status("PURPOSE: ALGORITHM ROBUSTNESS TESTING ONLY", "INFO")
     print_status("="*60, "INFO")
 
@@ -42,7 +45,7 @@ def run_injection_test(df, verbose=False):
     print_status("TEST 1: NULL TEST (SHUFFLED RESIDUALS)", "PROCESS")
     print_status("  Purpose: Verify that destroying phase correlation eliminates signal", "INFO")
 
-    np.random.seed(42)  # Reproducibility
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))  # Reproducibility
     res_shuffled = np.random.permutation(residuals)
     reg_null = linear_regression(res_shuffled, cos_elong)
     snr_null = abs(reg_null['eta']) / reg_null['eta_error']
@@ -84,18 +87,19 @@ def run_injection_test(df, verbose=False):
     print_status("TEST 3: SIGNAL RECOVERY (INJECTION INTO PURE NOISE)", "PROCESS")
     print_status("  Purpose: Validate pipeline can recover known injected signals", "INFO")
 
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
     pure_noise = np.random.normal(0, rms_original, n)
 
     # Load measured eta from step_002 output for injection test
     step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_003_path.exists():
-        with open(step_003_path, 'r') as f:
-            step_003_results = json.load(f)
-        eta_injected = step_003_results.get('eta_ols', 0)
-        print_status(f"  [DATA] Loaded measured η from step_003: {eta_injected:.4e}", "INFO")
-    else:
-        raise FileNotFoundError(f"Step 003 results not found: {step_003_path}. Run pipeline step 003 first.")
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    eta_injected = require_step003_eta_ols(step_003_results)
+    print_status(f"  [DATA] Loaded measured η from step_003: {eta_injected:.4e}", "INFO")
 
     signal_injected = 13.0 * eta_injected * cos_elong
     res_with_signal = pure_noise + signal_injected
@@ -192,7 +196,9 @@ if __name__ == "__main__":
 
     results = {
         "step_id": "step_011",
-        "data_type": "SYNTHETIC (PIPELINE VALIDATION)",
+        "data_type": "REAL_INPOP19A_RESIDUALS (INJECTION_PERTURBATIONS)",
+        "data_source": str(input_path),
+        "n_observations": int(len(df)),
         "injection_results": summary,
         "status": "PASS" if summary["injection_valid"] else "WARNING"
     }

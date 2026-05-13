@@ -1,5 +1,5 @@
 """
-Step 059: Quantitative Analysis of Temporal Bin Variation
+Step 043: Quantitative Analysis of Temporal Bin Variation
 
 This step provides quantitative analysis of temporal bin variation to address
 the concern about χ²/dof ≈ 33 (p < 0.001) indicating significant bin-to-bin variation.
@@ -25,7 +25,7 @@ import json
 import numpy as np
 import pandas as pd
 from scipy import stats
-from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.statistical_utils import linear_regression, robust_regression
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
 def temporal_bin_analysis(df, n_bins=10, verbose=False):
@@ -102,10 +102,15 @@ def temporal_bin_analysis(df, n_bins=10, verbose=False):
     chi2_p = 1 - stats.chi2.cdf(chi2, dof)
     chi2_dof = chi2 / dof if dof > 0 else np.nan
     
-    # Test 2: Test for temporal trend (linear regression vs time)
+    # Test 2: Temporal trend dη/d(year). Do not use linear_regression() here — it
+    # divides the slope by ETA_SCALE_FACTOR for residual-vs-cos(D) fits only.
     bin_centers = (bins_df['year_start'] + bins_df['year_end']) / 2
-    trend_reg = linear_regression(eta_values, bin_centers - np.mean(bin_centers))
-    trend_snr = abs(trend_reg['eta']) / trend_reg['eta_error'] if trend_reg['eta_error'] > 0 else 0
+    t_c = np.asarray(bin_centers - np.mean(bin_centers), dtype=float)
+    X_trend = np.column_stack([t_c, np.ones(len(eta_values))])
+    trend_fit = robust_regression(np.asarray(eta_values, dtype=float), X_trend, weights=None)
+    trend_slope = float(trend_fit["coefficients"][0])
+    trend_error = float(trend_fit["errors"][0])
+    trend_snr = abs(trend_slope) / trend_error if trend_error > 0 else 0.0
     trend_p = 2 * (1 - stats.norm.cdf(trend_snr))
     
     # Test 3: Test for sign consistency
@@ -117,14 +122,13 @@ def temporal_bin_analysis(df, n_bins=10, verbose=False):
     observed_variance = np.var(eta_values, ddof=1)
     variance_ratio = observed_variance / expected_variance if expected_variance > 0 else np.inf
     
-    # F-test for variance ratio
+    # Variance ratio (diagnostic). No exact F p-value: bin uncertainties differ
+    # and the denominator is an average squared SE, not an independent chi-square.
     if len(eta_values) > 1:
-        f_stat = observed_variance / expected_variance
-        f_p = 1 - stats.f.cdf(f_stat, len(eta_values)-1, 1000)  # Approximate
+        f_stat = float(observed_variance / expected_variance)
     else:
-        f_stat = np.nan
-        f_p = np.nan
-    
+        f_stat = float("nan")
+
     results = {
         'n_bins': len(bins_df),
         'bin_results': bin_results,
@@ -134,8 +138,8 @@ def temporal_bin_analysis(df, n_bins=10, verbose=False):
         'chi2_dof': float(dof),
         'chi2_p': float(chi2_p),
         'chi2_dof_ratio': float(chi2_dof),
-        'trend_slope': float(trend_reg['eta']),
-        'trend_error': float(trend_reg['eta_error']),
+        'trend_slope_d_eta_d_year': trend_slope,
+        'trend_slope_error': trend_error,
         'trend_snr': float(trend_snr),
         'trend_p': float(trend_p),
         'n_negative_bins': int(n_negative),
@@ -144,8 +148,12 @@ def temporal_bin_analysis(df, n_bins=10, verbose=False):
         'observed_variance': float(observed_variance),
         'expected_variance': float(expected_variance),
         'variance_ratio': float(variance_ratio),
-        'f_statistic': float(f_stat),
-        'f_p': float(f_p)
+        'variance_ratio_observed_over_mean_se_sq': f_stat,
+        'f_p': None,
+        'f_test_note': (
+            "f_p removed: heterogeneous bin uncertainties invalidate fixed-df F approximation; "
+            "use chi2_p and variance_ratio for dispersion diagnostics."
+        ),
     }
     
     return results
@@ -225,7 +233,11 @@ def main():
         print_status(f"This is consistent with chance (p={primary_results['sign_consistency_p']:.2e})", "INFO")
     
     # Interpret trend
-    print_status(f"Temporal trend: slope = {primary_results['trend_slope']:.2e} ± {primary_results['trend_error']:.2e}", "CALC")
+    print_status(
+        f"Temporal trend: dη/dy = {primary_results['trend_slope_d_eta_d_year']:.2e} ± "
+        f"{primary_results['trend_slope_error']:.2e} yr⁻¹",
+        "CALC",
+    )
     if primary_results['trend_p'] < 0.05:
         print_status(f"Significant temporal trend detected (p={primary_results['trend_p']:.2e})", "INFO")
         print_status("This could indicate real temporal variation or systematic drift", "INFO")
@@ -257,6 +269,7 @@ def main():
     # Compile final results
     final_results = {
         'step_id': 'step_043',
+        'status': 'PASS',
         'all_bin_analyses': all_results,
         'primary_analysis': primary_results,
         'assessment': assessment
@@ -265,7 +278,7 @@ def main():
     print(assessment['interpretation'])
     
     # Save results
-    logger.save_step_results(all_results, PROJECT_ROOT, "step_043_temporal_bin_variation")
+    logger.save_step_results(final_results, PROJECT_ROOT, "step_043_temporal_bin_variation")
     print_status("Step 043 completed successfully", "SUCCESS")
     
     return final_results

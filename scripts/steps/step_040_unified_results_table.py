@@ -1,5 +1,5 @@
 """
-Step 056: Unified Results Table with Consistent Statistical Measures
+Step 040: Unified Results Table with Consistent Statistical Measures
 
 This step consolidates results from all analysis steps into a unified table,
 reconciling conflicting significance claims and providing consistent statistical
@@ -28,17 +28,19 @@ from datetime import datetime
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
-def load_json(filepath):
-    """Load JSON file safely."""
-    try:
-        with open(filepath, 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print(f"Warning: {filepath} not found")
-        return None
-    except json.JSONDecodeError:
-        print(f"Warning: {filepath} contains invalid JSON")
-        return None
+def load_json_strict(rel_path: str) -> dict:
+    """Load a required pipeline JSON artifact; fail immediately if missing or invalid."""
+    path = PROJECT_ROOT / rel_path
+    if not path.is_file():
+        raise FileNotFoundError(f"Required pipeline output missing: {path}")
+    with path.open(encoding="utf-8") as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"Invalid JSON in {path}") from exc
+    if not isinstance(data, dict):
+        raise TypeError(f"Expected JSON object in {path}, got {type(data).__name__}")
+    return data
 
 def calculate_snr_from_error(eta, eta_error):
     """Calculate signal-to-noise ratio from estimate and error."""
@@ -62,6 +64,19 @@ def calculate_effect_size_r_squared(eta, rms_cm):
         r_squared = np.nan
     return r_squared
 
+def correlation_sigma_fisher(r: float, n_obs: int) -> float:
+    """
+    Convert a Pearson correlation coefficient to an approximate Gaussian-equivalent significance (sigma)
+    using Fisher's z-transform: z = atanh(r) * sqrt(n-3).
+    """
+    if n_obs is None or n_obs < 4:
+        raise ValueError(f"Need n_obs>=4 for Fisher z significance, got {n_obs}")
+    if not np.isfinite(r):
+        raise ValueError(f"Non-finite correlation r={r}")
+    # Guard against exactly ±1 (should not occur in real data, but avoid infinities).
+    r_clipped = float(np.clip(r, -0.999999999999, 0.999999999999))
+    return float(abs(np.arctanh(r_clipped)) * np.sqrt(n_obs - 3))
+
 def reconcile_de430_results():
     """
     Reconcile conflicting DE430 results from different sections.
@@ -71,20 +86,20 @@ def reconcile_de430_results():
     
     We need to determine which is correct by checking the source data.
     """
-    # Load step_006 results (multi-ephemeris comparison)
-    step_006 = load_json('results/outputs/step_006_multi_ephemeris_comparison.json')
-
-    if step_006 and 'comparisons' in step_006 and 'DE430' in step_006['comparisons']:
-        de430 = step_006['comparisons']['DE430']
-        return {
-            'eta': de430['eta'],
-            'eta_error': de430['eta_error'],
-            'snr': de430['snr'],
-            'n_obs': de430['n_obs'],
-            'source': 'step_006_multi_ephemeris_comparison'
-        }
-    else:
-        return None
+    step_006 = load_json_strict("results/outputs/step_006_multi_ephemeris_comparison.json")
+    try:
+        de430 = step_006["comparisons"]["DE430"]
+    except KeyError as exc:
+        raise RuntimeError(
+            "step_006_multi_ephemeris_comparison.json missing comparisons.DE430; re-run step_006."
+        ) from exc
+    return {
+        "eta": de430["eta"],
+        "eta_error": de430["eta_error"],
+        "snr": de430["snr"],
+        "n_obs": de430["n_obs"],
+        "source": "step_006_multi_ephemeris_comparison",
+    }
 
 def reconcile_bayesian_results():
     """
@@ -95,19 +110,20 @@ def reconcile_bayesian_results():
     
     We check step_016 for the authoritative value.
     """
-    step_016 = load_json('results/outputs/step_016_bayesian_analysis.json')
-    
-    if step_016 and 'bayesian_summary' in step_016:
-        return {
-            'posterior_mean_eta': step_016['bayesian_summary']['posterior_mean_eta'],
-            'posterior_std_eta': step_016['bayesian_summary']['posterior_std_eta'],
-            'bayes_factor_savage_dickey': step_016['bayesian_summary']['bayes_factor_savage_dickey'],
-            'bayes_factor_bic': step_016['bayesian_summary']['bayes_factor_bic'],
-            'credible_interval_95': step_016['bayesian_summary']['credible_interval_95'],
-            'source': 'step_016_bayesian_analysis'
-        }
-    else:
-        return None
+    step_016 = load_json_strict("results/outputs/step_016_bayesian_analysis.json")
+    if "bayesian_summary" not in step_016:
+        raise RuntimeError(
+            "step_016_bayesian_analysis.json missing bayesian_summary; re-run step_016."
+        )
+    bs = step_016["bayesian_summary"]
+    return {
+        "posterior_mean_eta": bs["posterior_mean_eta"],
+        "posterior_std_eta": bs["posterior_std_eta"],
+        "bayes_factor_savage_dickey": bs["bayes_factor_savage_dickey"],
+        "bayes_factor_bic": bs["bayes_factor_bic"],
+        "credible_interval_95": bs["credible_interval_95"],
+        "source": "step_016_bayesian_analysis",
+    }
 
 def address_station_power_contradiction():
     """
@@ -118,40 +134,59 @@ def address_station_power_contradiction():
     
     This function verifies the actual power status based on observed SNR.
     """
-    step_029 = load_json('results/outputs/step_029_station_power_analysis.json')
-    
-    if step_029 and 'per_station_power' in step_029:
-        stations = step_029['per_station_power']['stations']
-        
-        # Use the actual power analysis from step_029
-        # The JSON already contains 'actually_powered' and 'snr_observed'
-        n_expected_powered = step_029['per_station_power'].get('n_expected_powered', 0)
-        n_actually_powered = step_029['per_station_power'].get('n_actually_powered', 0)
-        
-        # Count how many stations actually have SNR >= 3σ
-        stations_with_3sigma = sum(1 for s in stations if s.get('snr_observed', 0) >= 3.0)
-        
-        return {
-            'stations': stations,
-            'n_expected_powered': n_expected_powered,
-            'n_actually_powered': n_actually_powered,
-            'n_actually_3sigma': stations_with_3sigma,
-            'interpretation': f'Step_029 power analysis: {n_expected_powered} stations expected to be powered, {n_actually_powered} actually powered, {stations_with_3sigma} with SNR ≥ 3σ',
-            'corrected_interpretation': step_029['per_station_power'].get('power_analysis_conclusion', 'No individual station achieves conventional statistical significance (SNR ≥ 3σ). Detection relies on combined analysis.'),
-            'source': 'step_029_station_power_analysis'
-        }
+    step_029 = load_json_strict("results/outputs/step_029_station_power_analysis.json")
+    if "per_station_power" not in step_029:
+        raise RuntimeError(
+            "step_029_station_power_analysis.json missing per_station_power; re-run step_029."
+        )
+    psp = step_029["per_station_power"]
+    stations = psp["stations"]
+    n_expected_powered = psp.get("n_expected_powered", 0)
+    n_actually_powered = psp.get("n_actually_powered", 0)
+    stations_with_3sigma = sum(1 for s in stations if s.get("snr_observed", 0) >= 3.0)
+    stations_3sigma_names = [s.get("station") for s in stations if s.get("snr_observed", 0) >= 3.0]
+    stations_3sigma_names = [s for s in stations_3sigma_names if s]
+
+    if stations_with_3sigma == 0:
+        corrected = (
+            "No individual station achieves conventional statistical significance (SNR ≥ 3σ). "
+            "Detection relies on the combined analysis across stations."
+        )
+    elif stations_with_3sigma == 1:
+        corrected = (
+            f"One station ({stations_3sigma_names[0]}) achieves SNR ≥ 3σ individually. "
+            "The strongest inference remains the pooled (multi-station) estimate, but the existence of "
+            "an independently significant station strengthens instrumental-independence."
+        )
     else:
-        return None
+        corrected = (
+            f"{stations_with_3sigma} stations ({', '.join(stations_3sigma_names)}) achieve SNR ≥ 3σ individually. "
+            "The pooled estimate is corroborated by multiple independent station-level detections."
+        )
+
+    return {
+        "stations": stations,
+        "n_expected_powered": n_expected_powered,
+        "n_actually_powered": n_actually_powered,
+        "n_actually_3sigma": stations_with_3sigma,
+        "interpretation": (
+            f"Step_029 power analysis: {n_expected_powered} stations expected to be powered, "
+            f"{n_actually_powered} actually powered, {stations_with_3sigma} with SNR ≥ 3σ"
+        ),
+        "corrected_interpretation": corrected,
+        "source": "step_029_station_power_analysis",
+    }
 
 def create_unified_results_table():
     """Create the master unified results table."""
     
     # Load actual results from JSON files instead of hardcoding
-    step_017 = load_json('results/outputs/step_017_leverage_diagnostics.json')
-    step_002 = load_json('results/outputs/step_003_statistical_analysis.json')
-    step_016 = load_json('results/outputs/step_016_bayesian_analysis.json')
-    step_010 = load_json('results/outputs/step_010_systematic_control_analysis.json')
-    step_050 = load_json('results/outputs/step_050_corrected_tep_analysis.json')
+    step_017 = load_json_strict("results/outputs/step_017_leverage_diagnostics.json")
+    step_002 = load_json_strict("results/outputs/step_003_statistical_analysis.json")
+    step_016 = load_json_strict("results/outputs/step_016_bayesian_analysis.json")
+    step_010 = load_json_strict("results/outputs/step_010_systematic_control_analysis.json")
+    step_050 = load_json_strict("results/outputs/step_050_corrected_tep_analysis.json")
+    step_004 = load_json_strict("results/outputs/step_004_detection_analysis_advanced.json")
     
     # Extract leverage-excised results from step_017
     if not (step_017 and 'conclusion' in step_017 and 'formal_cooks_d_excision' in step_017['conclusion']):
@@ -176,6 +211,15 @@ def create_unified_results_table():
     ar1_full_error = gls5.get('eta_error_cluster') or gls5['eta_error_gls']
     ar1_full_n = fullsys_n
     ar1_full_snr = abs(ar1_full_eta) / ar1_full_error
+
+    if 'keplerian_inclusion_proxy' not in step_050:
+        raise RuntimeError(
+            "step_050_corrected_tep_analysis.json missing keplerian_inclusion_proxy. "
+            "Re-run step_050."
+        )
+    kepler_proxy = step_050['keplerian_inclusion_proxy']
+    eta_after_kepler = kepler_proxy['eta_after_kepler_partialing']
+    eta_joint_kepler = kepler_proxy['eta_joint_with_kepler_terms']
 
     # Extract cosD-only AR(1) GLS from step_002 (retained for comparison)
     if not (step_002 and 'ar1_gls' in step_002):
@@ -208,9 +252,7 @@ def create_unified_results_table():
     bayes_snr = abs(bayes_eta) / bayes_error
 
     # Load station-level results from step_029 (authoritative per-station analysis)
-    step_029 = load_json('results/outputs/step_029_station_power_analysis.json')
-    step_004 = load_json('results/outputs/step_004_detection_analysis_advanced.json')
-
+    step_029 = load_json_strict("results/outputs/step_029_station_power_analysis.json")
     if not (step_029 and 'per_station_power' in step_029):
         raise RuntimeError("step_029_station_power_analysis.json missing required keys. Run upstream steps first.")
 
@@ -262,26 +304,25 @@ def create_unified_results_table():
         for station, rms_m in per_station_rms.items()
     )
     total_n_rms = sum(station_n_map.get(station, 0) for station in per_station_rms.keys())
-    global_rms_mm = float(np.sqrt(weighted_rms_sq / total_n_rms) * 1000) if total_n_rms > 0 else None
+    if total_n_rms <= 0:
+        raise RuntimeError(
+            "step_029 per-station RMS weights are empty. "
+            "Cannot compute global residual RMS from real data."
+        )
+    global_rms_mm = float(np.sqrt(weighted_rms_sq / total_n_rms) * 1000)
 
-    # Fallback: compute directly from processed CSV if step_029 data is incomplete
-    if global_rms_mm is None:
-        csv_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
-        if csv_path.exists():
-            try:
-                df_tmp = pd.read_csv(csv_path)
-                global_rms_mm = float(df_tmp['residual_m'].std() * 1000)
-            except Exception:
-                global_rms_mm = None
-
-    # Load Theil-Sen from step_017 (robust lower bound)
-    step_017_full = load_json('results/outputs/step_017_leverage_diagnostics.json')
-    if step_017_full and 'summary' in step_017_full:
-        theilsen_eta = step_017_full['summary'].get('full_sample_eta_theilsen', None)
-    else:
-        theilsen_eta = None
+    if "summary" not in step_017:
+        raise RuntimeError("step_017_leverage_diagnostics.json missing summary")
+    summary = step_017["summary"]
+    if "full_sample_eta_theilsen" not in summary:
+        raise RuntimeError(
+            "step_017_leverage_diagnostics.json summary missing full_sample_eta_theilsen"
+        )
+    theilsen_eta = summary["full_sample_eta_theilsen"]
 
     results = {
+        'step_id': 'step_040',
+        'status': 'PASS',
         'metadata': {
             'generated_at': datetime.now().isoformat(),
             'step_id': 'step_040',
@@ -348,7 +389,7 @@ def create_unified_results_table():
             'note': 'Robust estimators provide bounds on the true physical parameter.',
             'theil_sen': {
                 'eta': theilsen_eta,
-                'eta_error': None,
+                'eta_error_note': 'No reliable SE is reported for this Theil–Sen point estimate in step_017; use leverage-excised OLS / Bayesian for uncertainty.',
                 'method': 'Median of pairwise slopes',
                 'source': 'step_017_leverage_diagnostics',
                 'status': 'ROBUST LOWER BOUND'
@@ -360,6 +401,27 @@ def create_unified_results_table():
                 'method': 'WLS with 1/σ² station weights',
                 'source': 'step_029_station_power_analysis',
                 'status': 'CROSS-STATION VALIDATION'
+            }
+        },
+        'inclusion_proxies': {
+            'note': 'Controlled proxies for η_dynamical on real INPOP residuals; not a full INPOP/DE430 integrator refit.',
+            'keplerian_partialing': {
+                'eta': eta_after_kepler['eta'],
+                'eta_error': eta_after_kepler['eta_error'],
+                'snr': eta_after_kepler['snr'],
+                'method': kepler_proxy['method'],
+                'keplerian_only_r2': kepler_proxy['keplerian_only_r2'],
+                'post_kepler_rms_mm': kepler_proxy['post_kepler_rms_mm'],
+                'source': 'step_050_corrected_tep_analysis',
+                'status': 'INCLUSION PROXY - η after Keplerian partialing'
+            },
+            'joint_with_kepler_terms': {
+                'eta': eta_joint_kepler['eta'],
+                'eta_error': eta_joint_kepler['eta_error'],
+                'snr': eta_joint_kepler['snr'],
+                'method': 'Full systematic model with cos(M), sin(M) added',
+                'source': 'step_050_corrected_tep_analysis',
+                'status': 'INCLUSION PROXY - joint Keplerian + synodic fit'
             }
         },
         'station_level_results': {
@@ -392,10 +454,13 @@ def create_unified_results_table():
         'power_analysis_correction': address_station_power_contradiction(),
         'significance_reconciliation': {
             'correlation_analysis': {
-                'r': step_010.get('control_results', {}).get('r_original', None) if step_010 else None,
-                'p': step_010.get('control_results', {}).get('p_original', None) if step_010 else None,
-                'snr_correlation': step_004.get('bootstrap', {}).get('snr', None) if step_004 else None,
-                'n_obs': step_004.get('n_observations', None) if step_004 else None,
+                'r': step_010['control_results']['r_original'],
+                'p': step_010['control_results']['p_original'],
+                'snr_correlation': correlation_sigma_fisher(
+                    float(step_010['control_results']['r_original']),
+                    int(step_004['n_observations']),
+                ),
+                'n_obs': step_004['n_observations'],
                 'method': 'Pearson correlation'
             },
             'ols_regression': {
@@ -463,7 +528,8 @@ def create_markdown_table(results):
         if key == 'note':
             continue
         eta_x10_4 = value['eta'] * 1e4
-        err_x10_5 = value['eta_error'] * 1e5 if value['eta_error'] else 'N/A'
+        eta_err = value.get('eta_error', None)
+        err_x10_5 = eta_err * 1e5 if eta_err else 'N/A'
         snr = value['snr'] if 'snr' in value else 'N/A'
         method = value['method']
         status = value['status']
@@ -542,25 +608,23 @@ def main():
     
     print("\n2. STATION POWER CONTRADICTION:")
     print(f"   - Original claim: No stations meet 3σ threshold")
-    if results['power_analysis_correction']:
-        print(f"   - Expected powered: {results['power_analysis_correction']['n_expected_powered']} stations")
-        print(f"   - Actually powered: {results['power_analysis_correction']['n_actually_powered']} stations")
-        print(f"   - With SNR ≥ 3σ: {results['power_analysis_correction']['n_actually_3sigma']} stations")
-        print(f"   - Interpretation: {results['power_analysis_correction']['interpretation']}")
-        print(f"   - Correction: {results['power_analysis_correction']['corrected_interpretation']}")
+    pac = results['power_analysis_correction']
+    print(f"   - Expected powered: {pac['n_expected_powered']} stations")
+    print(f"   - Actually powered: {pac['n_actually_powered']} stations")
+    print(f"   - With SNR ≥ 3σ: {pac['n_actually_3sigma']} stations")
+    print(f"   - Interpretation: {pac['interpretation']}")
+    print(f"   - Correction: {pac['corrected_interpretation']}")
     
     print("\n3. DE430 RECONCILIATION:")
     de430 = results['cross_validation']['de430']
-    if de430:
-        print(f"   - Authoritative value: η = {de430['eta']:.2e} ± {de430['eta_error']:.2e} at {de430['snr']:.2f}σ")
-        print(f"   - Source: {de430['source']}")
+    print(f"   - Authoritative value: η = {de430['eta']:.2e} ± {de430['eta_error']:.2e} at {de430['snr']:.2f}σ")
+    print(f"   - Source: {de430['source']}")
     
     print("\n4. BAYESIAN EVIDENCE RECONCILIATION:")
     bayesian = results['bayesian_evidence']
-    if bayesian:
-        print(f"   - Savage-Dickey Bayes Factor: {bayesian['bayes_factor_savage_dickey']:.2e}")
-        print(f"   - BIC Bayes Factor: {bayesian['bayes_factor_bic']:.2e}")
-        print(f"   - Source: {bayesian['source']}")
+    print(f"   - Savage-Dickey Bayes Factor: {bayesian['bayes_factor_savage_dickey']:.2e}")
+    print(f"   - BIC Bayes Factor: {bayesian['bayes_factor_bic']:.2e}")
+    print(f"   - Source: {bayesian['source']}")
     
     print("\n5. EFFECT SIZE:")
     print(f"   - Amplitude: {results['effect_size_analysis']['predicted_amplitude_mm']:.2f} mm")

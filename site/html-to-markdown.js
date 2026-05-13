@@ -89,6 +89,12 @@ class HTMLToMarkdownConverter {
             return `\n\n@@@CODEBLOCK_START:${language}@@@\n${decodedCode}\n@@@CODEBLOCK_END@@@\n\n`;
         });
 
+        // Bare <pre> (no wrapping <code>) — keep newlines for trees and shell steps
+        html = html.replace(/<pre[^>]*>([\s\S]*?)<\/pre>/gi, (match, content) => {
+            const decoded = this.decodeEntities(content).replace(/\n+$/g, '');
+            return `\n\n@@@CODEBLOCK_START:@@@\n${decoded}\n@@@CODEBLOCK_END@@@\n\n`;
+        });
+
         html = html.replace(/<table[^>]*>[\s\S]*?<\/table>/gi, (match) => this.tableToMarkdown(match));
 
         html = html.replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, '\n# $1\n\n');

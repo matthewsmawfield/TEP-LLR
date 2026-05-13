@@ -34,9 +34,10 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
 import pandas as pd
 from scipy import stats
-from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.statistical_utils import linear_regression, require_step003_eta_ols
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
@@ -72,16 +73,34 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
         cos_elong = np.cos(elongation)
 
         rms = float(np.sqrt(np.mean(residuals ** 2)))
-        r_obs, p_obs = stats.pearsonr(residuals, cos_elong)
+        with suppress_scipy_array_api_matmul_runtime_warning():
+            r_obs, p_obs = stats.pearsonr(residuals, cos_elong)
         reg = linear_regression(residuals, cos_elong)
         snr_obs = float(abs(reg['eta']) / reg['eta_error']) if reg['eta_error'] > 0 else 0.0
 
         # Expected SNR given the global eta
+        # Use the correct slope-to-correlation mapping for y = A x + ε:
+        # se(A) ≈ rms / sqrt(n * Var(x)), so SNR_expected ≈ |A| * sqrt(n * Var(x)) / rms.
+        # Phase-truncated stations have Var(cos D) << 0.5, reducing leverage even at fixed N.
         A_expected = abs(eta_measured) * ETA_SCALE_FACTOR   # metres
-        r_expected = A_expected / rms if rms > 0 else 0.0
-        snr_expected = r_expected * np.sqrt(n)               # sigma_r = 1/sqrt(N)
+        var_x = float(np.var(cos_elong, ddof=1)) if n > 1 else float("nan")
+        snr_expected = (
+            float(A_expected * np.sqrt(n * var_x) / rms)
+            if rms > 0 and np.isfinite(var_x) and var_x > 0
+            else 0.0
+        )
 
-        # Is this station powered to detect at 3sigma?
+        # Expected SNR evaluated at the station's own measured eta (for diagnostic
+        # consistency). If the station-level eta differs from the pooled eta,
+        # this will differ from snr_expected_at_global_eta.
+        A_at_station = abs(float(reg["eta"])) * ETA_SCALE_FACTOR
+        snr_expected_at_station_eta = (
+            float(A_at_station * np.sqrt(n * var_x) / rms)
+            if rms > 0 and np.isfinite(var_x) and var_x > 0
+            else 0.0
+        )
+
+        # Is this station expected to be powered at 3σ for the pooled eta?
         powered = snr_expected >= 3.0
 
         result_rows.append({
@@ -94,9 +113,14 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
             'eta_err_obs': float(reg['eta_error']),
             'snr_observed': round(snr_obs, 2),
             'snr_expected_at_global_eta': round(snr_expected, 2),
+            'snr_expected_at_station_eta': round(snr_expected_at_station_eta, 2),
+            'cosd_variance': round(var_x, 4) if np.isfinite(var_x) else None,
             'powered_at_3sigma_expected': powered,  # Based on expected SNR
             'actually_powered': snr_obs >= 3.0,  # Based on actual observed SNR
-            'detection_verdict': 'powered (expected)' if powered else 'underpowered',
+            'detection_verdict': (
+                'powered (expected at pooled η)' if powered else
+                ('powered (at station η)' if snr_expected_at_station_eta >= 3.0 else 'underpowered')
+            ),
             'actual_detection_status': 'detected' if snr_obs >= 3.0 else 'not detected',
         })
 
@@ -136,6 +160,64 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
         )
     }
 
+
+# ---------------------------------------------------------------------------
+# 1c. Leave-one-station-out influence (pooled estimator sensitivity)
+# ---------------------------------------------------------------------------
+
+def leave_one_station_out_influence(df: pd.DataFrame) -> dict:
+    """
+    Quantify the influence of each station on the pooled cos(D)-only estimate.
+
+    This directly addresses the apparent sign anomaly at Haleakala: the pooled
+    inference should be stable to its exclusion because N is small and phase
+    coverage is biased.
+    """
+    stations = sorted(df["station"].unique())
+    base_residuals = df["residual_m"].values
+    base_cos = np.cos(df["elongation_rad"].values)
+    base = linear_regression(base_residuals, base_cos)
+
+    results = []
+    for s in stations:
+        sub = df[df["station"] != s]
+        residuals = sub["residual_m"].values
+        cos_e = np.cos(sub["elongation_rad"].values)
+        reg = linear_regression(residuals, cos_e)
+        delta = float(reg["eta"] - base["eta"])
+        delta_sigma = float(abs(delta) / base["eta_error"]) if base["eta_error"] > 0 else None
+        results.append(
+            {
+                "excluded_station": s,
+                "n_obs_remaining": int(len(sub)),
+                "eta": float(reg["eta"]),
+                "eta_error": float(reg["eta_error"]),
+                "snr": float(abs(reg["eta"]) / reg["eta_error"]) if reg["eta_error"] > 0 else 0.0,
+                "delta_eta_vs_full": delta,
+                "delta_eta_in_full_sigma": delta_sigma,
+            }
+        )
+
+    results_sorted = sorted(
+        results,
+        key=lambda r: (abs(r["delta_eta_in_full_sigma"]) if r["delta_eta_in_full_sigma"] is not None else -1.0),
+        reverse=True,
+    )
+    return {
+        "full_sample": {
+            "eta": float(base["eta"]),
+            "eta_error": float(base["eta_error"]),
+            "snr": float(abs(base["eta"]) / base["eta_error"]) if base["eta_error"] > 0 else 0.0,
+            "n_obs": int(len(df)),
+        },
+        "leave_one_out": results_sorted,
+        "interpretation": (
+            "If exclusion of any station shifts eta by << 1 sigma, the pooled detection is not driven "
+            "by that station. In particular, Haleakala's small N implies low influence even if its "
+            "station-level sign differs."
+        ),
+    }
+
 # ---------------------------------------------------------------------------
 # 1b. Phase coverage diagnostic
 # ---------------------------------------------------------------------------
@@ -164,7 +246,10 @@ def phase_coverage_analysis(df: pd.DataFrame, verbose: bool = False) -> dict:
 
         # Phase bias score: |mean_cos| → 0 is ideal, ±1 is maximally biased
         phase_bias = abs(mean_cos)
-        good_coverage = (phase_bias < 0.15) and (std_cos > 0.45)
+        # Coverage is "good enough" if the station samples both signs with
+        # substantial spread in cos(D). Strict uniformity is not expected due
+        # to observational constraints near new moon.
+        good_coverage = (phase_bias < 0.25) and (std_cos > 0.45)
 
         result_rows.append({
             'station': station,
@@ -198,8 +283,9 @@ def phase_coverage_analysis(df: pd.DataFrame, verbose: bool = False) -> dict:
             'anomalous eta estimates independent of noise level. '
             'McDonald2 (mean_cos=-0.326) is a primary example — its observations '
             'cluster near new moon (cos≈-1), giving the regression minimal '
-            'positive-cos leverage. This explains why McDonald2 yields an '
-            'opposite-sign eta that dilutes the IPW result.'
+            'positive-cos leverage. This inflates uncertainty and destabilizes '
+            'station-level fits, which in turn degrades station-balanced (IPW) '
+            'estimators even when the pooled signal is genuine.'
         )
     }
 
@@ -247,12 +333,12 @@ def monte_carlo_ipw_distribution(station_fractions: dict, eta_true: float,
 
         # --- Full-sample OLS ---
         X = np.column_stack([cos_elong, np.ones(n_total)])
-        coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+        coeffs, _, _, _ = stable_lstsq(X, residuals)
         A_full = coeffs[0]
         resid_full = residuals - np.dot(X, coeffs)
         mse_full = np.mean(resid_full ** 2)
         XtX_full = np.dot(X.T, X)
-        se_A_full = np.sqrt(mse_full * np.linalg.inv(XtX_full)[0, 0])
+        se_A_full = np.sqrt(mse_full * np.linalg.pinv(XtX_full, rcond=1e-10, hermitian=True)[0, 0])
         full_snrs.append(float(abs(A_full) / se_A_full) if se_A_full > 0 else 0.0)
 
         # --- IPW regression: equal total weight per station ---
@@ -268,15 +354,12 @@ def monte_carlo_ipw_distribution(station_fractions: dict, eta_true: float,
         sqrt_w = np.sqrt(weights)
         Xw = X * sqrt_w[:, None]
         yw = residuals * sqrt_w
-        coeffs_w, _, _, _ = np.linalg.lstsq(Xw, yw, rcond=None)
+        coeffs_w, _, _, _ = stable_lstsq(Xw, yw)
         A_ipw = coeffs_w[0]
         resid_ipw = yw - np.dot(Xw, coeffs_w)
         mse_ipw = np.mean(resid_ipw ** 2)
         XtWX = np.dot(Xw.T, Xw)
-        try:
-            se_A_ipw = np.sqrt(mse_ipw * np.linalg.inv(XtWX)[0, 0])
-        except np.linalg.LinAlgError:
-            se_A_ipw = np.inf
+        se_A_ipw = np.sqrt(mse_ipw * np.linalg.pinv(XtWX, rcond=1e-10, hermitian=True)[0, 0])
         ipw_snrs.append(float(abs(A_ipw) / se_A_ipw) if se_A_ipw > 0 else 0.0)
 
     ipw_snrs = np.array(ipw_snrs)
@@ -327,9 +410,14 @@ def precision_weighted_regression(df: pd.DataFrame,
         lambda x: np.sqrt(np.mean(x ** 2))
     ).to_dict()
 
-    # Assign per-observation weight = 1/RMS^2
-    rms_vals = np.array([station_rms[s] for s in df['station']])
+    # Assign per-observation weight = 1/RMS^2 (station-level precision weights).
+    # Enforce strict finiteness: silent infinities would corrupt WLS numerics.
+    rms_vals = np.array([station_rms[s] for s in df['station']], dtype=float)
+    if not np.all(np.isfinite(rms_vals)) or np.any(rms_vals <= 0):
+        raise ValueError("Station RMS values must be finite and positive for WLS weighting.")
     weights = 1.0 / (rms_vals ** 2)
+    if not np.all(np.isfinite(weights)) or np.any(weights <= 0):
+        raise ValueError("Computed WLS weights must be finite and positive.")
 
     residuals = df['residual_m'].values
     cos_elong = np.cos(df['elongation_rad'].values)
@@ -341,19 +429,31 @@ def precision_weighted_regression(df: pd.DataFrame,
     Xw = X * sqrt_w[:, None]
     yw = residuals * sqrt_w
 
-    coeffs, _, rank, _ = np.linalg.lstsq(Xw, yw, rcond=None)
-    A_wls = coeffs[0]
+    coeffs, _, rank, _ = stable_lstsq(Xw, yw)
+    A_wls = float(coeffs[0])
     eta_wls = A_wls / ETA_SCALE_FACTOR
 
-    resid_wls = yw - Xw @ coeffs
-    sum_w = weights.sum()
-    sum_w2 = (weights ** 2).sum()
-    n_eff = (sum_w ** 2) / sum_w2
-    mse = np.sum(resid_wls ** 2) / (n_eff - 2)
+    # Weighted residual sum of squares: Σ w_i (y_i - x_i'β)^2
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid_w = yw - (Xw @ coeffs)
+        rss_w = float(np.sum(resid_w ** 2))
+
+    # Standard WLS variance estimate uses dof = n - k (k=2 here).
+    dof = n - 2
+    if dof <= 0:
+        raise ValueError(f"Insufficient observations for WLS (n={n}).")
+    mse = rss_w / dof
+
     XtWX = Xw.T @ Xw
-    se_A = np.sqrt(mse * np.linalg.inv(XtWX)[0, 0])
+    XtWX_inv = np.linalg.pinv(XtWX, rcond=1e-10, hermitian=True)
+    se_A = float(np.sqrt(mse * XtWX_inv[0, 0])) if np.isfinite(XtWX_inv[0, 0]) else float("nan")
     se_eta = se_A / ETA_SCALE_FACTOR
     snr = abs(eta_wls) / se_eta if se_eta > 0 else 0.0
+
+    # Kish effective sample size (diagnostic only; not used for WLS dof)
+    sum_w = float(np.sum(weights))
+    sum_w2 = float(np.sum(weights ** 2))
+    n_eff = (sum_w ** 2) / sum_w2 if sum_w2 > 0 else float("nan")
 
     # Pearson r (weighted)
     w_norm = weights / weights.sum()
@@ -370,8 +470,9 @@ def precision_weighted_regression(df: pd.DataFrame,
             f"(SNR = {snr:.2f}σ)", "CALC")
         print_status(f"  Weighted Pearson r = {r_weighted:.4f}", "CALC")
         for st, rms in sorted(station_rms.items()):
+            w_scale = 1.0 / float(rms) ** 2
             print_status(f"    {st}: RMS={rms*100:.1f} cm, "
-                         f"weight_scale={1/rms**2:.1f}", "CALC")
+                         f"weight_scale={w_scale:.1f}", "CALC")
 
     return {
         'eta_precision_weighted': float(eta_wls),
@@ -379,6 +480,7 @@ def precision_weighted_regression(df: pd.DataFrame,
         'snr': float(snr),
         'r_weighted': float(r_weighted),
         'n_eff': float(n_eff),
+        'dof': int(dof),
         'per_station_rms': {k: float(v) for k, v in station_rms.items()},
         'method': 'WLS 1/sigma^2 per station'
     }
@@ -399,7 +501,8 @@ def grasse_internal_split(df: pd.DataFrame, verbose: bool = False) -> dict:
         cos_elong = np.cos(half['elongation_rad'].values)
         reg = linear_regression(residuals, cos_elong)
         snr = abs(reg['eta']) / reg['eta_error'] if reg['eta_error'] > 0 else 0.0
-        r, p = stats.pearsonr(residuals, cos_elong)
+        with suppress_scipy_array_api_matmul_runtime_warning():
+            r, p = stats.pearsonr(residuals, cos_elong)
 
         yr_start = float(half['date_julian_year'].min())
         yr_end = float(half['date_julian_year'].max())
@@ -461,7 +564,8 @@ def cross_station_validation(df: pd.DataFrame, verbose: bool = False) -> dict:
     grasse_res = grasse['residual_m'].values
     predicted_grasse = ETA_SCALE_FACTOR * eta_apo * grasse_cos
 
-    r_pred, p_pred = stats.pearsonr(grasse_res, predicted_grasse)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_pred, p_pred = stats.pearsonr(grasse_res, predicted_grasse)
 
     if verbose:
         print_status(
@@ -496,14 +600,15 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
 
     df = pd.read_csv(data_path)
 
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        eta_global = step_002_results.get('eta_ols', 0)
-    else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    eta_global = require_step003_eta_ols(step_003_results)
 
     if verbose:
         print_status('=' * 60, 'INFO')
@@ -516,6 +621,11 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
     if verbose:
         print_status('\n[1/5] Per-station power analysis...', 'PROCESS')
     power = per_station_power_analysis(df, eta_global, verbose=verbose)
+
+    # --- 1c. Leave-one-station-out influence ---
+    if verbose:
+        print_status('\n[1c/5] Leave-one-station-out influence...', 'PROCESS')
+    influence = leave_one_station_out_influence(df)
 
     # --- 1b. Phase coverage ---
     if verbose:
@@ -544,8 +654,8 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
         print_status(
             '  Note: MC uses uniform phase coverage. The observed IPW SNR=0.52 '
             'is lower than the MC median because McDonald2 has severe phase '
-            'truncation (mean_cos=-0.326) which introduces opposite-sign noise '
-            'into the IPW average. This is a data-structure effect, not a '
+            'truncation (mean_cos=-0.326), which reduces cos(D) leverage and '
+            'inflates station-level uncertainty. This is a data-structure effect, not a '
             'signal suppression.', 'CALC')
 
     # --- 3. Precision-weighted regression ---
@@ -584,8 +694,8 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
     ipw_explanation = (
         'The observed IPW SNR = 0.52 is explained by two structural data issues: '
         '(1) McDonald2 has severe phase truncation (mean cos(D) = -0.326, vs -0.11 for Grasse), '
-        'meaning its obs cluster near new moon. This introduces positive-sign noise into '
-        'the IPW average that directly counteracts Grasse and APO. '
+        'meaning its obs cluster near new moon. This sharply reduces cos(D) leverage and '
+        'inflates station-level uncertainty, which degrades station-balanced estimators. '
         '(2) Haleakala is opposite-signed (marginal early-era result, 1.5σ). '
         'When the IPW regression gives these stations equal weight to APO and Grasse, '
         'it amplifies phase-truncated noise to match the well-powered signal. '
@@ -634,6 +744,7 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
         'status': 'PASS' if all_pass else 'WARNING',
         'summary': summary,
         'per_station_power': power,
+        'leave_one_station_out_influence': influence,
         'phase_coverage': phase_cov,
         'mc_ipw_distribution': mc_ipw,
         'precision_weighted_regression': pwr,

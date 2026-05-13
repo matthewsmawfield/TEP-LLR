@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""
-Step 038: Full-Moon Deficit Analysis
+r"""
+Step 036: Full-Moon Deficit Analysis
 
 Tests for the "full-moon deficit" effect documented by Murphy et al. (2010, 2014)
 and Sabhlok et al. (2024), where signal degradation near full moon was attributed
@@ -8,7 +8,7 @@ to dust accumulation + thermal lensing on lunar retroreflectors.
 
 TEP reinterpretation: The phase-dependent deficit may reflect scalar-field activation
 tied to solar illumination geometry, consistent with:
-- Perihelion enhancement (Step 024): η = -5.45×10^-4 at perihelion vs null at aphelion
+- Perihelion-aphelion split (Step 022): $\eta = -2.81\times10^{-4}$ at perihelion versus a non-significant aphelion subset ($1.42\sigma$ differential)
 - Negative η sign indicating gravitational potential suppression dominance
 - Hardware-epoch consistency across all five instrument eras
 
@@ -27,6 +27,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 import argparse
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
@@ -73,7 +74,8 @@ def analyze_full_moon_deficit(df):
         # Compute correlation with cos(elongation) in this region
         cos_elong = np.cos(elongation[mask])
         if np.std(cos_elong) > 0.01:  # Ensure variation in cos(D)
-            r, p = stats.pearsonr(res_region, cos_elong)
+            with suppress_scipy_array_api_matmul_runtime_warning():
+                r, p = stats.pearsonr(res_region, cos_elong)
             
             # OLS amplitude
             A = np.sum(res_region * cos_elong) / np.sum(cos_elong**2)
@@ -103,11 +105,13 @@ def test_tep_vs_thermal_hypothesis(df: pd.DataFrame) -> dict:
     cos_elong = np.cos(elongation)
     
     # TEP predictor: cos(D) (synodic phase)
-    r_tep, p_tep = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_tep, p_tep = stats.pearsonr(residuals, cos_elong)
     
     # Thermal predictor: proximity to full moon (absolute deviation from π)
     thermal_proxy = -np.abs(elongation - np.pi)  # More negative = closer to full
-    r_thermal, p_thermal = stats.pearsonr(residuals, thermal_proxy)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_thermal, p_thermal = stats.pearsonr(residuals, thermal_proxy)
     
     return {
         'tep_correlation': {'r': float(r_tep), 'p': float(p_tep)},
@@ -143,8 +147,11 @@ def analyze_by_illumination_geometry(df: pd.DataFrame) -> dict:
     
     # Correlation with heliocentric distance (perihelion proximity)
     perihelion_proximity = 1 / (1 + df_temp['days_from_perihelion'].values)
-    r_peri, p_peri = stats.pearsonr(residuals[full_moon_mask], 
-                                     perihelion_proximity[full_moon_mask])
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_peri, p_peri = stats.pearsonr(
+            residuals[full_moon_mask],
+            perihelion_proximity[full_moon_mask],
+        )
     
     return {
         'full_moon_subset_n': int(np.sum(full_moon_mask)),

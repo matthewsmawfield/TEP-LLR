@@ -13,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import argparse
 import pandas as pd
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
@@ -67,7 +68,7 @@ def correlated_systematic_amplitude(systematic_signal, cos_elong):
     Returns the amplitude in metres of the cos(elongation)-correlated bias.
     """
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs, _, _, _ = np.linalg.lstsq(X, systematic_signal, rcond=None)
+    coeffs, _, _, _ = stable_lstsq(X, systematic_signal)
     return float(abs(coeffs[0]))
 
 
@@ -97,7 +98,7 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
     cos_elong = np.cos(df['elongation_rad'].values)
     residuals = df['residual_m'].values
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs_tep, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs_tep, _, _, _ = stable_lstsq(X, residuals)
     detrended = residuals - coeffs_tep[0] * cos_elong  # m
     eta_fit = coeffs_tep[0] / ETA_SCALE_FACTOR
 
@@ -171,7 +172,7 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
     # ------------------------------------------------------------------
     cos_2elong = np.cos(2.0 * df['elongation_rad'].values)
     X_tidal = np.column_stack([cos_2elong, np.ones(len(cos_2elong))])
-    tidal_coeffs, _, _, _ = np.linalg.lstsq(X_tidal, residuals, rcond=None)
+    tidal_coeffs, _, _, _ = stable_lstsq(X_tidal, residuals)
     tidal_model = tidal_coeffs[0] * cos_2elong
     tidal_bias_m = correlated_systematic_amplitude(tidal_model, cos_elong)
     tidal_uncertainty_cm = float(tidal_bias_m * 100.0)
@@ -188,7 +189,7 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
     X_thermal = np.column_stack([np.cos(omega * hour_frac),
                                   np.sin(omega * hour_frac),
                                   np.ones(len(hour_frac))])
-    thermal_coeffs, _, _, _ = np.linalg.lstsq(X_thermal, detrended, rcond=None)
+    thermal_coeffs, _, _, _ = stable_lstsq(X_thermal, detrended)
     thermal_model = (thermal_coeffs[0] * np.cos(omega * hour_frac) +
                      thermal_coeffs[1] * np.sin(omega * hour_frac))
     thermal_bias_m = correlated_systematic_amplitude(thermal_model, cos_elong)

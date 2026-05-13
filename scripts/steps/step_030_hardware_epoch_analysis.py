@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 032: Hardware Epoch Consistency Analysis
+Step 030: Hardware Epoch Consistency Analysis
 
 Addresses the concern that temporal chi^2/dof ~ 33 indicates an
 instrumental artifact rather than a genuine gravitational signal.
@@ -44,7 +44,8 @@ import json
 import numpy as np
 import pandas as pd
 from scipy import stats
-from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.statistical_utils import linear_regression, require_step003_eta_ols
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
@@ -82,7 +83,8 @@ def _fit_epoch(df_slice: pd.DataFrame) -> dict:
     reg = linear_regression(residuals, cos_elong)
     snr = abs(reg['eta']) / reg['eta_error'] if reg['eta_error'] > 0 else 0.0
     rms = float(np.std(residuals))
-    r, p = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r, p = stats.pearsonr(residuals, cos_elong)
     return {
         'n_obs': int(len(df_slice)),
         'year_start': round(float(df_slice['date_julian_year'].min()), 1),
@@ -212,8 +214,9 @@ def amplitude_rms_correlation(epoch_results: list) -> dict:
     # Expected eta error ~ RMS / (sqrt(N) * 13 * ~0.7) — should correlate with scatter
     expected_se = rmss / (np.sqrt(ns) * ETA_SCALE_FACTOR * 100 * 0.7)
 
-    r_eta_rms, p_eta_rms = stats.pearsonr(np.abs(etas), rmss)
-    r_se_rms, p_se_rms = stats.pearsonr(expected_se, rmss)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_eta_rms, p_eta_rms = stats.pearsonr(np.abs(etas), rmss)
+        r_se_rms, p_se_rms = stats.pearsonr(expected_se, rmss)
 
     return {
         'n_epochs': int(len(epoch_results)),
@@ -292,16 +295,17 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
     print_status(f"    Stations: {sorted(df['station'].unique())}", "DATA")
 
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        global_eta = step_002_results.get('eta_ols', 0)
-    else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
-    
-    print_status(f"    Global η from step_002: {global_eta:.8e}", "DATA")
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    global_eta = require_step003_eta_ols(step_003_results)
+
+    print_status(f"    Global η from step_003: {global_eta:.8e}", "DATA")
     print_status("═══ ANALYSIS TRACE", "INFO")
 
     if verbose:

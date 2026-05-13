@@ -1,61 +1,61 @@
 {
   "baseline": {
-    "eta": -0.0004524792725699482,
+    "eta": -0.00045329831411731363,
     "statistical_error": 0.0
   },
   "systematic_variations": {
     "ephemeris": {
-      "eta_mean": -0.001594936846997883,
-      "eta_std": 0.006045562617335005,
-      "systematic_error": 0.006045562617335005,
+      "eta_mean": -0.001597998378751095,
+      "eta_std": 0.006055361266817495,
+      "systematic_error": 0.006055361266817495,
       "description": "Position error ~0.5m, velocity error ~0.1 mm/s"
     },
     "tidal": {
-      "eta_mean": -0.0006046755809848962,
-      "eta_std": 4.983831840885326e-05,
-      "systematic_error": 4.983831840885326e-05,
+      "eta_mean": -0.0006052282912618818,
+      "eta_std": 4.975110536936727e-05,
+      "systematic_error": 4.975110536936727e-05,
       "description": "Love number uncertainty ~0.01"
     },
     "atmospheric": {
-      "eta_mean": -0.0004519234492315687,
-      "eta_std": 1.9897960304446415e-05,
-      "systematic_error": 1.9897960304446415e-05,
+      "eta_mean": -0.00045274377384083665,
+      "eta_std": 1.9936974993163215e-05,
+      "systematic_error": 1.9936974993163215e-05,
       "description": "Tropospheric delay model error ~5mm"
     },
     "instrumental": {
-      "eta_mean": -0.0004525998639737174,
-      "eta_std": 2.3386075970237706e-06,
-      "systematic_error": 2.3386075970237706e-06,
+      "eta_mean": -0.0004534191124739244,
+      "eta_std": 2.3426209965913274e-06,
+      "systematic_error": 2.3426209965913274e-06,
       "description": "Calibration drift ~0.5 mm/year"
     },
     "combined": {
-      "eta_mean": -0.0019565017674777487,
-      "eta_std": 0.005804709176977845,
-      "systematic_error": 0.005804709176977845,
+      "eta_mean": -0.0019597859874455024,
+      "eta_std": 0.005814088364023213,
+      "systematic_error": 0.005814088364023213,
       "description": "All systematic sources combined"
     }
   },
   "error_budget": {
-    "statistical": 6.613688839232008e-05,
+    "statistical": 6.613338698619046e-05,
     "systematic_combined": 0.00020740721173404252,
-    "systematic_mc_component": 0.005804709176977845,
-    "total_uncertainty": 0.0002176966685218406,
-    "signal_to_total_ratio": 2.078485057407081,
-    "systematic_to_statistical_ratio": 3.1360291779031892,
+    "systematic_mc_component": 0.005814088364023213,
+    "total_uncertainty": 0.0002176956048099161,
+    "signal_to_total_ratio": 2.0822575380569455,
+    "systematic_to_statistical_ratio": 3.136195213732996,
     "dominant_error_source": "systematic",
     "literature_systematic_floor_applied": false,
     "data_driven_systematic_source": "step_008_systematic_error_analysis.json",
     "data_driven_systematic_cm": 0.2696293752542553,
-    "floor_note": "Data-driven systematic budget from step_008_systematic_error_analysis.json (0.27 cm \u2192 2.07e-04 in eta) used as primary estimate. MC-derived systematic (5.80e-03) serves as independent upper-bound cross-check."
+    "floor_note": "Data-driven systematic budget from step_008_systematic_error_analysis.json (0.27 cm \u2192 2.07e-04 in eta) used as primary estimate. MC-derived systematic (5.81e-03) serves as independent upper-bound cross-check."
   },
   "conclusion": {
-    "baseline_eta": -0.0004524792725699482,
+    "baseline_eta": -0.00045329831411731363,
     "systematic_uncertainty": 0.00020740721173404252,
-    "statistical_uncertainty": 6.613688839232008e-05,
-    "total_uncertainty": 0.0002176966685218406,
+    "statistical_uncertainty": 6.613338698619046e-05,
+    "total_uncertainty": 0.0002176956048099161,
     "assessment": "systematic_errors_dominant",
-    "recommendation": "Report: \u03b7 = -4.52e-04 \u00b1 6.61e-05 (stat) \u00b1 2.07e-04 (sys)",
-    "note": "Data-driven systematic budget from step_008_systematic_error_analysis.json (0.27 cm \u2192 2.07e-04 in eta) used as primary estimate. MC-derived systematic (5.80e-03) serves as independent upper-bound cross-check."
+    "recommendation": "Report: \u03b7 = -4.53e-04 \u00b1 6.61e-05 (stat) \u00b1 2.07e-04 (sys)",
+    "note": "Data-driven systematic budget from step_008_systematic_error_analysis.json (0.27 cm \u2192 2.07e-04 in eta) used as primary estimate. MC-derived systematic (5.81e-03) serves as independent upper-bound cross-check."
   },
   "step_id": "step_019",
   "status": "PASS",

@@ -25,13 +25,16 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.config import get_config
 from scripts.utils.statistical_utils import detect_outliers_sigma, robust_regression, cluster_robust_variance
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 import numpy as np
 import pandas as pd
 from scipy import stats
 
 logger = TEPLogger("step_053")
+TEP_CONFIG = get_config()
 set_step_logger(logger)
 
 
@@ -41,7 +44,10 @@ def fit_model(y, X, names):
     c = result['coefficients']
     errs = result['errors']
     n, k = X.shape
-    resid = y - X @ c
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        resid = y - X @ c
+    if not np.all(np.isfinite(resid)):
+        raise RuntimeError("Non-finite residuals produced in fit_model.")
     mse = result['mse']
     rss = np.sum(resid**2)
     aic = 2 * k + n * np.log(rss / max(n, 1))
@@ -52,13 +58,53 @@ def fit_model(y, X, names):
     }
 
 
+def station_block_bootstrap(
+    y: np.ndarray,
+    st: np.ndarray,
+    X: np.ndarray,
+    names: list[str],
+    n_bootstrap: int = 2000,
+    seed: int = 42,
+) -> dict:
+    """Resample station blocks with replacement and refit the full model."""
+    rng = np.random.default_rng(seed)
+    stations = np.unique(st)
+    eta_vals = np.empty(n_bootstrap, dtype=float)
+
+    for i in range(n_bootstrap):
+        drawn = rng.choice(stations, size=len(stations), replace=True)
+        boot_parts = []
+        for station in drawn:
+            idx = np.where(st == station)[0]
+            boot_parts.append(rng.choice(idx, size=len(idx), replace=True))
+        boot_idx = np.concatenate(boot_parts)
+        boot_fit = fit_model(y[boot_idx], X[boot_idx], names)
+        eta_vals[i] = boot_fit['coeffs'][0] / ETA_SCALE_FACTOR
+
+    eta_std = float(np.std(eta_vals, ddof=1))
+    eta_mean = float(np.mean(eta_vals))
+    return {
+        "eta_mean": eta_mean,
+        "eta_std": eta_std,
+        "eta_ci95_lower": float(np.percentile(eta_vals, 2.5)),
+        "eta_ci95_upper": float(np.percentile(eta_vals, 97.5)),
+        "snr_mean": float(abs(eta_mean) / max(eta_std, 1e-20)),
+        "p_negative": float(np.mean(eta_vals < 0.0)),
+        "n_bootstrap": int(n_bootstrap),
+        "n_clusters": int(len(stations)),
+    }
+
+
 def cluster_robust_regression(y, X, cluster_ids, names):
     """Fit OLS with cluster-robust standard errors."""
     result = robust_regression(y, X, scale_errors_by_birge=False)
     c = result['coefficients']
     errs = result['errors']
     n, k = X.shape
-    resid = y - X @ c
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        resid = y - X @ c
+    if not np.all(np.isfinite(resid)):
+        raise RuntimeError("Non-finite residuals produced in cluster_robust_regression.")
     mse = result['mse']
     rss = np.sum(resid**2)
     aic = 2 * k + n * np.log(rss / max(n, 1))
@@ -83,7 +129,10 @@ def temporal_cv(df, models, split_year=2013.0):
     for name, (X_train, y_train, X_test, y_test) in models.items():
         reg = robust_regression(y_train, X_train, scale_errors_by_birge=False)
         c = reg['coefficients']
-        y_pred = X_test @ c
+        with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+            y_pred = X_test @ c
+        if not np.all(np.isfinite(y_pred)):
+            raise RuntimeError(f"Non-finite predictions in temporal_cv for model {name}.")
         ss_res = np.sum((y_test - y_pred)**2)
         ss_tot = np.sum((y_test - np.mean(y_test))**2)
         r2 = 1 - ss_res / ss_tot if ss_tot > 0 else float('nan')
@@ -137,6 +186,8 @@ def main():
     cluster_ids = np.array([cluster_map[s] for s in st_c])
 
     results = {
+        'step_id': 'step_053',
+        'status': 'PASS',
         'step': '053_clean_subset_analysis',
         'subset_description': 'Grasse 2010+ and APO',
         'n_total': len(df_sub),
@@ -179,6 +230,28 @@ def main():
         'n_clusters': int(m4_cr['n_clusters'])
     }
 
+    # --- MODEL 4 with station block bootstrap ---
+    print_status("--- Model 4: station block bootstrap ---", "INFO")
+    X_full = np.column_stack([cos_c, cos2d, sin_y, cos_y, sin_m, cos_m, np.ones(len(cos_c))])
+    full_names = ['cosD', 'cos2D', 'sin_y', 'cos_y', 'sin_m', 'cos_m', 'const']
+    station_bootstrap = station_block_bootstrap(
+        res_c,
+        st_c,
+        X_full,
+        full_names,
+        n_bootstrap=2000,
+        seed=TEP_CONFIG.get("RANDOM_SEED", 42),
+    )
+    print_status(
+        "  Station block bootstrap: "
+        f"η = {station_bootstrap['eta_mean']:.4e} ± {station_bootstrap['eta_std']:.4e} "
+        f"({station_bootstrap['snr_mean']:.2f}σ), "
+        f"95% CI [{station_bootstrap['eta_ci95_lower']:.4e}, {station_bootstrap['eta_ci95_upper']:.4e}], "
+        f"P(η<0) = {station_bootstrap['p_negative']:.4f}",
+        "RESULT",
+    )
+    results['m4_full_station_block_bootstrap'] = station_bootstrap
+
     # --- Temporal CV: pre-2013 / post-2013 ---
     print_status("--- Temporal CV (pre-2013 / post-2013) ---", "INFO")
     split_year = 2013.0
@@ -204,7 +277,10 @@ def main():
 
     reg = robust_regression(y_tr, X_tr, scale_errors_by_birge=False)
     c = reg['coefficients']
-    y_pred = X_te @ c
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        y_pred = X_te @ c
+    if not np.all(np.isfinite(y_pred)):
+        raise RuntimeError("Non-finite predictions in held-out temporal split.")
     ss_res = np.sum((y_te - y_pred)**2)
     ss_tot = np.sum((y_te - np.mean(y_te))**2)
     r2_pred = 1 - ss_res / ss_tot if ss_tot > 0 else float('nan')

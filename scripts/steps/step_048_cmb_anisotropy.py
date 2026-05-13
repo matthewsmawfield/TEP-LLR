@@ -52,6 +52,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scipy import stats
 from skyfield.api import load
@@ -331,7 +332,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         np.ones(n_clean),
     ])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_joint, _, rank_joint, _ = np.linalg.lstsq(X_joint, res, rcond=None)
+        coeffs_joint, _, rank_joint, _ = stable_lstsq(X_joint, res)
 
     if rank_joint < 4:
         print_status("WARNING: Joint model rank-deficient", "WARNING")
@@ -340,7 +341,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             resid_joint = res - X_joint @ coeffs_joint
         mse_joint = np.sum(resid_joint ** 2) / (n_clean - 4)
-        XtX_inv = np.linalg.inv(X_joint.T @ X_joint)
+        XtX_inv = np.linalg.pinv(X_joint.T @ X_joint, rcond=1e-10, hermitian=True)
         cov_joint = mse_joint * XtX_inv
         se_joint = np.sqrt(np.diag(cov_joint))
 
@@ -365,7 +366,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         # Simple model (cosD only, 2 params)
         X_simple = np.column_stack([cosD, np.ones(n_clean)])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_simple, _, _, _ = np.linalg.lstsq(X_simple, res, rcond=None)
+            coeffs_simple, _, _, _ = stable_lstsq(X_simple, res)
             resid_simple = res - X_simple @ coeffs_simple
         rss_simple = np.sum(resid_simple ** 2)
         k_simple = 2
@@ -375,7 +376,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         # Distance-velocity model (from Step 047, 4 params)
         X_dv = np.column_stack([cosD, r_c * cosD, vr_c * cosD, np.ones(n_clean)])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_dv, _, _, _ = np.linalg.lstsq(X_dv, res, rcond=None)
+            coeffs_dv, _, _, _ = stable_lstsq(X_dv, res)
             resid_dv = res - X_dv @ coeffs_dv
         rss_dv = np.sum(resid_dv ** 2)
         k_dv = 4
@@ -385,7 +386,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         # CMB-only model (3 params)
         X_cmb = np.column_stack([cosD, v_par_c * cosD, np.ones(n_clean)])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_cmb, _, _, _ = np.linalg.lstsq(X_cmb, res, rcond=None)
+            coeffs_cmb, _, _, _ = stable_lstsq(X_cmb, res)
             resid_cmb = res - X_cmb @ coeffs_cmb
         rss_cmb = np.sum(resid_cmb ** 2)
         k_cmb = 3
@@ -477,7 +478,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
     # distance modulation.
     X_vr = np.column_stack([np.ones(n_clean), r_c])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        beta_vr, _, rank_vr, _ = np.linalg.lstsq(X_vr, v_par_c, rcond=None)
+        beta_vr, _, rank_vr, _ = stable_lstsq(X_vr, v_par_c)
     if rank_vr == 2:
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             v_par_perp = v_par_c - X_vr @ beta_vr
@@ -496,14 +497,14 @@ def cmb_anisotropy_analysis(df, verbose=False):
             np.ones(n_clean),
         ])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_orth, _, rank_orth, _ = np.linalg.lstsq(X_orth, res, rcond=None)
+            coeffs_orth, _, rank_orth, _ = stable_lstsq(X_orth, res)
 
         orth_result = {"available": False}
         if rank_orth == 4:
             with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
                 resid_orth = res - X_orth @ coeffs_orth
             mse_orth = np.sum(resid_orth ** 2) / (n_clean - 4)
-            XtX_orth_inv = np.linalg.inv(X_orth.T @ X_orth)
+            XtX_orth_inv = np.linalg.pinv(X_orth.T @ X_orth, rcond=1e-10, hermitian=True)
             cov_orth = mse_orth * XtX_orth_inv
             se_orth = np.sqrt(np.diag(cov_orth))
 
@@ -574,14 +575,14 @@ def cmb_anisotropy_analysis(df, verbose=False):
         np.ones(n_clean),
     ])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_full, _, rank_full, _ = np.linalg.lstsq(X_full, res, rcond=None)
+        coeffs_full, _, rank_full, _ = stable_lstsq(X_full, res)
 
     full_result = {"available": False}
     if rank_full == 5:
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             resid_full = res - X_full @ coeffs_full
         mse_full = np.sum(resid_full ** 2) / (n_clean - 5)
-        XtX_full_inv = np.linalg.inv(X_full.T @ X_full)
+        XtX_full_inv = np.linalg.pinv(X_full.T @ X_full, rcond=1e-10, hermitian=True)
         cov_full = mse_full * XtX_full_inv
         se_full = np.sqrt(np.diag(cov_full))
 
@@ -664,7 +665,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         np.ones(n_clean),
     ])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_base, _, rank_base, _ = np.linalg.lstsq(X_base, res, rcond=None)
+        coeffs_base, _, rank_base, _ = stable_lstsq(X_base, res)
 
     nested_result = {"available": False}
     if rank_base == 4:
@@ -683,7 +684,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             np.ones(n_clean),
         ])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_cos, _, rank_cos, _ = np.linalg.lstsq(X_cos, res, rcond=None)
+            coeffs_cos, _, rank_cos, _ = stable_lstsq(X_cos, res)
 
         if rank_cos == 5:
             with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
@@ -701,7 +702,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             eta_theta_nested = coeffs_cos[3] / ETA_SCALE_FACTOR
             se_theta_nested = np.sqrt(
                 np.sum(resid_cos ** 2) / (n_clean - 5)
-                * np.linalg.inv(X_cos.T @ X_cos)[3, 3]
+                * np.linalg.pinv(X_cos.T @ X_cos, rcond=1e-10, hermitian=True)[3, 3]
             ) / ETA_SCALE_FACTOR
             t_theta_nested = (eta_theta_nested / se_theta_nested
                               if se_theta_nested > 0 else 0.0)
@@ -772,7 +773,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         np.ones(n_clean),
     ])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_phase, _, rank_phase, _ = np.linalg.lstsq(X_phase, res, rcond=None)
+        coeffs_phase, _, rank_phase, _ = stable_lstsq(X_phase, res)
 
     phase_result = None
     if rank_phase == 4:
@@ -780,7 +781,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             resid_phase = res - X_phase @ coeffs_phase
         rss_phase = np.sum(resid_phase ** 2)
         mse_phase = rss_phase / (n_clean - 4)
-        cov_phase = mse_phase * np.linalg.inv(X_phase.T @ X_phase)
+        cov_phase = mse_phase * np.linalg.pinv(X_phase.T @ X_phase, rcond=1e-10, hermitian=True)
         se_phase = np.sqrt(np.diag(cov_phase))
 
         # Individual coefficients (for reference; joint F-test is primary)
@@ -796,7 +797,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         # Joint F-test: does the sin+cos pair improve over synodic-only?
         X_phase_null = np.column_stack([cosD, np.ones(n_clean)])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_phase_null, _, _, _ = np.linalg.lstsq(X_phase_null, res, rcond=None)
+            coeffs_phase_null, _, _, _ = stable_lstsq(X_phase_null, res)
             resid_phase_null = res - X_phase_null @ coeffs_phase_null
         rss_phase_null = np.sum(resid_phase_null ** 2)
         delta_rss_phase = rss_phase_null - rss_phase
@@ -855,13 +856,12 @@ def cmb_anisotropy_analysis(df, verbose=False):
     orient_trend = None
     if len(bin_centers) >= 4:
         X_trend = np.column_stack([np.ones(len(bin_centers)), bin_centers])
-        coeffs_trend, _, rank_trend, _ = np.linalg.lstsq(
-            X_trend, bin_etas, rcond=None
-        )
+        coeffs_trend, _, rank_trend, _ = stable_lstsq(
+            X_trend, bin_etas)
         if rank_trend == 2:
             resid_trend = np.array(bin_etas) - X_trend @ coeffs_trend
             mse_t = np.sum(resid_trend ** 2) / (len(bin_centers) - 2)
-            cov_t = mse_t * np.linalg.inv(X_trend.T @ X_trend)
+            cov_t = mse_t * np.linalg.pinv(X_trend.T @ X_trend, rcond=1e-10, hermitian=True)
             se_t = np.sqrt(np.diag(cov_t))
             slope = coeffs_trend[1]
             slope_err = se_t[1]
@@ -990,7 +990,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             cos_theta_dir_c * cosD, np.ones(n_clean),
         ])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_dir, _, rank_dir, _ = np.linalg.lstsq(X_dir, res, rcond=None)
+            coeffs_dir, _, rank_dir, _ = stable_lstsq(X_dir, res)
 
         if rank_dir != 5:
             return {"available": False, "reason": "rank_deficient"}
@@ -999,7 +999,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             resid_dir = res - X_dir @ coeffs_dir
         rss_dir = np.sum(resid_dir ** 2)
         mse_dir = rss_dir / (n_clean - 5)
-        cov_dir = mse_dir * np.linalg.inv(X_dir.T @ X_dir)
+        cov_dir = mse_dir * np.linalg.pinv(X_dir.T @ X_dir, rcond=1e-10, hermitian=True)
         se_dir = np.sqrt(np.diag(cov_dir))
 
         eta_0_dir = coeffs_dir[0] / ETA_SCALE_FACTOR
@@ -1142,7 +1142,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
         np.ones(n_clean),
     ])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_multi, _, rank_multi, _ = np.linalg.lstsq(X_multi, res, rcond=None)
+        coeffs_multi, _, rank_multi, _ = stable_lstsq(X_multi, res)
 
     multipole_result = None
     if rank_multi == 7:
@@ -1150,7 +1150,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             resid_multi = res - X_multi @ coeffs_multi
         rss_multi = np.sum(resid_multi ** 2)
         mse_multi = rss_multi / (n_clean - 7)
-        cov_multi = mse_multi * np.linalg.inv(X_multi.T @ X_multi)
+        cov_multi = mse_multi * np.linalg.pinv(X_multi.T @ X_multi, rcond=1e-10, hermitian=True)
         se_multi = np.sqrt(np.diag(cov_multi))
 
         eta_multi = {
@@ -1169,7 +1169,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             cosD, r_c * cosD, vr_c * cosD, cos_theta_full * cosD, np.ones(n_clean),
         ])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_multi_null, _, _, _ = np.linalg.lstsq(X_multi_null, res, rcond=None)
+            coeffs_multi_null, _, _, _ = stable_lstsq(X_multi_null, res)
             resid_multi_null = res - X_multi_null @ coeffs_multi_null
         rss_multi_null = np.sum(resid_multi_null ** 2)
         delta_rss_multi = rss_multi_null - rss_multi
@@ -1226,7 +1226,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
             cos_theta_c[idx] * cosD[idx],
             np.ones(n_clean),
         ])
-        coeffs_b, _, rank_b, _ = np.linalg.lstsq(X_b, res[idx], rcond=None)
+        coeffs_b, _, rank_b, _ = stable_lstsq(X_b, res[idx])
         if rank_b == 5:
             boot_coeffs.append(coeffs_b)
 
@@ -1295,14 +1295,14 @@ def cmb_anisotropy_analysis(df, verbose=False):
         np.ones(n_clean),
     ])
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-        coeffs_env, _, rank_env, _ = np.linalg.lstsq(X_env, res, rcond=None)
+        coeffs_env, _, rank_env, _ = stable_lstsq(X_env, res)
 
     envelope_result = None
     if rank_env == 5:
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             resid_env = res - X_env @ coeffs_env
         mse_env = np.sum(resid_env ** 2) / (n_clean - 5)
-        XtX_env_inv = np.linalg.inv(X_env.T @ X_env)
+        XtX_env_inv = np.linalg.pinv(X_env.T @ X_env, rcond=1e-10, hermitian=True)
         cov_env = mse_env * XtX_env_inv
         se_env = np.sqrt(np.diag(cov_env))
 
@@ -1406,14 +1406,14 @@ def cmb_anisotropy_analysis(df, verbose=False):
             cos_theta_st * cosD_st, np.ones(n_st),
         ])
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            coeffs_st, _, rank_st, _ = np.linalg.lstsq(X_st, res_st, rcond=None)
+            coeffs_st, _, rank_st, _ = stable_lstsq(X_st, res_st)
 
         joint_st = {"eta_r": None, "eta_vr": None, "eta_theta": None}
         if rank_st == 5:
             with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
                 resid_st = res_st - X_st @ coeffs_st
             mse_st = np.sum(resid_st ** 2) / (n_st - 5)
-            cov_st = mse_st * np.linalg.inv(X_st.T @ X_st)
+            cov_st = mse_st * np.linalg.pinv(X_st.T @ X_st, rcond=1e-10, hermitian=True)
             se_st = np.sqrt(np.diag(cov_st))
             joint_st = {
                 "eta_r": float(coeffs_st[1] / ETA_SCALE_FACTOR),

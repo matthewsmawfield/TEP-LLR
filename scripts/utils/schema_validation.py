@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""Validate canonical pipeline JSON outputs and required result fields."""
+
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTPUTS_DIR = PROJECT_ROOT / "results" / "outputs"
+
+REQUIRED_OUTPUTS = {
+    "step_001_data_preprocessing.json": ["combined"],
+    "step_040_unified_results_table.json": ["primary_estimands"],
+    "step_050_corrected_tep_analysis.json": ["models", "station_univ"],
+    "step_055_cmb_rigorous_falsification.json": ["status", "sky_scrambling"],
+    "step_056_dynamical_integrator_eta_refit.json": ["inpop19a", "de430", "cross_ephemeris"],
+}
+
+# Pipeline steps that must record a top-level PASS for CI / manuscript integrity.
+REQUIRE_TOP_LEVEL_PASS = frozenset({"step_055_cmb_rigorous_falsification.json"})
+
+OPTIONAL_OUTPUTS = {
+    "step_012_station_dominance.json": ["full_sample_eta", "dominant_station_jackknife"],
+}
+
+
+def load_json(path: Path) -> dict:
+    with path.open(encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def validate_required_keys(payload: dict, required_keys: list[str], label: str, errors: list[str]) -> None:
+    for key in required_keys:
+        if key not in payload:
+            errors.append(f"{label}: missing required key {key!r}")
+
+
+def main() -> int:
+    errors: list[str] = []
+
+    for filename, required_keys in REQUIRED_OUTPUTS.items():
+        path = OUTPUTS_DIR / filename
+        if not path.exists():
+            errors.append(f"Missing required pipeline output: {path}")
+            continue
+        payload = load_json(path)
+        validate_required_keys(payload, required_keys, filename, errors)
+        if filename in REQUIRE_TOP_LEVEL_PASS:
+            status = str(payload.get("status", "")).strip().upper()
+            if status != "PASS":
+                errors.append(
+                    f"{filename}: expected top-level status 'PASS', found {payload.get('status', '')!r}"
+                )
+
+    for filename, required_keys in OPTIONAL_OUTPUTS.items():
+        path = OUTPUTS_DIR / filename
+        if not path.exists():
+            continue
+        payload = load_json(path)
+        validate_required_keys(payload, required_keys, filename, errors)
+
+    if errors:
+        print("Pipeline schema validation failed:")
+        for error in errors:
+            print(f"  - {error}")
+        return 1
+
+    print("Pipeline schema validation passed.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

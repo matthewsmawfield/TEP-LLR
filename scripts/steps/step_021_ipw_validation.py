@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 022: IPW Criteria Monte Carlo Validation
+Step 021: IPW Criteria Monte Carlo Validation
 
 Validates the IPW station-balance test threshold (Δη/ση < 8.0) through simulation:
 1. Simulate station-concentrated signals (74% Grasse-like)
@@ -21,8 +21,10 @@ import json
 from typing import Dict, List
 
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.statistical_utils import require_step003_eta_ols
 
 def simulate_station_concentrated_signal(n_total: int,
                                          station_fractions: List[float],
@@ -67,7 +69,7 @@ def compute_full_sample_eta(data: Dict) -> float:
     """Compute eta on full sample."""
     cos_elong = np.cos(data['elongation'])
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs, _, _, _ = np.linalg.lstsq(X, data['residuals'], rcond=None)
+    coeffs, _, _, _ = stable_lstsq(X, data['residuals'])
     return coeffs[0] / ETA_SCALE_FACTOR
     
 def compute_ipw_eta(data: Dict) -> Dict:
@@ -95,17 +97,18 @@ def compute_ipw_eta(data: Dict) -> Dict:
     Xw = X * sqrt_w[:, None]
     yw = data['residuals'] * sqrt_w
 
-    coeffs, _, _, _ = np.linalg.lstsq(Xw, yw, rcond=None)
+    coeffs, _, _, _ = stable_lstsq(Xw, yw)
     eta_ipw = coeffs[0] / ETA_SCALE_FACTOR
 
     # Compute error using effective sample size for weighted regression
-    resid_w = yw - Xw @ coeffs
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid_w = yw - Xw @ coeffs
     n_eff = np.sum(weights)**2 / np.sum(weights**2)
     dof = n_eff - 2
     mse = np.sum(resid_w**2) / dof if dof > 0 else np.nan
     XtWX = Xw.T @ Xw
     try:
-        cov = mse * np.linalg.inv(XtWX)
+        cov = mse * np.linalg.pinv(XtWX, rcond=1e-10, hermitian=True)
         eta_ipw_error = np.sqrt(cov[0, 0]) / ETA_SCALE_FACTOR
     except (np.linalg.LinAlgError, ValueError):
         eta_ipw_error = np.inf
@@ -249,7 +252,7 @@ def main():
     logger = TEPLogger("step_021", str(log_dir / "step_021_ipw_validation.log"))
     set_step_logger(logger)
 
-    print_status("═══ Starting Step 022: IPW Criteria Monte Carlo Validation...", "TITLE")
+    print_status("═══ Starting Step 021: IPW Criteria Monte Carlo Validation...", "TITLE")
     print_status("═══ STEP PURPOSE: Validate IPW station-balance test threshold (Δη/ση < 8.0) through simulation", "INFO")
     print_status("═══ METHOD: Simulate station-concentrated signals, measure Δη/ση distribution, compute false positive rate", "INFO")
     print_status("═══ PARAMETERS: MC iterations=500, seed=42, station fractions matching actual LLR data", "INFO")
@@ -257,16 +260,17 @@ def main():
     logger.info("Step 021: IPW Criteria Monte Carlo Validation")
 
     print_status("═══ DATA SUMMARY", "INFO")
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_002_path.exists():
-        with open(step_002_path, 'r') as f:
-            step_002_results = json.load(f)
-        eta_true = step_002_results.get('eta_ols', 0)
-        print_status(f"    Measured η from step_002: {eta_true:.4e}", "DATA")
-        logger.info(f"Loaded measured η from step_002: {eta_true:.4e}")
-    else:
-        raise FileNotFoundError(f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first.")
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
+    if not step_003_path.exists():
+        raise FileNotFoundError(
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
+        )
+    with open(step_003_path, 'r') as f:
+        step_003_results = json.load(f)
+    eta_true = require_step003_eta_ols(step_003_results)
+    print_status(f"    Measured η from step_003: {eta_true:.4e}", "DATA")
+    logger.info(f"Loaded measured η from step_003: {eta_true:.4e}")
 
     # Realistic station fractions (matching actual LLR data)
     # Grasse, APO, Matera, McDonald2, Haleakala
@@ -283,6 +287,8 @@ def main():
 
     # Add metadata
     results['step_id'] = 'step_021'
+    results['data_type'] = 'SYNTHETIC (MONTE_CARLO_VALIDATION)'
+    results['eta_calibration_source'] = str(step_003_path)
     results['status'] = 'PASS'
 
     # Conclusions

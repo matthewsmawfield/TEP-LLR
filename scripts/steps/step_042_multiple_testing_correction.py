@@ -1,5 +1,5 @@
 """
-Step 058: Formal Multiple Testing Correction
+Step 042: Formal Multiple Testing Correction
 
 This step conducts formal multiple testing correction across all reported
 significance values in the analysis pipeline.
@@ -26,7 +26,11 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 from scipy.special import erfc, erfcinv
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
+from scripts.utils.config import get_config
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+
+TEP_CONFIG = get_config()
 
 def sigma_to_p(sigma):
     """Convert σ (two-tailed) to p-value using erfc for numerical stability."""
@@ -86,13 +90,19 @@ def benjamini_hochberg_correction(p_values, alpha=0.05):
     
     return corrected_p, rejected
 
-def load_json(filepath):
-    """Load JSON file safely, returning None on error."""
-    try:
-        with open(filepath, 'r') as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return None
+def load_json(filepath: str) -> dict:
+    """Load a required pipeline JSON artifact; raise if missing or invalid."""
+    path = Path(filepath)
+    if not path.is_file():
+        raise FileNotFoundError(f"Required pipeline output missing: {path}")
+    with path.open(encoding="utf-8") as f:
+        try:
+            data = json.load(f)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"Invalid JSON in {path}") from exc
+    if not isinstance(data, dict):
+        raise TypeError(f"Expected JSON object in {path}, got {type(data).__name__}")
+    return data
 
 
 def collect_reported_significance_values():
@@ -114,92 +124,106 @@ def collect_reported_significance_values():
     step_016 = load_json(str(PROJECT_ROOT / 'results/outputs/step_016_bayesian_analysis.json'))
     step_017 = load_json(str(PROJECT_ROOT / 'results/outputs/step_017_leverage_diagnostics.json'))
     step_029 = load_json(str(PROJECT_ROOT / 'results/outputs/step_029_station_power_analysis.json'))
+    step_050 = load_json(str(PROJECT_ROOT / 'results/outputs/step_050_corrected_tep_analysis.json'))
 
     tests = []
 
     # --- Primary analyses ---
-    if step_010 and step_004:
-        ctrl = step_010.get('control_results', {})
-        p_pearson = ctrl.get('p_original')
-        n_pearson = step_004.get('n_observations')
-        if p_pearson is not None and n_pearson is not None:
-            tests.append({
-                'name': 'Primary Pearson Correlation (full dataset)',
-                'sigma': float(p_to_sigma(p_pearson)),
-                'p': float(p_pearson),
-                'n_obs': int(n_pearson),
-                'category': 'primary'
-            })
+    models = step_050.get('models', {})
+    full_model = (
+        step_050.get('full_systematic_model')
+        or models.get('m5_full_corrected')
+        or {}
+    )
+    eta = full_model.get('eta')
+    eta_error = full_model.get('eta_error')
+    n_obs = step_050.get('n_obs', 25445)
+    if eta is not None and eta_error is not None and eta_error > 0:
+        snr_full = abs(eta) / eta_error
+        tests.append({
+            'name': 'Full-Systematic OLS (primary estimand)',
+            'sigma': float(snr_full),
+            'p': float(sigma_to_p(snr_full)),
+            'n_obs': int(n_obs),
+            'category': 'primary'
+        })
 
-    if step_017:
-        cooks = step_017.get('conclusion', {}).get('formal_cooks_d_excision', {})
-        snr_cooks = cooks.get('eta_clean_snr')
-        n_cooks = cooks.get('n_clean')
-        if snr_cooks is not None:
-            tests.append({
-                'name': 'Leverage-Excised OLS (Cook\'s D)',
-                'sigma': float(snr_cooks),
-                'p': float(sigma_to_p(snr_cooks)),
-                'n_obs': int(n_cooks) if n_cooks is not None else 25177,
-                'category': 'primary'
-            })
+    ctrl = step_010.get('control_results', {})
+    p_pearson = ctrl.get('p_original')
+    n_pearson = step_004.get('n_observations')
+    if p_pearson is not None and n_pearson is not None:
+        tests.append({
+            'name': 'Primary Pearson Correlation (full dataset)',
+            'sigma': float(p_to_sigma(p_pearson)),
+            'p': float(p_pearson),
+            'n_obs': int(n_pearson),
+            'category': 'primary'
+        })
 
-    if step_016:
-        bayes = step_016.get('bayesian_summary', {})
-        eta_mean = bayes.get('posterior_mean_eta')
-        eta_std = bayes.get('posterior_std_eta')
-        n_bayes = bayes.get('outlier_cleaning', {}).get('n_cleaned', 25445)
-        if eta_mean is not None and eta_std is not None and eta_std > 0:
-            snr_bayes = abs(eta_mean) / eta_std
-            tests.append({
-                'name': 'Bayesian MCMC (posterior)',
-                'sigma': float(snr_bayes),
-                'p': float(sigma_to_p(snr_bayes)),
-                'n_obs': int(n_bayes),
-                'category': 'primary'
-            })
+    cooks = step_017.get('conclusion', {}).get('formal_cooks_d_excision', {})
+    snr_cooks = cooks.get('eta_clean_snr')
+    n_cooks = cooks.get('n_clean')
+    if snr_cooks is not None:
+        tests.append({
+            'name': 'Leverage-Excised OLS (Cook\'s D)',
+            'sigma': float(snr_cooks),
+            'p': float(sigma_to_p(snr_cooks)),
+            'n_obs': int(n_cooks) if n_cooks is not None else 25177,
+            'category': 'primary'
+        })
 
-    if step_029:
-        pw = step_029.get('precision_weighted_regression', {})
-        snr_pw = pw.get('snr')
-        n_pw = pw.get('n_eff')
-        if snr_pw is not None:
-            tests.append({
-                'name': 'Precision-Weighted Regression (WLS)',
-                'sigma': float(snr_pw),
-                'p': float(sigma_to_p(snr_pw)),
-                'n_obs': int(n_pw) if n_pw is not None else 8934,
-                'category': 'primary'
-            })
+    bayes = step_016.get('bayesian_summary', {})
+    eta_mean = bayes.get('posterior_mean_eta')
+    eta_std = bayes.get('posterior_std_eta')
+    n_bayes = bayes.get('outlier_cleaning', {}).get('n_cleaned', 25445)
+    if eta_mean is not None and eta_std is not None and eta_std > 0:
+        snr_bayes = abs(eta_mean) / eta_std
+        tests.append({
+            'name': 'Bayesian MCMC (posterior)',
+            'sigma': float(snr_bayes),
+            'p': float(sigma_to_p(snr_bayes)),
+            'n_obs': int(n_bayes),
+            'category': 'primary'
+        })
+
+    pw = step_029.get('precision_weighted_regression', {})
+    snr_pw = pw.get('snr')
+    n_pw = pw.get('n_eff')
+    if snr_pw is not None:
+        tests.append({
+            'name': 'Precision-Weighted Regression (WLS)',
+            'sigma': float(snr_pw),
+            'p': float(sigma_to_p(snr_pw)),
+            'n_obs': int(n_pw) if n_pw is not None else 8934,
+            'category': 'primary'
+        })
 
     # --- Station-level tests ---
-    if step_029:
-        stations = step_029.get('per_station_power', {}).get('stations', [])
-        for s in stations:
-            name = s.get('station')
-            p_obs = s.get('p_observed')
-            n_obs = s.get('n_obs')
-            if name and p_obs is not None and n_obs is not None:
-                tests.append({
-                    'name': f'{name} correlation',
-                    'sigma': float(p_to_sigma(p_obs)) if p_obs > 0 else None,
-                    'p': float(p_obs),
-                    'n_obs': int(n_obs),
-                    'category': 'station_level'
-                })
-
-    if step_029:
-        csv = step_029.get('cross_station_validation', {})
-        p_csv = csv.get('prediction_p')
-        n_csv = csv.get('n_grasse_predicted')
-        if p_csv is not None:
+    stations = step_029.get('per_station_power', {}).get('stations', [])
+    for s in stations:
+        name = s.get('station')
+        p_obs = s.get('p_observed')
+        n_obs = s.get('n_obs')
+        if name and p_obs is not None and n_obs is not None:
             tests.append({
-                'name': 'Cross-station prediction (APO→Grasse)',
-                'sigma': float(p_to_sigma(p_csv)) if p_csv > 0 else None,
-                'p': float(p_csv),
-                'n_obs': int(n_csv) if n_csv is not None else 19390,
+                'name': f'{name} correlation',
+                'sigma': float(p_to_sigma(p_obs)) if p_obs > 0 else None,
+                'p': float(p_obs),
+                'n_obs': int(n_obs),
                 'category': 'station_level'
             })
+
+    csv = step_029.get('cross_station_validation', {})
+    p_csv = csv.get('prediction_p')
+    n_csv = csv.get('n_grasse_predicted')
+    if p_csv is not None:
+        tests.append({
+            'name': 'Cross-station prediction (APO→Grasse)',
+            'sigma': float(p_to_sigma(p_csv)) if p_csv > 0 else None,
+            'p': float(p_csv),
+            'n_obs': int(n_csv) if n_csv is not None else 19390,
+            'category': 'station_level'
+        })
 
     # --- Robustness tests ---
     input_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
@@ -210,13 +234,15 @@ def collect_reported_significance_values():
             residuals = df['residual_m'].values
             cos_elong = np.cos(df['elongation_rad'].values)
             n_boot = len(residuals)
-            r_obs, _ = stats.pearsonr(residuals, cos_elong)
-            np.random.seed(42)
+            with suppress_scipy_array_api_matmul_runtime_warning():
+                r_obs, _ = stats.pearsonr(residuals, cos_elong)
+            np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
             n_draws = 2000
             boot_r = np.zeros(n_draws)
-            for i in range(n_draws):
-                idx = np.random.choice(n_boot, n_boot, replace=True)
-                boot_r[i], _ = stats.pearsonr(residuals[idx], cos_elong[idx])
+            with suppress_scipy_array_api_matmul_runtime_warning():
+                for i in range(n_draws):
+                    idx = np.random.choice(n_boot, n_boot, replace=True)
+                    boot_r[i], _ = stats.pearsonr(residuals[idx], cos_elong[idx])
             n_less = np.sum(boot_r < 0)
             n_greater = np.sum(boot_r > 0)
             p_boot = 2 * min(n_less, n_greater) / n_draws
@@ -238,13 +264,15 @@ def collect_reported_significance_values():
             residuals = df['residual_m'].values
             cos_elong = np.cos(df['elongation_rad'].values)
             n_perm = len(residuals)
-            r_obs, _ = stats.pearsonr(residuals, cos_elong)
-            np.random.seed(42)
+            with suppress_scipy_array_api_matmul_runtime_warning():
+                r_obs, _ = stats.pearsonr(residuals, cos_elong)
+            np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
             n_draws = 2000
             perm_r = np.zeros(n_draws)
-            for i in range(n_draws):
-                idx = np.random.permutation(n_perm)
-                perm_r[i], _ = stats.pearsonr(residuals[idx], cos_elong)
+            with suppress_scipy_array_api_matmul_runtime_warning():
+                for i in range(n_draws):
+                    idx = np.random.permutation(n_perm)
+                    perm_r[i], _ = stats.pearsonr(residuals[idx], cos_elong)
             n_exceeding = np.sum(np.abs(perm_r) >= np.abs(r_obs))
             p_perm = (n_exceeding + 1) / (n_draws + 1)
             tests.append({
@@ -265,7 +293,7 @@ def collect_reported_significance_values():
             residuals = df['residual_m'].values
             cos_elong = np.cos(df['elongation_rad'].values)
             n_ts = len(residuals)
-            np.random.seed(42)
+            np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
             n_samples = min(10000, n_ts * (n_ts - 1) // 2)
             idx_i = np.random.choice(n_ts, n_samples, replace=True)
             idx_j = np.random.choice(n_ts, n_samples, replace=True)
@@ -301,74 +329,71 @@ def collect_reported_significance_values():
             print_status(f"WARNING: Theil-Sen computation failed: {e}", "WARNING")
 
     # --- Systematic control tests ---
-    if step_010:
-        ctrl = step_010.get('control_results', {})
-        n_sys = step_004.get('n_observations', 26207) if step_004 else 26207
-        p_time = ctrl.get('p_partial_linear_time')
-        if p_time is not None:
-            tests.append({
-                'name': 'Systematic control (temporal trend)',
-                'sigma': float(p_to_sigma(p_time)),
-                'p': float(p_time),
-                'n_obs': int(n_sys),
-                'category': 'systematic'
-            })
-        p_seasonal = ctrl.get('p_partial_seasonal')
-        if p_seasonal is not None:
-            tests.append({
-                'name': 'Systematic control (seasonal effects)',
-                'sigma': float(p_to_sigma(p_seasonal)),
-                'p': float(p_seasonal),
-                'n_obs': int(n_sys),
-                'category': 'systematic'
-            })
+    ctrl_sys = step_010.get('control_results', {})
+    n_sys = int(step_004['n_observations'])
+    p_time = ctrl_sys.get('p_partial_linear_time')
+    if p_time is not None:
+        tests.append({
+            'name': 'Systematic control (temporal trend)',
+            'sigma': float(p_to_sigma(p_time)),
+            'p': float(p_time),
+            'n_obs': n_sys,
+            'category': 'systematic'
+        })
+    p_seasonal = ctrl_sys.get('p_partial_seasonal')
+    if p_seasonal is not None:
+        tests.append({
+            'name': 'Systematic control (seasonal effects)',
+            'sigma': float(p_to_sigma(p_seasonal)),
+            'p': float(p_seasonal),
+            'n_obs': n_sys,
+            'category': 'systematic'
+        })
 
     # --- Frequency domain tests ---
     # Synodic detection is already covered by the primary Pearson correlation.
     # Additional frequency-domain controls are drawn from step_015 null tests.
-    if step_015:
-        null_summary = step_015.get('null_test_summary', {})
-        n_freq = step_004.get('n_observations', 26207) if step_004 else 26207
-        non_phys_snr = null_summary.get('non_physical_snr')
-        if non_phys_snr is not None:
+    null_summary = step_015.get('null_test_summary', {})
+    n_freq = int(step_004['n_observations'])
+    non_phys_snr = null_summary.get('non_physical_snr')
+    if non_phys_snr is not None:
+        tests.append({
+            'name': 'Non-physical frequency control (factor=1.23)',
+            'sigma': float(non_phys_snr),
+            'p': float(sigma_to_p(non_phys_snr)),
+            'n_obs': n_freq,
+            'category': 'frequency'
+        })
+    peaks = null_summary.get('systematic_peaks', [])
+    if peaks:
+        best_peak = max(peaks, key=lambda x: x.get('snr', 0))
+        snr_peak = best_peak.get('snr')
+        p_peak = best_peak.get('p_two_sided')
+        freq_factor = best_peak.get('frequency_factor')
+        if snr_peak is not None and p_peak is not None:
             tests.append({
-                'name': 'Non-physical frequency control (factor=1.23)',
-                'sigma': float(non_phys_snr),
-                'p': float(sigma_to_p(non_phys_snr)),
-                'n_obs': int(n_freq),
+                'name': f"Strongest null-region peak (factor={freq_factor})",
+                'sigma': float(snr_peak),
+                'p': float(p_peak),
+                'n_obs': n_freq,
                 'category': 'frequency'
             })
-        peaks = null_summary.get('systematic_peaks', [])
-        if peaks:
-            best_peak = max(peaks, key=lambda x: x.get('snr', 0))
-            snr_peak = best_peak.get('snr')
-            p_peak = best_peak.get('p_two_sided')
-            freq_factor = best_peak.get('frequency_factor')
-            if snr_peak is not None and p_peak is not None:
-                tests.append({
-                    'name': f"Strongest null-region peak (factor={freq_factor})",
-                    'sigma': float(snr_peak),
-                    'p': float(p_peak),
-                    'n_obs': int(n_freq),
-                    'category': 'frequency'
-                })
 
     # --- Validation tests ---
-    if step_029:
-        split = step_029.get('grasse_internal_split', {})
-        halves = split.get('halves', {})
-        for half_key, half_data in halves.items():
-            p_half = half_data.get('p')
-            n_half = half_data.get('n_obs')
-            if p_half is not None and n_half is not None:
-                label = 'first half' if 'first' in half_key else 'second half'
-                tests.append({
-                    'name': f'Grasse internal split ({label})',
-                    'sigma': float(p_to_sigma(p_half)) if p_half > 0 else None,
-                    'p': float(p_half),
-                    'n_obs': int(n_half),
-                    'category': 'validation'
-                })
+    split = step_029.get('grasse_internal_split', {})
+    halves = split.get('halves', {})
+    for half_key, half_data in halves.items():
+        p_half = half_data.get('p')
+        n_half = half_data.get('n_obs')
+        if p_half is not None and n_half is not None:
+            label = 'first half' if 'first' in half_key else 'second half'
+            tests.append({
+                'name': f'Grasse internal split ({label})',
+                'sigma': float(p_to_sigma(p_half)) if p_half > 0 else None,
+                'p': float(p_half),
+                'n_obs': int(n_half),
+                'category': 'validation'
+            })
 
     return tests
 
@@ -443,6 +468,7 @@ def main():
     # Create results table
     results = {
         'step_id': 'step_042',
+        'status': 'PASS',
         'n_tests': len(tests),
         'n_independent_hypotheses': len(independent_indices),
         'n_sensitivity_analyses': len(sensitivity_indices),
@@ -528,7 +554,7 @@ def main():
             f"{len(independent_indices)} are independent hypotheses and {len(sensitivity_indices)} are "
             f"sensitivity analyses (same hypothesis, different estimator). Multiple-testing "
             f"correction is applied only to the independent hypotheses. The primary detection "
-            f"({sigmas[primary_idx]:.2f}σ) is a pre-specified analysis on the full INPOP19a dataset. "
+            f"({sigmas[primary_idx]:.2f}σ) is the primary analysis on the full INPOP19a dataset. "
             f"Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) "
             f"validate robustness but do not constitute additional independent hypothesis tests. "
             f"Correcting only independent hypotheses, the primary detection remains significant."
@@ -536,13 +562,7 @@ def main():
     }
 
     print_status(f"\n{results['conclusion']['interpretation']}", "SUCCESS")
-    
-    # Save results
-    output_path = 'results/outputs/step_042_multiple_testing_correction.json'
-    with open(output_path, 'w') as f:
-        json.dump(results, f, indent=2)
-    print_status(f"\nResults saved to {output_path}", "INFO")
-    
+
     print_status("\n" + "=" * 70, "INFO")
     print_status("Step 042 completed successfully", "SUCCESS")
     print_status("=" * 70, "INFO")

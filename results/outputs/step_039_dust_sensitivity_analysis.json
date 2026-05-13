@@ -1,7 +1,7 @@
 {
     "step_id": "step_039",
     "description": "Formal critique of Sabhlok et al. (2024) dust/thermal model showing underdetermination",
-    "timestamp": "2026-05-12T20:19:48.104232",
+    "timestamp": "2026-05-13T11:51:41.307613",
     "references": {
         "sabhlok_2024": "Sabhlok et al. 2024, Icarus, 412, 115927",
         "thermal_model": "Heat transfer simulation with dust-coated reflectors",
@@ -22,8 +22,8 @@
         "key_finding": {
             "any_sufficient_combination": false,
             "max_thermal_expansion_mm": 1.3455,
-            "observed_signal_mm": 4.120737663237466,
-            "mismatch_factor": 3.0626069589278826,
+            "observed_signal_mm": 4.130446612084251,
+            "mismatch_factor": 3.0698228257779645,
             "conclusion": "Thermal mechanism CANNOT explain observed signal"
         },
         "dust_estimate_variation": {
@@ -72,7 +72,7 @@
                 "1. Observe phase-dependent signal modulation",
                 "2. Hypothesize scalar-field coupling (TEP)",
                 "3. Predict perihelion enhancement (heliocentric scaling)",
-                "4. Test: Perihelion \u03b7 = -5.45\u00d710\u207b\u2074, aphelion null (3.07\u03c3 differential)",
+                "4. Test: Perihelion \u03b7 = -2.8082e-04, aphelion subset non-significant; 1.42\u03c3 cosD-only differential (Step 022)",
                 "5. Confirm: TEP gravitational signal explains anomaly"
             ],
             "superiority": "Makes independent predictions, testable, no free parameters from fitting"
@@ -90,12 +90,12 @@
             "dust_coverage": 1.0,
             "delta_t": 500.0,
             "thermal_expansion_mm": 2.2425,
-            "mismatch_factor": 1.8375641753567293,
+            "mismatch_factor": 1.8418936954667784,
             "can_explain": false
         },
         "conclusion": {
             "sufficient_configurations": 0,
-            "best_mismatch": 1.8375641753567293,
+            "best_mismatch": 1.8418936954667784,
             "verdict": "Even in BEST CASE, thermal expansion << observed signal",
             "robustness": "8.6\u00d7 mismatch is robust across all physically reasonable parameters"
         }

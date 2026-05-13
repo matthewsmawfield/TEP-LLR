@@ -22,6 +22,7 @@ from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 TEP_CONFIG = get_config()
 
 import numpy as np
+from scripts.utils.numerics import hat_diagonal_from_qr, stable_lstsq
 import pandas as pd
 import json
 from typing import Dict, Tuple
@@ -30,16 +31,12 @@ from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, p
 def compute_leverage(X: np.ndarray) -> np.ndarray:
     """Compute hat matrix diagonal (leverage values) in O(n) memory.
 
-    CRITICAL FIX: The original implementation materialised the full n×n hat
-    matrix (26000² ≈ 676M entries ≈ 5.4 GB), which crashes on memory-constrained
-    systems. Leverage h_ii = (X (X'X)^(-1) X')_ii can be computed as the row-wise
-    sum of (X @ (X'X)^(-1)) * X without forming the full n×n matrix.
+    Uses reduced QR on the design with intercept: h_ii = sum_j Q[i,j]^2,
+    avoiding explicit (X'X)^{-1} which is ill-conditioned for stacked
+    periodic controls.
     """
-    X = np.column_stack([np.ones(len(X)), X])  # Add intercept
-    XtX_inv = np.linalg.inv(X.T @ X)
-    # h_ii = sum_j [X_ij * (XtX_inv @ X.T)_ji] = sum_j [(X @ XtX_inv)_ij * X_ij]
-    leverage = np.sum((X @ XtX_inv) * X, axis=1)
-    return leverage
+    Xd = np.column_stack([np.ones(len(X)), X])
+    return hat_diagonal_from_qr(Xd)
 
 def theil_sen_regression(x: np.ndarray, y: np.ndarray, sample_size: int = 10000) -> Tuple[float, float]:
     """Compute Theil-Sen robust regression (median of pairwise slopes).
@@ -140,7 +137,7 @@ def test_signal_without_leverage_points(df: pd.DataFrame, leverage: np.ndarray,
 
     # OLS
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs, _, _, _ = stable_lstsq(X, residuals)
     eta_ols = coeffs[0] / ETA_SCALE_FACTOR
 
     # Theil-Sen
@@ -164,10 +161,11 @@ def formal_cooks_distance_excision(df: pd.DataFrame) -> Dict:
     n = len(df)
     
     X = np.column_stack([np.ones(n), cos_elong])
-    H = np.dot(X, np.dot(np.linalg.inv(np.dot(X.T, X)), X.T))
-    leverage = np.diag(H)
-    coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
-    y_pred = np.dot(X, coeffs)
+    from scripts.utils.numerics import hat_diagonal_from_qr
+    leverage = hat_diagonal_from_qr(X)
+    coeffs, _, _, _ = stable_lstsq(X, residuals)
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        y_pred = np.dot(X, coeffs)
     resid = residuals - y_pred
     mse = np.sum(resid**2) / (n - 2)
     std_resid = resid / np.sqrt(mse * (1 - leverage))
@@ -178,12 +176,13 @@ def formal_cooks_distance_excision(df: pd.DataFrame) -> Dict:
     
     X_clean = np.column_stack([cos_elong[mask], np.ones(mask.sum())])
     res_clean = residuals[mask]
-    coeffs_clean, _, _, _ = np.linalg.lstsq(X_clean, res_clean, rcond=None)
+    coeffs_clean, _, _, _ = stable_lstsq(X_clean, res_clean)
     eta_clean = coeffs_clean[0] / ETA_SCALE_FACTOR
     
     resid_clean = res_clean - np.dot(X_clean, coeffs_clean)
     mse_clean = np.sum(resid_clean**2) / (mask.sum() - 2)
-    se_clean = np.sqrt(mse_clean * np.linalg.inv(np.dot(X_clean.T, X_clean))[0, 0]) / ETA_SCALE_FACTOR
+    XtX_clean_inv = np.linalg.pinv(np.dot(X_clean.T, X_clean), rcond=1e-10, hermitian=True)
+    se_clean = np.sqrt(mse_clean * XtX_clean_inv[0, 0]) / ETA_SCALE_FACTOR
     snr_clean = abs(eta_clean) / se_clean if se_clean > 0 else 0.0
     
     slope_ts, intercept_ts = theil_sen_regression(cos_elong[mask], res_clean, sample_size=10000)
@@ -227,7 +226,7 @@ def bootstrap_leverage_influence(df: pd.DataFrame, n_bootstrap: int = None) -> D
 
         # With all points
         X = np.column_stack([cos_samp, np.ones(len(cos_samp))])
-        coeffs, _, _, _ = np.linalg.lstsq(X, res_samp, rcond=None)
+        coeffs, _, _, _ = stable_lstsq(X, res_samp)
         eta_ols_with.append(coeffs[0] / ETA_SCALE_FACTOR)
 
         slope_ts, _ = theil_sen_regression(
@@ -240,7 +239,7 @@ def bootstrap_leverage_influence(df: pd.DataFrame, n_bootstrap: int = None) -> D
             res_filt = res_samp[~lev_samp]
 
             Xf = np.column_stack([cos_filt, np.ones(len(cos_filt))])
-            coeffs_f, _, _, _ = np.linalg.lstsq(Xf, res_filt, rcond=None)
+            coeffs_f, _, _, _ = stable_lstsq(Xf, res_filt)
             eta_ols_without.append(coeffs_f[0] / ETA_SCALE_FACTOR)
 
             slope_ts_f, _ = theil_sen_regression(
@@ -333,7 +332,7 @@ def main():
     # Compute original fits for comparison
     residuals = df['residual_m'].values
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs, _, _, _ = stable_lstsq(X, residuals)
     eta_ols_full = coeffs[0] / ETA_SCALE_FACTOR
 
     slope_ts, _ = theil_sen_regression(cos_elong, residuals)

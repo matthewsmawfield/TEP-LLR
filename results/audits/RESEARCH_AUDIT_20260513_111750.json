@@ -1,0 +1,208 @@
+{
+    "report_metadata": {
+        "pipeline_name": "Full Canonical",
+        "timestamp": "2026-05-13T11:17:50.259460",
+        "elapsed_total_s": 37.8,
+        "status": "FAIL"
+    },
+    "system_telemetry": {
+        "os": "Darwin",
+        "os_release": "25.3.0",
+        "machine": "arm64",
+        "processor": "arm",
+        "cpu_count_logical": 14,
+        "cpu_count_physical": 14,
+        "memory_total_gb": 24.0,
+        "python_version": "3.13.5",
+        "cpu_architecture": "arm64"
+    },
+    "dependency_audit": {
+        "scripts": {
+            "step_000_llr_data_ingestion.py": "26de5c0cad20",
+            "step_001_data_preprocessing.py": "9dacd2f33000",
+            "step_002_de430_preprocessing.py": "7e7856166bc6",
+            "step_003_statistical_analysis.py": "6aeeae56f19f",
+            "step_004_detection_analysis_advanced.py": "b1c7ce736c83",
+            "step_005_temporal_drift_analysis.py": "874ee51b53f0",
+            "step_006_multi_ephemeris_comparison.py": "05c84fe06bfc",
+            "step_006b_de430_outlier_robustness.py": "618d99e8b9a5",
+            "step_007_meta_analysis.py": "1bca84a328c7",
+            "step_008_systematic_error_analysis.py": "3e7f6aac22b9",
+            "step_009_ephemeris_independent_analysis.py": "a256c81c0e82",
+            "step_010_systematic_control_analysis.py": "9970a6f05ec8",
+            "step_011_noise_signal_injection.py": "0ed184539e60",
+            "step_012_subsample_robustness.py": "277fec4798c0",
+            "step_013_station_decomposition.py": "007e467bcdab",
+            "step_014_inter_station_consistency.py": "013aa912d6a8",
+            "step_015_null_tests.py": "4e55144e7ecb",
+            "step_016_bayesian_analysis.py": "0265e6796a92"
+        },
+        "utils": {
+            "astronomical_utils.py": "14ca40eb4e1f",
+            "compress_pdf.py": "f232a06525ed",
+            "config.py": "cc7f96ed7873",
+            "html_to_pdf.py": "af6fe88b0576",
+            "llr_constants.py": "0191e287598b",
+            "logger.py": "c859854b4f7b",
+            "numerics.py": "4c17018170f8",
+            "parse_de430.py": "e03b9e581573",
+            "parse_edc_crd.py": "5859b57d7bb5",
+            "parse_inpop_mini.py": "f4ce883c468a",
+            "pipeline_runner.py": "497f180ff027",
+            "pre_whitening_filter.py": "6eba4ba15ad8",
+            "process_pdf.py": "15da6f308d55",
+            "schema_validation.py": "8e85fae4e3cb",
+            "statistical_utils.py": "85dcce192cce",
+            "verify_value_consistency.py": "6e6f02eeb93e"
+        },
+        "config": {
+            "config.json": "2cbdc1456563"
+        }
+    },
+    "step_telemetry": [
+        {
+            "name": "step_000_llr_data_ingestion.py",
+            "status": "PASS",
+            "elapsed_s": 0.05,
+            "returncode": 0,
+            "output": "results/outputs/step_000_llr_data_ingestion.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_001_data_preprocessing.py",
+            "status": "PASS",
+            "elapsed_s": 7.81,
+            "returncode": 0,
+            "output": "results/outputs/step_001_data_preprocessing.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_002_de430_preprocessing.py",
+            "status": "PASS",
+            "elapsed_s": 0.86,
+            "returncode": 0,
+            "output": "results/outputs/step_002_de430_preprocessing.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_003_statistical_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 10.25,
+            "returncode": 0,
+            "output": "results/outputs/step_003_statistical_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_004_detection_analysis_advanced.py",
+            "status": "PASS",
+            "elapsed_s": 4.68,
+            "returncode": 0,
+            "output": "results/outputs/step_004_detection_analysis_advanced.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_005_temporal_drift_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.66,
+            "returncode": 0,
+            "output": "results/outputs/step_005_temporal_drift_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_006_multi_ephemeris_comparison.py",
+            "status": "PASS",
+            "elapsed_s": 0.65,
+            "returncode": 0,
+            "output": "results/outputs/step_006_multi_ephemeris_comparison.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_006b_de430_outlier_robustness.py",
+            "status": "PASS",
+            "elapsed_s": 2.61,
+            "returncode": 0,
+            "output": "results/outputs/step_006b_de430_outlier_robustness.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_007_meta_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.64,
+            "returncode": 0,
+            "output": "results/outputs/step_007_meta_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_008_systematic_error_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.31,
+            "returncode": 0,
+            "output": "results/outputs/step_008_systematic_error_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_009_ephemeris_independent_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.65,
+            "returncode": 0,
+            "output": "results/outputs/step_009_ephemeris_independent_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_010_systematic_control_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.69,
+            "returncode": 0,
+            "output": "results/outputs/step_010_systematic_control_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_011_noise_signal_injection.py",
+            "status": "PASS",
+            "elapsed_s": 0.7,
+            "returncode": 0,
+            "output": "results/outputs/step_011_noise_signal_injection.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_012_subsample_robustness.py",
+            "status": "PASS",
+            "elapsed_s": 0.67,
+            "returncode": 0,
+            "output": "results/outputs/step_012_subsample_robustness.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_013_station_decomposition.py",
+            "status": "PASS",
+            "elapsed_s": 0.66,
+            "returncode": 0,
+            "output": "results/outputs/step_013_station_decomposition.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_014_inter_station_consistency.py",
+            "status": "PASS",
+            "elapsed_s": 0.64,
+            "returncode": 0,
+            "output": "results/outputs/step_014_inter_station_consistency.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_015_null_tests.py",
+            "status": "PASS",
+            "elapsed_s": 0.99,
+            "returncode": 0,
+            "output": "results/outputs/step_015_null_tests.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_016_bayesian_analysis.py",
+            "status": "FAIL",
+            "elapsed_s": 4.26,
+            "returncode": 1,
+            "output": "results/outputs/step_016_bayesian_analysis.json",
+            "output_check": "not checked"
+        }
+    ]
+}

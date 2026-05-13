@@ -3,7 +3,7 @@
 TEP-LLR: Full Canonical Analysis Pipeline
 ==========================================
 
-Executes the complete 44-step LLR analysis pipeline in sequence.
+Executes the complete 58-step LLR analysis pipeline in sequence.
 Every step writes a JSON output to results/outputs/ and a detailed
 log to logs/.  Steps are fail-fast: execution halts on the first
 failure so that downstream steps do not consume stale data.
@@ -29,12 +29,21 @@ Group C — Physical Signal Probes (steps 022–026)
 Group D — Defensibility (steps 027–039)
     False-positive diagnostic steps designed to test for
     instrumental and systematic alternative explanations:
-      029 — Day/Night thermal bias null test
-      030 — True geometric elongation vs mean-phase comparison
-      031 — Station power analysis and Grasse-dominance defense
+      027 — Day/Night thermal bias null test
+      028 — True geometric elongation vs mean-phase comparison
+      029 — Station power analysis and Grasse-dominance defense
              (includes phase-coverage analysis explaining McDonald2)
-      032 — Hardware epoch consistency analysis (sign-consistency
+      030 — Hardware epoch consistency analysis (sign-consistency
              across Nd:glass / Nd:YAG / C-SPAD era partitions)
+      031 — Lomb-Scargle orbital dynamics mapping
+      032 — Ephemeris orthogonality proof
+      033 — Quantitative η prediction from TEP first principles
+      034 — Static vs dynamic signal absorption test
+      035 — Historical comparison analysis
+      036 — Full-moon deficit analysis
+      037 — Lunar recession analysis
+      038 — Tidal resonance analysis
+      039 — Dust model sensitivity analysis
 
 Usage
 -----
@@ -76,8 +85,8 @@ def main() -> None:
         # -------------------------------------------------------------------
         # Group A: Core Detection
         # -------------------------------------------------------------------
-        # 000 — Download and parse INPOP19a LLR residual normal-point data
-        #        from Paris Observatory.  Produces the master parquet file.
+        # 000 — Verify required INPOP19a and DE430 raw residual files
+        #        against the checked data manifest before preprocessing.
         "step_000_llr_data_ingestion.py",
         # 001 — Compute Moon-Sun elongation D for every observation; assign
         #        station labels; validate data quality (NaN, range checks).
@@ -135,8 +144,8 @@ def main() -> None:
         #        specific contributions weighted by data fraction.
         "step_013_station_decomposition.py",
         # 014 — Inter-Station Consistency Analysis.
-        #        Wald test, meta-analysis, and pairwise consistency across
-        #        independent LLR stations (APO, Grasse, Matera, McDonald, Haleakala).
+        #        CosD-only meta-analysis plus controlled pooling against the
+        #        common-eta mixed model from Step 050.
         "step_014_inter_station_consistency.py",
         # 015 — Null tests against control datasets (shuffled phases, DE430
         #        raw, non-TEP frequency bands) to calibrate false-alarm rates.
@@ -303,6 +312,10 @@ def main() -> None:
         #        values (Bonferroni, Benjamini-Hochberg). Addresses "researcher
         #        degrees of freedom" concern for 20+ complementary methods.
         "step_042_multiple_testing_correction.py",
+        # 043 — Temporal Bin Variation Analysis.
+        #        Quantitative analysis of temporal bin variation to address χ²/dof ≈ 33
+        #        concern. Assesses whether temporal variation exceeds expected noise.
+        "step_043_temporal_bin_variation_analysis.py",
         # 044 — Systematic Projection Analysis.
         #        Computes cos(elongation)-projected systematic bias for each error
         #        source and performs phase-locked differential analysis that cancels
@@ -314,10 +327,6 @@ def main() -> None:
         #        comparison, (2) heliocentric modulation consistency, (3) station
         #        latitude independence. All three tests PASS.
         "step_045_independent_validation.py",
-        # 043 — Temporal Bin Variation Analysis.
-        #        Quantitative analysis of temporal bin variation to address χ²/dof ≈ 33
-        #        concern. Assesses whether temporal variation exceeds expected noise.
-        "step_043_temporal_bin_variation_analysis.py",
         # 046 — Station-Balanced TEP Analysis.
         #        Directly addresses Grasse-dominance concern by creating balanced
         #        subsamples (equal-N per station, Grasse-capped). Tests whether
@@ -340,6 +349,14 @@ def main() -> None:
         #        perihelion and CMB dipole longitude makes this distinguishable from
         #        heliocentric distance modulation.
         "step_048_cmb_anisotropy.py",
+        # 055 — CMB Anisotropy Rigorous Falsification Suite.
+        #        Stress-tests the CMB interpretation against aliasing,
+        #        multicollinearity, sky-scrambling, permutation, and
+        #        orthogonalized-predictor nulls.
+        "step_055_cmb_rigorous_falsification.py",
+        # 056 — Linearized dynamical Nordtvedt refit on INPOP19a and DE430
+        #        residual archives with full-systematic nuisance design.
+        "step_056_dynamical_integrator_eta_refit.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

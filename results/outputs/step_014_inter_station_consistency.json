@@ -9,17 +9,38 @@
         "Haleakala"
     ],
     "meta_analysis": {
-        "weighted_mean_eta": -0.0003505301941416979,
-        "weighted_error_eta": 6.621678559379576e-05,
-        "snr": 5.293675780216989
+        "weighted_mean_eta": -0.0003511782486660766,
+        "weighted_error_eta": 6.633538684379649e-05,
+        "snr": 5.293980564144669,
+        "method": "inverse-variance fixed-effects on cosD-only station slopes (Step 004)"
     },
     "heterogeneity": {
-        "Q": 12.269829072235442,
+        "Q": 12.254773500983264,
         "df": 4,
-        "p_value": 0.015453585005256842,
-        "I_squared_pct": 67.39970885942228,
+        "p_value": 0.015553927531026357,
+        "I_squared_pct": 67.35965785349636,
         "is_consistent": false
     },
-    "status": "WARNING",
-    "conclusion": "Station-specific biases detected; meta-analysis still yields significant TEP detection."
+    "controlled_pooling": {
+        "common_eta": {
+            "eta": -0.00043213024642831625,
+            "eta_error": 6.756305488649924e-05,
+            "snr": 6.39595481812156
+        },
+        "f_test_station_specific_eta": {
+            "F": 1.1848563101292588,
+            "p": 0.3151220242330546
+        },
+        "pooled_meta_analysis": {
+            "eta": -0.0004371711964514781,
+            "err": 6.778366518477076e-05,
+            "snr": 6.44950660693543,
+            "cochran_q": 3.5868083768503913,
+            "p_het": 0.1663927721020435,
+            "I2": 44.24012130371408
+        },
+        "interpretation": "CosD-only station slopes can disagree under unequal phase coverage, but a common-eta model with station-specific systematics leaves no evidence for station-specific Nordtvedt parameters."
+    },
+    "status": "PASS",
+    "conclusion": "CosD-only station slopes show heterogeneity, but controlled pooling with station-specific systematics supports a single common Nordtvedt parameter."
 }

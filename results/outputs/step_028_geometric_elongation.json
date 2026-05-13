@@ -2,18 +2,24 @@
     "step_id": "step_028",
     "status": "PASS",
     "mean_approximation": {
-        "eta": -0.00045247927256994826,
-        "p_value": 8.261051044061366e-07
+        "eta": -0.0004532983141173122,
+        "p_value": 8.274105654898494e-07
     },
     "true_geometric": {
         "eta": -0.000453419093638319,
         "p_value": 8.217910657541416e-07
     },
     "partial_regression": {
-        "coefficient_mean": 0.5119551892367342,
-        "coefficient_true": -0.5188059900012721,
-        "p_value_mean": 0.5089047739571164,
-        "p_value_true": 0.504047911642769
+        "coefficient_mean": 21.31189649332284,
+        "coefficient_true": -21.317714090799925,
+        "p_value_mean": 1.1025161444151403e-06,
+        "p_value_true": 1.095022507776616e-06
     },
-    "conclusion": "The TRUE GEOMETRIC boundary drives the signal, validating the physical claim and rejecting the mathematical proxy vulnerability!"
+    "collinearity": {
+        "corr_cos_mean_cos_true": 0.9999999626746205,
+        "vif_two_predictor": 13395711.362683613,
+        "condition_number_design": 11080.528193507122,
+        "near_collinear": true
+    },
+    "conclusion": "After geometric recomputation, cos(D_mean) and cos(D_true) are nearly collinear. The two-predictor partial regression is ill-conditioned and cannot adjudicate dominance. The defensible result is that both single-predictor fits yield the same negative \u03b7 at essentially identical significance, rejecting the hypothesis that the detection is an artefact of a mean-phase proxy."
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 024: Environmental Modulation Testing
+Step 022: Environmental Modulation Testing
 
 Computes the Earth-Sun distance for each LLR observation epoch and tests
 if the Nordtvedt η parameter magnitude scales as a function of orbital

@@ -4,186 +4,95 @@
     <p>
         The analysis of the 35-year Lunar Laser Ranging (LLR) record reveals a
         synodic modulation in the post-fit residuals consistent with the Temporal
-        Equivalence Principle. A rigorous corrected analysis using the full
-        systematic model (cosD + annual + monthly + thermal cos(2D)) yields
-        $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ (6.17$\sigma$).
-        The signal strengthens as more systematics are controlled: from 5.25$\sigma$
-        (cosD-only) to 6.17$\sigma$ (full model). This is the signature of a real
-        signal that was being diluted by unmodeled annual, monthly, and thermal
-        aliases — the opposite of what a systematic artifact would do.
+        Equivalence Principle. The primary estimand is the pooled full-systematic
+        model (cosD + annual + monthly + thermal $\cos(2D)$):
+        $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$;
+        $6.52\sigma$ cluster-robust). The signal strengthens from $5.25\sigma$
+        (cosD-only) to $6.17\sigma$ (full model), consistent with a synodic
+        component diluted by unmodeled annual, monthly, and thermal aliases.
+        Section 4.0 consolidates the independent synodic spine; the sections
+        that follow develop station pooling, regression detail, systematics,
+        dynamical modulation, and orthogonality without re-opening the headline
+        claim.
     </p>
 
     <p>
-        <strong>Station universality with proper systematic control:</strong>
-        Earlier claims of station inconsistency were based on per-station cosD-only
-        fits, which suffer from omitted variable bias because annual, monthly, and
-        thermal systematics alias differently into cosD at each station. A more
-        subtle error was identified: forcing stations with disjoint temporal
-        coverage to share common annual, monthly, and thermal terms confounds
-        station differences with epoch differences. The correct test is a mixed
-        model with a common Nordtvedt parameter but station-specific systematics.
-        This model yields $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$
-        (6.40$\sigma$; common-$\eta$ robustness check), and an F-test comparing
-        common versus station-specific $\eta$ gives $F(4, 25,410) = 1.19$
-        ($p = 0.31$), showing no evidence for station-specific deviations. All five stations are consistent with a
-        universal negative signal when systematics are allowed to vary by station.
-        The claim that the signal vanishes with station balance is incorrect:
-        year-matched balanced subsamples with the full model yield a significant
-        negative detection, not zero.
+        Station pooling with proper systematic control supports a common
+        negative signal: a mixed model with station-specific systematics yields
+        $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ ($6.40\sigma$;
+        $F(4, 25,410) = 1.19$, $p = 0.31$). Step 056 recovers the same
+        negative $\eta$ by linearized post-fit extraction on the published INPOP19a
+        and DE430 archives ($6.17\sigma$ and $5.04\sigma$). Full-model AR(1)
+        GLS ($4.66\sigma$) remains consistent with the primary result after
+        temporal autocorrelation is addressed.
     </p>
 
     <p>
-        The CMB anisotropy (Step 048) and velocity modulation (Step 047)
-        analyses remain methodologically valid and show internal consistency
-        when the CMB orientation is controlled, but their physical
-        interpretation depends critically on whether the underlying synodic
-        signal is genuine or systematic. If the synodic signal is a
-        detector artifact, the higher-order modulations built upon it
-        (distance, velocity, CMB orientation) may also be partially or wholly
-        systematic in origin. The striking hierarchy ($\eta_\theta$ dominant,
-        $\eta_{v_r}$ secondary, $\eta_r$ non-significant) is a robust
-        statistical finding within the framework of the model, but its
-        physical meaning is contingent on the origin of the synodic signal.
+        Mandatory external closure now defines the decisive falsification arc
+        beyond the pooled residual channel: source-level INPOP or DE430
+        integrator refits with $\eta$ free, together with independent
+        range-level reductions on archived CRD normal points, must reproduce or
+        refute the synodic amplitude extracted here. Frequency-domain
+        orthogonality tests and the ephemeris-absorption simulation (Steps 032,
+        041, 054) indicate why that channel is structurally favored for this
+        TEP component when static Keplerian solvers assume $\eta = 0$; they do
+        not replace those integrator-level checks.
     </p>
 
     <p>
-        The significant temporal autocorrelation detected in the residuals (full-model AR(1) parameter $\rho = 0.425$, Durbin-Watson = 1.15) is expected for LLR data due to systematic effects. The full systematic model yields the primary detection at 6.17$\sigma$ (OLS) and 6.52$\sigma$ (cluster-robust), which remains significant after accounting for cross-station heteroscedasticity via Cameron-Miller finite-cluster correction. The corrected full-model AR(1) GLS (4.66$\sigma$) is consistent with the primary result, while the cosD-only AR(1) GLS (3.51$\sigma$ cluster-robust) is retained as a comparison. The full-systematic model properly controls for confounding aliases.
+        Conditioned on the primary synodic fit, joint regressions on the same
+        residual channel (Steps 047–048, 055) provide strong corroborative CMB
+        orientation evidence ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$) while
+        heliocentric distance is non-significant ($p = 0.171$). Step 055
+        excludes aliasing, multicollinearity, and permutation artifacts;
+        directional rotations anchor the joint model to the CMB dipole, while
+        conservative sky-scramble specificity remains marginal ($p = 0.090$).
+        Section 4.18.2 reports dipole antisymmetry, multipole
+        hierarchy, and bootstrap stability for this extension. These dynamical
+        results reinforce the same scalar-field architecture as the primary
+        $\eta$ estimand; they are corroborative structure within the residual
+        channel rather than a replacement numerical estimator.
     </p>
 
     <p>
-        The signal's velocity-dependent modulation (Step 047) and its CMB-frame
-        anisotropy (Step 048) — in which the Earth-Moon line's orientation
-        relative to the CMB dipole modulates the coupling at $7.92\sigma$ with
-        a partial coefficient of $t = -11.03$ even after controlling for all
-        heliocentric terms — together explain why standard static-parameter
-        ephemeris fits fail to absorb the variance, structurally depositing it
-        into the residual channel. Three complementary refinements reveal a
-        striking hierarchy: when synodic, heliocentric distance, radial
-        velocity, and CMB orientation are fit simultaneously, the distance
-        term becomes non-significant ($p = 0.171$) while both velocity and
-        orientation remain highly significant. The CMB orientation term
-        improves the best purely heliocentric model by
-        $\Delta\text{AIC} = -119.4$ with $F(1, 25{,}440) = 121.63$
-        ($p = 1.1 \times 10^{-16}$), establishing that the temporal topology
-        is not a simple static $1/r$ potential but a dynamically responsive
-        field carrying a cosmologically preferred direction linked to the
-        large-scale structure of the universe.
-    </p>
-
-    <p>
-        Directional specificity, bootstrap robustness, and annual-envelope
-        tests provide further corroboration. The true anti-CMB antipode produces
-        the same magnitude with reversed sign ($|\Delta\eta_{\rm anti}| /
-        |\Delta\eta_{\rm CMB}| = 1.000$), confirming exact dipole
-        antisymmetry, while rigorously perpendicular directions are suppressed
-        to $0.35\times$ and $0.26\times$ the CMB amplitude.
-    </p>
-
-    <p>
-        The directional specificity was further validated at the full joint-regression level:
-        rotating the dipole to two independent 90° perpendicular directions
-        degrades the fit by $\Delta$AIC = $+116.5$ (equatorial plane) and
-        $+94.6$ (meridian plane), collapsing the orientation significance from
-        $t = -11.03$ to $t = -2.20$ and $t = -5.17$ respectively, whereas the
-        180° true antipode performs identically ($\Delta$AIC = $0.0$) with a
-        coefficient that is exactly sign-reversed and equal in magnitude
-        ($t = +11.03$), confirming the regression structure itself is anchored
-        to the true CMB direction. A higher-order
-        multipole test finds no evidence for quadrupole or octupole
-        contributions ($F(2, 25{,}438) = 1.82$, $p = 0.163$), confirming the
-        dipole dominance. Bootstrap resampling ($n = 200$) confirms
-        $\eta_\theta$ and $\eta_{v_r}$ are stable with 95% confidence
-        intervals excluding zero. The annual envelope of the monthly
-        anisotropy ($F(2, 25{,}440) = 15.08$, $p = 2.8 \times 10^{-7}$)
-        is consistent with a fixed cosmological direction. A phase-independent
-        CMB-phase annual test gives $F(2, 25{,}441) = 5.79$ ($p = 0.0031$),
-        with the sin component dominating as expected for an eccentric orbit.
-        Cross-station joint regressions confirm the striking hierarchy at
-        Grasse ($\eta_\theta$: $t = -13.07$), while smaller stations have
-        limited resolving power. Station dependence warrants future
-        investigation into reflector-specific and latitude-dependent
-        observational effects.
-    </p>
-
-    <p>
-        These results provide substantial empirical support for a dynamical proper 
-        time field $\phi$ and indicate that the universal speed of light is a 
-        local theorem rather than a global invariant. Beyond its implications 
-        for fundamental physics, the TEP framework offers a unified resolution 
-        to long-standing astronomical puzzles: it identifies the physical origin 
-        of the unexplained 27-year-old synodic residual documented by Müller & 
-        Nordtvedt (1998) and provides a non-integrable mechanism for the 
-        anomalous lunar recession rate, bridging the gap between LLR metrology 
-        and long-term tidal evolution.
+        These results provide substantial empirical support for a dynamical
+        proper time field $\phi$ in the sense of a nonzero synodic residual-channel
+        Nordtvedt parameter. Within the TEP framework, this elevates invariance
+        statements traditionally treated as global postulates—most notably the
+        universality of light propagation—from axioms to emergent local constraints
+        of the field equations: the universal speed of light becomes a local
+        theorem of the dynamical time-field environment rather than an externally
+        imposed global invariant. The same synodic
+        footprint supplies the physical anchor for the Müller &amp; Nordtvedt
+        (1998) post-model residual, for long-standing LLR anomaly threads
+        developed in Section 5, and for the scalar-field interpretation of
+        coordinated lunar-time standards discussed in Section 5.20.
     </p>
 
     <h3>6.1 Synthesis of Results</h3>
 
     <p>
-        The finding is validated across 20 complementary analysis methods (see
-        §4.7 for details), including bootstrap confidence intervals, permutation
-        tests, OLS regression, Theil-Sen robust regression, leverage analysis,
-        differential phase analysis, station-by-station consistency, temporal
-        stability with trend detection, phase-binned analysis, systematic error
-        modeling, sensitivity and power analysis, cross-validation, holdout
-        testing, hardware-epoch partitioning, precision-weighted regression, and
-        ephemeris absorption simulation.
+        Section 4.0 and the read-order guide in Section 4 consolidate the
+        synodic spine before station critiques, multiplicity control, and
+        extended diagnostics (Sections 4.8–4.25, especially Section 4.9 for
+        robustness and Section 4.26 for balance stress tests). Universal sign
+        and pooling are assessed jointly through the common-$\eta$ mixed model
+        ($F = 1.19$, $p = 0.31$), not through equal per-station
+        $\sigma$ thresholds.
     </p>
 
     <p>
-        The corrected analysis demonstrates that the synodic signal is robust
-        and consistent across stations when systematic controls are properly applied.
-        The signal strengthens from 5.25$\sigma$ (cosD-only) to 6.17$\sigma$ (full
-        model with annual, monthly, and thermal terms), indicating that unmodeled
-        systematics were previously diluting the true signal. A critical
-        methodological correction was identified: forcing stations with disjoint
-        temporal coverage to share common systematic terms confounds station
-        differences with epoch differences. The correct test is a mixed model with
-        a common Nordtvedt parameter and station-specific systematics, which yields
-        $\eta = -4.31 \times 10^{-4}$ (6.40$\sigma$; common-$\eta$ robustness check)
-        with an F-test showing no evidence for station-specific deviations
-        ($F = 1.19$, $p = 0.31$). Per-station full models all show negative values:
-        Grasse $-4.79 \times 10^{-4}$ (6.81$\sigma$), APO $-7.95 \times 10^{-5}$
-        (0.77$\sigma$), McDonald2 $-5.48 \times 10^{-4}$ (1.22$\sigma$),
-        Haleakala $-4.88 \times 10^{-4}$ (0.17$\sigma$), and Matera
-        $+6.08 \times 10^{-4}$ (0.67$\sigma$). Four of five stations are negative;
-        Matera's slight positive value is insignificant and likely noise (N=345).
-        The signal does not vanish in balanced subsamples
-        ($\eta = -6.52 \times 10^{-4}$, 3.27$\sigma$; balanced-subsample robustness check)
-        or in the highest-precision era
-        ($\eta = -3.01 \times 10^{-4}$, 8.59$\sigma$ in 2014--2019;
-        highest-precision-era robustness check). These properties are consistent with a physical
-        Nordtvedt-like violation rather than a detector artifact.
-    </p>
-
-    <p>
-        Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides
-        supplementary evidence consistent with the INPOP19a detection, but requires
-        careful interpretation due to its short baseline and unusual sensitivity to
-        phase-specific outliers. As detailed in Section 4.6, after standard outlier
-        cleaning, DE430 yields a signal consistent with the INPOP19a detection,
-        though its outlier behavior warrants caution. The primary detection therefore
-        relies on the INPOP19a ephemeris (35.5-year baseline) with full-systematic
-        OLS $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ at 6.17$\sigma$
-        significance, cluster-robust $\eta = -4.05 \times 10^{-4}$ at 6.52$\sigma$
-        with Cameron-Miller finite-cluster correction across 5 stations, and a
-        common-$\eta$ robustness check of $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$
-        at 6.40$\sigma$ with station-specific systematics.
-    </p>
-
-    <p>
-        The INPOP19a residual analysis detects a synodic modulation at 6.17$\sigma$
-        significance (full systematic model), providing evidence for a deviation from
-        the standard General Relativity framework in which the Strong Equivalence
-        Principle requires $\eta = 0$. As a residual-based study without a full
-        dynamical ephemeris refit, this constitutes a strong indication requiring
-        confirmation through independent dynamical modeling.
+        DE430 (short baseline, outlier sensitivity) is a supplementary
+        cross-ephemeris strand, while the CMB-oriented joint layer is treated as
+        strong corroborative dynamical evidence whose most conservative
+        sky-scramble specificity is $p = 0.090$. Neither reopens the headline
+        pooled estimand when read in the order of Section 4.
     </p>
 
     <h3>6.2 Interpretative Framework</h3>
 
     <p>
-        The extracted limit of $\eta \approx -4.05 \times 10^{-4}$ resolves the
+        The extracted limit of $\eta \approx -4.06 \times 10^{-4}$ resolves the
         theoretical suppression ambiguity in TEP. The negative sign supports the
         interpretation that gravitational potential scaling (Temporal Shear
         suppression $\propto \Phi/c^2$) dominates over soliton-radius scaling in
@@ -222,10 +131,11 @@
     <p>
         The detection of a non-zero $\eta$ has implications for gravity
         theories. In General Relativity, $\eta = 0$ exactly. The result
-        therefore suggests either (1) a modification to GR in the form of a
-        scalar-tensor theory, or (2) unmodeled systematic effects in the LLR
-        data or ephemeris processing. TEP provides a concrete scalar-tensor
-        framework that could explain the observed signal while remaining
+        therefore demands a decisive fork in interpretation under external closure tests:
+        either (1) a modification to GR in the form of a scalar-tensor theory such as TEP,
+        or (2) a residual-channel artefact introduced by unmodeled systematics in the LLR
+        reduction and ephemeris processing chain. TEP provides a concrete scalar-tensor
+        framework that explains the observed signal while remaining
         consistent with all other precision tests through TEP geometric
         suppression and Yukawa suppression mechanisms.
     </p>

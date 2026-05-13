@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 035: Quantitative η Analysis from TEP Framework
+Step 033: Quantitative η Analysis from TEP Framework
 
 Analyzes the measured Nordtvedt parameter η in the context of the TEP framework.
 Following the updated theoretical framework (Papers 6, 10, 11, 12, 13):
@@ -20,6 +20,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import json
 import numpy as np
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+from scripts.utils.statistical_utils import require_step003_eta_ols, require_step003_eta_ols_error
 from scripts.utils.llr_constants import (
     RHO_T,
     RHO_T_ERROR,
@@ -35,20 +36,21 @@ from scripts.utils.llr_constants import (
 def compute_prediction():
     print_status("Computing Quantitative η Prediction from TEP...", "TITLE")
 
-    # Load measured eta from step_002 output (deterministic pipeline result)
-    step_002_path = (
+    # Load measured η from step_003 statistical output (deterministic pipeline result)
+    step_003_path = (
         PROJECT_ROOT / "results" / "outputs" / "step_003_statistical_analysis.json"
     )
-    if step_002_path.exists():
-        with open(step_002_path, "r") as f:
-            step_002_results = json.load(f)
-        eta_measured = float(step_002_results.get('eta_ols', 0))
-        eta_error = float(step_002_results.get('eta_ols_error', 0))
-        print_status(f"Loaded measured η from step_002: {eta_measured:.4e} ± {eta_error:.4e}", "INFO")
-    else:
+    if not step_003_path.exists():
         raise FileNotFoundError(
-            f"Step 002 results not found: {step_002_path}. Run pipeline step 002 first."
+            f"step_003_statistical_analysis.json not found: {step_003_path}. Run pipeline step 003 first."
         )
+    with open(step_003_path, "r") as f:
+        step_003_results = json.load(f)
+    eta_measured = require_step003_eta_ols(step_003_results)
+    eta_error = require_step003_eta_ols_error(step_003_results)
+    print_status(
+        f"Loaded measured η from step_003: {eta_measured:.4e} ± {eta_error:.4e}", "INFO"
+    )
 
     print_status(f"ρ_T: {RHO_T} ± {RHO_T_ERROR} g/cm³ ({RHO_T_SOURCE})", "INFO")
 

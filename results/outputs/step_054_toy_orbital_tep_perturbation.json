@@ -1,5 +1,8 @@
 {
+  "step_id": "step_054",
+  "status": "PASS",
   "step": "054_toy_orbital_tep_perturbation",
+  "data_type": "SYNTHETIC (TOY_ORBITAL_MODEL)",
   "simulation": {
     "n_points": 50000,
     "span_years": 10.0,

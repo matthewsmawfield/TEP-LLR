@@ -8,9 +8,9 @@
             "Day_Ranged_Percent": 45.74181117533719,
             "Day_Minus_Night_Bias_mm": 6.545285340719073,
             "Spurious_Eta": 0.000503483487747621,
-            "Original_Eta": -0.00023936773659735623,
-            "Cleaned_Eta_After_Solar_Modeling": -0.00030987324497248176,
-            "Cleaned_P_Val": 0.00039306865198862617
+            "Original_Eta": -0.00023983556703264082,
+            "Cleaned_Eta_After_Solar_Modeling": -0.0003104748823039425,
+            "Cleaned_P_Val": 0.0003919525459135098
         },
         {
             "Station": "Grasse",
@@ -18,9 +18,9 @@
             "Day_Ranged_Percent": 44.321815368746776,
             "Day_Minus_Night_Bias_mm": -3.1383896252682555,
             "Spurious_Eta": -0.00024141458655909658,
-            "Original_Eta": -0.0005392816311042269,
-            "Cleaned_Eta_After_Solar_Modeling": -0.0005049902659596221,
-            "Cleaned_P_Val": 5.548535572774682e-06
+            "Original_Eta": -0.0005401787666332995,
+            "Cleaned_Eta_After_Solar_Modeling": -0.0005058196993779841,
+            "Cleaned_P_Val": 5.5759983870196095e-06
         },
         {
             "Station": "Matera",
@@ -28,9 +28,9 @@
             "Day_Ranged_Percent": 21.67630057803468,
             "Day_Minus_Night_Bias_mm": -28.043037771659098,
             "Spurious_Eta": -0.0021571567516660843,
-            "Original_Eta": -1.3129864840358415e-05,
-            "Cleaned_Eta_After_Solar_Modeling": 0.0007301548732341923,
-            "Cleaned_P_Val": 0.40724318121521264
+            "Original_Eta": -1.813115381112349e-05,
+            "Cleaned_Eta_After_Solar_Modeling": 0.0007273605001939861,
+            "Cleaned_P_Val": 0.41023237411788704
         },
         {
             "Station": "McDonald2",
@@ -38,9 +38,9 @@
             "Day_Ranged_Percent": 42.17903791016247,
             "Day_Minus_Night_Bias_mm": -16.557208451378937,
             "Spurious_Eta": -0.0012736314193368414,
-            "Original_Eta": -0.0004997488047718066,
-            "Cleaned_Eta_After_Solar_Modeling": -0.0003184468524681248,
-            "Cleaned_P_Val": 0.3768097553715468
+            "Original_Eta": -0.0005009356067952293,
+            "Cleaned_Eta_After_Solar_Modeling": -0.00031921022613960384,
+            "Cleaned_P_Val": 0.3766193131211073
         },
         {
             "Station": "Haleakala",
@@ -48,16 +48,16 @@
             "Day_Ranged_Percent": 33.37856173677069,
             "Day_Minus_Night_Bias_mm": 41.63784381970102,
             "Spurious_Eta": 0.003202911063053924,
-            "Original_Eta": 0.003548250135483287,
-            "Cleaned_Eta_After_Solar_Modeling": 0.0030984587146546437,
-            "Cleaned_P_Val": 0.03158731597455966
+            "Original_Eta": 0.003553510872736506,
+            "Cleaned_Eta_After_Solar_Modeling": 0.0031026183373106747,
+            "Cleaned_P_Val": 0.03170243016867769
         }
     ],
     "global_analysis": {
-        "original_eta": -0.0004524792725699484,
-        "solar_altitude_param": -3.442797790244204e-05,
-        "solar_altitude_pval": 0.28115721010043826,
-        "cleaned_eta": -0.0004183465482147722,
-        "cleaned_pval": 7.736461711704834e-06
+        "original_eta": -0.00045329831411731363,
+        "solar_altitude_param": -3.442668500218242e-05,
+        "solar_altitude_pval": 0.2811759875204376,
+        "cleaned_eta": -0.0004191017455621734,
+        "cleaned_pval": 7.746881913517356e-06
     }
 }

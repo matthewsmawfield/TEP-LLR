@@ -1,25 +1,25 @@
-[20:19:47]     Step 040: Tidal Resonance Analysis
-[20:19:47]     Critiquing North Atlantic resonance explanation vs TEP
-[20:19:47]     Analyzing tidal resonance model...
-[20:19:47]     Testing predictive power...
-[20:19:47]     Results saved to: results/outputs/step_038_tidal_resonance_analysis.json
-[20:19:47]     
+[11:51:40]     Step 038: Tidal Resonance Analysis
+[11:51:40]     Critiquing North Atlantic resonance explanation vs TEP
+[11:51:40]     Analyzing tidal resonance model...
+[11:51:40]     Testing predictive power...
+[11:51:40]     Results saved to: results/outputs/step_038_tidal_resonance_analysis.json
+[11:51:40]     
 === Tidal Resonance Analysis Summary ===
-[20:19:47]     Measured recession: 3.82 cm/yr
-[20:19:47]     Historical average: 1.70 cm/yr
-[20:19:47] ⚠   Discrepancy: 2.25× higher
-[20:19:47]     
+[11:51:40]     Measured recession: 3.82 cm/yr
+[11:51:40]     Historical average: 1.70 cm/yr
+[11:51:40] ⚠   Discrepancy: 2.25× higher
+[11:51:40]     
 Resonance Model Critique:
-[20:19:47] ⚠     - Ad hoc (post-hoc fit)
-[20:19:47] ⚠     - Requires fine-tuned continental geometry
-[20:19:47] ⚠     - No physical mechanism for Q change
-[20:19:47] ⚠     - No predictive power
-[20:19:47]     
+[11:51:40] ⚠     - Ad hoc (post-hoc fit)
+[11:51:40] ⚠     - Requires fine-tuned continental geometry
+[11:51:40] ⚠     - No physical mechanism for Q change
+[11:51:40] ⚠     - No predictive power
+[11:51:40]     
 TEP Alternative:
-[20:19:47]       - Physical mechanism (dynamical φ field)
-[20:19:47]       - No fine-tuning required
-[20:19:47]       - Makes multiple testable predictions
-[20:19:47]       - Perihelion enhancement: 3.07σ confirmed
-[20:19:47]     
+[11:51:40]       - Physical mechanism (dynamical φ field)
+[11:51:40]       - No fine-tuning required
+[11:51:40]       - Makes multiple testable predictions
+[11:51:40]       - Perihelion-aphelion split: Perihelion η = -2.8082e-04 versus aphelion subset; 1.42σ cosD-only differential (Step 022)
+[11:51:40]     
 Verdict: TEP provides superior explanation
-[20:19:47]     Step 040 completed successfully
+[11:51:40]     Step 038 completed successfully

@@ -4,6 +4,7 @@ Pre-Whitening Filter for TEP-LLR
 Removes dominant non-synodic seasonal and systematic harmonics from residuals.
 """
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from typing import List
 from scripts.utils.llr_constants import SYNODIC_PERIOD_DAYS
@@ -49,12 +50,12 @@ def identify_peak_harmonics(phase: np.ndarray, y: np.ndarray,
 
         X = np.column_stack([cos_term, sin_term, np.ones_like(phase)])
         try:
-            coeffs, res_sum, rank, s = np.linalg.lstsq(X, y, rcond=None)
+            coeffs, res_sum, rank, s = stable_lstsq(X, y)
             rss = res_sum[0] if len(
                 res_sum) > 0 else np.sum((y - X @ coeffs)**2)
             n = len(y)
             sigma2 = rss / (n - 3)
-            cov = sigma2 * np.linalg.inv(X.T @ X)
+            cov = sigma2 * np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)
             # Amplitude squared A^2 = c1^2 + s1^2
             # For simplicity, we use the joint significance
             snr = np.sqrt(coeffs[0]**2 + coeffs[1]**2) / \
@@ -129,13 +130,14 @@ def apply_pre_whitening(df: pd.DataFrame, n_harmonics: int = 5, verbose: bool = 
 
     # Solve for all harmonics jointly
     try:
-        coeffs, _, _, _ = np.linalg.lstsq(X_full, y, rcond=None)
+        coeffs, _, _, _ = stable_lstsq(X_full, y)
 
         # The first coefficient is the mean/intercept
         # The others are [cos_f1, sin_f1, cos_f2, sin_f2, ...]
 
         # Calculate the total fit
-        y_fit = X_full @ coeffs
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            y_fit = X_full @ coeffs
 
         # The whitened residuals are the original minus the joint fit
         y_whitened = y - y_fit
@@ -148,7 +150,7 @@ def apply_pre_whitening(df: pd.DataFrame, n_harmonics: int = 5, verbose: bool = 
             c = np.cos(f * phase)
             s = np.sin(f * phase)
             M = np.column_stack([c, s, np.ones_like(phase)])
-            cf, _, _, _ = np.linalg.lstsq(M, y_whitened, rcond=None)
+            cf, _, _, _ = stable_lstsq(M, y_whitened)
             y_whitened -= (cf[0] * c + cf[1] * s)
 
     df_clean['residual_whitened_m'] = y_whitened

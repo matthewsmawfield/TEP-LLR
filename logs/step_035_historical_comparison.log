@@ -1,17 +1,17 @@
-[20:19:45]     Step 037: Historical Comparison Analysis
-[20:19:45]     Comparing TEP detection to Müller & Nordtvedt (1998)
-[20:19:45]     Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
-[20:19:45]     Loaded 26207 observations
-[20:19:45]     Analyzing 1998-era subset (1984-1997)...
-[20:19:45]     Analyzing full sample (1984-2019)...
-[20:19:45]     Analyzing modern C-SPAD era (2009-2019)...
-[20:19:45]     Comparing to Müller & Nordtvedt (1998)...
-[20:19:45]     Results saved to: results/outputs/step_035_historical_comparison.json
-[20:19:45]     
+[11:51:38]     Step 035: Historical Comparison Analysis
+[11:51:38]     Comparing TEP detection to Müller & Nordtvedt (1998)
+[11:51:38]     Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
+[11:51:38]     Loaded 26207 observations
+[11:51:38]     Analyzing 1998-era subset (1984-1997)...
+[11:51:38]     Analyzing full sample (1984-2019)...
+[11:51:38]     Analyzing modern C-SPAD era (2009-2019)...
+[11:51:38]     Comparing to Müller & Nordtvedt (1998)...
+[11:51:38]     Results saved to: results/outputs/step_035_historical_comparison.json
+[11:51:38]     
 === Historical Comparison Summary ===
-[20:19:45]     Müller & Nordtvedt (1998) reported: 1.0 cm
-[20:19:45]     TEP 1998-era replication: 0.57 ± 0.39 cm
-[20:19:45]     TEP modern C-SPAD: 0.38 ± 0.05 cm at 8.2σ
-[20:19:45]     
+[11:51:38]     Müller & Nordtvedt (1998) reported: 1.0 cm
+[11:51:38]     TEP 1998-era replication: 0.57 ± 0.39 cm
+[11:51:38]     TEP modern C-SPAD: 0.38 ± 0.05 cm at 8.2σ
+[11:51:38]     
 Assessment: TEP provides theoretical framework for previously unexplained signal
-[20:19:45]     Step 037 completed successfully
+[11:51:38]     Step 035 completed successfully

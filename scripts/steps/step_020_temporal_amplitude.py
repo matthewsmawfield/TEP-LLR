@@ -18,6 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 import json
 from typing import Dict, List
@@ -49,11 +50,12 @@ def sliding_window_eta(df: pd.DataFrame, window_years: int = 5,
 
         # OLS fit
         X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-        coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+        coeffs, _, _, _ = stable_lstsq(X, residuals)
         eta = coeffs[0] / ETA_SCALE_FACTOR
 
         # Error estimate (unbiased MSE: divide by n-2, not n)
-        resid_fit = residuals - X @ coeffs
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            resid_fit = residuals - X @ coeffs
         n_win = len(resid_fit)
         mse = np.sum(resid_fit**2) / (n_win - 2) if n_win > 2 else np.nan
         cos_centered = cos_elong - np.mean(cos_elong)
@@ -102,7 +104,7 @@ def test_amplitude_trend(window_results: List[Dict]) -> Dict:
     try:
         coeffs_w = np.linalg.solve(XtWX, XtWy)
         slope_weighted = coeffs_w[0]
-        cov_w = np.linalg.inv(XtWX)
+        cov_w = np.linalg.pinv(XtWX, rcond=1e-10, hermitian=True)
         slope_err_weighted = np.sqrt(cov_w[0, 0])
     except (np.linalg.LinAlgError, ValueError):
         slope_weighted = slope
@@ -204,7 +206,7 @@ def station_specific_temporal_analysis(df: pd.DataFrame, station: str,
         residuals = window_df['residual_m'].values
 
         X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-        coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+        coeffs, _, _, _ = stable_lstsq(X, residuals)
         eta = coeffs[0] / ETA_SCALE_FACTOR
 
         results.append({

@@ -1,11 +1,38 @@
-[20:18:31] ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
-[20:18:31] >>> Computing CMB-frame kinematics...
-[20:18:31]     r(cosD, cosθ) = 0.0499
-[20:18:31]     Cleaned dataset: 25,445 observations
-[20:18:31] ═══ ═══ A. Aliasing Simulation Falsification ═══
-[20:18:39]     Simulated η_θ (no CMB): mean=9.4233e-07, std=8.8033e-05, max|η|=3.2680e-04
-[20:18:39]     Simulated t (no CMB): mean=0.01, std=0.99, max|t|=3.70
-[20:18:39]     Observed: η_θ = -9.7601e-04, t = -11.03
-[20:18:39]     Aliasing p-value (coefficient): 0.0000
-[20:18:39]     Aliasing p-value (t-statistic): 0.0000
-[20:18:39] ═══ ═══ B. Multicollinearity Diagnostic Suite ═══
+[11:52:05] ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
+[11:52:05] >>> Computing CMB-frame kinematics...
+[11:52:05]     r(cosD, cosθ) = 0.0499
+[11:52:05]     Cleaned dataset: 25,445 observations
+[11:52:05] ═══ ═══ A. Aliasing Simulation Falsification ═══
+[11:52:12]     Simulated η_θ (no CMB): mean=9.4454e-07, std=8.8194e-05, max|η|=3.2737e-04
+[11:52:12]     Simulated t (no CMB): mean=0.01, std=0.99, max|t|=3.69
+[11:52:12]     Observed: η_θ = -9.7721e-04, t = -11.02
+[11:52:12]     Aliasing p-value (coefficient): 0.0000
+[11:52:12]     Aliasing p-value (t-statistic): 0.0000
+[11:52:12] ═══ ═══ B. Multicollinearity Diagnostic Suite ═══
+[11:52:12]     VIF(cosD) = 1.017
+[11:52:12]     VIF(r_c·cosD) = 1.026
+[11:52:12]     VIF(vr_c·cosD) = 1.189
+[11:52:12]     VIF(cosθ_c·cosD) = 1.201
+[11:52:12]     Condition number κ(X) = 1.78e+02
+[11:52:12]     Condition number κ(XᵀX) = 3.18e+04
+[11:52:12]     SE(cosθ) actual = 8.8659e-05; SE if orthogonal = 8.8659e-05; inflation = 1.00x
+[11:52:12] ═══ ═══ C. Permutation Test for cosθ ═══
+[11:52:13]     Permuted η_θ: mean=-1.2885e-06, std=7.9799e-05, 99.9th %ile |η|=2.3028e-04
+[11:52:13]     Permuted t: mean=-0.02, std=0.95, 99.9th %ile |t|=2.76
+[11:52:13]     Permutation p (coefficient) = 0.0000
+[11:52:13]     Permutation p (t-statistic) = 0.0000
+[11:52:13] ═══ ═══ D. Sky Scrambling Monte Carlo ═══
+[11:52:21]     Base model AIC = -141809.8; True CMB ΔAIC = 119.2
+[11:52:21]     Random directions ΔAIC: median = 60.5, 99th %ile = 130.2
+[11:52:21]     p(random ΔAIC ≥ true) = 0.0902
+[11:52:21]     Random directions F: median = 62.52, 99th %ile = 132.47
+[11:52:21]     True CMB F = 121.49; p(random F ≥ true) = 0.0902
+[11:52:21] ═══ ═══ E. Gram–Schmidt Orthogonalization ═══
+[11:52:21]     Orthogonality residuals (dot products): ['3.77e-12', '4.19e-15', '-1.01e-12', '-1.23e-12']
+[11:52:21]     Orthogonalized η_θ = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000e+00)
+[11:52:21] ═══ ═══ F. Joint-model directional anatomy ═══
+[11:52:21]     ΔAIC(true vs perp1) = 116.4; ΔAIC(true vs perp2) = 94.5; ΔAIC(true vs antipode) = 0.0
+[11:52:21]     |η_θ|/σ: true=11.02, perp1=2.20, perp2=5.17, antipode=11.02
+[11:52:21] ✓   RESULT: 5/5 falsification tests passed. CMB anisotropy claim is robust.
+[11:52:21] Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
+[11:52:21] ✓   CMB Falsification analysis complete.

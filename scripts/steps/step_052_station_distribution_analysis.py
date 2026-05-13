@@ -20,6 +20,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 import pandas as pd
 from scipy import stats
 
@@ -197,10 +199,13 @@ def main():
         y = sub['residual_m'].values
         X = np.column_stack([sub['cosD'].values, np.ones(len(sub))])
         try:
-            coeffs = np.linalg.lstsq(X, y, rcond=None)[0]
-            resid = y - X @ coeffs
+            coeffs = stable_lstsq(X, y)[0]
+            with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+                resid = y - X @ coeffs
+            if not np.all(np.isfinite(resid)):
+                raise RuntimeError(f"Non-finite residuals in per-station regression for {stn}.")
             mse = np.mean(resid**2)
-            se = np.sqrt(mse * np.linalg.inv(X.T @ X)[0, 0])
+            se = np.sqrt(mse * np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)[0, 0])
             eta = coeffs[0] / ETA_SCALE_FACTOR  # Convert to Nordtvedt eta
             eta_err = se / ETA_SCALE_FACTOR
             snr = abs(eta) / max(eta_err, 1e-20)
@@ -214,6 +219,8 @@ def main():
             per_station_regression[stn] = {'error': str(e)}
     
     results = {
+        'step_id': 'step_052',
+        'status': 'PASS',
         'step': '052_station_distribution_analysis',
         'total_obs': len(df),
         'station_coverage': station_coverage,

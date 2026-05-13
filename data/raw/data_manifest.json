@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2024-01-15T10:30:00Z",
+  "generated": "2026-05-13T12:00:00Z",
   "description": "Data integrity manifest for TEP-LLR raw data files",
   "files": {
     "INPOP19a_APO_residuals.txt": {
@@ -74,7 +74,7 @@
     },
     "DE430_2014-2018_residuals.dat": {
       "size_bytes": 475519,
-      "sha256": null,
+      "sha256": "e44d3c25b095f7d3f5bc8dbd003275961669efeae9e3e52189f2f166d397423e",
       "source": "JPL DE430 ephemeris residuals (2014-2018)",
       "ephemeris_version": "DE430",
       "format": "DAT"

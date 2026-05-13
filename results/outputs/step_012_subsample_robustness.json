@@ -2,86 +2,86 @@
     "step_id": "step_012",
     "robustness_summary": {
         "subsample_n": 20965,
-        "full_sample_eta": -0.0004524792725699484,
-        "full_sample_eta_error": 9.177544502117292e-05,
-        "eta": -0.0004331461451534596,
-        "snr": 4.2234287451799855,
+        "full_sample_eta": -0.00045329831411731363,
+        "full_sample_eta_error": 9.194732759479532e-05,
+        "eta": -0.0004339640014514024,
+        "snr": 4.223538944101801,
         "robust": true,
         "multiple_iterations": {
             "n_iterations": 10,
-            "eta_mean": -0.0004311615610318654,
-            "eta_std": 2.6414623650715646e-05,
-            "snr_mean": 4.196481633074617,
+            "eta_mean": -0.0004319311447854394,
+            "eta_std": 2.6472525398568347e-05,
+            "snr_mean": 4.196099497430775,
             "all_robust": true
         },
         "station_jackknife": {
             "APO": {
-                "eta": -0.00048285087393745756,
-                "snr": 4.692665457360343,
+                "eta": -0.0004837319889068452,
+                "snr": 4.692323442303758,
                 "n": 23612
             },
             "Grasse": {
-                "eta": -0.00016391936944631588,
-                "snr": 0.9369176017779929,
+                "eta": -0.00016453115466241584,
+                "snr": 0.9386811782408547,
                 "n": 6817
             },
             "Matera": {
-                "eta": -0.0004537498233232638,
-                "snr": 4.910720505956441,
+                "eta": -0.0004545444708069907,
+                "snr": 4.9101382106972515,
                 "n": 25861
             },
             "McDonald2": {
-                "eta": -0.00045480722497921527,
-                "snr": 4.76194063024742,
+                "eta": -0.00045560776294373696,
+                "snr": 4.761463534864325,
                 "n": 23068
             },
             "Haleakala": {
-                "eta": -0.0004891420828812299,
-                "snr": 5.387088374350841,
+                "eta": -0.0004900068946369092,
+                "snr": 5.386534056067948,
                 "n": 25470
             }
         },
-        "jackknife_max_shift_sigma": 3.144195084611802,
-        "jackknife_max_shift_sigma_powered": 0.39948387395804225,
+        "jackknife_max_shift_sigma": 3.1405715316433347,
+        "jackknife_max_shift_sigma_powered": 0.39923488240318894,
         "jackknife_n_underpowered": 1,
         "jackknife_consistent": true,
         "station_weight_sensitivity": {
             "APO": {
-                "eta": -0.0004627247730191673,
-                "delta_eta_sigma": 0.11163661965196912,
+                "eta": -0.00046355577676944373,
+                "delta_eta_sigma": 0.11155802915049295,
                 "n": 24910
             },
             "Grasse": {
-                "eta": -0.00033748719695024943,
-                "delta_eta_sigma": 1.2529721386060282,
+                "eta": -0.000338282539554613,
+                "delta_eta_sigma": 1.2508876285079886,
                 "n": 16512
             },
             "Matera": {
-                "eta": -0.00045021233603865753,
-                "delta_eta_sigma": 0.02470090480921018,
+                "eta": -0.00045101897823024,
+                "delta_eta_sigma": 0.0247895827611052,
                 "n": 26034
             },
             "McDonald2": {
-                "eta": -0.0004718518431712227,
-                "delta_eta_sigma": 0.2110866430209622,
+                "eta": -0.0004726963347261111,
+                "delta_eta_sigma": 0.21096883526928595,
                 "n": 24638
             },
             "Haleakala": {
-                "eta": -0.00046522559169726117,
-                "delta_eta_sigma": 0.138885941924576,
+                "eta": -0.00046604896866215607,
+                "delta_eta_sigma": 0.13867346532390343,
                 "n": 25838
             }
         },
-        "weight_sensitivity_max_delta_sigma": 1.2529721386060282,
+        "weight_sensitivity_max_delta_sigma": 1.2508876285079886,
         "weight_sensitivity_consistent": true,
         "station_balance_test": {
             "method": "IPW (equal per-station total weight, all data used)",
             "n_effective": 26207.0,
             "total_n": 26207,
-            "eta": -4.9971627284717537e-05,
-            "eta_error": 0.00010272067949899196,
-            "snr": 0.48648069238295805,
-            "delta_eta_sigma": 4.385787998002853,
+            "eta": -5.075523540865147e-05,
+            "eta_error": 0.00010291720929925295,
+            "snr": 0.49316567903692554,
+            "delta_eta_sigma": 4.37797475183442,
             "same_sign_as_full": true,
             "consistent": true,
             "station_counts_original": {
@@ -94,87 +94,88 @@
         }
     },
     "station_dominance_report": {
-        "full_sample_eta": -0.0004524792725699484,
-        "full_sample_eta_error": 9.177544502117292e-05,
+        "step_id": "step_012",
+        "full_sample_eta": -0.00045329831411731363,
+        "full_sample_eta_error": 9.194732759479532e-05,
         "dominant_station_jackknife": {
             "station": "Grasse",
-            "eta": -0.00016391936944631588,
-            "snr": 0.9369176017779929,
-            "delta_eta_sigma": 3.144195084611802,
+            "eta": -0.00016453115466241584,
+            "snr": 0.9386811782408547,
+            "delta_eta_sigma": 3.1405715316433347,
             "sign_flip_vs_full": false
         },
         "dominant_station_weight": {
             "station": "Grasse",
-            "eta": -0.00033748719695024943,
-            "delta_eta_sigma": 1.2529721386060282,
+            "eta": -0.000338282539554613,
+            "delta_eta_sigma": 1.2508876285079886,
             "n": 16512
         },
         "jackknife_ranked_by_delta_sigma": [
             {
                 "station": "Grasse",
-                "eta": -0.00016391936944631588,
-                "snr": 0.9369176017779929,
-                "delta_eta_sigma": 3.144195084611802,
+                "eta": -0.00016453115466241584,
+                "snr": 0.9386811782408547,
+                "delta_eta_sigma": 3.1405715316433347,
                 "sign_flip_vs_full": false
             },
             {
                 "station": "Haleakala",
-                "eta": -0.0004891420828812299,
-                "snr": 5.387088374350841,
-                "delta_eta_sigma": 0.39948387395804225,
+                "eta": -0.0004900068946369092,
+                "snr": 5.386534056067948,
+                "delta_eta_sigma": 0.39923488240318894,
                 "sign_flip_vs_full": false
             },
             {
                 "station": "APO",
-                "eta": -0.00048285087393745756,
-                "snr": 4.692665457360343,
-                "delta_eta_sigma": 0.33093385012191767,
+                "eta": -0.0004837319889068452,
+                "snr": 4.692323442303758,
+                "delta_eta_sigma": 0.3309903135374459,
                 "sign_flip_vs_full": false
             },
             {
                 "station": "McDonald2",
-                "eta": -0.00045480722497921527,
-                "snr": 4.76194063024742,
-                "delta_eta_sigma": 0.025365743622706223,
+                "eta": -0.00045560776294373696,
+                "snr": 4.761463534864325,
+                "delta_eta_sigma": 0.02511708482274643,
                 "sign_flip_vs_full": false
             },
             {
                 "station": "Matera",
-                "eta": -0.0004537498233232638,
-                "snr": 4.910720505956441,
-                "delta_eta_sigma": 0.013844125223498248,
+                "eta": -0.0004545444708069907,
+                "snr": 4.9101382106972515,
+                "delta_eta_sigma": 0.013552940822475937,
                 "sign_flip_vs_full": false
             }
         ],
         "weight_ranked_by_delta_sigma": [
             {
                 "station": "Grasse",
-                "eta": -0.00033748719695024943,
-                "delta_eta_sigma": 1.2529721386060282,
+                "eta": -0.000338282539554613,
+                "delta_eta_sigma": 1.2508876285079886,
                 "n": 16512
             },
             {
                 "station": "McDonald2",
-                "eta": -0.0004718518431712227,
-                "delta_eta_sigma": 0.2110866430209622,
+                "eta": -0.0004726963347261111,
+                "delta_eta_sigma": 0.21096883526928595,
                 "n": 24638
             },
             {
                 "station": "Haleakala",
-                "eta": -0.00046522559169726117,
-                "delta_eta_sigma": 0.138885941924576,
+                "eta": -0.00046604896866215607,
+                "delta_eta_sigma": 0.13867346532390343,
                 "n": 25838
             },
             {
                 "station": "APO",
-                "eta": -0.0004627247730191673,
-                "delta_eta_sigma": 0.11163661965196912,
+                "eta": -0.00046355577676944373,
+                "delta_eta_sigma": 0.11155802915049295,
                 "n": 24910
             },
             {
                 "station": "Matera",
-                "eta": -0.00045021233603865753,
-                "delta_eta_sigma": 0.02470090480921018,
+                "eta": -0.00045101897823024,
+                "delta_eta_sigma": 0.0247895827611052,
                 "n": 26034
             }
         ],
@@ -184,10 +185,10 @@
             "method": "IPW (equal per-station total weight, all data used)",
             "n_effective": 26207.0,
             "total_n": 26207,
-            "eta": -4.9971627284717537e-05,
-            "eta_error": 0.00010272067949899196,
-            "snr": 0.48648069238295805,
-            "delta_eta_sigma": 4.385787998002853,
+            "eta": -5.075523540865147e-05,
+            "eta_error": 0.00010291720929925295,
+            "snr": 0.49316567903692554,
+            "delta_eta_sigma": 4.37797475183442,
             "same_sign_as_full": true,
             "consistent": true,
             "station_counts_original": {

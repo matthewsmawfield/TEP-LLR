@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 027: Leverage Temporal Clustering
+Step 025: Leverage Temporal Clustering
 
 Identifies high-leverage points from the OLS fit and bins them into temporal
 epochs to investigate if the OLS vs Theil-Sen divergence is driven by localized
@@ -15,6 +15,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
@@ -25,17 +26,19 @@ def compute_cooks_distance(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     p = X.shape[1]
     
     # Fit OLS
-    beta = np.linalg.lstsq(X, y, rcond=None)[0]
-    y_pred = X @ beta
+    beta = stable_lstsq(X, y)[0]
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        y_pred = X @ beta
     residuals = y - y_pred
     mse = np.sum(residuals**2) / (n - p)
     
-    # compute leverage using O(n) memory computation
-    XtX_inv = np.linalg.inv(X.T @ X)
-    leverage = np.sum((X @ XtX_inv) * X, axis=1)
+    # leverage h_ii = sum_j Q[i,j]^2 for reduced QR of X
+    from scripts.utils.numerics import hat_diagonal_from_qr
+    leverage = hat_diagonal_from_qr(X)
     
     # Cook's Distance formula
-    cooks_d = (residuals**2 / (p * mse)) * (leverage / ((1 - leverage)**2))
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        cooks_d = (residuals**2 / (p * mse)) * (leverage / ((1 - leverage)**2))
     return cooks_d
 
 

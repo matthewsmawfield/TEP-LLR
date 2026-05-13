@@ -1,136 +1,144 @@
-[20:19:58] ═══ Starting Independent Validation...
-[20:19:58] ═══ ═══ Starting Step 045: Independent Validation and Systematic Falsification
-[20:19:58] ═══ ═══ TEST 1: Matched-Window Ephemeris Comparison
-[20:19:58]         DE430 window: JD 2456722.50–2458372.50 (2014.18–2018.69)
-[20:19:58]         INPOP19a in window: N = 8,816
-[20:19:58]         DE430 total: N = 4,597
-[20:19:58]     Sigma Outlier Detection: median=-0.003, MAD=0.015, sigma=0.023
-[20:19:58]       Threshold=0.136 (6.0σ), Count=14
-[20:19:58]     Linear Regression Complete (N=8802, DOF=8800):
-[20:19:58]       RSS=1.034618e+03, MSE=1.175702e-01, χ²_red=0.118
-[20:19:58]       Birge Ratio = 0.343 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 1.77e+00
-[20:19:58]       Final η = -3.61037289e-04 ± 3.59435350e-05
-[20:19:58]     Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
-[20:19:58]       Threshold=0.297 (6.0σ), Count=37
-[20:19:58]     Linear Regression Complete (N=4560, DOF=4558):
-[20:19:58]       RSS=1.416411e+01, MSE=3.107528e-03, χ²_red=0.003
-[20:19:58]       Birge Ratio = 0.056 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 1.86e+00
-[20:19:58]       Final η = -7.02800624e-04 ± 1.18001960e-04
-[20:19:58]         INPOP19a (window): η = -3.610e-04 ± 3.594e-05 (10.04σ)
-[20:19:58]         DE430:             η = -7.028e-04 ± 1.180e-04 (5.96σ)
-[20:19:58]         Difference:        Δη = 3.418e-04 ± 1.234e-04 (2.77σ)
-[20:19:58] ✓       Consistent (<3σ)?  YES ✓
-[20:19:58]         Matched-window ephemeris scatter: ±2.417e-04
-[20:19:58] ═══ ═══ TEST 2: Seasonal Independence
-[20:19:58]     Linear Regression Complete (N=2327, DOF=2325):
-[20:19:58]       RSS=2.253463e+01, MSE=9.692312e-03, χ²_red=0.010
-[20:19:58]       Birge Ratio = 0.098 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.33e+00
-[20:19:58]       Final η = 2.65979724e-04 ± 3.56930634e-04
-[20:19:58]     Linear Regression Complete (N=2128, DOF=2126):
-[20:19:58]       RSS=1.282674e+01, MSE=6.033272e-03, χ²_red=0.006
-[20:19:58]       Birge Ratio = 0.078 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.33e+00
-[20:19:58]       Final η = -6.29746883e-05 ± 2.82463412e-04
-[20:19:58]     Linear Regression Complete (N=2656, DOF=2654):
-[20:19:58]       RSS=1.953648e+01, MSE=7.361146e-03, χ²_red=0.007
-[20:19:58]       Birge Ratio = 0.086 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.15e+00
-[20:19:58]       Final η = 6.32411031e-04 ± 2.61077261e-04
-[20:19:58]     Linear Regression Complete (N=2415, DOF=2413):
-[20:19:58]       RSS=2.520932e+01, MSE=1.044729e-02, χ²_red=0.010
-[20:19:58]       Birge Ratio = 0.102 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.03e+00
-[20:19:58]       Final η = -4.90438822e-05 ± 3.11879472e-04
-[20:19:58]     Linear Regression Complete (N=1494, DOF=1492):
-[20:19:58]       RSS=1.093234e+01, MSE=7.327305e-03, χ²_red=0.007
-[20:19:58]       Birge Ratio = 0.086 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.38e+00
-[20:19:58]       Final η = 1.52760043e-03 ± 3.74849892e-04
-[20:19:58]     Linear Regression Complete (N=1698, DOF=1696):
-[20:19:58]       RSS=1.574503e+01, MSE=9.283629e-03, χ²_red=0.009
-[20:19:58]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.12e+00
-[20:19:58]       Final η = 4.52548660e-04 ± 3.72501005e-04
-[20:19:58]     Linear Regression Complete (N=1876, DOF=1874):
-[20:19:58]       RSS=1.642421e+01, MSE=8.764254e-03, χ²_red=0.009
-[20:19:58]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.48e+00
-[20:19:58]       Final η = -1.04109889e-03 ± 3.84813570e-04
-[20:19:58]     Linear Regression Complete (N=2648, DOF=2646):
-[20:19:58]       RSS=1.551430e+01, MSE=5.863304e-03, χ²_red=0.006
-[20:19:58]       Birge Ratio = 0.077 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 1.73e+00
-[20:19:58]       Final η = -7.29780391e-04 ± 1.96324223e-04
-[20:19:58]     Linear Regression Complete (N=2805, DOF=2803):
-[20:19:58]       RSS=2.444317e+01, MSE=8.720361e-03, χ²_red=0.009
-[20:19:58]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 1.90e+00
-[20:19:58]       Final η = -4.38287274e-04 ± 2.57090676e-04
-[20:19:58]     Linear Regression Complete (N=2065, DOF=2063):
-[20:19:58]       RSS=2.851377e+01, MSE=1.382151e-02, χ²_red=0.014
-[20:19:58]       Birge Ratio = 0.118 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.19e+00
-[20:19:58]       Final η = -5.57388394e-04 ± 4.25562625e-04
-[20:19:58]     Linear Regression Complete (N=2062, DOF=2060):
-[20:19:58]       RSS=1.737995e+01, MSE=8.436867e-03, χ²_red=0.008
-[20:19:58]       Birge Ratio = 0.092 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.38e+00
-[20:19:58]       Final η = -2.64306714e-03 ± 3.50836822e-04
-[20:19:58]     Linear Regression Complete (N=2033, DOF=2031):
-[20:19:58]       RSS=2.292267e+01, MSE=1.128640e-02, χ²_red=0.011
-[20:19:58]       Birge Ratio = 0.106 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.30e+00
-[20:19:58]       Final η = -1.94817172e-03 ± 3.92389296e-04
-[20:19:58]         Base η: -4.123e-04
-[20:19:58]         Monthly modulation amplitude: -2.298e-04 ± 2.751e-05
-[20:19:58]         Monthly modulation t = -8.36, p = 0.0000
-[20:19:58]         Monthly variance / expected noise variance = 11.33
-[20:19:58]         Jan η = 2.660e-04, Jul η = -1.041e-03
-[20:19:58]         Heliocentric sign flip (Jan vs Jul)? YES ✓ (TEP predicts sign flip)
-[20:19:58]         Interpretation: heliocentric_modulation
-[20:19:58] ✓       Consistent with TEP heliocentric gradient? YES ✓
-[20:19:58] ═══ ═══ TEST 3: Station Latitude Independence
-[20:19:58]     Linear Regression Complete (N=2595, DOF=2593):
-[20:19:58]       RSS=2.582930e+00, MSE=9.961166e-04, χ²_red=0.001
-[20:19:58]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 1.95e+00
-[20:19:58]       Final η = -2.39367737e-04 ± 8.64929544e-05
-[20:19:58]     Linear Regression Complete (N=19390, DOF=19388):
-[20:19:58]       RSS=1.886681e+02, MSE=9.731181e-03, χ²_red=0.010
-[20:19:58]       Birge Ratio = 0.099 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 2.04e+00
-[20:19:58]       Final η = -5.39281631e-04 ± 1.08548179e-04
-[20:19:58]     Linear Regression Complete (N=346, DOF=344):
-[20:19:58]       RSS=1.323292e+00, MSE=3.846779e-03, χ²_red=0.004
-[20:19:58]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 3.39e+00
-[20:19:58]       Final η = -1.31298648e-05 ± 8.68490603e-04
-[20:19:58]     Linear Regression Complete (N=3139, DOF=3137):
-[20:19:58]       RSS=2.863187e+01, MSE=9.127150e-03, χ²_red=0.009
-[20:19:58]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 3.06e+00
-[20:19:58]       Final η = -4.99748805e-04 ± 3.59860914e-04
-[20:19:58]     Linear Regression Complete (N=737, DOF=735):
-[20:19:58]       RSS=1.397838e+01, MSE=1.901821e-02, χ²_red=0.019
-[20:19:58]       Birge Ratio = 0.138 (Scaling factor applied: 1.000)
-[20:19:58]       Condition Number κ(R) = 4.14e+00
-[20:19:58]       Final η = 3.54825014e-03 ± 1.44582873e-03
-[20:19:58]         Station results:
-[20:19:58]                  APO (lat= 32.8°): η = -2.394e-04 ( 2.77σ)
-[20:19:58]               Grasse (lat= 43.8°): η = -5.393e-04 ( 4.97σ)
-[20:19:58]               Matera (lat= 40.6°): η = -1.313e-05 ( 0.02σ)
-[20:19:58]            McDonald2 (lat= 30.7°): η = -4.997e-04 ( 1.39σ)
-[20:19:58]            Haleakala (lat= 20.7°): η =  3.548e-03 ( 2.45σ) [ANOMALOUS]
-[20:19:58]         Pearson r (all stations) = -0.790 (p = 0.1121)
-[20:19:58]         Pearson r (excl. Haleakala) = 0.095 (p = 0.9049)
-[20:19:58] ✓       Latitude-independent? YES ✓
-[20:19:58] ═══ ═══ INDEPENDENT VALIDATION SUMMARY
-[20:19:58] ✓     [✓] Matched-window ephemeris: consistent (<3σ)
-[20:19:58] ✓     [✓] Heliocentric modulation: consistent with TEP prediction (Jan-Jul sign flip)
-[20:19:58] ✓     [✓] Latitude independence: no correlation (excl. known-anomalous Haleakala)
-[20:19:58] ✓     Overall: 3/3 tests passed
-[20:19:58] Results saved to results/outputs/step_045_independent_validation.json
-[20:19:58] ✓   Independent Validation Complete.
+[11:52:00] ═══ Starting Independent Validation...
+[11:52:00] ═══ ═══ Starting Step 045: Independent Validation and Systematic Falsification
+[11:52:00] ═══ ═══ TEST 1: Matched-Window Ephemeris Comparison
+[11:52:01]         DE430 window: JD 2456722.50–2458372.50 (2014.18–2018.69)
+[11:52:01]         INPOP19a in window: N = 8,816
+[11:52:01]         DE430 total: N = 4,597
+[11:52:01]     Sigma Outlier Detection: median=-0.003, MAD=0.015, sigma=0.023
+[11:52:01]       Threshold=0.136 (6.0σ), Count=14
+[11:52:01]     Linear Regression Complete (N=8802, DOF=8800):
+[11:52:01]       RSS=1.034579e+03, MSE=1.175658e-01, χ²_red=0.118
+[11:52:01]       Birge Ratio = 0.343 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 1.77e+00
+[11:52:01]       Final η = -3.62178326e-04 ± 3.59982804e-05
+[11:52:01]     Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
+[11:52:01]       Threshold=0.297 (6.0σ), Count=37
+[11:52:01]     Linear Regression Complete (N=4560, DOF=4558):
+[11:52:01]       RSS=1.416414e+01, MSE=3.107534e-03, χ²_red=0.003
+[11:52:01]       Birge Ratio = 0.056 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 1.87e+00
+[11:52:01]       Final η = -7.04120478e-04 ± 1.18236800e-04
+[11:52:01]         INPOP19a (window): η = -3.622e-04 ± 3.600e-05 (10.06σ)
+[11:52:01]         DE430:             η = -7.041e-04 ± 1.182e-04 (5.96σ)
+[11:52:01]         Difference:        Δη = 3.419e-04 ± 1.236e-04 (2.77σ)
+[11:52:01] ✓       Consistent (<3σ)?  YES ✓
+[11:52:01]     Sigma Outlier Detection: median=-0.003, MAD=0.015, sigma=0.023
+[11:52:01]       Threshold=0.136 (6.0σ), Count=14
+[11:52:01]     Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
+[11:52:01]       Threshold=0.297 (6.0σ), Count=37
+[11:52:01]         INPOP19a (full model): η = -2.878e-04 ± 3.724e-05 (7.73σ)
+[11:52:01]         DE430 (full model):    η = -5.977e-04 ± 1.185e-04 (5.04σ)
+[11:52:01]         Full-model difference: Δη = 3.099e-04 ± 1.242e-04 (2.49σ)
+[11:52:01] ✓       Full-model consistent (<3σ)? YES ✓
+[11:52:01]         Matched-window ephemeris scatter: ±2.418e-04
+[11:52:01] ═══ ═══ TEST 2: Seasonal Independence
+[11:52:01]     Linear Regression Complete (N=2327, DOF=2325):
+[11:52:01]       RSS=2.253464e+01, MSE=9.692317e-03, χ²_red=0.010
+[11:52:01]       Birge Ratio = 0.098 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.33e+00
+[11:52:01]       Final η = 2.66103738e-04 ± 3.57520021e-04
+[11:52:01]     Linear Regression Complete (N=2128, DOF=2126):
+[11:52:01]       RSS=1.282675e+01, MSE=6.033278e-03, χ²_red=0.006
+[11:52:01]       Birge Ratio = 0.078 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.33e+00
+[11:52:01]       Final η = -6.16593962e-05 ± 2.83000650e-04
+[11:52:01]     Linear Regression Complete (N=2656, DOF=2654):
+[11:52:01]       RSS=1.953643e+01, MSE=7.361128e-03, χ²_red=0.007
+[11:52:01]       Birge Ratio = 0.086 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.15e+00
+[11:52:01]       Final η = 6.33981327e-04 ± 2.61587012e-04
+[11:52:01]     Linear Regression Complete (N=2415, DOF=2413):
+[11:52:01]       RSS=2.520935e+01, MSE=1.044731e-02, χ²_red=0.010
+[11:52:01]       Birge Ratio = 0.102 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.03e+00
+[11:52:01]       Final η = -4.59685295e-05 ± 3.12529600e-04
+[11:52:01]     Linear Regression Complete (N=1494, DOF=1492):
+[11:52:01]       RSS=1.093238e+01, MSE=7.327331e-03, χ²_red=0.007
+[11:52:01]       Birge Ratio = 0.086 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.39e+00
+[11:52:01]       Final η = 1.53048495e-03 ± 3.75617898e-04
+[11:52:01]     Linear Regression Complete (N=1698, DOF=1696):
+[11:52:01]       RSS=1.574496e+01, MSE=9.283582e-03, χ²_red=0.009
+[11:52:01]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.12e+00
+[11:52:01]       Final η = 4.54587889e-04 ± 3.73103293e-04
+[11:52:01]     Linear Regression Complete (N=1876, DOF=1874):
+[11:52:01]       RSS=1.642435e+01, MSE=8.764326e-03, χ²_red=0.009
+[11:52:01]       Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.48e+00
+[11:52:01]       Final η = -1.04191616e-03 ± 3.85522368e-04
+[11:52:01]     Linear Regression Complete (N=2648, DOF=2646):
+[11:52:01]       RSS=1.551411e+01, MSE=5.863231e-03, χ²_red=0.006
+[11:52:01]       Birge Ratio = 0.077 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 1.73e+00
+[11:52:01]       Final η = -7.32021474e-04 ± 1.96691107e-04
+[11:52:01]     Linear Regression Complete (N=2805, DOF=2803):
+[11:52:01]       RSS=2.444311e+01, MSE=8.720340e-03, χ²_red=0.009
+[11:52:01]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 1.91e+00
+[11:52:01]       Final η = -4.39568420e-04 ± 2.57529651e-04
+[11:52:01]     Linear Regression Complete (N=2065, DOF=2063):
+[11:52:01]       RSS=2.851378e+01, MSE=1.382151e-02, χ²_red=0.014
+[11:52:01]       Birge Ratio = 0.118 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.20e+00
+[11:52:01]       Final η = -5.58380144e-04 ± 4.26371851e-04
+[11:52:01]     Linear Regression Complete (N=2062, DOF=2060):
+[11:52:01]       RSS=1.737848e+01, MSE=8.436154e-03, χ²_red=0.008
+[11:52:01]       Birge Ratio = 0.092 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.39e+00
+[11:52:01]       Final η = -2.65257298e-03 ± 3.51544407e-04
+[11:52:01]     Linear Regression Complete (N=2033, DOF=2031):
+[11:52:01]       RSS=2.292228e+01, MSE=1.128620e-02, χ²_red=0.011
+[11:52:01]       Birge Ratio = 0.106 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.31e+00
+[11:52:01]       Final η = -1.95320880e-03 ± 3.93124789e-04
+[11:52:01]         Base η: -4.130e-04
+[11:52:01]         Monthly modulation amplitude: -2.306e-04 ± 2.756e-05
+[11:52:01]         Monthly modulation t = -8.37, p = 0.0000
+[11:52:01]         Monthly variance / expected noise variance = 11.36
+[11:52:01]         Jan η = 2.661e-04, Jul η = -1.042e-03
+[11:52:01]         Heliocentric sign flip (Jan vs Jul)? YES ✓ (TEP predicts sign flip)
+[11:52:01]         Interpretation: heliocentric_modulation
+[11:52:01] ✓       Consistent with TEP heliocentric gradient? YES ✓
+[11:52:01] ═══ ═══ TEST 3: Station Latitude Independence
+[11:52:01]     Linear Regression Complete (N=2595, DOF=2593):
+[11:52:01]       RSS=2.582927e+00, MSE=9.961152e-04, χ²_red=0.001
+[11:52:01]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 1.95e+00
+[11:52:01]       Final η = -2.39835567e-04 ± 8.66412451e-05
+[11:52:01]     Linear Regression Complete (N=19390, DOF=19388):
+[11:52:01]       RSS=1.886682e+02, MSE=9.731186e-03, χ²_red=0.010
+[11:52:01]       Birge Ratio = 0.099 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 2.04e+00
+[11:52:01]       Final η = -5.40178767e-04 ± 1.08752371e-04
+[11:52:01]     Linear Regression Complete (N=346, DOF=344):
+[11:52:01]       RSS=1.323291e+00, MSE=3.846776e-03, χ²_red=0.004
+[11:52:01]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 3.40e+00
+[11:52:01]       Final η = -1.81311538e-05 ± 8.70658166e-04
+[11:52:01]     Linear Regression Complete (N=3139, DOF=3137):
+[11:52:01]       RSS=2.863186e+01, MSE=9.127146e-03, χ²_red=0.009
+[11:52:01]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 3.06e+00
+[11:52:01]       Final η = -5.00935607e-04 ± 3.60578299e-04
+[11:52:01]     Linear Regression Complete (N=737, DOF=735):
+[11:52:01]       RSS=1.397850e+01, MSE=1.901837e-02, χ²_red=0.019
+[11:52:01]       Birge Ratio = 0.138 (Scaling factor applied: 1.000)
+[11:52:01]       Condition Number κ(R) = 4.15e+00
+[11:52:01]       Final η = 3.55351087e-03 ± 1.44874881e-03
+[11:52:01]         Station results:
+[11:52:01]                  APO (lat= 32.8°): η = -2.398e-04 ( 2.77σ)
+[11:52:01]               Grasse (lat= 43.8°): η = -5.402e-04 ( 4.97σ)
+[11:52:01]               Matera (lat= 40.6°): η = -1.813e-05 ( 0.02σ)
+[11:52:01]            McDonald2 (lat= 30.7°): η = -5.009e-04 ( 1.39σ)
+[11:52:01]            Haleakala (lat= 20.7°): η =  3.554e-03 ( 2.45σ) [ANOMALOUS]
+[11:52:01]         Pearson r (all stations) = -0.790 (p = 0.1118)
+[11:52:01]         Pearson r (excl. Haleakala) = 0.092 (p = 0.9076)
+[11:52:01] ✓       Latitude-independent? YES ✓
+[11:52:01] ═══ ═══ INDEPENDENT VALIDATION SUMMARY
+[11:52:01] ✓     [✓] Matched-window ephemeris: consistent (<3σ)
+[11:52:01] ✓     [✓] Heliocentric modulation: consistent with TEP prediction (Jan-Jul sign flip)
+[11:52:01] ✓     [✓] Latitude independence: no correlation (excl. known-anomalous Haleakala)
+[11:52:01] ✓     Overall: 3/3 tests passed
+[11:52:01] Results saved to results/outputs/step_045_independent_validation.json
+[11:52:01] ✓   Independent Validation Complete.

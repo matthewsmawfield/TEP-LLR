@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 025: Solar Cycle Correlation & Haleakala Station Anomaly
+Step 023: Solar Cycle Correlation & Haleakala Station Anomaly
 
 Tests the hypothesis that the anomalous positive eta detected at the
 Haleakala station (and potentially temporally varying eta at others)
@@ -17,7 +17,10 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import numpy as np
 import pandas as pd
 from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
+from scripts.utils.config import get_config
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+
+TEP_CONFIG = get_config()
 
 
 def solar_activity_index(years_array):
@@ -117,7 +120,7 @@ def run_solar_correlation(df, verbose=False):
     solar_idx_clean = df_clean['solar_activity'].values
     
     diff_solar_perms = []
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
     
     for _ in range(n_permutations):
         shuffled_solar = np.random.permutation(solar_idx_clean)

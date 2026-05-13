@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 011: Systematic Control Analysis for TEP-LLR
+Step 010: Systematic Control Analysis for TEP-LLR
 """
 
 import sys
@@ -12,6 +12,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import argparse
 import pandas as pd
 import numpy as np
+from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
 from scipy import stats
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
@@ -34,7 +35,8 @@ def compute_partial_correlation(x, y, z, verbose=False):
     y_residuals = y_resid - y_pred
 
     # Partial correlation is correlation of residuals
-    r_partial, p_partial = stats.pearsonr(x_residuals, y_residuals)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_partial, p_partial = stats.pearsonr(x_residuals, y_residuals)
 
     if verbose:
         print_status("  [CALC] Partial correlation computation:", "CALC")
@@ -69,7 +71,8 @@ def run_control_analysis(df, verbose=False):
         f"[DATA] JD range: [{np.min(jd):.4f}, {np.max(jd):.4f}]", "INFO")
 
     # Original correlation (no controls)
-    r_orig, p_orig = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_orig, p_orig = stats.pearsonr(residuals, cos_elong)
     snr_orig = abs(r_orig)/np.sqrt((1-r_orig**2)/(n-2))
 
     print_status("", "INFO")
@@ -85,7 +88,9 @@ def run_control_analysis(df, verbose=False):
 
     print_status("", "INFO")
     print_status("TEST 2: CONTROLLING FOR LINEAR TIME TREND", "PROCESS")
-    print_status(f"  [CALC] Time trend coefficient: {np.corrcoef(residuals, jd_norm)[0,1]:.6e}", "CALC")
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_jd_res = np.corrcoef(residuals, jd_norm)[0, 1]
+    print_status(f"  [CALC] Time trend coefficient: {r_jd_res:.6e}", "CALC")
     print_status(f"  [CALC] r_partial (time controlled): {r_time:.6e}", "CALC")
     print_status(f"  [CALC] p_partial: {p_time:.2e}", "CALC")
     print_status(f"  [CALC] Signal attenuation: {(1 - abs(r_time)/abs(r_orig))*100:.1f}%", "CALC")
@@ -134,16 +139,18 @@ def run_control_analysis(df, verbose=False):
             cos_anomalistic
         ])
 
-        # Regress residuals on controls
-        beta_res = np.linalg.lstsq(X, residuals, rcond=None)[0]
-        res_residuals = residuals - X @ beta_res
+        X = np.asarray(X, dtype=np.float64, order="C")
 
-        # Regress cos_elong on controls
-        beta_cos = np.linalg.lstsq(X, cos_elong, rcond=None)[0]
-        cos_residuals = cos_elong - X @ beta_cos
+        # Regress residuals on controls
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            beta_res = stable_lstsq(X, residuals)[0]
+            res_residuals = residuals - X @ beta_res
+            beta_cos = stable_lstsq(X, cos_elong)[0]
+            cos_residuals = cos_elong - X @ beta_cos
 
         # Partial correlation after all controls
-        r_combined, p_combined = stats.pearsonr(res_residuals, cos_residuals)
+        with suppress_scipy_array_api_matmul_runtime_warning():
+            r_combined, p_combined = stats.pearsonr(res_residuals, cos_residuals)
         
         print_status("", "INFO")
         print_status("TEST 4: CONTROLLING FOR SEASONAL AND LUNAR CYCLES", "PROCESS")

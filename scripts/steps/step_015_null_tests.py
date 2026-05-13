@@ -19,6 +19,7 @@ import argparse
 import math
 import pandas as pd
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
 from scripts.utils.statistical_utils import linear_regression
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.pre_whitening_filter import apply_pre_whitening
@@ -122,8 +123,9 @@ def run_null_tests(
     # Project out TEP basis
     cos_elong_tep = np.cos(elongation)
     X_tep = np.column_stack([cos_elong_tep, np.ones_like(cos_elong_tep)])
-    tep_coeffs, _, _, _ = np.linalg.lstsq(X_tep, residuals_white, rcond=None)
-    residuals_null = residuals_white - X_tep @ tep_coeffs
+    tep_coeffs, _, _, _ = stable_lstsq(X_tep, residuals_white)
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        residuals_null = residuals_white - X_tep @ tep_coeffs
 
     test_results = []
     for factor in test_frequency_factors:

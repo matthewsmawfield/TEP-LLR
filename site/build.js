@@ -7,20 +7,11 @@ function readJsonIfExists(filePath) {
     if (!fs.existsSync(filePath)) {
         return null;
     }
+    const raw = fs.readFileSync(filePath, 'utf8');
     try {
-        const raw = fs.readFileSync(filePath, 'utf8');
-        try {
-            return JSON.parse(raw);
-        } catch (error) {
-            const sanitized = raw
-                .replace(/:\s*-Infinity\b/g, ': null')
-                .replace(/:\s*Infinity\b/g, ': null')
-                .replace(/:\s*NaN\b/g, ': null');
-            return JSON.parse(sanitized);
-        }
+        return JSON.parse(raw);
     } catch (error) {
-        console.warn(`⚠️  Failed to parse JSON: ${filePath}`);
-        return null;
+        throw new Error(`Failed to parse JSON ${filePath}: ${error.message}`);
     }
 }
 
@@ -72,6 +63,32 @@ function formatIntegerLatex(value) {
     return s.replace(/,/g, '{,}');
 }
 
+function bayesFactorEvidenceLabel(bf) {
+    if (bf === null || bf === undefined) {
+        return '';
+    }
+    const num = Number(bf);
+    if (!Number.isFinite(num) || num < 0) {
+        return '';
+    }
+    if (num < 1) {
+        return 'negative';
+    }
+    if (num < 3) {
+        return 'barely worth mentioning';
+    }
+    if (num < 10) {
+        return 'substantial';
+    }
+    if (num < 30) {
+        return 'strong';
+    }
+    if (num < 100) {
+        return 'very strong';
+    }
+    return 'decisive';
+}
+
 function formatPValueMantissaExp(pValue, mantissaDecimals = 1) {
     if (pValue === null || pValue === undefined) {
         return null;
@@ -97,6 +114,30 @@ function formatPValueLatex(pValue, mantissaDecimals = 1) {
         return null;
     }
     return `${parts.mantissa} \\times 10^{${parts.exp}}`;
+}
+
+function formatScientificLatex(value, mantissaDecimals = 2) {
+    if (value === null || value === undefined) {
+        return null;
+    }
+    const num = Number(value);
+    if (!Number.isFinite(num)) {
+        return null;
+    }
+    if (num === 0) {
+        return '0';
+    }
+    const sign = num < 0 ? '-' : '';
+    const magnitude = Math.abs(num);
+    let exp = Math.floor(Math.log10(magnitude));
+    let mantissa = magnitude / Math.pow(10, exp);
+    let mantissaStr = mantissa.toFixed(mantissaDecimals);
+    if (Number(mantissaStr) >= 10) {
+        mantissa = mantissa / 10;
+        mantissaStr = mantissa.toFixed(mantissaDecimals);
+        exp += 1;
+    }
+    return `${sign}${mantissaStr} \\times 10^{${exp}}`;
 }
 
 function formatPValueCell(pValue, options = {}) {
@@ -151,15 +192,14 @@ function safeGet(obj, pathParts) {
 function createInjectionContext() {
     const outputsDir = path.join(__dirname, '..', 'results', 'outputs');
 
-    // Load TEP-LLR pipeline outputs (steps 000-041)
-    const step002 = readJsonIfExists(path.join(outputsDir, 'step_002_statistical_analysis.json'));
-    const step003 = readJsonIfExists(path.join(outputsDir, 'step_003_detection_analysis_advanced.json'));
-    const step005 = readJsonIfExists(path.join(outputsDir, 'step_005_multi_ephemeris_comparison.json'));
-    const step013 = readJsonIfExists(path.join(outputsDir, 'step_013_subsample_robustness.json'));
+    // Load TEP-LLR pipeline outputs used by manuscript placeholder injection.
+    const step003 = readJsonIfExists(path.join(outputsDir, 'step_003_statistical_analysis.json'));
+    const step004 = readJsonIfExists(path.join(outputsDir, 'step_004_detection_analysis_advanced.json'));
+    const step006 = readJsonIfExists(path.join(outputsDir, 'step_006_multi_ephemeris_comparison.json'));
     const step016 = readJsonIfExists(path.join(outputsDir, 'step_016_bayesian_analysis.json'));
-    const step018 = readJsonIfExists(path.join(outputsDir, 'step_018_leverage_diagnostics.json'));
-    const step031 = readJsonIfExists(path.join(outputsDir, 'step_031_station_power_analysis.json'));
-    const step032 = readJsonIfExists(path.join(outputsDir, 'step_032_hardware_epoch_analysis.json'));
+    const step017 = readJsonIfExists(path.join(outputsDir, 'step_017_leverage_diagnostics.json'));
+    const step029 = readJsonIfExists(path.join(outputsDir, 'step_029_station_power_analysis.json'));
+    const step030 = readJsonIfExists(path.join(outputsDir, 'step_030_hardware_epoch_analysis.json'));
 
     const ctx = {
         llr: {
@@ -174,34 +214,35 @@ function createInjectionContext() {
     };
 
     // Step 002: Primary statistical analysis
-    if (step002) {
-        const results = step002.analysis_results || step002.regression_metrics || {};
+    if (step003) {
+        const results = step003.analysis_results || step003.regression_metrics || {};
         ctx.llr.step002 = {
-            n_observations: formatIntegerWithCommas(results.n_obs || step002.outlier_cleaning?.n_cleaned),
-            eta_ols_sci: results.eta ?? step002.eta_ols,
-            eta_err_sci: results.eta_error ?? step002.eta_ols_error,
-            snr: formatFixedNumber(step002.snr, 2),
-            sigma: formatFixedNumber(step002.snr, 2)
+            n_observations: formatIntegerWithCommas(results.n_obs || step003.outlier_cleaning?.n_cleaned),
+            eta_ols_sci: results.eta ?? step003.eta_ols,
+            eta_err_sci: results.eta_error ?? step003.eta_ols_error,
+            snr: formatFixedNumber(step003.snr, 2),
+            sigma: formatFixedNumber(step003.snr, 2)
         };
     } else {
-        console.warn('⚠️  Missing step_002_statistical_analysis.json; primary detection values not injected.');
+        console.warn('⚠️  Missing step_003_statistical_analysis.json; primary detection values not injected.');
     }
 
     // Step 016: Bayesian analysis
     if (step016) {
         const bayes = step016.bayesian_summary || {};
+        const bf = bayes.bayes_factor_savage_dickey;
         ctx.llr.step016 = {
-            bayes_factor_llr_sci: bayes.bayes_factor_savage_dickey || 0,
-            bayes_factor_llr_val: formatPValueLatex(bayes.bayes_factor_savage_dickey),
-            evidence_strength: "decisive"
+            bayes_factor_llr_sci: bf || 0,
+            bayes_factor_llr_val: formatScientificLatex(bf),
+            evidence_strength: bayesFactorEvidenceLabel(bf)
         };
     }
 
     // Step 032: Hardware epoch analysis
-    if (step032) {
+    if (step030) {
         const epochs = [
-            ...(step032.epoch_fits?.grasse_epochs || []),
-            ...(step032.epoch_fits?.apo_epochs || []),
+            ...(step030.epoch_fits?.grasse_epochs || []),
+            ...(step030.epoch_fits?.apo_epochs || []),
         ];
         const modern = epochs.find(e => e.epoch_name === 'Grasse-III') || {};
         ctx.llr.step032 = {
@@ -211,11 +252,11 @@ function createInjectionContext() {
     }
 
     // Step 031: Station power analysis
-    if (step031) {
-        const stations = step031.per_station_power?.stations || [];
+    if (step029) {
+        const stations = step029.per_station_power?.stations || [];
         const apo = stations.find(s => s.station === 'APO') || {};
         const grasse = stations.find(s => s.station === 'Grasse') || {};
-        const pw = step031.precision_weighted_regression || {};
+        const pw = step029.precision_weighted_regression || {};
         
         ctx.llr.step031 = {
             apo_eta_sci: apo.eta_obs,
@@ -226,38 +267,38 @@ function createInjectionContext() {
             grasse_snr: formatFixedNumber(grasse.snr_observed, 1),
             pw_eta_sci: pw.eta_precision_weighted,
             pw_snr: formatFixedNumber(pw.snr, 2),
-            cross_station_r: formatFixedNumber(step031.cross_station_validation?.prediction_r, 4)
+            cross_station_r: formatFixedNumber(step029.cross_station_validation?.prediction_r, 4)
         };
     } else {
-        console.warn('⚠️  Missing step_031_station_power_analysis.json; station values not injected.');
+        console.warn('⚠️  Missing step_029_station_power_analysis.json; station values not injected.');
     }
 
     // Step 018: Leverage diagnostics
-    if (step018) {
-        const cook = step018.conclusion?.formal_cooks_d_excision || {};
-        const summary = step018.summary || {};
+    if (step017) {
+        const cook = step017.conclusion?.formal_cooks_d_excision || {};
+        const summary = step017.summary || {};
         
         ctx.llr.step018 = {
             theilsen_eta_sci: summary.full_sample_eta_theilsen,
             cook_eta_sci: cook.eta_clean_ols,
             cook_err_sci: cook.eta_clean_se,
             cook_snr: formatFixedNumber(cook.eta_clean_snr, 2),
-            n_high_leverage: formatIntegerWithCommas(step018.leverage_statistics?.n_high_leverage)
+            n_high_leverage: formatIntegerWithCommas(step017.leverage_statistics?.n_high_leverage)
         };
     } else {
-        console.warn('⚠️  Missing step_018_leverage_diagnostics.json; leverage values not injected.');
+        console.warn('⚠️  Missing step_017_leverage_diagnostics.json; leverage values not injected.');
     }
 
     // Step 005: DE430 cross-validation
-    if (step005) {
-        const de430 = step005.comparisons?.DE430 || {};
+    if (step006) {
+        const de430 = step006.comparisons?.DE430 || {};
         ctx.llr.step005 = {
             de430_eta_sci: de430.eta,
             de430_err_sci: de430.eta_error,
             de430_snr: formatFixedNumber(de430.snr, 2)
         };
     } else {
-        console.warn('⚠️  Missing step_005_multi_ephemeris_comparison.json; DE430 values not injected.');
+        console.warn('⚠️  Missing step_006_multi_ephemeris_comparison.json; DE430 values not injected.');
     }
 
     // Backward compatibility: map to old tep.* paths
@@ -284,7 +325,7 @@ function injectPlaceholders(template, context) {
         return String(value);
     });
     if (unresolved.size > 0) {
-        console.warn(`⚠️  Unresolved placeholders (${unresolved.size}): ${Array.from(unresolved).slice(0, 10).join(', ')}${unresolved.size > 10 ? ', ...' : ''}`);
+        throw new Error(`Unresolved placeholders (${unresolved.size}): ${Array.from(unresolved).join(', ')}`);
     }
     return replaced;
 }
@@ -331,14 +372,7 @@ async function buildStaticSite() {
                     ${componentHtml}
                 </section>`;
             } else {
-                console.warn(`⚠️  Component not found: ${section.file}`);
-                componentsHtml += `
-                <section id="${section.id}" class="manuscript-section" data-section="${section.title}">
-                    <div style="background-color: #ffe6e6; border: 1px solid #ff9999; padding: 15px; margin: 20px 0; border-radius: 5px;">
-                        <h3 style="color: #cc0000; margin-top: 0;">Missing Section: ${section.title}</h3>
-                        <p>Component file <code>components/${section.file}</code> not found</p>
-                    </div>
-                </section>`;
+                throw new Error(`Component not found: ${componentPath}`);
             }
         }
         

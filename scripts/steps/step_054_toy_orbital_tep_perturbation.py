@@ -35,6 +35,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 import numpy as np
+from scripts.utils.numerics import stable_lstsq
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 from scipy.optimize import minimize
 
 logger = TEPLogger("step_054")
@@ -133,9 +135,12 @@ def fit_ephemeris(t_days, r_true, a_moon_km=384400.0):
     n = 2 * np.pi / MONTH_DAYS
     M = n * t_days
     X = np.column_stack([np.ones(len(t_days)), np.cos(M), np.sin(M)])
-    coeffs, _, _, _ = np.linalg.lstsq(X, r_true, rcond=None)
+    coeffs, _, _, _ = stable_lstsq(X, r_true)
     a_fit, e_cos_fit, e_sin_fit = coeffs
-    r_fit = X @ coeffs
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        r_fit = X @ coeffs
+    if not np.all(np.isfinite(r_fit)):
+        raise RuntimeError("Non-finite fitted range produced in toy Keplerian fit.")
     rss = np.sum((r_true - r_fit)**2)
     e_fit = np.sqrt(e_cos_fit**2 + e_sin_fit**2) / abs(a_fit)
     omega_fit = np.arctan2(-e_sin_fit, -e_cos_fit)
@@ -175,9 +180,13 @@ def main():
     # 4. Regress residuals on cos(D) to recover η
     print_status("Regressing residuals on cos(D)...", "PROCESS")
     X = np.column_stack([cosD, np.ones(len(cosD))])
-    coeffs, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs, _, _, _ = stable_lstsq(X, residuals)
     eta_recovered = coeffs[0] / A_NORDVEDT
-    se = np.sqrt(np.mean((residuals - X @ coeffs)**2) * np.linalg.inv(X.T @ X)[0, 0])
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid_fit = residuals - X @ coeffs
+    if not np.all(np.isfinite(resid_fit)):
+        raise RuntimeError("Non-finite residuals produced in toy eta uncertainty estimate.")
+    se = np.sqrt(np.mean(resid_fit**2) * np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)[0, 0])
     eta_err_recovered = se / A_NORDVEDT
     snr = abs(eta_recovered) / max(eta_err_recovered, 1e-20)
 
@@ -194,7 +203,7 @@ def main():
         ef = fit_ephemeris(t_days, r_test)
         resid_test = r_test - ef['r_model']
         X_test = np.column_stack([cosD_test, np.ones(len(cosD_test))])
-        c_test, _, _, _ = np.linalg.lstsq(X_test, resid_test, rcond=None)
+        c_test, _, _, _ = stable_lstsq(X_test, resid_test)
         eta_rec = c_test[0] / A_NORDVEDT
         sweep_results.append({
             'eta_input': float(eta_test),
@@ -208,7 +217,10 @@ def main():
 
     # 6. Save results
     results = {
+        'step_id': 'step_054',
+        'status': 'PASS',
         'step': '054_toy_orbital_tep_perturbation',
+        'data_type': 'SYNTHETIC (TOY_ORBITAL_MODEL)',
         'simulation': {
             'n_points': len(t_days),
             'span_years': float(t_days[-1] / YEAR_DAYS),

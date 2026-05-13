@@ -1,0 +1,124 @@
+{
+    "step_id": "step_055",
+    "status": "PASS",
+    "n_observations": 25445,
+    "correlation_cosD_cos_theta": 0.04994902346715334,
+    "aliasing_simulation": {
+        "n_simulations": 5000,
+        "eta_theta_sim_mean": 9.44537558753995e-07,
+        "eta_theta_sim_std": 8.819424703603245e-05,
+        "eta_theta_sim_99_9_percentile": 0.00029769402146342586,
+        "t_sim_mean": 0.010647419593826925,
+        "t_sim_std": 0.9921774621025389,
+        "t_sim_99_9_percentile": 3.351179723913054,
+        "observed_eta_theta": -0.0009772069121439257,
+        "observed_t": -11.022138626702096,
+        "p_aliasing_coefficient": 0.0,
+        "p_aliasing_t_statistic": 0.0,
+        "aliasing_rejected": true
+    },
+    "multicollinearity_diagnostics": {
+        "vifs": {
+            "cosD": 1.017497971310049,
+            "r_c\u00b7cosD": 1.0260744117577387,
+            "vr_c\u00b7cosD": 1.1886073014238667,
+            "cos\u03b8_c\u00b7cosD": 1.2005238709586104
+        },
+        "max_vif": 1.2005238709586104,
+        "mean_vif": 1.1081758888625661,
+        "condition_number_X": 178.41749967494817,
+        "condition_number_XtX": 31832.804190260395,
+        "se_cos_theta_actual": 8.865855758487345e-05,
+        "se_cos_theta_orthogonal": 8.865855758487319e-05,
+        "se_inflation_factor": 1.0000000000000029,
+        "severe_multicollinearity": false
+    },
+    "permutation_test": {
+        "n_permutations": 1000,
+        "eta_perm_mean": -1.288473148804307e-06,
+        "eta_perm_std": 7.979939821688475e-05,
+        "eta_perm_99_9_percentile": 0.00023027677154773208,
+        "t_perm_mean": -0.015401088017234606,
+        "t_perm_std": 0.952884795373614,
+        "t_perm_99_9_percentile": 2.755556324105104,
+        "observed_eta": -0.0009772069121439257,
+        "observed_t": -11.022138626702096,
+        "p_value_coefficient": 0.0,
+        "p_value_t_statistic": 0.0,
+        "permutation_rejected": true
+    },
+    "sky_scrambling": {
+        "n_scrambles": 5000,
+        "strict_alpha": 0.01,
+        "base_model_aic": -141809.8426337258,
+        "true_delta_aic": 119.22220149813802,
+        "true_f_statistic": 121.4875399062354,
+        "true_f_p_value": 1.1102230246251565e-16,
+        "delta_aic_median": 60.45497680995322,
+        "delta_aic_99th_percentile": 130.15307951744126,
+        "delta_aic_max": 136.92768309242092,
+        "f_median": 62.519400090729675,
+        "f_99th_percentile": 132.47081861203486,
+        "p_scramble_delta_aic": 0.0902,
+        "p_scramble_f": 0.0902,
+        "true_direction_preferred": false,
+        "directional_anatomy_supported": true
+    },
+    "orthogonalization_test": {
+        "available": true,
+        "eta_theta_orthogonal": -0.0009772069121439261,
+        "eta_theta_orthogonal_error": 8.865855758487322e-05,
+        "eta_theta_orthogonal_t": -11.02213862670213,
+        "eta_theta_orthogonal_p": 0.0,
+        "orthogonality_residuals": [
+            3.768541034787631e-12,
+            4.1945613649119196e-15,
+            -1.0133005545753804e-12,
+            -1.2310152897043736e-12
+        ],
+        "signal_persists": true
+    },
+    "directional_anatomy": {
+        "true_cmb": {
+            "delta_aic": 119.22220149813802,
+            "f_statistic": 121.4875399062354,
+            "f_p_value": 1.1102230246251565e-16,
+            "eta_theta": -0.0009772069121439257,
+            "eta_theta_error": 8.865855758487345e-05,
+            "eta_theta_t": -11.022138626702096
+        },
+        "perpendicular_1": {
+            "delta_aic": 2.840311937878141,
+            "f_statistic": 4.839821122048283,
+            "f_p_value": 0.027818738184555825,
+            "eta_theta": 0.00021571269071316617,
+            "eta_theta_error": 9.805303500270453e-05,
+            "eta_theta_t": 2.1999593455441366
+        },
+        "perpendicular_2": {
+            "delta_aic": 24.677063941810047,
+            "f_statistic": 26.68580837062298,
+            "f_p_value": 2.4117764341191616e-07,
+            "eta_theta": 0.0011252155321580686,
+            "eta_theta_error": 0.00021781888815859617,
+            "eta_theta_t": 5.165830849980226
+        },
+        "antipode": {
+            "delta_aic": 119.22220149813802,
+            "f_statistic": 121.4875399062354,
+            "f_p_value": 1.1102230246251565e-16,
+            "eta_theta": 0.0009772069121439257,
+            "eta_theta_error": 8.865855758487345e-05,
+            "eta_theta_t": 11.022138626702096
+        },
+        "delta_aic_perp1_vs_true": 116.38188956025988,
+        "delta_aic_perp2_vs_true": 94.54513755632797,
+        "delta_aic_antipode_vs_true": 0.0,
+        "antipode_magnitude_ratio": 1.0,
+        "dipole_antipode_consistent": true,
+        "perpendicular_directions_suppressed": true,
+        "directional_anatomy_passed": true
+    },
+    "falsification_tests_passed": 5,
+    "falsification_tests_total": 5
+}

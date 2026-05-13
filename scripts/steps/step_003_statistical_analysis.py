@@ -161,9 +161,20 @@ def run_statistical_analysis(verbose=False):
         return None
 
     df = pd.read_csv(input_path)
-    if 'sigma_m' not in df.columns:
-        print_status("WARNING: sigma_m not found in dataset. Falling back to global std(y).", "WARNING")
-        df['sigma_m'] = np.std(df['residual_m'].values)
+    if "sigma_m" not in df.columns:
+        print_status(
+            f"CRITICAL: processed INPOP CSV missing required column 'sigma_m'. "
+            f"Re-run data preprocessing (step 001) after rebuilding residuals.",
+            "ERROR",
+        )
+        return None
+    sig = df["sigma_m"].values
+    if not np.all(np.isfinite(sig)) or np.any(sig <= 0):
+        print_status(
+            "CRITICAL: sigma_m must be finite and positive for all rows.",
+            "ERROR",
+        )
+        return None
 
     print_status("═══ DATA SUMMARY", "INFO")
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
@@ -212,7 +223,7 @@ def run_statistical_analysis(verbose=False):
     n_steps = TEP_CONFIG.get("MCMC_STANDARD_STEPS", 3000)
     burn_in = TEP_CONFIG.get("MCMC_BURN_IN", 1000)
     initial = np.array([eta_ols, reg['intercept']])
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
     pos = initial + 1e-6 * np.random.randn(n_walkers, 2)
 
     print_status(">>> Running Bayesian MCMC analysis", "PROCESS")
@@ -288,12 +299,14 @@ def run_statistical_analysis(verbose=False):
     print_status(f"    Limitations: OLS is unweighted (Birge ratio diagnostic); MCMC uses fixed station-specific sigma_m", "INFO")
 
     results = {
+        "step_id": "step_003",
         "eta_ols": float(eta_ols),
         "eta_ols_error": float(eta_err_ols),  # Add this key for consistency with other steps
         "eta_mcmc": float(eta_mcmc),
         "eta_err_mcmc": float(eta_err_mcmc),
         "snr": float(snr),
-        "status": status,
+        "status": "PASS",
+        "detection_status": status,
         "ar1_gls": {
             "eta": float(ar1_gls_results['eta']),
             "eta_error": float(ar1_gls_results['eta_error']),
@@ -337,7 +350,7 @@ if __name__ == "__main__":
     log_dir = PROJECT_ROOT / "logs"
     logger = TEPLogger("step_003", str(log_dir / "step_003_statistical_analysis.log"))
     set_step_logger(logger)
-    
+
     results = run_statistical_analysis(verbose=True)
     if results:
         # Convert numpy to native for JSON
@@ -348,3 +361,6 @@ if __name__ == "__main__":
             return obj
         logger.save_step_results(to_native(results), PROJECT_ROOT, "step_003_statistical_analysis")
         print_status(f"Statistical Analysis Complete. SNR = {results['snr']:.1f}σ", "SUCCESS")
+    else:
+        print_status("Statistical analysis failed (missing data, invalid sigma_m, or upstream error).", "ERROR")
+        sys.exit(1)

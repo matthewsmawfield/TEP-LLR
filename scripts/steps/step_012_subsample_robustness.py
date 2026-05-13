@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 013: Subsample Robustness Analysis for TEP-LLR
+Step 012: Subsample Robustness Analysis for TEP-LLR
 """
 
 
@@ -15,6 +15,8 @@ from scripts.utils.logger import TEPLogger, set_step_logger, print_status, set_v
 from scripts.utils.config import get_config
 from scripts.utils.statistical_utils import linear_regression, weighted_linear_regression
 import argparse
+
+TEP_CONFIG = get_config()
 import pandas as pd
 import numpy as np
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -58,6 +60,7 @@ def build_station_dominance_report(summary: dict) -> dict:
     station_balance_test = summary.get("station_balance_test", {})
 
     return {
+        "step_id": "step_012",
         "full_sample_eta": eta_full,
         "full_sample_eta_error": eta_err_full,
         "dominant_station_jackknife": dominant_jackknife,
@@ -98,7 +101,7 @@ def run_subsample_robustness(df, verbose=False):
         print_status("", "INFO")
         print_status("TEST 1: SINGLE 80% SUBSAMPLE", "PROCESS")
 
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
     indices = np.random.choice(n, int(0.8 * n), replace=False)
     sub_df = df.iloc[indices]
 

@@ -8,17 +8,13 @@ phase, and related computations that are used across multiple parsing modules.
 import numpy as np
 import pandas as pd
 
-# Import constants from llr_constants module
-from scripts.utils.llr_constants import (
-    SYNODIC_PERIOD_DAYS,
-    REFERENCE_NEW_MOON_JD,
-    SYNODIC_PERIOD_RADIANS
-)
-
 
 def compute_elongation(df: pd.DataFrame, verbose: bool = False) -> pd.DataFrame:
     """
-    Compute precise lunar elongation (angular separation from Sun) using Skyfield/DE421.
+    Compute lunar elongation (angular separation Sun–Moon as seen from Earth) using Skyfield/DE421.
+
+    Elongation is the geometric separation angle; ``cos(elongation)`` matches the
+    sky-plane dot product used with range residuals.
 
     Args:
         df: DataFrame containing 'date_julian' column
@@ -32,54 +28,44 @@ def compute_elongation(df: pd.DataFrame, verbose: bool = False) -> pd.DataFrame:
     
     PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
     eph_path = PROJECT_ROOT / "de421.bsp"
-    
-    if eph_path.exists():
-        if verbose:
-            print_status(f"Computing precise elongation via Skyfield ({eph_path.name})...", "INFO")
-        
-        planets = load(str(eph_path))
-        earth = planets['earth']
-        moon = planets['moon']
-        sun = planets['sun']
-        ts = load.timescale()
-        
-        times = ts.tt(jd=df['date_julian'].values)
-        
-        # Get positions in GCRS
-        e_pos = earth.at(times)
-        m_pos = e_pos.observe(moon).apparent()
-        s_pos = e_pos.observe(sun).apparent()
-        
-        # Angle between Moon and Sun as seen from Earth
-        # Using dot product of unit vectors for stability
-        m_vec = m_pos.position.au
-        s_vec = s_pos.position.au
-        
-        m_unit = m_vec / np.linalg.norm(m_vec, axis=0)
-        s_unit = s_vec / np.linalg.norm(s_vec, axis=0)
-        
-        # dot = cos(theta)
-        cos_d = np.einsum('ij,ij->j', m_unit, s_unit)
-        # Ensure range [-1, 1]
-        cos_d = np.clip(cos_d, -1.0, 1.0)
-        
-        # elongation_rad = arccos(cos_d)
-        # Note: arccos gives [0, pi]. We need [0, 2pi] to distinguish waxing/waning.
-        # We need to check if Moon is ahead or behind Sun in longitude.
-        # Simplification: TEP signal depends on cos(D), so arccos is technically sufficient
-        # if we only care about the cos(D) predictor. 
-        # But for completeness, we use the phase-angle logic.
-        
-        # Get ecliptic longitudes
-        m_lon = m_pos.ecliptic_latlon()[1].radians
-        s_lon = s_pos.ecliptic_latlon()[1].radians
-        
-        elongation_rad = (m_lon - s_lon) % (2 * np.pi)
-    else:
-        print_status("Warning: de421.bsp not found. Falling back to mean synodic approximation.", "WARNING")
-        # Calculate phase in cycles based on synodic period
-        phase_cycles = (df['date_julian'] - REFERENCE_NEW_MOON_JD) / SYNODIC_PERIOD_DAYS
-        elongation_rad = (phase_cycles * SYNODIC_PERIOD_RADIANS) % SYNODIC_PERIOD_RADIANS
+
+    if not eph_path.exists():
+        raise FileNotFoundError(
+            f"Required Skyfield ephemeris missing: {eph_path}. "
+            "Download DE421 (de421.bsp) to the project root; mean-synodic elongation fallback is disabled."
+        )
+
+    if verbose:
+        print_status(f"Computing precise elongation via Skyfield ({eph_path.name})...", "INFO")
+
+    planets = load(str(eph_path))
+    earth = planets['earth']
+    moon = planets['moon']
+    sun = planets['sun']
+    ts = load.timescale()
+
+    times = ts.tt(jd=df['date_julian'].values)
+
+    # Get positions in GCRS
+    e_pos = earth.at(times)
+    m_pos = e_pos.observe(moon).apparent()
+    s_pos = e_pos.observe(sun).apparent()
+
+    # Angle between Moon and Sun as seen from Earth
+    # Using dot product of unit vectors for stability
+    m_vec = m_pos.position.au
+    s_vec = s_pos.position.au
+
+    m_unit = m_vec / np.linalg.norm(m_vec, axis=0)
+    s_unit = s_vec / np.linalg.norm(s_vec, axis=0)
+
+    # dot = cos(theta) for true geometric Sun–Moon separation as seen from Earth
+    cos_d = np.einsum('ij,ij->j', m_unit, s_unit)
+    cos_d = np.clip(cos_d, -1.0, 1.0)
+
+    # Use geometric elongation so cos(elongation) matches the sky-plane cosine;
+    # ecliptic longitude difference alone is not the separation angle when latitudes differ.
+    elongation_rad = np.arccos(cos_d)
 
     df['elongation_rad'] = elongation_rad
 

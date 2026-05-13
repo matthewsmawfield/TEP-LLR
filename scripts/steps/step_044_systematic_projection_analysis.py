@@ -31,12 +31,16 @@ sys.path.insert(0, str(PROJECT_ROOT))
 import argparse
 import json
 import numpy as np
+from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
+from scripts.utils.config import get_config
 import pandas as pd
 from scipy import stats
 
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR, ELONGATION_MASK_WIDTH
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.statistical_utils import linear_regression
+
+TEP_CONFIG = get_config()
 
 
 def compute_systematic_projection(residuals, cos_elong, systematic_component):
@@ -53,7 +57,8 @@ def compute_systematic_projection(residuals, cos_elong, systematic_component):
     bias_A = cov_sys_cos / var_cos  # bias to slope A [meters]
     bias_eta = bias_A / ETA_SCALE_FACTOR
     # Also compute correlation for diagnostics
-    r_sc, p_sc = stats.pearsonr(systematic_component, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_sc, p_sc = stats.pearsonr(systematic_component, cos_elong)
     return float(bias_A), float(bias_eta), float(r_sc), float(p_sc)
 
 
@@ -99,7 +104,7 @@ def run_systematic_projection_analysis(df, verbose=False):
     # Detrend residuals: remove best-fit TEP signal
     # ------------------------------------------------------------------
     X = np.column_stack([cos_elong, np.ones(n)])
-    coeffs_tep, _, _, _ = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs_tep, _, _, _ = stable_lstsq(X, residuals)
     detrended = residuals - coeffs_tep[0] * cos_elong  # m
 
     # ------------------------------------------------------------------
@@ -170,7 +175,7 @@ def run_systematic_projection_analysis(df, verbose=False):
     # ------------------------------------------------------------------
     cos_2elong = np.cos(2.0 * elongation)
     X_tidal = np.column_stack([cos_2elong, np.ones(n)])
-    tidal_coeffs, _, _, _ = np.linalg.lstsq(X_tidal, residuals, rcond=None)
+    tidal_coeffs, _, _, _ = stable_lstsq(X_tidal, residuals)
     tidal_sys = tidal_coeffs[0] * cos_2elong
     tidal_bias_A, tidal_bias_eta, tidal_r, tidal_p = compute_systematic_projection(
         residuals, cos_elong, tidal_sys)
@@ -183,7 +188,7 @@ def run_systematic_projection_analysis(df, verbose=False):
     X_thermal = np.column_stack([np.cos(omega * hour_frac),
                                   np.sin(omega * hour_frac),
                                   np.ones(n)])
-    thermal_coeffs, _, _, _ = np.linalg.lstsq(X_thermal, detrended, rcond=None)
+    thermal_coeffs, _, _, _ = stable_lstsq(X_thermal, detrended)
     thermal_sys = thermal_coeffs[0] * np.cos(omega * hour_frac) + thermal_coeffs[1] * np.sin(omega * hour_frac)
     thermal_bias_A, thermal_bias_eta, thermal_r, thermal_p = compute_systematic_projection(
         residuals, cos_elong, thermal_sys)
@@ -297,7 +302,7 @@ def run_systematic_projection_analysis(df, verbose=False):
         snr_diff = abs(eta_diff) / eta_diff_error if eta_diff_error > 0 else 0.0
 
         # Null test: random-phase subsets
-        np.random.seed(42)
+        np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
         n_perm = 1000
         perm_eta_diffs = []
         for _ in range(n_perm):
@@ -389,8 +394,8 @@ if __name__ == "__main__":
 
     log_dir = PROJECT_ROOT / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
-    logger = TEPLogger("step_024", str(
-        log_dir / "step_024_systematic_projection_analysis.log"))
+    logger = TEPLogger("step_044", str(
+        log_dir / "step_044_systematic_projection_analysis.log"))
     set_step_logger(logger)
     set_verbose_mode(True)
 
@@ -405,5 +410,5 @@ if __name__ == "__main__":
     summary = run_systematic_projection_analysis(df, verbose=True)
 
     logger.save_step_results(summary, PROJECT_ROOT,
-                             "step_024_systematic_projection_analysis")
+                             "step_044_systematic_projection_analysis")
     print_status("Systematic Projection Analysis Complete.", "SUCCESS")

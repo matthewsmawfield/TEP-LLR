@@ -26,14 +26,14 @@
                     "n_years": 11,
                     "years_with_sparse_data": 0,
                     "fraction_years_sparse": 0.0,
-                    "elongation_uniformity": 1.1964356787280013
+                    "elongation_uniformity": 1.2151588135683415
                 },
                 "systematic_correlations": {
                     "seasonal_correlation": 0.1204941922490195,
-                    "sin_elongation_correlation": 0.03264039961698988,
+                    "sin_elongation_correlation": -0.07131976072582505,
                     "temporal_trend_correlation": 0.0416835586615107
                 },
-                "eta_original": -0.00023936773659735615
+                "eta_original": -0.00023983556703264052
             },
             "Grasse": {
                 "quality_metrics": {
@@ -51,14 +51,14 @@
                     "n_years": 36,
                     "years_with_sparse_data": 0,
                     "fraction_years_sparse": 0.0,
-                    "elongation_uniformity": 1.2603890543722873
+                    "elongation_uniformity": 1.3266756705607539
                 },
                 "systematic_correlations": {
                     "seasonal_correlation": 0.10459113610877743,
-                    "sin_elongation_correlation": 0.06116604962864658,
+                    "sin_elongation_correlation": 0.003976900698658849,
                     "temporal_trend_correlation": -0.026648366832871938
                 },
-                "eta_original": -0.0005392816311042262
+                "eta_original": -0.0005401787666332994
             },
             "Matera": {
                 "quality_metrics": {
@@ -76,14 +76,14 @@
                     "n_years": 17,
                     "years_with_sparse_data": 7,
                     "fraction_years_sparse": 0.4117647058823529,
-                    "elongation_uniformity": 1.6893496811648636
+                    "elongation_uniformity": 1.7256344225180171
                 },
                 "systematic_correlations": {
                     "seasonal_correlation": 0.28329298672518566,
-                    "sin_elongation_correlation": -0.03189338228870816,
+                    "sin_elongation_correlation": -0.04981298045808671,
                     "temporal_trend_correlation": -0.0490147714457523
                 },
-                "eta_original": -1.3129864840358525e-05
+                "eta_original": -1.813115381112259e-05
             },
             "McDonald2": {
                 "quality_metrics": {
@@ -101,14 +101,14 @@
                     "n_years": 26,
                     "years_with_sparse_data": 0,
                     "fraction_years_sparse": 0.0,
-                    "elongation_uniformity": 1.6739823258361293
+                    "elongation_uniformity": 1.6717330388854212
                 },
                 "systematic_correlations": {
                     "seasonal_correlation": 0.02171498419716165,
-                    "sin_elongation_correlation": -0.09051135955935204,
+                    "sin_elongation_correlation": -0.013665202876487545,
                     "temporal_trend_correlation": 0.038092998790967954
                 },
-                "eta_original": -0.0004997488047718065
+                "eta_original": -0.0005009356067952294
             },
             "Haleakala": {
                 "quality_metrics": {
@@ -126,14 +126,14 @@
                     "n_years": 7,
                     "years_with_sparse_data": 1,
                     "fraction_years_sparse": 0.14285714285714285,
-                    "elongation_uniformity": 2.0178552533750223
+                    "elongation_uniformity": 2.0338407407175647
                 },
                 "systematic_correlations": {
                     "seasonal_correlation": 0.06325610384755179,
-                    "sin_elongation_correlation": -0.029673630211965524,
+                    "sin_elongation_correlation": 0.10125480196550075,
                     "temporal_trend_correlation": 0.08987488612039259
                 },
-                "eta_original": 0.0035482501354832875
+                "eta_original": 0.0035535108727365035
             }
         },
         "rms_statistics": {
@@ -159,11 +159,11 @@
             "n_years": 7,
             "years_with_sparse_data": 1,
             "fraction_years_sparse": 0.14285714285714285,
-            "elongation_uniformity": 2.0178552533750223
+            "elongation_uniformity": 2.0338407407175647
         },
         "systematics": {
             "seasonal_correlation": 0.06325610384755179,
-            "sin_elongation_correlation": -0.029673630211965524,
+            "sin_elongation_correlation": 0.10125480196550075,
             "temporal_trend_correlation": 0.08987488612039259
         },
         "quality_cut_tests": {
@@ -171,18 +171,18 @@
                 "n_original": 737,
                 "n_after_cuts": 737,
                 "fraction_retained": 1.0,
-                "eta": 0.0035482501354832875,
-                "eta_error": 0.0014438656238000048,
-                "snr": 2.457465623528668,
+                "eta": 0.0035535108727365035,
+                "eta_error": 0.0014467817340064687,
+                "snr": 2.456148560084472,
                 "sign_changed": true
             },
             "recent_only": {
                 "n_original": 737,
                 "n_after_cuts": 410,
                 "fraction_retained": 0.5563093622795116,
-                "eta": 0.004412930829128718,
-                "eta_error": 0.0017969210696352838,
-                "snr": 2.455828975295169,
+                "eta": 0.004418854222565512,
+                "eta_error": 0.0018001002637477307,
+                "snr": 2.4547822760525846,
                 "sign_changed": true
             }
         },
@@ -206,11 +206,11 @@
             "n_years": 26,
             "years_with_sparse_data": 0,
             "fraction_years_sparse": 0.0,
-            "elongation_uniformity": 1.6739823258361293
+            "elongation_uniformity": 1.6717330388854212
         },
         "systematics": {
             "seasonal_correlation": 0.02171498419716165,
-            "sin_elongation_correlation": -0.09051135955935204,
+            "sin_elongation_correlation": -0.013665202876487545,
             "temporal_trend_correlation": 0.038092998790967954
         },
         "era_split": {
@@ -218,18 +218,18 @@
                 "n_original": 3139,
                 "n_after_cuts": 1101,
                 "fraction_retained": 0.350748646065626,
-                "eta": 0.00024548861006891767,
-                "eta_error": 0.0007999777376916384,
-                "snr": 0.30686930210993496,
+                "eta": 0.00024576237975719407,
+                "eta_error": 0.0008016362635358284,
+                "snr": 0.3065759259357782,
                 "sign_changed": false
             },
             "late": {
                 "n_original": 3139,
                 "n_after_cuts": 2038,
                 "fraction_retained": 0.649251353934374,
-                "eta": -0.0008305542102401981,
-                "eta_error": 0.00036316099174611363,
-                "snr": -2.2870138288994424,
+                "eta": -0.0008322981092810869,
+                "eta_error": 0.00036387331031740504,
+                "snr": -2.2873293689913035,
                 "sign_changed": true
             }
         }

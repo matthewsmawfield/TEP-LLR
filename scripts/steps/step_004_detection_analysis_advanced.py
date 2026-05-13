@@ -16,7 +16,7 @@ Physical Background:
 
 Statistical Strategy:
 - Uses 17 independent analysis methods to ensure robustness
-- All methods use fixed random seeds (seed=42) for reproducibility
+- All methods use configurable random seeds (seed from config.json) for reproducibility
 - Employs both parametric (OLS regression) and non-parametric (bootstrap, permutation) methods
 - Tests for consistency across independent stations and temporal epochs
 - Accounts for systematic errors and leverage effects
@@ -41,6 +41,7 @@ from typing import Dict, List, Tuple
 
 import pandas as pd
 import numpy as np
+from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
 from scipy import stats
 
 from scripts.utils.config import get_config
@@ -143,15 +144,17 @@ def _bootstrap_worker(args: Tuple) -> float:
     np.random.seed(seed_offset)
     n = len(residuals)
     idx = np.random.choice(n, n, replace=True)
-    r, _ = stats.pearsonr(residuals[idx], cos_elong[idx])
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r, _ = stats.pearsonr(residuals[idx], cos_elong[idx])
     return r
 
 
 def bootstrap_correlation(residuals: np.ndarray, cos_elong: np.ndarray,
-                          n_bootstrap: int = 10000, seed: int = 42, verbose: bool = False) -> Dict:
+                          n_bootstrap: int = 10000, seed: int = TEP_CONFIG.get("RANDOM_SEED", 42), verbose: bool = False) -> Dict:
     """Bootstrap confidence intervals for correlation coefficient."""
     # Observed statistic
-    r_obs, _ = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_obs, _ = stats.pearsonr(residuals, cos_elong)
     
     if verbose:
         print(f"  Running {n_bootstrap} bootstrap samples...")
@@ -191,13 +194,15 @@ def _permutation_worker(args: Tuple) -> float:
     residuals, cos_elong, seed_offset = args
     np.random.seed(seed_offset)
     residuals_shuffled = np.random.permutation(residuals)
-    r, _ = stats.pearsonr(residuals_shuffled, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r, _ = stats.pearsonr(residuals_shuffled, cos_elong)
     return r
 
 def permutation_test(residuals: np.ndarray, cos_elong: np.ndarray,
-                     n_permutations: int = None, seed: int = 42) -> Dict:
+                     n_permutations: int = None, seed: int = TEP_CONFIG.get("RANDOM_SEED", 42)) -> Dict:
     # Observed statistic
-    r_obs, _ = stats.pearsonr(residuals, cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_obs, _ = stats.pearsonr(residuals, cos_elong)
 
     # Prepare arguments for parallel processing
     worker_args = [(residuals, cos_elong, seed + i)
@@ -274,7 +279,7 @@ def robust_regression(residuals: np.ndarray, cos_elong: np.ndarray) -> Dict:
             f"Computing Theil-Sen estimator with {n_samples} sampled pairs...", "CALC")
 
     # Vectorized random sampling of pairs
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
     idx_i = np.random.choice(n, n_samples)
     idx_j = np.random.choice(n, n_samples)
 
@@ -335,12 +340,13 @@ def leverage_analysis(residuals: np.ndarray, cos_elong: np.ndarray) -> dict:
     # Hat matrix: H = X(X'X)^(-1)X' using same design matrix as linear_regression
     # (includes intercept column, p = 2 parameters)
     X = np.column_stack([np.ones(n), cos_elong])
-    XtX_inv = np.linalg.inv(X.T @ X)
-    leverage = np.sum((X @ XtX_inv) * X, axis=1)
+    from scripts.utils.numerics import hat_diagonal_from_qr
+    leverage = hat_diagonal_from_qr(X)
 
     # OLS fit for residuals (full model with intercept)
-    beta = XtX_inv @ X.T @ residuals
-    predicted = X @ beta
+    beta = stable_lstsq(X, residuals)[0]
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        predicted = X @ beta
     residuals_ols = residuals - predicted
 
     # MSE
@@ -412,7 +418,7 @@ def differential_analysis(residuals: np.ndarray, elongation: np.ndarray) -> dict
 
     # Balanced analysis: downsample the larger bin to match the smaller
     n_min = min(n_0, n_pi)
-    np.random.seed(42)
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
 
     if n_0 > n_pi:
         # Downsample new moon bin
@@ -480,7 +486,8 @@ def station_by_station_analysis(df: pd.DataFrame) -> Dict:
             continue
 
         # Correlation
-        r, p = stats.pearsonr(residuals, cos_elong)
+        with suppress_scipy_array_api_matmul_runtime_warning():
+            r, p = stats.pearsonr(residuals, cos_elong)
 
         # Regression
         reg = linear_regression(residuals, cos_elong)
@@ -581,7 +588,7 @@ def temporal_stability_analysis(df: pd.DataFrame, n_bins: int = 7) -> Dict:
 
         # Standard error of slope
         mse = ss_res / (len(etas) - 2)
-        XtWX_inv = np.linalg.inv(XtWX)
+        XtWX_inv = np.linalg.pinv(XtWX, rcond=1e-10, hermitian=True)
         slope_se = np.sqrt(mse * XtWX_inv[1, 1])
 
         # T-test for slope significance
@@ -915,7 +922,8 @@ def systematic_error_modeling(residuals: np.ndarray, elongation: np.ndarray,
     results['harmonics'] = harmonic_results
 
     # 3. Test for correlation with sin(elongation) (should be zero for TEP)
-    r_sin, p_sin = stats.pearsonr(residuals, sin_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_sin, p_sin = stats.pearsonr(residuals, sin_elong)
     results['sin_elongation'] = {'r': r_sin, 'p': p_sin}
 
     # 4. Sensitivity to outlier removal
@@ -928,12 +936,14 @@ def systematic_error_modeling(residuals: np.ndarray, elongation: np.ndarray,
         keep_idx = residuals_sorted_idx[:-
                                         n_remove] if n_remove > 0 else residuals_sorted_idx
 
-        r_trim, p_trim = stats.pearsonr(
-            residuals[keep_idx], cos_elong[keep_idx])
+        with suppress_scipy_array_api_matmul_runtime_warning():
+            r_trim, p_trim = stats.pearsonr(
+                residuals[keep_idx], cos_elong[keep_idx])
         results[f'trim_{int(remove_frac*100)}%'] = {'r': r_trim, 'p': p_trim}
 
     # 5. Test for data-dependent effects (correlation with residual magnitude)
-    r_mag, p_mag = stats.pearsonr(np.abs(residuals), cos_elong)
+    with suppress_scipy_array_api_matmul_runtime_warning():
+        r_mag, p_mag = stats.pearsonr(np.abs(residuals), cos_elong)
     results['magnitude_dependence'] = {'r': r_mag, 'p': p_mag}
 
     # 6. Complex Phase Coherence (to verify TEP rigid phase)
@@ -1011,7 +1021,7 @@ def sensitivity_analysis(residuals: np.ndarray, elongation: np.ndarray,
     return results
 
 def cross_validation_analysis(residuals: np.ndarray, elongation: np.ndarray,
-                              n_folds: int = 5, seed: int = 42) -> Dict:
+                              n_folds: int = 5, seed: int = TEP_CONFIG.get("RANDOM_SEED", 42)) -> Dict:
     if get_verbose_mode():
         print_status(f"Running {n_folds}-fold cross-validation...", "PROCESS")
 
@@ -1037,7 +1047,7 @@ def cross_validation_analysis(residuals: np.ndarray, elongation: np.ndarray,
         # Fit model on training set with intercept to address leverage bias from phase asymmetry
         # Model: residual = A * cos(elongation) + B
         X_train = np.column_stack([train_cos, np.ones_like(train_cos)])
-        coeffs_train, _, _, _ = np.linalg.lstsq(X_train, train_res, rcond=None)
+        coeffs_train, _, _, _ = stable_lstsq(X_train, train_res)
         A_train, B_train = coeffs_train
 
         # Test on test set
@@ -1082,7 +1092,7 @@ def cross_validation_analysis(residuals: np.ndarray, elongation: np.ndarray,
     }
 
 def holdout_test(residuals: np.ndarray, elongation: np.ndarray,
-                 holdout_frac: float = 0.2, seed: int = 42) -> Dict:
+                 holdout_frac: float = 0.2, seed: int = TEP_CONFIG.get("RANDOM_SEED", 42)) -> Dict:
     if get_verbose_mode():
         print_status(
             f"Running holdout test with {holdout_frac*100:.0f}% holdout...", "PROCESS")
@@ -1102,7 +1112,7 @@ def holdout_test(residuals: np.ndarray, elongation: np.ndarray,
     # Fit model on training set with intercept to address leverage bias from phase asymmetry
     # Model: residual = A * cos(elongation) + B
     X_train = np.column_stack([train_cos, np.ones_like(train_cos)])
-    coeffs_train, _, _, _ = np.linalg.lstsq(X_train, train_res, rcond=None)
+    coeffs_train, _, _, _ = stable_lstsq(X_train, train_res)
     A_train, B_train = coeffs_train
     eta_train = A_train / ETA_SCALE_FACTOR
 
@@ -1118,7 +1128,7 @@ def holdout_test(residuals: np.ndarray, elongation: np.ndarray,
 
     # Fit model on test set independently for comparison
     X_test = np.column_stack([test_cos, np.ones_like(test_cos)])
-    coeffs_test, _, _, _ = np.linalg.lstsq(X_test, test_res, rcond=None)
+    coeffs_test, _, _, _ = stable_lstsq(X_test, test_res)
     A_test, _ = coeffs_test
     eta_test = A_test / ETA_SCALE_FACTOR
 
@@ -1146,14 +1156,14 @@ def complex_phase_coherence_analysis(residuals: np.ndarray, elongation: np.ndarr
     sin_d = np.sin(elongation)
     X = np.column_stack([cos_d, sin_d, np.ones_like(elongation)])
 
-    coeffs, residuals_sum, rank, s = np.linalg.lstsq(X, residuals, rcond=None)
+    coeffs, residuals_sum, rank, s = stable_lstsq(X, residuals)
     c1, s1, b = coeffs
 
     n = len(residuals)
     rss = residuals_sum[0] if len(residuals_sum) > 0 else np.sum(
         (residuals - X @ coeffs)**2)
     sigma2 = rss / (n - 3)
-    cov = sigma2 * np.linalg.inv(X.T @ X)
+    cov = sigma2 * np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)
 
     # Amplitude and Phase
     amplitude = np.sqrt(c1**2 + s1**2)
@@ -1206,7 +1216,7 @@ def main():
         description="Step 004: Advanced TEP Detection Analysis")
     parser.add_argument("--verbose", action="store_true",
                         help="Enable verbose output")
-    parser.add_argument("--seed", type=int, default=42,
+    parser.add_argument("--seed", type=int, default=TEP_CONFIG.get("RANDOM_SEED", 42),
                         help="Random seed for reproducibility")
     args = parser.parse_args()
 
@@ -1215,7 +1225,7 @@ def main():
     print_status("═══ Starting Step 004: Advanced TEP Detection Analysis...", "TITLE")
     print_status("═══ STEP PURPOSE: Comprehensive TEP detection using 17 robust statistical methods", "INFO")
     print_status("═══ METHOD: Bootstrap correlation, OLS regression, station-by-station analysis, leverage analysis", "INFO")
-    print_status("═══ PARAMETERS: Random seed=42, bootstrap samples=10000, Theil-Sen samples=100000", "INFO")
+    print_status(f"═══ PARAMETERS: Random seed={args.seed}, bootstrap samples=10000, Theil-Sen samples=100000", "INFO")
     
     input_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     
@@ -1255,8 +1265,10 @@ def main():
             "ci_95_upper": float(boot_results['ci_95_upper']),
         },
         "regression": {
-            "eta_est": float(reg_ols['eta_ols']) if 'eta_ols' in reg_ols else None,
-            "snr": float(reg_ols['snr']) if 'snr' in reg_ols else None,
+            "eta_est": float(reg_ols["eta"]) if "eta" in reg_ols else None,
+            "snr": (float(abs(reg_ols["eta"]) / reg_ols["eta_error"]))
+            if ("eta" in reg_ols and "eta_error" in reg_ols and reg_ols["eta_error"] not in (0, None))
+            else None,
         },
         "station_by_station": station_results
     }
