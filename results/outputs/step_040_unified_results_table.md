@@ -2,19 +2,21 @@
 
 | Estimator | η (×10⁻⁴) | Error (×10⁻⁵) | SNR | N | Method | Status |
 |-----------|-----------|----------------|-----|---|--------|--------|
-| full_systematic_ols | -4.06 | 6.58 | 6.17σ | 25,445 | OLS with full systematic model (cosD + cos2D + sin_m + cos_m + sin_y + cos_y + const) | PRIMARY RESULT |
-| ar1_gls_full_model | -4.47 | 9.68 | 4.62σ | 25,445 | Full-model AR(1) GLS with Cochrane-Orcutt on full design matrix + cluster-robust SE (by station) | ROBUSTNESS CHECK - accounts for temporal autocorrelation with systematic controls |
-| ar1_gls_cosd_only | -3.29 | 9.37 | 3.51σ | 25,445 | cosD-only AR(1) GLS with Cochrane-Orcutt + cluster-robust SE (by station) | COMPARISON - cosD-only; superseded by full-systematic model |
+| cooks_excised_full_systematic | -3.87 | 4.95 | 7.82σ | 23,837 | Full-systematic OLS with Cook's Distance excision (D > 4/n) on cosD + cos2D + sin_m + cos_m + sin_y + cos_y + const | PRIMARY ROBUST ESTIMAND |
+| precision_weighted_full_systematic | -3.91 | 5.63 | 6.94σ | 25,445 | Full-systematic WLS with 1/σ² station weights | CROSS-STATION CONSENSUS |
+| full_systematic_ols | -4.06 | 6.58 | 6.17σ | 25,445 | OLS with full systematic model (cosD + cos2D + sin_m + cos_m + sin_y + cos_y + const) | SYSTEMATIC-CONTROLLED SENSITIVITY - upper bound; most leverage-sensitive |
+| ar1_gls_full_model | -4.45 | 9.87 | 4.51σ | 25,445 | Full-model AR(1) GLS with Cochrane-Orcutt on full design matrix + cluster-robust SE (by station) | ROBUSTNESS CHECK - accounts for temporal autocorrelation with systematic controls |
+| ar1_gls_cosd_only | -3.26 | 9.48 | 3.44σ | 25,445 | cosD-only AR(1) GLS with Cochrane-Orcutt + cluster-robust SE (by station) | COMPARISON - cosD-only; superseded by full-systematic model |
 | full_sample_ols | -3.18 | 6.05 | 5.25σ | 25,445 | cosD-only OLS with 6σ MAD outlier cleaning (step_003) | SECONDARY - cosD-only baseline |
-| bayesian_mcmc | -2.86 | 6.50 | 4.40σ | 25,445 | Ensemble MCMC (32 walkers, 3000 steps) | SECONDARY - consistent with primary |
-| leverage_excised_ols | -3.31 | 5.85 | 5.65σ | 25,176 | OLS with Cook's Distance excision (threshold: 4/n) | DIAGNOSTIC - confirms leverage inflation |
+| bayesian_mcmc | -2.87 | 6.73 | 4.26σ | 25,445 | Ensemble MCMC (32 walkers, 3000 steps) | SECONDARY - consistent with primary |
+| leverage_excised_ols | -3.31 | 5.85 | 5.65σ | 25,176 | cosD-only OLS with Cook's Distance excision (threshold: 4/n) | DIAGNOSTIC - cosD-only leverage check |
 
 ### Robust Estimands
 
 | Estimator | η (×10⁻⁴) | Error (×10⁻⁵) | SNR | Method | Status |
 |-----------|-----------|----------------|-----|--------|--------|
-| theil_sen | -2.04 | N/A | N/A | Median of pairwise slopes | ROBUST LOWER BOUND |
-| precision_weighted | -3.50 | 6.589113340030604 | 5.3188644467079325 | WLS with 1/σ² station weights | CROSS-STATION VALIDATION |
+| theil_sen | -2.94 | N/A | N/A | Median of pairwise slopes (cosD-only) | NONPARAMETRIC LOWER ENVELOPE - cosD-only; not directly comparable to full-systematic |
+| precision_weighted_cosd_only | -3.50 | 6.59 | 5.32σ | cosD-only WLS with 1/σ² station weights | CROSS-STATION VALIDATION - cosD-only baseline |
 
 ### Table A: Station-level regression estimates
 

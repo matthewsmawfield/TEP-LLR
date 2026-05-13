@@ -1,7 +1,7 @@
 {
   "simulation_parameters": {
     "n_total": 26000,
-    "eta_true": -0.0003177266624680193,
+    "eta_true": -0.0003177266624680195,
     "noise_rms": 0.095,
     "station_fractions": [
       0.74,
@@ -13,17 +13,17 @@
   },
   "genuine_signals": {
     "n_simulated": 500,
-    "eta_full_mean": -0.00031959881461064867,
-    "eta_full_std": 6.433534328780518e-05,
-    "eta_ipw_mean": -0.00031463022973746466,
+    "eta_full_mean": -0.00031959881461064883,
+    "eta_full_std": 6.433534328780516e-05,
+    "eta_ipw_mean": -0.0003146302297374649,
     "eta_ipw_std": 0.00014672436743410006,
     "delta_sigma_distribution": {
       "mean": 0.7250758268034733,
-      "std": 0.5421354137967836,
-      "median": 0.6244319198585541,
-      "percentile_95": 1.7108497455066958,
+      "std": 0.5421354137967835,
+      "median": 0.6244319198585547,
+      "percentile_95": 1.710849745506695,
       "percentile_99": 2.4065945011192413,
-      "max": 3.041330518478099
+      "max": 3.041330518478098
     },
     "same_sign_fraction": 0.982,
     "pass_rate_at_8sigma": 1.0

@@ -248,6 +248,7 @@ def main():
         print_status("Conclusion: Signal is NOT driven by Grasse dominance", "SUCCESS")
         conclusion = "Signal persists in station-balanced full-systematic subsamples"
         status = "PASS"
+        stress_test_result = "PASS"
     elif primary_significant:
         print_status(
             "Primary full-systematic detection remains significant; balanced subsamples lose power",
@@ -255,17 +256,23 @@ def main():
         )
         conclusion = (
             "Primary full-systematic detection remains significant, but equal-N subsamples "
-            "lose power under enforced station balance"
+            "lose power under enforced station balance. This is a power-limited stress-test "
+            "outcome, not a failure of the primary full-systematic TEP detection."
         )
         status = "PASS"
+        stress_test_result = "POWER_LIMITED_BALANCE"
     else:
         print_status("Primary full-systematic detection is not significant", "WARNING")
         conclusion = "Primary full-systematic detection failed on the full sample"
-        status = "WARNING"
+        status = "FAIL"
+        stress_test_result = "PRIMARY_FAILED"
 
     output = {
         "step_id": "step_046",
         "status": status,
+        "stress_test_result": stress_test_result,
+        "primary_full_systematic_significant": bool(primary_significant),
+        "balanced_full_systematic_all_significant": bool(balanced_full_significant),
         "primary_estimand": "full_systematic",
         "tests": results,
         "bootstrap": {

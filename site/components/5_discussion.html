@@ -71,8 +71,8 @@
         the detection threshold. Step 012 employs five independent robustness
         tests including subsample replication and station jackknife. Step 013
         decomposes the pooled signal into station-specific contributions
-        consistent with Section 4.5. Detailed results are presented in
-        Section 4.13.
+        consistent with Section 4.10. Detailed results are presented in
+        Section 4.19.
     </p>
 
     <p>
@@ -106,7 +106,7 @@
         structurally independent of Grasse concentration, mathematically
         validated across cleanly weighted independent parameters.
         Outlier sweeps, resampling, cross-validation, and the Step 008
-        systematic-error budget (Section 4.9) are documented in Results and are
+        systematic-error budget (Section 4.15) are documented in Results and are
         not repeated here.
     </p>
 
@@ -229,7 +229,7 @@
     <p>
         This process <em>partially</em> dampens the total amplitude by
         misattributing the field's energy, but it fails to structurally flatten
-        it. In Section 4.18.6 (Step 032), the algebraic reason for this failure
+        it. In Section 4.24.6 (Step 032), the algebraic reason for this failure
         was derived: separating a synodic amplitude ($\cos(D)$) whose coupling
         constant scales with Earth's changing solar environment ($1/r_\odot$)
         inevitably multiplies the two harmonic frequencies ($D$ and $l'$). This
@@ -257,14 +257,14 @@
         32.13 days. In classical orbital and terrestrial geophysics, this
         frequency is spectrally quiet. The closest major multi-body resonance is
         standard Lunar Evection (31.81 days; resolved from 32.13d by $4\times$
-        the Rayleigh limit, Section 4.18.6), and the closest long-period ocean
+        the Rayleigh limit, Section 4.24.6), and the closest long-period ocean
         tide is the $Mm$ lunar monthly tide (27.55 days). Standard mechanics do
         not possess a continuous driving function operating at 32.13 days.
     </p>
 
     <p>
         Decoupling Static from Dynamic Physics. As demonstrated computationally
-        in the Ephemeris Absorption Simulation (Section 4.16), explicitly
+        in the Ephemeris Absorption Simulation (Section 4.22), explicitly
         injecting a dynamically varying TEP signal into a rigid
         uniform-parameter solver yielded a null global extraction. The post-fit
         residuals preserved the surviving localised multi-sigma structures
@@ -447,7 +447,7 @@
     </p>
     <p>
         Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides
-        supplementary evidence consistent with the INPOP19a detection. Section 4.6
+        supplementary evidence consistent with the INPOP19a detection. Section 4.11
         documents that DE430 exhibits unusual sensitivity to phase-specific outliers,
         which requires careful interpretation given its shorter baseline. After
         appropriate outlier cleaning, the DE430 signal aligns with the INPOP19a
@@ -490,7 +490,7 @@
     </p>
 
     <p>
-        <strong>Covariate Shift and Predictive Weakness (Section 4.24).</strong>
+        <strong>Covariate Shift and Predictive Weakness (Section 4.30).</strong>
         A cross-validation critique might argue that negative predictive
         $R^2$ in temporal and leave-one-station-out splits indicates a non-existent
         signal. Step 052 demonstrates that severe covariate shift is a major
@@ -509,7 +509,7 @@
     </p>
 
     <p>
-        <strong>Clean-Subset and Orbital Orthogonality (Section 4.25).</strong>
+        <strong>Clean-Subset and Orbital Orthogonality (Section 4.31).</strong>
         Steps 053 and 054 address the two most serious residual-analysis
         limitations.  Step 053 isolates Grasse (C-SPAD era) and APO — the
         two stations with the best precision and phase coverage.  The cluster-robust
@@ -517,7 +517,7 @@
         the signal strengthens when heterogeneous stations are removed, though
         temporal hold-out remains marginally negative ($R^2 = -0.017$), indicating
         genuine low amplitude rather than dependence on a single station's
-        weighting. Step 046 (Section 4.26) shows that equal-$N$ balance stress
+        weighting. Step 046 (Section 4.3) shows that equal-$N$ balance stress
         tests lose power below $3\sigma$ even though the full-archive primary
         fit remains significant. Step 054 uses a toy
         orbital model to demonstrate that a synodic cos(D) perturbation of the observed
@@ -820,7 +820,7 @@
 
     <p>
         The statistical and methodological limitations of the analysis are
-        detailed in Section 4.12. In interpretative terms, the most significant
+        detailed in Section 4.18. In interpretative terms, the most significant
         constraint is that the TEP framework interpretation depends on the
         validity of the Temporal Topology integrating cleanly across planetary
         interiors.
@@ -845,7 +845,7 @@
     </p>
 
     <p>
-        The coarse temporal $\chi^2/\mathrm{dof} \approx 33$ (Section 4.11)
+        The coarse temporal $\chi^2/\mathrm{dof} \approx 33$ (Section 4.17)
         indicates bin-to-bin variance. Hardware epoch analysis (Step 030)
         provides the key mechanistic explanation: early-era 1980s PMT
         electronics possessed extremely large variance limits that collapse to
@@ -919,7 +919,7 @@
         instrumental artifact. The authors developed an "observation worth
         function" demonstrating that new-moon observations were most potent for
         constraining the $\cos D$ amplitude — a finding consistent with the
-        phase-asymmetry documented in Section 4.3. They concluded that LLR
+        phase-asymmetry documented in Section 4.8. They concluded that LLR
         observations should "preferentially be made on the new moon side of the
         quarter moon phase" to maximize sensitivity.
     </p>
@@ -1099,7 +1099,7 @@
         <em>Scope note:</em> Sections 5.10–5.22 are programmatic predictions
         and interpretative extensions of the TEP framework. They do not add
         independent estimands to the pooled full-systematic synodic detection
-        in Section 4.2; instead, they define nearby lunar and metrological
+        in Section 4.7; instead, they define nearby lunar and metrological
         observables on which the same time-field architecture can be tested.
         Quantitative modeling of these effects remains an open analytical target.
     </p>

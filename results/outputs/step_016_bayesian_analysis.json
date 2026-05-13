@@ -1,41 +1,41 @@
 {
     "step_id": "step_016",
     "bayesian_summary": {
-        "posterior_mean_eta": -0.00028594942887712416,
-        "posterior_std_eta": 6.504549068021742e-05,
-        "posterior_mean_b": -0.0004113824017026088,
-        "posterior_std_b": 0.00048503250785084594,
+        "posterior_mean_eta": -0.0002866223669863245,
+        "posterior_std_eta": 6.73386298419646e-05,
+        "posterior_mean_b": -0.0004044734694453865,
+        "posterior_std_b": 0.00047805169285644453,
         "credible_interval_95": [
-            -0.00041634001093592433,
-            -0.00015871316391788073
+            -0.00041587062115457937,
+            -0.00015454621058058978
         ],
         "credible_interval_68": [
-            -0.0003517298831397055,
-            -0.0002230483322292683
+            -0.00035404555052543924,
+            -0.0002203092028225997
         ],
-        "bayes_factor_primary": 1768.0907621524275,
+        "bayes_factor_primary": 1722.017428158311,
         "bayes_factor_primary_method": "BIC approximation (robust to bandwidth ambiguity)",
-        "bayes_factor_bic": 1768.0907621524275,
-        "bayes_factor_savage_dickey": 5155924.57539194,
-        "bayes_factor_savage_dickey_geometric_mean": 2206.592804879938,
+        "bayes_factor_bic": 1722.017428158311,
+        "bayes_factor_savage_dickey": 24.942927223457584,
+        "bayes_factor_savage_dickey_geometric_mean": 4.6840964704160015,
         "bayes_factor_sensitivity": {
             "note": "Savage-Dickey is bandwidth-sensitive; BIC is the primary robust estimator.",
             "bandwidth_methods": {
-                "scott_default": 5155924.57539194,
-                "silverman": 1083436.2681586265,
-                "narrow_0.5x": 33.60554803247242,
-                "wide_2.0x": 0.12628968604843377
+                "scott_default": 24.942927223457584,
+                "silverman": 22.096181865677508,
+                "narrow_0.5x": 7.568813275747106,
+                "wide_2.0x": 0.1154013467476206
             },
-            "min": 0.12628968604843377,
-            "max": 5155924.57539194,
-            "geometric_mean": 2206.592804879938,
-            "range_ratio": 40826173.036922224,
+            "min": 0.1154013467476206,
+            "max": 24.942927223457584,
+            "geometric_mean": 4.6840964704160015,
+            "range_ratio": 216.14069442367116,
             "robust": false
         },
         "n_samples": 3200,
-        "gelman_rubin_eta": 1.0012490029605643,
-        "gelman_rubin_b": 1.0020899951036937,
-        "mean_acceptance_fraction": 0.7126770833333333,
+        "gelman_rubin_eta": 1.0019724827673788,
+        "gelman_rubin_b": 1.0052035307764808,
+        "mean_acceptance_fraction": 0.7110208333333333,
         "outlier_cleaning": {
             "method": "6\u03c3 MAD (detect_outliers_sigma)",
             "sigma_threshold": 6.0,

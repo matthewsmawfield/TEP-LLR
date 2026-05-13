@@ -1,0 +1,18 @@
+[20:12:32] ═══ ═══ Step 053: Clean Subset High-SNR Analysis ═══
+[20:12:33]     Clean subset: Grasse 2010+ (N=9981) + APO (N=2595) = 12576
+[20:12:33]     Removed 0 outliers, N=12576
+[20:12:33]     --- Model 1: cosD only ---
+[20:12:33]       η = -3.0557e-04 ± 3.1178e-05 (9.80σ)
+[20:12:33]     --- Model 4: cosD + cos(2D) + annual + monthly (full) ---
+[20:12:33]       η = -3.3597e-04 ± 3.3021e-05 (10.17σ)
+[20:12:33]     --- Model 4: cluster-robust SEs ---
+[20:12:33]       η = -3.3597e-04 ± 4.6312e-05 (7.25σ, cluster-robust, 2 clusters)
+[20:12:33]     --- Model 4: station block bootstrap ---
+[20:12:35]       Station block bootstrap: η = -2.7417e-04 ± 1.2096e-04 (2.27σ), 95% CI [-3.9433e-04, 1.1990e-05], P(η<0) = 0.9650
+[20:12:35]     --- Temporal CV (pre-2013 / post-2013) ---
+[20:12:35]       Train: 2112, Test: 10464
+[20:12:35]       R²_pred = -0.0164, RMSE = 0.0235
+[20:12:35]     --- Per-station cosD-only within clean subset ---
+[20:12:35]       Grasse: η = -3.0522e-04 ± 3.2605e-05 (9.36σ), N=9981
+[20:12:35]       APO: η = -2.3984e-04 ± 8.6641e-05 (2.77σ), N=2595
+[20:12:35]     Saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_053_clean_subset_analysis.json

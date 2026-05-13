@@ -32,7 +32,7 @@ from skyfield.api import load
 
 from scipy.optimize import curve_fit
 from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
-from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
+from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 
 # Earth's orbital parameters
 # Source: IAU 1976 Astronomical Constants, JPL DE430/DE440 ephemeris documentation
@@ -69,11 +69,13 @@ def threshold_activation_model(r_sun_au, eta_0, m):
 
 
 def compute_distances_and_analyze(df, verbose=False):
-    # 1. Load skyfield ephemeris
-    eph_path = PROJECT_ROOT / "de421.bsp"
+    # 1. Load skyfield ephemeris (canonical kernel; verified in Step 000 manifest)
+    eph_path = PROJECT_ROOT / "data" / "raw" / "de440.bsp"
     if not eph_path.exists():
-        print_status(f"Ephemeris not found at {eph_path}", "ERROR")
-        return {"status": "FAIL", "reason": "No ephemeris"}
+        raise FileNotFoundError(
+            f"Required Skyfield kernel missing for Step 022: {eph_path}. "
+            "Place de440.bsp under data/raw and verify via Step 000 manifest."
+        )
 
     planets = load(str(eph_path))
     earth = planets["earth"]
@@ -238,20 +240,25 @@ def compute_distances_and_analyze(df, verbose=False):
             )
         else:
             print_status(
-                "RESULT: Non-significant scaling over this distance baseline.",
-                "WARNING",
+                "RESULT: Non-significant scaling over this distance baseline (null on this test).",
+                "INFO",
             )
 
-    # Status: A significant differential (>2σ) validates TEP's environmental scaling prediction
-    # and serves as systematic error discrimination (instrumental artifacts wouldn't scale with r_sun)
-    status = "PASS" if diff_significance > 2.0 else "WARNING"
+    # Step completes successfully whether the differential is significant or not; significance
+    # is encoded in differential.is_significant and modulation_test_result (not status=WARNING).
+    significant = bool(diff_significance > 2.0)
+    modulation_test_result = (
+        "DIFFERENTIAL_SIGNIFICANT" if significant else "DIFFERENTIAL_NOT_SIGNIFICANT"
+    )
 
     return {
         "step_id": "step_022",
-        "status": status,
+        "status": "PASS",
+        "modulation_test_result": modulation_test_result,
         "test_interpretation": "Significant perihelion-aphelion differential confirms environmental scaling predicted by TEP, ruling out stationary instrumental systematics"
-        if diff_significance > 2.0
-        else "Non-significant differential - insufficient data to confirm environmental modulation",
+        if significant
+        else "Perihelion–aphelion η differential is not significant at the 2σ threshold on this split; "
+        "environmental scaling is therefore not established by this test (null outcome).",
         "distance_stats": {
             "min_au": float(np.min(distances_au)),
             "max_au": float(np.max(distances_au)),
@@ -269,7 +276,7 @@ def compute_distances_and_analyze(df, verbose=False):
         "differential": {
             "delta_eta_mag": float(eta_diff),
             "significance_sigma": float(diff_significance),
-            "is_significant": bool(diff_significance > 2.0),
+            "is_significant": significant,
         },
         "threshold_activation_fit": threshold_fit,
         "binned_analysis": {
@@ -284,6 +291,7 @@ def compute_distances_and_analyze(df, verbose=False):
 
 if __name__ == "__main__":
     log_dir = PROJECT_ROOT / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
     logger = TEPLogger(
         "step_022", str(log_dir / "step_022_environmental_modulation.log")
     )

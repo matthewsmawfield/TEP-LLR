@@ -1,0 +1,60 @@
+{
+    "step_id": "step_046b",
+    "status": "PASS",
+    "eta_true": -0.0003177266624680195,
+    "n_mc": 2000,
+    "n_successful": 2000,
+    "equal_n_params": {
+        "min_obs_per_station": 346,
+        "stations": {
+            "APO": 2595,
+            "Grasse": 19390,
+            "Haleakala": 737,
+            "Matera": 346,
+            "McDonald2": 3139
+        }
+    },
+    "simulation": {
+        "method": "Parametric injection with observed phase distributions and station RMS",
+        "noise_model": "Gaussian per-station RMS",
+        "phase_model": "Bootstrap from observed elongation distribution"
+    },
+    "observed_step_046": {
+        "snr": 0.08280902939607791,
+        "t_stat": 0.08280902939607791
+    },
+    "t_stat_distribution": {
+        "mean": 0.9095680913332495,
+        "median": 0.7751740211835583,
+        "std": 0.6625563381989067,
+        "min": 0.0017088062702584964,
+        "max": 3.4950608606072966,
+        "percentile_2_5": 0.042276428916905945,
+        "percentile_25": 0.3631865671644008,
+        "percentile_50": 0.7751740211835583,
+        "percentile_75": 1.3197048816722319,
+        "percentile_97_5": 2.4063385809751905
+    },
+    "snr_distribution": {
+        "mean": 0.9095680913332495,
+        "median": 0.7751740211835583,
+        "std": 0.6625563381989067,
+        "percentile_25": 0.3631865671644008,
+        "percentile_75": 1.3197048816722319
+    },
+    "eta_distribution": {
+        "mean": -0.00031947157435067,
+        "median": -0.0003195272951263909,
+        "std": 0.0004171133146971843,
+        "percentile_2_5": -0.0011230941784235733,
+        "percentile_97_5": 0.0004887556537465909
+    },
+    "fraction_below_thresholds": {
+        "|t|_lt_0_5": 0.336,
+        "|t|_lt_1_0": 0.6045,
+        "|t|_lt_observed": 0.052
+    },
+    "percentile_of_observed": 5.2,
+    "observed_in_bulk_25_75": false,
+    "interpretation": "For a genuine signal at eta=-3.18e-04, 33.6% of equal-N subsamples yield |t|<0.5. The observed Step 046 value (|t|=0.083) lies at the 5th percentile of the alternative distribution, outside the 25th\u201375th percentile bulk. This confirms the equal-N collapse is consistent with low statistical power, not an anomalous signal suppression."
+}

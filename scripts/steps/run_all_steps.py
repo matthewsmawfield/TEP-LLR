@@ -3,7 +3,7 @@
 TEP-LLR: Full Canonical Analysis Pipeline
 ==========================================
 
-Executes the complete 58-step LLR analysis pipeline in sequence.
+Executes the complete 60-step LLR analysis pipeline in sequence.
 Every step writes a JSON output to results/outputs/ and a detailed
 log to logs/.  Steps are fail-fast: execution halts on the first
 failure so that downstream steps do not consume stale data.
@@ -143,10 +143,6 @@ def main() -> None:
         # 013 — Station decomposition: decompose the combined eta into station-
         #        specific contributions weighted by data fraction.
         "step_013_station_decomposition.py",
-        # 014 — Inter-Station Consistency Analysis.
-        #        CosD-only meta-analysis plus controlled pooling against the
-        #        common-eta mixed model from Step 050.
-        "step_014_inter_station_consistency.py",
         # 015 — Null tests against control datasets (shuffled phases, DE430
         #        raw, non-TEP frequency bands) to calibrate false-alarm rates.
         "step_015_null_tests.py",
@@ -265,6 +261,23 @@ def main() -> None:
         #        model showing dust estimate is underdetermined (20-80%) and
         #        thermal mechanism cannot explain observed 8.9 mm signal.
         "step_039_dust_sensitivity_analysis.py",
+        # 062 — Solar Radiation Pressure Bound.
+        #        Order-of-magnitude bound on local mechanical displacement of
+        #        Apollo retroreflector arrays from direct SRP and IR re-radiation.
+        #        Maximum displacement is 2.7e-10 times the TEP signal.
+        "step_062_solar_radiation_pressure_bound.py",
+        # 063 — Atmospheric Seeing Analysis.
+        #        Bounds synodic-correlated range bias from atmospheric seeing.
+        #        Fast stochastic wander averages to zero; elevation-dependent
+        #        channel already bounded by Step 027 (p=0.281).  Seeing-specific
+        #        bound < 0.12 mm, ~3% of the TEP signal.
+        "step_063_atmospheric_seeing_analysis.py",
+        # 064 — Solar Radiation Pressure Systematic Check.
+        #        Three orthogonal tests avoid the collinearity trap between
+        #        cos(D) and cos(D)/r_sun^2 (VIF ~ 1800). Detrended-residual
+        #        correlation, binned 1/r^2 scaling test, and perihelion-aphelion
+        #        differential all fail to detect an SRP signature.
+        "step_064_srp_systematic_check.py",
         # -------------------------------------------------------------------
         # Group E: Advanced Systematic Controls & Cross-Validation
         # -------------------------------------------------------------------
@@ -332,6 +345,16 @@ def main() -> None:
         #        subsamples (equal-N per station, Grasse-capped). Tests whether
         #        signal persists when station contributions are equalised.
         "step_046_station_balanced_tep.py",
+        # 046b — Equal-N Injection Simulation.
+        #        Parametric Monte Carlo under the alternative hypothesis:
+        #        if the true eta = -3.18e-4, what fraction of equal-N subsamples
+        #        recover |t| < 0.5?  Tests whether observed 0.19σ is in the
+        #        bulk of the genuine-signal distribution.
+        "step_046b_equal_n_injection_simulation.py",
+        # 014 — Inter-Station Consistency Analysis.
+        #        CosD-only meta-analysis plus controlled pooling against the
+        #        common-eta mixed model from Step 050. Must run after Step 050.
+        "step_014_inter_station_consistency.py",
         # 047 — Orbital Velocity Modulation of Temporal Shear.
         #        Tests the TEP-specific prediction that temporal shear depends on
         #        the Earth-Moon system's velocity through the solar scalar topology,
@@ -357,6 +380,37 @@ def main() -> None:
         # 056 — Linearized dynamical Nordtvedt refit on INPOP19a and DE430
         #        residual archives with full-systematic nuisance design.
         "step_056_dynamical_integrator_eta_refit.py",
+        # 057 — Haleakala null-fluctuation simulation under TEP vs GR (family-wise).
+        "step_057_haleakala_null_fluctuation.py",
+        # 059 — Grasse-specific systematic sufficiency analysis.
+        #        Quantitatively falsifies the hypothesis that the pooled
+        #        detection is driven by a Grasse-specific systematic by
+        #        computing the required amplitude and comparing to known
+        #        systematics.  Grasse-only fit at 6.83σ.
+        "step_059_grasse_systematic_sufficiency.py",
+        # 060 — Gaussian Process non-parametric signal extraction.
+        #        Fits a GP with periodic kernel to binned elongation means
+        #        and tests whether the recovered shape is sinusoidal.
+        "step_060_gaussian_process_extraction.py",
+        # 061 — Systematic amplitude sensitivity with Monte Carlo
+        #        falsification. Tests whether any known systematic could
+        #        produce the observed eta when injected as the sole signal.
+        "step_061_systematic_sensitivity_analysis.py",
+        # 065 — High-Dimensional Ephemeris-Like Basis Absorption Test.
+        #        Directly addresses the reviewer criticism that a 3-parameter
+        #        toy model underestimates real ephemeris DOF. Constructs an
+        #        80+ parameter realistic basis and proves that synodic cos(D)
+        #        variance is NOT absorbed because none of the basis functions
+        #        project onto the synodic frequency. Spectral orthogonality, not
+        #        parameter count, governs absorption.
+        "step_065_high_dimensional_absorption_test.py",
+        # 066 — Lomb-Scargle Sideband Survival Analysis.
+        #        Computes high-resolution periodograms on pre-fit and post-fit
+        #        residuals, quantifying sideband peak survival at D±M and
+        #        D±annual frequencies.  Provides direct spectral evidence that
+        #        cross-frequency sidebands are more robust to absorption than
+        #        the central carrier.
+        "step_066_lomb_scargle_sideband_survival.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

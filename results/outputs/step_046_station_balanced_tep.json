@@ -1,6 +1,9 @@
 {
     "step_id": "step_046",
     "status": "PASS",
+    "stress_test_result": "POWER_LIMITED_BALANCE",
+    "primary_full_systematic_significant": true,
+    "balanced_full_systematic_all_significant": false,
     "primary_estimand": "full_systematic",
     "tests": [
         {
@@ -9,48 +12,48 @@
             "n_used": 25445,
             "n_outliers": 762,
             "cosd_only": {
-                "eta": -0.00031772666246801935,
-                "eta_error": 6.051938437639123e-05,
-                "snr": 5.249998256624126,
+                "eta": -0.00031772666246801957,
+                "eta_error": 6.0519384376391265e-05,
+                "snr": 5.249998256624127,
                 "significant": true
             },
             "full_systematic": {
-                "eta": -0.0004061154555979798,
-                "eta_error": 6.577799889845751e-05,
-                "snr": 6.1740317796062225,
+                "eta": -0.0004061154555979797,
+                "eta_error": 6.577799889845754e-05,
+                "snr": 6.174031779606219,
                 "significant": true
             },
             "stations": {
-                "APO": 2595,
                 "Grasse": 19390,
-                "Matera": 346,
+                "Haleakala": 737,
                 "McDonald2": 3139,
-                "Haleakala": 737
+                "Matera": 346,
+                "APO": 2595
             }
         },
         {
             "name": "equal_n_subsample",
             "n_total": 1730,
-            "n_used": 1710,
-            "n_outliers": 20,
+            "n_used": 1698,
+            "n_outliers": 32,
             "cosd_only": {
-                "eta": -0.00017612666586534572,
-                "eta_error": 0.0003443385636359434,
-                "snr": 0.5114927123049686,
+                "eta": 0.00011405414768470258,
+                "eta_error": 0.000335017983573205,
+                "snr": 0.3404418666372295,
                 "significant": false
             },
             "full_systematic": {
-                "eta": -7.717727250116231e-05,
-                "eta_error": 0.0004000993411030863,
-                "snr": 0.19289527517936464,
+                "eta": -3.2836625868960386e-05,
+                "eta_error": 0.00039653436477200913,
+                "snr": 0.08280902939607791,
                 "significant": false
             },
             "stations": {
-                "APO": 346,
                 "Grasse": 346,
-                "Matera": 346,
+                "Haleakala": 346,
                 "McDonald2": 346,
-                "Haleakala": 346
+                "Matera": 346,
+                "APO": 346
             }
         },
         {
@@ -60,35 +63,35 @@
             "n_outliers": 129,
             "cosd_only": {
                 "eta": -0.00020918993439619888,
-                "eta_error": 0.00011792504879910756,
-                "snr": 1.773922813910101,
+                "eta_error": 0.00011792504879910761,
+                "snr": 1.7739228139101004,
                 "significant": false
             },
             "full_systematic": {
-                "eta": -0.00027798988012051176,
+                "eta": -0.0002779898801205119,
                 "eta_error": 0.0001359951451509814,
-                "snr": 2.0441162058534386,
+                "snr": 2.04411620585344,
                 "significant": false
             },
             "stations": {
-                "APO": 2595,
                 "Grasse": 2595,
-                "Matera": 346,
+                "Haleakala": 737,
                 "McDonald2": 3139,
-                "Haleakala": 737
+                "Matera": 346,
+                "APO": 2595
             }
         }
     ],
     "bootstrap": {
         "n_iterations": 200,
         "estimand": "full_systematic",
-        "eta_mean": -9.198304011939246e-05,
-        "eta_std": 0.00023561163083326252,
-        "eta_ci95_lower": -0.0005376328500164635,
-        "eta_ci95_upper": 0.0003595098376009112,
-        "snr_mean": 0.5102152532529332,
-        "snr_std": 0.3771206181849955,
+        "eta_mean": -0.00011172002236135396,
+        "eta_std": 0.00024716724426554384,
+        "eta_ci95_lower": -0.0006632369039131007,
+        "eta_ci95_upper": 0.0003229886198537389,
+        "snr_mean": 0.5121692662939394,
+        "snr_std": 0.4322789130990338,
         "all_significant": false
     },
-    "conclusion": "Primary full-systematic detection remains significant, but equal-N subsamples lose power under enforced station balance"
+    "conclusion": "Primary full-systematic detection remains significant, but equal-N subsamples lose power under enforced station balance. This is a power-limited stress-test outcome, not a failure of the primary full-systematic TEP detection."
 }

@@ -1,98 +1,98 @@
-[11:50:37] ═══ Starting Bayesian MCMC Analysis...
-[11:50:37]     ============================================================
-[11:50:37] ═══ BAYESIAN MCMC ANALYSIS - DETAILED TRACE
-[11:50:37]     ============================================================
-[11:50:37]     Applied 6σ MAD outlier cleaning: removed 762/26207 outliers
-[11:50:37]     [DATA] Dataset: N=25445 observations
-[11:50:37]     [DATA] Residual mean: -3.597882e-04 m
-[11:50:37]     [DATA] Residual std:  6.166717e-02 m
-[11:50:37]     [DATA] Mean uncertainty: 9.201876e-02 m
-[11:50:37]     [DATA] cos(elongation) mean: -0.167153
-[11:50:37]     [DATA] cos(elongation) std:  0.491130
-[11:50:37]       [CALC] OLS-derived initial position: η=-3.177267e-04, b=-1.050206e-03
-[11:50:37] 
-[11:50:37] >>> MCMC CONFIGURATION
-[11:50:37]       [CALC] Number of walkers: 32
-[11:50:37]       [CALC] Total steps: 3000
-[11:50:37]       [CALC] Burn-in steps: 1000
-[11:50:37]       [CALC] Thinning factor: 20
-[11:50:37]       [CALC] Initial position: η=-3.177267e-04, b=-1.050206e-03
-[11:50:37]       [CALC] Prior bounds: η∈[-0.01, 0.01], b∈[-0.1, 0.1]
-[11:50:37]       [CALC] Expected samples after burn-in/thin: 3200
-[11:50:37]     Running MCMC with 32 walkers for 3000 steps...
-[11:50:40] 
-[11:50:40] >>> MCMC CHAIN DIAGNOSTICS
-[11:50:40]       [CALC] Acceptance fraction per walker:
-[11:50:40]       [CALC]    Walker  1: 0.720
-[11:50:40]       [CALC]    Walker  2: 0.723
-[11:50:40]       [CALC]    Walker  3: 0.689
-[11:50:40]       [CALC]    Walker  4: 0.716
-[11:50:40]       [CALC]    Walker  5: 0.706
-[11:50:40]       [CALC] Mean acceptance: 0.713 ± 0.010
-[11:50:40]       [CALC] Acceptable range: 0.2-0.5 (ensemble sampler)
-[11:50:40]       [CALC] Gelman-Rubin R̂ (convergence diagnostic):
-[11:50:40] ✓     [CALC]    R̂_η = 1.0012 ✓ converged
-[11:50:40] ✓     [CALC]    R̂_b = 1.0021 ✓ converged
-[11:50:40]       [CALC]    Target: R̂ < 1.1 for convergence
-[11:50:40]       [CALC] Post-burn-in chain shape: (2000, 32, 2)
-[11:50:40]       [CALC] Chain evolution (η):
-[11:50:40]       [CALC]    Step 0:   mean=-3.376661e-04, std=7.861787e-05
-[11:50:40]       [CALC]    Step 100: mean=-3.051212e-04, std=6.694349e-05
-[11:50:40]       [CALC]    Step 500: mean=-2.937661e-04, std=7.900901e-05
-[11:50:40]       [CALC]    Step 999: mean=-2.791846e-04, std=5.810490e-05
-[11:50:40] 
-[11:50:40] >>> POSTERIOR ANALYSIS
-[11:50:40]       [CALC] Effective samples: 3200
-[11:50:40]       [CALC] Thinning reduced samples by factor of 20.0
-[11:50:40]       [CALC] η posterior statistics:
-[11:50:40]       [CALC]    Mean:   -2.859494e-04
-[11:50:40]       [CALC]    Std:    6.504549e-05
-[11:50:40]       [CALC]    Median: -2.850811e-04
-[11:50:40]       [CALC]    68% CI: [-3.517299e-04, -2.230483e-04]
-[11:50:40]       [CALC]    95% CI: [-4.163400e-04, -1.587132e-04]
-[11:50:40] ✓     [CALC]    Includes η=0? NO
-[11:50:40]       [CALC] b (intercept) posterior statistics:
-[11:50:40]       [CALC]    Mean:   -4.113824e-04 m
-[11:50:40]       [CALC]    Std:    4.850325e-04 m
-[11:50:40]       [CALC] η posterior percentiles:
-[11:50:40]       [CALC]     1th: -4.408288e-04
-[11:50:40]       [CALC]     5th: -3.957562e-04
-[11:50:40]       [CALC]    10th: -3.692787e-04
-[11:50:40]       [CALC]    25th: -3.296338e-04
-[11:50:40]       [CALC]    50th: -2.850811e-04
-[11:50:40]       [CALC]    75th: -2.417072e-04
-[11:50:40]       [CALC]    90th: -2.050570e-04
-[11:50:40]       [CALC]    95th: -1.817511e-04
-[11:50:40]       [CALC]    99th: -1.359301e-04
-[11:50:40]       [CALC] Savage-Dickey Bandwidth Sensitivity:
-[11:50:40]       [CALC]    scott_default: 5.16e+06
-[11:50:40]       [CALC]    silverman: 1.08e+06
-[11:50:40]       [CALC]    narrow_0.5x: 3.36e+01
-[11:50:40]       [CALC]    wide_2.0x: 1.26e-01
-[11:50:40]       [CALC]    Range: 1.26e-01 – 5.16e+06 (ratio 40826173.0x)
-[11:50:40] ⚠     [CALC]    Verdict: Sensitive to bandwidth choice
-[11:50:40] 
-[11:50:40] >>> BAYES FACTOR CALCULATION
-[11:50:40]       [CALC] Savage-Dickey Density Ratio:
-[11:50:40]       [CALC]    Prior density at η=0:    5.00e+01
-[11:50:40]       [CALC]    Posterior KDE at η=0:   9.70e-06
-[11:50:40]       [CALC]    BF_SD = prior/post =    5.16e+06
-[11:50:40]       [CALC] BIC Approximation:
-[11:50:40]       [CALC]    RSS (null model):       96.7633
-[11:50:40]       [CALC]    RSS (TEP model):        96.6678
-[11:50:40]       [CALC]    BIC_0 (null):           -141769.58
-[11:50:40]       [CALC]    BIC_1 (TEP):            -141784.54
-[11:50:40]       [CALC]    ΔBIC = BIC_0 - BIC_1:   14.96
-[11:50:40]       [CALC]    BF_BIC = exp(0.5×ΔBIC): 1.77e+03
-[11:50:40]       [CALC] log₁₀(BF) = 3.25
-[11:50:40] ✓     [CALC] Evidence strength: Decisive
-[11:50:40]       [CALC] P(TEP|data) with equal priors: 0.999435
-[11:50:40] 
-[11:50:40]     ============================================================
-[11:50:40] ═══ BAYESIAN ANALYSIS SUMMARY
-[11:50:40]     ============================================================
-[11:50:40]       Posterior η: -2.859494e-04 ± 6.504549e-05
-[11:50:40]       95% CI:      [-4.163400e-04, -1.587132e-04]
-[11:50:40] ✓     Bayes Factor: 1.77e+03 (Decisive evidence)
-[11:50:40] Results saved to results/outputs/step_016_bayesian_analysis.json
-[11:50:40] ✓   Bayesian Analysis Complete.
+[20:11:16] ═══ Starting Bayesian MCMC Analysis...
+[20:11:16]     ============================================================
+[20:11:16] ═══ BAYESIAN MCMC ANALYSIS - DETAILED TRACE
+[20:11:16]     ============================================================
+[20:11:16]     Applied 6σ MAD outlier cleaning: removed 762/26207 outliers
+[20:11:16]     [DATA] Dataset: N=25445 observations
+[20:11:16]     [DATA] Residual mean: -3.597882e-04 m
+[20:11:16]     [DATA] Residual std:  6.166717e-02 m
+[20:11:16]     [DATA] Mean uncertainty: 9.201876e-02 m
+[20:11:16]     [DATA] cos(elongation) mean: -0.167153
+[20:11:16]     [DATA] cos(elongation) std:  0.491130
+[20:11:16]       [CALC] OLS-derived initial position: η=-3.177267e-04, b=-1.050206e-03
+[20:11:16] 
+[20:11:16] >>> MCMC CONFIGURATION
+[20:11:16]       [CALC] Number of walkers: 32
+[20:11:16]       [CALC] Total steps: 3000
+[20:11:16]       [CALC] Burn-in steps: 1000
+[20:11:16]       [CALC] Thinning factor: 20
+[20:11:16]       [CALC] Initial position: η=-3.177267e-04, b=-1.050206e-03
+[20:11:16]       [CALC] Prior bounds: η∈[-0.01, 0.01], b∈[-0.1, 0.1]
+[20:11:16]       [CALC] Expected samples after burn-in/thin: 3200
+[20:11:16]     Running MCMC with 32 walkers for 3000 steps...
+[20:11:19] 
+[20:11:19] >>> MCMC CHAIN DIAGNOSTICS
+[20:11:19]       [CALC] Acceptance fraction per walker:
+[20:11:19]       [CALC]    Walker  1: 0.725
+[20:11:19]       [CALC]    Walker  2: 0.720
+[20:11:19]       [CALC]    Walker  3: 0.697
+[20:11:19]       [CALC]    Walker  4: 0.717
+[20:11:19]       [CALC]    Walker  5: 0.694
+[20:11:19]       [CALC] Mean acceptance: 0.711 ± 0.009
+[20:11:19]       [CALC] Acceptable range: 0.2-0.5 (ensemble sampler)
+[20:11:19]       [CALC] Gelman-Rubin R̂ (convergence diagnostic):
+[20:11:19] ✓     [CALC]    R̂_η = 1.0020 ✓ converged
+[20:11:19] ✓     [CALC]    R̂_b = 1.0052 ✓ converged
+[20:11:19]       [CALC]    Target: R̂ < 1.1 for convergence
+[20:11:19]       [CALC] Post-burn-in chain shape: (2000, 32, 2)
+[20:11:19]       [CALC] Chain evolution (η):
+[20:11:19]       [CALC]    Step 0:   mean=-3.376661e-04, std=7.861787e-05
+[20:11:19]       [CALC]    Step 100: mean=-3.051212e-04, std=6.694349e-05
+[20:11:19]       [CALC]    Step 500: mean=-2.863036e-04, std=8.650011e-05
+[20:11:19]       [CALC]    Step 999: mean=-2.781037e-04, std=5.959593e-05
+[20:11:19] 
+[20:11:19] >>> POSTERIOR ANALYSIS
+[20:11:19]       [CALC] Effective samples: 3200
+[20:11:19]       [CALC] Thinning reduced samples by factor of 20.0
+[20:11:19]       [CALC] η posterior statistics:
+[20:11:19]       [CALC]    Mean:   -2.866224e-04
+[20:11:19]       [CALC]    Std:    6.733863e-05
+[20:11:19]       [CALC]    Median: -2.888685e-04
+[20:11:19]       [CALC]    68% CI: [-3.540456e-04, -2.203092e-04]
+[20:11:19]       [CALC]    95% CI: [-4.158706e-04, -1.545462e-04]
+[20:11:19] ✓     [CALC]    Includes η=0? NO
+[20:11:19]       [CALC] b (intercept) posterior statistics:
+[20:11:19]       [CALC]    Mean:   -4.044735e-04 m
+[20:11:19]       [CALC]    Std:    4.780517e-04 m
+[20:11:19]       [CALC] η posterior percentiles:
+[20:11:19]       [CALC]     1th: -4.456771e-04
+[20:11:19]       [CALC]     5th: -3.960348e-04
+[20:11:19]       [CALC]    10th: -3.722067e-04
+[20:11:19]       [CALC]    25th: -3.323669e-04
+[20:11:19]       [CALC]    50th: -2.888685e-04
+[20:11:19]       [CALC]    75th: -2.399155e-04
+[20:11:19]       [CALC]    90th: -2.003734e-04
+[20:11:19]       [CALC]    95th: -1.748101e-04
+[20:11:19]       [CALC]    99th: -1.303782e-04
+[20:11:19]       [CALC] Savage-Dickey Bandwidth Sensitivity:
+[20:11:19]       [CALC]    scott_default: 2.49e+01
+[20:11:19]       [CALC]    silverman: 2.21e+01
+[20:11:19]       [CALC]    narrow_0.5x: 7.57e+00
+[20:11:19]       [CALC]    wide_2.0x: 1.15e-01
+[20:11:19]       [CALC]    Range: 1.15e-01 – 2.49e+01 (ratio 216.1x)
+[20:11:19] ⚠     [CALC]    Verdict: Sensitive to bandwidth choice
+[20:11:19] 
+[20:11:19] >>> BAYES FACTOR CALCULATION
+[20:11:19]       [CALC] Savage-Dickey Density Ratio:
+[20:11:19]       [CALC]    Prior density at η=0:    5.00e+01
+[20:11:19]       [CALC]    Posterior KDE at η=0:   2.00e+00
+[20:11:19]       [CALC]    BF_SD = prior/post =    2.49e+01
+[20:11:19]       [CALC] BIC Approximation:
+[20:11:19]       [CALC]    RSS (null model):       96.7633
+[20:11:19]       [CALC]    RSS (TEP model):        96.6680
+[20:11:19]       [CALC]    BIC_0 (null):           -141769.58
+[20:11:19]       [CALC]    BIC_1 (TEP):            -141784.48
+[20:11:19]       [CALC]    ΔBIC = BIC_0 - BIC_1:   14.90
+[20:11:19]       [CALC]    BF_BIC = exp(0.5×ΔBIC): 1.72e+03
+[20:11:19]       [CALC] log₁₀(BF) = 3.24
+[20:11:19] ✓     [CALC] Evidence strength: Decisive
+[20:11:19]       [CALC] P(TEP|data) with equal priors: 0.999420
+[20:11:19] 
+[20:11:19]     ============================================================
+[20:11:19] ═══ BAYESIAN ANALYSIS SUMMARY
+[20:11:19]     ============================================================
+[20:11:19]       Posterior η: -2.866224e-04 ± 6.733863e-05
+[20:11:19]       95% CI:      [-4.158706e-04, -1.545462e-04]
+[20:11:19] ✓     Bayes Factor: 1.72e+03 (Decisive evidence)
+[20:11:19] Results saved to results/outputs/step_016_bayesian_analysis.json
+[20:11:19] ✓   Bayesian Analysis Complete.

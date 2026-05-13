@@ -10,31 +10,6 @@
     },
     "station_quality_comparison": {
         "station_comparison": {
-            "APO": {
-                "quality_metrics": {
-                    "n_observations": 2595,
-                    "rms_residual_cm": 3.1615182965202613,
-                    "mean_residual_m": 0.001109483830716577,
-                    "std_residual_m": 0.03159570919527865,
-                    "median_residual_m": 0.000793814659119,
-                    "outlier_fraction": 0.0,
-                    "outlier_count": 0,
-                    "year_range": [
-                        2006,
-                        2016
-                    ],
-                    "n_years": 11,
-                    "years_with_sparse_data": 0,
-                    "fraction_years_sparse": 0.0,
-                    "elongation_uniformity": 1.2151588135683415
-                },
-                "systematic_correlations": {
-                    "seasonal_correlation": 0.1204941922490195,
-                    "sin_elongation_correlation": -0.07131976072582505,
-                    "temporal_trend_correlation": 0.0416835586615107
-                },
-                "eta_original": -0.00023983556703264052
-            },
             "Grasse": {
                 "quality_metrics": {
                     "n_observations": 19390,
@@ -60,30 +35,30 @@
                 },
                 "eta_original": -0.0005401787666332994
             },
-            "Matera": {
+            "Haleakala": {
                 "quality_metrics": {
-                    "n_observations": 346,
-                    "rms_residual_cm": 6.1861665325636706,
-                    "mean_residual_m": -0.0015232230916638612,
-                    "std_residual_m": 0.061842909280483443,
-                    "median_residual_m": 0.001142641744545,
-                    "outlier_fraction": 0.002890173410404624,
-                    "outlier_count": 1,
+                    "n_observations": 737,
+                    "rms_residual_cm": 13.828276515083553,
+                    "mean_residual_m": 0.00033120559666105986,
+                    "std_residual_m": 0.13828236850956047,
+                    "median_residual_m": -0.00899588995263,
+                    "outlier_fraction": 0.0,
+                    "outlier_count": 0,
                     "year_range": [
-                        2003,
-                        2019
+                        1984,
+                        1990
                     ],
-                    "n_years": 17,
-                    "years_with_sparse_data": 7,
-                    "fraction_years_sparse": 0.4117647058823529,
-                    "elongation_uniformity": 1.7256344225180171
+                    "n_years": 7,
+                    "years_with_sparse_data": 1,
+                    "fraction_years_sparse": 0.14285714285714285,
+                    "elongation_uniformity": 2.0338407407175647
                 },
                 "systematic_correlations": {
-                    "seasonal_correlation": 0.28329298672518566,
-                    "sin_elongation_correlation": -0.04981298045808671,
-                    "temporal_trend_correlation": -0.0490147714457523
+                    "seasonal_correlation": 0.06325610384755179,
+                    "sin_elongation_correlation": 0.10125480196550075,
+                    "temporal_trend_correlation": 0.08987488612039259
                 },
-                "eta_original": -1.813115381112259e-05
+                "eta_original": 0.0035535108727365035
             },
             "McDonald2": {
                 "quality_metrics": {
@@ -110,30 +85,55 @@
                 },
                 "eta_original": -0.0005009356067952294
             },
-            "Haleakala": {
+            "Matera": {
                 "quality_metrics": {
-                    "n_observations": 737,
-                    "rms_residual_cm": 13.828276515083553,
-                    "mean_residual_m": 0.00033120559666105986,
-                    "std_residual_m": 0.13828236850956047,
-                    "median_residual_m": -0.00899588995263,
+                    "n_observations": 346,
+                    "rms_residual_cm": 6.1861665325636706,
+                    "mean_residual_m": -0.0015232230916638612,
+                    "std_residual_m": 0.061842909280483443,
+                    "median_residual_m": 0.001142641744545,
+                    "outlier_fraction": 0.002890173410404624,
+                    "outlier_count": 1,
+                    "year_range": [
+                        2003,
+                        2019
+                    ],
+                    "n_years": 17,
+                    "years_with_sparse_data": 7,
+                    "fraction_years_sparse": 0.4117647058823529,
+                    "elongation_uniformity": 1.7256344225180171
+                },
+                "systematic_correlations": {
+                    "seasonal_correlation": 0.28329298672518566,
+                    "sin_elongation_correlation": -0.04981298045808671,
+                    "temporal_trend_correlation": -0.0490147714457523
+                },
+                "eta_original": -1.813115381112259e-05
+            },
+            "APO": {
+                "quality_metrics": {
+                    "n_observations": 2595,
+                    "rms_residual_cm": 3.1615182965202613,
+                    "mean_residual_m": 0.001109483830716577,
+                    "std_residual_m": 0.03159570919527865,
+                    "median_residual_m": 0.000793814659119,
                     "outlier_fraction": 0.0,
                     "outlier_count": 0,
                     "year_range": [
-                        1984,
-                        1990
+                        2006,
+                        2016
                     ],
-                    "n_years": 7,
-                    "years_with_sparse_data": 1,
-                    "fraction_years_sparse": 0.14285714285714285,
-                    "elongation_uniformity": 2.0338407407175647
+                    "n_years": 11,
+                    "years_with_sparse_data": 0,
+                    "fraction_years_sparse": 0.0,
+                    "elongation_uniformity": 1.2151588135683415
                 },
                 "systematic_correlations": {
-                    "seasonal_correlation": 0.06325610384755179,
-                    "sin_elongation_correlation": 0.10125480196550075,
-                    "temporal_trend_correlation": 0.08987488612039259
+                    "seasonal_correlation": 0.1204941922490195,
+                    "sin_elongation_correlation": -0.07131976072582505,
+                    "temporal_trend_correlation": 0.0416835586615107
                 },
-                "eta_original": 0.0035535108727365035
+                "eta_original": -0.00023983556703264052
             }
         },
         "rms_statistics": {

@@ -5,19 +5,19 @@
     "eta_calibration_source": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_017_leverage_diagnostics.json",
     "purpose": "Demonstrate that static Nordtvedt signals are absorbed by standard fitting, but dynamically modulated TEP signals are not",
     "static_signal": {
-        "injected_eta": -0.0003305412660490356,
-        "fitted_eta": -0.00034145328639767605,
+        "injected_eta": -0.00033054126604903567,
+        "fitted_eta": -0.0003414532863976761,
         "fitted_eta_error": 6.561737124959317e-05,
-        "snr": 5.203702615559948,
+        "snr": 5.203702615559949,
         "absorption_efficiency": 1.0330125810888062,
         "interpretation": "Static signal is well-recovered by standard fitting"
     },
     "tep_signal": {
-        "injected_eta_0": -0.0003305412660490356,
-        "fitted_eta": -0.00022691628572221975,
+        "injected_eta_0": -0.00033054126604903567,
+        "fitted_eta": -0.0002269162857222198,
         "fitted_eta_error": 6.573726177314503e-05,
-        "snr": 3.45186701729824,
-        "post_fit_sideband_fraction": 0.0005680845164241774,
+        "snr": 3.451867017298241,
+        "post_fit_sideband_fraction": 0.0005680845164241772,
         "interpretation": "Dynamic signal is not fully absorbed - sidebands remain in residuals"
     },
     "null_case": {

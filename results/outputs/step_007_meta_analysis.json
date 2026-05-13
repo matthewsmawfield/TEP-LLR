@@ -2,9 +2,9 @@
     "step_id": "step_007",
     "individual_results": {
         "INPOP19a": {
-            "eta": -0.0003177266624680193,
-            "eta_error": 6.051938437639123e-05,
-            "snr": 5.249998256624125,
+            "eta": -0.0003177266624680195,
+            "eta_error": 6.0519384376391265e-05,
+            "snr": 5.249998256624126,
             "n_obs": 25445,
             "baseline_years": 35.50749417999987,
             "r": -0.032895757484115176,
@@ -23,16 +23,16 @@
     "meta_analysis": {
         "sign_consistent": true,
         "sign_consistent_note": "Qualitative check only; not used for quantitative weighting (identical weights after renormalisation)",
-        "eta_combined_statistical": -0.0003301913315887356,
-        "eta_error_statistical": 5.86911599095432e-05,
-        "snr_statistical": 5.625912524094559,
-        "systematic_uncertainty": 0.00038639381568786194,
-        "eta_combined_total": -0.0003301913315887356,
-        "eta_error_total": 0.0003908258346800439,
-        "snr_total": 0.8448554376121329,
+        "eta_combined_statistical": -0.0003301913315887359,
+        "eta_error_statistical": 5.8691159909543226e-05,
+        "snr_statistical": 5.625912524094562,
+        "systematic_uncertainty": 0.0003863938156878617,
+        "eta_combined_total": -0.0003301913315887359,
+        "eta_error_total": 0.00039082583468004364,
+        "snr_total": 0.8448554376121342,
         "weights": {
             "INPOP19a": 0.9677410232393946,
-            "DE430": 0.03225897676060531
+            "DE430": 0.032258976760605344
         },
         "interpretation_notes": {
             "headline_estimands": "Primary inference is anchored in Step 040 (unified table) and Step 050 (corrected full-systematic / cluster-robust models), not in snr_total from this ephemeris-combination bookkeeping step.",

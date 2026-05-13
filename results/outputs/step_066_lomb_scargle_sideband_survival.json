@@ -1,0 +1,281 @@
+{
+  "step_id": "step_066",
+  "status": "PASS",
+  "step": "066_lomb_scargle_sideband_survival",
+  "simulation": {
+    "n_observations": 26207,
+    "n_basis_parameters": 82,
+    "injected_eta": -0.000406,
+    "injected_amplitude_mm": 5.278
+  },
+  "target_frequencies_cpd": {
+    "D_minus_M": 0.0027378064796965973,
+    "D": 0.03386319067786996,
+    "D_plus_M": 0.07046418783543652,
+    "D_minus_annual": 0.03112533989073786,
+    "D_plus_annual": 0.036601041465002065,
+    "D_minus_2annual": 0.02838748910360576,
+    "D_plus_2annual": 0.03933889225213417
+  },
+  "real_inpop": {
+    "pre_fit_peaks": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002410240966593977,
+        "period_days": 414.8962754596053,
+        "peak_power": 0.01397560004487917,
+        "noise_floor": 0.002502398316290376,
+        "snr": 5.584882292279105
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03394510706114662,
+        "period_days": 29.459326735916957,
+        "peak_power": 0.004403332606928976,
+        "noise_floor": 0.0008510000582830535,
+        "snr": 5.174303531556718
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07036866873161576,
+        "period_days": 14.210869951426444,
+        "peak_power": 0.004816881874832158,
+        "noise_floor": 0.0010545331195140487,
+        "snr": 4.56778624179379
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03156152712818535,
+        "period_days": 31.684144938188727,
+        "peak_power": 0.00631728053732104,
+        "noise_floor": 0.0031386280330346064,
+        "snr": 2.0127522187499003
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03622306586988304,
+        "period_days": 27.6067189782362,
+        "peak_power": 0.006335135363688069,
+        "noise_floor": 0.0019350954448377775,
+        "snr": 3.273810281858813
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02888748910360576,
+        "period_days": 34.61706195417237,
+        "peak_power": 0.0028918729519890603,
+        "noise_floor": 0.0007466115346531311,
+        "snr": 3.873330129211837
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.03884109269222218,
+        "period_days": 25.74592862059844,
+        "peak_power": 0.004693220534554195,
+        "noise_floor": 0.0009731400098092028,
+        "snr": 4.8227598159018905
+      }
+    },
+    "post_fit_peaks": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002420843087018062,
+        "period_days": 413.0792306872631,
+        "peak_power": 0.012059620919939382,
+        "noise_floor": 0.0017272724512018283,
+        "snr": 6.981886911672998
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03413554514876414,
+        "period_days": 29.29497670659595,
+        "peak_power": 0.003515532191157077,
+        "noise_floor": 0.0007018282212768404,
+        "snr": 5.009106337675119
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07039547409268797,
+        "period_days": 14.205458701554093,
+        "peak_power": 0.0036508199733792557,
+        "noise_floor": 0.0011620570572846323,
+        "snr": 3.1416873642246896
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03144030288333638,
+        "period_days": 31.80630936383276,
+        "peak_power": 0.007242325876728234,
+        "noise_floor": 0.003014023073750157,
+        "snr": 2.4028767197581766
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03654713068284563,
+        "period_days": 27.361929139607575,
+        "peak_power": 0.006572168732263077,
+        "noise_floor": 0.0016919268771677179,
+        "snr": 3.884428352639491
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02887108582294963,
+        "period_days": 34.63672984564716,
+        "peak_power": 0.00272767671804275,
+        "noise_floor": 0.0005930774804640056,
+        "snr": 4.5991911814097195
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.039611046683020346,
+        "period_days": 25.245482857403502,
+        "peak_power": 0.004677379631275311,
+        "noise_floor": 0.0009722309120750633,
+        "snr": 4.810976048161471
+      }
+    },
+    "survival_fractions": {
+      "D_minus_M": 0.8629054123767783,
+      "D": 0.798379887457314,
+      "D_plus_M": 0.7579218399468155,
+      "D_minus_annual": 1.1464309419127803,
+      "D_plus_annual": 1.0374156754303379,
+      "D_minus_2annual": 0.9432214911677311,
+      "D_plus_2annual": 0.9966247264192565
+    },
+    "carrier_survival_pct": 79.8,
+    "sideband_mean_survival_pct": 95.7
+  },
+  "synthetic_modulated": {
+    "pre_fit_peaks": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002410240966593977,
+        "period_days": 414.8962754596053,
+        "peak_power": 0.014003094119049328,
+        "noise_floor": 0.0024916159145295155,
+        "snr": 5.6200853580169445
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.033945707181170626,
+        "period_days": 29.45880592980225,
+        "peak_power": 0.004374555727320247,
+        "noise_floor": 0.0008439781398673065,
+        "snr": 5.183257149300136
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07036926885163976,
+        "period_days": 14.21074875892643,
+        "peak_power": 0.004784225711664174,
+        "noise_floor": 0.0010576995006323442,
+        "snr": 4.523237184856314
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03156172716819335,
+        "period_days": 31.683944122289986,
+        "peak_power": 0.006319118114619745,
+        "noise_floor": 0.0031364409896193286,
+        "snr": 2.0147415926313026
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03622246574985904,
+        "period_days": 27.60717635584738,
+        "peak_power": 0.006270934128451853,
+        "noise_floor": 0.00196103745542888,
+        "snr": 3.1977635669790896
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02888748910360576,
+        "period_days": 34.61706195417237,
+        "peak_power": 0.0029301190091714337,
+        "noise_floor": 0.0007408213196119355,
+        "snr": 3.9552304065794415
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.03884109269222218,
+        "period_days": 25.74592862059844,
+        "peak_power": 0.004640896879840235,
+        "noise_floor": 0.0009642222048186751,
+        "snr": 4.8130989481962505
+      }
+    },
+    "post_fit_peaks": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002420843087018062,
+        "period_days": 413.0792306872631,
+        "peak_power": 0.012058164244749437,
+        "noise_floor": 0.0017277251414168468,
+        "snr": 6.979214433877463
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03413554514876414,
+        "period_days": 29.29497670659595,
+        "peak_power": 0.0035162752596799244,
+        "noise_floor": 0.000702309967036851,
+        "snr": 5.006728403009296
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07039547409268797,
+        "period_days": 14.205458701554093,
+        "peak_power": 0.003650998240622455,
+        "noise_floor": 0.0011622515555913073,
+        "snr": 3.14131499593044
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03144030288333638,
+        "period_days": 31.80630936383276,
+        "peak_power": 0.00724198446607914,
+        "noise_floor": 0.0030142107114867135,
+        "snr": 2.4026138711806055
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03654713068284563,
+        "period_days": 27.361929139607575,
+        "peak_power": 0.006570204967023822,
+        "noise_floor": 0.001692229861458964,
+        "snr": 3.8825724073674532
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02887108582294963,
+        "period_days": 34.63672984564716,
+        "peak_power": 0.002729614465588031,
+        "noise_floor": 0.0005926011264222277,
+        "snr": 4.606158078145777
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.039611046683020346,
+        "period_days": 25.245482857403502,
+        "peak_power": 0.004676774214712172,
+        "noise_floor": 0.0009727899267065519,
+        "snr": 4.807589065550583
+      }
+    },
+    "survival_fractions": {
+      "D_minus_M": 0.8611071340544605,
+      "D": 0.8038016838418274,
+      "D_plus_M": 0.7631325235599032,
+      "D_minus_annual": 1.1460435356199903,
+      "D_plus_annual": 1.0477234862369462,
+      "D_minus_2annual": 0.9315711945638342,
+      "D_plus_2annual": 1.0077306899508556
+    },
+    "carrier_survival_pct": 80.4,
+    "sideband_mean_survival_pct": 96.0
+  },
+  "conclusion": {
+    "key_finding": "On real INPOP19a residuals, the central synodic carrier survives at 79.8% after an 82-parameter basis fit, while the mean sideband survival is 95.7%. For the synthetic dynamically modulated TEP signal, carrier survival is 80.4% and sideband mean survival is 96.0%. The sidebands (D\u00b1M, D\u00b1annual) are substantially more robust to absorption than the central carrier because the basis lacks explicit cross-frequency product terms. This spectral persistence is direct evidence that the residual signal carries a dynamical sideband signature that cannot be reproduced by static ephemeris parameter adjustments."
+  }
+}

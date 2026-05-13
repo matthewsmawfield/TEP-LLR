@@ -8,29 +8,30 @@
     "ephemeris": "INPOP19a",
     "n_obs": 25445,
     "linearized_integrator_eta": {
-      "eta": -0.0004061154555979798,
-      "eta_error": 6.577799889845751e-05,
-      "snr": 6.1740317796062225,
+      "eta": -0.0004061154555979797,
+      "eta_error": 6.577799889845754e-05,
+      "snr": 6.174031779606219,
       "n_obs": 25445,
       "rss_m2": 95.76938074729598,
-      "condition_number": 3.2400372414461494
+      "condition_number": 3.240037241446156
     },
     "gauss_newton_full_systematic": {
-      "eta": -0.0004061154555979798,
-      "eta_error": 6.577799889845751e-05,
-      "snr": 6.1740317796062225,
+      "eta": -0.0004061154555979797,
+      "eta_error": 6.577799889845754e-05,
+      "snr": 6.174031779606219,
       "iterations": 2,
       "history": [
-        -0.0004061154555979798,
-        -0.0004061154555979798
-      ]
+        -0.0004061154555979797,
+        -0.0004061154555979797
+      ],
+      "note": "For a fixed linearized design, the WLS solution is a single solve; repeat-solve convergence demonstrates fixed-point closure, not a multi-iteration integrator update."
     },
     "extended_orbital_modulation": {
       "eta0": -0.0004083769267525085,
-      "eta0_error": 6.590641691631933e-05,
-      "snr": 6.196315106479242,
-      "eta_helio_coupling_m": -0.0007387327825224862,
-      "eta_helio_coupling_error_m": 0.0013386042470135513
+      "eta0_error": 6.590641691631937e-05,
+      "snr": 6.196315106479238,
+      "eta_helio_coupling_m": -0.0007387327825224821,
+      "eta_helio_coupling_error_m": 0.0013386042470135517
     }
   },
   "de430": {
@@ -52,7 +53,8 @@
       "history": [
         -0.0005976986078411144,
         -0.0005976986078411144
-      ]
+      ],
+      "note": "For a fixed linearized design, the WLS solution is a single solve; repeat-solve convergence demonstrates fixed-point closure, not a multi-iteration integrator update."
     },
     "extended_orbital_modulation": {
       "eta0": -0.0006024118439961182,
@@ -63,9 +65,9 @@
     }
   },
   "cross_ephemeris": {
-    "delta_eta": 0.0001915831522431346,
-    "delta_eta_error": 0.00013554458441703395,
-    "delta_sigma": 1.4134327318728217,
+    "delta_eta": 0.00019158315224313466,
+    "delta_eta_error": 0.00013554458441703397,
+    "delta_sigma": 1.413432731872822,
     "consistent_within_3sigma": true
   },
   "crd_range_forward_refit": {

@@ -4,25 +4,6 @@
   "step": "052_station_distribution_analysis",
   "total_obs": 26207,
   "station_coverage": {
-    "APO": {
-      "n_obs": 2595,
-      "date_range": [
-        2006.26356852,
-        2016.90088362
-      ],
-      "elongation_mean_rad": 1.8694734018101926,
-      "elongation_std_rad": 0.6714897806318397,
-      "cosD_mean": -0.23088679248172672,
-      "cosD_std": 0.5501761470244428,
-      "residual_rms_m": 0.031601798760565084,
-      "phase_coverage": {
-        "q1_waxing_crescent": 0.34335260115606936,
-        "q2_waxing_gibbous": 0.6566473988439306,
-        "q3_waning_gibbous": 0.0,
-        "q4_waning_crescent": 0.0
-      },
-      "mean_abs_cosD": 0.5163709564355548
-    },
     "Grasse": {
       "n_obs": 19390,
       "date_range": [
@@ -42,24 +23,24 @@
       },
       "mean_abs_cosD": 0.43852430478713134
     },
-    "Matera": {
-      "n_obs": 346,
+    "Haleakala": {
+      "n_obs": 737,
       "date_range": [
-        2003.14198213,
-        2019.23802473
+        1984.86808199,
+        1990.66064725
       ],
-      "elongation_mean_rad": 1.5993662825170039,
-      "elongation_std_rad": 0.3058293320623682,
-      "cosD_mean": -0.025795613533676317,
-      "cosD_std": 0.29501757496797165,
-      "residual_rms_m": 0.0619324718317995,
+      "elongation_mean_rad": 1.9304942410122479,
+      "elongation_std_rad": 0.3049742153870513,
+      "cosD_mean": -0.33447364385973527,
+      "cosD_std": 0.269905244576639,
+      "residual_rms_m": 0.1383762784480651,
       "phase_coverage": {
-        "q1_waxing_crescent": 0.5057803468208093,
-        "q2_waxing_gibbous": 0.49421965317919075,
+        "q1_waxing_crescent": 0.10176390773405698,
+        "q2_waxing_gibbous": 0.898236092265943,
         "q3_waning_gibbous": 0.0,
         "q4_waning_crescent": 0.0
       },
-      "mean_abs_cosD": 0.25090026459403475
+      "mean_abs_cosD": 0.3546966185538846
     },
     "McDonald2": {
       "n_obs": 3139,
@@ -80,24 +61,43 @@
       },
       "mean_abs_cosD": 0.40978161951588066
     },
-    "Haleakala": {
-      "n_obs": 737,
+    "Matera": {
+      "n_obs": 346,
       "date_range": [
-        1984.86808199,
-        1990.66064725
+        2003.14198213,
+        2019.23802473
       ],
-      "elongation_mean_rad": 1.9304942410122479,
-      "elongation_std_rad": 0.3049742153870513,
-      "cosD_mean": -0.33447364385973527,
-      "cosD_std": 0.269905244576639,
-      "residual_rms_m": 0.1383762784480651,
+      "elongation_mean_rad": 1.5993662825170039,
+      "elongation_std_rad": 0.3058293320623682,
+      "cosD_mean": -0.025795613533676317,
+      "cosD_std": 0.29501757496797165,
+      "residual_rms_m": 0.0619324718317995,
       "phase_coverage": {
-        "q1_waxing_crescent": 0.10176390773405698,
-        "q2_waxing_gibbous": 0.898236092265943,
+        "q1_waxing_crescent": 0.5057803468208093,
+        "q2_waxing_gibbous": 0.49421965317919075,
         "q3_waning_gibbous": 0.0,
         "q4_waning_crescent": 0.0
       },
-      "mean_abs_cosD": 0.3546966185538846
+      "mean_abs_cosD": 0.25090026459403475
+    },
+    "APO": {
+      "n_obs": 2595,
+      "date_range": [
+        2006.26356852,
+        2016.90088362
+      ],
+      "elongation_mean_rad": 1.8694734018101926,
+      "elongation_std_rad": 0.6714897806318397,
+      "cosD_mean": -0.23088679248172672,
+      "cosD_std": 0.5501761470244428,
+      "residual_rms_m": 0.031601798760565084,
+      "phase_coverage": {
+        "q1_waxing_crescent": 0.34335260115606936,
+        "q2_waxing_gibbous": 0.6566473988439306,
+        "q3_waning_gibbous": 0.0,
+        "q4_waning_crescent": 0.0
+      },
+      "mean_abs_cosD": 0.5163709564355548
     }
   },
   "temporal_epochs": {
@@ -105,17 +105,17 @@
       "n_total": 2659,
       "station_counts": {
         "Grasse": 1855,
-        "McDonald2": 112,
-        "Haleakala": 692
+        "Haleakala": 692,
+        "McDonald2": 112
       },
       "dominant_station": "Grasse",
-      "mean_abs_cosD": 0.3760162813861994
+      "mean_abs_cosD": 0.37601628138619947
     },
     "1990_2000": {
       "n_total": 7533,
       "station_counts": {
-        "Grasse": 5212,
         "McDonald2": 2276,
+        "Grasse": 5212,
         "Haleakala": 45
       },
       "dominant_station": "Grasse",
@@ -124,10 +124,10 @@
     "2000_2010": {
       "n_total": 3716,
       "station_counts": {
-        "APO": 707,
         "Grasse": 2342,
+        "McDonald2": 661,
         "Matera": 6,
-        "McDonald2": 661
+        "APO": 707
       },
       "dominant_station": "Grasse",
       "mean_abs_cosD": 0.4062240825125187
@@ -137,8 +137,8 @@
       "station_counts": {
         "APO": 1888,
         "Grasse": 9981,
-        "Matera": 340,
-        "McDonald2": 90
+        "McDonald2": 90,
+        "Matera": 340
       },
       "dominant_station": "Grasse",
       "mean_abs_cosD": 0.474131632590922
@@ -149,29 +149,29 @@
     "pre": {
       "n": 13466,
       "stations": {
-        "APO": 365,
         "Grasse": 9384,
-        "Matera": 6,
+        "Haleakala": 737,
         "McDonald2": 2974,
-        "Haleakala": 737
+        "Matera": 6,
+        "APO": 365
       },
-      "elongation_mean": 1.8486590350496153,
+      "elongation_mean": 1.8486590350496155,
       "elongation_std": 0.45850832746836623,
       "cosD_mean": -0.24933776430541704,
-      "cosD_std": 0.4092062270051056,
+      "cosD_std": 0.40920622700510567,
       "mean_abs_cosD": 0.40474254441341156
     },
     "post": {
       "n": 12741,
       "stations": {
         "APO": 2230,
+        "McDonald2": 165,
         "Grasse": 10006,
-        "Matera": 340,
-        "McDonald2": 165
+        "Matera": 340
       },
       "elongation_mean": 1.6789229471763771,
       "elongation_std": 0.659612166560268,
-      "cosD_mean": -0.08036441222024322,
+      "cosD_mean": -0.08036441222024324,
       "cosD_std": 0.5493105502770016,
       "mean_abs_cosD": 0.47305809605100374
     },
@@ -183,24 +183,6 @@
     }
   },
   "leave_one_station_out_shift": {
-    "APO": {
-      "n_train": 23612,
-      "n_test": 2595,
-      "train_cosD_range": 1.986180135278766,
-      "test_cosD_range": 1.839257709126696,
-      "train_mean_abs_cosD": 0.42933735697554526,
-      "test_mean_abs_cosD": 0.5163709564355548,
-      "train_date_range": [
-        1984.26625597,
-        2019.77663227
-      ],
-      "test_date_range": [
-        2006.26356852,
-        2016.90088362
-      ],
-      "ks_elongation_statistic": 0.1247657130024673,
-      "ks_elongation_pvalue": 3.513053064172135e-32
-    },
     "Grasse": {
       "n_train": 6817,
       "n_test": 19390,
@@ -218,6 +200,42 @@
       ],
       "ks_elongation_statistic": 0.15122866921825673,
       "ks_elongation_pvalue": 3.533332051472208e-101
+    },
+    "Haleakala": {
+      "n_train": 25470,
+      "n_test": 737,
+      "train_cosD_range": 1.9861864408226013,
+      "test_cosD_range": 1.360950478652667,
+      "train_mean_abs_cosD": 0.4403645424806685,
+      "test_mean_abs_cosD": 0.3546966185538846,
+      "train_date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "test_date_range": [
+        1984.86808199,
+        1990.66064725
+      ],
+      "ks_elongation_statistic": 0.2893792628036602,
+      "ks_elongation_pvalue": 1.373876548172142e-53
+    },
+    "McDonald2": {
+      "n_train": 23068,
+      "n_test": 3139,
+      "train_cosD_range": 1.9861864408226013,
+      "test_cosD_range": 1.764329769325263,
+      "train_mean_abs_cosD": 0.4417891365179681,
+      "test_mean_abs_cosD": 0.40978161951588066,
+      "train_date_range": [
+        1984.26625597,
+        2019.77663227
+      ],
+      "test_date_range": [
+        1988.16071428,
+        2013.93737637
+      ],
+      "ks_elongation_statistic": 0.19733568297571186,
+      "ks_elongation_pvalue": 9.31200551869618e-95
     },
     "Matera": {
       "n_train": 25861,
@@ -237,61 +255,37 @@
       "ks_elongation_statistic": 0.28119361110856556,
       "ks_elongation_pvalue": 2.4216467679154137e-24
     },
-    "McDonald2": {
-      "n_train": 23068,
-      "n_test": 3139,
-      "train_cosD_range": 1.9861864408226013,
-      "test_cosD_range": 1.764329769325263,
-      "train_mean_abs_cosD": 0.44178913651796825,
-      "test_mean_abs_cosD": 0.40978161951588066,
+    "APO": {
+      "n_train": 23612,
+      "n_test": 2595,
+      "train_cosD_range": 1.986180135278766,
+      "test_cosD_range": 1.839257709126696,
+      "train_mean_abs_cosD": 0.42933735697554526,
+      "test_mean_abs_cosD": 0.5163709564355548,
       "train_date_range": [
         1984.26625597,
         2019.77663227
       ],
       "test_date_range": [
-        1988.16071428,
-        2013.93737637
+        2006.26356852,
+        2016.90088362
       ],
-      "ks_elongation_statistic": 0.19733568297571186,
-      "ks_elongation_pvalue": 9.31200551869618e-95
-    },
-    "Haleakala": {
-      "n_train": 25470,
-      "n_test": 737,
-      "train_cosD_range": 1.9861864408226013,
-      "test_cosD_range": 1.360950478652667,
-      "train_mean_abs_cosD": 0.44036454248066853,
-      "test_mean_abs_cosD": 0.3546966185538846,
-      "train_date_range": [
-        1984.26625597,
-        2019.77663227
-      ],
-      "test_date_range": [
-        1984.86808199,
-        1990.66064725
-      ],
-      "ks_elongation_statistic": 0.2893792628036602,
-      "ks_elongation_pvalue": 1.373876548172142e-53
+      "ks_elongation_statistic": 0.1247657130024673,
+      "ks_elongation_pvalue": 3.513053064172135e-32
     }
   },
   "per_station_cosD_regression": {
-    "APO": {
-      "eta": -0.00023983556703264052,
-      "eta_err": 8.660785090210135e-05,
-      "snr": 2.7692127738366668,
-      "n": 2595
-    },
     "Grasse": {
       "eta": -0.0005401787666332994,
       "eta_err": 0.00010874676181888822,
       "snr": 4.967308980960165,
       "n": 19390
     },
-    "Matera": {
-      "eta": -1.813115381112259e-05,
-      "eta_err": 0.0008681381659801182,
-      "snr": 0.02088510161358097,
-      "n": 346
+    "Haleakala": {
+      "eta": 0.0035535108727365035,
+      "eta_err": 0.0014467817340064679,
+      "snr": 2.4561485600844732,
+      "n": 737
     },
     "McDonald2": {
       "eta": -0.0005009356067952294,
@@ -299,11 +293,17 @@
       "snr": 1.389698905542326,
       "n": 3139
     },
-    "Haleakala": {
-      "eta": 0.0035535108727365035,
-      "eta_err": 0.0014467817340064679,
-      "snr": 2.4561485600844732,
-      "n": 737
+    "Matera": {
+      "eta": -1.813115381112259e-05,
+      "eta_err": 0.0008681381659801182,
+      "snr": 0.02088510161358097,
+      "n": 346
+    },
+    "APO": {
+      "eta": -0.00023983556703264052,
+      "eta_err": 8.660785090210135e-05,
+      "snr": 2.7692127738366668,
+      "n": 2595
     }
   }
 }

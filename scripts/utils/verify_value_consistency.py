@@ -69,6 +69,7 @@ def main() -> int:
     step_046 = load_json(OUTPUTS_DIR / "step_046_station_balanced_tep.json")
     step_055 = load_json(OUTPUTS_DIR / "step_055_cmb_rigorous_falsification.json")
     step_056 = load_json(OUTPUTS_DIR / "step_056_dynamical_integrator_eta_refit.json")
+    step_029 = load_json(OUTPUTS_DIR / "step_029_station_power_analysis.json")
 
     primary = step_040["primary_estimands"]["full_systematic_ols"]
     cluster = step_050["models"]["m5_full_corrected"]["cluster_robust"]
@@ -92,6 +93,8 @@ def main() -> int:
         test for test in step_046["tests"] if test["name"] == "grasse_capped"
     )
     sky_scramble = step_055["sky_scrambling"]
+    wls_eta = step_029["summary"]["precision_weighted_eta"]
+    wls_snr = step_029["summary"]["precision_weighted_snr"]
 
     total_obs = step_001["combined"]["total_obs"]
     n_clean = primary["n_obs"]
@@ -260,6 +263,18 @@ def main() -> int:
     )
     require_substring(
         manuscript,
+        format_sci_latex(wls_eta),
+        "Step 029 WLS eta",
+        errors,
+    )
+    require_substring(
+        manuscript,
+        format_sigma(wls_snr),
+        "Step 029 WLS SNR",
+        errors,
+    )
+    require_substring(
+        manuscript,
         f"{sky_scramble['n_scrambles']:,}",
         "Step 055 sky-scramble draw count",
         errors,
@@ -273,12 +288,13 @@ def main() -> int:
         "Step 055 marginal sky-scramble p-value",
         errors,
     )
-    require_substring(
-        manuscript,
-        f"marginal ($p = {p_marginal_str}$)",
-        "Step 055 marginal sky-scramble interpretation",
-        errors,
-    )
+    marginal_needle = f"marginal ($p = {p_marginal_str}$)"
+    marginal_alt = f"marginally specific (uniform $p = {p_marginal_str}$)"
+    if marginal_needle not in manuscript and marginal_alt not in manuscript:
+        errors.append(
+            "Step 055 marginal sky-scramble interpretation: expected manuscript "
+            f"source to contain {marginal_needle!r} or {marginal_alt!r}"
+        )
 
     forbid_substring(manuscript, "figure-placeholder", "figure placeholders", errors)
     forbid_substring(manuscript, r"\chi^2 = 50.7", "DE430 phase chi-square stale value", errors)

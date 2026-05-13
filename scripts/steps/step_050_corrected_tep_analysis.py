@@ -27,13 +27,15 @@ from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.config import get_config
 from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression, cluster_robust_variance, robust_regression
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
-from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
+from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning, hat_diagonal_from_qr
 import numpy as np
 import pandas as pd
 from scipy import stats
 from skyfield.api import load
 
-logger = TEPLogger("step_050")
+log_dir = PROJECT_ROOT / "logs"
+log_dir.mkdir(parents=True, exist_ok=True)
+logger = TEPLogger("step_050", str(log_dir / "step_050_corrected_tep_analysis.log"))
 set_step_logger(logger)
 
 TEP_CONFIG = get_config()
@@ -132,6 +134,10 @@ def ar1_gls_regression(y, X, names, target_name='cosD', cluster_ids=None):
     Estimates rho from OLS residuals of the full model, applies
     Cochrane-Orcutt quasi-differencing to y and all columns of X,
     then re-fits the full model on transformed data.
+
+    Rows must be in time order (e.g. ascending ``date_julian`` with a fixed
+    tie-break on ``station``) so lag-1 products reflect temporal structure,
+    not concatenation order across stations.
     """
     # Step 1: OLS on full model to get residuals for rho estimation
     reg_ols = robust_regression(y, X, weights=None, scale_errors_by_birge=False)
@@ -180,12 +186,150 @@ def ar1_gls_regression(y, X, names, target_name='cosD', cluster_ids=None):
     }
 
 
+def cooks_distance_excision_full_model(y, X, names, cluster_ids=None):
+    """Cook's Distance excision on full systematic model (D > 4/n threshold).
+
+    Follows the same formal diagnostic as step_017 but applied to the full
+    design matrix so that leverage is assessed jointly across all systematic
+    terms, not just cosD + intercept.
+    """
+    n = len(y)
+    k = X.shape[1]
+
+    leverage = hat_diagonal_from_qr(X)
+
+    # Fit full model on all data
+    reg = robust_regression(y, X, weights=None, scale_errors_by_birge=False)
+    coeffs = reg['coefficients']
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        y_pred = X @ coeffs
+    resid = y - y_pred
+    mse = np.sum(resid**2) / max(1, n - k)
+    std_resid = resid / np.sqrt(mse * (1 - leverage))
+
+    cooks_d = (std_resid**2 / k) * (leverage / (1 - leverage))
+    threshold = 4.0 / n
+    mask = cooks_d < threshold
+
+    # Refit on clean data
+    X_clean = X[mask]
+    y_clean = y[mask]
+    reg_clean = robust_regression(
+        y_clean, X_clean, weights=None, scale_errors_by_birge=False
+    )
+    coeffs_clean = reg_clean['coefficients']
+    se_clean = reg_clean['errors']
+
+    eta_clean = coeffs_clean[0] / ETA_SCALE_FACTOR
+    se_eta = se_clean[0] / ETA_SCALE_FACTOR
+    snr_clean = abs(eta_clean) / se_eta if se_eta > 0 else 0.0
+
+    # Cluster-robust on clean data
+    eta_error_cluster = None
+    n_clusters_clean = None
+    if cluster_ids is not None and len(cluster_ids) == n:
+        cluster_ids_clean = cluster_ids[mask]
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            resid_clean = y_clean - X_clean @ coeffs_clean
+        cr = cluster_robust_variance(
+            X_clean, resid_clean, cluster_ids_clean, small_sample_correction=True
+        )
+        eta_error_cluster = cr['se_cluster'][0] / ETA_SCALE_FACTOR
+        n_clusters_clean = cr['n_clusters']
+
+    return {
+        'n': n,
+        'n_removed': int(n - mask.sum()),
+        'n_clean': int(mask.sum()),
+        'threshold': float(threshold),
+        'eta': float(eta_clean),
+        'eta_error': float(se_eta),
+        'eta_error_cluster': float(eta_error_cluster) if eta_error_cluster is not None else None,
+        'snr': float(snr_clean),
+        'snr_cluster': float(
+            abs(eta_clean) / eta_error_cluster
+        ) if eta_error_cluster is not None and eta_error_cluster > 0 else None,
+        'cooks_d_max': float(np.max(cooks_d)),
+        'n_clusters': n_clusters_clean,
+        'coefficients': {name: float(coeffs_clean[i]) for i, name in enumerate(names)},
+    }
+
+
+def precision_weighted_full_model(y, X, names, station_ids, station_rms_map):
+    """Precision-weighted regression on full systematic model.
+
+    Weights each observation by the inverse variance of its station,
+    so high-precision epochs dominate and low-precision hardware is
+    naturally down-weighted without manual excision.
+    """
+    n = len(y)
+    k = X.shape[1]
+
+    # Assign per-observation weight = 1 / RMS^2
+    rms_vals = np.array(
+        [station_rms_map.get(s, np.nan) for s in station_ids], dtype=float
+    )
+    if not np.all(np.isfinite(rms_vals)) or np.any(rms_vals <= 0):
+        raise ValueError(
+            "Station RMS values must be finite and positive for WLS weighting."
+        )
+    weights = 1.0 / (rms_vals ** 2)
+
+    # Weighted regression via robust_regression (uses QR on transformed data)
+    reg = robust_regression(y, X, weights=weights, scale_errors_by_birge=False)
+    coeffs = reg['coefficients']
+    eta = coeffs[0] / ETA_SCALE_FACTOR
+    se_eta = reg['errors'][0] / ETA_SCALE_FACTOR
+    snr = abs(eta) / se_eta if se_eta > 0 else 0.0
+
+    # Cluster-robust on weighted (transformed) residuals
+    sqrt_w = np.sqrt(weights)
+    Xw = X * sqrt_w[:, None]
+    yw = y * sqrt_w
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        resid_w = yw - Xw @ coeffs
+    cr = cluster_robust_variance(
+        Xw, resid_w, station_ids, small_sample_correction=True
+    )
+    eta_error_cluster = cr['se_cluster'][0] / ETA_SCALE_FACTOR
+    snr_cluster = abs(eta) / eta_error_cluster if eta_error_cluster > 0 else 0.0
+
+    # Kish effective sample size (diagnostic)
+    sum_w = float(np.sum(weights))
+    sum_w2 = float(np.sum(weights ** 2))
+    n_eff = (sum_w ** 2) / sum_w2 if sum_w2 > 0 else float("nan")
+
+    return {
+        'eta': float(eta),
+        'eta_error': float(se_eta),
+        'eta_error_cluster': float(eta_error_cluster),
+        'snr': float(snr),
+        'snr_cluster': float(snr_cluster),
+        'n_obs': n,
+        'n_clusters': cr['n_clusters'],
+        'n_eff': float(n_eff),
+        'per_station_rms': {k: float(v) for k, v in station_rms_map.items()},
+        'method': 'WLS 1/sigma^2 per station on full systematic model',
+    }
+
+
 def run_corrected_analysis():
     print_status("═══ Step 050: Corrected TEP Analysis ═══", "TITLE")
 
     # Load data
     input_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     df = pd.read_csv(input_path)
+    if "date_julian" not in df.columns or "station" not in df.columns:
+        raise ValueError(
+            "INPOP residuals CSV must include date_julian and station for time ordering."
+        )
+    df = df.sort_values(["date_julian", "station"], kind="mergesort").reset_index(
+        drop=True
+    )
+    print_status(
+        "Rows sorted by date_julian (+ station) for AR(1) / lag-1 diagnostics.",
+        "INFO",
+    )
     res = df['residual_m'].values
     st = df['station'].values
     el = df['elongation_rad'].values
@@ -315,6 +459,57 @@ def run_corrected_analysis():
     if gls5['eta_error_cluster'] is not None:
         err_cr = gls5['eta_error_cluster']
         print_status(f"  η (cluster) = {eta_gls:.4e} ± {err_cr:.4e} ({abs(eta_gls)/err_cr:.2f}σ)", "RESULT")
+
+    # --- FULL-SYSTEMATIC COOK'S DISTANCE EXCISION ---
+    print_status("--- Cook's Distance excision on full systematic model ---", "INFO")
+    cooks_full = cooks_distance_excision_full_model(
+        res_c, X_full,
+        ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'const'],
+        cluster_ids=st_c,
+    )
+    print_status(
+        f"  Removed {cooks_full['n_removed']}/{cooks_full['n']} observations "
+        f"(D > {cooks_full['threshold']:.2e})",
+        "RESULT",
+    )
+    print_status(
+        f"  η (Cook's-excised full) = {cooks_full['eta']:.4e} ± "
+        f"{cooks_full['eta_error']:.4e} ({cooks_full['snr']:.2f}σ)",
+        "RESULT",
+    )
+    if cooks_full['eta_error_cluster'] is not None:
+        print_status(
+            f"  η (cluster) = {cooks_full['eta']:.4e} ± "
+            f"{cooks_full['eta_error_cluster']:.4e} ({cooks_full['snr_cluster']:.2f}σ)",
+            "RESULT",
+        )
+
+    # --- FULL-SYSTEMATIC PRECISION-WEIGHTED REGRESSION ---
+    print_status("--- Precision-weighted regression on full systematic model ---", "INFO")
+    station_rms_map = {}
+    for s in np.unique(st_c):
+        mask = st_c == s
+        station_rms_map[s] = float(np.sqrt(np.mean(res_c[mask] ** 2)))
+    pw_full = precision_weighted_full_model(
+        res_c, X_full,
+        ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'const'],
+        station_ids=st_c,
+        station_rms_map=station_rms_map,
+    )
+    print_status(
+        f"  η (precision-weighted full) = {pw_full['eta']:.4e} ± "
+        f"{pw_full['eta_error']:.4e} ({pw_full['snr']:.2f}σ)",
+        "RESULT",
+    )
+    print_status(
+        f"  η (cluster) = {pw_full['eta']:.4e} ± "
+        f"{pw_full['eta_error_cluster']:.4e} ({pw_full['snr_cluster']:.2f}σ)",
+        "RESULT",
+    )
+    print_status(
+        f"  Effective sample size (Kish): {pw_full['n_eff']:.1f}",
+        "RESULT",
+    )
 
     # --- CROSS-VALIDATION: PRE/POST 2008 ---
     print_status("--- Cross-Validation (train pre-2008, test post-2008) ---", "INFO")
@@ -545,6 +740,8 @@ def run_corrected_analysis():
             "eta_error_gls": float(err_gls),
             "eta_error_cluster": float(gls5['eta_error_cluster']) if gls5['eta_error_cluster'] is not None else None
         },
+        "cooks_excised_full_systematic": cooks_full,
+        "precision_weighted_full_systematic": pw_full,
         "station_univ": {
             "per_station_full_model": station_results,
             "common_eta_station_systematics": {

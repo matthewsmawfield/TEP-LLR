@@ -51,6 +51,11 @@ def ar1_gls_regression(y, x, station_ids=None, verbose=False):
     transformed model.  If station_ids are provided, cluster-robust
     (sandwich) standard errors are computed by station.
 
+    Callers must pass ``y``, ``x``, and ``station_ids`` in time order
+    (typically ascending ``date_julian``, with a fixed tie-break such as
+    ``station``). Lag-1 products are otherwise dominated by file layout
+    rather than temporal autocorrelation.
+
     Parameters:
     -----------
     y : np.ndarray
@@ -79,7 +84,9 @@ def ar1_gls_regression(y, x, station_ids=None, verbose=False):
 
     # First fit with OLS to get initial residuals
     reg_ols = linear_regression(y, x, weights=None)
-    residuals = y - (13.0 * reg_ols['eta'] * x + reg_ols['intercept'])
+    residuals = y - (
+        ETA_SCALE_FACTOR * reg_ols["eta"] * x + reg_ols["intercept"]
+    )
 
     # Estimate AR(1) parameter rho from residuals
     # rho = sum(residuals[t] * residuals[t-1]) / sum(residuals[t-1]^2)
@@ -122,9 +129,8 @@ def ar1_gls_regression(y, x, station_ids=None, verbose=False):
         cr = cluster_robust_variance(
             X_star, u_star, cluster_ids_star, small_sample_correction=True
         )
-        # Convert amplitude SE to eta SE: eta = A / 13
-        from scripts.utils.llr_constants import ETA_SCALE_FACTOR
-        eta_error_cluster = cr['se_cluster'][0] / ETA_SCALE_FACTOR
+        # Convert amplitude SE to η SE (amplitude = ETA_SCALE_FACTOR × η)
+        eta_error_cluster = cr["se_cluster"][0] / ETA_SCALE_FACTOR
         n_clusters = cr['n_clusters']
 
     if verbose:
@@ -168,6 +174,13 @@ def run_statistical_analysis(verbose=False):
             "ERROR",
         )
         return None
+    if "date_julian" not in df.columns or "station" not in df.columns:
+        print_status(
+            "CRITICAL: processed INPOP CSV must include date_julian and station "
+            "for time-ordered AR(1) diagnostics.",
+            "ERROR",
+        )
+        return None
     sig = df["sigma_m"].values
     if not np.all(np.isfinite(sig)) or np.any(sig <= 0):
         print_status(
@@ -184,9 +197,16 @@ def run_statistical_analysis(verbose=False):
     outlier_mask = detect_outliers_sigma(df['residual_m'].values, sigma_threshold=6.0)
     n_outliers = int(np.sum(outlier_mask))
     df_clean = df[~outlier_mask]  # PERFORMANCE FIX: Removed unnecessary .copy()
+    df_clean = df_clean.sort_values(
+        ["date_julian", "station"], kind="mergesort"
+    ).reset_index(drop=True)
     if verbose:
         print_status(f"Applied 6σ MAD outlier cleaning: removed {n_outliers}/{len(df)} outliers", "INFO")
         print_status(f"    Cleaned dataset: N = {len(df_clean):,} observations", "DATA")
+    print_status(
+        "Rows sorted by date_julian (+ station) for AR(1) / lag-1 diagnostics.",
+        "INFO",
+    )
 
     # PERFORMANCE FIX: Use pre-computed cos_elong_rad if available, otherwise compute
     if 'cos_elong_rad' in df_clean.columns:

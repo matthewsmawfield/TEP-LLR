@@ -1,0 +1,27 @@
+{
+    "step_id": "step_062",
+    "status": "PASS",
+    "signal_amplitude_mm": 4.130446612084254,
+    "solar_radiation_pressure": {
+        "solar_constant_W_m2": 1361.0,
+        "radiation_pressure_uPa": 4.53980733564685,
+        "array_area_m2": 0.11341149479459153,
+        "max_force_uN": 1.0297326720303224,
+        "array_mass_kg": 30.0,
+        "free_displacement_over_month_m": 111723.59869305616,
+        "conservative_stiffness_N_m": 1000000.0,
+        "elastic_displacement_m": 1.0297326720303223e-12,
+        "elastic_displacement_mm": 1.0297326720303223e-09
+    },
+    "thermal_reradiation_pressure": {
+        "max_force_uN": 0.0738841083103565,
+        "elastic_displacement_m": 7.38841083103565e-14,
+        "elastic_displacement_mm": 7.38841083103565e-11
+    },
+    "combined": {
+        "total_displacement_mm": 1.1036167803406788e-09,
+        "ratio_to_tep_signal": 2.671906658015816e-10,
+        "can_explain_signal": false
+    },
+    "conclusion": "Maximum local mechanical displacement from solar radiation pressure is 1.10e-09 mm, 2.7e-10 times smaller than the 4.13 mm TEP signal.  This mechanism cannot explain the anomaly."
+}

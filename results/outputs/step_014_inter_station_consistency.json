@@ -2,16 +2,16 @@
     "step_id": "step_014",
     "n_stations": 5,
     "station_names": [
-        "APO",
         "Grasse",
-        "Matera",
+        "Haleakala",
         "McDonald2",
-        "Haleakala"
+        "Matera",
+        "APO"
     ],
     "meta_analysis": {
-        "weighted_mean_eta": -0.0003511782486660766,
+        "weighted_mean_eta": -0.00035117824866607656,
         "weighted_error_eta": 6.633538684379649e-05,
-        "snr": 5.293980564144669,
+        "snr": 5.293980564144668,
         "method": "inverse-variance fixed-effects on cosD-only station slopes (Step 004)"
     },
     "heterogeneity": {
@@ -23,21 +23,21 @@
     },
     "controlled_pooling": {
         "common_eta": {
-            "eta": -0.00043213024642831625,
-            "eta_error": 6.756305488649924e-05,
-            "snr": 6.39595481812156
+            "eta": -0.0004321302464283162,
+            "eta_error": 6.756305488649927e-05,
+            "snr": 6.395954818121557
         },
         "f_test_station_specific_eta": {
-            "F": 1.1848563101292588,
-            "p": 0.3151220242330546
+            "F": 1.1848563101302072,
+            "p": 0.31512202423218394
         },
         "pooled_meta_analysis": {
-            "eta": -0.0004371711964514781,
+            "eta": -0.0004371711964514779,
             "err": 6.778366518477076e-05,
-            "snr": 6.44950660693543,
-            "cochran_q": 3.5868083768503913,
-            "p_het": 0.1663927721020435,
-            "I2": 44.24012130371408
+            "snr": 6.449506606935427,
+            "cochran_q": 3.586808376850394,
+            "p_het": 0.16639277210204328,
+            "I2": 44.240121303714126
         },
         "interpretation": "CosD-only station slopes can disagree under unequal phase coverage, but a common-eta model with station-specific systematics leaves no evidence for station-specific Nordtvedt parameters."
     },

@@ -1,18 +1,18 @@
-[11:51:05] Computing True Geometric Vectors from Astropy (J2000 Ephemeris)... (Vectorized for M4 Pro)
-[11:51:07] ================================================================================
-[11:51:07] GEOMETRIC VS MEAN PHASE VULNERABILITY INVESTIGATION
-[11:51:07] ================================================================================
-[11:51:07] Mean Approximation Eta:  -0.00045330 (p-val: 8.2741e-07)
-[11:51:07] True Geometric Eta:      -0.00045342 (p-val: 8.2179e-07)
-[11:51:07] 
+[20:11:46] Computing True Geometric Vectors from Astropy (J2000 Ephemeris)... (Vectorized for M4 Pro)
+[20:11:48] ================================================================================
+[20:11:48] GEOMETRIC VS MEAN PHASE VULNERABILITY INVESTIGATION
+[20:11:48] ================================================================================
+[20:11:48] Mean Approximation Eta:  -0.00045330 (p-val: 8.2741e-07)
+[20:11:48] True Geometric Eta:      -0.00045342 (p-val: 8.2179e-07)
+[20:11:48] 
 Partial Regression (Competing predictors):
-[11:51:07]    Coefficient for Mean: 21.31189649332284
-[11:51:07]    Coefficient for True: -21.317714090799925
-[11:51:07]    P-val for Mean: 1.1025161444151403e-06
-[11:51:07]    P-val for True: 1.095022507776616e-06
-[11:51:07]    Corr(cos_mean, cos_true): 1.000000
-[11:51:07]    VIF (two-predictor): 1.34e+07
-[11:51:07]    Condition number (design): 1.11e+04
-[11:51:07] 
+[20:11:48]    Coefficient for Mean: 21.311896493169023
+[20:11:48]    Coefficient for True: -21.317714090646014
+[20:11:48]    P-val for Mean: 1.1025161446109127e-06
+[20:11:48]    P-val for True: 1.0950225079711573e-06
+[20:11:48]    Corr(cos_mean, cos_true): 1.000000
+[20:11:48]    VIF (two-predictor): 1.34e+07
+[20:11:48]    Condition number (design): 1.11e+04
+[20:11:48] 
 CONCLUSION: After geometric recomputation, cos(D_mean) and cos(D_true) are nearly collinear. The two-predictor partial regression is ill-conditioned and cannot adjudicate dominance. The defensible result is that both single-predictor fits yield the same negative η at essentially identical significance, rejecting the hypothesis that the detection is an artefact of a mean-phase proxy.
-[11:51:07] Results saved to results/outputs/step_028_geometric_elongation.json
+[20:11:48] Results saved to results/outputs/step_028_geometric_elongation.json

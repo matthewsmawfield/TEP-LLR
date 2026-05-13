@@ -1,16 +1,16 @@
-[11:51:40]     Step 037: Lunar Recession Analysis
-[11:51:40]     Testing lunar orbit recession anomaly vs TEP predictions
-[11:51:40]     Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
-[11:51:40]     Loaded 26207 observations
-[11:51:40]     Analyzing secular recession trend...
-[11:51:40]     Testing TEP heliocentric phase dependence...
-[11:51:40]     Results saved to: results/outputs/step_037_lunar_recession_analysis.json
-[11:51:40]     
+[20:12:21]     Step 037: Lunar Recession Analysis
+[20:12:21]     Testing lunar orbit recession anomaly vs TEP predictions
+[20:12:21]     Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
+[20:12:21]     Loaded 26207 observations
+[20:12:21]     Analyzing secular recession trend...
+[20:12:21]     Testing TEP heliocentric phase dependence...
+[20:12:21]     Results saved to: results/outputs/step_037_lunar_recession_analysis.json
+[20:12:21]     
 === Lunar Recession Analysis Summary ===
-[11:51:40]     Estimated recession: -0.00 ± 0.00 cm/year
-[11:51:40]     Literature value: 3.82 ± 0.07 cm/year
-[11:51:40]     Consistency: 54.57σ
-[11:51:40]     Historical average: 1.7 cm/year (tidal rhythmites)
-[11:51:40] ⚠   Discrepancy: Current rate is ~2.2× higher than long-term average
-[11:51:40]     TEP interpretation: Dynamical φ field affects orbital evolution
-[11:51:40]     Step 037 completed successfully
+[20:12:21]     Estimated recession: -0.00 ± 0.00 cm/year
+[20:12:21]     Literature value: 3.82 ± 0.07 cm/year
+[20:12:21]     Consistency: 54.57σ
+[20:12:21]     Historical average: 1.7 cm/year (tidal rhythmites)
+[20:12:21] ⚠   Discrepancy: Current rate is ~2.2× higher than long-term average
+[20:12:21]     TEP interpretation: Dynamical φ field affects orbital evolution
+[20:12:21]     Step 037 completed successfully

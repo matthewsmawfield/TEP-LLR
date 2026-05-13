@@ -33,7 +33,9 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-logger = TEPLogger("step_053")
+log_dir = PROJECT_ROOT / "logs"
+log_dir.mkdir(parents=True, exist_ok=True)
+logger = TEPLogger("step_053", str(log_dir / "step_053_clean_subset_analysis.log"))
 TEP_CONFIG = get_config()
 set_step_logger(logger)
 

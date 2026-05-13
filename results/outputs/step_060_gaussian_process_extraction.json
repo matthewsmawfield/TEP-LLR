@@ -1,0 +1,25 @@
+{
+    "step_id": "step_060",
+    "status": "PASS",
+    "method": "GP non-parametric extraction on binned elongation means",
+    "n_total": 26207,
+    "n_bins": 48,
+    "gp_result": {
+        "amplitude_m": 0.011322534941126235,
+        "phase_deg": 232.34842305649502,
+        "A_cos_m": -0.006916462473582833,
+        "eta_gp_sin": -0.0005320355748909872,
+        "eta_gp_cos": -0.0005320355748909872,
+        "r2_sin": 0.9851722713877726,
+        "r2_cos": 0.7452951984396852,
+        "kernel_str": "0.0316**2 * ExpSineSquared(length_scale=5, periodicity=5) + 0.021**2 * RBF(length_scale=3.16) + WhiteKernel(noise_level=2.36e-05)",
+        "log_marginal_likelihood": 174.22337605323366,
+        "n_bins": 48
+    },
+    "parametric_comparison": {
+        "step_003_eta_ols": -0.0003177266624680195,
+        "gp_eta_cos": -0.0005320355748909872,
+        "ratio": 1.6745071715362847
+    },
+    "interpretation": "GP extraction on 48 elongation bins recovers amplitude 1.13 cm (eta=-5.32e-04). Shape fidelity R^2=0.985 (excellent agreement with sinusoid). Phase=232.3 degrees. Differs from parametric OLS by 67.5%, consistent with subsampling."
+}

@@ -1,7 +1,7 @@
 {
     "step_id": "step_039",
     "description": "Formal critique of Sabhlok et al. (2024) dust/thermal model showing underdetermination",
-    "timestamp": "2026-05-13T11:51:41.307613",
+    "timestamp": "2026-05-13T20:12:22.354842",
     "references": {
         "sabhlok_2024": "Sabhlok et al. 2024, Icarus, 412, 115927",
         "thermal_model": "Heat transfer simulation with dust-coated reflectors",
@@ -22,8 +22,8 @@
         "key_finding": {
             "any_sufficient_combination": false,
             "max_thermal_expansion_mm": 1.3455,
-            "observed_signal_mm": 4.130446612084251,
-            "mismatch_factor": 3.0698228257779645,
+            "observed_signal_mm": 4.130446612084254,
+            "mismatch_factor": 3.0698228257779663,
             "conclusion": "Thermal mechanism CANNOT explain observed signal"
         },
         "dust_estimate_variation": {
@@ -90,12 +90,12 @@
             "dust_coverage": 1.0,
             "delta_t": 500.0,
             "thermal_expansion_mm": 2.2425,
-            "mismatch_factor": 1.8418936954667784,
+            "mismatch_factor": 1.8418936954667795,
             "can_explain": false
         },
         "conclusion": {
             "sufficient_configurations": 0,
-            "best_mismatch": 1.8418936954667784,
+            "best_mismatch": 1.8418936954667795,
             "verdict": "Even in BEST CASE, thermal expansion << observed signal",
             "robustness": "8.6\u00d7 mismatch is robust across all physically reasonable parameters"
         }

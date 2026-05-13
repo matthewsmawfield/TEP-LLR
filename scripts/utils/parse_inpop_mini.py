@@ -222,6 +222,11 @@ def process_all_stations() -> Dict[str, Any]:
     # Combine all stations into single file
     if all_data:
         combined_df = pd.concat(all_data, ignore_index=True)
+        # Global time order is required for any lag-1 (AR(1)) diagnostics; stable
+        # sort ties on Julian date by station name for reproducibility.
+        combined_df = combined_df.sort_values(
+            ["date_julian", "station"], kind="mergesort"
+        ).reset_index(drop=True)
         combined_path = output_dir / "INPOP19a_all_stations_residuals.csv"
         combined_df.to_csv(combined_path, index=False)
         print_status(

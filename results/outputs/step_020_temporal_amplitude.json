@@ -13,10 +13,10 @@
       "window_end": 1989,
       "window_center": 1986.5,
       "n_observations": 2196,
-      "eta": -0.0022936270365601506,
-      "eta_error": 0.001025737856711781,
-      "snr": -2.236075252124218,
-      "correlation_r": -0.04768412273755527,
+      "eta": -0.002293627036560149,
+      "eta_error": 0.0010257378567117813,
+      "snr": -2.2360752521242158,
+      "correlation_r": -0.047684122737555325,
       "significant": false
     },
     {
@@ -35,10 +35,10 @@
       "window_end": 1993,
       "window_center": 1990.5,
       "n_observations": 2692,
-      "eta": -0.0007332859876659005,
+      "eta": -0.0007332859876659011,
       "eta_error": 0.00045276286072569135,
-      "snr": -1.619580692839039,
-      "correlation_r": -0.031211512283243602,
+      "snr": -1.6195806928390402,
+      "correlation_r": -0.031211512283243592,
       "significant": false
     },
     {
@@ -46,10 +46,10 @@
       "window_end": 1995,
       "window_center": 1992.5,
       "n_observations": 2992,
-      "eta": -0.0001793534147731889,
+      "eta": -0.00017935341477318923,
       "eta_error": 0.0003435659625398141,
-      "snr": -0.522034876351887,
-      "correlation_r": -0.00954649904843413,
+      "snr": -0.5220348763518879,
+      "correlation_r": -0.009546499048434146,
       "significant": false
     },
     {
@@ -57,10 +57,10 @@
       "window_end": 1997,
       "window_center": 1994.5,
       "n_observations": 3868,
-      "eta": -0.0008058612796784833,
-      "eta_error": 0.0002509330188266366,
+      "eta": -0.0008058612796784832,
+      "eta_error": 0.00025093301882663654,
       "snr": -3.2114597092351285,
-      "correlation_r": -0.05158138895280646,
+      "correlation_r": -0.0515813889528065,
       "significant": true
     },
     {
@@ -68,10 +68,10 @@
       "window_end": 1999,
       "window_center": 1996.5,
       "n_observations": 4298,
-      "eta": -0.0011173472588532052,
+      "eta": -0.001117347258853205,
       "eta_error": 0.0002186476468041075,
-      "snr": -5.110264277640581,
-      "correlation_r": -0.07773117116645743,
+      "snr": -5.11026427764058,
+      "correlation_r": -0.07773117116645747,
       "significant": true
     },
     {
@@ -79,9 +79,9 @@
       "window_end": 2001,
       "window_center": 1998.5,
       "n_observations": 4411,
-      "eta": -0.000916765547195418,
+      "eta": -0.0009167655471954197,
       "eta_error": 0.00019773166543202877,
-      "snr": -4.636412408666839,
+      "snr": -4.636412408666847,
       "correlation_r": -0.06965557303787076,
       "significant": true
     },
@@ -90,10 +90,10 @@
       "window_end": 2003,
       "window_center": 2000.5,
       "n_observations": 3230,
-      "eta": -0.0003269694718237616,
-      "eta_error": 0.00020823284481604685,
-      "snr": -1.570210847921743,
-      "correlation_r": -0.02762647124098256,
+      "eta": -0.00032696947182376146,
+      "eta_error": 0.00020823284481604683,
+      "snr": -1.5702108479217423,
+      "correlation_r": -0.02762647124098257,
       "significant": false
     },
     {
@@ -101,10 +101,10 @@
       "window_end": 2005,
       "window_center": 2002.5,
       "n_observations": 2389,
-      "eta": -0.0002866480220160524,
+      "eta": -0.0002866480220160526,
       "eta_error": 0.0002507097083807044,
-      "snr": -1.143346318207891,
-      "correlation_r": -0.0233955198630917,
+      "snr": -1.1433463182078916,
+      "correlation_r": -0.023395519863091723,
       "significant": false
     },
     {
@@ -112,10 +112,10 @@
       "window_end": 2007,
       "window_center": 2004.5,
       "n_observations": 1558,
-      "eta": -0.0011226136732985952,
+      "eta": -0.0011226136732985943,
       "eta_error": 0.0003195692217787304,
-      "snr": -3.5128967271944997,
-      "correlation_r": -0.08870440998605873,
+      "snr": -3.512896727194497,
+      "correlation_r": -0.08870440998605875,
       "significant": true
     },
     {
@@ -123,10 +123,10 @@
       "window_end": 2009,
       "window_center": 2006.5,
       "n_observations": 1601,
-      "eta": -0.0004991026263092092,
-      "eta_error": 0.00026042511262981026,
-      "snr": -1.9164919284058248,
-      "correlation_r": -0.047872327421347304,
+      "eta": -0.0004991026263092087,
+      "eta_error": 0.0002604251126298102,
+      "snr": -1.9164919284058233,
+      "correlation_r": -0.04787232742134731,
       "significant": false
     },
     {
@@ -134,10 +134,10 @@
       "window_end": 2011,
       "window_center": 2008.5,
       "n_observations": 1332,
-      "eta": 0.00010496180249651206,
+      "eta": 0.00010496180249651214,
       "eta_error": 0.0002441917984295666,
-      "snr": 0.42983344719821415,
-      "correlation_r": 0.011785397184116492,
+      "snr": 0.4298334471982145,
+      "correlation_r": 0.011785397184116484,
       "significant": false
     },
     {
@@ -145,10 +145,10 @@
       "window_end": 2013,
       "window_center": 2010.5,
       "n_observations": 2097,
-      "eta": -0.00011337059018394988,
-      "eta_error": 0.00015905483417606576,
-      "snr": -0.7127767651403434,
-      "correlation_r": -0.015570726179038888,
+      "eta": -0.00011337059018394981,
+      "eta_error": 0.0001590548341760658,
+      "snr": -0.7127767651403428,
+      "correlation_r": -0.015570726179038872,
       "significant": false
     },
     {
@@ -156,9 +156,9 @@
       "window_end": 2015,
       "window_center": 2012.5,
       "n_observations": 2863,
-      "eta": -0.0002561143408085416,
+      "eta": -0.00025611434080854154,
       "eta_error": 0.0001131944626651667,
-      "snr": -2.2626048552051263,
+      "snr": -2.262604855205126,
       "correlation_r": -0.04226312212903141,
       "significant": false
     },
@@ -167,10 +167,10 @@
       "window_end": 2017,
       "window_center": 2014.5,
       "n_observations": 4654,
-      "eta": -0.000427670009415858,
+      "eta": -0.0004276700094158579,
       "eta_error": 6.379311944769015e-05,
-      "snr": -6.7040146824383475,
-      "correlation_r": -0.09781991346304816,
+      "snr": -6.704014682438346,
+      "correlation_r": -0.0978199134630482,
       "significant": true
     },
     {
@@ -178,18 +178,18 @@
       "window_end": 2019,
       "window_center": 2016.5,
       "n_observations": 9031,
-      "eta": -0.00025198518020375007,
+      "eta": -0.0002519851802037503,
       "eta_error": 3.559151273801377e-05,
-      "snr": -7.079923296843056,
+      "snr": -7.079923296843062,
       "correlation_r": -0.07430303396746003,
       "significant": true
     }
   ],
   "trend_analysis": {
-    "linear_trend_slope_per_year": 6.1580047107158e-06,
-    "linear_trend_pvalue": 0.8204350521168249,
+    "linear_trend_slope_per_year": 6.158004710715803e-06,
+    "linear_trend_pvalue": 0.8204350521168247,
     "linear_trend_significant": false,
-    "weighted_slope_per_year": 1.7426522322073453e-05,
+    "weighted_slope_per_year": 1.7426522322480104e-05,
     "weighted_slope_error": 1.37097949205915e-08,
     "chi2_consistency": 4.463727722081357,
     "interpretation": "amplitude_varies_significantly"
@@ -199,13 +199,13 @@
       {
         "year": 1984,
         "event": "Haleakala_start",
-        "nearby_eta": -0.0022936270365601506,
+        "nearby_eta": -0.002293627036560149,
         "n_windows": 1
       },
       {
         "year": 1987,
         "event": "McDonald2_upgrade",
-        "nearby_eta": 6.174519951006254e-05,
+        "nearby_eta": 6.17451995100634e-05,
         "n_windows": 2
       },
       {
@@ -217,25 +217,25 @@
       {
         "year": 2000,
         "event": "APO_start",
-        "nearby_eta": -0.0005101276803450773,
+        "nearby_eta": -0.0005101276803450779,
         "n_windows": 3
       },
       {
         "year": 2005,
         "event": "Grasse_detector_replacement",
-        "nearby_eta": -0.0006361214405412857,
+        "nearby_eta": -0.0006361214405412852,
         "n_windows": 3
       },
       {
         "year": 2012,
         "event": "APO_timing_upgrade",
-        "nearby_eta": -0.00026571831346944985,
+        "nearby_eta": -0.00026571831346944974,
         "n_windows": 3
       }
     ],
     "instrumental_correlation": {
-      "t_statistic": -0.8378652667458758,
-      "p_value": 0.4297826579754407,
+      "t_statistic": -0.8378652667458749,
+      "p_value": 0.42978265797544113,
       "correlated": false
     }
   },

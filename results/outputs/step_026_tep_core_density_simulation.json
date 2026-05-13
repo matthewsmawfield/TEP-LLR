@@ -13,14 +13,14 @@
         "shielding_differential": 0.032197908036881044
     },
     "comparison_with_measurement": {
-        "measured_eta": -0.0003177266624680193,
-        "measured_eta_error": 6.051938437639123e-05,
-        "effective_coupling_diagnostic": 0.009867928751895303
+        "measured_eta": -0.0003177266624680195,
+        "measured_eta_error": 6.0519384376391265e-05,
+        "effective_coupling_diagnostic": 0.00986792875189531
     },
     "volumetric_prediction": {
         "alpha_0_cassini": 0.003,
         "eta_volumetric": -9.659372411064314e-05,
-        "measured_to_volumetric_ratio": 3.2893095839651005,
+        "measured_to_volumetric_ratio": 3.2893095839651028,
         "caveat": "Phenomenological (\u03c1/\u03c1_T)^3 scaling with simplified PREM density model. Ratio ~3\u20135 is consistent with model uncertainties (density profile simplification, \u03c1_T uncertainty, \u03b1_0 upper-bound nature)."
     },
     "conclusions": {

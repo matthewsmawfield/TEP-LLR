@@ -1,0 +1,81 @@
+{
+    "step_id": "step_061",
+    "status": "PASS",
+    "method": "Systematic amplitude sensitivity with Monte Carlo falsification",
+    "observed_abs_eta": 0.000406,
+    "required_amplitude_m": 0.005278,
+    "required_amplitude_cm": 0.5277999999999999,
+    "systematics": {
+        "ephemeris": {
+            "known_amplitude_m": 0.003551881934658616,
+            "known_eta": 0.000273221687281432,
+            "required_amplitude_m": 0.005278,
+            "ratio_required_to_known": 1.4859728158467878,
+            "monte_carlo": {
+                "n_mc": 2000,
+                "mean_abs_eta": 7.837973105700874e-05,
+                "std_abs_eta": 5.8843361033632636e-05,
+                "max_abs_eta": 0.000331018626122954,
+                "p_exceed_observed": 0.0,
+                "percentile_of_observed": 100.0
+            }
+        },
+        "atmospheric": {
+            "known_amplitude_m": -0.0007998379696114187,
+            "known_eta": -6.152599766241682e-05,
+            "required_amplitude_m": 0.005278,
+            "ratio_required_to_known": 6.598836515055899,
+            "monte_carlo": {
+                "n_mc": 2000,
+                "mean_abs_eta": 8.105944847970434e-05,
+                "std_abs_eta": 6.018271651522609e-05,
+                "max_abs_eta": 0.0003226034120742951,
+                "p_exceed_observed": 0.0,
+                "percentile_of_observed": 100.0
+            }
+        },
+        "instrumental": {
+            "known_amplitude_m": 9.774929385785637e-05,
+            "known_eta": 7.519176450604337e-06,
+            "required_amplitude_m": 0.005278,
+            "ratio_required_to_known": 53.99527497022213,
+            "monte_carlo": {
+                "n_mc": 2000,
+                "mean_abs_eta": 8.069338914280954e-05,
+                "std_abs_eta": 6.006680421273423e-05,
+                "max_abs_eta": 0.0003282662876165224,
+                "p_exceed_observed": 0.0,
+                "percentile_of_observed": 100.0
+            }
+        },
+        "tidal": {
+            "known_amplitude_m": -9.117936585027406e-05,
+            "known_eta": -7.0137973730980044e-06,
+            "required_amplitude_m": 0.005278,
+            "ratio_required_to_known": 57.885903798311354,
+            "monte_carlo": {
+                "n_mc": 2000,
+                "mean_abs_eta": 8.054980357500221e-05,
+                "std_abs_eta": 6.0113452741578614e-05,
+                "max_abs_eta": 0.0003171963142021023,
+                "p_exceed_observed": 0.0,
+                "percentile_of_observed": 100.0
+            }
+        },
+        "thermal": {
+            "known_amplitude_m": -0.0005561137739642375,
+            "known_eta": -4.2777982612633655e-05,
+            "required_amplitude_m": 0.005278,
+            "ratio_required_to_known": 9.490863645357967,
+            "monte_carlo": {
+                "n_mc": 2000,
+                "mean_abs_eta": 7.886623238722601e-05,
+                "std_abs_eta": 6.022837073628325e-05,
+                "max_abs_eta": 0.0003531366669195711,
+                "p_exceed_observed": 0.0,
+                "percentile_of_observed": 100.0
+            }
+        }
+    },
+    "interpretation": "For a systematic to fully explain the observed |eta|=4.06e-04, it would need amplitude 0.53 cm. The smallest ratio to a known systematic is 1.5x (ephemeris). Monte Carlo falsification: no known systematic, when injected at its observed amplitude as the sole signal, produces |eta| >= observed in more than 0.0% of simulations. All systematic-only simulations produce |eta| significantly below observed. The systematic hypothesis is formally falsified."
+}

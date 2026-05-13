@@ -169,7 +169,7 @@ def main():
     
     # Load the processed INPOP19a data
     try:
-        df = pd.read_csv('data/processed/INPOP19a_all_stations_residuals.csv')
+        df = pd.read_csv(PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv")
         print_status(f"Loaded {len(df)} observations from INPOP19a residuals", "INFO")
     except FileNotFoundError:
         print_status("Error: INPOP19a residuals not found", "ERROR")

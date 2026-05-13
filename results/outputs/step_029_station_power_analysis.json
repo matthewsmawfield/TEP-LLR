@@ -5,10 +5,10 @@
     "good_coverage_stations_all_negative": true,
     "n_good_coverage_stations": 2,
     "n_good_coverage_negative": 2,
-    "ipw_median_snr_for_genuine_signal": 3.0233297240425148,
+    "ipw_median_snr_for_genuine_signal": 3.023329724042516,
     "ipw_low_snr_explanation": "McDonald2 phase-truncation + Haleakala sign anomaly dilute IPW",
-    "precision_weighted_eta": -0.00035046600679617735,
-    "precision_weighted_snr": 5.3188644467079325,
+    "precision_weighted_eta": -0.00035046600679617616,
+    "precision_weighted_snr": 5.318864446707926,
     "grasse_both_halves_negative": true,
     "cross_station_r": 0.0356,
     "overall_verdict": "CONSISTENT",
@@ -111,56 +111,56 @@
   },
   "leave_one_station_out_influence": {
     "full_sample": {
-      "eta": -0.00045329831411731363,
+      "eta": -0.00045329831411731385,
       "eta_error": 9.194732759479532e-05,
-      "snr": 4.929978129597892,
+      "snr": 4.929978129597894,
       "n_obs": 26207
     },
     "leave_one_out": [
       {
         "excluded_station": "Grasse",
         "n_obs_remaining": 6817,
-        "eta": -0.00016453115466241584,
-        "eta_error": 0.00017527906010724234,
-        "snr": 0.9386811782408547,
-        "delta_eta_vs_full": 0.0002887671594548978,
-        "delta_eta_in_full_sigma": 3.1405715316433347
+        "eta": -0.0001645311546624156,
+        "eta_error": 0.00017527906010724232,
+        "snr": 0.9386811782408535,
+        "delta_eta_vs_full": 0.0002887671594548983,
+        "delta_eta_in_full_sigma": 3.14057153164334
       },
       {
         "excluded_station": "Haleakala",
         "n_obs_remaining": 25470,
-        "eta": -0.0004900068946369092,
-        "eta_error": 9.096886597884123e-05,
-        "snr": 5.386534056067948,
-        "delta_eta_vs_full": -3.67085805195956e-05,
-        "delta_eta_in_full_sigma": 0.39923488240318894
+        "eta": -0.0004900068946369093,
+        "eta_error": 9.096886597884122e-05,
+        "snr": 5.3865340560679495,
+        "delta_eta_vs_full": -3.670858051959549e-05,
+        "delta_eta_in_full_sigma": 0.3992348824031878
       },
       {
         "excluded_station": "APO",
         "n_obs_remaining": 23612,
-        "eta": -0.0004837319889068452,
-        "eta_error": 0.00010309007783771841,
-        "snr": 4.692323442303758,
-        "delta_eta_vs_full": -3.0433674789531555e-05,
-        "delta_eta_in_full_sigma": 0.3309903135374459
+        "eta": -0.00048373198890684595,
+        "eta_error": 0.00010309007783771847,
+        "snr": 4.6923234423037625,
+        "delta_eta_vs_full": -3.0433674789532097e-05,
+        "delta_eta_in_full_sigma": 0.3309903135374518
       },
       {
         "excluded_station": "McDonald2",
         "n_obs_remaining": 23068,
-        "eta": -0.00045560776294373696,
-        "eta_error": 9.568649630679555e-05,
+        "eta": -0.000455607762943737,
+        "eta_error": 9.568649630679557e-05,
         "snr": 4.761463534864325,
-        "delta_eta_vs_full": -2.3094488264233277e-06,
-        "delta_eta_in_full_sigma": 0.02511708482274643
+        "delta_eta_vs_full": -2.309448826423165e-06,
+        "delta_eta_in_full_sigma": 0.025117084822744665
       },
       {
         "excluded_station": "Matera",
         "n_obs_remaining": 25861,
         "eta": -0.0004545444708069907,
-        "eta_error": 9.257264282637052e-05,
-        "snr": 4.9101382106972515,
-        "delta_eta_vs_full": -1.2461566896770698e-06,
-        "delta_eta_in_full_sigma": 0.013552940822475937
+        "eta_error": 9.257264282637054e-05,
+        "snr": 4.910138210697251,
+        "delta_eta_vs_full": -1.246156689676853e-06,
+        "delta_eta_in_full_sigma": 0.01355294082247358
       }
     ],
     "interpretation": "If exclusion of any station shifts eta by << 1 sigma, the pooled detection is not driven by that station. In particular, Haleakala's small N implies low influence even if its station-level sign differs."
@@ -257,7 +257,7 @@
   },
   "mc_ipw_distribution": {
     "n_mc": 2000,
-    "eta_true": -0.0003177266624680193,
+    "eta_true": -0.0003177266624680195,
     "station_fractions": {
       "Grasse": 0.74,
       "APO": 0.099,
@@ -266,42 +266,42 @@
       "Haleakala": 0.028
     },
     "ipw_snr": {
-      "mean": 3.369517813232637,
-      "median": 3.0233297240425148,
-      "std": 2.2504632561712694,
+      "mean": 3.369517813232638,
+      "median": 3.023329724042516,
+      "std": 2.25046325617127,
       "percentiles": {
-        "5": 0.3424117995561825,
-        "10": 0.6726102435291815,
-        "25": 1.590756394190805,
-        "50": 3.0233297240425148,
-        "75": 4.790832231280035,
-        "90": 6.592222051458446,
-        "95": 7.579905094739887
+        "5": 0.34241179955618006,
+        "10": 0.6726102435291793,
+        "25": 1.5907563941908072,
+        "50": 3.023329724042516,
+        "75": 4.790832231280038,
+        "90": 6.592222051458449,
+        "95": 7.57990509473989
       },
       "fraction_below_0_52": 0.0765
     },
     "full_sample_snr": {
-      "mean": 4.190664348508031,
-      "median": 4.199523102876092,
+      "mean": 4.190664348508034,
+      "median": 4.199523102876096,
       "std": 0.9987108289895681,
       "percentiles": {
-        "5": 2.5559208476189137,
-        "10": 2.904727351636998,
-        "25": 3.524996733565489,
-        "50": 4.199523102876092,
-        "75": 4.855536395788767,
-        "90": 5.469595009012219,
-        "95": 5.81224028920178
+        "5": 2.555920847618916,
+        "10": 2.904727351637001,
+        "25": 3.5249967335654926,
+        "50": 4.199523102876096,
+        "75": 4.85553639578877,
+        "90": 5.469595009012223,
+        "95": 5.812240289201783
       }
     },
     "interpretation": "For a genuine signal at eta=-3.18e-04 with the observed station concentration (Grasse=74%), IPW SNR has median=3.02\u03c3. 7.6% of simulated genuine signals yield IPW SNR < 0.52 (the observed value). The observed IPW SNR is therefore consistent with expectation for a genuine signal \u2014 not evidence against detection."
   },
   "precision_weighted_regression": {
-    "eta_precision_weighted": -0.00035046600679617735,
-    "eta_error": 6.589113340030604e-05,
-    "snr": 5.3188644467079325,
+    "eta_precision_weighted": -0.00035046600679617616,
+    "eta_error": 6.58911334003059e-05,
+    "snr": 5.318864446707926,
     "r_weighted": -0.032839197796707305,
-    "n_eff": 8933.788868375796,
+    "n_eff": 8933.78886837579,
     "dof": 26205,
     "per_station_rms": {
       "APO": 0.03161518296520261,

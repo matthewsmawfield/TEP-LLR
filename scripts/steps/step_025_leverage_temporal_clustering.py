@@ -145,7 +145,7 @@ def run_leverage_clustering(logger):
     print_status(f"    Station distribution analysis tests for instrument-specific effects", "INFO")
 
     print_status("═══ REPRODUCIBILITY", "INFO")
-    print_status(f"    Output file: results/outputs/step_027_leverage_temporal_clustering.json", "INFO")
+    print_status(f"    Output file: results/outputs/step_025_leverage_temporal_clustering.json", "INFO")
     print_status(f"    Cook's D threshold: 4/n", "INFO")
     print_status(f"    Epoch bin size: 5 years", "INFO")
     print_status(f"    Data source: INPOP19a_all_stations_residuals.csv", "INFO")

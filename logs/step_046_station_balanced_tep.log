@@ -1,41 +1,41 @@
-[11:52:01] ═══ Starting Step 046: Station-Balanced TEP Analysis...
-[11:52:01]     Purpose: Test TEP signal persistence when Grasse dominance is removed
-[11:52:01]     Loaded 26,207 observations
-[11:52:01]       Station APO: 2,595 obs
-[11:52:01]       Station Grasse: 19,390 obs
-[11:52:01]       Station Haleakala: 737 obs
-[11:52:01]       Station Matera: 346 obs
-[11:52:01]       Station McDonald2: 3,139 obs
-[11:52:01] 
-[11:52:01] >>> >>> TEST 1: Full-sample baseline
-[11:52:01]         cosD-only η = -3.177e-04 ± 6.052e-05 (5.25σ)
-[11:52:01]         full-systematic η = -4.061e-04 ± 6.578e-05 (6.17σ)
-[11:52:01] 
-[11:52:01] >>> >>> TEST 2: Equal-N subsample (all stations = min N)
-[11:52:01]         cosD-only η = -1.761e-04 ± 3.443e-04 (0.51σ)
-[11:52:01]         full-systematic η = -7.718e-05 ± 4.001e-04 (0.19σ)
-[11:52:01]           APO: 346 obs
-[11:52:01]           Grasse: 346 obs
-[11:52:01]           Haleakala: 346 obs
-[11:52:01]           Matera: 346 obs
-[11:52:01]           McDonald2: 346 obs
-[11:52:01] 
-[11:52:01] >>> >>> TEST 3: Grasse-capped subsample (Grasse = APO N)
-[11:52:01]         cosD-only η = -2.092e-04 ± 1.179e-04 (1.77σ)
-[11:52:01]         full-systematic η = -2.780e-04 ± 1.360e-04 (2.04σ)
-[11:52:01]           APO: 2595 obs
-[11:52:01]           Grasse: 2595 obs
-[11:52:01]           Haleakala: 737 obs
-[11:52:01]           Matera: 346 obs
-[11:52:01]           McDonald2: 3139 obs
-[11:52:01] 
-[11:52:01] >>> >>> TEST 4: Stratified bootstrap (200 iterations of equal-N)
-[11:52:03]         Full-systematic mean η = -9.198e-05 ± 2.356e-04
-[11:52:03]         95% CI = [-5.376e-04, 3.595e-04]
-[11:52:03]         Mean SNR = 0.51σ
-[11:52:03]         All balanced iterations significant? False
-[11:52:03] 
-[11:52:03] ═══ ═══ SUMMARY
-[11:52:03] ⚠   Primary full-systematic detection remains significant; balanced subsamples lose power
-[11:52:03] Results saved to results/outputs/step_046_station_balanced_tep.json
-[11:52:03] ✓   Station-Balanced Analysis Complete.
+[20:12:42] ═══ Starting Step 046: Station-Balanced TEP Analysis...
+[20:12:42]     Purpose: Test TEP signal persistence when Grasse dominance is removed
+[20:12:42]     Loaded 26,207 observations
+[20:12:42]       Station APO: 2,595 obs
+[20:12:42]       Station Grasse: 19,390 obs
+[20:12:42]       Station Haleakala: 737 obs
+[20:12:42]       Station Matera: 346 obs
+[20:12:42]       Station McDonald2: 3,139 obs
+[20:12:42] 
+[20:12:42] >>> >>> TEST 1: Full-sample baseline
+[20:12:42]         cosD-only η = -3.177e-04 ± 6.052e-05 (5.25σ)
+[20:12:42]         full-systematic η = -4.061e-04 ± 6.578e-05 (6.17σ)
+[20:12:42] 
+[20:12:42] >>> >>> TEST 2: Equal-N subsample (all stations = min N)
+[20:12:42]         cosD-only η = 1.141e-04 ± 3.350e-04 (0.34σ)
+[20:12:42]         full-systematic η = -3.284e-05 ± 3.965e-04 (0.08σ)
+[20:12:42]           APO: 346 obs
+[20:12:42]           Grasse: 346 obs
+[20:12:42]           Haleakala: 346 obs
+[20:12:42]           Matera: 346 obs
+[20:12:42]           McDonald2: 346 obs
+[20:12:42] 
+[20:12:42] >>> >>> TEST 3: Grasse-capped subsample (Grasse = APO N)
+[20:12:42]         cosD-only η = -2.092e-04 ± 1.179e-04 (1.77σ)
+[20:12:42]         full-systematic η = -2.780e-04 ± 1.360e-04 (2.04σ)
+[20:12:42]           APO: 2595 obs
+[20:12:42]           Grasse: 2595 obs
+[20:12:42]           Haleakala: 737 obs
+[20:12:42]           Matera: 346 obs
+[20:12:42]           McDonald2: 3139 obs
+[20:12:42] 
+[20:12:42] >>> >>> TEST 4: Stratified bootstrap (200 iterations of equal-N)
+[20:12:43]         Full-systematic mean η = -1.117e-04 ± 2.472e-04
+[20:12:43]         95% CI = [-6.632e-04, 3.230e-04]
+[20:12:43]         Mean SNR = 0.51σ
+[20:12:43]         All balanced iterations significant? False
+[20:12:43] 
+[20:12:43] ═══ ═══ SUMMARY
+[20:12:43] ⚠   Primary full-systematic detection remains significant; balanced subsamples lose power
+[20:12:43] Results saved to results/outputs/step_046_station_balanced_tep.json
+[20:12:43] ✓   Station-Balanced Analysis Complete.

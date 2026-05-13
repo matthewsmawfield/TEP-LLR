@@ -1,19 +1,14 @@
 {
     "step_id": "step_008",
     "systematics": {
-        "APO": {
-            "n_obs": 2595,
-            "residual_rms": 0.031601798760565084,
-            "clean_profile": true
-        },
         "Grasse": {
             "n_obs": 19390,
             "residual_rms": 0.09870697444379005,
             "clean_profile": true
         },
-        "Matera": {
-            "n_obs": 346,
-            "residual_rms": 0.0619324718317995,
+        "Haleakala": {
+            "n_obs": 737,
+            "residual_rms": 0.1383762784480651,
             "clean_profile": true
         },
         "McDonald2": {
@@ -21,9 +16,14 @@
             "residual_rms": 0.09555025387360164,
             "clean_profile": true
         },
-        "Haleakala": {
-            "n_obs": 737,
-            "residual_rms": 0.1383762784480651,
+        "Matera": {
+            "n_obs": 346,
+            "residual_rms": 0.0619324718317995,
+            "clean_profile": true
+        },
+        "APO": {
+            "n_obs": 2595,
+            "residual_rms": 0.031601798760565084,
             "clean_profile": true
         }
     },
@@ -88,7 +88,7 @@
         }
     },
     "total_systematic_cm": 0.2696293752542553,
-    "eta_fit": -0.00045329831411731363,
+    "eta_fit": -0.0004532983141173137,
     "n_observations": 26207,
     "data_driven": true,
     "status": "PASS"

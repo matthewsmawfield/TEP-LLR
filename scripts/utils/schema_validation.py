@@ -13,13 +13,35 @@ OUTPUTS_DIR = PROJECT_ROOT / "results" / "outputs"
 REQUIRED_OUTPUTS = {
     "step_001_data_preprocessing.json": ["combined"],
     "step_040_unified_results_table.json": ["primary_estimands"],
+    "step_046_station_balanced_tep.json": [
+        "status",
+        "stress_test_result",
+        "primary_full_systematic_significant",
+        "balanced_full_systematic_all_significant",
+    ],
     "step_050_corrected_tep_analysis.json": ["models", "station_univ"],
     "step_055_cmb_rigorous_falsification.json": ["status", "sky_scrambling"],
     "step_056_dynamical_integrator_eta_refit.json": ["inpop19a", "de430", "cross_ephemeris"],
+    "step_057_haleakala_null_fluctuation.json": [
+        "status",
+        "haleakala_simulation_tep",
+        "haleakala_simulation_gr",
+        "interpretation",
+    ],
 }
 
 # Pipeline steps that must record a top-level PASS for CI / manuscript integrity.
-REQUIRE_TOP_LEVEL_PASS = frozenset({"step_055_cmb_rigorous_falsification.json"})
+REQUIRE_TOP_LEVEL_PASS = frozenset(
+    {
+        "step_055_cmb_rigorous_falsification.json",
+        "step_056_dynamical_integrator_eta_refit.json",
+        "step_057_haleakala_null_fluctuation.json",
+        "step_040_unified_results_table.json",
+        "step_046_station_balanced_tep.json",
+        "step_050_corrected_tep_analysis.json",
+        "step_042_multiple_testing_correction.json",
+    }
+)
 
 OPTIONAL_OUTPUTS = {
     "step_012_station_dominance.json": ["full_sample_eta", "dominant_station_jackknife"],

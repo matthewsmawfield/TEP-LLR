@@ -3,16 +3,6 @@
     "status": "PASS",
     "station_results": [
         {
-            "Station": "APO",
-            "N": 2595,
-            "Day_Ranged_Percent": 45.74181117533719,
-            "Day_Minus_Night_Bias_mm": 6.545285340719073,
-            "Spurious_Eta": 0.000503483487747621,
-            "Original_Eta": -0.00023983556703264082,
-            "Cleaned_Eta_After_Solar_Modeling": -0.0003104748823039425,
-            "Cleaned_P_Val": 0.0003919525459135098
-        },
-        {
             "Station": "Grasse",
             "N": 19390,
             "Day_Ranged_Percent": 44.321815368746776,
@@ -23,14 +13,14 @@
             "Cleaned_P_Val": 5.5759983870196095e-06
         },
         {
-            "Station": "Matera",
-            "N": 346,
-            "Day_Ranged_Percent": 21.67630057803468,
-            "Day_Minus_Night_Bias_mm": -28.043037771659098,
-            "Spurious_Eta": -0.0021571567516660843,
-            "Original_Eta": -1.813115381112349e-05,
-            "Cleaned_Eta_After_Solar_Modeling": 0.0007273605001939861,
-            "Cleaned_P_Val": 0.41023237411788704
+            "Station": "Haleakala",
+            "N": 737,
+            "Day_Ranged_Percent": 33.37856173677069,
+            "Day_Minus_Night_Bias_mm": 41.63784381970102,
+            "Spurious_Eta": 0.003202911063053924,
+            "Original_Eta": 0.003553510872736506,
+            "Cleaned_Eta_After_Solar_Modeling": 0.0031026183373106747,
+            "Cleaned_P_Val": 0.03170243016867769
         },
         {
             "Station": "McDonald2",
@@ -43,21 +33,31 @@
             "Cleaned_P_Val": 0.3766193131211073
         },
         {
-            "Station": "Haleakala",
-            "N": 737,
-            "Day_Ranged_Percent": 33.37856173677069,
-            "Day_Minus_Night_Bias_mm": 41.63784381970102,
-            "Spurious_Eta": 0.003202911063053924,
-            "Original_Eta": 0.003553510872736506,
-            "Cleaned_Eta_After_Solar_Modeling": 0.0031026183373106747,
-            "Cleaned_P_Val": 0.03170243016867769
+            "Station": "Matera",
+            "N": 346,
+            "Day_Ranged_Percent": 21.67630057803468,
+            "Day_Minus_Night_Bias_mm": -28.043037771659098,
+            "Spurious_Eta": -0.0021571567516660843,
+            "Original_Eta": -1.813115381112349e-05,
+            "Cleaned_Eta_After_Solar_Modeling": 0.0007273605001939861,
+            "Cleaned_P_Val": 0.41023237411788704
+        },
+        {
+            "Station": "APO",
+            "N": 2595,
+            "Day_Ranged_Percent": 45.74181117533719,
+            "Day_Minus_Night_Bias_mm": 6.545285340719073,
+            "Spurious_Eta": 0.000503483487747621,
+            "Original_Eta": -0.00023983556703264082,
+            "Cleaned_Eta_After_Solar_Modeling": -0.0003104748823039425,
+            "Cleaned_P_Val": 0.0003919525459135098
         }
     ],
     "global_analysis": {
-        "original_eta": -0.00045329831411731363,
-        "solar_altitude_param": -3.442668500218242e-05,
-        "solar_altitude_pval": 0.2811759875204376,
-        "cleaned_eta": -0.0004191017455621734,
-        "cleaned_pval": 7.746881913517356e-06
+        "original_eta": -0.00045329831411731385,
+        "solar_altitude_param": -3.442668500218383e-05,
+        "solar_altitude_pval": 0.2811759875205231,
+        "cleaned_eta": -0.00041910174556217456,
+        "cleaned_pval": 7.7468819137394e-06
     }
 }

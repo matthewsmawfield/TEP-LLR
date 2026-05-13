@@ -3,19 +3,19 @@
     "status": "PASS",
     "simulation": {
         "n_obs": 26000,
-        "eta_injected": -0.0003177266624680193,
+        "eta_injected": -0.0003177266624680195,
         "noise_level_m": 0.04
     },
     "static_test": {
-        "eta_recovered": -0.00031985815795504326,
+        "eta_recovered": -0.0003198581579550435,
         "recovery_fraction": 1.006708582372241,
         "residual_rms_m": 0.0398311347339379
     },
     "dynamic_test": {
-        "eta_recovered_from_static_fit": -0.0003180893366012503,
+        "eta_recovered_from_static_fit": -0.00031808933660125053,
         "recovery_fraction": 1.0011414658449305,
         "residual_rms_m": 0.040140588542884076,
-        "absorbed_power_fraction": 0.6691951809422874
+        "absorbed_power_fraction": 0.6691951809422865
     },
     "comparison": {
         "efficiency_loss_to_dynamics": 0.005567116527310567,

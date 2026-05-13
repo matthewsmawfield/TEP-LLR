@@ -127,6 +127,13 @@ def gauss_newton_integrator_iterations(
     max_iterations: int = 5,
     tolerance: float = 1e-12,
 ) -> dict[str, float | int | list[float]]:
+    """
+    Report apparent Gauss–Newton convergence for the linearized extraction.
+
+    For a fixed design matrix, the weighted least-squares solution is a single
+    solve; repeating the solve must converge immediately. We keep this record
+    explicitly to demonstrate that the extraction is already at the fixed point.
+    """
     fit = robust_regression(residuals_m, design, scale_errors_by_birge=False)
     eta = float(fit["coefficients"][eta_index] / ETA_SCALE_FACTOR)
     eta_err = float(fit["errors"][eta_index] / ETA_SCALE_FACTOR)
@@ -147,6 +154,11 @@ def gauss_newton_integrator_iterations(
         "snr": float(abs(eta) / max(eta_err, 1e-20)),
         "iterations": len(history),
         "history": history,
+        "note": (
+            "For a fixed linearized design, the WLS solution is a single solve; "
+            "repeat-solve convergence demonstrates fixed-point closure, not a multi-iteration "
+            "integrator update."
+        ),
     }
 
 
@@ -320,4 +332,10 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    log_dir = PROJECT_ROOT / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    logger = TEPLogger(
+        "step_056", str(log_dir / "step_056_dynamical_integrator_eta_refit.log")
+    )
+    set_step_logger(logger)
     sys.exit(main())

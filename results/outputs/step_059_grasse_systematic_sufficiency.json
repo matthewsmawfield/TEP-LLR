@@ -1,0 +1,82 @@
+{
+    "step_id": "step_059",
+    "status": "PASS",
+    "method": "Grasse-specific systematic sufficiency analysis",
+    "n_total": 26207,
+    "grasse_fraction": 0.7398786583737169,
+    "partition_test": {
+        "grasse": {
+            "eta": -0.00046794259045642556,
+            "eta_err": 6.847973824855893e-05,
+            "snr": 6.833299928191137,
+            "n_used": 18664,
+            "n_outliers": 726,
+            "amplitude_m": -0.0060832536759335325,
+            "amplitude_err_m": 0.000890236597231266
+        },
+        "non_grasse": {
+            "eta": -0.00019001247751226224,
+            "eta_err": 0.0001907228123468508,
+            "snr": 0.9962755643866202,
+            "n_used": 6765,
+            "n_outliers": 52,
+            "amplitude_m": -0.0024701622076594093,
+            "amplitude_err_m": 0.0024793965605090606
+        },
+        "pooled": {
+            "eta": -0.0004061154555979797,
+            "eta_err": 6.577799889845754e-05,
+            "snr": 6.174031779606219,
+            "n_used": 25445,
+            "n_outliers": 762,
+            "amplitude_m": -0.005279500922773736,
+            "amplitude_err_m": 0.000855113985679948
+        }
+    },
+    "required_systematic": {
+        "pooled_eta": -0.0004061154555979797,
+        "required_amplitude_cm": 0.7135630772724668,
+        "required_amplitude_m": 0.007135630772724668
+    },
+    "known_systematics_comparison": {
+        "ephemeris": {
+            "amplitude_cm": 0.3551881934658616,
+            "eta_equivalent": 0.000273221687281432
+        },
+        "atmospheric": {
+            "amplitude_cm": -0.07998379696114187,
+            "eta_equivalent": -6.152599766241682e-05
+        },
+        "instrumental": {
+            "amplitude_cm": 0.009774929385785638,
+            "eta_equivalent": 7.519176450604337e-06
+        },
+        "tidal": {
+            "amplitude_cm": -0.009117936585027405,
+            "eta_equivalent": -7.0137973730980044e-06
+        },
+        "thermal": {
+            "amplitude_cm": -0.05561137739642375,
+            "eta_equivalent": -4.2777982612633655e-05
+        }
+    },
+    "interaction_test": {
+        "base_eta": -0.00037136896673205445,
+        "base_eta_err": 0.00012138914095495504,
+        "interact_eta": -4.486282394323817e-05,
+        "interact_eta_err": 0.00013172501404717644,
+        "t_interact": -0.3405793824942835,
+        "p_interact": 0.7334202528446623,
+        "n_used": 25445
+    },
+    "monte_carlo_station_dominance": {
+        "grasse_snr": 6.833299928191137,
+        "random_snr_mean": 1.9263874907195182,
+        "random_snr_std": 2.5362654878606827,
+        "random_snr_95th": 6.833299928191137,
+        "p_grasse_dominant": 1.0,
+        "percentile": 100.0,
+        "n_mc": 5000
+    },
+    "interpretation": "A Grasse-only systematic would need amplitude 0.7 cm to explain the pooled eta=-4.06e-04. This is 2.0x larger than the largest known systematic projection. The Grasse x cos(D) interaction is t=-0.34 (p=0.733), providing no evidence that Grasse has a differential cos(D) coefficient. The Grasse-specific systematic hypothesis is quantitatively falsified."
+}

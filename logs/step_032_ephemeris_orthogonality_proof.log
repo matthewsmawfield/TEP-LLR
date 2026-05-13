@@ -1,30 +1,30 @@
-[11:51:37]     Initiating Ephemeris Orthogonality Spectral Analysis (v2)...
-[11:51:37]     Step 022 empirical modulation: eta_peri=-2.8082e-04, eta_aph=7.1236e-05
-[11:51:37]     Empirical modulation depth m = 1.68
-[11:51:37]     Perihelion-aphelion differential = 1.42σ
-[11:51:37]     Loaded measured η from step_003: -3.1773e-04
-[11:51:37] >>> Computing Lomb-Scargle periodograms...
-[11:51:37]     m=0.017: D-l' power = 0.0147 (ratio to static: 1.1x), sideband fraction = 0.0%
-[11:51:37]     m=0.100: D-l' power = 0.0219 (ratio to static: 1.6x), sideband fraction = 0.5%
-[11:51:37]     m=0.500: D-l' power = 0.0776 (ratio to static: 5.8x), sideband fraction = 11.1%
-[11:51:37]     m=1.000: D-l' power = 0.1598 (ratio to static: 11.9x), sideband fraction = 33.3%
-[11:51:37]     m=1.680: D-l' power = 0.2354 (ratio to static: 17.5x), sideband fraction = 58.5%
-[11:51:37] 
-[11:51:37] ✓   --- SPECTRAL ORTHOGONALITY DECOUPLING ---
-[11:51:37]     Primary model (m=1.0): D-l' sideband power = 0.1598
-[11:51:37]       Static model power at same frequency = 0.0134
-[11:51:37]       TEP/static power ratio = 11.9x
-[11:51:37]       Theoretical sideband fraction = 33.33%
-[11:51:37] 
-[11:51:37] >>> --- EMPIRICAL CALIBRATION ---
-[11:51:37]     Step 022 perihelion/aphelion data imply m = 1.68
-[11:51:37] ✓   The m=1.0 model is CONSERVATIVE (empirical m > 1.0)
-[11:51:37] 
-[11:51:37] >>> --- GEOPHYSICAL QUIET SPACE VERIFICATION ---
-[11:51:37]     Sideband D - l' maps to exactly 32.13 days.
-[11:51:37]     This frequency is isolated from standard tidal/orbital resonances:
-[11:51:37]       - Evection limit: 31.81 days
-[11:51:37]       - Mm Ocean Tide limit: 27.55 days
-[11:51:37] ✓   Result: Classical geophysics cannot natively inject power here without violating bounds.
-[11:51:37] Results saved to results/outputs/step_032_ephemeris_orthogonality_proof.json
-[11:51:37] ✓   Ephemeris Orthogonality test compiled cleanly.
+[20:12:18]     Initiating Ephemeris Orthogonality Spectral Analysis (v2)...
+[20:12:18]     Step 022 empirical modulation: eta_peri=-2.8082e-04, eta_aph=7.1236e-05
+[20:12:18]     Empirical modulation depth m = 1.68
+[20:12:18]     Perihelion-aphelion differential = 1.42σ
+[20:12:18]     Loaded measured η from step_003: -3.1773e-04
+[20:12:18] >>> Computing Lomb-Scargle periodograms...
+[20:12:18]     m=0.017: D-l' power = 0.0147 (ratio to static: 1.1x), sideband fraction = 0.0%
+[20:12:18]     m=0.100: D-l' power = 0.0219 (ratio to static: 1.6x), sideband fraction = 0.5%
+[20:12:18]     m=0.500: D-l' power = 0.0776 (ratio to static: 5.8x), sideband fraction = 11.1%
+[20:12:18]     m=1.000: D-l' power = 0.1598 (ratio to static: 11.9x), sideband fraction = 33.3%
+[20:12:18]     m=1.680: D-l' power = 0.2354 (ratio to static: 17.5x), sideband fraction = 58.5%
+[20:12:18] 
+[20:12:18] ✓   --- SPECTRAL ORTHOGONALITY DECOUPLING ---
+[20:12:18]     Primary model (m=1.0): D-l' sideband power = 0.1598
+[20:12:18]       Static model power at same frequency = 0.0134
+[20:12:18]       TEP/static power ratio = 11.9x
+[20:12:18]       Theoretical sideband fraction = 33.33%
+[20:12:18] 
+[20:12:18] >>> --- EMPIRICAL CALIBRATION ---
+[20:12:18]     Step 022 perihelion/aphelion data imply m = 1.68
+[20:12:18] ✓   The m=1.0 model is CONSERVATIVE (empirical m > 1.0)
+[20:12:18] 
+[20:12:18] >>> --- GEOPHYSICAL QUIET SPACE VERIFICATION ---
+[20:12:18]     Sideband D - l' maps to exactly 32.13 days.
+[20:12:18]     This frequency is isolated from standard tidal/orbital resonances:
+[20:12:18]       - Evection limit: 31.81 days
+[20:12:18]       - Mm Ocean Tide limit: 27.55 days
+[20:12:18] ✓   Result: Classical geophysics cannot natively inject power here without violating bounds.
+[20:12:18] Results saved to results/outputs/step_032_ephemeris_orthogonality_proof.json
+[20:12:18] ✓   Ephemeris Orthogonality test compiled cleanly.

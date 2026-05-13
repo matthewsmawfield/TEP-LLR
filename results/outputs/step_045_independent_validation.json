@@ -2,20 +2,20 @@
     "step_id": "step_045",
     "ephemeris_matched_window": {
         "available": true,
-        "inpop_window_eta": -0.0003621783257617348,
-        "inpop_window_eta_error": 3.5998280416945405e-05,
-        "inpop_window_snr": 10.060989624139026,
+        "inpop_window_eta": -0.00036217832576173524,
+        "inpop_window_eta_error": 3.599828041694542e-05,
+        "inpop_window_snr": 10.060989624139035,
         "de430_eta": -0.0007041204781558812,
         "de430_eta_error": 0.00011823679986658583,
         "de430_snr": 5.955171984952109,
-        "difference": 0.00034194215239414643,
+        "difference": 0.000341942152394146,
         "difference_error": 0.0001235953762713966,
-        "difference_sigma": 2.7666257647316317,
+        "difference_sigma": 2.7666257647316286,
         "consistent": true,
         "inpop_window_full_systematic": {
-            "eta": -0.0002877877845996414,
-            "eta_error": 3.7244832611288046e-05,
-            "snr": 7.726918458815132,
+            "eta": -0.00028778778459964124,
+            "eta_error": 3.724483261128806e-05,
+            "snr": 7.726918458815125,
             "n": 8802
         },
         "de430_full_systematic": {
@@ -24,9 +24,9 @@
             "snr": 5.043270502978974,
             "n": 4560
         },
-        "full_systematic_difference": 0.000309910823241473,
+        "full_systematic_difference": 0.00030991082324147314,
         "full_systematic_difference_error": 0.00012422868743548662,
-        "full_systematic_difference_sigma": 2.494680010222383,
+        "full_systematic_difference_sigma": 2.4946800102223845,
         "full_systematic_consistent": true,
         "window_jd_min": 2456722.5,
         "window_jd_max": 2458372.5,
@@ -39,102 +39,102 @@
     },
     "seasonal_independence": {
         "available": true,
-        "base_eta": -0.0004130350464053959,
-        "monthly_modulation_eta": -0.00023056964966994156,
-        "monthly_modulation_error": 2.7556702232333967e-05,
-        "monthly_t_stat": -8.367098781486272,
+        "base_eta": -0.00041303504640539577,
+        "monthly_modulation_eta": -0.00023056964966994183,
+        "monthly_modulation_error": 2.755670223233398e-05,
+        "monthly_t_stat": -8.367098781486277,
         "monthly_p_value": 0.0,
         "monthly_etas": [
             {
                 "month": 1,
                 "n": 2327,
                 "eta": 0.0002661037382116362,
-                "eta_error": 0.0003575200211134858,
-                "snr": 0.7443044375049648
+                "eta_error": 0.0003575200211134859,
+                "snr": 0.7443044375049646
             },
             {
                 "month": 2,
                 "n": 2128,
-                "eta": -6.165939615381829e-05,
+                "eta": -6.165939615381857e-05,
                 "eta_error": 0.0002830006496843323,
-                "snr": 0.21787722474345939
+                "snr": 0.21787722474346038
             },
             {
                 "month": 3,
                 "n": 2656,
                 "eta": 0.0006339813274650516,
-                "eta_error": 0.0002615870116767197,
-                "snr": 2.423596352897493
+                "eta_error": 0.0002615870116767198,
+                "snr": 2.4235963528974915
             },
             {
                 "month": 4,
                 "n": 2415,
-                "eta": -4.59685294694355e-05,
+                "eta": -4.596852946943647e-05,
                 "eta_error": 0.00031252960023737665,
-                "snr": 0.14708536226495306
+                "snr": 0.14708536226495617
             },
             {
                 "month": 5,
                 "n": 1494,
-                "eta": 0.0015304849469187942,
-                "eta_error": 0.0003756178977321697,
-                "snr": 4.0745793961343395
+                "eta": 0.0015304849469187968,
+                "eta_error": 0.00037561789773216987,
+                "snr": 4.074579396134345
             },
             {
                 "month": 6,
                 "n": 1698,
-                "eta": 0.0004545878894256928,
-                "eta_error": 0.00037310329325067793,
-                "snr": 1.2183968827106215
+                "eta": 0.00045458788942569266,
+                "eta_error": 0.0003731032932506778,
+                "snr": 1.2183968827106213
             },
             {
                 "month": 7,
                 "n": 1876,
-                "eta": -0.0010419161644310553,
-                "eta_error": 0.0003855223676299369,
-                "snr": 2.70260885467271
+                "eta": -0.0010419161644310572,
+                "eta_error": 0.000385522367629937,
+                "snr": 2.702608854672715
             },
             {
                 "month": 8,
                 "n": 2648,
-                "eta": -0.000732021474253207,
-                "eta_error": 0.0001966911067930434,
+                "eta": -0.0007320214742532073,
+                "eta_error": 0.00019669110679304346,
                 "snr": 3.7216805893691642
             },
             {
                 "month": 9,
                 "n": 2805,
-                "eta": -0.00043956841997852693,
-                "eta_error": 0.00025752965136594403,
-                "snr": 1.706865278025441
+                "eta": -0.00043956841997852726,
+                "eta_error": 0.0002575296513659441,
+                "snr": 1.7068652780254419
             },
             {
                 "month": 10,
                 "n": 2065,
-                "eta": -0.0005583801440682748,
-                "eta_error": 0.00042637185134072355,
-                "snr": 1.309608367232621
+                "eta": -0.0005583801440682758,
+                "eta_error": 0.0004263718513407237,
+                "snr": 1.3096083672326229
             },
             {
                 "month": 11,
                 "n": 2062,
-                "eta": -0.0026525729767730936,
-                "eta_error": 0.0003515444066944113,
-                "snr": 7.545484798678388
+                "eta": -0.002652572976773095,
+                "eta_error": 0.0003515444066944114,
+                "snr": 7.54548479867839
             },
             {
                 "month": 12,
                 "n": 2033,
-                "eta": -0.001953208799714839,
+                "eta": -0.0019532087997148396,
                 "eta_error": 0.0003931247889408455,
-                "snr": 4.968419328064157
+                "snr": 4.968419328064158
             }
         ],
-        "eta_variance_across_months": 1.2947159291606853e-06,
-        "expected_eta_variance_from_noise": 1.139889379494353e-07,
-        "variance_ratio": 11.358259428077243,
+        "eta_variance_across_months": 1.2947159291606872e-06,
+        "expected_eta_variance_from_noise": 1.1398893794943534e-07,
+        "variance_ratio": 11.358259428077256,
         "january_eta": 0.0002661037382116362,
-        "july_eta": -0.0010419161644310553,
+        "july_eta": -0.0010419161644310572,
         "heliocentric_sign_flip": true,
         "interpretation": "heliocentric_modulation",
         "consistent_with_TEP": true,
@@ -144,14 +144,6 @@
         "available": true,
         "station_results": [
             {
-                "station": "APO",
-                "latitude": 32.78,
-                "n": 2595,
-                "eta": -0.00023983556703264082,
-                "eta_error": 8.664124510072114e-05,
-                "snr": 2.768145434127015
-            },
-            {
                 "station": "Grasse",
                 "latitude": 43.75,
                 "n": 19390,
@@ -160,12 +152,12 @@
                 "snr": 4.967052795448198
             },
             {
-                "station": "Matera",
-                "latitude": 40.65,
-                "n": 346,
-                "eta": -1.813115381112349e-05,
-                "eta_error": 0.0008706581659571015,
-                "snr": 0.020824652567511592
+                "station": "Haleakala",
+                "latitude": 20.71,
+                "n": 737,
+                "eta": 0.003553510872736506,
+                "eta_error": 0.0014487488072928987,
+                "snr": 2.4528136657289275
             },
             {
                 "station": "McDonald2",
@@ -176,18 +168,26 @@
                 "snr": 1.3892561147375393
             },
             {
-                "station": "Haleakala",
-                "latitude": 20.71,
-                "n": 737,
-                "eta": 0.003553510872736506,
-                "eta_error": 0.0014487488072928987,
-                "snr": 2.4528136657289275
+                "station": "Matera",
+                "latitude": 40.65,
+                "n": 346,
+                "eta": -1.813115381112349e-05,
+                "eta_error": 0.0008706581659571015,
+                "snr": 0.020824652567511592
+            },
+            {
+                "station": "APO",
+                "latitude": 32.78,
+                "n": 2595,
+                "eta": -0.00023983556703264082,
+                "eta_error": 8.664124510072114e-05,
+                "snr": 2.768145434127015
             }
         ],
         "pearson_r_all": -0.7900068994262263,
         "pearson_p_all": 0.11180600623614914,
-        "pearson_r_excl_haleakala": 0.09237688549879514,
-        "pearson_p_excl_haleakala": 0.9076231145012048,
+        "pearson_r_excl_haleakala": 0.09237688549879508,
+        "pearson_p_excl_haleakala": 0.907623114501205,
         "latitude_independent": true,
         "note": "Haleakala (1984-1991, solar maximum era) is a known anomalous station; primary metric excludes it"
     },

@@ -82,7 +82,12 @@ _CMB_UNIT = _CMB_UNIT / np.linalg.norm(_CMB_UNIT)
 
 def compute_cmb_projections(jd_array):
     """Compute CMB-frame kinematic projections for every epoch."""
-    eph_path = PROJECT_ROOT / "de421.bsp"
+    eph_path = PROJECT_ROOT / "data" / "raw" / "de440.bsp"
+    if not eph_path.exists():
+        raise FileNotFoundError(
+            f"Required Skyfield kernel missing for Step 055: {eph_path}. "
+            "Download and place de440.bsp under data/raw and verify it via Step 000 manifest."
+        )
     planets = load(str(eph_path))
     earth = planets["earth"]
     moon = planets["moon"]
@@ -384,7 +389,7 @@ def cmb_falsification_analysis(df, verbose=False):
     }
 
     # ------------------------------------------------------------------
-    # D. Sky Scrambling Monte Carlo
+    # D. Sky Scrambling Monte Carlo (enhanced)
     # ------------------------------------------------------------------
     print_status("═══ D. Sky Scrambling Monte Carlo ═══", "TITLE")
 
@@ -396,54 +401,83 @@ def cmb_falsification_analysis(df, verbose=False):
     rss_base = np.sum(resid_base ** 2)
     aic_base = n_clean * np.log(rss_base / n_clean) + 2 * 4
 
-    def delta_aic_for_direction(cos_theta_dir_c):
+    # Estimate temporal autocorrelation in base residuals for effective-sample-size correction
+    def autocorr_lag1(x):
+        x_c = x - np.mean(x)
+        denom = np.sum(x_c ** 2)
+        return np.sum(x_c[:-1] * x_c[1:]) / denom if denom > 0 else 0.0
+
+    rho_base = autocorr_lag1(resid_base)
+    # Effective sample size for AR(1): n_eff = n * (1 - rho) / (1 + rho)
+    n_eff = n_clean * (1.0 - rho_base) / (1.0 + rho_base) if abs(rho_base) < 0.999 else n_clean
+    print_status(f"Base residual AR(1) ρ = {rho_base:.4f}; n_eff = {n_eff:.1f}", "CALC")
+
+    def delta_aic_for_direction(cos_theta_dir_c, use_eff=False):
         """Fit base + direction and return delta_AIC = AIC_base - AIC_augmented.
-        Positive means the direction improves the fit."""
+        Positive means the direction improves the fit.
+        If use_eff=True, return autocorrelation-adjusted F using n_eff."""
         X_aug = np.column_stack([cosD, r_c * cosD, vr_c * cosD, cos_theta_dir_c * cosD, np.ones(n_clean)])
         coeffs_aug, _, rank_aug, _ = stable_lstsq(X_aug, res)
         if rank_aug < 5:
-            return None, None, None
+            return None, None, None, None
         with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
             resid_aug = res - X_aug @ coeffs_aug
         rss_aug = np.sum(resid_aug ** 2)
         aic_aug = n_clean * np.log(rss_aug / n_clean) + 2 * 5
         delta_aic = aic_base - aic_aug
-        # F-statistic for the added direction term
+        # Standard F-statistic
         delta_rss = rss_base - rss_aug
         f_dir = (delta_rss / 1) / (rss_aug / (n_clean - 5))
         p_f = 1 - stats.f.cdf(f_dir, 1, n_clean - 5)
-        return delta_aic, f_dir, p_f
+        # Effective-sample-size F-statistic (autocorrelation-adjusted)
+        if use_eff and n_eff > 5:
+            f_dir_eff = (delta_rss / 1) / (rss_aug / (n_eff - 5))
+            p_f_eff = 1 - stats.f.cdf(f_dir_eff, 1, n_eff - 5)
+        else:
+            f_dir_eff = f_dir
+            p_f_eff = p_f
+        return delta_aic, f_dir, p_f, f_dir_eff
 
-    n_scramble = 5000
+    # True CMB (compute once)
+    delta_aic_true, f_true, p_f_true, f_true_eff = delta_aic_for_direction(cos_theta_c, use_eff=True)
+
+    # ------------------------------------------------------------------
+    # D1. Uniform random-direction scramble (large ensemble)
+    # ------------------------------------------------------------------
+    n_scramble = 50000
     strict_alpha = 0.01
     rng_scram = np.random.default_rng(44)
     delta_aics_scram = []
     f_stats_scram = []
+    f_stats_eff_scram = []
+    corr_cosD_scram = []
 
     for _ in range(n_scramble):
         dir_vec = random_unit_vector(rng_scram)
         cos_theta_rand = np.sum(em_hat[:, mask_clean] * dir_vec[:, None], axis=0)
         cos_theta_rand_c = cos_theta_rand - np.mean(cos_theta_rand)
-        d_aic, f_dir, _ = delta_aic_for_direction(cos_theta_rand_c)
+        d_aic, f_dir, _p_f, f_dir_eff = delta_aic_for_direction(cos_theta_rand_c, use_eff=True)
         if d_aic is not None:
             delta_aics_scram.append(d_aic)
             f_stats_scram.append(f_dir)
+            f_stats_eff_scram.append(f_dir_eff)
+            corr_cosD_scram.append(np.corrcoef(cosD, cos_theta_rand)[0, 1])
 
     delta_aics_scram = np.array(delta_aics_scram)
     f_stats_scram = np.array(f_stats_scram)
-
-    # True CMB
-    delta_aic_true, f_true, p_f_true = delta_aic_for_direction(cos_theta_c)
+    f_stats_eff_scram = np.array(f_stats_eff_scram)
+    corr_cosD_scram = np.array(corr_cosD_scram)
 
     p_scramble_delta_aic = np.mean(delta_aics_scram >= delta_aic_true)
     p_scramble_f = np.mean(f_stats_scram >= f_true)
+    p_scramble_f_eff = np.mean(f_stats_eff_scram >= f_true_eff)
 
     print_status(
         f"Base model AIC = {aic_base:.1f}; True CMB ΔAIC = {delta_aic_true:.1f}",
         "CALC",
     )
     print_status(
-        f"Random directions ΔAIC: median = {np.median(delta_aics_scram):.1f}, "
+        f"Uniform scramble (n={n_scramble}) ΔAIC: median = {np.median(delta_aics_scram):.1f}, "
         f"99th %ile = {np.percentile(delta_aics_scram, 99):.1f}",
         "CALC",
     )
@@ -452,7 +486,7 @@ def cmb_falsification_analysis(df, verbose=False):
         "CALC",
     )
     print_status(
-        f"Random directions F: median = {np.median(f_stats_scram):.2f}, "
+        f"Uniform scramble F: median = {np.median(f_stats_scram):.2f}, "
         f"99th %ile = {np.percentile(f_stats_scram, 99):.2f}",
         "CALC",
     )
@@ -460,6 +494,46 @@ def cmb_falsification_analysis(df, verbose=False):
         f"True CMB F = {f_true:.2f}; p(random F ≥ true) = {p_scramble_f:.4f}",
         "CALC",
     )
+    print_status(
+        f"Eff-sample-size F: true = {f_true_eff:.2f}; "
+        f"p(random F_eff ≥ true) = {p_scramble_f_eff:.4f}",
+        "CALC",
+    )
+
+    # ------------------------------------------------------------------
+    # D2. Correlation-matched scramble (rigorous correlation-structure null)
+    # ------------------------------------------------------------------
+    # Random directions with different r(cosD, cosθ) have different aliasing
+    # potential.  The true correlation is corr_cosD_cosTheta ~ 0.050.
+    # We restrict the null to directions with a matched correlation to ensure
+    # the comparison is conditioned on the same correlation structure.
+    corr_true = abs(corr_cosD_cosTheta)
+    corr_tol = 0.02
+    matched_mask = np.abs(np.abs(corr_cosD_scram) - corr_true) <= corr_tol
+    n_matched = matched_mask.sum()
+    if n_matched >= 100:
+        p_scramble_delta_aic_matched = np.mean(delta_aics_scram[matched_mask] >= delta_aic_true)
+        p_scramble_f_matched = np.mean(f_stats_scram[matched_mask] >= f_true)
+        p_scramble_f_eff_matched = np.mean(f_stats_eff_scram[matched_mask] >= f_true_eff)
+        print_status(
+            f"Correlation-matched scramble: {n_matched} directions "
+            f"(|r(cosD, cosθ)| within {corr_tol:.3f} of {corr_true:.4f})",
+            "CALC",
+        )
+        print_status(
+            f"  p_matched(ΔAIC) = {p_scramble_delta_aic_matched:.4f}, "
+            f"p_matched(F) = {p_scramble_f_matched:.4f}, "
+            f"p_matched(F_eff) = {p_scramble_f_eff_matched:.4f}",
+            "CALC",
+        )
+    else:
+        p_scramble_delta_aic_matched = None
+        p_scramble_f_matched = None
+        p_scramble_f_eff_matched = None
+        print_status(
+            f"Correlation-matched scramble: insufficient matches ({n_matched})",
+            "WARNING",
+        )
 
     sky_scramble_result = {
         "n_scrambles": n_scramble,
@@ -468,13 +542,26 @@ def cmb_falsification_analysis(df, verbose=False):
         "true_delta_aic": float(delta_aic_true),
         "true_f_statistic": float(f_true),
         "true_f_p_value": float(p_f_true),
+        "true_f_statistic_eff": float(f_true_eff),
+        "base_residual_ar1_rho": float(rho_base),
+        "effective_sample_size": float(n_eff),
         "delta_aic_median": float(np.median(delta_aics_scram)),
         "delta_aic_99th_percentile": float(np.percentile(delta_aics_scram, 99)),
         "delta_aic_max": float(np.max(delta_aics_scram)),
         "f_median": float(np.median(f_stats_scram)),
         "f_99th_percentile": float(np.percentile(f_stats_scram, 99)),
+        "f_eff_median": float(np.median(f_stats_eff_scram)),
+        "f_eff_99th_percentile": float(np.percentile(f_stats_eff_scram, 99)),
         "p_scramble_delta_aic": float(p_scramble_delta_aic),
         "p_scramble_f": float(p_scramble_f),
+        "p_scramble_f_eff": float(p_scramble_f_eff),
+        "correlation_matched": {
+            "n_matched": int(n_matched) if n_matched is not None else None,
+            "corr_tolerance": float(corr_tol),
+            "p_scramble_delta_aic_matched": float(p_scramble_delta_aic_matched) if p_scramble_delta_aic_matched is not None else None,
+            "p_scramble_f_matched": float(p_scramble_f_matched) if p_scramble_f_matched is not None else None,
+            "p_scramble_f_eff_matched": float(p_scramble_f_eff_matched) if p_scramble_f_eff_matched is not None else None,
+        },
         "true_direction_preferred": bool(
             p_scramble_delta_aic < strict_alpha and p_scramble_f < strict_alpha
         ),
@@ -555,7 +642,7 @@ def cmb_falsification_analysis(df, verbose=False):
     def joint_direction_metrics(dir_vec):
         cos_theta_dir = np.sum(em_hat[:, mask_clean] * dir_vec[:, None], axis=0)
         cos_theta_dir_c = cos_theta_dir - np.mean(cos_theta_dir)
-        delta_aic, f_dir, p_f = delta_aic_for_direction(cos_theta_dir_c)
+        delta_aic, f_dir, p_f, _f_eff = delta_aic_for_direction(cos_theta_dir_c)
         eta_dir, se_dir, _, _, _ = fit_full_joint_model(res, cosD, r_c, vr_c, cos_theta_dir_c)
         t_dir = eta_dir / se_dir if se_dir and se_dir > 0 else 0.0
         return {
@@ -685,21 +772,23 @@ if __name__ == "__main__":
     )
     set_step_logger(logger)
 
-    data_path = (
-        PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
-    )
+    data_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     if not data_path.exists():
-        # Fallback to DE430 if INPOP19a not available
-        data_path = (
-            PROJECT_ROOT / "data" / "processed" / "DE430_all_residuals.csv"
+        raise FileNotFoundError(
+            "Missing required processed residual archive for Step 055: "
+            f"{data_path}. "
+            "This step is defined on the INPOP19a archive used by the primary estimand; "
+            "automatic ephemeris substitution is disabled."
         )
-    if not data_path.exists():
-        print_status(f"No processed residuals found at expected paths", "ERROR")
-        sys.exit(1)
 
     df = pd.read_csv(data_path)
 
     results = cmb_falsification_analysis(df, verbose=True)
+    if results:
+        results["input_dataset"] = {
+            "label": "INPOP19a_all_stations_residuals",
+            "path": str(data_path.relative_to(PROJECT_ROOT)),
+        }
 
     if results:
         logger.save_step_results(

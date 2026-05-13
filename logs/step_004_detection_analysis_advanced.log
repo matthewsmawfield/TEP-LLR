@@ -1,28 +1,28 @@
-[11:50:24] ═══ ═══ Starting Step 004: Advanced TEP Detection Analysis...
-[11:50:24]     ═══ STEP PURPOSE: Comprehensive TEP detection using 17 robust statistical methods
-[11:50:24]     ═══ METHOD: Bootstrap correlation, OLS regression, station-by-station analysis, leverage analysis
-[11:50:24]     ═══ PARAMETERS: Random seed=42, bootstrap samples=10000, Theil-Sen samples=100000
-[11:50:24]     ═══ DATA SUMMARY
-[11:50:24]     Loading residual data...
-[11:50:24]         Dataset: N = 26,207 observations
-[11:50:24]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
-[11:50:24]     ═══ ANALYSIS TRACE
-[11:50:24] ═══ Running comprehensive TEP detection analysis...
-[11:50:24]     Running bootstrap correlation analysis...
-[11:50:27]     Running OLS regression...
-[11:50:27]     Running station-by-station analysis...
-[11:50:27]     ═══ RESULTS SUMMARY
-[11:50:27]         Bootstrap correlation r: -0.0304
-[11:50:27]         95% CI: [-0.0411, -0.0197]
-[11:50:27]         Stations analyzed: 5
-[11:50:27]     ═══ INTERPRETATION
-[11:50:27]         Bootstrap correlation provides robust non-parametric confidence intervals
-[11:50:27]         Station-by-station analysis tests cross-instrumental consistency
-[11:50:27]         Multiple statistical methods ensure robustness of TEP detection
-[11:50:27]     ═══ REPRODUCIBILITY
-[11:50:27]         Output file: results/outputs/step_004_detection_analysis_advanced.json
-[11:50:27]         Random seed: 42
-[11:50:27]         Bootstrap samples: 10000
-[11:50:27]         Theil-Sen samples: 100000
-[11:50:27] ✓   Results saved to step_004_detection_analysis_advanced.json
-[11:50:27]     Bootstrap r=-0.0304 [-0.0411, -0.0197]
+[20:11:03] ═══ ═══ Starting Step 004: Advanced TEP Detection Analysis...
+[20:11:03]     ═══ STEP PURPOSE: Comprehensive TEP detection using 17 robust statistical methods
+[20:11:03]     ═══ METHOD: Bootstrap correlation, OLS regression, station-by-station analysis, leverage analysis
+[20:11:03]     ═══ PARAMETERS: Random seed=42, bootstrap samples=10000, Theil-Sen samples=100000
+[20:11:03]     ═══ DATA SUMMARY
+[20:11:03]     Loading residual data...
+[20:11:03]         Dataset: N = 26,207 observations
+[20:11:03]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+[20:11:03]     ═══ ANALYSIS TRACE
+[20:11:03] ═══ Running comprehensive TEP detection analysis...
+[20:11:03]     Running bootstrap correlation analysis...
+[20:11:06]     Running OLS regression...
+[20:11:06]     Running station-by-station analysis...
+[20:11:06]     ═══ RESULTS SUMMARY
+[20:11:06]         Bootstrap correlation r: -0.0304
+[20:11:06]         95% CI: [-0.0412, -0.0197]
+[20:11:06]         Stations analyzed: 5
+[20:11:06]     ═══ INTERPRETATION
+[20:11:06]         Bootstrap correlation provides robust non-parametric confidence intervals
+[20:11:06]         Station-by-station analysis tests cross-instrumental consistency
+[20:11:06]         Multiple statistical methods ensure robustness of TEP detection
+[20:11:06]     ═══ REPRODUCIBILITY
+[20:11:06]         Output file: results/outputs/step_004_detection_analysis_advanced.json
+[20:11:06]         Random seed: 42
+[20:11:06]         Bootstrap samples: 10000
+[20:11:06]         Theil-Sen samples: 100000
+[20:11:06] ✓   Results saved to step_004_detection_analysis_advanced.json
+[20:11:06]     Bootstrap r=-0.0304 [-0.0412, -0.0197]

@@ -1,7 +1,7 @@
 {
     "step_id": "step_036",
     "description": "Tests Murphy/Sabhlok full-moon deficit against TEP scalar-field predictions",
-    "timestamp": "2026-05-13T11:51:39.462101",
+    "timestamp": "2026-05-13T20:12:20.575317",
     "references": {
         "murphy_2010": "Murphy et al. 2010, PASP, 122, 892",
         "murphy_2014": "Murphy et al. 2014, Icarus, 231, 183",
@@ -10,21 +10,21 @@
     "phase_analysis": {
         "full_moon": {
             "n_observations": 840,
-            "mean_residual_m": 0.0023104971163168345,
+            "mean_residual_m": 0.002310497116316834,
             "std_residual_m": 0.049098157876712595,
             "sem_residual_m": 0.0016940473888936447,
-            "correlation_r": 0.04701128703488216,
+            "correlation_r": 0.0470112870348822,
             "correlation_p": 0.17343777322847573,
-            "eta": -0.00017776804763735185
+            "eta": -0.00017776804763735193
         },
         "quarter_moon": {
             "n_observations": 11033,
-            "mean_residual_m": -0.000524334319220351,
-            "std_residual_m": 0.09908197292051028,
-            "sem_residual_m": 0.000943295660611382,
+            "mean_residual_m": -0.0005243343192203513,
+            "std_residual_m": 0.09908197292051027,
+            "sem_residual_m": 0.0009432956606113818,
             "correlation_r": -0.030255278152309377,
             "correlation_p": 0.0014812909184679641,
-            "eta": -0.0011413696702161462
+            "eta": -0.001141369670216146
         },
         "new_moon": {
             "n_observations": 160,
@@ -38,20 +38,20 @@
     },
     "model_comparison": {
         "tep_correlation": {
-            "r": -0.03044048752477968,
+            "r": -0.030440487524779684,
             "p": 8.274105654898864e-07
         },
         "thermal_correlation": {
-            "r": 0.028827715425791062,
+            "r": 0.02882771542579106,
             "p": 3.048214116130858e-06
         },
         "preferred_model": "TEP",
-        "r_tep_squared": 0.0009266232807462674,
-        "r_thermal_squared": 0.0008310371766703919
+        "r_tep_squared": 0.0009266232807462676,
+        "r_thermal_squared": 0.0008310371766703918
     },
     "illumination_geometry": {
         "full_moon_subset_n": 1678,
-        "perihelion_correlation_r": 0.0253636930377105,
+        "perihelion_correlation_r": 0.025363693037710498,
         "perihelion_correlation_p": 0.29909510303716014,
         "interpretation": "Inconclusive"
     },

@@ -1,0 +1,9 @@
+[20:15:34] ═══ ═══ Step 056: Dynamical Integrator η Refit ═══
+[20:15:34]     INPOP19a cleaned sample: N=25,445
+[20:15:34]     DE430 cleaned sample: N=4,560
+[20:15:34]     Heliocentric modulation uses de440.bsp
+[20:15:35]     Heliocentric modulation uses de440.bsp
+[20:15:35]     INPOP linearized integrator η = -4.0612e-04 ± 6.5778e-05 (6.17σ)
+[20:15:35]     DE430 linearized integrator η = -5.9770e-04 ± 1.1851e-04 (5.04σ)
+[20:15:35]     Cross-ephemeris Δη = 1.9158e-04 ± 1.3554e-04 (1.41σ)
+[20:15:35] ✓   Saved results to results/outputs/step_056_dynamical_integrator_eta_refit.json

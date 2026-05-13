@@ -44,11 +44,11 @@
     "combined": {
         "total_obs": 26207,
         "stations": [
-            "APO",
             "Grasse",
-            "Matera",
+            "Haleakala",
             "McDonald2",
-            "Haleakala"
+            "Matera",
+            "APO"
         ],
         "date_range": [
             1984.26625597,

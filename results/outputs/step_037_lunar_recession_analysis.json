@@ -1,7 +1,7 @@
 {
     "step_id": "step_037",
     "description": "Tests lunar orbit recession anomaly (3.82 cm/yr) against TEP time-varying dynamics",
-    "timestamp": "2026-05-13T11:51:40.096119",
+    "timestamp": "2026-05-13T20:12:21.177682",
     "references": {
         "rio_rio_2012": "Riofrio 2012, Planetary Science \u2014 Lunar orbit anomaly",
         "tidal_rhythmites": "Historical average ~1.7 cm/yr from tidal rhythmites (2-3 Gyr)",
@@ -15,9 +15,9 @@
         "age_paradox": "At current rate, coincidence < 2 Gyr vs. actual 4.5 Gyr"
     },
     "recession_analysis": {
-        "estimated_recession_cm_per_year": -1.6845243881034785e-07,
-        "recession_error_cm_per_year": 0.0002415444458579593,
-        "snr": 0.0006973972769773669,
+        "estimated_recession_cm_per_year": -1.684524388103445e-07,
+        "recession_error_cm_per_year": 0.00024154444585795928,
+        "snr": 0.000697397276977353,
         "n_years": 36,
         "year_range": "1984-2019",
         "comparison_to_literature": {
@@ -25,7 +25,7 @@
             "measured_error": 0.07,
             "sigma_consistency": 54.57110609301242,
             "historical_average_rhythmites": 1.7,
-            "ratio_to_historical": -9.908966988843991e-08
+            "ratio_to_historical": -9.908966988843794e-08
         },
         "annual_data": {
             "years": [
@@ -139,7 +139,7 @@
                 0.0006485658286288577,
                 0.0006669335914684495,
                 0.0006254410980151288,
-                0.0003689461839410197,
+                0.0003689461839410204,
                 0.000577756657126153
             ]
         }
@@ -162,7 +162,7 @@
     },
     "tidal_q_analysis": {
         "q_nominal": 13.0,
-        "q_from_observed_recession": -294801312.17280686,
+        "q_from_observed_recession": -294801312.1728127,
         "q_historical_inferred": 29.211764705882352,
         "discrepancy_factor": 2.2470588235294118,
         "tep_interpretation": "Time-varying Q_eff from \u03c6 evolution"

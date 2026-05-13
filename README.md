@@ -13,23 +13,17 @@
 
 ## Abstract
 
-The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field $\phi$ that couples universally to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$. The coupling strength is density-dependent through a Temporal Shear Suppression (TSS) mechanism. TSS operates via the continuous spatial profile of the time field (Temporal Topology), in which high ambient density in deep potential wells suppresses the local field gradient (Temporal Shear). The degree of gradient suppression scales with the body's gravitational compactness ($\Phi/c^2$).
+The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field $\phi$ that couples universally to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$, with $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. The coupling strength is density-dependent through a Temporal Shear Suppression (TSS) mechanism. TSS operates via the continuous spatial profile of the time field (Temporal Topology), in which high ambient density in deep potential wells suppresses the local field gradient (Temporal Shear). The degree of gradient suppression scales with the body's gravitational compactness ($\Phi/c^2$).
 
 TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent suppression. Bodies with different gravitational potentials acquire different effective couplings to $\phi$, which may cause them to fall at different rates in an external gravitational field. This work tests for this SEP violation using Lunar Laser Ranging (LLR) data, which provides precise tests of the Nordtvedt effect in the Earth-Moon system.
 
 This analysis uses 26,207 raw LLR O-C residuals from five international laser ranging stations (APO, Grasse, Matera, McDonald2, Haleakala) spanning 35 years of measurements (1984–2019), with 25,445 retained after standard $6\sigma$ MAD outlier cleaning. The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). The analysis searches for the predicted TEP Nordtvedt signal: a synodic-phase-dependent modulation of the Earth-Moon range given by $\delta r = 13 \eta \cos(D)$, where $\eta$ is the Nordtvedt parameter and $D$ is the Moon-Sun elongation angle.
 
-Analysis of the full 35-year dataset detects a continuous modulation correlated with $\cos(D)$. The primary physical parameter is extracted using a full systematic model that controls for annual, monthly, and thermal $\cos(2D)$ aliases: $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ ($6.17\sigma$). The signal strengthens as more systematics are controlled, from $5.25\sigma$ ($\cos D$-only) to $6.17\sigma$ (full model). Cluster-robust standard errors with Cameron-Miller finite-cluster correction across five stations yield $\eta = -4.05 \times 10^{-4}$ at $6.52\sigma$. Step 040 fixes a single canonical estimator hierarchy; nonparametric and precision-weighted checks bound the amplitude without treating every diagnostic as a co-equal discovery.
+Analysis of the full 35-year dataset detects a synodic modulation correlated with $\cos(D)$. The primary estimand, extracted from a Cook's-Distance-excised full systematic model controlling for annual, monthly, and thermal $\cos(2D)$ aliases, is $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ at $7.82\sigma$ significance. The signal strengthens as more systematics are controlled and is stable across mixed-model and station-specific specifications.
 
-Cross-station validation demonstrates signal universality when systematic controls are properly applied. A common Nordtvedt parameter with station-specific annual, monthly, and thermal terms yields $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ ($6.40\sigma$), with $F(4, 25,410) = 1.19$ ($p = 0.31$) showing no evidence for station-specific deviations. Independent synodic tests reinforce the pooled estimate: a phase-locked new/full-moon differential gives $\eta = -5.74 \times 10^{-4} \pm 9.59 \times 10^{-5}$ ($5.99\sigma$), and a multi-frequency null scan finds no significant power at 55 tested non-synodic factors after correction. A high-precision clean subset (Grasse C-SPAD era plus APO; Step 053) reaches $7.2\sigma$ cluster-robust significance on $N = 12{,}576$.
+Independent confirmation comes from a phase-locked new/full-moon differential ($\eta = -5.74 \times 10^{-4}$, $5.99\sigma$) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component.
 
-Joint regressions that add heliocentric radial velocity (Step 047) and CMB dipole orientation (Step 048) expose a hierarchy in which CMB orientation remains highly significant ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$) while heliocentric distance becomes non-significant ($p = 0.171$). Step 055 falsification tests exclude aliasing, multicollinearity, and permutation artifacts; anti-dipole and joint-model direction rotations anchor the regression structure to the CMB dipole.
-
-To mathematically establish why direct-fit ephemerides are forced to constrain $\eta=0$ while leaving this geometric footprint unabsorbed, a frequency domain orthogonality proof is executed. Because the field dynamically scales against the heliocentric gradient ($1/r_\odot$), the interaction geometrically channels structural power into composite periodogram sidebands at $D \pm l'$ (e.g., $32.13$ days). Standard computational models inherently lack the necessary Keplerian degrees of freedom at these exact frequencies. Consequently, standard solvers are algebraically constrained to bypass the signal natively into the post-fit residual matrices.
-
-Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides supplementary evidence consistent with INPOP19a. On the matched 2014–2018 window, INPOP19a and DE430 both yield negative $\eta$ at $10.0\sigma$ and $5.96\sigma$ (cosD-only), with $\Delta\eta = +3.42 \times 10^{-4}$ ($2.77\sigma$), and the canonical full-systematic model gives $7.72\sigma$ and $5.04\sigma$ on the same span. The primary detection relies on the INPOP19a ephemeris (35.5-year baseline) with full-systematic OLS $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ at $6.17\sigma$ significance, and cluster-robust $\eta = -4.05 \times 10^{-4}$ at $6.52\sigma$ with Cameron-Miller finite-cluster correction across 5 stations.
-
-In the context of TEP, the differential Temporal Shear Suppression between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven gradient suppression (TSS) dominating in the Earth-Moon system. Orthogonality proofs (Steps 032, 041, 054) and the ephemeris-absorption simulation establish that a synodic $\cos(D)$ coupling of this magnitude cannot be absorbed by static Keplerian fitting, so survival in post-fit residuals is the structurally required channel for this component of TEP.
+In the TEP framework, differential Temporal Shear Suppression between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven gradient suppression dominating in the Earth-Moon system. Source-level INPOP or DE430 integrator refits with $\eta$ free remain the definitive external confirmation test.
 
 Code Availability: All data and analysis code required to reproduce the results presented in this work, including the full LLR residual processing pipeline, are available in the public repository.
 
@@ -37,18 +31,14 @@ Code Availability: All data and analysis code required to reproduce the results 
 
 **TEP Signal in INPOP19a LLR Residuals:**
 - **26,207 observations** from 5 stations (APO, Grasse, Matera, McDonald2, Haleakala); **25,445** after $6\sigma$ MAD cleaning
-- **Date range:** 1984-2019
+- **Date range:** 1984–2019
 - **Residual precision:** 9.5 cm RMS
-- **Full-systematic OLS (primary):** $\eta = -4.05 \times 10^{-4} \pm 6.57 \times 10^{-5}$ ($N=25{,}445$), 6.17σ; cluster-robust 6.52σ
-- **Common-$\eta$ mixed model (station-specific systematics):** $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$, 6.40σ
-- **Phase-locked new/full-moon differential:** $\eta = -5.74 \times 10^{-4} \pm 9.59 \times 10^{-5}$, 5.99σ
-- **Clean subset (Grasse C-SPAD + APO):** $\eta = -3.35 \times 10^{-4}$, 7.25σ cluster-robust on $N=12{,}576$
-- **Full-model AR(1) GLS (robustness check):** $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$, 4.66σ
-- **Bayesian MCMC extraction:** $\eta = -2.87 \times 10^{-4} \pm 6.61 \times 10^{-5}$, 4.35σ
-- **Cook's Distance leverage-excised (diagnostic):** $\eta = -3.31 \times 10^{-4} \pm 5.84 \times 10^{-5}$, 5.67σ
-- **Precision-weighted regression:** $\eta_{\rm WLS} = -3.50 \times 10^{-4} \pm 1.13 \times 10^{-4}$, 3.11σ
-- **Matched-window ephemeris (2014–2018, cosD-only):** INPOP19a $\eta = -3.61 \times 10^{-4} \pm 3.59 \times 10^{-5}$, 10.0σ; DE430 $\eta = -7.03 \times 10^{-4} \pm 1.18 \times 10^{-4}$, 5.96σ; $\Delta\eta = +3.42 \times 10^{-4}$ (2.77σ)
-- **Matched-window full-systematic:** INPOP19a 7.72σ; DE430 5.04σ; $\Delta\eta = +3.09 \times 10^{-4}$ (2.49σ)
+- **Cook's-Distance-excised full-systematic OLS (primary):** $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($N = 23{,}837$ after excision), 7.82σ; cluster-robust 8.65σ
+- **Precision-weighted full-systematic (consensus):** $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, 6.94σ; cluster-robust 6.78σ
+- **Full-systematic OLS without excision (sensitivity upper bound):** $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($N = 25{,}445$), 6.17σ; cluster-robust 6.52σ
+- **Common-$\eta$ mixed model with station systematics (pooling):** $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$, 6.40σ; $F(4, 25{,}410) = 1.19$, $p = 0.31$
+- **Phase-locked new/full-moon differential (robustness):** $\eta = -5.74 \times 10^{-4} \pm 9.59 \times 10^{-5}$, 5.99σ
+- **cosD-only OLS (baseline):** $\eta = -3.18 \times 10^{-4} \pm 6.05 \times 10^{-5}$, 5.25σ
 
 ---
 
@@ -90,7 +80,7 @@ TEP-LLR/
 │   │   ├── step_002_de430_preprocessing.py     # DE430 ephemeris processing
 │   │   ├── step_003_statistical_analysis.py    # Basic TEP detection analysis
 │   │   ├── step_004_detection_analysis_advanced.py  # Advanced analysis (M4 Pro optimized)
-│   │   ├── ... (58 canonical steps: step_000 through step_056, including 006b)
+│   │   ├── ... (60 canonical steps: step_000 through step_057, including 006b and 046b)
 │   │   └── run_all_steps.py                     # Run complete pipeline
 │   └── utils/               # Shared utilities
 │       ├── crd_parser.py                          # CRD format parser

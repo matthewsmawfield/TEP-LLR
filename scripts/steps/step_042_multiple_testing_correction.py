@@ -525,7 +525,7 @@ def main():
     print(f"Benjamini-Hochberg rejected (independent only): {n_bh_rejected}/{len(independent_indices)}")
 
     # Focus on primary test
-    primary_idx = 0  # Primary Pearson correlation
+    primary_idx = 0  # Full-Systematic OLS (primary estimand)
     results['primary_detection'] = {
         'original_sigma': sigmas[primary_idx],
         'original_p': p_values[primary_idx],
@@ -537,7 +537,7 @@ def main():
         'still_significant_bh': bool(bh_rejected[primary_idx]) if bh_rejected[primary_idx] is not None else None
     }
 
-    print(f"\nPrimary detection (Pearson correlation):")
+    print(f"\nPrimary detection (Full-Systematic OLS):")
     print(f"  Original: {sigmas[primary_idx]:.2f}σ (p={p_values[primary_idx]:.2e})")
     if bonf_sigmas[primary_idx] is not None:
         print(f"  Bonferroni: {bonf_sigmas[primary_idx]:.2f}σ (p={bonf_p[primary_idx]:.2e})")

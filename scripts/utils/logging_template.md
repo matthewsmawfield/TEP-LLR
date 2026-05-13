@@ -110,7 +110,7 @@ For regression/fitting steps:
 - Provides interpretation of Bayes factors
 - Reports all key parameters
 
-#### Needs Improvement (step_002_statistical_analysis.log)
+#### Needs Improvement (step_003_statistical_analysis.log)
 - Missing regression diagnostics (RSS, MSE, χ²_red, condition number)
 - No method description
 - No interpretation of results
@@ -131,7 +131,7 @@ For each step script:
 ## Priority Steps for Improvement
 
 1. **High Priority** (too brief, missing diagnostics):
-   - step_002_statistical_analysis.py
+   - step_003_statistical_analysis.py
    - step_010_ephemeris_independent_analysis.py
    - step_025_solar_cycle_correlation.py
    - step_031_station_power_analysis.py

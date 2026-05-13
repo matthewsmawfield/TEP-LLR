@@ -1,28 +1,28 @@
-[11:50:53] ═══ ═══ Starting Step 023: Solar Cycle Correlation & Haleakala Station Anomaly...
-[11:50:53]     ═══ STEP PURPOSE: Test if TEP signal correlates with 11-year solar cycle and investigate Haleakala anomaly
-[11:50:53]     ═══ METHOD: Compare η at solar minima vs maxima, Monte Carlo permutation test
-[11:50:53]     ═══ DATA SUMMARY
-[11:50:53]         Dataset: N = 26,207 observations
-[11:50:53]         Data source: INPOP19a_all_stations_residuals.csv
-[11:50:53]         Applied 6σ MAD outlier cleaning: removed 762/26207 outliers
-[11:50:53]         Cleaned dataset: N = 25,445 observations
-[11:50:53]     ═══ ANALYSIS TRACE
-[11:50:53] >>> >>> Comparing TEP signal at solar minima vs maxima
-[11:50:53]         Low solar activity (index < 0.1): N = 10,234
-[11:50:53]         High solar activity (index > 0.9): N = 1,344
-[11:51:00] >>> >>> Investigating Haleakala station anomaly
-[11:51:00]     ═══ RESULTS SUMMARY
-[11:51:00]         Solar modulation differential: -1.8876e-03 ± 5.2704e-04
-[11:51:00]         Differential significance: 3.58σ
-[11:51:00]         Empirical p-value: 0.0000
-[11:51:00]         Haleakala η: 2.5708e-03 ± 1.1645e-03
-[11:51:00]     ═══ INTERPRETATION
-[11:51:00]         Solar cycle modulation test: SIGNIFICANT
-[11:51:00]         Haleakala anomaly: EXPLAINED by solar cycle timing
-[11:51:00]         Limitations: Solar activity index is simplified sine wave model
-[11:51:00]     ═══ REPRODUCIBILITY
-[11:51:00]         Output file: results/outputs/step_023_solar_cycle_correlation.json
-[11:51:00]         Permutations: 10000
-[11:51:00]         Random seed: 42
-[11:51:00] Results saved to results/outputs/step_023_solar_cycle_correlation.json
-[11:51:00] ✓   Solar Cycle Correlation Complete.
+[20:11:33] ═══ ═══ Starting Step 023: Solar Cycle Correlation & Haleakala Station Anomaly...
+[20:11:33]     ═══ STEP PURPOSE: Test if TEP signal correlates with 11-year solar cycle and investigate Haleakala anomaly
+[20:11:33]     ═══ METHOD: Compare η at solar minima vs maxima, Monte Carlo permutation test
+[20:11:33]     ═══ DATA SUMMARY
+[20:11:33]         Dataset: N = 26,207 observations
+[20:11:33]         Data source: INPOP19a_all_stations_residuals.csv
+[20:11:33]         Applied 6σ MAD outlier cleaning: removed 762/26207 outliers
+[20:11:33]         Cleaned dataset: N = 25,445 observations
+[20:11:33]     ═══ ANALYSIS TRACE
+[20:11:33] >>> >>> Comparing TEP signal at solar minima vs maxima
+[20:11:33]         Low solar activity (index < 0.1): N = 10,234
+[20:11:33]         High solar activity (index > 0.9): N = 1,344
+[20:11:41] >>> >>> Investigating Haleakala station anomaly
+[20:11:41]     ═══ RESULTS SUMMARY
+[20:11:41]         Solar modulation differential: -1.8876e-03 ± 5.2704e-04
+[20:11:41]         Differential significance: 3.58σ
+[20:11:41]         Empirical p-value: 0.0000
+[20:11:41]         Haleakala η: 2.5708e-03 ± 1.1645e-03
+[20:11:41]     ═══ INTERPRETATION
+[20:11:41]         Solar cycle modulation test: SIGNIFICANT
+[20:11:41]         Haleakala anomaly: EXPLAINED by solar cycle timing
+[20:11:41]         Limitations: Solar activity index is simplified sine wave model
+[20:11:41]     ═══ REPRODUCIBILITY
+[20:11:41]         Output file: results/outputs/step_023_solar_cycle_correlation.json
+[20:11:41]         Permutations: 10000
+[20:11:41]         Random seed: 42
+[20:11:41] Results saved to results/outputs/step_023_solar_cycle_correlation.json
+[20:11:41] ✓   Solar Cycle Correlation Complete.

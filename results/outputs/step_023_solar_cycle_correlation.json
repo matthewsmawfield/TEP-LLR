@@ -2,9 +2,9 @@
     "step_id": "step_023",
     "status": "PASS",
     "solar_modulation": {
-        "low_activity_eta": -0.00018807718824616077,
-        "high_activity_eta": 0.001699500157281967,
-        "significance_sigma": 3.581460417421083,
+        "low_activity_eta": -0.00018807718824616056,
+        "high_activity_eta": 0.001699500157281966,
+        "significance_sigma": 3.581460417421081,
         "empirical_p_value": 0.0
     },
     "haleakala_analysis": {

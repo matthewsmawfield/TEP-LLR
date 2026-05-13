@@ -1091,66 +1091,6 @@ def cross_validation_analysis(residuals: np.ndarray, elongation: np.ndarray,
         'n_folds': n_folds
     }
 
-def holdout_test(residuals: np.ndarray, elongation: np.ndarray,
-                 holdout_frac: float = 0.2, seed: int = TEP_CONFIG.get("RANDOM_SEED", 42)) -> Dict:
-    if get_verbose_mode():
-        print_status(
-            f"Running holdout test with {holdout_frac*100:.0f}% holdout...", "PROCESS")
-
-    np.random.seed(seed)
-    n = len(residuals)
-    n_holdout = int(n * holdout_frac)
-
-    indices = np.random.permutation(n)
-    train_idx = indices[:-n_holdout]
-    test_idx = indices[-n_holdout:]
-
-    # Train on training set
-    train_res = residuals[train_idx]
-    train_cos = np.cos(elongation[train_idx])
-
-    # Fit model on training set with intercept to address leverage bias from phase asymmetry
-    # Model: residual = A * cos(elongation) + B
-    X_train = np.column_stack([train_cos, np.ones_like(train_cos)])
-    coeffs_train, _, _, _ = stable_lstsq(X_train, train_res)
-    A_train, B_train = coeffs_train
-    eta_train = A_train / ETA_SCALE_FACTOR
-
-    # Test on test set
-    test_res = residuals[test_idx]
-    test_cos = np.cos(elongation[test_idx])
-
-    # Predict residuals using trained model
-    pred_res = A_train * test_cos + B_train
-
-    # Compute correlation between predicted and actual test residuals (proper generalization test)
-    r_test, p_test = stats.pearsonr(test_res, pred_res)
-
-    # Fit model on test set independently for comparison
-    X_test = np.column_stack([test_cos, np.ones_like(test_cos)])
-    coeffs_test, _, _, _ = stable_lstsq(X_test, test_res)
-    A_test, _ = coeffs_test
-    eta_test = A_test / ETA_SCALE_FACTOR
-
-    # Compute prediction error
-    mse = np.mean((test_res - pred_res)**2)
-
-    # Compare training and test results
-    eta_diff = eta_train - eta_test
-
-    return {
-        'n_train': len(train_idx),
-        'n_test': len(test_idx),
-        'eta_train': eta_train,
-        'eta_test': eta_test,
-        'eta_difference': eta_diff,
-        'r_test': r_test,
-        'p_test': p_test,
-        'mse': mse,
-        'A_train': A_train,
-        'A_test': A_test
-    }
-
 def complex_phase_coherence_analysis(residuals: np.ndarray, elongation: np.ndarray) -> Dict:
     cos_d = np.cos(elongation)
     sin_d = np.sin(elongation)

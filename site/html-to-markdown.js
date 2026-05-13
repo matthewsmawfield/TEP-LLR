@@ -209,6 +209,7 @@ First published: ${dateReleased}${doi ? `\nDOI: ${doi}` : ''}
             console.log(`✅ Markdown saved to: ${outputPath} (${(finalMarkdown.length / 1024).toFixed(1)} KB)`);
         } catch (error) {
             console.error('❌ Markdown conversion failed:', error.message);
+            process.exitCode = 1;
         }
     }
 }

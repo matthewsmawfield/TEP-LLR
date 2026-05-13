@@ -1,0 +1,26 @@
+[22:34:49] ═══ ═══ Step 066: Lomb-Scargle Sideband Survival Analysis ═══
+[22:34:49]     Loaded INPOP19a residuals: N=26,207
+[22:34:49] >>> Building ephemeris-like basis...
+[22:34:49]     Basis size: 82 parameters
+[22:34:49] >>> Fitted basis to real residuals.
+[22:34:49]     --- Real INPOP residuals: peak extraction ---
+[22:34:49]       D_minus_M           : pre=0.0140, post=0.0121, survival=86.3%
+[22:34:49]       D                   : pre=0.0044, post=0.0035, survival=79.8%
+[22:34:49]       D_plus_M            : pre=0.0048, post=0.0037, survival=75.8%
+[22:34:49]       D_minus_annual      : pre=0.0063, post=0.0072, survival=114.6%
+[22:34:49]       D_plus_annual       : pre=0.0063, post=0.0066, survival=103.7%
+[22:34:49]       D_minus_2annual     : pre=0.0029, post=0.0027, survival=94.3%
+[22:34:49]       D_plus_2annual      : pre=0.0047, post=0.0047, survival=99.7%
+[22:34:49]     --- Synthetic modulated TEP signal ---
+[22:34:49]       D_minus_M           : pre=0.0140, post=0.0121, survival=86.1%
+[22:34:49]       D                   : pre=0.0044, post=0.0035, survival=80.4%
+[22:34:49]       D_plus_M            : pre=0.0048, post=0.0037, survival=76.3%
+[22:34:49]       D_minus_annual      : pre=0.0063, post=0.0072, survival=114.6%
+[22:34:49]       D_plus_annual       : pre=0.0063, post=0.0066, survival=104.8%
+[22:34:49]       D_minus_2annual     : pre=0.0029, post=0.0027, survival=93.2%
+[22:34:49]       D_plus_2annual      : pre=0.0046, post=0.0047, survival=100.8%
+[22:34:49]     Real sideband mean survival: 95.7%
+[22:34:49]     Synth sideband mean survival: 96.0%
+[22:34:49] ✓   --- CONCLUSION ---
+[22:34:49] ✓   On real INPOP19a residuals, the central synodic carrier survives at 79.8% after an 82-parameter basis fit, while the mean sideband survival is 95.7%. For the synthetic dynamically modulated TEP signal, carrier survival is 80.4% and sideband mean survival is 96.0%. The sidebands (D±M, D±annual) are substantially more robust to absorption than the central carrier because the basis lacks explicit cross-frequency product terms. This spectral persistence is direct evidence that the residual signal carries a dynamical sideband signature that cannot be reproduced by static ephemeris parameter adjustments.
+[22:34:49] ✓   Saved results to results/outputs/step_066_lomb_scargle_sideband_survival.json

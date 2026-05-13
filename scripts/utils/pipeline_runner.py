@@ -3,7 +3,7 @@
 Shared pipeline runner utility for TEP-LLR pipeline.
 
 Provides run_step() and run_pipeline() for executing the canonical
-58-step Lunar Laser Ranging analysis pipeline.
+60-step Lunar Laser Ranging analysis pipeline.
 """
 
 import datetime
@@ -79,6 +79,8 @@ def _validate_step_output(output_path: Path, pre_run_mtime: float | None) -> tup
         status = str(payload.get("status", "")).upper()
         if status in {"FAIL", "FAILED", "ERROR"}:
             return False, f"{output_path.relative_to(PROJECT_ROOT)} reports status={status}"
+        if status == "WARNING":
+            return True, "fresh output verified with status=WARNING"
 
     return True, "fresh output verified"
 

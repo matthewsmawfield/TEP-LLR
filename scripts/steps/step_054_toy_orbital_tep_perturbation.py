@@ -39,7 +39,9 @@ from scripts.utils.numerics import stable_lstsq
 from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 from scipy.optimize import minimize
 
-logger = TEPLogger("step_054")
+log_dir = PROJECT_ROOT / "logs"
+log_dir.mkdir(parents=True, exist_ok=True)
+logger = TEPLogger("step_054", str(log_dir / "step_054_toy_orbital_tep_perturbation.log"))
 set_step_logger(logger)
 
 

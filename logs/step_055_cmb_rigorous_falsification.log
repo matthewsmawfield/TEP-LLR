@@ -1,38 +1,42 @@
-[11:52:05] ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
-[11:52:05] >>> Computing CMB-frame kinematics...
-[11:52:05]     r(cosD, cosθ) = 0.0499
-[11:52:05]     Cleaned dataset: 25,445 observations
-[11:52:05] ═══ ═══ A. Aliasing Simulation Falsification ═══
-[11:52:12]     Simulated η_θ (no CMB): mean=9.4454e-07, std=8.8194e-05, max|η|=3.2737e-04
-[11:52:12]     Simulated t (no CMB): mean=0.01, std=0.99, max|t|=3.69
-[11:52:12]     Observed: η_θ = -9.7721e-04, t = -11.02
-[11:52:12]     Aliasing p-value (coefficient): 0.0000
-[11:52:12]     Aliasing p-value (t-statistic): 0.0000
-[11:52:12] ═══ ═══ B. Multicollinearity Diagnostic Suite ═══
-[11:52:12]     VIF(cosD) = 1.017
-[11:52:12]     VIF(r_c·cosD) = 1.026
-[11:52:12]     VIF(vr_c·cosD) = 1.189
-[11:52:12]     VIF(cosθ_c·cosD) = 1.201
-[11:52:12]     Condition number κ(X) = 1.78e+02
-[11:52:12]     Condition number κ(XᵀX) = 3.18e+04
-[11:52:12]     SE(cosθ) actual = 8.8659e-05; SE if orthogonal = 8.8659e-05; inflation = 1.00x
-[11:52:12] ═══ ═══ C. Permutation Test for cosθ ═══
-[11:52:13]     Permuted η_θ: mean=-1.2885e-06, std=7.9799e-05, 99.9th %ile |η|=2.3028e-04
-[11:52:13]     Permuted t: mean=-0.02, std=0.95, 99.9th %ile |t|=2.76
-[11:52:13]     Permutation p (coefficient) = 0.0000
-[11:52:13]     Permutation p (t-statistic) = 0.0000
-[11:52:13] ═══ ═══ D. Sky Scrambling Monte Carlo ═══
-[11:52:21]     Base model AIC = -141809.8; True CMB ΔAIC = 119.2
-[11:52:21]     Random directions ΔAIC: median = 60.5, 99th %ile = 130.2
-[11:52:21]     p(random ΔAIC ≥ true) = 0.0902
-[11:52:21]     Random directions F: median = 62.52, 99th %ile = 132.47
-[11:52:21]     True CMB F = 121.49; p(random F ≥ true) = 0.0902
-[11:52:21] ═══ ═══ E. Gram–Schmidt Orthogonalization ═══
-[11:52:21]     Orthogonality residuals (dot products): ['3.77e-12', '4.19e-15', '-1.01e-12', '-1.23e-12']
-[11:52:21]     Orthogonalized η_θ = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000e+00)
-[11:52:21] ═══ ═══ F. Joint-model directional anatomy ═══
-[11:52:21]     ΔAIC(true vs perp1) = 116.4; ΔAIC(true vs perp2) = 94.5; ΔAIC(true vs antipode) = 0.0
-[11:52:21]     |η_θ|/σ: true=11.02, perp1=2.20, perp2=5.17, antipode=11.02
-[11:52:21] ✓   RESULT: 5/5 falsification tests passed. CMB anisotropy claim is robust.
-[11:52:21] Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
-[11:52:21] ✓   CMB Falsification analysis complete.
+[20:14:02] ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
+[20:14:02] >>> Computing CMB-frame kinematics...
+[20:14:02]     r(cosD, cosθ) = 0.0499
+[20:14:02]     Cleaned dataset: 25,445 observations
+[20:14:02] ═══ ═══ A. Aliasing Simulation Falsification ═══
+[20:14:08]     Simulated η_θ (no CMB): mean=-7.5735e-07, std=8.8080e-05, max|η|=3.2360e-04
+[20:14:08]     Simulated t (no CMB): mean=-0.01, std=0.99, max|t|=3.66
+[20:14:08]     Observed: η_θ = -9.7721e-04, t = -11.02
+[20:14:08]     Aliasing p-value (coefficient): 0.0000
+[20:14:08]     Aliasing p-value (t-statistic): 0.0000
+[20:14:09] ═══ ═══ B. Multicollinearity Diagnostic Suite ═══
+[20:14:09]     VIF(cosD) = 1.017
+[20:14:09]     VIF(r_c·cosD) = 1.026
+[20:14:09]     VIF(vr_c·cosD) = 1.189
+[20:14:09]     VIF(cosθ_c·cosD) = 1.201
+[20:14:09]     Condition number κ(X) = 1.78e+02
+[20:14:09]     Condition number κ(XᵀX) = 3.18e+04
+[20:14:09]     SE(cosθ) actual = 8.8659e-05; SE if orthogonal = 8.8659e-05; inflation = 1.00x
+[20:14:09] ═══ ═══ C. Permutation Test for cosθ ═══
+[20:14:10]     Permuted η_θ: mean=6.6079e-07, std=8.2560e-05, 99.9th %ile |η|=2.6145e-04
+[20:14:10]     Permuted t: mean=0.01, std=0.99, 99.9th %ile |t|=3.11
+[20:14:10]     Permutation p (coefficient) = 0.0000
+[20:14:10]     Permutation p (t-statistic) = 0.0000
+[20:14:10] ═══ ═══ D. Sky Scrambling Monte Carlo ═══
+[20:14:10]     Base residual AR(1) ρ = 0.4161; n_eff = 10491.1
+[20:15:34]     Base model AIC = -141809.8; True CMB ΔAIC = 119.2
+[20:15:34]     Uniform scramble (n=50000) ΔAIC: median = 62.5, 99th %ile = 130.5
+[20:15:34]     p(random ΔAIC ≥ true) = 0.0981
+[20:15:34]     Uniform scramble F: median = 64.53, 99th %ile = 132.81
+[20:15:34]     True CMB F = 121.49; p(random F ≥ true) = 0.0981
+[20:15:34]     Eff-sample-size F: true = 50.08; p(random F_eff ≥ true) = 0.0981
+[20:15:34]     Correlation-matched scramble: 9268 directions (|r(cosD, cosθ)| within 0.020 of 0.0499)
+[20:15:34]       p_matched(ΔAIC) = 0.2711, p_matched(F) = 0.2711, p_matched(F_eff) = 0.2711
+[20:15:34] ═══ ═══ E. Gram–Schmidt Orthogonalization ═══
+[20:15:34]     Orthogonality residuals (dot products): ['-3.23e-12', '-1.92e-15', '9.15e-13', '1.72e-11']
+[20:15:34]     Orthogonalized η_θ = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000e+00)
+[20:15:34] ═══ ═══ F. Joint-model directional anatomy ═══
+[20:15:34]     ΔAIC(true vs perp1) = 116.4; ΔAIC(true vs perp2) = 94.5; ΔAIC(true vs antipode) = 0.0
+[20:15:34]     |η_θ|/σ: true=11.02, perp1=2.20, perp2=5.17, antipode=11.02
+[20:15:34] ✓   RESULT: 5/5 falsification tests passed. CMB anisotropy claim is robust.
+[20:15:34] Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
+[20:15:34] ✓   CMB Falsification analysis complete.

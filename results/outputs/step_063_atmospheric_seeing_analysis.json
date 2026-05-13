@@ -1,0 +1,32 @@
+{
+    "step_id": "step_063",
+    "status": "PASS",
+    "signal_amplitude_mm": 4.130446612084254,
+    "seeing_parameters": {
+        "typical_fwhm_arcsec": 1.0,
+        "bad_fwhm_arcsec": 3.0,
+        "lateral_wander_typical_m": 791.3476816072426,
+        "lateral_wander_bad_m": 2374.0430448217276
+    },
+    "range_effects": {
+        "max_range_shift_from_reflector_switch_m": 208.84190755208252,
+        "coherent_bias_typical_mm": 6604.160987589005,
+        "coherent_bias_bad_mm": 20884.190755208252,
+        "opl_per_turbulent_layer_mm": 0.01,
+        "opl_coherent_after_averaging_mm": 0.000316227766016838
+    },
+    "synodic_correlation": {
+        "step_027_total_elevation_bound_mm": 0.4445553912168107,
+        "seeing_fraction_of_elevation_systematic": 0.25,
+        "seeing_specific_bound_mm": 0.11113884780420268,
+        "elevation_systematic_already_tested": true,
+        "elevation_test_reference": "Step 027 (day/night thermal bias null test)",
+        "elevation_test_pvalue": 0.2811759875205231
+    },
+    "combined": {
+        "max_plausible_synodic_bias_mm": 0.11113884780420268,
+        "ratio_to_tep_signal": 0.026907222932999297,
+        "can_explain_signal": false
+    },
+    "conclusion": "Atmospheric seeing cannot produce a synodic-correlated range bias exceeding 0.111 mm, which is 0.03 times smaller than the 4.13 mm TEP signal. The dominant elevation-dependent channel is already bounded by Step 027 (p=0.281). Fast stochastic wander averages to zero over LLR integration times."
+}

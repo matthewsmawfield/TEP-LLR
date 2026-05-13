@@ -89,6 +89,7 @@ def check_data(verbose=False):
         "INPOP19a_McDonald2_residuals.txt",
         "INPOP19a_Haleakala_residuals.txt",
         "DE430_2014-2018_residuals.dat",
+        "de440.bsp",
     ]
 
     found = []

@@ -124,7 +124,7 @@
     "chi2_sim_median": 0.89,
     "chi2_sim_95th_percentile": 2.09,
     "percentile_in_simulated_distribution": 100.0,
-    "global_eta_used": -0.0003177266624680193,
+    "global_eta_used": -0.0003177266624680195,
     "interpretation": "Observed chi2/dof = 4.0. Under the hypothesis of a constant eta = -3.18e-04 with epoch-varying noise, simulated chi2/dof has median = 0.9 and 95th percentile = 2.1. The observed chi2/dof is at the 100th percentile of the expected distribution under heteroscedastic noise \u2014 above the 95th percentile, suggesting additional variance beyond noise."
   },
   "amplitude_rms_correlation": {

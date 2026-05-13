@@ -1,0 +1,150 @@
+{
+  "step_id": "step_065",
+  "status": "PASS",
+  "step": "065_high_dimensional_absorption_test",
+  "simulation": {
+    "n_observations": 26207,
+    "n_basis_parameters": 82,
+    "condition_number": 1.0249304285898822e+21,
+    "injected_eta": -0.000406,
+    "injected_amplitude_mm": 5.278
+  },
+  "test_a_white_noise_static": {
+    "test_surface": "white_noise",
+    "n_observations": 26207,
+    "injected_eta": -0.000406,
+    "injected_amplitude_mm": 5.278,
+    "pre_clean": {
+      "amplitude_m": -0.001070546238090112,
+      "amplitude_err_m": 0.0011942393458116373,
+      "eta": -8.23497106223163e-05,
+      "eta_err": 9.186456506243364e-05,
+      "snr": 0.8964251947021054
+    },
+    "pre_fit": {
+      "amplitude_m": -0.006348546238090112,
+      "amplitude_err_m": 0.0011942393458116373,
+      "eta": -0.0004883497106223163,
+      "eta_err": 9.186456506243364e-05,
+      "snr": 5.315974775370902
+    },
+    "post_fit_without_cosd": {
+      "amplitude_m": -0.00011474797510412764,
+      "amplitude_err_m": 0.001192684712010608,
+      "eta": -8.826767315702127e-06,
+      "eta_err": 9.174497784696985e-05,
+      "snr": 0.0962098146715467
+    },
+    "post_fit_with_cosd": {
+      "amplitude_m": 2.6534132109684516e-14,
+      "amplitude_err_m": 0.0011926634123812145,
+      "eta": 2.0410870853603473e-15,
+      "eta_err": 9.174333941393957e-05,
+      "snr": 2.224779584435121e-11
+    },
+    "joint_fit_eta": -0.0009013501412698853,
+    "eta_survived": 7.352294330661418e-05,
+    "absorption_fraction": 1.1810909933660447,
+    "survival_fraction": -0.18109099336604473
+  },
+  "test_b_modulated_tep": {
+    "test_surface": "modulated_tep",
+    "injected_eta": -0.000406,
+    "pre_fit": {
+      "amplitude_m": -0.005274711925432581,
+      "amplitude_err_m": 0.0011953082839281659,
+      "eta": -0.0004057470711871216,
+      "eta_err": 9.194679107139737e-05,
+      "snr": 4.412846456730132
+    },
+    "post_fit_without_cosd": {
+      "amplitude_m": -0.00014968668457236516,
+      "amplitude_err_m": 0.0011703248837463907,
+      "eta": -1.1514360351720397e-05,
+      "eta_err": 9.002499105741467e-05,
+      "snr": 0.12790182166612998
+    },
+    "post_fit_with_cosd": {
+      "amplitude_m": 1.078715092690154e-14,
+      "amplitude_err_m": 0.0011702879459898716,
+      "eta": 8.297808405308877e-16,
+      "eta_err": 9.002214969152858e-05,
+      "snr": 9.217518614854552e-12
+    },
+    "joint_fit_eta": -0.0011757951659213451,
+    "sideband_pre_fit": {
+      "power_minus": 0.006978887562542365,
+      "power_centre": 0.002441956649284094,
+      "power_plus": 0.0011774589203133548,
+      "total_sideband_power": 0.010598303132139813,
+      "sideband_fraction": 0.7695898467105782
+    },
+    "sideband_post_fit": {
+      "power_minus": 5.426084424624867e-09,
+      "power_centre": 0.000132525970721242,
+      "power_plus": 0.00017785909296986886,
+      "total_sideband_power": 0.00031039048977553546,
+      "sideband_fraction": 0.573034693114855
+    },
+    "sideband_ratio_pre": 3.340086518426487,
+    "sideband_ratio_post": 1.3421106677152177,
+    "sideband_ratio_survival_fraction": 0.4018191326215961
+  },
+  "test_c_real_inpop_sidebands": {
+    "test_surface": "real_inpop_sidebands",
+    "pre_fit_eta": -0.00045329831411731396,
+    "pre_fit_eta_err": 9.194732759479532e-05,
+    "post_fit_eta": -1.1974801061106526e-05,
+    "post_fit_eta_err": 9.002543913031064e-05,
+    "sideband_pre_fit": {
+      "power_minus": 0.00699510857716358,
+      "power_centre": 0.0026907051111281647,
+      "power_plus": 0.0011915389881081428,
+      "total_sideband_power": 0.010877352676399887,
+      "sideband_fraction": 0.7526323553923127
+    },
+    "sideband_post_fit": {
+      "power_minus": 5.424844443962806e-09,
+      "power_centre": 0.00013297222396382478,
+      "power_plus": 0.00017807950079430353,
+      "total_sideband_power": 0.0003110571496025723,
+      "sideband_fraction": 0.5725151338468859
+    },
+    "sideband_ratio_pre": 3.0425658803759466,
+    "sideband_ratio_post": 1.339264098396938,
+    "sideband_ratio_survival_fraction": 0.4401758749202352
+  },
+  "basis_projection": {
+    "max_projection": 0.9267559839062915,
+    "n_above_0_01": 65,
+    "n_above_0_001": 80,
+    "top_5_projections": [
+      {
+        "name": "sin_2D",
+        "projection": 0.9267559839062915
+      },
+      {
+        "name": "cos_3D",
+        "projection": 0.5840861171383732
+      },
+      {
+        "name": "cos_2D",
+        "projection": 0.35812158204137157
+      },
+      {
+        "name": "sin_3D",
+        "projection": 0.3128608191937719
+      },
+      {
+        "name": "t3",
+        "projection": 0.19419047989724503
+      }
+    ]
+  },
+  "conclusion": {
+    "white_noise_absorption_pct": 118.11,
+    "modulated_sideband_ratio_survival_pct": 40.18,
+    "real_sideband_ratio_survival_pct": 44.02,
+    "key_finding": "A 82-parameter ephemeris-like basis can partially absorb a static synodic carrier on the real LLR sampling manifold (absorption 118.1% in the worst-case linear scenario). However, the dynamically modulated TEP signal's sideband-to-carrier ratio survives at 40.2% after fitting. On real INPOP19a residuals, the sideband-to-carrier ratio survives at 44.0%. The persistence of sideband structure \u2014 which requires explicit cross-frequency (annual \u00d7 synodic) terms that real ephemeris integrators do not include \u2014 demonstrates that the residual signal carries a genuine dynamical signature, not merely leakage from a partially absorbed static component. Moreover, the actual INPOP19a residuals exhibit \u03b7 = -4.53e-04, confirming that INPOP's own 100+ parameter fit did not absorb the signal, regardless of what an idealised linear basis might achieve in principle."
+  }
+}

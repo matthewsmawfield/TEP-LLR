@@ -1,0 +1,613 @@
+{
+    "report_metadata": {
+        "pipeline_name": "Full Canonical",
+        "timestamp": "2026-05-13T20:17:04.173071",
+        "elapsed_total_s": 394.0,
+        "status": "PASS"
+    },
+    "system_telemetry": {
+        "os": "Darwin",
+        "os_release": "25.3.0",
+        "machine": "arm64",
+        "processor": "arm",
+        "cpu_count_logical": 14,
+        "cpu_count_physical": 14,
+        "memory_total_gb": 24.0,
+        "python_version": "3.13.5",
+        "cpu_architecture": "arm64"
+    },
+    "dependency_audit": {
+        "scripts": {
+            "step_000_llr_data_ingestion.py": "87dcb45ec952",
+            "step_001_data_preprocessing.py": "9dacd2f33000",
+            "step_002_de430_preprocessing.py": "7e7856166bc6",
+            "step_003_statistical_analysis.py": "341542f56325",
+            "step_004_detection_analysis_advanced.py": "a1852bac1bcc",
+            "step_005_temporal_drift_analysis.py": "874ee51b53f0",
+            "step_006_multi_ephemeris_comparison.py": "05c84fe06bfc",
+            "step_006b_de430_outlier_robustness.py": "618d99e8b9a5",
+            "step_007_meta_analysis.py": "1bca84a328c7",
+            "step_008_systematic_error_analysis.py": "3e7f6aac22b9",
+            "step_009_ephemeris_independent_analysis.py": "a256c81c0e82",
+            "step_010_systematic_control_analysis.py": "9970a6f05ec8",
+            "step_011_noise_signal_injection.py": "0ed184539e60",
+            "step_012_subsample_robustness.py": "277fec4798c0",
+            "step_013_station_decomposition.py": "007e467bcdab",
+            "step_015_null_tests.py": "5683632a3663",
+            "step_016_bayesian_analysis.py": "8a144adda9f6",
+            "step_017_leverage_diagnostics.py": "8660da13335e",
+            "step_018_station_quality.py": "2acd77d5871f",
+            "step_019_systematic_monte_carlo.py": "24fb91657182",
+            "step_020_temporal_amplitude.py": "05628936adf1",
+            "step_021_ipw_validation.py": "8b2e22fe7ad7",
+            "step_022_environmental_modulation.py": "1b5dde2b6264",
+            "step_023_solar_cycle_correlation.py": "7941a846f7fe",
+            "step_024_thermal_array_modeling.py": "6874eca2f445",
+            "step_025_leverage_temporal_clustering.py": "bbf15a0a542f",
+            "step_026_tep_core_density_simulation.py": "d47d9ab6e8b3",
+            "step_027_day_night_thermal_bias.py": "1ecb25dde698",
+            "step_028_geometric_elongation.py": "ff39e8ff2e9a",
+            "step_029_station_power_analysis.py": "6dcd193e9215",
+            "step_030_hardware_epoch_analysis.py": "df84adfd3763",
+            "step_031_lomb_scargle_orbital_dynamics.py": "a7f9384d7ba0",
+            "step_032_ephemeris_orthogonality_proof.py": "4dd04d1980fe",
+            "step_033_quantitative_eta_prediction.py": "46aa0f9fdcab",
+            "step_034_static_dynamic_absorption.py": "aff2f4c62c71",
+            "step_035_historical_comparison.py": "e90d35ca54a4",
+            "step_036_full_moon_deficit_analysis.py": "bdab9a388bbf",
+            "step_037_lunar_recession_analysis.py": "32ad3578280e",
+            "step_038_tidal_resonance_analysis.py": "02998471bc10",
+            "step_039_dust_sensitivity_analysis.py": "01df8a9a9c2d",
+            "step_049_eop_systematic_analysis.py": "97445118826d",
+            "step_050_corrected_tep_analysis.py": "127a48e5e604",
+            "step_051_cross_validation_analysis.py": "22dd9ff0a0f0",
+            "step_052_station_distribution_analysis.py": "91a882ff7e14",
+            "step_053_clean_subset_analysis.py": "a181b8518727",
+            "step_054_toy_orbital_tep_perturbation.py": "97b136cef434",
+            "step_040_unified_results_table.py": "95e684e78c28",
+            "step_041_ephemeris_absorption_simulation.py": "8d38b0a8677e",
+            "step_042_multiple_testing_correction.py": "51b2b1009028",
+            "step_043_temporal_bin_variation_analysis.py": "f002f4c04d9f",
+            "step_044_systematic_projection_analysis.py": "b989a3a286bd",
+            "step_045_independent_validation.py": "157c9fa2a4fc",
+            "step_046_station_balanced_tep.py": "671242eeafaa",
+            "step_046b_equal_n_injection_simulation.py": "0546d979b248",
+            "step_014_inter_station_consistency.py": "013aa912d6a8",
+            "step_047_velocity_modulation.py": "35abb5d10b06",
+            "step_048_cmb_anisotropy.py": "a3404b7ce096",
+            "step_055_cmb_rigorous_falsification.py": "c7aa561aead1",
+            "step_056_dynamical_integrator_eta_refit.py": "a3ed058e0127",
+            "step_057_haleakala_null_fluctuation.py": "bd2836857ede",
+            "step_059_grasse_systematic_sufficiency.py": "b6066ecf3b62",
+            "step_060_gaussian_process_extraction.py": "f0d81899ea6f",
+            "step_061_systematic_sensitivity_analysis.py": "3ffcc2442716"
+        },
+        "utils": {
+            "astronomical_utils.py": "14ca40eb4e1f",
+            "compress_pdf.py": "f232a06525ed",
+            "config.py": "cc7f96ed7873",
+            "html_to_pdf.py": "af6fe88b0576",
+            "llr_constants.py": "0191e287598b",
+            "logger.py": "c859854b4f7b",
+            "numerics.py": "4c17018170f8",
+            "parse_de430.py": "e03b9e581573",
+            "parse_edc_crd.py": "5859b57d7bb5",
+            "parse_inpop_mini.py": "eac484f43034",
+            "pipeline_runner.py": "c0593686b0bf",
+            "pre_whitening_filter.py": "fc58a676367c",
+            "process_pdf.py": "15da6f308d55",
+            "schema_validation.py": "f3e936e5326f",
+            "statistical_utils.py": "2ba9150ee226",
+            "verify_value_consistency.py": "1a5411c1c786"
+        },
+        "config": {
+            "config.json": "2cbdc1456563"
+        }
+    },
+    "step_telemetry": [
+        {
+            "name": "step_000_llr_data_ingestion.py",
+            "status": "PASS",
+            "elapsed_s": 0.87,
+            "returncode": 0,
+            "output": "results/outputs/step_000_llr_data_ingestion.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_001_data_preprocessing.py",
+            "status": "PASS",
+            "elapsed_s": 12.68,
+            "returncode": 0,
+            "output": "results/outputs/step_001_data_preprocessing.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_002_de430_preprocessing.py",
+            "status": "PASS",
+            "elapsed_s": 2.46,
+            "returncode": 0,
+            "output": "results/outputs/step_002_de430_preprocessing.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_003_statistical_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 15.95,
+            "returncode": 0,
+            "output": "results/outputs/step_003_statistical_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_004_detection_analysis_advanced.py",
+            "status": "PASS",
+            "elapsed_s": 4.88,
+            "returncode": 0,
+            "output": "results/outputs/step_004_detection_analysis_advanced.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_005_temporal_drift_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.69,
+            "returncode": 0,
+            "output": "results/outputs/step_005_temporal_drift_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_006_multi_ephemeris_comparison.py",
+            "status": "PASS",
+            "elapsed_s": 0.62,
+            "returncode": 0,
+            "output": "results/outputs/step_006_multi_ephemeris_comparison.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_006b_de430_outlier_robustness.py",
+            "status": "PASS",
+            "elapsed_s": 2.46,
+            "returncode": 0,
+            "output": "results/outputs/step_006b_de430_outlier_robustness.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_007_meta_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.63,
+            "returncode": 0,
+            "output": "results/outputs/step_007_meta_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_008_systematic_error_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.31,
+            "returncode": 0,
+            "output": "results/outputs/step_008_systematic_error_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_009_ephemeris_independent_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.61,
+            "returncode": 0,
+            "output": "results/outputs/step_009_ephemeris_independent_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_010_systematic_control_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.64,
+            "returncode": 0,
+            "output": "results/outputs/step_010_systematic_control_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_011_noise_signal_injection.py",
+            "status": "PASS",
+            "elapsed_s": 0.63,
+            "returncode": 0,
+            "output": "results/outputs/step_011_noise_signal_injection.json",
+            "output_check": "fresh output verified with status=WARNING"
+        },
+        {
+            "name": "step_012_subsample_robustness.py",
+            "status": "PASS",
+            "elapsed_s": 0.68,
+            "returncode": 0,
+            "output": "results/outputs/step_012_subsample_robustness.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_013_station_decomposition.py",
+            "status": "PASS",
+            "elapsed_s": 0.62,
+            "returncode": 0,
+            "output": "results/outputs/step_013_station_decomposition.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_015_null_tests.py",
+            "status": "PASS",
+            "elapsed_s": 0.99,
+            "returncode": 0,
+            "output": "results/outputs/step_015_null_tests.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_016_bayesian_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 3.94,
+            "returncode": 0,
+            "output": "results/outputs/step_016_bayesian_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_017_leverage_diagnostics.py",
+            "status": "PASS",
+            "elapsed_s": 2.49,
+            "returncode": 0,
+            "output": "results/outputs/step_017_leverage_diagnostics.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_018_station_quality.py",
+            "status": "PASS",
+            "elapsed_s": 0.32,
+            "returncode": 0,
+            "output": "results/outputs/step_018_station_quality.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_019_systematic_monte_carlo.py",
+            "status": "PASS",
+            "elapsed_s": 3.31,
+            "returncode": 0,
+            "output": "results/outputs/step_019_systematic_monte_carlo.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_020_temporal_amplitude.py",
+            "status": "PASS",
+            "elapsed_s": 0.67,
+            "returncode": 0,
+            "output": "results/outputs/step_020_temporal_amplitude.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_021_ipw_validation.py",
+            "status": "PASS",
+            "elapsed_s": 5.49,
+            "returncode": 0,
+            "output": "results/outputs/step_021_ipw_validation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_022_environmental_modulation.py",
+            "status": "PASS",
+            "elapsed_s": 0.77,
+            "returncode": 0,
+            "output": "results/outputs/step_022_environmental_modulation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_023_solar_cycle_correlation.py",
+            "status": "PASS",
+            "elapsed_s": 8.62,
+            "returncode": 0,
+            "output": "results/outputs/step_023_solar_cycle_correlation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_024_thermal_array_modeling.py",
+            "status": "PASS",
+            "elapsed_s": 0.37,
+            "returncode": 0,
+            "output": "results/outputs/step_024_thermal_array_modeling.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_025_leverage_temporal_clustering.py",
+            "status": "PASS",
+            "elapsed_s": 0.3,
+            "returncode": 0,
+            "output": "results/outputs/step_025_leverage_temporal_clustering.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_026_tep_core_density_simulation.py",
+            "status": "PASS",
+            "elapsed_s": 0.36,
+            "returncode": 0,
+            "output": "results/outputs/step_026_tep_core_density_simulation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_027_day_night_thermal_bias.py",
+            "status": "PASS",
+            "elapsed_s": 2.5,
+            "returncode": 0,
+            "output": "results/outputs/step_027_day_night_thermal_bias.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_028_geometric_elongation.py",
+            "status": "PASS",
+            "elapsed_s": 3.68,
+            "returncode": 0,
+            "output": "results/outputs/step_028_geometric_elongation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_029_station_power_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 15.87,
+            "returncode": 0,
+            "output": "results/outputs/step_029_station_power_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_030_hardware_epoch_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.75,
+            "returncode": 0,
+            "output": "results/outputs/step_030_hardware_epoch_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_031_lomb_scargle_orbital_dynamics.py",
+            "status": "PASS",
+            "elapsed_s": 12.12,
+            "returncode": 0,
+            "output": "results/outputs/step_031_lomb_scargle_orbital_dynamics.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_032_ephemeris_orthogonality_proof.py",
+            "status": "PASS",
+            "elapsed_s": 1.29,
+            "returncode": 0,
+            "output": "results/outputs/step_032_ephemeris_orthogonality_proof.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_033_quantitative_eta_prediction.py",
+            "status": "PASS",
+            "elapsed_s": 0.36,
+            "returncode": 0,
+            "output": "results/outputs/step_033_quantitative_eta_prediction.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_034_static_dynamic_absorption.py",
+            "status": "PASS",
+            "elapsed_s": 0.36,
+            "returncode": 0,
+            "output": "results/outputs/step_034_static_dynamic_absorption.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_035_historical_comparison.py",
+            "status": "PASS",
+            "elapsed_s": 0.59,
+            "returncode": 0,
+            "output": "results/outputs/step_035_historical_comparison.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_036_full_moon_deficit_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.6,
+            "returncode": 0,
+            "output": "results/outputs/step_036_full_moon_deficit_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_037_lunar_recession_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.6,
+            "returncode": 0,
+            "output": "results/outputs/step_037_lunar_recession_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_038_tidal_resonance_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.58,
+            "returncode": 0,
+            "output": "results/outputs/step_038_tidal_resonance_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_039_dust_sensitivity_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.59,
+            "returncode": 0,
+            "output": "results/outputs/step_039_dust_sensitivity_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_049_eop_systematic_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 1.28,
+            "returncode": 0,
+            "output": "results/outputs/step_049_eop_systematic_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_050_corrected_tep_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 6.71,
+            "returncode": 0,
+            "output": "results/outputs/step_050_corrected_tep_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_051_cross_validation_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 1.42,
+            "returncode": 0,
+            "output": "results/outputs/step_051_cross_validation_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_052_station_distribution_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.65,
+            "returncode": 0,
+            "output": "results/outputs/step_052_station_distribution_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_053_clean_subset_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 3.02,
+            "returncode": 0,
+            "output": "results/outputs/step_053_clean_subset_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_054_toy_orbital_tep_perturbation.py",
+            "status": "PASS",
+            "elapsed_s": 0.23,
+            "returncode": 0,
+            "output": "results/outputs/step_054_toy_orbital_tep_perturbation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_040_unified_results_table.py",
+            "status": "PASS",
+            "elapsed_s": 0.59,
+            "returncode": 0,
+            "output": "results/outputs/step_040_unified_results_table.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_041_ephemeris_absorption_simulation.py",
+            "status": "PASS",
+            "elapsed_s": 0.63,
+            "returncode": 0,
+            "output": "results/outputs/step_041_ephemeris_absorption_simulation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_042_multiple_testing_correction.py",
+            "status": "PASS",
+            "elapsed_s": 2.4,
+            "returncode": 0,
+            "output": "results/outputs/step_042_multiple_testing_correction.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_043_temporal_bin_variation_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 0.62,
+            "returncode": 0,
+            "output": "results/outputs/step_043_temporal_bin_variation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_044_systematic_projection_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 1.23,
+            "returncode": 0,
+            "output": "results/outputs/step_044_systematic_projection_analysis.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_045_independent_validation.py",
+            "status": "PASS",
+            "elapsed_s": 0.64,
+            "returncode": 0,
+            "output": "results/outputs/step_045_independent_validation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_046_station_balanced_tep.py",
+            "status": "PASS",
+            "elapsed_s": 2.22,
+            "returncode": 0,
+            "output": "results/outputs/step_046_station_balanced_tep.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_046b_equal_n_injection_simulation.py",
+            "status": "PASS",
+            "elapsed_s": 75.4,
+            "returncode": 0,
+            "output": "results/outputs/step_046b_equal_n_injection_simulation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_014_inter_station_consistency.py",
+            "status": "PASS",
+            "elapsed_s": 0.77,
+            "returncode": 0,
+            "output": "results/outputs/step_014_inter_station_consistency.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_047_velocity_modulation.py",
+            "status": "PASS",
+            "elapsed_s": 0.69,
+            "returncode": 0,
+            "output": "results/outputs/step_047_velocity_modulation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_048_cmb_anisotropy.py",
+            "status": "PASS",
+            "elapsed_s": 0.93,
+            "returncode": 0,
+            "output": "results/outputs/step_048_cmb_anisotropy.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_055_cmb_rigorous_falsification.py",
+            "status": "PASS",
+            "elapsed_s": 92.28,
+            "returncode": 0,
+            "output": "results/outputs/step_055_cmb_rigorous_falsification.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_056_dynamical_integrator_eta_refit.py",
+            "status": "PASS",
+            "elapsed_s": 0.95,
+            "returncode": 0,
+            "output": "results/outputs/step_056_dynamical_integrator_eta_refit.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_057_haleakala_null_fluctuation.py",
+            "status": "PASS",
+            "elapsed_s": 42.0,
+            "returncode": 0,
+            "output": "results/outputs/step_057_haleakala_null_fluctuation.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_059_grasse_systematic_sufficiency.py",
+            "status": "PASS",
+            "elapsed_s": 7.98,
+            "returncode": 0,
+            "output": "results/outputs/step_059_grasse_systematic_sufficiency.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_060_gaussian_process_extraction.py",
+            "status": "PASS",
+            "elapsed_s": 1.29,
+            "returncode": 0,
+            "output": "results/outputs/step_060_gaussian_process_extraction.json",
+            "output_check": "fresh output verified"
+        },
+        {
+            "name": "step_061_systematic_sensitivity_analysis.py",
+            "status": "PASS",
+            "elapsed_s": 37.82,
+            "returncode": 0,
+            "output": "results/outputs/step_061_systematic_sensitivity_analysis.json",
+            "output_check": "fresh output verified"
+        }
+    ]
+}

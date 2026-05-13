@@ -286,7 +286,12 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
     
     with open(step_003_path, 'r') as f:
         step_003_data = json.load(f)
-    final_stat_error = step_003_data.get('eta_err_mcmc', 0.001)
+    final_stat_error = step_003_data.get("eta_err_mcmc", None)
+    if final_stat_error is None or not np.isfinite(final_stat_error) or final_stat_error <= 0:
+        raise ValueError(
+            f"{step_003_path} missing a valid eta_err_mcmc. "
+            "Re-run step_003_statistical_analysis.py and ensure MCMC uncertainty is persisted."
+        )
     
     # Load data-driven systematic error budget from step_008.
     step_008_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_008_systematic_error_analysis.json'

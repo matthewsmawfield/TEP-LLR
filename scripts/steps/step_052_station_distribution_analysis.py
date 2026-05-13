@@ -25,7 +25,9 @@ from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warni
 import pandas as pd
 from scipy import stats
 
-logger = TEPLogger("step_052")
+log_dir = PROJECT_ROOT / "logs"
+log_dir.mkdir(parents=True, exist_ok=True)
+logger = TEPLogger("step_052", str(log_dir / "step_052_station_distribution_analysis.log"))
 set_step_logger(logger)
 
 
