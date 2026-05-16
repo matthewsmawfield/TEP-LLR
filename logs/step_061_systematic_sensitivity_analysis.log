@@ -1,0 +1,22 @@
+[13:51:11] ═══ Starting Step 061: Systematic Amplitude Sensitivity Analysis
+[13:51:11]     Loaded data: 26,207 observations
+[13:51:11]     Canonical 6σ-cleaned sample: 25,445 observations (762 outliers removed)
+[13:51:11]     Observed |eta| = 4.061e-04
+[13:51:11] 
+[13:51:11] >>> >>> Computing known-systematic sensitivity...
+[13:51:11]       ephemeris: known_amp=0.355 cm, required=0.528 cm, ratio=1.5x
+[13:51:17]       atmospheric: known_amp=-0.080 cm, required=0.528 cm, ratio=6.6x
+[13:51:22]       instrumental: known_amp=0.010 cm, required=0.528 cm, ratio=54.0x
+[13:51:26]       tidal: known_amp=-0.009 cm, required=0.528 cm, ratio=57.9x
+[13:51:31]       thermal: known_amp=-0.056 cm, required=0.528 cm, ratio=9.5x
+[13:51:36] 
+[13:51:36] >>> >>> Adversarial PCA nuisance search...
+[13:51:36]       cosD survives all PCs: True, joint eta=-2.927e-04
+[13:51:36] >>> >>> Adversarial 2D GP (elongation x time bins)...
+[13:51:38]       cosD survives GP subtraction: False, eta after GP=5.347e-05
+[13:51:38] >>> >>> Era x station x lunation interaction grid...
+[13:51:38]       Fitted 26/60 cells; 13 negative, 9 significant
+[13:51:38] >>> >>> Blind 20% year hold-out...
+[13:51:38]       Combined blind test eta=-3.658e-04 (14.27σ), all splits negative=False
+[13:51:38] Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
+[13:51:38] ✓   Systematic Sensitivity Analysis Complete.

@@ -2,31 +2,31 @@
     "step_id": "step_057",
     "status": "PASS",
     "upstream": {
-        "eta_obs_step_029": 0.003553510872736506,
-        "eta_err_obs_step_029": 0.0014487488072928987,
-        "eta_true_tep_step_050_m5_full_corrected": -0.0004061154555979797
+        "eta_obs_step_029": 0.0025708161272214283,
+        "eta_err_obs_step_029": 0.001164501902528554,
+        "eta_true_tep_step_050_m5_full_corrected": -0.00040611545725110945
     },
     "haleakala_simulation_tep": {
         "n_mc": 20000,
         "seed": 57,
-        "eta_true": -0.0004061154555979797,
+        "eta_true": -0.00040611545725110945,
         "n_obs": 737,
         "rms_m": 0.13828276515083554,
-        "eta_observed": 0.003553510872736506,
-        "eta_error_observed": 0.0014487488072928987,
-        "simulated_eta_mean": -0.00041665786866935175,
-        "simulated_eta_std": 0.0014479943471249,
-        "simulated_eta_median": -0.0004129019637148538,
-        "p_one_tailed_opposite_sign": 0.00335,
-        "p_two_tailed_deviation": 0.00635,
-        "z_score_observed": 2.734559244790297,
+        "eta_observed": 0.0025708161272214283,
+        "eta_error_observed": 0.001164501902528554,
+        "simulated_eta_mean": -0.0004062561874214806,
+        "simulated_eta_std": 0.0014585643423596013,
+        "simulated_eta_median": -0.0003993913267180704,
+        "p_one_tailed_opposite_sign": 0.0197,
+        "p_two_tailed_deviation": 0.03935,
+        "z_score_observed": 2.0410012078429043,
         "percentiles": {
-            "1": -0.003777312111340486,
-            "2.5": -0.0032407898766674227,
-            "5": -0.002783859769385746,
-            "95": 0.001962869194487242,
-            "97.5": 0.0024166743014770705,
-            "99": 0.002947687979147965
+            "1": -0.0037382114430133764,
+            "2.5": -0.003234120604175861,
+            "5": -0.0027944685846903105,
+            "95": 0.00199247292765103,
+            "97.5": 0.0024371691168899555,
+            "99": 0.0030258969115324144
         }
     },
     "haleakala_simulation_gr": {
@@ -35,28 +35,28 @@
         "eta_true": 0.0,
         "n_obs": 737,
         "rms_m": 0.13828276515083554,
-        "eta_observed": 0.003553510872736506,
-        "eta_error_observed": 0.0014487488072928987,
-        "simulated_eta_mean": 1.550610179565706e-05,
-        "simulated_eta_std": 0.0014559301329997104,
-        "simulated_eta_median": 1.1717361562541896e-05,
-        "p_one_tailed_opposite_sign": 0.007,
-        "p_two_tailed_deviation": 0.01435,
-        "z_score_observed": 2.4407152460091384,
+        "eta_observed": 0.0025708161272214283,
+        "eta_error_observed": 0.001164501902528554,
+        "simulated_eta_mean": -2.691838914041457e-06,
+        "simulated_eta_std": 0.0014582766272056636,
+        "simulated_eta_median": 3.982679594635771e-06,
+        "p_one_tailed_opposite_sign": 0.03925,
+        "p_two_tailed_deviation": 0.07745,
+        "z_score_observed": 1.7629138938800677,
         "percentiles": {
-            "1": -0.0034026888494915345,
-            "2.5": -0.0028205803318581365,
-            "5": -0.0023722281525036344,
-            "95": 0.0023820421289474643,
-            "97.5": 0.0028532761089821307,
-            "99": 0.003387407475818722
+            "1": -0.0033753939540729205,
+            "2.5": -0.0028499208841118806,
+            "5": -0.002396300367662364,
+            "95": 0.002393147393567942,
+            "97.5": 0.0028470159104930738,
+            "99": 0.003406604083207522
         }
     },
     "family_wise_tep": {
         "n_mc": 20000,
         "seed": 257,
-        "eta_true": -0.0004061154555979797,
-        "p_any_station_deviates": 0.00535,
+        "eta_true": -0.00040611545725110945,
+        "p_any_station_deviates": 0.04155,
         "stations_included": [
             "APO",
             "Grasse",
@@ -69,7 +69,7 @@
         "n_mc": 20000,
         "seed": 357,
         "eta_true": 0.0,
-        "p_any_station_deviates": 0.0137,
+        "p_any_station_deviates": 0.08025,
         "stations_included": [
             "APO",
             "Grasse",
@@ -79,10 +79,10 @@
         ]
     },
     "solar_cycle_context": {
-        "solar_cycle_swing_eta": 0.0018875773455281266,
-        "low_activity_eta": -0.00018807718824616056,
-        "high_activity_eta": 0.001699500157281966,
+        "solar_cycle_swing_eta": 0.0018875773409302466,
+        "low_activity_eta": -0.0001880771906724221,
+        "high_activity_eta": 0.0016995001502578245,
         "haleakala_mean_solar_index": 0.4967153595101352
     },
-    "interpretation": "Haleakala's fluctuation is a 2.7\u03c3 event under TEP (p = 0.0063), making it a marginal outlier. The solar-cycle modulation amplitude (1.888e-03) is of comparable order, supporting the physical explanation that Haleakala's solar-maximum operation epoch (mean index = 0.497) contributes substantially to its deviation."
+    "interpretation": "Haleakala's fluctuation is a 2.0\u03c3 event under TEP (p = 0.0394), making it a marginal outlier. The solar-cycle modulation amplitude (1.888e-03) is of comparable order, supporting the physical explanation that Haleakala's solar-maximum operation epoch (mean index = 0.497) contributes substantially to its deviation."
 }

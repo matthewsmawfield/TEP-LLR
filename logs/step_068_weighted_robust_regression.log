@@ -1,0 +1,17 @@
+[13:30:56] ═══ ═══ Step 068: Weighted Robust M-Estimator ═══
+[13:30:56]     Dataset: N=25,445
+[13:30:56]       Station APO: RMS=0.0316 m, N=2595
+[13:30:56]       Station Grasse: RMS=0.0590 m, N=18742
+[13:30:56]       Station Haleakala: RMS=0.1062 m, N=666
+[13:30:56]       Station Matera: RMS=0.0589 m, N=345
+[13:30:56]       Station McDonald2: RMS=0.0807 m, N=3097
+[13:30:56]     --- Full systematic: weighted robust M-estimator ---
+[13:30:56]       Converged: True in 11 iterations
+[13:30:56]       Final MAD: 3.7450e-02 m
+[13:30:56]       Fraction heavily downweighted: 0.122
+[13:30:56]       η (M-estimator OLS SE)    = -3.6442e-04 ± 3.5556e-05 (10.25σ)
+[13:30:56]       η (M-estimator cluster SE) = -3.6442e-04 ± 3.9820e-05 (9.15σ)
+[13:30:56]     --- Theil-Sen ( Step 004 style) on same data ---
+[13:30:56]       η (Theil-Sen) = -3.4974e-04 ± 1.1202e-04 (3.12σ)
+[13:30:56] Results saved to results/outputs/step_068_weighted_robust_regression.json
+[13:30:56] ✓   Step 068 complete.

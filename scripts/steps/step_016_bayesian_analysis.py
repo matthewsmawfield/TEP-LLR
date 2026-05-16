@@ -16,6 +16,10 @@ import pandas as pd
 import emcee
 from scipy import stats
 
+from scripts.utils.bayesian_evidence import (
+    ETA_PRIOR_SPECS,
+    build_prior_sensitivity_table,
+)
 from scripts.utils.config import get_config
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
@@ -26,13 +30,12 @@ TEP_CONFIG = get_config()
 
 def gelman_rubin(chains):
     """Compute Gelman-Rubin statistic for convergence diagnostics."""
-    n_walkers, n_steps, n_params = chains.shape
+    # emcee stores (n_steps, n_walkers, n_params); statistics need (n_walkers, n_steps, n_params)
+    if chains.shape[0] > chains.shape[1]:
+        chains = np.transpose(chains, (1, 0, 2))
+    n_walkers, n_steps, _n_params = chains.shape
 
-    # Reshape to (n_walkers, n_steps, n_params)
-    # Compute within-chain variance
     W = np.mean(np.var(chains, axis=1, ddof=1), axis=0)
-
-    # Compute between-chain variance
     chain_means = np.mean(chains, axis=1)
     B = n_steps * np.var(chain_means, axis=0, ddof=1)
 
@@ -49,20 +52,62 @@ def gelman_rubin(chains):
 compute_gelman_rubin = gelman_rubin
 
 
-def log_probability(theta, x, y, y_err):
-    """Log probability function for MCMC with uniform prior bounds."""
+def log_probability(theta, x, y, y_err, eta_lo=-0.01, eta_hi=0.01):
+    """Log posterior for synodic-only model with uniform box prior on (η, b)."""
     eta, intercept = theta
-
-    # CRITICAL FIX: enforce prior bounds [-0.01, 0.01] for eta and [-0.1, 0.1] for intercept.
-    # These bounds were stated in verbose output but never actually applied to the sampler,
-    # meaning the Savage-Dickey Bayes factor was computed under a prior the walkers did not respect.
-    if not (-0.01 <= eta <= 0.01 and -0.1 <= intercept <= 0.1):
+    if not (eta_lo <= eta <= eta_hi and -0.1 <= intercept <= 0.1):
         return -np.inf
-
     model = eta * ETA_SCALE_FACTOR * x + intercept
     residuals = y - model
     chi2 = np.sum((residuals / y_err) ** 2)
     return -0.5 * chi2
+
+
+def _run_mcmc_chain(
+    x,
+    y,
+    y_err,
+    eta_lo,
+    eta_hi,
+    n_walkers,
+    n_steps,
+    burn_in,
+    thin,
+    verbose,
+    label,
+):
+    """Run emcee for one documented η prior; return flat η samples and diagnostics."""
+    X_ols = np.column_stack([x, np.ones_like(x)])
+    ols_coeffs, _, _, _ = stable_lstsq(X_ols, y)
+    eta_init = ols_coeffs[0] / ETA_SCALE_FACTOR
+    intercept_init = ols_coeffs[1]
+    initial = np.array([eta_init, intercept_init])
+
+    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
+    pos = initial + 1e-4 * np.random.randn(n_walkers, 2)
+
+    sampler = emcee.EnsembleSampler(
+        n_walkers,
+        2,
+        log_probability,
+        args=(x, y, y_err, eta_lo, eta_hi),
+    )
+    if verbose:
+        print_status(
+            f"MCMC [{label}]: η∈[{eta_lo}, {eta_hi}], {n_walkers} walkers × {n_steps} steps",
+            "INFO",
+        )
+    sampler.run_mcmc(pos, n_steps, progress=verbose)
+
+    chain = sampler.get_chain()
+    R_hat = compute_gelman_rubin(chain)
+    flat_samples = sampler.get_chain(discard=burn_in, thin=thin, flat=True)
+    return {
+        "flat_samples": flat_samples,
+        "eta_samples": flat_samples[:, 0],
+        "R_hat": R_hat,
+        "acceptance_fraction": float(np.mean(sampler.acceptance_fraction)),
+    }
 
 def run_bayesian_analysis(verbose=False):
     if verbose:
@@ -74,12 +119,12 @@ def run_bayesian_analysis(verbose=False):
         "INPOP19a_all_stations_residuals.csv"
     df = pd.read_csv(input_path)
 
-    # Apply 6σ MAD outlier cleaning for consistency with other steps (CRITICAL FIX for standardization)
+    # Apply 6σ-equivalent (MAD-based) outlier cleaning for consistency with other steps (CRITICAL FIX for standardization)
     outlier_mask = detect_outliers_sigma(df['residual_m'].values, sigma_threshold=6.0)
     n_outliers = int(np.sum(outlier_mask))
     df_clean = df[~outlier_mask]  # PERFORMANCE FIX: Removed unnecessary .copy()
     if verbose:
-        print_status(f"Applied 6σ MAD outlier cleaning: removed {n_outliers}/{len(df)} outliers", "INFO")
+        print_status(f"Applied 6σ-equivalent (MAD-based) outlier cleaning: removed {n_outliers}/{len(df)} outliers", "INFO")
 
     # PERFORMANCE FIX: Use pre-computed cos_elong_rad if available, otherwise compute
     if 'cos_elong_rad' in df_clean.columns:
@@ -102,107 +147,63 @@ def run_bayesian_analysis(verbose=False):
         print_status(f"[DATA] cos(elongation) mean: {np.mean(x):.6f}", "INFO")
         print_status(f"[DATA] cos(elongation) std:  {np.std(x):.6f}", "INFO")
 
-    # MCMC Configuration
-    # Compute initial position from fresh OLS on this data — do NOT hardcode
-    # the known detection value.  Starting walkers from a data-derived prior is
-    # essential so that the Gelman-Rubin R̂ convergence diagnostic is a genuine
-    # test of mixing rather than trivially satisfied by pre-positioning walkers.
-    X_ols = np.column_stack([x, np.ones_like(x)])
-    ols_coeffs, _, _, _ = stable_lstsq(X_ols, y)
-    eta_init = ols_coeffs[0] / ETA_SCALE_FACTOR  # η = A / 13
-    intercept_init = ols_coeffs[1]
-    initial = np.array([eta_init, intercept_init])
-
     n_walkers = TEP_CONFIG["MCMC_STANDARD_WALKERS"]
-    n_steps = TEP_CONFIG["MCMC_STANDARD_STEPS"]
+    n_steps_ref = TEP_CONFIG["MCMC_STANDARD_STEPS"]
+    n_steps_sensitivity = max(2000, n_steps_ref // 2)
     burn_in = TEP_CONFIG["MCMC_BURN_IN"]
     thin = 20
 
-    if verbose:
-        print_status(
-            f"  [CALC] OLS-derived initial position: η={eta_init:.6e}, b={intercept_init:.6e}",
-            "CALC")
-
-    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
-    pos = initial + 1e-4 * np.random.randn(n_walkers, 2)
-
-    if verbose:
-        print_status("", "INFO")
-        print_status("MCMC CONFIGURATION", "PROCESS")
-        print_status(f"  [CALC] Number of walkers: {n_walkers}", "CALC")
-        print_status(f"  [CALC] Total steps: {n_steps}", "CALC")
-        print_status(f"  [CALC] Burn-in steps: {burn_in}", "CALC")
-        print_status(f"  [CALC] Thinning factor: {thin}", "CALC")
-        print_status(
-            f"  [CALC] Initial position: η={initial[0]:.6e}, b={initial[1]:.6e}", "CALC")
-        print_status(
-            "  [CALC] Prior bounds: η∈[-0.01, 0.01], b∈[-0.1, 0.1]", "CALC")
-        print_status(
-            f"  [CALC] Expected samples after burn-in/thin: {(n_steps - burn_in) * n_walkers // thin}", "CALC")
-
-    sampler = emcee.EnsembleSampler(
-        n_walkers, 2, log_probability, args=(x, y, y_err))
-
     print_status(
-        f"Running MCMC with {n_walkers} walkers for {n_steps} steps...", "INFO")
-    sampler.run_mcmc(pos, n_steps, progress=verbose)
+        f"Running synodic MCMC: reference {n_steps_ref} steps; "
+        f"sensitivity priors {n_steps_sensitivity} steps each",
+        "INFO",
+    )
 
-    # Get chain for diagnostics
-    chain = sampler.get_chain()
+    posterior_by_prior = {}
+    flat_by_prior = {}
+    mcmc_runs = {}
+    for spec in ETA_PRIOR_SPECS:
+        steps = n_steps_ref if spec.get("reference") else n_steps_sensitivity
+        run = _run_mcmc_chain(
+            x,
+            y,
+            y_err,
+            spec["eta_lo"],
+            spec["eta_hi"],
+            n_walkers,
+            steps,
+            burn_in,
+            thin,
+            verbose,
+            spec["prior_id"],
+        )
+        posterior_by_prior[spec["prior_id"]] = run["eta_samples"]
+        flat_by_prior[spec["prior_id"]] = run["flat_samples"]
+        mcmc_runs[spec["prior_id"]] = {
+            "n_steps": steps,
+            "gelman_rubin_eta": float(run["R_hat"][0]),
+            "gelman_rubin_b": float(run["R_hat"][1]),
+            "mean_acceptance_fraction": run["acceptance_fraction"],
+            "n_posterior_samples": int(len(run["eta_samples"])),
+        }
 
-    if verbose:
-        print_status("", "INFO")
-        print_status("MCMC CHAIN DIAGNOSTICS", "PROCESS")
-
-        # Acceptance fraction
-        accept_frac = sampler.acceptance_fraction
-        print_status("  [CALC] Acceptance fraction per walker:", "CALC")
-        for i in range(min(n_walkers, 5)):  # Show first 5
-            print_status(
-                f"  [CALC]    Walker {i+1:2d}: {accept_frac[i]:.3f}", "CALC")
-        print_status(
-            f"  [CALC] Mean acceptance: {np.mean(accept_frac):.3f} ± {np.std(accept_frac):.3f}", "CALC")
-        print_status(
-            "  [CALC] Acceptable range: 0.2-0.5 (ensemble sampler)", "CALC")
-
-        # Gelman-Rubin convergence diagnostic
-        R_hat = compute_gelman_rubin(chain)
-        print_status(
-            "  [CALC] Gelman-Rubin R̂ (convergence diagnostic):", "CALC")
-        print_status(f"  [CALC]    R̂_η = {R_hat[0]:.4f} {'✓ converged' if R_hat[0] < 1.1 else '✗ not converged'}",
-                     "SUCCESS" if R_hat[0] < 1.1 else "WARNING")
-        print_status(f"  [CALC]    R̂_b = {R_hat[1]:.4f} {'✓ converged' if R_hat[1] < 1.1 else '✗ not converged'}",
-                     "SUCCESS" if R_hat[1] < 1.1 else "WARNING")
-        print_status("  [CALC]    Target: R̂ < 1.1 for convergence", "CALC")
-
-        # Chain statistics by phase
-        chain_burned = chain[burn_in:, :, :]
-        print_status(
-            f"  [CALC] Post-burn-in chain shape: {chain_burned.shape}", "CALC")
-
-        # Evolution of mean by step (trace)
-        step_means_eta = np.mean(chain[:, :, 0], axis=1)
-        step_stds_eta = np.std(chain[:, :, 0], axis=1)
-        print_status("  [CALC] Chain evolution (η):", "CALC")
-        print_status(
-            f"  [CALC]    Step 0:   mean={step_means_eta[0]:.6e}, std={step_stds_eta[0]:.6e}", "CALC")
-        print_status(
-            f"  [CALC]    Step 100: mean={step_means_eta[100]:.6e}, std={step_stds_eta[100]:.6e}", "CALC")
-        print_status(
-            f"  [CALC]    Step 500: mean={step_means_eta[500]:.6e}, std={step_stds_eta[500]:.6e}", "CALC")
-        print_status(
-            f"  [CALC]    Step 999: mean={step_means_eta[999]:.6e}, std={step_stds_eta[999]:.6e}", "CALC")
-
-    # Get flattened samples after burn-in and thinning
-    flat_samples = sampler.get_chain(discard=burn_in, thin=thin, flat=True)
+    ref_id = "uniform_reference"
+    flat_samples = flat_by_prior[ref_id]
     n_effective = len(flat_samples)
+    R_hat = np.array(
+        [
+            mcmc_runs[ref_id]["gelman_rubin_eta"],
+            mcmc_runs[ref_id]["gelman_rubin_b"],
+        ]
+    )
+    accept_frac_mean = mcmc_runs[ref_id]["mean_acceptance_fraction"]
 
     if verbose:
         print_status("", "INFO")
         print_status("POSTERIOR ANALYSIS", "PROCESS")
         print_status(f"  [CALC] Effective samples: {n_effective}", "CALC")
         print_status(
-            f"  [CALC] Thinning reduced samples by factor of {(n_steps - burn_in) * n_walkers / n_effective:.1f}", "CALC")
+            f"  [CALC] Thinning reduced samples by factor of {(n_steps_ref - burn_in) * n_walkers / n_effective:.1f}", "CALC")
 
     # Calculate credible intervals
     eta_samples = flat_samples[:, 0]
@@ -241,47 +242,22 @@ def run_bayesian_analysis(verbose=False):
         for p, v in zip(percentiles, p_vals):
             print_status(f"  [CALC]    {p:2d}th: {v:.6e}", "CALC")
 
-    # Bayes Factor Estimate via Savage-Dickey Density Ratio
-    # BF = p(η=0|data) / p(η=0) where p(η=0|data) is from KDE at zero
-    from scipy.stats import gaussian_kde
-    kde = gaussian_kde(eta_samples)
-
-    # Prior density at zero (uniform prior width 0.02 => density = 1/0.02 = 50)
-    # Prior range [-0.01, 0.01] for η based on physical constraints:
-    # - Nordtvedt effect in GR: η ≈ 10^-13 (negligible)
-    # - Alternative theories: η up to 10^-4-10^-3 (e.g., scalar-tensor)
-    # - Chosen range [-0.01, 0.01] spans 2 orders of magnitude beyond typical alternative theory predictions,
-    #   making it a weakly informative prior that does not constrain the posterior artificially
-    prior_density = 1.0 / 0.02  # uniform over [-0.01, 0.01]
-
-    # Posterior density at zero
-    posterior_density_at_zero = kde.evaluate(0.0)[0]
-
-    # Savage-Dickey Bayes Factor
-    bayes_factor_sd = prior_density / \
-        posterior_density_at_zero if posterior_density_at_zero > 0 else np.inf
-
-    # KDE Bandwidth Sensitivity Check
-    # Verify that the Savage-Dickey BF is robust to bandwidth choice.
-    # Test Scott (default), Silverman, narrow (0.5x), and wide (2.0x).
-    bf_sensitivity = {}
-    for bw_label, bw_method in [
-        ("scott_default", "scott"),
-        ("silverman", "silverman"),
-        ("narrow_0.5x", 0.5),
-        ("wide_2.0x", 2.0),
-    ]:
-        kde_test = gaussian_kde(eta_samples, bw_method=bw_method)
-        post_d_zero = kde_test.evaluate(0.0)[0]
-        bf_test = prior_density / post_d_zero if post_d_zero > 0 else np.inf
-        bf_sensitivity[bw_label] = float(bf_test)
-
+    prior_sensitivity_table = build_prior_sensitivity_table(
+        posterior_by_prior, ETA_PRIOR_SPECS
+    )
+    ref_row = next(r for r in prior_sensitivity_table if r["prior_id"] == ref_id)
+    bf_sensitivity = ref_row["bandwidth_bf"]
+    prior_density = ref_row["prior_density_at_eta_zero"]
+    bayes_factor_sd = float(ref_row["bandwidth_bf"]["scott_default"])
     bf_sd_values = list(bf_sensitivity.values())
-    bf_sd_min = min(bf_sd_values)
-    bf_sd_max = max(bf_sd_values)
-    bf_sd_range_ratio = bf_sd_max / bf_sd_min if bf_sd_min > 0 else np.inf
-    # Geometric mean across bandwidth methods (more stable than any single choice)
-    bf_sd_gmean = np.exp(np.mean(np.log([v for v in bf_sd_values if v > 0])))
+    bf_sd_min = ref_row["bf_min"]
+    bf_sd_max = ref_row["bf_max"]
+    bf_sd_range_ratio = ref_row["bf_range_ratio"]
+    bf_sd_gmean = ref_row["bf_geometric_mean"]
+    from scipy.stats import gaussian_kde
+    posterior_density_at_zero = float(
+        gaussian_kde(eta_samples).evaluate(0.0)[0]
+    )
 
     if verbose:
         print_status("  [CALC] Savage-Dickey Bandwidth Sensitivity:", "CALC")
@@ -344,7 +320,7 @@ def run_bayesian_analysis(verbose=False):
             evidence = "Substantial"
         else:
             evidence = "Weak/None"
-    
+
     # Bayes factor interpretation thresholds from Kass & Raftery (1995):
     # log10(BF) > 1: Strong evidence, > 0.5: Substantial evidence, < 0.5: Weak/None
 
@@ -367,20 +343,23 @@ def run_bayesian_analysis(verbose=False):
         "bayes_factor_savage_dickey": float(bayes_factor_sd),
         "bayes_factor_savage_dickey_geometric_mean": float(bf_sd_gmean),
         "bayes_factor_sensitivity": {
-            "note": "Savage-Dickey is bandwidth-sensitive; BIC is the primary robust estimator.",
+            "note": "Savage-Dickey is bandwidth- and prior-sensitive; BIC is the primary robust estimator.",
             "bandwidth_methods": bf_sensitivity,
             "min": float(bf_sd_min),
             "max": float(bf_sd_max),
             "geometric_mean": float(bf_sd_gmean),
             "range_ratio": float(bf_sd_range_ratio),
-            "robust": bool(bf_sd_range_ratio < 10) if np.isfinite(bf_sd_range_ratio) else None
+            "robust": bool(bf_sd_range_ratio < 10) if np.isfinite(bf_sd_range_ratio) else None,
         },
+        "prior_sensitivity_table": prior_sensitivity_table,
+        "prior_specifications": ETA_PRIOR_SPECS,
+        "mcmc_runs_by_prior": mcmc_runs,
         "n_samples": n_effective,
-        "gelman_rubin_eta": float(R_hat[0]) if 'R_hat' in locals() else None,
-        "gelman_rubin_b": float(R_hat[1]) if 'R_hat' in locals() else None,
-        "mean_acceptance_fraction": float(np.mean(accept_frac)) if 'accept_frac' in locals() else None,
+        "gelman_rubin_eta": float(R_hat[0]),
+        "gelman_rubin_b": float(R_hat[1]),
+        "mean_acceptance_fraction": float(accept_frac_mean),
         "outlier_cleaning": {
-            "method": "6σ MAD (detect_outliers_sigma)",
+            "method": "6σ-equivalent (MAD-based; detect_outliers_sigma)",
             "sigma_threshold": 6.0,
             "n_outliers_removed": n_outliers,
             "n_original": len(df),

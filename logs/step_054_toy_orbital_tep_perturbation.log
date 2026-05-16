@@ -1,19 +1,19 @@
-[20:12:35] ═══ ═══ Step 054: Toy Orbital TEP Perturbation Model ═══
-[20:12:35]     Simulation: 50000 points over 10.0 years
-[20:12:35]     Input η = -5.40e-04
-[20:12:35]     Perturbation amplitude: 7.02 mm
-[20:12:35] >>> Fitting standard orbital-element basis...
-[20:12:35]       Fit: a = 384400.0 km, e = 0.00000
-[20:12:35]       Residual RMS: 4.97 mm
-[20:12:35] >>> Regressing residuals on cos(D)...
-[20:12:35]       Recovered η = -5.4000e-04 ± 2.7857e-09 (193847.79σ)
-[20:12:35]       Input η     = -5.4000e-04
-[20:12:35]       Recovery bias: -0.0%
-[20:12:35]     --- Sweep over η values ---
-[20:12:35]       η_in = -1.00e-03: recovered = -1.0000e-03, amp = 13.0 mm, RMS = 9.19 mm
-[20:12:35]       η_in = -5.00e-04: recovered = -5.0000e-04, amp = 6.5 mm, RMS = 4.60 mm
-[20:12:35]       η_in = -3.00e-04: recovered = -3.0000e-04, amp = 3.9 mm, RMS = 2.76 mm
-[20:12:35]       η_in = -1.00e-04: recovered = -1.0000e-04, amp = 1.3 mm, RMS = 0.92 mm
-[20:12:35]       η_in = -5.00e-05: recovered = -5.0000e-05, amp = 0.7 mm, RMS = 0.46 mm
-[20:12:35]       η_in = -1.00e-05: recovered = -1.0000e-05, amp = 0.1 mm, RMS = 0.09 mm
-[20:12:35]     Saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_054_toy_orbital_tep_perturbation.json
+[22:29:40] ═══ ═══ Step 054: Toy Orbital TEP Perturbation Model ═══
+[22:29:40]     Simulation: 50000 points over 10.0 years
+[22:29:40]     Input η = -5.40e-04
+[22:29:40]     Perturbation amplitude: 7.02 mm
+[22:29:40] >>> Fitting standard orbital-element basis...
+[22:29:40]       Fit: a = 384400.0 km, e = 0.00000
+[22:29:40]       Residual RMS: 4.97 mm
+[22:29:40] >>> Regressing residuals on cos(D)...
+[22:29:40]       Recovered η = -5.4000e-04 ± 2.7857e-09 (193847.79σ)
+[22:29:40]       Input η     = -5.4000e-04
+[22:29:40]       Recovery bias: -0.0%
+[22:29:40]     --- Sweep over η values ---
+[22:29:40]       η_in = -1.00e-03: recovered = -1.0000e-03, amp = 13.0 mm, RMS = 9.19 mm
+[22:29:40]       η_in = -5.00e-04: recovered = -5.0000e-04, amp = 6.5 mm, RMS = 4.60 mm
+[22:29:40]       η_in = -3.00e-04: recovered = -3.0000e-04, amp = 3.9 mm, RMS = 2.76 mm
+[22:29:40]       η_in = -1.00e-04: recovered = -1.0000e-04, amp = 1.3 mm, RMS = 0.92 mm
+[22:29:40]       η_in = -5.00e-05: recovered = -5.0000e-05, amp = 0.7 mm, RMS = 0.46 mm
+[22:29:41]       η_in = -1.00e-05: recovered = -1.0000e-05, amp = 0.1 mm, RMS = 0.09 mm
+[22:29:41]     Saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_054_toy_orbital_tep_perturbation.json

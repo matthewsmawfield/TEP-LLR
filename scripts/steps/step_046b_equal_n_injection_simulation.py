@@ -3,8 +3,8 @@
 Step 046b: Equal-N Injection Simulation
 
 Parametric simulation under the alternative hypothesis.
-If the true Nordtvedt parameter is at the headline value
-eta = -4.06e-4, what fraction of equal-N station-balanced
+If the true Nordtvedt parameter is at the headline precision-weighted
+value from Step 050, what fraction of equal-N station-balanced
 subsamples recover |t| < 0.5?  This directly tests whether
 the observed 0.08sigma in Step 046 is in the bulk of the
 expected distribution for a genuine signal, or whether it
@@ -19,7 +19,7 @@ Methods:
      actual phase distribution (preserving phase-truncation
      effects) and noise is Gaussian with the station's RMS.
   3. Apply the exact equal-N balancing algorithm from Step 046.
-  4. Apply 6-sigma MAD outlier cleaning.
+  4. Apply 6σ-equivalent (MAD-based) outlier cleaning.
   5. Fit the full-systematic model and record |t| = |eta|/SE.
   6. Report the fraction yielding |t| < 0.5, |t| < 1.0,
      |t| < 0.19 (the observed value), and percentile statistics.
@@ -33,11 +33,15 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import argparse
+import os
+from concurrent.futures import ProcessPoolExecutor
+
 import numpy as np
 import pandas as pd
 from scripts.utils.statistical_utils import linear_regression, robust_regression, detect_outliers_sigma
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.config import get_config
 
 
 def create_equal_n_subsample(df, min_obs_per_station=None, seed=42):
@@ -113,33 +117,47 @@ def run_balanced_analysis(df, outlier_threshold=6.0):
 def simulate_equal_n_iteration(station_params, eta_true, seed):
     """Generate one synthetic dataset and apply equal-N balancing."""
     rng = np.random.RandomState(seed)
-    synthetic_rows = []
-
+    station_blocks = []
+    residual_blocks = []
+    elong_blocks = []
+    jd_blocks = []
     for sp in station_params:
         n_s = sp['n_obs']
-        # Sample elongation with replacement from observed distribution
         elong_samples = rng.choice(sp['elongation'], size=n_s, replace=True)
-        # TEP signal
-        signal = ETA_SCALE_FACTOR * eta_true * np.cos(elong_samples)
-        # Noise
-        noise = rng.normal(0, sp['rms'], size=n_s)
-        residuals = signal + noise
+        residuals = (
+            ETA_SCALE_FACTOR * eta_true * np.cos(elong_samples)
+            + rng.normal(0, sp['rms'], size=n_s)
+        )
+        jd = rng.uniform(sp['jd_min'], sp['jd_max'], size=n_s)
+        station_blocks.append(np.full(n_s, sp['station'], dtype=object))
+        residual_blocks.append(residuals)
+        elong_blocks.append(elong_samples)
+        jd_blocks.append(jd)
 
-        # Construct synthetic DataFrame row-matching real data columns
-        for i in range(n_s):
-            synthetic_rows.append({
-                'station': sp['station'],
-                'residual_m': residuals[i],
-                'elongation_rad': elong_samples[i],
-                'date_julian': rng.uniform(sp['jd_min'], sp['jd_max']),
-            })
-
-    df_syn = pd.DataFrame(synthetic_rows)
-    # Add derived columns expected by build_full_systematic_design
+    df_syn = pd.DataFrame({
+        'station': np.concatenate(station_blocks),
+        'residual_m': np.concatenate(residual_blocks),
+        'elongation_rad': np.concatenate(elong_blocks),
+        'date_julian': np.concatenate(jd_blocks),
+    })
     df_syn['date_julian_year'] = df_syn['date_julian'] / 365.25
 
     eq_df = create_equal_n_subsample(df_syn, seed=seed)
     return run_balanced_analysis(eq_df)
+
+
+_SP046B = None
+_ET046B = None
+
+
+def _init_046b_worker(station_params, eta_true):
+    global _SP046B, _ET046B
+    _SP046B = station_params
+    _ET046B = float(eta_true)
+
+
+def _run_046b_mc_index(i: int):
+    return simulate_equal_n_iteration(_SP046B, _ET046B, seed=42 + int(i))
 
 
 def main():
@@ -151,18 +169,29 @@ def main():
     set_step_logger(logger)
 
     print_status("Starting Step 046b: Equal-N Injection Simulation", "TITLE")
-    print_status("Purpose: Parametric simulation under true eta = -3.18e-4", "INFO")
+    print_status(
+        "Purpose: Parametric equal-N simulation at the headline Step 050 precision-weighted η",
+        "INFO",
+    )
 
-    # --- Load primary eta from Step 003 ---
-    step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
-    if step_003_path.exists():
-        with open(step_003_path, 'r') as f:
-            step_003 = json.load(f)
-        eta_true = float(step_003.get('eta_ols', -4.06e-4))
-        print_status(f"Loaded eta_true from Step 003: {eta_true:.3e}", "INFO")
-    else:
-        eta_true = -4.06e-4
-        print_status(f"Step 003 not found; using default eta_true = {eta_true:.3e}", "WARNING")
+    from scripts.utils.upstream_outputs import load_headline_eta
+
+    eta_true = load_headline_eta()
+    print_status(f"Loaded eta_true from Step 050 (precision-weighted WLS): {eta_true:.3e}", "INFO")
+
+    step_046_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_046_station_balanced_tep.json'
+    if not step_046_path.is_file():
+        print_status(f"Required upstream output missing: {step_046_path}", "ERROR")
+        sys.exit(1)
+    with open(step_046_path, 'r', encoding='utf-8') as f:
+        step_046 = json.load(f)
+    equal_row = next((t for t in step_046['tests'] if t.get('name') == 'equal_n_subsample'), None)
+    if equal_row is None or 'full_systematic' not in equal_row:
+        print_status("step_046 JSON missing equal_n_subsample.full_systematic", "ERROR")
+        sys.exit(1)
+    observed_snr = float(equal_row['full_systematic']['snr'])
+    observed_t = observed_snr
+    print_status(f"Loaded observed equal-N |t| from Step 046: {observed_t:.4f}", "INFO")
 
     # --- Load real data to extract station parameters ---
     input_path = PROJECT_ROOT / 'data' / 'processed' / 'INPOP19a_all_stations_residuals.csv'
@@ -191,34 +220,51 @@ def main():
             f"mean_cosD={np.mean(np.cos(sdf['elongation_rad'].values)):+.3f}", "INFO"
         )
 
-    # --- Run Monte Carlo ---
+    # --- Run Monte Carlo (multiprocessing on Apple Silicon / multi-core hosts) ---
     N_MC = 2000
+    cfg = get_config()
+    n_workers = max(1, min(int(cfg['N_WORKERS']), os.cpu_count() or 8))
     print_status(f"", "INFO")
-    print_status(f">>> Running {N_MC} equal-N simulations under eta_true = {eta_true:.3e}", "PROCESS")
+    print_status(
+        f">>> Running {N_MC} equal-N simulations under eta_true = {eta_true:.3e} "
+        f"({n_workers} worker processes)",
+        "PROCESS",
+    )
 
     snrs = []
     t_stats = []
     etas = []
     n_used_list = []
 
-    for i in range(N_MC):
-        result = simulate_equal_n_iteration(station_params, eta_true, seed=42 + i)
-        if result is None:
-            continue
-        snrs.append(result['full_systematic']['snr'])
-        t_stats.append(abs(result['full_systematic']['t_stat']))
-        etas.append(result['full_systematic']['eta'])
-        n_used_list.append(result['n_used'])
+    if n_workers <= 1:
+        for i in range(N_MC):
+            result = simulate_equal_n_iteration(station_params, eta_true, seed=42 + i)
+            if result is None:
+                continue
+            snrs.append(result['full_systematic']['snr'])
+            t_stats.append(abs(result['full_systematic']['t_stat']))
+            etas.append(result['full_systematic']['eta'])
+            n_used_list.append(result['n_used'])
+    else:
+        chunksize = max(8, N_MC // (n_workers * 8))
+        with ProcessPoolExecutor(
+            max_workers=n_workers,
+            initializer=_init_046b_worker,
+            initargs=(station_params, eta_true),
+        ) as pool:
+            for result in pool.map(_run_046b_mc_index, range(N_MC), chunksize=chunksize):
+                if result is None:
+                    continue
+                snrs.append(result['full_systematic']['snr'])
+                t_stats.append(abs(result['full_systematic']['t_stat']))
+                etas.append(result['full_systematic']['eta'])
+                n_used_list.append(result['n_used'])
 
     snrs = np.array(snrs)
     t_stats = np.array(t_stats)
     etas = np.array(etas)
 
-    # --- Observed Step 046 values (updated after re-run) ---
-    observed_snr = 0.08280902939607791  # From step_046 JSON: equal-N full-systematic
-    observed_t = observed_snr
-
-    # --- Statistics ---
+    # --- Observed Step 046 values (from step_046_station_balanced_tep.json) ---
     fraction_below_0_5 = float(np.mean(t_stats < 0.5))
     fraction_below_1_0 = float(np.mean(t_stats < 1.0))
     fraction_below_observed = float(np.mean(t_stats < observed_t))

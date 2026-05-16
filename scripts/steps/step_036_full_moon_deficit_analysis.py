@@ -42,20 +42,20 @@ def analyze_full_moon_deficit(df):
     """Analyze residuals near full moon vs other phases."""
     elongation = df['elongation_rad'].values
     residuals = df['residual_m'].values
-    
+
     # Define phase regions
     # Full moon: elongation within 20° of π (0.349 rad)
     full_moon_mask = np.abs(elongation - np.pi) < np.radians(20)
-    
+
     # Quarter moon: elongation near π/2 or 3π/2
     quarter_mask = (np.abs(elongation - np.pi/2) < np.radians(20)) | \
                    (np.abs(elongation - 3*np.pi/2) < np.radians(20))
-    
+
     # New moon: elongation within 20° of 0 or 2π
     new_moon_mask = (elongation < np.radians(20)) | (elongation > 2*np.pi - np.radians(20))
-    
+
     results = {}
-    
+
     for region_name, mask in [
         ('full_moon', full_moon_mask),
         ('quarter_moon', quarter_mask),
@@ -65,24 +65,24 @@ def analyze_full_moon_deficit(df):
         if n < 10:
             results[region_name] = {'error': f'Insufficient data (n={n})'}
             continue
-            
+
         res_region = residuals[mask]
         mean_res = np.mean(res_region)
         std_res = np.std(res_region, ddof=1)
         sem_res = std_res / np.sqrt(n)
-        
+
         # Compute correlation with cos(elongation) in this region
         cos_elong = np.cos(elongation[mask])
         if np.std(cos_elong) > 0.01:  # Ensure variation in cos(D)
             with suppress_scipy_array_api_matmul_runtime_warning():
                 r, p = stats.pearsonr(res_region, cos_elong)
-            
+
             # OLS amplitude
             A = np.sum(res_region * cos_elong) / np.sum(cos_elong**2)
             eta = A / ETA_SCALE_FACTOR
         else:
             r, p, eta = 0, 1, 0
-        
+
         results[region_name] = {
             'n_observations': int(n),
             'mean_residual_m': float(mean_res),
@@ -92,27 +92,27 @@ def analyze_full_moon_deficit(df):
             'correlation_p': float(p),
             'eta': float(eta)
         }
-    
+
     return results
 
 def test_tep_vs_thermal_hypothesis(df: pd.DataFrame) -> dict:
     """Docstring."""
-    
+
     elongation = df['elongation_rad'].values
     residuals = df['residual_m'].values
-    
+
     # Compute correlations with competing predictors
     cos_elong = np.cos(elongation)
-    
+
     # TEP predictor: cos(D) (synodic phase)
     with suppress_scipy_array_api_matmul_runtime_warning():
         r_tep, p_tep = stats.pearsonr(residuals, cos_elong)
-    
+
     # Thermal predictor: proximity to full moon (absolute deviation from π)
     thermal_proxy = -np.abs(elongation - np.pi)  # More negative = closer to full
     with suppress_scipy_array_api_matmul_runtime_warning():
         r_thermal, p_thermal = stats.pearsonr(residuals, thermal_proxy)
-    
+
     return {
         'tep_correlation': {'r': float(r_tep), 'p': float(p_tep)},
         'thermal_correlation': {'r': float(r_thermal), 'p': float(p_thermal)},
@@ -128,23 +128,23 @@ def analyze_by_illumination_geometry(df: pd.DataFrame) -> dict:
     # Perihelion ~ day 3, aphelion ~ day 186 (Earth's orbital parameters)
     df_temp = df.copy()  # Keep this copy since we add a column
     df_temp['day_of_year'] = (df_temp['date_julian'] % 365.25).astype(int)
-    
+
     # Simplified heliocentric distance model for illumination analysis
     df_temp['days_from_perihelion'] = np.minimum(
         np.abs(df_temp['day_of_year'] - 3),
         365.25 - np.abs(df_temp['day_of_year'] - 3)
     )
-    
+
     elongation = df_temp['elongation_rad'].values
     residuals = df_temp['residual_m'].values
     cos_elong = np.cos(elongation)
-    
+
     # Subset near full moon
     full_moon_mask = np.abs(elongation - np.pi) < np.radians(30)
-    
+
     if np.sum(full_moon_mask) < 50:
         return {'error': 'Insufficient full-moon data'}
-    
+
     # Correlation with heliocentric distance (perihelion proximity)
     perihelion_proximity = 1 / (1 + df_temp['days_from_perihelion'].values)
     with suppress_scipy_array_api_matmul_runtime_warning():
@@ -152,7 +152,7 @@ def analyze_by_illumination_geometry(df: pd.DataFrame) -> dict:
             residuals[full_moon_mask],
             perihelion_proximity[full_moon_mask],
         )
-    
+
     return {
         'full_moon_subset_n': int(np.sum(full_moon_mask)),
         'perihelion_correlation_r': float(r_peri),
@@ -164,7 +164,7 @@ def main():
     parser = argparse.ArgumentParser(description='Full-Moon Deficit Analysis (Step 036)')
     parser.add_argument('--verbose', action='store_true', help='Enable verbose output')
     args = parser.parse_args()
-    
+
     # Setup logging
     log_dir = PROJECT_ROOT / "logs"
     log_dir.mkdir(exist_ok=True)
@@ -172,32 +172,32 @@ def main():
     logger = TEPLogger("step_036", str(log_file))
     set_step_logger(logger)
     set_verbose_mode(args.verbose)
-    
+
     print_status("Step 038: Full-Moon Deficit Analysis", "STEP")
     print_status("Testing Murphy/Sabhlok full-moon deficit vs TEP predictions", "INFO")
-    
+
     # Load data
     data_path = PROJECT_ROOT / "data/processed/INPOP19a_all_stations_residuals.csv"
     if not data_path.exists():
         print_status(f"Error: Data file not found: {data_path}", "ERROR")
         sys.exit(1)
-    
+
     print_status(f"Loading data from: {data_path}", "INFO")
     df = load_residuals(data_path)
     print_status(f"Loaded {len(df)} observations", "INFO")
-    
+
     # Analyze full-moon deficit
     print_status("Analyzing full-moon deficit pattern...", "INFO")
     phase_analysis = analyze_full_moon_deficit(df)
-    
+
     # Test TEP vs thermal hypothesis
     print_status("Testing TEP vs thermal/dust hypothesis...", "INFO")
     model_comparison = test_tep_vs_thermal_hypothesis(df)
-    
+
     # Analyze by illumination geometry
     print_status("Analyzing heliocentric geometry dependence...", "INFO")
     geometry_analysis = analyze_by_illumination_geometry(df)
-    
+
     # Compile results
     output = {
         "step_id": "step_036",
@@ -218,16 +218,16 @@ def main():
         },
         "status": "PASS"
     }
-    
+
     # Save output
     output_path = PROJECT_ROOT / "results/outputs/step_036_full_moon_deficit_analysis.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, 'w') as f:
         json.dump(output, f, indent=4, default=str)
-    
+
     output_rel = output_path.relative_to(PROJECT_ROOT) if output_path.is_relative_to(PROJECT_ROOT) else output_path
     print_status(f"Results saved to: {output_rel}", "INFO")
-    
+
     # Summary
     print_status("\n=== Full-Moon Deficit Analysis Summary ===", "STEP")
     if 'full_moon' in phase_analysis and 'n_observations' in phase_analysis['full_moon']:
@@ -235,7 +235,7 @@ def main():
     print_status(f"TEP correlation (r²): {model_comparison['r_tep_squared']:.4f}", "INFO")
     print_status(f"Thermal correlation (r²): {model_comparison['r_thermal_squared']:.4f}", "INFO")
     print_status(f"Preferred model: {model_comparison['preferred_model']}", "PASS" if model_comparison['preferred_model'] == 'TEP' else "WARNING")
-    
+
     print_status("Step 038 completed successfully", "PASS")
 
 if __name__ == "__main__":

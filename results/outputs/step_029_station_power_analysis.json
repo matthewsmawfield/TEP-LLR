@@ -1,18 +1,26 @@
 {
   "step_id": "step_029",
   "status": "PASS",
+  "n_observations": 25445,
+  "n_outliers_removed": 762,
   "summary": {
     "good_coverage_stations_all_negative": true,
     "n_good_coverage_stations": 2,
     "n_good_coverage_negative": 2,
-    "ipw_median_snr_for_genuine_signal": 3.023329724042516,
+    "ipw_median_snr_for_genuine_signal": 3.03048453730697,
     "ipw_low_snr_explanation": "McDonald2 phase-truncation + Haleakala sign anomaly dilute IPW",
-    "precision_weighted_eta": -0.00035046600679617616,
-    "precision_weighted_snr": 5.318864446707926,
+    "precision_weighted_eta": -0.0003212679824702559,
+    "precision_weighted_snr": 6.2715218090480604,
     "grasse_both_halves_negative": true,
-    "cross_station_r": 0.0356,
-    "overall_verdict": "CONSISTENT",
-    "interpretation": "The observed IPW SNR = 0.52 is explained by two structural data issues: (1) McDonald2 has severe phase truncation (mean cos(D) = -0.326, vs -0.11 for Grasse), meaning its obs cluster near new moon. This sharply reduces cos(D) leverage and inflates station-level uncertainty, which degrades station-balanced estimators. (2) Haleakala is opposite-signed (marginal early-era result, 1.5\u03c3). When the IPW regression gives these stations equal weight to APO and Grasse, it amplifies phase-truncated noise to match the well-powered signal. The correct comparison is: all stations with good phase coverage and sufficient data (APO, Grasse) detect negative \u03b7. The precision-weighted regression (\u03b7_WLS = -3.505e-04 at 5.32\u03c3) which weights by data quality, not station identity, confirms the detection."
+    "cross_station_r": 0.0418,
+    "overall_verdict": "QUALIFIED",
+    "core_support": true,
+    "qualified_by_leverage": true,
+    "max_leave_one_station_shift_sigma": 4.015151640265885,
+    "expected_power_misses": [
+      "APO"
+    ],
+    "interpretation": "The observed IPW SNR = 0.52 is explained by two structural data issues: (1) McDonald2 has severe phase truncation (mean cos(D) = -0.315), meaning its obs cluster near new moon. This sharply reduces cos(D) leverage and inflates station-level uncertainty, which degrades station-balanced estimators. (2) Low-power opposite-sign stations (Haleakala, Matera) are amplified by equal-station weighting. When the IPW regression gives these stations equal weight to APO and Grasse, it amplifies phase-truncated noise to match the well-powered signal. The correct comparison is: all stations with good phase coverage and sufficient data (APO, Grasse) detect negative \u03b7. The precision-weighted regression (\u03b7_WLS = -3.213e-04 at 6.27\u03c3) which weights by data quality, not station identity, supports the detection. However, Grasse contributes 73.7% of the cleaned archive and leave-one-Grasse shifts the cosD-only eta by 4.02\u03c3, so this step is best read as a qualified station-power diagnosis rather than a complete Grasse-dominance falsification."
   },
   "per_station_power": {
     "stations": [
@@ -21,9 +29,9 @@
         "n_obs": 2595,
         "rms_cm": 3.16,
         "r_observed": -0.0543,
-        "p_observed": 0.005677689973151364,
-        "eta_obs": -0.00023983556703264082,
-        "eta_err_obs": 8.664124510072114e-05,
+        "p_observed": 0.005677689810373049,
+        "eta_obs": -0.00023983556784707943,
+        "eta_err_obs": 8.664124510162064e-05,
         "snr_observed": 2.77,
         "snr_expected_at_global_eta": 3.66,
         "snr_expected_at_station_eta": 2.76,
@@ -35,33 +43,33 @@
       },
       {
         "station": "Grasse",
-        "n_obs": 19390,
-        "rms_cm": 9.87,
-        "r_observed": -0.0356,
-        "p_observed": 6.855618825263247e-07,
-        "eta_obs": -0.0005401787666332995,
-        "eta_err_obs": 0.00010875237064689926,
-        "snr_observed": 4.97,
-        "snr_expected_at_global_eta": 2.92,
-        "snr_expected_at_station_eta": 4.96,
-        "cosd_variance": 0.2511,
-        "powered_at_3sigma_expected": false,
+        "n_obs": 18742,
+        "rms_cm": 5.9,
+        "r_observed": -0.0418,
+        "p_observed": 9.959111613924106e-09,
+        "eta_obs": -0.00037818228146582576,
+        "eta_err_obs": 6.595420878131981e-05,
+        "snr_observed": 5.73,
+        "snr_expected_at_global_eta": 4.81,
+        "snr_expected_at_station_eta": 5.73,
+        "cosd_variance": 0.2524,
+        "powered_at_3sigma_expected": true,
         "actually_powered": true,
-        "detection_verdict": "powered (at station \u03b7)",
+        "detection_verdict": "powered (expected at pooled \u03b7)",
         "actual_detection_status": "detected"
       },
       {
         "station": "Haleakala",
-        "n_obs": 737,
-        "rms_cm": 13.83,
-        "r_observed": 0.0901,
-        "p_observed": 0.014405700264250846,
-        "eta_obs": 0.003553510872736506,
-        "eta_err_obs": 0.0014487488072928987,
-        "snr_observed": 2.45,
-        "snr_expected_at_global_eta": 0.22,
-        "snr_expected_at_station_eta": 2.45,
-        "cosd_variance": 0.0728,
+        "n_obs": 666,
+        "rms_cm": 10.62,
+        "r_observed": 0.0854,
+        "p_observed": 0.027609623736412476,
+        "eta_obs": 0.0025708161272214283,
+        "eta_err_obs": 0.001164501902528554,
+        "snr_observed": 2.21,
+        "snr_expected_at_global_eta": 0.27,
+        "snr_expected_at_station_eta": 2.2,
+        "cosd_variance": 0.0737,
         "powered_at_3sigma_expected": false,
         "actually_powered": false,
         "detection_verdict": "underpowered",
@@ -69,16 +77,16 @@
       },
       {
         "station": "Matera",
-        "n_obs": 346,
-        "rms_cm": 6.19,
-        "r_observed": -0.0011,
-        "p_observed": 0.9833976056485416,
-        "eta_obs": -1.813115381112349e-05,
-        "eta_err_obs": 0.0008706581659571015,
-        "snr_observed": 0.02,
-        "snr_expected_at_global_eta": 0.37,
-        "snr_expected_at_station_eta": 0.02,
-        "cosd_variance": 0.087,
+        "n_obs": 345,
+        "rms_cm": 5.89,
+        "r_observed": 0.025,
+        "p_observed": 0.6434621968499931,
+        "eta_obs": 0.0003845938253044743,
+        "eta_err_obs": 0.0008301659369748619,
+        "snr_observed": 0.46,
+        "snr_expected_at_global_eta": 0.38,
+        "snr_expected_at_station_eta": 0.46,
+        "cosd_variance": 0.0867,
         "powered_at_3sigma_expected": false,
         "actually_powered": false,
         "detection_verdict": "underpowered",
@@ -86,84 +94,84 @@
       },
       {
         "station": "McDonald2",
-        "n_obs": 3139,
-        "rms_cm": 9.55,
-        "r_observed": -0.0248,
-        "p_observed": 0.16485348545014725,
-        "eta_obs": -0.0005009356067952293,
-        "eta_err_obs": 0.00036057829904881643,
-        "snr_observed": 1.39,
-        "snr_expected_at_global_eta": 0.88,
-        "snr_expected_at_station_eta": 1.39,
-        "cosd_variance": 0.1324,
+        "n_obs": 3097,
+        "rms_cm": 8.07,
+        "r_observed": -0.0052,
+        "p_observed": 0.774183682599882,
+        "eta_obs": -8.792793726778155e-05,
+        "eta_err_obs": 0.00030644184818751384,
+        "snr_observed": 0.29,
+        "snr_expected_at_global_eta": 1.04,
+        "snr_expected_at_station_eta": 0.29,
+        "cosd_variance": 0.1326,
         "powered_at_3sigma_expected": false,
         "actually_powered": false,
         "detection_verdict": "underpowered",
         "actual_detection_status": "not detected"
       }
     ],
-    "n_expected_powered": 1,
+    "n_expected_powered": 2,
     "n_actually_powered": 1,
-    "n_expected_underpowered": 4,
+    "n_expected_underpowered": 3,
     "n_actually_underpowered": 4,
-    "power_analysis_conclusion": "Expected powered stations (based on SNR >= 3.0 at global \u03b7): 1. Actually powered stations (based on observed SNR >= 3.0): 1. No individual station achieves conventional statistical significance (SNR \u2265 3\u03c3). Detection relies on combined analysis with N = 25,177 observations.",
-    "conclusion": "Pattern of detections/non-detections matches per-station power analysis. Underpowered stations failing to detect is expected and consistent with the global signal, not evidence against it. The detection is achieved through combined analysis, not individual station measurements."
+    "power_analysis_conclusion": "Expected powered stations (based on SNR >= 3.0 at global \u03b7): 2. Actually powered stations (based on observed SNR >= 3.0): 1. 1 station(s) achieve conventional station-level significance (SNR \u2265 3\u03c3). The strongest inference remains the combined analysis with N = 25,445 observations.",
+    "conclusion": "Pattern of detections/non-detections matches per-station power analysis. Underpowered stations failing to detect is expected and consistent with the global signal, not evidence against it. The detection is achieved primarily through combined analysis, with station-level results used as power diagnostics rather than independent discovery claims."
   },
   "leave_one_station_out_influence": {
     "full_sample": {
-      "eta": -0.00045329831411731385,
-      "eta_error": 9.194732759479532e-05,
-      "snr": 4.929978129597894,
-      "n_obs": 26207
+      "eta": -0.00031772666444063755,
+      "eta_error": 6.051938437550738e-05,
+      "snr": 5.249998289295616,
+      "n_obs": 25445
     },
     "leave_one_out": [
       {
         "excluded_station": "Grasse",
-        "n_obs_remaining": 6817,
-        "eta": -0.0001645311546624156,
-        "eta_error": 0.00017527906010724232,
-        "snr": 0.9386811782408535,
-        "delta_eta_vs_full": 0.0002887671594548983,
-        "delta_eta_in_full_sigma": 3.14057153164334
+        "n_obs_remaining": 6703,
+        "eta": -7.473215899743748e-05,
+        "eta_error": 0.00014567323247198808,
+        "snr": 0.5130122928507674,
+        "delta_eta_vs_full": 0.00024299450544320006,
+        "delta_eta_in_full_sigma": 4.015151640265885
       },
       {
         "excluded_station": "Haleakala",
-        "n_obs_remaining": 25470,
-        "eta": -0.0004900068946369093,
-        "eta_error": 9.096886597884122e-05,
-        "snr": 5.3865340560679495,
-        "delta_eta_vs_full": -3.670858051959549e-05,
-        "delta_eta_in_full_sigma": 0.3992348824031878
-      },
-      {
-        "excluded_station": "APO",
-        "n_obs_remaining": 23612,
-        "eta": -0.00048373198890684595,
-        "eta_error": 0.00010309007783771847,
-        "snr": 4.6923234423037625,
-        "delta_eta_vs_full": -3.0433674789532097e-05,
-        "delta_eta_in_full_sigma": 0.3309903135374518
+        "n_obs_remaining": 24779,
+        "eta": -0.00034348929756680626,
+        "eta_error": 5.923298646856385e-05,
+        "snr": 5.798952881585719,
+        "delta_eta_vs_full": -2.576263312616871e-05,
+        "delta_eta_in_full_sigma": 0.4256922536805418
       },
       {
         "excluded_station": "McDonald2",
-        "n_obs_remaining": 23068,
-        "eta": -0.000455607762943737,
-        "eta_error": 9.568649630679557e-05,
-        "snr": 4.761463534864325,
-        "delta_eta_vs_full": -2.309448826423165e-06,
-        "delta_eta_in_full_sigma": 0.025117084822744665
+        "n_obs_remaining": 22348,
+        "eta": -0.0003311166295235409,
+        "eta_error": 5.987367459960924e-05,
+        "snr": 5.530254017943671,
+        "delta_eta_vs_full": -1.338996508290334e-05,
+        "delta_eta_in_full_sigma": 0.22125084749411877
+      },
+      {
+        "excluded_station": "APO",
+        "n_obs_remaining": 22850,
+        "eta": -0.000325979114597155,
+        "eta_error": 6.754025460809602e-05,
+        "snr": 4.8264418973345125,
+        "delta_eta_vs_full": -8.252450156517465e-06,
+        "delta_eta_in_full_sigma": 0.13636044453646637
       },
       {
         "excluded_station": "Matera",
-        "n_obs_remaining": 25861,
-        "eta": -0.0004545444708069907,
-        "eta_error": 9.257264282637054e-05,
-        "snr": 4.910138210697251,
-        "delta_eta_vs_full": -1.246156689676853e-06,
-        "delta_eta_in_full_sigma": 0.01355294082247358
+        "n_obs_remaining": 25100,
+        "eta": -0.0003201432478218278,
+        "eta_error": 6.073904487445432e-05,
+        "snr": 5.270798190579943,
+        "delta_eta_vs_full": -2.4165833811902373e-06,
+        "delta_eta_in_full_sigma": 0.03993073303911937
       }
     ],
-    "interpretation": "If exclusion of any station shifts eta by << 1 sigma, the pooled detection is not driven by that station. In particular, Haleakala's small N implies low influence even if its station-level sign differs."
+    "interpretation": "Large leave-one-station shifts indicate material station leverage. This diagnostic is intentionally conservative because it uses a cosD-only fit; the controlled common-eta model in Step 050 is the primary station-pooling test."
   },
   "phase_coverage": {
     "stations": [
@@ -186,173 +194,173 @@
       },
       {
         "station": "Grasse",
-        "n_obs": 19390,
-        "mean_cos_elong": -0.131,
-        "std_cos_elong": 0.501,
-        "phase_bias": 0.131,
+        "n_obs": 18742,
+        "mean_cos_elong": -0.13,
+        "std_cos_elong": 0.502,
+        "phase_bias": 0.13,
         "coverage_bins_pct": [
-          27.5,
-          31.6,
+          27.6,
+          31.5,
           28.2,
-          12.6
+          12.7
         ],
-        "chi2_uniformity": 1656.8,
+        "chi2_uniformity": 1581.7,
         "p_uniformity": 0.0,
         "good_phase_coverage": true,
         "coverage_note": "Good: near-uniform phase coverage"
       },
       {
         "station": "Haleakala",
-        "n_obs": 737,
-        "mean_cos_elong": -0.334,
-        "std_cos_elong": 0.27,
-        "phase_bias": 0.334,
+        "n_obs": 666,
+        "mean_cos_elong": -0.347,
+        "std_cos_elong": 0.271,
+        "phase_bias": 0.347,
         "coverage_bins_pct": [
-          29.0,
-          60.8,
-          10.2,
+          30.6,
+          59.3,
+          10.1,
           0.0
         ],
-        "chi2_uniformity": 631.4,
+        "chi2_uniformity": 548.0,
         "p_uniformity": 0.0,
         "good_phase_coverage": false,
-        "coverage_note": "Biased: mean cos(D)=-0.334 (skewed toward new moon)"
+        "coverage_note": "Biased: mean cos(D)=-0.347 (skewed toward new moon)"
       },
       {
         "station": "Matera",
-        "n_obs": 346,
-        "mean_cos_elong": -0.026,
-        "std_cos_elong": 0.295,
-        "phase_bias": 0.026,
+        "n_obs": 345,
+        "mean_cos_elong": -0.025,
+        "std_cos_elong": 0.294,
+        "phase_bias": 0.025,
         "coverage_bins_pct": [
           10.4,
-          39.0,
-          50.6,
+          38.8,
+          50.7,
           0.0
         ],
-        "chi2_uniformity": 233.7,
+        "chi2_uniformity": 233.3,
         "p_uniformity": 0.0,
         "good_phase_coverage": false,
-        "coverage_note": "Biased: mean cos(D)=-0.026 (skewed toward new moon)"
+        "coverage_note": "Biased: mean cos(D)=-0.025 (skewed toward new moon)"
       },
       {
         "station": "McDonald2",
-        "n_obs": 3139,
-        "mean_cos_elong": -0.316,
+        "n_obs": 3097,
+        "mean_cos_elong": -0.315,
         "std_cos_elong": 0.364,
-        "phase_bias": 0.316,
+        "phase_bias": 0.315,
         "coverage_bins_pct": [
           34.4,
-          45.8,
-          17.6,
+          45.9,
+          17.5,
           2.2
         ],
-        "chi2_uniformity": 1379.0,
+        "chi2_uniformity": 1359.2,
         "p_uniformity": 0.0,
         "good_phase_coverage": false,
-        "coverage_note": "Biased: mean cos(D)=-0.316 (skewed toward new moon)"
+        "coverage_note": "Biased: mean cos(D)=-0.315 (skewed toward new moon)"
       }
     ],
     "note": "Stations with mean cos(D) far from 0 have phase-truncated sampling. This reduces OLS leverage on the cosine slope and can produce anomalous eta estimates independent of noise level. McDonald2 (mean_cos=-0.326) is a primary example \u2014 its observations cluster near new moon (cos\u2248-1), giving the regression minimal positive-cos leverage. This inflates uncertainty and destabilizes station-level fits, which in turn degrades station-balanced (IPW) estimators even when the pooled signal is genuine."
   },
   "mc_ipw_distribution": {
     "n_mc": 2000,
-    "eta_true": -0.0003177266624680195,
+    "eta_true": -0.00031772666444063755,
     "station_fractions": {
-      "Grasse": 0.74,
-      "APO": 0.099,
-      "Matera": 0.013,
-      "McDonald2": 0.12,
-      "Haleakala": 0.028
+      "Grasse": 0.7365690705443113,
+      "McDonald2": 0.12171349970524661,
+      "APO": 0.10198467282373748,
+      "Haleakala": 0.026174101002161526,
+      "Matera": 0.013558655924543132
     },
     "ipw_snr": {
-      "mean": 3.369517813232638,
-      "median": 3.023329724042516,
-      "std": 2.25046325617127,
+      "mean": 3.326467521609722,
+      "median": 3.03048453730697,
+      "std": 2.210913109415504,
       "percentiles": {
-        "5": 0.34241179955618006,
-        "10": 0.6726102435291793,
-        "25": 1.5907563941908072,
-        "50": 3.023329724042516,
-        "75": 4.790832231280038,
-        "90": 6.592222051458449,
-        "95": 7.57990509473989
+        "5": 0.30142777234255025,
+        "10": 0.6291237950449223,
+        "25": 1.5350573149834215,
+        "50": 3.03048453730697,
+        "75": 4.812550385379167,
+        "90": 6.369889365677846,
+        "95": 7.358378044028892
       },
-      "fraction_below_0_52": 0.0765
+      "fraction_below_0_52": 0.0855
     },
     "full_sample_snr": {
-      "mean": 4.190664348508034,
-      "median": 4.199523102876096,
-      "std": 0.9987108289895681,
+      "mean": 4.1544773560593615,
+      "median": 4.141684229584478,
+      "std": 0.986838596318074,
       "percentiles": {
-        "5": 2.555920847618916,
-        "10": 2.904727351637001,
-        "25": 3.5249967335654926,
-        "50": 4.199523102876096,
-        "75": 4.85553639578877,
-        "90": 5.469595009012223,
-        "95": 5.812240289201783
+        "5": 2.4982467139200675,
+        "10": 2.912427165881205,
+        "25": 3.450959752261107,
+        "50": 4.141684229584478,
+        "75": 4.827827310549178,
+        "90": 5.408989479794991,
+        "95": 5.761115328297375
       }
     },
-    "interpretation": "For a genuine signal at eta=-3.18e-04 with the observed station concentration (Grasse=74%), IPW SNR has median=3.02\u03c3. 7.6% of simulated genuine signals yield IPW SNR < 0.52 (the observed value). The observed IPW SNR is therefore consistent with expectation for a genuine signal \u2014 not evidence against detection."
+    "interpretation": "For a genuine signal at eta=-3.18e-04 with the observed station concentration (Grasse=74%), IPW SNR has median=3.03\u03c3. 8.6% of simulated genuine signals yield IPW SNR < 0.52 (the observed value). The observed IPW SNR is therefore consistent with expectation for a genuine signal \u2014 not evidence against detection."
   },
   "precision_weighted_regression": {
-    "eta_precision_weighted": -0.00035046600679617616,
-    "eta_error": 6.58911334003059e-05,
-    "snr": 5.318864446707926,
-    "r_weighted": -0.032839197796707305,
-    "n_eff": 8933.78886837579,
-    "dof": 26205,
+    "eta_precision_weighted": -0.0003212679824702559,
+    "eta_error": 5.1226479354142657e-05,
+    "snr": 6.2715218090480604,
+    "r_weighted": -0.03928740574815068,
+    "n_eff": 17449.094366736455,
+    "dof": 25443,
     "per_station_rms": {
       "APO": 0.03161518296520261,
-      "Grasse": 0.09870678774190637,
-      "Haleakala": 0.13828276515083554,
-      "Matera": 0.06186166532563671,
-      "McDonald2": 0.09553802413980864
+      "Grasse": 0.05902263869865752,
+      "Haleakala": 0.10624811895862268,
+      "Matera": 0.058856587276723105,
+      "McDonald2": 0.08069853340704666
     },
     "method": "WLS 1/sigma^2 per station"
   },
   "grasse_internal_split": {
-    "n_grasse_total": 19390,
-    "split_point_obs": 9695,
+    "n_grasse_total": 18742,
+    "split_point_obs": 9371,
     "halves": {
       "first_half": {
-        "n_obs": 9695,
+        "n_obs": 9371,
         "year_range": [
           1984.3,
-          2012.7
+          2013.4
         ],
-        "eta": -0.0008024756322075247,
-        "eta_error": 0.00025213609281923995,
-        "snr": 3.18,
-        "r": -0.0323,
-        "p": 0.0014636528744247526,
+        "eta": -0.000486813054854459,
+        "eta_error": 0.0001513551619001866,
+        "snr": 3.22,
+        "r": -0.0332,
+        "p": 0.0013026772508921939,
         "negative_eta": true
       },
       "second_half": {
-        "n_obs": 9695,
+        "n_obs": 9371,
         "year_range": [
-          2012.7,
+          2013.4,
           2019.8
         ],
-        "eta": -0.0003153496636040026,
-        "eta_error": 3.240755235529812e-05,
-        "snr": 9.73,
-        "r": -0.0984,
-        "p": 2.818960536980166e-22,
+        "eta": -0.00029937955174614477,
+        "eta_error": 3.218358415752579e-05,
+        "snr": 9.3,
+        "r": -0.0957,
+        "p": 1.6848807599263107e-20,
         "negative_eta": true
       }
     },
     "both_negative_eta": true,
-    "half_consistency_sigma": 1.92,
+    "half_consistency_sigma": 1.21,
     "conclusion": "Both chronological halves of Grasse data independently detect negative eta. Internal consistency confirms the signal is not driven by a single hardware cohort within Grasse."
   },
   "cross_station_validation": {
-    "eta_from_apo": -0.00023983556703264082,
-    "prediction_r": 0.0356,
-    "prediction_p": 6.855618825263247e-07,
-    "prediction_sigma": 4.96,
-    "n_grasse_predicted": 19390,
-    "conclusion": "APO-derived amplitude predicts Grasse residuals at r=0.0356 (p=6.86e-07). Cross-station predictive power confirms the signal is consistent across independent observatories."
+    "eta_from_apo": -0.00023983556784707943,
+    "prediction_r": 0.0418,
+    "prediction_p": 9.959111613924106e-09,
+    "prediction_sigma": 5.73,
+    "n_grasse_predicted": 18742,
+    "conclusion": "APO-derived amplitude predicts Grasse residuals at r=0.0418 (p=9.96e-09). Cross-station predictive power confirms the signal is consistent across independent observatories."
   }
 }

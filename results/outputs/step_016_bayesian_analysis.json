@@ -1,43 +1,177 @@
 {
     "step_id": "step_016",
     "bayesian_summary": {
-        "posterior_mean_eta": -0.0002866223669863245,
-        "posterior_std_eta": 6.73386298419646e-05,
-        "posterior_mean_b": -0.0004044734694453865,
-        "posterior_std_b": 0.00047805169285644453,
+        "posterior_mean_eta": -0.00028690332786088414,
+        "posterior_std_eta": 6.634015742663272e-05,
+        "posterior_mean_b": -0.0004026892458610367,
+        "posterior_std_b": 0.00048004923671965405,
         "credible_interval_95": [
-            -0.00041587062115457937,
-            -0.00015454621058058978
+            -0.00041539174358933055,
+            -0.00015590465315350007
         ],
         "credible_interval_68": [
-            -0.00035404555052543924,
-            -0.0002203092028225997
+            -0.00035335626772925677,
+            -0.00022102303169449448
         ],
-        "bayes_factor_primary": 1722.017428158311,
+        "bayes_factor_primary": 1710.147732169257,
         "bayes_factor_primary_method": "BIC approximation (robust to bandwidth ambiguity)",
-        "bayes_factor_bic": 1722.017428158311,
-        "bayes_factor_savage_dickey": 24.942927223457584,
-        "bayes_factor_savage_dickey_geometric_mean": 4.6840964704160015,
+        "bayes_factor_bic": 1710.147732169257,
+        "bayes_factor_savage_dickey": 292912.1067559718,
+        "bayes_factor_savage_dickey_geometric_mean": 522.9678008659774,
         "bayes_factor_sensitivity": {
-            "note": "Savage-Dickey is bandwidth-sensitive; BIC is the primary robust estimator.",
+            "note": "Savage-Dickey is bandwidth- and prior-sensitive; BIC is the primary robust estimator.",
             "bandwidth_methods": {
-                "scott_default": 24.942927223457584,
-                "silverman": 22.096181865677508,
-                "narrow_0.5x": 7.568813275747106,
-                "wide_2.0x": 0.1154013467476206
+                "scott_default": 292912.1067559718,
+                "silverman": 99876.34441764545,
+                "narrow_0.5x": 21.210051503878876,
+                "wide_2.0x": 0.12054747465511782
             },
-            "min": 0.1154013467476206,
-            "max": 24.942927223457584,
-            "geometric_mean": 4.6840964704160015,
-            "range_ratio": 216.14069442367116,
+            "min": 0.12054747465511782,
+            "max": 292912.1067559718,
+            "geometric_mean": 522.9678008659774,
+            "range_ratio": 2429848.552149128,
             "robust": false
         },
-        "n_samples": 3200,
-        "gelman_rubin_eta": 1.0019724827673788,
-        "gelman_rubin_b": 1.0052035307764808,
-        "mean_acceptance_fraction": 0.7110208333333333,
+        "prior_sensitivity_table": [
+            {
+                "prior_id": "uniform_reference",
+                "prior_label": "Uniform reference (pipeline default)",
+                "eta_prior_lo": -0.01,
+                "eta_prior_hi": 0.01,
+                "intercept_prior": "b \u2208 [-0.1, 0.1] m (uniform)",
+                "prior_density_at_eta_zero": 50.0,
+                "bandwidth_bf": {
+                    "scott_default": 292912.1067559718,
+                    "silverman": 99876.34441764545,
+                    "narrow_0.5x": 21.210051503878876,
+                    "wide_2.0x": 0.12054747465511782
+                },
+                "bf_geometric_mean": 522.9678008659774,
+                "bf_min": 0.12054747465511782,
+                "bf_max": 292912.1067559718,
+                "bf_range_ratio": 2429848.552149128
+            },
+            {
+                "prior_id": "uniform_tight",
+                "prior_label": "Uniform tight (\u00b110\u207b\u00b3)",
+                "eta_prior_lo": -0.001,
+                "eta_prior_hi": 0.001,
+                "intercept_prior": "b \u2208 [-0.1, 0.1] m (uniform)",
+                "prior_density_at_eta_zero": 500.0,
+                "bandwidth_bf": {
+                    "scott_default": 835595.6674802627,
+                    "silverman": 281196.9107544151,
+                    "narrow_0.5x": 219.88168082036893,
+                    "wide_2.0x": 1.189263237979608
+                },
+                "bf_geometric_mean": 2799.744768435463,
+                "bf_min": 1.189263237979608,
+                "bf_max": 835595.6674802627,
+                "bf_range_ratio": 702616.2423887103
+            },
+            {
+                "prior_id": "uniform_wide",
+                "prior_label": "Uniform wide (\u00b110\u207b\u00b9)",
+                "eta_prior_lo": -0.1,
+                "eta_prior_hi": 0.1,
+                "intercept_prior": "b \u2208 [-0.1, 0.1] m (uniform)",
+                "prior_density_at_eta_zero": 5.0,
+                "bandwidth_bf": {
+                    "scott_default": 8355.956674802626,
+                    "silverman": 2811.969107544151,
+                    "narrow_0.5x": 2.198816808203689,
+                    "wide_2.0x": 0.01189263237979608
+                },
+                "bf_geometric_mean": 27.997447684354643,
+                "bf_min": 0.01189263237979608,
+                "bf_max": 8355.956674802626,
+                "bf_range_ratio": 702616.2423887103
+            },
+            {
+                "prior_id": "uniform_half_cent",
+                "prior_label": "Uniform half-cent (\u00b15\u00d710\u207b\u2074)",
+                "eta_prior_lo": -0.0005,
+                "eta_prior_hi": 0.0005,
+                "intercept_prior": "b \u2208 [-0.1, 0.1] m (uniform)",
+                "prior_density_at_eta_zero": 1000.0,
+                "bandwidth_bf": {
+                    "scott_default": 68702.71863268397,
+                    "silverman": 32236.081358937536,
+                    "narrow_0.5x": 184.99680283429223,
+                    "wide_2.0x": 2.19270074212901
+                },
+                "bf_geometric_mean": 973.5649678579388,
+                "bf_min": 2.19270074212901,
+                "bf_max": 68702.71863268397,
+                "bf_range_ratio": 31332.4647147138
+            }
+        ],
+        "prior_specifications": [
+            {
+                "prior_id": "uniform_reference",
+                "prior_label": "Uniform reference (pipeline default)",
+                "eta_lo": -0.01,
+                "eta_hi": 0.01,
+                "reference": true
+            },
+            {
+                "prior_id": "uniform_tight",
+                "prior_label": "Uniform tight (\u00b110\u207b\u00b3)",
+                "eta_lo": -0.001,
+                "eta_hi": 0.001,
+                "reference": false
+            },
+            {
+                "prior_id": "uniform_wide",
+                "prior_label": "Uniform wide (\u00b110\u207b\u00b9)",
+                "eta_lo": -0.1,
+                "eta_hi": 0.1,
+                "reference": false
+            },
+            {
+                "prior_id": "uniform_half_cent",
+                "prior_label": "Uniform half-cent (\u00b15\u00d710\u207b\u2074)",
+                "eta_lo": -0.0005,
+                "eta_hi": 0.0005,
+                "reference": false
+            }
+        ],
+        "mcmc_runs_by_prior": {
+            "uniform_reference": {
+                "n_steps": 5000,
+                "gelman_rubin_eta": 0.9991987473628989,
+                "gelman_rubin_b": 1.0022846685989935,
+                "mean_acceptance_fraction": 0.71713125,
+                "n_posterior_samples": 6400
+            },
+            "uniform_tight": {
+                "n_steps": 2500,
+                "gelman_rubin_eta": 1.0011651674320383,
+                "gelman_rubin_b": 1.0048271703949125,
+                "mean_acceptance_fraction": 0.7174625000000001,
+                "n_posterior_samples": 2400
+            },
+            "uniform_wide": {
+                "n_steps": 2500,
+                "gelman_rubin_eta": 1.0011651674320383,
+                "gelman_rubin_b": 1.0048271703949125,
+                "mean_acceptance_fraction": 0.7174625000000001,
+                "n_posterior_samples": 2400
+            },
+            "uniform_half_cent": {
+                "n_steps": 2500,
+                "gelman_rubin_eta": 1.0029828397269445,
+                "gelman_rubin_b": 1.0042508978008535,
+                "mean_acceptance_fraction": 0.7176374999999999,
+                "n_posterior_samples": 2400
+            }
+        },
+        "n_samples": 6400,
+        "gelman_rubin_eta": 0.9991987473628989,
+        "gelman_rubin_b": 1.0022846685989935,
+        "mean_acceptance_fraction": 0.71713125,
         "outlier_cleaning": {
-            "method": "6\u03c3 MAD (detect_outliers_sigma)",
+            "method": "6\u03c3-equivalent (MAD-based; detect_outliers_sigma)",
             "sigma_threshold": 6.0,
             "n_outliers_removed": 762,
             "n_original": 26207,

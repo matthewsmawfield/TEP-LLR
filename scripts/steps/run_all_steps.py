@@ -3,7 +3,7 @@
 TEP-LLR: Full Canonical Analysis Pipeline
 ==========================================
 
-Executes the complete 60-step LLR analysis pipeline in sequence.
+Executes the complete 74-step LLR analysis pipeline in sequence.
 Every step writes a JSON output to results/outputs/ and a detailed
 log to logs/.  Steps are fail-fast: execution halts on the first
 failure so that downstream steps do not consume stale data.
@@ -146,11 +146,9 @@ def main() -> None:
         # 015 — Null tests against control datasets (shuffled phases, DE430
         #        raw, non-TEP frequency bands) to calibrate false-alarm rates.
         "step_015_null_tests.py",
-        # 016 — Bayesian MCMC analysis (emcee, 32 walkers × 10,000 steps).
-        #        Initialised from fresh OLS estimate to ensure Gelman-Rubin
-        #        convergence diagnostics are a genuine test of mixing
-        #        (not biased by a hardcoded starting position).
-        #        Savage-Dickey Bayes Factor B ≈ 3.8×10² (Strong evidence);
+        # 016 — Synodic-only Bayesian MCMC (emcee; prior × bandwidth table).
+        #        Four uniform η priors; Savage–Dickey reported as sensitivity only.
+        #        BIC primary within Step 016; grid/bridge cross-checks in Step 073.
         "step_016_bayesian_analysis.py",
         # 017 — Leverage diagnostics: Cook's distance, hat-matrix, DFFITS.
         #        Identifies 5,016 high-leverage points (19.1%) whose presence
@@ -272,7 +270,7 @@ def main() -> None:
         #        channel already bounded by Step 027 (p=0.281).  Seeing-specific
         #        bound < 0.12 mm, ~3% of the TEP signal.
         "step_063_atmospheric_seeing_analysis.py",
-        # 064 — Solar Radiation Pressure Systematic Check.
+        # 064-SRP — Solar Radiation Pressure Systematic Check.
         #        Three orthogonal tests avoid the collinearity trap between
         #        cos(D) and cos(D)/r_sun^2 (VIF ~ 1800). Detrended-residual
         #        correlation, binned 1/r^2 scaling test, and perihelion-aphelion
@@ -292,20 +290,6 @@ def main() -> None:
         "step_050_corrected_tep_analysis.py",
         # 051 — Cross-Validation Analysis.
         #        K-fold and leave-one-station-out cross-validation of the
-        #        TEP signal to assess out-of-sample predictive stability.
-        "step_051_cross_validation_analysis.py",
-        # 052 — Station Distribution Analysis.
-        #        Quantifies the impact of station geographic distribution
-        #        and observational sampling on detection robustness.
-        "step_052_station_distribution_analysis.py",
-        # 053 — Clean Subset Analysis.
-        #        Repeats primary analysis on the highest-quality data subset
-        #        to verify signal is not driven by low-quality observations.
-        "step_053_clean_subset_analysis.py",
-        # 054 — Toy Orbital TEP Perturbation.
-        #        Analytic toy-model simulation of orbital perturbations
-        #        induced by a temporally-varying Nordtvedt parameter.
-        "step_054_toy_orbital_tep_perturbation.py",
         # -------------------------------------------------------------------
         # Group F: Results Consolidation & Validation
         # -------------------------------------------------------------------
@@ -347,7 +331,7 @@ def main() -> None:
         "step_046_station_balanced_tep.py",
         # 046b — Equal-N Injection Simulation.
         #        Parametric Monte Carlo under the alternative hypothesis:
-        #        if the true eta = -3.18e-4, what fraction of equal-N subsamples
+        #        if the true eta is the Step 050 precision-weighted headline, what fraction of equal-N subsamples
         #        recover |t| < 0.5?  Tests whether observed 0.19σ is in the
         #        bulk of the genuine-signal distribution.
         "step_046b_equal_n_injection_simulation.py",
@@ -396,6 +380,23 @@ def main() -> None:
         #        falsification. Tests whether any known systematic could
         #        produce the observed eta when injected as the sole signal.
         "step_061_systematic_sensitivity_analysis.py",
+        # 062 — False-positive rate simulation: parametric bootstrap under
+        #        GR null (η=0) with AR(1) noise model. Computes exact p-value
+        #        by counting how often |η| ≥ |η_obs| in 10,000 synthetic
+        #        datasets that preserve temporal correlation but contain no
+        #        cos(D) signal. Directly answers "how often would chance
+        #        produce a signal this strong?"
+        "step_062_false_positive_simulation.py",
+        # 063 — INPOP19a outlier threshold sensitivity sweep (3σ–10σ MAD).
+        #        Mirrors step_006b (DE430) for the primary dataset. Verifies
+        #        the η signal is robust to outlier-removal threshold choice.
+        #        Includes phase-bin chi-square, bootstrap CI, and permutation
+        #        test on 6σ-cleaned data.
+        "step_063_outlier_sensitivity.py",
+        # 064-PI — Uncertainty calibration: prediction-interval coverage under
+        #        WLS, cluster-robust, and AR(1)-scaled errors; σ calibration;
+        #        station-block bootstrap and LOSO conformal intervals on headline η.
+        "step_064_prediction_coverage.py",
         # 065 — High-Dimensional Ephemeris-Like Basis Absorption Test.
         #        Directly addresses the reviewer criticism that a 3-parameter
         #        toy model underestimates real ephemeris DOF. Constructs an
@@ -411,6 +412,48 @@ def main() -> None:
         #        cross-frequency sidebands are more robust to absorption than
         #        the central carrier.
         "step_066_lomb_scargle_sideband_survival.py",
+        # -------------------------------------------------------------------
+        # Group G: Advanced Estimator Corrections (post-review strengthening)
+        # -------------------------------------------------------------------
+        # 067 — Cluster-Robust + AR(1) Combined Standard Errors.
+        #        The primary estimand must correct for BOTH station-level
+        #        clustering AND temporal autocorrelation simultaneously.
+        #        Implements Cochrane-Orcutt pre-whitening + cluster-robust
+        #        sandwich on transformed residuals. This is the most defensible
+        #        primary estimator.
+        "step_067_cluster_robust_ar1_combined.py",
+        # 068 — Weighted Robust M-Estimator.
+        #        Replaces Theil-Sen with a proper cluster-robust weighted
+        #        biweight M-estimator. Theil-Sen is biased toward zero under
+        #        heteroskedasticity because noisy stations dominate the median
+        #        pairwise slope. The M-estimator recovers OLS-consistent η.
+        "step_068_weighted_robust_regression.py",
+        # 069 — Rolling η(t) Correlated with Environmental Predictors.
+        #        Tests whether temporal hold-out R² = -0.15 is expected for a
+        #        dynamical field. Computes 2-year rolling η(t) and correlates
+        #        with 1/r_⊙, v_r, and cos(θ_EM-CMB). If η(t) tracks TEP
+        #        predictions, the predictive collapse is positive evidence.
+        "step_069_rolling_eta_environmental.py",
+        # 070 — DE430 Full Environmental Model (No Outlier Removal).
+        #        Runs cosD + 1/r_⊙ + v_r + cos(θ_CMB) + full systematics on
+        #        RAW DE430. If "outliers" are TEP sideband signal, the full
+        #        model should detect η without data-dependent trimming.
+        "step_070_de430_full_environmental.py",
+        # 071 — Stratified Equal-N Test by Environmental Variables.
+        #        Draws equal-N per station stratified by heliocentric distance
+        #        and CMB-orientation bins. Eliminates the epoch-concentration
+        #        bias that artificially weakened the random equal-N test.
+        "step_071_stratified_equal_n.py",
+        # 072 — Leave-one-station-out meta-analysis with full-systematic
+        #        model and cluster-robust standard errors. Tests whether
+        #        the global detection is driven by a single station and
+        #        quantifies each station's leverage on the consensus η.
+        #        Includes inverse-variance meta-analysis and Cochran's Q
+        #        heterogeneity test on powered exclusions.
+        "step_072_leave_one_station_out_meta.py",
+        # 073 — Bayesian evidence cross-checks: grid quadrature, bridge sampling,
+        #        Laplace/BIC (secondary), and P(η<0|data) from MCMC.
+        "step_073_laplace_bayes_factor.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

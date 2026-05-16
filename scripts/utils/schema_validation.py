@@ -19,7 +19,12 @@ REQUIRED_OUTPUTS = {
         "primary_full_systematic_significant",
         "balanced_full_systematic_all_significant",
     ],
-    "step_050_corrected_tep_analysis.json": ["models", "station_univ"],
+    "step_050_corrected_tep_analysis.json": [
+        "models",
+        "station_univ",
+        "precision_weighted_full_systematic",
+        "cooks_excised_full_systematic",
+    ],
     "step_055_cmb_rigorous_falsification.json": ["status", "sky_scrambling"],
     "step_056_dynamical_integrator_eta_refit.json": ["inpop19a", "de430", "cross_ephemeris"],
     "step_057_haleakala_null_fluctuation.json": [
@@ -47,6 +52,8 @@ OPTIONAL_OUTPUTS = {
     "step_012_station_dominance.json": ["full_sample_eta", "dominant_station_jackknife"],
 }
 
+VALID_TOP_LEVEL_STATUSES = {"PASS", "WARNING", "FAIL", "ERROR"}
+
 
 def load_json(path: Path) -> dict:
     with path.open(encoding="utf-8") as handle:
@@ -69,6 +76,28 @@ def main() -> int:
             continue
         payload = load_json(path)
         validate_required_keys(payload, required_keys, filename, errors)
+        if filename == "step_040_unified_results_table.json":
+            pw = payload.get("primary_estimands", {}).get(
+                "precision_weighted_full_systematic"
+            )
+            if pw is None:
+                errors.append(
+                    f"{filename}: primary_estimands missing "
+                    "precision_weighted_full_systematic (headline estimand)"
+                )
+            elif "PRIMARY HEADLINE" not in str(pw.get("status", "")):
+                errors.append(
+                    f"{filename}: precision_weighted_full_systematic.status "
+                    "should mark PRIMARY HEADLINE estimand"
+                )
+        status_raw = payload.get("status")
+        if status_raw is not None:
+            status = str(status_raw).strip().upper()
+            if status not in VALID_TOP_LEVEL_STATUSES:
+                errors.append(
+                    f"{filename}: non-standard top-level status {status_raw!r}; "
+                    f"expected one of {sorted(VALID_TOP_LEVEL_STATUSES)}"
+                )
         if filename in REQUIRE_TOP_LEVEL_PASS:
             status = str(payload.get("status", "")).strip().upper()
             if status != "PASS":
@@ -82,6 +111,17 @@ def main() -> int:
             continue
         payload = load_json(path)
         validate_required_keys(payload, required_keys, filename, errors)
+
+    for path in sorted(OUTPUTS_DIR.glob("step_*.json")):
+        payload = load_json(path)
+        if not isinstance(payload, dict) or "status" not in payload:
+            continue
+        status = str(payload["status"]).strip().upper()
+        if status not in VALID_TOP_LEVEL_STATUSES:
+            errors.append(
+                f"{path.name}: non-standard top-level status {payload['status']!r}; "
+                f"expected one of {sorted(VALID_TOP_LEVEL_STATUSES)}"
+            )
 
     if errors:
         print("Pipeline schema validation failed:")

@@ -1,0 +1,58 @@
+{
+    "step_id": "step_070",
+    "status": "PASS",
+    "dataset": {
+        "n_total": 4597,
+        "n_outliers_6sigma": 37
+    },
+    "model_cosd_only": {
+        "eta": -5.5324647012830426e-06,
+        "eta_error": 0.0005606135707941737,
+        "snr": 0.009868588613446637
+    },
+    "model_environmental": {
+        "eta": 0.00015860725577363768,
+        "eta_error": 0.0005630735240495327,
+        "snr": 0.28168125297911406,
+        "coefficients": {
+            "cosD": 0.00206189432505729,
+            "inv_r": 1.096595482472935,
+            "v_r": -0.006740381908240962,
+            "cos_cmb": -0.010922333331283661,
+            "const": -1.083631223113162
+        }
+    },
+    "model_full_systematic_environmental": {
+        "eta": 0.00032865534742213074,
+        "eta_error": 0.0005859469698436899,
+        "snr": 0.5608960611398066,
+        "eta_error_cluster": null,
+        "snr_cluster": null,
+        "coefficients": {
+            "cosD": 0.0042725195164877,
+            "cos2D": -0.023044985118047707,
+            "sin_m": -0.346739905506586,
+            "cos_m": 0.17155165776596398,
+            "sin_y": 0.2913173534239353,
+            "cos_y": -0.6354291874120513,
+            "inv_r": 41.47955618254362,
+            "v_r": -0.3612692992250533,
+            "cos_cmb": 0.3852144121495738,
+            "const": -41.4803741794219
+        }
+    },
+    "model_cosd_after_partialing_env": {
+        "eta": 0.00015691392844664027,
+        "eta_error": 0.000559876902472628,
+        "snr": 0.2802650506810498
+    },
+    "sideband_diagnostics": {
+        "corr_cosD_minus_lp": 0.052948280021905034,
+        "p_cosD_minus_lp": 0.0003287815800221995,
+        "corr_cosD_plus_lp": 0.008957010442561086,
+        "p_cosD_plus_lp": 0.543756081987054,
+        "outlier_corr_abs_cosD_minus_lp": 0.024637821288975386,
+        "outlier_corr_abs_cosD_plus_lp": 0.009459909436616941
+    },
+    "interpretation": "If the full environmental model detects significant \u03b7 in raw DE430 without outlier removal, the 'outliers' are TEP sideband signal. This removes the fragility of the step-006b DE430 result."
+}

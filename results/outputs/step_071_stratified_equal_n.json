@@ -1,0 +1,64 @@
+{
+    "step_id": "step_071",
+    "status": "PASS",
+    "main_results": true,
+    "full_archive_reference": {
+        "eta": -0.00040611545725110945,
+        "eta_error": 6.224625170663243e-05,
+        "snr": 6.524335941787115,
+        "n": 25445
+    },
+    "random_equal_n": {
+        "eta": -0.00010534050753062177,
+        "eta_error": 0.000367037230715932,
+        "snr": 0.28700224041345257
+    },
+    "stratified_equal_n": {
+        "eta": -0.0002725963216759356,
+        "eta_error": 0.00036547286286275216,
+        "snr": 0.7458729481053291
+    },
+    "bootstrap_stratified": {
+        "n_iterations": 200,
+        "eta_mean": -0.0002791078434379337,
+        "eta_std": 0.0002474986952093233,
+        "snr_mean": 0.8261777555472585,
+        "eta_ci95_lower": -0.0007500313011715654,
+        "eta_ci95_upper": 0.00023364462413384397
+    },
+    "stability_report": {
+        "full_archive": {
+            "eta": -0.00040611545725110945,
+            "snr": 6.524335941787115,
+            "n": 25445
+        },
+        "subsamples": {
+            "random_equal_n": {
+                "eta": -0.00010534050753062177,
+                "snr": 0.28700224041345257,
+                "sign_matches_full": true,
+                "eta_ratio_to_full": 0.2593856147304622,
+                "snr_ratio_to_full": 0.043989494559171685
+            },
+            "stratified_equal_n": {
+                "eta": -0.0002725963216759356,
+                "snr": 0.7458729481053291,
+                "sign_matches_full": true,
+                "eta_ratio_to_full": 0.6712286292205415,
+                "snr_ratio_to_full": 0.11432166503385525
+            }
+        },
+        "bootstrap_stratified_stability": {
+            "sign_matches_full": true,
+            "ci_includes_zero": true,
+            "eta_mean_ratio_to_full": 0.6872623005466045,
+            "snr_mean_ratio_to_full": 0.12663016786976727
+        },
+        "eta_snr_stable_under_balance": {
+            "sign_retained_all_subsamples": true,
+            "stratified_improves_snr_over_random": true,
+            "interpretation": "Enforced station balance reduces SNR by construction but does not flip the sign of \u03b7. Stratified equal-N improves |\u03b7|/\u03c3 relative to random equal-N, consistent with environmental phase-space confounding rather than a Grasse-only artifact."
+        }
+    },
+    "interpretation": "Enforced station balance reduces SNR by construction but does not flip the sign of \u03b7. Stratified equal-N improves |\u03b7|/\u03c3 relative to random equal-N, consistent with environmental phase-space confounding rather than a Grasse-only artifact."
+}

@@ -97,11 +97,9 @@ def compute_orbital_velocities(jd_array):
         earth_moon_cos_theta : ndarray
             Cosine of angle between Earth-Moon vector and CMB dipole
     """
-    eph_path = PROJECT_ROOT / "de421.bsp"
-    if not eph_path.exists():
-        raise FileNotFoundError(f"Ephemeris not found at {eph_path}")
+    from scripts.utils.astronomical_utils import load_skyfield_planets
 
-    planets = load(str(eph_path))
+    planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets["earth"]
     moon = planets["moon"]
     sun = planets["sun"]
@@ -744,11 +742,10 @@ def velocity_modulation_analysis(df, verbose=False):
     # ------------------------------------------------------------------
     # 9. Compile results
     # ------------------------------------------------------------------
-    status = "PASS"
     if cmb_controlled_result.get("available"):
         # Primary criterion: CMB-controlled model with velocity significance
         if cmb_controlled_result.get("eta_vr_p", 1.0) < 0.05:
-            status = "PASS"
+            velocity_modulation_result = "SIGNIFICANT_CMB_CONTROLLED"
             print_status(
                 "RESULT: Significant velocity-dependent modulation detected "
                 "with CMB orientation controlled. TEP temporal topology is "
@@ -756,41 +753,44 @@ def velocity_modulation_analysis(df, verbose=False):
                 "SUCCESS",
             )
         elif diff_v_sig > 2.0 or diff_shear_sig > 2.0:
-            status = "PASS"
+            velocity_modulation_result = "MARGINAL"
             print_status(
                 "RESULT: Marginal velocity modulation detected.",
                 "SUCCESS",
             )
         else:
-            status = "WARNING"
+            velocity_modulation_result = "NOT_SIGNIFICANT_CMB_CONTROLLED"
             print_status(
                 "RESULT: No significant velocity modulation with CMB control. "
                 "Temporal topology may be static or CMB-only.",
-                "WARNING",
+                "INFO",
             )
+        pipeline_status = "PASS"
     elif joint_result.get("available"):
-        # Fallback to Model D if Model E unavailable
         if joint_result.get("eta_vr_p", 1.0) < 0.05:
-            status = "PASS"
+            velocity_modulation_result = "SIGNIFICANT_JOINT_MODEL"
             print_status(
                 "RESULT: Significant velocity-dependent modulation detected. "
                 "TEP temporal topology is dynamical.",
                 "SUCCESS",
             )
         else:
-            status = "WARNING"
+            velocity_modulation_result = "NOT_SIGNIFICANT_JOINT_MODEL"
             print_status(
                 "RESULT: No significant velocity modulation. "
                 "Temporal topology appears static (distance-only).",
-                "WARNING",
+                "INFO",
             )
+        pipeline_status = "PASS"
     else:
-        status = "FAIL"
+        velocity_modulation_result = "MODEL_FAILED"
+        pipeline_status = "FAIL"
         print_status("RESULT: Joint model failed to converge.", "ERROR")
 
     results = {
         "step_id": "step_047",
-        "status": status,
+        "status": pipeline_status,
+        "velocity_modulation_result": velocity_modulation_result,
         "n_observations": n_clean,
         "n_outliers_removed": int(n - n_clean),
         "kinematic_ranges": {

@@ -1,139 +1,597 @@
 {
     "step_id": "step_055",
     "status": "PASS",
+    "falsification_result": "STRONG_SUPPORT",
     "n_observations": 25445,
-    "correlation_cosD_cos_theta": 0.049949024196867385,
+    "correlation_cosD_cos_theta": 0.04994902395914531,
     "aliasing_simulation": {
         "n_simulations": 5000,
-        "eta_theta_sim_mean": -7.573510323999522e-07,
-        "eta_theta_sim_std": 8.808011457485912e-05,
-        "eta_theta_sim_99_9_percentile": 0.00028949586695890063,
-        "t_sim_mean": -0.008598157600867472,
-        "t_sim_std": 0.9910985964843543,
-        "t_sim_99_9_percentile": 3.267550310038234,
-        "observed_eta_theta": -0.0009772069114242542,
-        "observed_t": -11.022138616012333,
+        "eta_theta_sim_mean": -7.573510323609188e-07,
+        "eta_theta_sim_std": 8.808011461512355e-05,
+        "eta_theta_sim_99_9_percentile": 0.00028949586733187474,
+        "t_sim_mean": -0.008598157596329762,
+        "t_sim_std": 0.9910985964258725,
+        "t_sim_99_9_percentile": 3.267550312561336,
+        "observed_eta_theta": -0.0009772069113962894,
+        "observed_t": -11.022138609939493,
         "p_aliasing_coefficient": 0.0,
         "p_aliasing_t_statistic": 0.0,
         "aliasing_rejected": true
     },
     "multicollinearity_diagnostics": {
         "vifs": {
-            "cosD": 1.01749797133153,
-            "r_c\u00b7cosD": 1.0260744117928917,
-            "vr_c\u00b7cosD": 1.1886073010544311,
-            "cos\u03b8_c\u00b7cosD": 1.2005238707201369
+            "cosD": 1.0174979717472021,
+            "r_c\u00b7cosD": 1.0260744114639284,
+            "vr_c\u00b7cosD": 1.1886073020502728,
+            "cos\u03b8_c\u00b7cosD": 1.2005238715776962
         },
-        "max_vif": 1.2005238707201369,
-        "mean_vif": 1.1081758887247473,
-        "condition_number_X": 178.4174996579504,
-        "condition_number_XtX": 31832.804184194683,
-        "se_cos_theta_actual": 8.865855760556521e-05,
-        "se_cos_theta_orthogonal": 8.865855760556307e-05,
-        "se_inflation_factor": 1.0000000000000242,
+        "max_vif": 1.2005238715776962,
+        "mean_vif": 1.1081758892097748,
+        "condition_number_X": 178.41749965445774,
+        "condition_number_XtX": 31832.804182948512,
+        "se_cos_theta_actual": 8.865855765187604e-05,
+        "se_cos_theta_orthogonal": 8.8658557651878e-05,
+        "se_inflation_factor": 0.999999999999978,
         "severe_multicollinearity": false
     },
     "permutation_test": {
         "n_permutations": 1000,
-        "eta_perm_mean": 6.607887513919477e-07,
-        "eta_perm_std": 8.256026102734746e-05,
-        "eta_perm_99_9_percentile": 0.0002614509365129392,
-        "t_perm_mean": 0.007923944964594667,
-        "t_perm_std": 0.9857460031910541,
-        "t_perm_99_9_percentile": 3.1129436169218905,
-        "observed_eta": -0.0009772069114242542,
-        "observed_t": -11.022138616012333,
+        "eta_perm_mean": 6.607887402966205e-07,
+        "eta_perm_std": 8.256026107000128e-05,
+        "eta_perm_99_9_percentile": 0.0002614509363439061,
+        "t_perm_mean": 0.007923944831709825,
+        "t_perm_std": 0.9857460035766022,
+        "t_perm_99_9_percentile": 3.1129436144414795,
+        "observed_eta": -0.0009772069113962894,
+        "observed_t": -11.022138609939493,
         "p_value_coefficient": 0.0,
         "p_value_t_statistic": 0.0,
         "permutation_rejected": true
     },
     "sky_scrambling": {
+        "random_axis_delta_aic_null": {
+            "description": "Uniform random unit vectors on S\u00b2: empirical null for \u0394AIC when the orientation predictor is any fixed sky axis (not only permuted or rotated Planck).",
+            "n_draws": 50000,
+            "observed_delta_aic_planck": 119.2222011302656,
+            "null_delta_aic_median": 61.158882493313286,
+            "null_delta_aic_99th_percentile": 130.54359033551563,
+            "null_delta_aic_max": 137.69139511688263,
+            "empirical_p_value": 0.0954,
+            "planck_axis_exceeds_median_by": 58.06331863695232,
+            "jeffreys_95_interval_on_p": {
+                "k_random_ge_true": 4770,
+                "n_draws": 50000,
+                "jeffreys_95_lower": 0.09284848789113942,
+                "jeffreys_95_upper": 0.09799835170680525
+            },
+            "correlation_matched_subnull": {
+                "n_matched": 9032,
+                "corr_tolerance": 0.02,
+                "empirical_p_value": 0.26428255093002656
+            },
+            "role": "primary_delta_aic_null_for_any_fixed_axis"
+        },
         "n_scrambles": 50000,
         "strict_alpha": 0.01,
-        "base_model_aic": -141809.84263371586,
-        "true_delta_aic": 119.22220126356115,
-        "true_f_statistic": 121.48753967059785,
+        "base_model_aic": -141809.84263390687,
+        "true_delta_aic": 119.2222011302656,
+        "true_f_statistic": 121.48753953671066,
         "true_f_p_value": 1.1102230246251565e-16,
-        "true_f_statistic_eff": 50.07598465554747,
-        "base_residual_ar1_rho": 0.41612390216147066,
-        "effective_sample_size": 10491.121071274292,
-        "delta_aic_median": 62.46539915756148,
-        "delta_aic_99th_percentile": 130.4953011466729,
-        "delta_aic_max": 137.76442039836547,
-        "f_median": 64.53444667575076,
-        "f_99th_percentile": 132.81475695917476,
-        "f_eff_median": 26.600472527893764,
-        "f_eff_99th_percentile": 54.74495367632768,
-        "p_scramble_delta_aic": 0.0981,
-        "p_scramble_f": 0.0981,
-        "p_scramble_f_eff": 0.0981,
+        "true_f_statistic_eff": 50.0759846009532,
+        "base_residual_ar1_rho": 0.41612390215657946,
+        "effective_sample_size": 10491.121071398413,
+        "delta_aic_median": 61.158882493313286,
+        "delta_aic_99th_percentile": 130.54359033551563,
+        "delta_aic_max": 137.69139511688263,
+        "f_median": 63.22490673493898,
+        "f_99th_percentile": 132.86328875923934,
+        "f_eff_median": 26.060692875410496,
+        "f_eff_99th_percentile": 54.76495801389747,
+        "p_scramble_delta_aic": 0.0954,
+        "p_scramble_f": 0.0954,
+        "p_scramble_f_eff": 0.0954,
+        "p_scramble_f_monte_carlo_counts": {
+            "k_random_ge_true_f": 4770,
+            "n_draws": 50000,
+            "jeffreys_95_lower": 0.09284848789113942,
+            "jeffreys_95_upper": 0.09799835170680525
+        },
+        "p_scramble_delta_aic_monte_carlo_counts": {
+            "k_random_ge_true_delta_aic": 4770,
+            "n_draws": 50000,
+            "jeffreys_95_lower": 0.09284848789113942,
+            "jeffreys_95_upper": 0.09799835170680525
+        },
         "correlation_matched": {
-            "n_matched": 9268,
+            "n_matched": 9032,
             "corr_tolerance": 0.02,
-            "p_scramble_delta_aic_matched": 0.2711480362537764,
-            "p_scramble_f_matched": 0.2711480362537764,
-            "p_scramble_f_eff_matched": 0.2711480362537764
+            "p_scramble_delta_aic_matched": 0.26428255093002656,
+            "p_scramble_f_matched": 0.26428255093002656,
+            "p_scramble_f_eff_matched": 0.26428255093002656,
+            "k_random_ge_true_f_matched": 2387,
+            "jeffreys_95_lower_f_matched": 0.2552652939288244,
+            "jeffreys_95_upper_f_matched": 0.2734508513945073
         },
         "true_direction_preferred": false,
-        "directional_anatomy_supported": true
+        "directional_anatomy_supported": true,
+        "refined_directional_nulls": {
+            "phase_null": {
+                "n_draws": 5000,
+                "true_f_statistic_eff": 50.0759846009532,
+                "f_eff_median": 1.639687930182642,
+                "f_eff_99th_percentile": 25.29528924637785,
+                "p_f_eff": 0.0006,
+                "k_random_ge_true_f": 3,
+                "jeffreys_95_lower": 0.00016901489450098605,
+                "jeffreys_95_upper": 0.0016003949302265425,
+                "true_delta_aic": 119.2222011302656,
+                "delta_aic_median": 1.9784585226298077,
+                "p_delta_aic": 0.0006,
+                "description": "Circular shifts of the CMB cos\u03b8_c series destroy synodic phase alignment with cosD while preserving the marginal cos\u03b8 distribution."
+            },
+            "rotation_global_null": {
+                "n_draws": 5000,
+                "true_f_statistic_eff": 50.0759846009532,
+                "f_eff_median": 26.125538005726057,
+                "f_eff_99th_percentile": 54.76681357555884,
+                "p_f_eff": 0.0964,
+                "k_random_ge_true_f": 482,
+                "jeffreys_95_lower": 0.08845284478967212,
+                "jeffreys_95_upper": 0.10481422808185334,
+                "true_delta_aic": 119.2222011302656,
+                "delta_aic_median": 61.315841275500134,
+                "p_delta_aic": 0.0964,
+                "description": "Uniform SO(3) rotations of the Planck axis (marginal on S\u00b2, comparable to uniform scramble)."
+            },
+            "rotation_local_null": {
+                "n_draws": 5000,
+                "true_f_statistic_eff": 50.0759846009532,
+                "f_eff_median": 49.18227350441863,
+                "f_eff_99th_percentile": 51.825422154151504,
+                "p_f_eff": 0.2994,
+                "k_random_ge_true_f": 1497,
+                "jeffreys_95_lower": 0.28682409034028006,
+                "jeffreys_95_upper": 0.31220807203960543,
+                "true_delta_aic": 119.2222011302656,
+                "delta_aic_median": 117.06379015503626,
+                "p_delta_aic": 0.2994,
+                "description": "Random rotations of the Planck axis within a 30\u00b0 cone (local orientation specificity)."
+            },
+            "orthogonal_scramble_null": {
+                "n_draws": 5000,
+                "true_f_statistic_eff": 50.0759846009532,
+                "f_eff_median": 26.52091110426183,
+                "f_eff_99th_percentile": 54.792642730667325,
+                "p_f_eff": 0.0902,
+                "k_random_ge_true_f": 451,
+                "jeffreys_95_lower": 0.08249659089206228,
+                "jeffreys_95_upper": 0.09837765388575184,
+                "true_delta_aic": 119.2222011302656,
+                "delta_aic_median": 62.27282789174933,
+                "p_delta_aic": 0.0902,
+                "description": "Random sky directions with cos\u03b8\u00b7cosD Gram\u2013Schmidt orthogonalized against the heliocentric base before augmentation (same geometry as test E)."
+            },
+            "local_cone_deg": 30.0
+        }
     },
     "orthogonalization_test": {
         "available": true,
-        "eta_theta_orthogonal": -0.0009772069114242544,
-        "eta_theta_orthogonal_error": 8.865855760556305e-05,
-        "eta_theta_orthogonal_t": -11.022138616012604,
+        "eta_theta_orthogonal": -0.0009772069113962905,
+        "eta_theta_orthogonal_error": 8.865855765187794e-05,
+        "eta_theta_orthogonal_t": -11.022138609939269,
         "eta_theta_orthogonal_p": 0.0,
         "orthogonality_residuals": [
-            -3.232969447708456e-12,
-            -1.9186041644303486e-15,
-            9.14823772291129e-13,
-            1.7176482458580722e-11
+            -1.4093615163801587e-11,
+            -4.2674197509029455e-15,
+            5.371258993136507e-13,
+            3.105693480165428e-11
         ],
         "signal_persists": true
     },
     "directional_anatomy": {
         "true_cmb": {
-            "delta_aic": 119.22220126356115,
-            "f_statistic": 121.48753967059785,
+            "delta_aic": 119.2222011302656,
+            "f_statistic": 121.48753953671066,
             "f_p_value": 1.1102230246251565e-16,
-            "eta_theta": -0.0009772069114242542,
-            "eta_theta_error": 8.865855760556521e-05,
-            "eta_theta_t": -11.022138616012333
+            "eta_theta": -0.0009772069113962894,
+            "eta_theta_error": 8.865855765187604e-05,
+            "eta_theta_t": -11.022138609939493
         },
         "perpendicular_1": {
-            "delta_aic": 2.8403121482697316,
-            "f_statistic": 4.839821332425289,
-            "f_p_value": 0.027818734791515642,
-            "eta_theta": 0.00021571269538875378,
-            "eta_theta_error": 9.805303499696533e-05,
-            "eta_theta_t": 2.199959393357176
+            "delta_aic": 2.840311897190986,
+            "f_statistic": 4.8398210813530005,
+            "f_p_value": 0.02781873884092967,
+            "eta_theta": 0.00021571268984480607,
+            "eta_theta_error": 9.805303502020563e-05,
+            "eta_theta_t": 2.19995933629545
         },
         "perpendicular_2": {
-            "delta_aic": 24.677063827693928,
-            "f_statistic": 26.685808256413875,
-            "f_p_value": 2.411776577337932e-07,
-            "eta_theta": 0.0011252155285792528,
-            "eta_theta_error": 0.0002178188879319477,
-            "eta_theta_t": 5.165830838925224
+            "delta_aic": 24.677064186427742,
+            "f_statistic": 26.685808615438738,
+            "f_p_value": 2.41177612880783e-07,
+            "eta_theta": 0.0011252155358476373,
+            "eta_theta_error": 0.00021781888787367792,
+            "eta_theta_t": 5.1658308736760965
         },
         "antipode": {
-            "delta_aic": 119.22220126356115,
-            "f_statistic": 121.48753967059785,
+            "delta_aic": 119.2222011302656,
+            "f_statistic": 121.48753953671066,
             "f_p_value": 1.1102230246251565e-16,
-            "eta_theta": 0.0009772069114242542,
-            "eta_theta_error": 8.865855760556521e-05,
-            "eta_theta_t": 11.022138616012333
+            "eta_theta": 0.0009772069113962894,
+            "eta_theta_error": 8.865855765187604e-05,
+            "eta_theta_t": 11.022138609939493
         },
-        "delta_aic_perp1_vs_true": 116.38188911529141,
-        "delta_aic_perp2_vs_true": 94.54513743586722,
+        "delta_aic_perp1_vs_true": 116.38188923307462,
+        "delta_aic_perp2_vs_true": 94.54513694383786,
         "delta_aic_antipode_vs_true": 0.0,
         "antipode_magnitude_ratio": 1.0,
         "dipole_antipode_consistent": true,
         "perpendicular_directions_suppressed": true,
         "directional_anatomy_passed": true
     },
-    "falsification_tests_passed": 5,
+    "year_jackknife": {
+        "n_years_in_sample": 36,
+        "n_jackknife_fits": 36,
+        "per_year_results": [
+            {
+                "year_excluded": 1984,
+                "n": 25314,
+                "eta_theta": -0.0009632009725811854,
+                "t": -10.93024125200042
+            },
+            {
+                "year_excluded": 1985,
+                "n": 24842,
+                "eta_theta": -0.0009277016247318542,
+                "t": -10.834225505798887
+            },
+            {
+                "year_excluded": 1986,
+                "n": 25283,
+                "eta_theta": -0.0009628846792812234,
+                "t": -10.943250073849939
+            },
+            {
+                "year_excluded": 1987,
+                "n": 25249,
+                "eta_theta": -0.001002234327018832,
+                "t": -11.370756824015857
+            },
+            {
+                "year_excluded": 1988,
+                "n": 24966,
+                "eta_theta": -0.0009667932047280764,
+                "t": -10.975530975643155
+            },
+            {
+                "year_excluded": 1989,
+                "n": 25021,
+                "eta_theta": -0.0009492769761401143,
+                "t": -10.83239870516387
+            },
+            {
+                "year_excluded": 1990,
+                "n": 24770,
+                "eta_theta": -0.0011747412577567862,
+                "t": -13.482420965605257
+            },
+            {
+                "year_excluded": 1991,
+                "n": 24975,
+                "eta_theta": -0.0008502007827622728,
+                "t": -9.641336581662804
+            },
+            {
+                "year_excluded": 1992,
+                "n": 24960,
+                "eta_theta": -0.0009471680235344526,
+                "t": -10.795012589867472
+            },
+            {
+                "year_excluded": 1993,
+                "n": 24776,
+                "eta_theta": -0.0009862791736495644,
+                "t": -11.120431550853338
+            },
+            {
+                "year_excluded": 1994,
+                "n": 24823,
+                "eta_theta": -0.001028686795482792,
+                "t": -11.579245610396931
+            },
+            {
+                "year_excluded": 1995,
+                "n": 24399,
+                "eta_theta": -0.0009687861161394817,
+                "t": -10.807699245092925
+            },
+            {
+                "year_excluded": 1996,
+                "n": 24419,
+                "eta_theta": -0.0009646624998260031,
+                "t": -10.886680175256613
+            },
+            {
+                "year_excluded": 1997,
+                "n": 24605,
+                "eta_theta": -0.0011016301236128295,
+                "t": -12.43943076785052
+            },
+            {
+                "year_excluded": 1998,
+                "n": 24697,
+                "eta_theta": -0.0009316572640409213,
+                "t": -10.427200009431617
+            },
+            {
+                "year_excluded": 1999,
+                "n": 24581,
+                "eta_theta": -0.0008508822486031643,
+                "t": -9.435764231340439
+            },
+            {
+                "year_excluded": 2000,
+                "n": 24530,
+                "eta_theta": -0.0009059713320345522,
+                "t": -9.999955986957092
+            },
+            {
+                "year_excluded": 2001,
+                "n": 25027,
+                "eta_theta": -0.0009455221074302684,
+                "t": -10.649739548062145
+            },
+            {
+                "year_excluded": 2002,
+                "n": 25168,
+                "eta_theta": -0.0009400079763983673,
+                "t": -10.61001529908114
+            },
+            {
+                "year_excluded": 2003,
+                "n": 25176,
+                "eta_theta": -0.0009567688878970177,
+                "t": -10.737198597973823
+            },
+            {
+                "year_excluded": 2004,
+                "n": 24940,
+                "eta_theta": -0.0009352060474216622,
+                "t": -10.493661405920244
+            },
+            {
+                "year_excluded": 2005,
+                "n": 25105,
+                "eta_theta": -0.0009605546115668748,
+                "t": -10.772429726292781
+            },
+            {
+                "year_excluded": 2006,
+                "n": 25282,
+                "eta_theta": -0.0010041351781114238,
+                "t": -11.297536767068591
+            },
+            {
+                "year_excluded": 2007,
+                "n": 25229,
+                "eta_theta": -0.0009859271550296902,
+                "t": -11.05815619627449
+            },
+            {
+                "year_excluded": 2008,
+                "n": 25072,
+                "eta_theta": -0.0009682440291823096,
+                "t": -10.825430876546026
+            },
+            {
+                "year_excluded": 2009,
+                "n": 25214,
+                "eta_theta": -0.0009977329442230174,
+                "t": -11.199779223648624
+            },
+            {
+                "year_excluded": 2010,
+                "n": 25100,
+                "eta_theta": -0.0009606813533302283,
+                "t": -10.74420422684032
+            },
+            {
+                "year_excluded": 2011,
+                "n": 24982,
+                "eta_theta": -0.0009521519236654002,
+                "t": -10.567090545032787
+            },
+            {
+                "year_excluded": 2012,
+                "n": 24763,
+                "eta_theta": -0.000979148690131314,
+                "t": -10.820397736583445
+            },
+            {
+                "year_excluded": 2013,
+                "n": 24742,
+                "eta_theta": -0.00099079511209412,
+                "t": -10.953375696386175
+            },
+            {
+                "year_excluded": 2014,
+                "n": 24776,
+                "eta_theta": -0.0009851671653662633,
+                "t": -10.852309906872645
+            },
+            {
+                "year_excluded": 2015,
+                "n": 23944,
+                "eta_theta": -0.0010685533376666293,
+                "t": -11.383013995256597
+            },
+            {
+                "year_excluded": 2016,
+                "n": 24346,
+                "eta_theta": -0.001082349917086543,
+                "t": -11.573640760972141
+            },
+            {
+                "year_excluded": 2017,
+                "n": 24035,
+                "eta_theta": -0.0010710861865340319,
+                "t": -11.385329472999176
+            },
+            {
+                "year_excluded": 2018,
+                "n": 21093,
+                "eta_theta": -0.0009448389261641442,
+                "t": -8.363545601091662
+            },
+            {
+                "year_excluded": 2019,
+                "n": 24371,
+                "eta_theta": -0.0009537744981069526,
+                "t": -10.286712153988148
+            }
+        ],
+        "eta_theta_full_sample": -0.0009772069113962894,
+        "jackknife_median_t": -10.83331210548138,
+        "jackknife_min_t": -13.482420965605257,
+        "jackknife_max_t": -8.363545601091662,
+        "all_jackknife_eta_same_sign_as_full": true,
+        "temporal_stability_strong": true
+    },
+    "alternative_fixed_directions": {
+        "north_ecliptic_pole": {
+            "delta_aic": 27.531519246898824,
+            "f_statistic": 29.54285667051442,
+            "f_p_value": 5.5196204162832885e-08,
+            "eta_theta": -0.005131066611310462,
+            "eta_theta_error": 0.0009440204642983541,
+            "eta_theta_t": -5.435334090055074
+        },
+        "galactic_north_pole": {
+            "delta_aic": 125.65362165184342,
+            "f_statistic": 127.9492197701447,
+            "f_p_value": 1.1102230246251565e-16,
+            "eta_theta": -0.0011205100122927978,
+            "eta_theta_error": 9.90596799643328e-05,
+            "eta_theta_t": -11.311464086056466
+        },
+        "mean_orbit_angular_momentum": {
+            "delta_aic": 27.53431678697234,
+            "f_statistic": 29.545656909091896,
+            "f_p_value": 5.511661005375146e-08,
+            "eta_theta": -0.0051316555914879035,
+            "eta_theta_error": 0.0009440840839083657,
+            "eta_theta_t": -5.435591679761853
+        }
+    },
+    "dual_axis_identifiability": {
+        "cmb_galactic_cos_correlation": 0.9844371572475196,
+        "cmb_galactic_axis_separation_deg": 41.86527299928282,
+        "base_heliocentric_aic": -141809.84263390687,
+        "cmb_only": {
+            "aic": -141929.06483503713,
+            "delta_aic_vs_base": 119.2222011302656,
+            "eta_theta": -0.0009772069113962894,
+            "eta_theta_t": -11.022138609939493,
+            "max_vif": Infinity
+        },
+        "galactic_only": {
+            "aic": -141935.4962555587,
+            "delta_aic_vs_base": 125.65362165184342,
+            "eta_theta": -0.0011205100122927978,
+            "eta_theta_t": -11.311464086056466,
+            "max_vif": Infinity
+        },
+        "dual_axis": {
+            "aic": -141933.96151625173,
+            "delta_aic_vs_base": 124.11888234486105,
+            "eta_cmb": 0.0003499470802601923,
+            "eta_gal": -0.0015056806071175812,
+            "eta_cmb_t": 0.6820228998612328,
+            "eta_gal_t": -2.626021605012265,
+            "max_vif": Infinity
+        },
+        "nested_f_tests": {
+            "add_cmb_to_base": {
+                "f": 121.48753953671066,
+                "p": 1.1102230246251565e-16
+            },
+            "add_gal_to_base": {
+                "f": 127.9492197701447,
+                "p": 1.1102230246251565e-16
+            },
+            "add_gal_given_cmb": {
+                "f": 6.89598946998793,
+                "p": 0.008644105818946035
+            },
+            "add_cmb_given_gal": {
+                "f": 0.4651552359290564,
+                "p": 0.49523068029029427
+            }
+        },
+        "galactic_beats_cmb_single_axis_aic": true,
+        "dual_improves_over_gal_only": false,
+        "dual_improves_over_cmb_only": true,
+        "both_axes_significant_in_dual": false,
+        "galactic_coefficient_stronger_in_dual": true,
+        "interpretation": "Galactic north attains lower AIC than Planck in single-axis fits, but the six-parameter dual model tests whether that advantage is a separable second axis or shared dipole structure."
+    },
+    "primary_orientation_block": "dual_axis_identifiability",
+    "supplementary_single_axis_metrics": {
+        "planck_delta_aic_vs_base": 119.2222011302656,
+        "galactic_single_axis": {
+            "delta_aic": 125.65362165184342,
+            "f_statistic": 127.9492197701447,
+            "f_p_value": 1.1102230246251565e-16,
+            "eta_theta": -0.0011205100122927978,
+            "eta_theta_error": 9.90596799643328e-05,
+            "eta_theta_t": -11.311464086056466
+        },
+        "random_axis_delta_aic_null": {
+            "description": "Uniform random unit vectors on S\u00b2: empirical null for \u0394AIC when the orientation predictor is any fixed sky axis (not only permuted or rotated Planck).",
+            "n_draws": 50000,
+            "observed_delta_aic_planck": 119.2222011302656,
+            "null_delta_aic_median": 61.158882493313286,
+            "null_delta_aic_99th_percentile": 130.54359033551563,
+            "null_delta_aic_max": 137.69139511688263,
+            "empirical_p_value": 0.0954,
+            "planck_axis_exceeds_median_by": 58.06331863695232,
+            "jeffreys_95_interval_on_p": {
+                "k_random_ge_true": 4770,
+                "n_draws": 50000,
+                "jeffreys_95_lower": 0.09284848789113942,
+                "jeffreys_95_upper": 0.09799835170680525
+            },
+            "correlation_matched_subnull": {
+                "n_matched": 9032,
+                "corr_tolerance": 0.02,
+                "empirical_p_value": 0.26428255093002656
+            },
+            "role": "primary_delta_aic_null_for_any_fixed_axis"
+        }
+    },
+    "tep_prediction_coverage": {
+        "eta_theta_fitted": -0.0009772069113962894,
+        "eta_theta_fitted_se": 8.865855765187604e-05,
+        "eta_theta_predicted_center": -0.00031772666444063755,
+        "eta_0_synodic_error": 6.0519384375507376e-05,
+        "order_of_magnitude_band": {
+            "lo": -0.001,
+            "hi": -0.0001
+        },
+        "within_predicted_band": true,
+        "z_score_vs_predicted_center": -6.143561669403535,
+        "ratio_fitted_to_predicted_center": 3.0756213461551187,
+        "formula": "\u03b7_\u03b8 \u2248 \u03b7\u2080 m_CMB from eq:cmb_anisotropy; |m_CMB| ~ O(1) \u21d2 |\u03b7_\u03b8| ~ |\u03b7\u2080|",
+        "volumetric_scale_anchor": -9.659372411064314e-05
+    },
+    "reference_axis_geometry": {
+        "cmb_mean_orbit_normal_separation_deg": 101.32721753061568,
+        "cmb_ecliptic_pole_separation_deg": 101.32724589658666,
+        "cmb_galactic_separation_deg": 41.86527299928282
+    },
+    "falsification_tests_passed": 4,
     "falsification_tests_total": 5,
+    "interpretation": "4/5 scored diagnostics pass (A\u2013E). Primary orientation identifiability is the dual-axis block (H): r(cos\u03b8_CMB, cos\u03b8_gal)=0.984; in the six-parameter model \u03b7_gal t=-2.63 while \u03b7_CMB t=0.68 (add-gal|CMB p=8.6441e-03, add-CMB|gal p=0.495). Single-axis Planck vs galactic \u0394AIC comparisons are supplementary (galactic-only beats CMB-only in AIC: True). Random-axis Monte Carlo on S\u00b2 (D): Planck \u0394AIC=119.2 vs null median 61.2; p(any axis \u2265 Planck)=0.095. TEP \u03b7_\u03b8 coverage (I): fitted \u03b7_\u03b8=-9.7721e-04 within Step 033 band=True (z=-6.14 vs \u03b7\u2080 scale). Aliasing, permutation, and orthogonalization support a nontrivial directional component; phase null p_F_eff=0.0006. Present as directional-anatomy plus fixed-sky identifiability, not unique CMB-frame proof.",
     "input_dataset": {
         "label": "INPOP19a_all_stations_residuals",
         "path": "data/processed/INPOP19a_all_stations_residuals.csv"

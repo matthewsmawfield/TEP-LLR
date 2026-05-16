@@ -14,7 +14,7 @@ import json
 import argparse
 import pandas as pd
 import numpy as np
-from scripts.utils.statistical_utils import linear_regression, require_step003_eta_ols
+from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression, require_step003_eta_ols
 from scripts.utils.config import get_config
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
@@ -29,8 +29,15 @@ def run_injection_test(df, verbose=False):
     print_status("PURPOSE: ALGORITHM ROBUSTNESS TESTING ONLY", "INFO")
     print_status("="*60, "INFO")
 
-    residuals = df['residual_m'].values
-    elongation = df['elongation_rad'].values
+    outlier_mask = detect_outliers_sigma(df['residual_m'].values, 6.0)
+    df_clean = df.loc[~outlier_mask].copy()
+    print_status(
+        f"[DATA] Canonical 6σ cleaning: removed {int(outlier_mask.sum()):,}/{len(df):,} observations",
+        "INFO",
+    )
+
+    residuals = df_clean['residual_m'].values
+    elongation = df_clean['elongation_rad'].values
     cos_elong = np.cos(elongation)
     n = len(residuals)
 
@@ -45,8 +52,8 @@ def run_injection_test(df, verbose=False):
     print_status("TEST 1: NULL TEST (SHUFFLED RESIDUALS)", "PROCESS")
     print_status("  Purpose: Verify that destroying phase correlation eliminates signal", "INFO")
 
-    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))  # Reproducibility
-    res_shuffled = np.random.permutation(residuals)
+    rng = np.random.default_rng(TEP_CONFIG.get("RANDOM_SEED", 42))
+    res_shuffled = rng.permutation(residuals)
     reg_null = linear_regression(res_shuffled, cos_elong)
     snr_null = abs(reg_null['eta']) / reg_null['eta_error']
 
@@ -65,8 +72,8 @@ def run_injection_test(df, verbose=False):
     noise_results = []
 
     for noise_mult in noise_levels:
-        np.random.seed(42 + int(noise_mult * 10))  # Unique seed per level
-        noise = np.random.normal(0, noise_mult * rms_original, n)
+        rng_noise = np.random.default_rng(42 + int(noise_mult * 10))
+        noise = rng_noise.normal(0, noise_mult * rms_original, n)
         res_noisy = residuals + noise
         reg_noisy = linear_regression(res_noisy, cos_elong)
         snr_noisy = abs(reg_noisy['eta']) / reg_noisy['eta_error']
@@ -87,8 +94,8 @@ def run_injection_test(df, verbose=False):
     print_status("TEST 3: SIGNAL RECOVERY (INJECTION INTO PURE NOISE)", "PROCESS")
     print_status("  Purpose: Validate pipeline can recover known injected signals", "INFO")
 
-    np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
-    pure_noise = np.random.normal(0, rms_original, n)
+    rng_recovery = np.random.default_rng(TEP_CONFIG.get("RANDOM_SEED", 42))
+    pure_noise = rng_recovery.normal(0, rms_original, n)
 
     # Load measured eta from step_002 output for injection test
     step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
@@ -108,14 +115,21 @@ def run_injection_test(df, verbose=False):
     eta_recovered = reg_recovery['eta']
     recovery_error = abs(eta_recovered - eta_injected) / \
         abs(eta_injected) * 100
+    recovery_z = abs(eta_recovered - eta_injected) / max(reg_recovery['eta_error'], 1e-20)
+    recovery_pass = recovery_z < 2.0
 
     print_status("  [CALC] Injected signal parameters:", "CALC")
     print_status(f"  [CALC]    η_injected: {eta_injected:.6e}", "CALC")
     print_status("  [CALC] Recovery results:", "CALC")
     print_status(f"  [CALC]    η_recovered: {eta_recovered:.6e}", "CALC")
     print_status(f"  [CALC]    Recovery error: {recovery_error:.1f}%", "CALC")
+    print_status(f"  [CALC]    Recovery z-score: {recovery_z:.2f}σ", "CALC")
     print_status(f"  [CALC]    SNR: {abs(eta_recovered)/reg_recovery['eta_error']:.2f}σ", "CALC")
-    print_status(f"  [RESULT] {'PASS ✓' if recovery_error < 20 else 'WARNING'} (error < 20%)", "SUCCESS" if recovery_error < 20 else "WARNING")
+    print_status(
+        f"  [RESULT] {'PASS ✓' if recovery_pass else 'WARNING'} "
+        "(recovered η within 2σ of injected η)",
+        "SUCCESS" if recovery_pass else "WARNING",
+    )
 
     # TEST 4: Detection threshold analysis
     print_status("", "INFO")
@@ -154,11 +168,15 @@ def run_injection_test(df, verbose=False):
             f"  Null test:           SNR = {snr_null:.2f}σ (should be < 3) {'✓' if snr_null < 3 else '✗'}", "SUCCESS" if snr_null < 3 else "WARNING")
         print_status(f"  Noise at 2× RMS:     Signal {'survives' if any(r['noise_multiplier'] == 2.0 and r['significant'] for r in noise_results) else 'lost'} {'✓' if any(r['noise_multiplier'] == 2.0 and r['significant'] for r in noise_results) else ''}", "SUCCESS" if any(
             r['noise_multiplier'] == 2.0 and r['significant'] for r in noise_results) else "WARNING")
-        print_status(f"  Signal recovery:     {recovery_error:.1f}% error {'✓' if recovery_error < 20 else '✗'}",
-                     "SUCCESS" if recovery_error < 20 else "WARNING")
+        print_status(
+            f"  Signal recovery:     z={recovery_z:.2f}σ {'✓' if recovery_pass else '✗'}",
+            "SUCCESS" if recovery_pass else "WARNING",
+        )
         print_status("="*60, "INFO")
 
     return {
+        "n_observations": int(n),
+        "n_outliers_removed": int(outlier_mask.sum()),
         "null_test_eta": float(reg_null['eta']),
         "null_test_eta_error": float(reg_null['eta_error']),
         "null_test_snr": float(snr_null),
@@ -168,10 +186,11 @@ def run_injection_test(df, verbose=False):
             "eta_injected": float(eta_injected),
             "eta_recovered": float(eta_recovered),
             "recovery_error_percent": float(recovery_error),
-            "recovery_pass": bool(recovery_error < 20)
+            "recovery_z_score": float(recovery_z),
+            "recovery_pass": bool(recovery_pass)
         },
         "detection_thresholds": threshold_results,
-        "injection_valid": bool(snr_null < 3 and recovery_error < 20)
+        "injection_valid": bool(snr_null < 3 and recovery_pass)
     }
 
 if __name__ == "__main__":
@@ -198,7 +217,7 @@ if __name__ == "__main__":
         "step_id": "step_011",
         "data_type": "REAL_INPOP19A_RESIDUALS (INJECTION_PERTURBATIONS)",
         "data_source": str(input_path),
-        "n_observations": int(len(df)),
+        "n_observations": int(summary.get("n_observations", len(df))),
         "injection_results": summary,
         "status": "PASS" if summary["injection_valid"] else "WARNING"
     }

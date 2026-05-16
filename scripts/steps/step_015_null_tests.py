@@ -23,6 +23,13 @@ from scripts.utils.numerics import stable_lstsq
 from scripts.utils.statistical_utils import linear_regression
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.pre_whitening_filter import apply_pre_whitening
+from scripts.utils.llr_constants import (
+    NULL_TEST_SCAN_MIN_FACTOR,
+    NULL_TEST_SCAN_MAX_FACTOR,
+    NULL_TEST_SCAN_POINTS,
+    NULL_TEST_EXCLUDE_SYNODIC_WINDOW,
+    NULL_TEST_PRIMARY_FREQUENCY_FACTOR,
+)
 
 # Add project root to path
 
@@ -71,10 +78,10 @@ def run_null_tests(
     df,
     verbose=False,
     correction_mode="fdr_bh",
-    scan_min_factor=0.2,
-    scan_max_factor=3.5,
-    scan_points=80,
-    exclude_synodic_window=0.08,
+    scan_min_factor=NULL_TEST_SCAN_MIN_FACTOR,
+    scan_max_factor=NULL_TEST_SCAN_MAX_FACTOR,
+    scan_points=NULL_TEST_SCAN_POINTS,
+    exclude_synodic_window=NULL_TEST_EXCLUDE_SYNODIC_WINDOW,
     exclude_bands=None,
 ):
     # NOTE: exclude_bands does NOT remove frequencies from the actual test.
@@ -88,14 +95,13 @@ def run_null_tests(
         (0.90, 0.96, "Lunar Orbital (Sidereal/Anomalistic)"),
         (1.95, 2.05, "Semi-Synodic Harmonic"),
     ]
-    
-    # This frequency (1.23 * synodic) is intentionally non-physical.
+
+    # This frequency is intentionally non-physical.
     # It lies between known systematic bands (annual ~0.08, lunar orbital ~0.93, semi-synodic ~2.0)
     # and serves as a control frequency where no physical signal is expected.
-    # Factor 1.23 chosen as intermediate value between systematic bands for null test
-    primary_test_frequency_factor = 1.23  # Intermediate frequency between systematic bands
+    primary_test_frequency_factor = NULL_TEST_PRIMARY_FREQUENCY_FACTOR
     candidate_factors = np.linspace(scan_min_factor, scan_max_factor, scan_points)
-    
+
     # Exclude only the immediate synodic window to avoid self-nulling
     excluded_by_synodic = [f for f in candidate_factors if abs(float(f) - 1.0) <= exclude_synodic_window]
     test_frequency_factors = sorted({
@@ -132,13 +138,13 @@ def run_null_tests(
         reg = linear_regression(residuals_null, np.cos(elongation * factor))
         snr = float(abs(reg['eta']) / reg['eta_error']) if reg['eta_error'] > 0 else 0.0
         p_raw = float(math.erfc(snr / math.sqrt(2.0))) if snr > 0 else 1.0
-        
+
         label = "Null Region"
         for lo, hi, name in systematic_regions:
             if lo <= factor <= hi:
                 label = name
                 break
-                
+
         test_results.append({
             "frequency_factor": float(factor),
             "label": label,
@@ -148,12 +154,12 @@ def run_null_tests(
 
     p_values = [r["p_two_sided"] for r in test_results]
     fdr_sig_flags, fdr_threshold, any_significant_fdr = _fdr_bh_significance(p_values, alpha=0.05)
-    
+
     for i, flag in enumerate(fdr_sig_flags):
         test_results[i]["significant_after_fdr_bh"] = bool(flag)
 
     primary_result = min(test_results, key=lambda r: abs(r["frequency_factor"] - primary_test_frequency_factor))
-    
+
     # Worst case EXCLUDING known systematic regions
     non_systematic_results = [r for r in test_results if r["label"] == "Null Region"]
     worst_null_result = max(non_systematic_results, key=lambda r: r["snr"]) if non_systematic_results else primary_result
@@ -167,7 +173,7 @@ def run_null_tests(
         print_status("Deep Scan Multi-frequency Null Test Summary:", "CALC")
         print_status(f"  Primary factor (1.23×) SNR: {primary_result['snr']:.2f}σ", "CALC")
         print_status(f"  Worst clean null factor: {worst_null_result['frequency_factor']:.2f}×, SNR={worst_null_result['snr']:.2f}σ", "CALC")
-        
+
         # Report systematic peaks discovered
         systematic_peaks = [r for r in test_results if r["label"] != "Null Region" and r["snr"] > 3.0]
         if systematic_peaks:

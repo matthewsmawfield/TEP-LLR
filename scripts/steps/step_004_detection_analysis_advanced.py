@@ -45,7 +45,7 @@ from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul
 from scipy import stats
 
 from scripts.utils.config import get_config
-from scripts.utils.llr_constants import ETA_SCALE_FACTOR, ELONGATION_MASK_WIDTH
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR, ELONGATION_MASK_WIDTH, STATISTICAL_ALPHA
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, set_verbose_mode, get_verbose_mode
 from scripts.utils.pre_whitening_filter import apply_pre_whitening
 from scripts.utils.statistical_utils import (
@@ -155,14 +155,14 @@ def bootstrap_correlation(residuals: np.ndarray, cos_elong: np.ndarray,
     # Observed statistic
     with suppress_scipy_array_api_matmul_runtime_warning():
         r_obs, _ = stats.pearsonr(residuals, cos_elong)
-    
+
     if verbose:
         print(f"  Running {n_bootstrap} bootstrap samples...")
-    
+
     # Run bootstrap
     worker_args = [(residuals, cos_elong, seed + i) for i in range(n_bootstrap)]
     boot_r = np.zeros(n_bootstrap)
-    
+
     with ProcessPoolExecutor(max_workers=N_WORKERS) as executor:
         futures = {executor.submit(_bootstrap_worker, arg): i for i, arg in enumerate(worker_args)}
         for future in as_completed(futures):
@@ -172,14 +172,14 @@ def bootstrap_correlation(residuals: np.ndarray, cos_elong: np.ndarray,
             except Exception as e:
                 print(f"    Bootstrap sample {idx} failed: {e}")
                 boot_r[idx] = np.nan
-    
+
     # Remove NaNs
     boot_r = boot_r[~np.isnan(boot_r)]
-    
+
     # Compute confidence intervals
     ci_lower = np.percentile(boot_r, 2.5)
     ci_upper = np.percentile(boot_r, 97.5)
-    
+
     return {
         'r_observed': r_obs,
         'r_mean': np.mean(boot_r),
@@ -602,7 +602,7 @@ def temporal_stability_analysis(df: pd.DataFrame, n_bins: int = 7) -> Dict:
             'trend_t_statistic': t_stat_slope,
             'trend_p_value': p_trend,
             'trend_r_squared': r_squared,
-            'trend_significant': p_trend < 0.05
+            'trend_significant': p_trend < STATISTICAL_ALPHA
         }
     else:
         trend_results = {
@@ -1161,40 +1161,44 @@ def main():
     args = parser.parse_args()
 
     logger = setup_tep_logger(verbose=args.verbose)
-    
+
     print_status("═══ Starting Step 004: Advanced TEP Detection Analysis...", "TITLE")
     print_status("═══ STEP PURPOSE: Comprehensive TEP detection using 17 robust statistical methods", "INFO")
     print_status("═══ METHOD: Bootstrap correlation, OLS regression, station-by-station analysis, leverage analysis", "INFO")
-    print_status(f"═══ PARAMETERS: Random seed={args.seed}, bootstrap samples=10000, Theil-Sen samples=100000", "INFO")
-    
+    print_status(
+        f"═══ PARAMETERS: Random seed={args.seed}, bootstrap samples=10000, "
+        f"Theil-Sen samples={int(TEP_CONFIG['THEIL_SEN_SAMPLES'])}",
+        "INFO",
+    )
+
     input_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
-    
+
     print_status("═══ DATA SUMMARY", "INFO")
     print_status("Loading residual data...", "INFO")
     df = load_residuals(input_path, verbose=args.verbose)
-    
+
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
     print_status(f"    Stations: {sorted(df['station'].unique())}", "DATA")
-    
+
     print_status("═══ ANALYSIS TRACE", "INFO")
     print_status("Running comprehensive TEP detection analysis...", "TITLE")
-    
+
     residuals = df['residual_m'].values
     elongation = df['elongation_rad'].values
     cos_elong = np.cos(elongation)
-    
+
     # Run bootstrap correlation
     print_status("Running bootstrap correlation analysis...", "INFO")
     boot_results = bootstrap_correlation(residuals, cos_elong, verbose=args.verbose)
-    
+
     # Run OLS regression
     print_status("Running OLS regression...", "INFO")
     reg_ols = robust_regression(residuals, cos_elong)
-    
+
     # Run station-by-station analysis for inter-station consistency
     print_status("Running station-by-station analysis...", "INFO")
     station_results = station_by_station_analysis(df)
-    
+
     results = {
         "step_id": "step_004",
         "status": "PASS",
@@ -1210,9 +1214,28 @@ def main():
             if ("eta" in reg_ols and "eta_error" in reg_ols and reg_ols["eta_error"] not in (0, None))
             else None,
         },
+        "theil_sen_sampled": {
+            "eta": float(reg_ols["eta"]) if "eta" in reg_ols else None,
+            "eta_error": float(reg_ols["eta_error"]) if "eta_error" in reg_ols else None,
+            "snr": (
+                float(abs(reg_ols["eta"]) / reg_ols["eta_error"])
+                if (
+                    "eta" in reg_ols
+                    and "eta_error" in reg_ols
+                    and reg_ols["eta_error"] not in (0, None)
+                )
+                else None
+            ),
+            "method": str(reg_ols.get("method", "Theil-Sen (sampled)")),
+            "n_samples": int(TEP_CONFIG["THEIL_SEN_SAMPLES"]),
+            "note": (
+                "Subsampled pairwise median slope on the Step 004 input table; "
+                "full-sample cosD-only Theil-Sen envelope is Step 017 / Step 040."
+            ),
+        },
         "station_by_station": station_results
     }
-    
+
     print_status("═══ RESULTS SUMMARY", "INFO")
     print_status(f"    Bootstrap correlation r: {boot_results['r_observed']:.4f}", "CALC")
     print_status(f"    95% CI: [{boot_results['ci_95_lower']:.4f}, {boot_results['ci_95_upper']:.4f}]", "CALC")
@@ -1220,29 +1243,35 @@ def main():
         print_status(f"    OLS η: {reg_ols['eta_ols']:.4e}", "CALC")
     if 'snr' in reg_ols:
         print_status(f"    SNR: {reg_ols['snr']:.2f}σ", "CALC")
+    if "eta" in reg_ols and reg_ols.get("eta") is not None:
+        print_status(
+            f"    Sampled Theil–Sen η: {float(reg_ols['eta']):.4e} "
+            f"(±{float(reg_ols.get('eta_error', 0.0)):.4e})",
+            "CALC",
+        )
     print_status(f"    Stations analyzed: {len(station_results)}", "CALC")
-    
+
     print_status("═══ INTERPRETATION", "INFO")
     print_status(f"    Bootstrap correlation provides robust non-parametric confidence intervals", "INFO")
     print_status(f"    Station-by-station analysis tests cross-instrumental consistency", "INFO")
     print_status(f"    Multiple statistical methods ensure robustness of TEP detection", "INFO")
-    
+
     print_status("═══ REPRODUCIBILITY", "INFO")
     print_status(f"    Output file: results/outputs/step_004_detection_analysis_advanced.json", "INFO")
     print_status(f"    Random seed: {args.seed}", "INFO")
     print_status(f"    Bootstrap samples: 10000", "INFO")
-    print_status(f"    Theil-Sen samples: 100000", "INFO")
-    
+    print_status(f"    Theil-Sen samples: {int(TEP_CONFIG['THEIL_SEN_SAMPLES'])}", "INFO")
+
     # Save results
     output_path = PROJECT_ROOT / "results" / "outputs" / "step_004_detection_analysis_advanced.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output_path, "w") as f:
         json.dump(_convert_to_serializable(results), f, indent=2)
-    
+
     print_status(f"Results saved to {output_path.name}", "SUCCESS")
     print_status(f"Bootstrap r={boot_results['r_observed']:.4f} [{boot_results['ci_95_lower']:.4f}, {boot_results['ci_95_upper']:.4f}]", "INFO")
-    
+
     return results
 
 

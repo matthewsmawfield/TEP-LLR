@@ -23,7 +23,7 @@ from typing import Dict, List
 import numpy as np
 from scripts.utils.numerics import stable_lstsq
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
-from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR, IPW_VALIDATION_THRESHOLD
 from scripts.utils.statistical_utils import require_step003_eta_ols
 
 def simulate_station_concentrated_signal(n_total: int,
@@ -71,7 +71,7 @@ def compute_full_sample_eta(data: Dict) -> float:
     X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
     coeffs, _, _, _ = stable_lstsq(X, data['residuals'])
     return coeffs[0] / ETA_SCALE_FACTOR
-    
+
 def compute_ipw_eta(data: Dict) -> Dict:
     """Compute IPW-weighted eta with equal per-station weight."""
     stations = data['stations']
@@ -230,9 +230,9 @@ def validate_ipw_criteria(eta_true: float,
     }
 
     # Threshold analysis
-    # Threshold of 8.0 determined from Monte Carlo to capture 95% of genuine signals
+    # Threshold determined from Monte Carlo to capture 95% of genuine signals
     # at the observed station concentration (Grasse=74%, APO=10%, etc.)
-    threshold = 8.0
+    threshold = IPW_VALIDATION_THRESHOLD
     results['threshold_analysis'] = {
         'threshold': threshold,
         'justification': "Monte Carlo calibrated threshold capturing 95% of genuine signals",

@@ -12,6 +12,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, set_verbose_mode
 from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.llr_constants import TEMPORAL_DRIFT_MAX_LAG, TEMPORAL_DRIFT_ERA_SPLIT_YEAR
 
 import argparse
 import pandas as pd
@@ -20,16 +21,16 @@ from scipy import stats
 
 # Add the project root to the Python path
 
-def analyze_temporal_autocorrelation(df, station, max_lag=30, verbose=False):
+def analyze_temporal_autocorrelation(df, station, max_lag=TEMPORAL_DRIFT_MAX_LAG, verbose=False):
     """
     Analyze temporal autocorrelation in residuals to check for temporal dependencies
     """
     station_data = df[df['station'] == station].sort_values('date_julian_year')
     if len(station_data) < 50:
         return {"error": "Insufficient data for autocorrelation analysis"}
-    
+
     residuals = station_data['residual_m'].values
-    
+
     # Calculate autocorrelation function
     autocorr = []
     lags = []
@@ -39,13 +40,13 @@ def analyze_temporal_autocorrelation(df, station, max_lag=30, verbose=False):
         corr = np.corrcoef(residuals[:-lag], residuals[lag:])[0, 1]
         autocorr.append(corr)
         lags.append(lag)
-    
+
     # Calculate Durbin-Watson statistic
     dw_stat = 0
     if len(residuals) > 1:
         diff_residuals = np.diff(residuals)
         dw_stat = np.sum(diff_residuals ** 2) / np.sum(residuals ** 2)
-    
+
     # Test for significant autocorrelation
     significant_lags = []
     for i, (lag, corr) in enumerate(zip(lags, autocorr)):
@@ -55,7 +56,7 @@ def analyze_temporal_autocorrelation(df, station, max_lag=30, verbose=False):
         p_value = 2 * (1 - stats.norm.cdf(abs(z_score)))
         if p_value < 0.05:
             significant_lags.append({"lag": lag, "autocorr": corr, "p_value": p_value})
-    
+
     if verbose:
         print_status(f"  {station} Temporal Autocorrelation Analysis:", "CALC")
         print_status(f"    Durbin-Watson statistic: {dw_stat:.3f}", "CALC")
@@ -63,7 +64,7 @@ def analyze_temporal_autocorrelation(df, station, max_lag=30, verbose=False):
         if significant_lags:
             for sig in significant_lags[:3]:  # Show first 3 significant lags
                 print_status(f"      Lag {sig['lag']}: r={sig['autocorr']:.3f}, p={sig['p_value']:.3f}", "CALC")
-    
+
     return {
         "durbin_watson": float(dw_stat),
         "autocorrelations": autocorr,
@@ -72,7 +73,7 @@ def analyze_temporal_autocorrelation(df, station, max_lag=30, verbose=False):
         "interpretation": "No significant temporal autocorrelation" if len(significant_lags) == 0 else f"Significant autocorrelation at {len(significant_lags)} lags"
     }
 
-def era_analysis(df, station, split_year=2000.0, verbose=False):
+def era_analysis(df, station, split_year=TEMPORAL_DRIFT_ERA_SPLIT_YEAR, verbose=False):
     station_data = df[df['station'] == station]  # PERFORMANCE FIX: Removed unnecessary .copy()
     if len(station_data) < 100:
         return {"error": "Insufficient data"}

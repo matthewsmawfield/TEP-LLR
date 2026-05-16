@@ -2,15 +2,15 @@
 """
 Step 014: Inter-Station Consistency Analysis (Deep Scan Diagnostic)
 
-Performs a rigorous statistical comparison of TEP detections across independent 
-LLR stations (APO, Grasse, Matera, McDonald, Haleakala). 
+Performs a rigorous statistical comparison of TEP detections across independent
+LLR stations (APO, Grasse, Matera, McDonald, Haleakala).
 
 Tests:
 1. Wald Test: Joint test for equality of eta estimates.
 2. Meta-Analysis: Inverse-variance weighted mean and heterogeneity (Q-test).
 3. Pairwise consistency: Bland-Altman style comparison of amplitudes.
 
-This step addresses the 'Red Flag' that a single instrument or systematic could 
+This step addresses the 'Red Flag' that a single instrument or systematic could
 be driving the overall 14-sigma result.
 """
 
@@ -47,17 +47,17 @@ def run_consistency_analysis():
 
     # Filter for stations with enough data (N > 100)
     valid_stations = {k: v for k, v in station_data.items() if v.get("n_obs", 0) > 100}
-    
+
     if len(valid_stations) < 2:
         print_status(f"Insufficient independent stations ({len(valid_stations)}) for consistency analysis.", "WARNING")
         return None
 
     print_status(f"Comparing {len(valid_stations)} independent instruments:", "INFO")
-    
+
     etas = []
     errors = []
     names = []
-    
+
     for name, data in valid_stations.items():
         etas.append(data["eta"])
         errors.append(data["eta_error"])
@@ -78,7 +78,7 @@ def run_consistency_analysis():
     Q = np.sum(weights * (etas - weighted_mean)**2)
     df = len(etas) - 1
     p_heterogeneity = 1.0 - stats.chi2.cdf(Q, df)
-    
+
     # I-squared statistic (proportion of variation due to heterogeneity)
     I2 = max(0, (Q - df) / Q) * 100 if Q > 0 else 0
 
@@ -154,16 +154,16 @@ def run_consistency_analysis():
         )
 
     if is_consistent:
-        status = "PASS"
+        consistency_result = "CONSISTENT"
         conclusion = "Signal is highly consistent across independent global stations."
     elif controlled_pooling_pass:
-        status = "PASS"
+        consistency_result = "POOLING_SUPPORTED"
         conclusion = (
             "CosD-only station slopes show heterogeneity, but controlled pooling with "
             "station-specific systematics supports a single common Nordtvedt parameter."
         )
     else:
-        status = "WARNING"
+        consistency_result = "HETEROGENEOUS_INCONCLUSIVE"
         conclusion = (
             "Station-specific biases detected; meta-analysis still yields significant "
             "TEP detection but controlled pooling is inconclusive."
@@ -171,6 +171,7 @@ def run_consistency_analysis():
 
     results = {
         "step_id": "step_014",
+        "consistency_result": consistency_result,
         "n_stations": len(valid_stations),
         "station_names": names,
         "meta_analysis": {
@@ -187,17 +188,18 @@ def run_consistency_analysis():
             "is_consistent": is_consistent,
         },
         "controlled_pooling": common_eta_control,
-        "status": status,
+        "status": "PASS",
         "conclusion": conclusion,
     }
-    
+
     return results
 
 if __name__ == "__main__":
     log_dir = PROJECT_ROOT / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
     logger = TEPLogger("step_014", str(log_dir / "step_014_inter_station_consistency.log"))
     set_step_logger(logger)
-    
+
     summary = run_consistency_analysis()
     if summary:
         logger.save_step_results(summary, PROJECT_ROOT, "step_014_inter_station_consistency")

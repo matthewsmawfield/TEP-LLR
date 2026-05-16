@@ -2,83 +2,106 @@
     <h2>Abstract</h2>
 
     <p>
+        A 35-year Lunar Laser Ranging residual-channel analysis of INPOP19a
+        O–C archives ($N = 25{,}445$ after 6σ-equivalent MAD cleaning) yields a
+        precision-weighted synodic Nordtvedt estimate
+        $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$
+        ($6.94\sigma$; $6.78\sigma$ cluster-robust) on
+        $\delta r = 13\eta\cos D$. Step 064-PI gives prediction-interval coverage
+        86% at 68% nominal and 98% at 95% ($\chi^2_{\rm red} = 0.48$ on published
+        $\sigma$), so formal errors are conservative rather than underestimated;
+        station-block bootstrap and leave-one-station-out conformal bands on
+        $\eta$ provide complementary $\sigma$-free brackets. Convergent
+        full-systematic, mixed-model, null-test, and bootstrap support across
+        five stations (1984–2019). Linearized post-fit extraction on the
+        published archives (Step 056) recovers the same $\eta$ at
+        $6.17\sigma$ (INPOP19a) and $5.04\sigma$ (DE430) on matched windows.
+        Source-level INPOP or DE430 integrator refits with $\eta$ free, together
+        with independent range-level reductions on archived CRD normal points,
+        remain the decisive open closure beyond this post-fit channel;
+        ephemeris-absorption stress tests (Steps 032, 041, 054) bound but do
+        not replace that integrator-level check. Conditioned on the synodic
+        fit, a fixed-sky directional term tied to the Planck dipole is
+        corroborative ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$;
+        synodic phase null $p_{F,\mathrm{eff}} \approx 6\times10^{-4}$) while
+        uniform sky-scramble specificity remains marginal
+        ($p_F \approx 0.095$) and nearly collinear with galactic north
+        ($r = 0.984$), indicating one shared orientation subspace rather than
+        a second independent discovery axis.
+    </p>
+
+    <p>
         The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in
         which proper time is a dynamical field $\phi$ that couples universally
         to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi)
         g_{\mu\nu}$, with $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. The coupling
-        strength is density-dependent through a 
-        Temporal Shear Suppression (TSS) mechanism. TSS operates via the 
-        continuous spatial profile of the time field (Temporal Topology), in 
+        strength is density-dependent through screening of Temporal Shear governed by Temporal Topology, in 
         which high ambient density in deep potential wells suppresses the 
         local field gradient (Temporal Shear). The degree of gradient 
         suppression scales with the body's gravitational compactness ($\Phi/c^2$).
-    </p>
-
-    <p>
         TEP preserves the Weak Equivalence Principle through universal conformal
         coupling, but predicts violation of the Strong Equivalence Principle
-        (SEP) via compactness-dependent suppression. Bodies with different
-        gravitational potentials acquire different effective couplings to
-        $\phi$, which may cause them to fall at different rates in an external
-        gravitational field. This work tests for this SEP violation using Lunar
-        Laser Ranging (LLR) data, which provides precise tests of the Nordtvedt
-        effect in the Earth-Moon system.
+        (SEP) via compactness-dependent suppression. This work tests that SEP
+        sector using LLR residuals processed against INPOP19a from the Paris
+        Observatory (Geoazur), searching for the predicted synodic-phase-dependent
+        Earth-Moon range modulation with $D$ the Moon-Sun elongation angle.
     </p>
 
     <p>
-        This analysis uses 26,207 raw LLR O-C residuals from five international
-        laser ranging stations (APO, Grasse, Matera, McDonald2, Haleakala)
-        spanning 35 years of measurements (1984–2019), with 25,445 retained after
-        standard $6\sigma$ MAD outlier cleaning. The residuals are
-        processed against the INPOP19a lunar and planetary ephemeris from the
-        Paris Observatory (Geoazur). The analysis searches for the predicted
-        TEP Nordtvedt signal: a synodic-phase-dependent modulation of the
-        Earth-Moon range given by $\delta r = 13 \eta \cos(D)$, where $\eta$
-        is the Nordtvedt parameter and $D$ is the Moon-Sun elongation angle.
-    </p>
-
-    <p>
-        Analysis of the full 35-year dataset detects a continuous
-        modulation correlated with $\cos(D)$. The primary physical
-        parameter is extracted using a full systematic model that controls
-        for annual, monthly, and thermal $\cos(2D)$ aliases:
-        $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$;
-        $6.52\sigma$ cluster-robust). The signal strengthens as more
-        systematics are controlled, from $5.25\sigma$ ($\cos D$-only) to
-        $6.17\sigma$ (full model). Step 040 fixes a single canonical estimator
-        hierarchy; nonparametric and precision-weighted checks bound the
-        amplitude without treating every diagnostic as a co-equal discovery.
-        A common-$\eta$ mixed model with station-specific systematics yields
+        The primary estimand is the precision-weighted full-systematic consensus,
+        which retains all observations and weights each epoch by inverse station
+        variance. The unweighted full-systematic OLS, reported as a sensitivity
+        upper bound, gives
+        $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$
+        ($6.17\sigma$; $6.52\sigma$ cluster-robust). Cook's-Distance excision
+        returns a consistent
+        $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$
+        ($7.82\sigma$; $8.65\sigma$ cluster-robust; $N = 23{,}837$). The signal
+        strengthens as systematic controls are added, from $5.25\sigma$
+        ($\cos D$-only) to $6.17\sigma$ (full model OLS) and $6.94\sigma$
+        (precision-weighted). Step 040 fixes a single canonical estimator
+        hierarchy. A common-$\eta$ mixed model with station-specific
+        systematics yields
         $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ ($6.40\sigma$;
-        $F(4, 25,410) = 1.19$, $p = 0.31$). Independent synodic checks
-        include a phase-locked new/full-moon differential
-        ($\eta = -5.74 \times 10^{-4}$, $5.99\sigma$), a frequency null scan
+        $F(4, 25,410) = 1.19$, $p = 0.31$). Independent synodic checks include a
+        phase-locked new/full-moon differential
+        ($\eta = -5.95 \times 10^{-4}$, $5.91\sigma$), a frequency null scan
         with no significant power at 55 tested non-synodic factors after
         correction, and a Grasse C-SPAD plus APO clean subset at
-        $7.25\sigma$ cluster-robust significance ($N = 12{,}576$).
+        $7.25\sigma$ cluster-robust significance ($N = 12{,}576$). A parametric
+        bootstrap under the GR null (10,000 synthetic datasets) returns zero false
+        positives ($p < 10^{-4}$). Outlier-threshold sweeps (3σ–10σ MAD) recover
+        stable negative $\eta$ at every cutoff. Leave-one-station-out meta-analysis
+        finds $I^2 = 0.0\%$ heterogeneity
+        ($\eta_{\rm meta} = -4.21 \times 10^{-4}$, $12.8\sigma$). Bayesian
+        summaries are secondary: $P(\eta < 0 \,|\, {\rm data}) = 1.0000$,
+        bandwidth-free synodic cross-checks give ${\rm BF}_{10} \approx 70$
+        (grid quadrature) and $\approx 97$ (bridge sampling), and
+        $\mathcal{B}_{\rm BIC} \approx 8 \times 10^{3}$; Laplace and
+        Savage–Dickey ratios are model-dependent and not quoted as headline
+        evidence. Remaining caveats are bounded tests of station leverage and
+        source-level ephemeris refitting, not alternative explanations that
+        reproduce the observed signal; no catalogued systematic at its observed
+        amplitude reproduces the headline $|\eta|$, and integrator refit remains
+        the open closure.
     </p>
 
     <p>
-        On the same residual channel, Step 056 recovers the primary
-        $\eta$ by linearized post-fit parameter extraction on the published INPOP19a and
-        DE430 archives ($6.17\sigma$ and $5.04\sigma$). Matched-window
-        DE430 validation is consistent with INPOP19a. Joint regressions
-        conditioned on the synodic fit (Steps 047–048, 055) provide strong
-        corroborative CMB-orientation evidence while heliocentric distance is
-        non-significant ($p = 0.171$). Frequency-domain orthogonality tests
-        and ephemeris-absorption analysis (Steps 032, 041, 054) indicate why
-        a static direct-fit model with $\eta$ fixed at zero need not erase a
-        synodic $\cos(D)$ component in post-fit residuals. Source-level INPOP
-        or DE430 integrator refits with $\eta$ free, together with independent
-        range-level reductions on archived CRD normal points, are the
-        definitive external closure tests on that channel interpretation.
+        Step 056 recovers the primary $\eta$ by linearized post-fit extraction on
+        published INPOP19a and DE430 archives ($6.17\sigma$ and $5.04\sigma$);
+        matched-window DE430 validation is consistent with INPOP19a. Heliocentric
+        distance is non-significant ($p = 0.171$) in joint regressions. The
+        82-parameter ephemeris-like proxy and toy Keplerian bases used in
+        orthogonality tests are linear stress tests, not symplectic N-body
+        integrators; collaboration with IMCCE and JPL is invited for a source-level
+        numerical refit with dynamic $\eta$.
     </p>
 
     <p>
-        In the context of TEP, differential Temporal Shear Suppression between
+        In the context of TEP, differential screening of Temporal Shear between
         Earth and Moon could produce an effective Nordtvedt parameter with the
         observed negative sign, consistent with gravitational compactness-driven
-        gradient suppression (TSS) dominating in the Earth-Moon system.
+        Temporal Shear suppression dominating in the Earth-Moon system.
         Orthogonality analysis and the ephemeris-absorption simulation support
         residual-channel survival under static Keplerian fitting in the
         linearized and toy bases tested here, pending source-level integrator

@@ -24,18 +24,18 @@ def compute_cooks_distance(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     """Compute Cook's Distance for each observation."""
     n = len(y)
     p = X.shape[1]
-    
+
     # Fit OLS
     beta = stable_lstsq(X, y)[0]
     with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
         y_pred = X @ beta
     residuals = y - y_pred
     mse = np.sum(residuals**2) / (n - p)
-    
+
     # leverage h_ii = sum_j Q[i,j]^2 for reduced QR of X
     from scripts.utils.numerics import hat_diagonal_from_qr
     leverage = hat_diagonal_from_qr(X)
-    
+
     # Cook's Distance formula
     with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
         cooks_d = (residuals**2 / (p * mse)) * (leverage / ((1 - leverage)**2))
@@ -60,19 +60,19 @@ def run_leverage_clustering(logger):
     n_total = len(df)
     print_status(f"    Dataset: N = {n_total:,} observations", "DATA")
     print_status(f"    Data source: INPOP19a_all_stations_residuals.csv", "DATA")
-    
+
     x_val = np.cos(df['elongation_rad'].values)
     X = np.column_stack([np.ones(n_total), x_val])
     y = df['residual_m'].values
 
     # Calculate Cook's Distance
     cooks_d = compute_cooks_distance(X, y)
-    
+
     # Define high leverage threshold (standard Cook's distance criterion: 4/n)
     # Source: Cook & Weisberg 1982, standard diagnostic for influential points
     threshold = 4.0 / n_total
     high_lev_mask = cooks_d > threshold
-    
+
     # Time limits
     min_year = int(np.floor(df['date_julian_year'].min()))
     max_year = int(np.ceil(df['date_julian_year'].max()))
@@ -86,23 +86,23 @@ def run_leverage_clustering(logger):
     # Bin by 5-year epochs
     bins = np.arange(min_year, max_year + 5, 5)
     df['epoch_bin'] = pd.cut(df['date_julian_year'], bins=bins, right=False)
-    
+
     clustering_results = {}
     total_high_lev = int(np.sum(high_lev_mask))
-    
+
     df_high = df[high_lev_mask]
-    
+
     # Count overall distribution vs high-leverage distribution
     for interval in df['epoch_bin'].cat.categories:
         str_interval = f"{int(interval.left)}-{int(interval.right)}"
-        
+
         mask_interval = df['epoch_bin'] == interval
         n_total_in_bin = int(mask_interval.sum())
         n_high_in_bin = int((mask_interval & high_lev_mask).sum())
-        
+
         pct_high = float(n_high_in_bin / total_high_lev) * 100 if total_high_lev > 0 else 0
         expected_pct = float(n_total_in_bin / n_total) * 100
-        
+
         clustering_results[str_interval] = {
             "total_obs": n_total_in_bin,
             "high_lev_obs": n_high_in_bin,
@@ -114,7 +114,7 @@ def run_leverage_clustering(logger):
     # Station-specific high leverage count
     station_counts = df_high['station'].value_counts()
     station_high = {str(k): int(v) for k, v in station_counts.items()}
-    
+
     # Did Grasse dominate the high-leverage points?
     grasse_domination = station_high.get('Grasse', 0) / total_high_lev > 0.6 if total_high_lev > 0 else False
 
@@ -162,9 +162,9 @@ def main():
     log_dir.mkdir(parents=True, exist_ok=True)
     logger = TEPLogger("step_025", str(log_dir / "step_025_leverage_temporal_clustering.log"))
     set_step_logger(logger)
-    
+
     results = run_leverage_clustering(logger)
-    
+
     # Save output to JSON
     output_path = PROJECT_ROOT / "results" / "outputs" / "step_025_leverage_temporal_clustering.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)

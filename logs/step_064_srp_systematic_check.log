@@ -1,109 +1,38 @@
-[22:19:58]     ======================================================================
-[22:19:58] ═══ STEP 064: SOLAR RADIATION PRESSURE SYSTEMATIC CHECK
-[22:19:58]     ======================================================================
-[22:19:58]     Sigma Outlier Detection: median=-0.000, MAD=0.027, sigma=0.040
-[22:19:58]       Threshold=0.239 (6.0σ), Count=762
-[22:19:58]     Outlier cleaning: 762/26207 removed (6σ)
-[22:19:58]     Clean dataset: N = 25,445
-[22:20:00]     SRP proxy computed for 25,445 observations
-[22:20:00]       r_sun range: 0.98322 – 1.01675 AU
-[22:20:00]       cos(elong) range: -1.0000 – 0.9862
-[22:20:00]       SRP_proxy range: -1.0329 – 0.9983
-[22:20:00] 
-[22:20:00] >>> TEST 1: COLLINEARITY DIAGNOSTIC
-[22:20:00]       Pearson r(cosD, SRP_proxy) = 0.999723
-[22:20:00]       VIF(SRP_proxy) = 1807.72
-[22:20:00] ⚠     WARNING: VIF > 10 indicates severe multicollinearity; joint OLS decomposition is unreliable.
-[22:20:00]     Linear Regression Complete (N=25445, DOF=25443):
-[22:20:00]       RSS=9.665849e+01, MSE=3.799021e-03, χ²_red=0.004
-[22:20:00]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.11e+00
-[22:20:00]       Final η = -3.17793539e-04 ± 6.05191757e-05
-[22:20:00] 
-[22:20:00] >>> TEST 2: DETRENDED-RESIDUAL SRP CORRELATION
-[22:20:00]       After removing best-fit TEP cos(D) signal (eta = -3.1779e-04)
-[22:20:00]       r(detrended, SRP_proxy) = -3.221644e-04
-[22:20:00]       p-value = 9.5902e-01
-[22:20:00]       SNR = 0.05σ
-[22:20:00]       RESULT: No significant correlation with SRP proxy after TEP detrending. SRP does not explain residual variance beyond the TEP cos(D) term.
-[22:20:00]     Linear Regression Complete (N=5155, DOF=5153):
-[22:20:00]       RSS=2.556292e+01, MSE=4.960784e-03, χ²_red=0.005
-[22:20:00]       Birge Ratio = 0.070 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.32e+00
-[22:20:00]       Final η = -6.45820790e-04 ± 1.68395764e-04
-[22:20:00]     Linear Regression Complete (N=2106, DOF=2104):
-[22:20:00]       RSS=7.516837e+00, MSE=3.572641e-03, χ²_red=0.004
-[22:20:00]       Birge Ratio = 0.060 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.20e+00
-[22:20:00]       Final η = -3.62511085e-04 ± 2.04759465e-04
-[22:20:00]     Linear Regression Complete (N=1700, DOF=1698):
-[22:20:00]       RSS=8.924135e+00, MSE=5.255674e-03, χ²_red=0.005
-[22:20:00]       Birge Ratio = 0.072 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.68e+00
-[22:20:00]       Final η = -1.47548020e-03 ± 3.39361360e-04
-[22:20:00]     Linear Regression Complete (N=1831, DOF=1829):
-[22:20:00]       RSS=7.192547e+00, MSE=3.932502e-03, χ²_red=0.004
-[22:20:00]       Birge Ratio = 0.063 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.07e+00
-[22:20:00]       Final η = 2.39080423e-04 ± 2.26754522e-04
-[22:20:00]     Linear Regression Complete (N=1967, DOF=1965):
-[22:20:00]       RSS=7.247431e+00, MSE=3.688260e-03, χ²_red=0.004
-[22:20:00]       Birge Ratio = 0.061 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.20e+00
-[22:20:00]       Final η = 2.04571408e-04 ± 2.21550958e-04
-[22:20:00]     Linear Regression Complete (N=1857, DOF=1855):
-[22:20:00]       RSS=6.139155e+00, MSE=3.309517e-03, χ²_red=0.003
-[22:20:00]       Birge Ratio = 0.058 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.26e+00
-[22:20:00]       Final η = -6.57509297e-05 ± 2.10081553e-04
-[22:20:00]     Linear Regression Complete (N=1661, DOF=1659):
-[22:20:00]       RSS=4.708553e+00, MSE=2.838188e-03, χ²_red=0.003
-[22:20:00]       Birge Ratio = 0.053 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 1.96e+00
-[22:20:00]       Final η = -1.16369886e-04 ± 1.94179807e-04
-[22:20:00]     Linear Regression Complete (N=2396, DOF=2394):
-[22:20:00]       RSS=6.731731e+00, MSE=2.811918e-03, χ²_red=0.003
-[22:20:00]       Birge Ratio = 0.053 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 1.89e+00
-[22:20:00]       Final η = -7.91208090e-05 ± 1.57575793e-04
-[22:20:00]     Linear Regression Complete (N=2241, DOF=2239):
-[22:20:00]       RSS=6.604794e+00, MSE=2.949886e-03, χ²_red=0.003
-[22:20:00]       Birge Ratio = 0.054 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 1.91e+00
-[22:20:00]       Final η = -7.25913179e-04 ± 1.61870196e-04
-[22:20:00]     Linear Regression Complete (N=4530, DOF=4528):
-[22:20:00]       RSS=1.534882e+01, MSE=3.389758e-03, χ²_red=0.003
-[22:20:00]       Birge Ratio = 0.058 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.07e+00
-[22:20:00]       Final η = -2.27503678e-04 ± 1.35138401e-04
-[22:20:00] 
-[22:20:00] >>> TEST 3: SRP SCALING TEST (central)
-[22:20:00]       Bins: 10 (N per bin: 1661–5155)
-[22:20:00]       Fit: eta(r) = C + M / r^2
-[22:20:00]       C = 6.0011e-03 ± 2.7947e-03  (t = 2.15, p = 0.064)
-[22:20:00]       M = -6.3247e-03 ± 2.8079e-03  (t = -2.25, p = 0.054)
-[22:20:00]       χ²_red = 4.83
-[22:20:00]       Expected M for pure SRP = -3.1776e-04
-[22:20:00] ⚠     Significant 1/r² scaling detected, but with a sign or magnitude inconsistent with simple SRP. Further investigation required.
-[22:20:00]     Linear Regression Complete (N=3817, DOF=3815):
-[22:20:00]       RSS=1.817837e+01, MSE=4.764973e-03, χ²_red=0.005
-[22:20:00]       Birge Ratio = 0.069 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.32e+00
-[22:20:00]       Final η = -2.81019763e-04 ± 1.91812722e-04
-[22:20:00]     Linear Regression Complete (N=3819, DOF=3817):
-[22:20:00]       RSS=1.290115e+01, MSE=3.379918e-03, χ²_red=0.003
-[22:20:00]       Birge Ratio = 0.058 (Scaling factor applied: 1.000)
-[22:20:00]       Condition Number κ(R) = 2.26e+00
-[22:20:00]       Final η = 5.94067454e-05 ± 1.57469433e-04
-[22:20:00] 
-[22:20:00] >>> TEST 4: PERIHELION–APHELION DIFFERENTIAL
-[22:20:00]       Perihelion η = -2.8102e-04 ± 1.9181e-04 (N=3817)
-[22:20:00]       Aphelion   η = 5.9407e-05 ± 1.5747e-04 (N=3819)
-[22:20:00]       Δη = -3.4043e-04 ± 2.4817e-04  (SNR = 1.37σ)
-[22:20:00]       SRP-predicted Δη ≈ -1.5803e-05
-[22:20:00] 
-[22:20:00] ═══ OVERALL SUMMARY
-[22:20:00] ⚠     Overall status: WARNING
-[22:20:00] ⚠     Tests are inconclusive. While no clear SRP signature is detected, the statistical power of the scaling test is limited by the small heliocentric-distance baseline (3.4%).
-[22:20:00]     ======================================================================
-[22:20:00] Results saved to results/outputs/step_064_srp_systematic_check.json
+[13:27:31]     ======================================================================
+[13:27:31] ═══ STEP 064: SOLAR RADIATION PRESSURE SYSTEMATIC CHECK
+[13:27:31]     ======================================================================
+[13:27:31]     Outlier cleaning: 762/26207 removed (6σ)
+[13:27:31]     Clean dataset: N = 25,445
+[13:27:34] 
+[13:27:34] >>> TEST 1: COLLINEARITY DIAGNOSTIC
+[13:27:34]       Pearson r(cosD, SRP_proxy) = 0.999723
+[13:27:34]       VIF(SRP_proxy) = 1807.72
+[13:27:34] ⚠     WARNING: VIF > 10 indicates severe multicollinearity; joint OLS decomposition is unreliable.
+[13:27:34] 
+[13:27:34] >>> TEST 2: DETRENDED-RESIDUAL SRP CORRELATION
+[13:27:34]       After removing best-fit TEP cos(D) signal (eta = -3.1779e-04)
+[13:27:34]       r(detrended, SRP_proxy) = -3.221644e-04
+[13:27:34]       p-value = 9.5902e-01
+[13:27:34]       SNR = 0.05σ
+[13:27:34]       RESULT: No significant correlation with SRP proxy after TEP detrending. SRP does not explain residual variance beyond the TEP cos(D) term.
+[13:27:34] 
+[13:27:34] >>> TEST 3: SRP SCALING TEST (central)
+[13:27:34]       Bins: 10 (N per bin: 1661–5155)
+[13:27:34]       Fit: eta(r) = C + M / r^2
+[13:27:34]       C = 6.0011e-03 ± 2.7947e-03  (t = 2.15, p = 0.064)
+[13:27:34]       M = -6.3247e-03 ± 2.8079e-03  (t = -2.25, p = 0.054)
+[13:27:34]       χ²_red = 4.83
+[13:27:34]       Expected M for pure SRP = -3.1776e-04
+[13:27:34] ⚠     The 1/r² slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.
+[13:27:34] 
+[13:27:34] >>> TEST 4: PERIHELION–APHELION DIFFERENTIAL
+[13:27:34]       Perihelion η = -2.8102e-04 ± 1.9181e-04 (N=3817)
+[13:27:34]       Aphelion   η = 5.9407e-05 ± 1.5747e-04 (N=3819)
+[13:27:34]       Δη = -3.4043e-04 ± 2.4817e-04  (SNR = 1.37σ)
+[13:27:34]       SRP-predicted Δη ≈ -1.5803e-05
+[13:27:34] 
+[13:27:34] ═══ OVERALL SUMMARY
+[13:27:34]       SRP test outcome: NO_SRP_SIGNATURE
+[13:27:34]       All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r² scaling in the residuals, rules out SRP as the dominant source of the detected signal.
+[13:27:34]     ======================================================================
+[13:27:34] Results saved to results/outputs/step_064_srp_systematic_check.json

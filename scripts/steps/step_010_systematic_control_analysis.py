@@ -111,14 +111,14 @@ def run_control_analysis(df, verbose=False):
         year_frac = t_year - np.floor(t_year)
         sin_year = np.sin(2 * np.pi * year_frac)
         cos_year = np.cos(2 * np.pi * year_frac)
-        
+
         # Control 4: Lunar Sidereal Cycle (27.32 days)
         # Control for lunar orientation artifacts
         sidereal_period = 27.321661
         sidereal_frac = (jd / sidereal_period) % 1.0
         sin_sidereal = np.sin(2 * np.pi * sidereal_frac)
         cos_sidereal = np.cos(2 * np.pi * sidereal_frac)
-        
+
         # Control 5: Lunar Anomalistic Cycle (27.55 days)
         # Control for distance-dependent artifacts (perigee/apogee)
         anomalistic_period = 27.554551
@@ -128,10 +128,10 @@ def run_control_analysis(df, verbose=False):
 
         # Combined control: all systematics simultaneously including lunar cycles
         X = np.column_stack([
-            np.ones(n), 
-            jd_norm, 
+            np.ones(n),
+            jd_norm,
             jd_norm**2,
-            sin_year, 
+            sin_year,
             cos_year,
             sin_sidereal,
             cos_sidereal,
@@ -151,7 +151,7 @@ def run_control_analysis(df, verbose=False):
         # Partial correlation after all controls
         with suppress_scipy_array_api_matmul_runtime_warning():
             r_combined, p_combined = stats.pearsonr(res_residuals, cos_residuals)
-        
+
         print_status("", "INFO")
         print_status("TEST 4: CONTROLLING FOR SEASONAL AND LUNAR CYCLES", "PROCESS")
         print_status(f"  [CALC] Controlled for: Annual, Sidereal (27.32d), Anomalistic (27.55d)", "CALC")

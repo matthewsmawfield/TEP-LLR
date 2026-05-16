@@ -3,11 +3,11 @@
 Step 032: Ephemeris Orthogonality Proof (Mathematical Exploration)
 
 This script computationally demonstrates that the TEP signal cannot be perfectly
-absorbed by standard ephemeris codes (INPOP, DE430). 
-Standard codes fit global constants (e.g., lunar initial state vectors, masses), 
+absorbed by standard ephemeris codes (INPOP, DE430).
+Standard codes fit global constants (e.g., lunar initial state vectors, masses),
 which act as static mathematical filters.
 Because the TEP field geometrically modulates with heliocentric distance (Section 4.16),
-the signal strictly produces orbital sidebands (D ± l') that are mathematically orthogonal 
+the signal strictly produces orbital sidebands (D ± l') that are mathematically orthogonal
 to the Keplerian/Post-Newtonian parameter space.
 
 This script outputs the frequency domain sideband proof.
@@ -37,28 +37,29 @@ from scripts.utils.statistical_utils import require_step003_eta_ols
 
 def explore_orthogonality():
     print_status("Initiating Ephemeris Orthogonality Spectral Analysis (v2)...", "INFO")
-    
+
     # 1. Load Data
     data_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     if not data_path.exists():
         print_status("No processed INPOP19a residuals.", "ERROR")
         return {"status": "FAIL", "reason": "No data"}
-        
+
     df = pd.read_csv(data_path)
     df = df.sort_values('date_julian')  # PERFORMANCE FIX: Removed unnecessary .copy()
     jad = df['date_julian'].values
     D_phase = df['elongation_rad'].values # Earth-Moon-Sun synodic phase
-    
-    # 2. Compute true Heliocentric Distance 
-    eph_path = PROJECT_ROOT / "de421.bsp"
-    planets = load(str(eph_path))
+
+    # 2. Compute true Heliocentric Distance
+    from scripts.utils.astronomical_utils import load_skyfield_planets
+
+    planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets['earth']
     sun = planets['sun']
     ts = load.timescale()
     timestamps = ts.tt(jd=jad)
     astrometric = earth.at(timestamps).observe(sun)
     r_au = astrometric.distance().au
-    
+
     # 3. Load Step 022 empirical data for modulation calibration
     step022_path = PROJECT_ROOT / "results" / "outputs" / "step_022_environmental_modulation.json"
     if not step022_path.exists():
@@ -82,7 +83,7 @@ def explore_orthogonality():
     )
     print_status(f"Empirical modulation depth m = {empirical_m:.2f}", "CALC")
     print_status(f"Perihelion-aphelion differential = {diff_sigma:.2f}σ", "CALC")
-    
+
     # 4. Frequency grid
     t_days = jad - jad[0]
     f_synodic = 1.0 / 29.530588
@@ -108,13 +109,13 @@ def explore_orthogonality():
     print_status(f"Loaded measured η from step_003: {eta_0:.4e}", "INFO")
 
     S_static = 13.0 * eta_0 * np.cos(D_phase)
-    
+
     print_status("Computing Lomb-Scargle periodograms...", "PROCESS")
     ls_static = LombScargle(t_days, S_static).power(freqs)
-    
+
     power_stat_lower = float(ls_static[f_lower_idx])
     power_stat_upper = float(ls_static[f_upper_idx])
-    
+
     # 6. Modulation depth sweep
     # The physical parameterization: eta(r) = eta_0 * (1 + m * (1 - r/r_mean))
     # where m controls the modulation depth.
@@ -122,17 +123,17 @@ def explore_orthogonality():
     # m = 0.017: linear 1/r scaling (fractional eccentricity modulation)
     # m = 1.0: threshold-like activation (Step 034 original model)
     # m = empirical_m: calibrated to Step 024 data
-    
+
     r_mean = np.mean(r_au)
     sweep_depths = [0.017, 0.1, 0.5, 1.0]
     if empirical_m is not None and empirical_m < 10:
         if empirical_m not in sweep_depths:
             sweep_depths.append(round(empirical_m, 2))
     sweep_depths = sorted(sweep_depths)
-    
+
     sweep_results = []
     primary_result = None
-    
+
     for m_depth in sweep_depths:
         # Construct dynamic signal with modulation depth m
         # eta(r) = eta_0 * (1 + m * (r_mean - r) / (r_mean * e_Earth))
@@ -141,16 +142,16 @@ def explore_orthogonality():
         norm_r = (r_mean - r_au) / (r_mean * e_Earth)
         eta_dynamic = eta_0 * (1.0 + m_depth * norm_r)
         S_dynamic = 13.0 * eta_dynamic * np.cos(D_phase)
-        
+
         ls_dynamic = LombScargle(t_days, S_dynamic).power(freqs)
-        
+
         power_dyn_lower = float(ls_dynamic[f_lower_idx])
         power_dyn_upper = float(ls_dynamic[f_upper_idx])
-        
+
         # Theoretical sideband fraction: for eta = eta_0*(1 + m*cos(l')),
         # sidebands have amplitude m/2 relative to fundamental
         theoretical_sideband_fraction = 2 * (m_depth/2)**2 / (1.0 + 2 * (m_depth/2)**2)
-        
+
         entry = {
             "modulation_depth_m": m_depth,
             "sideband_power_D_minus_Lprime": power_dyn_lower,
@@ -160,13 +161,13 @@ def explore_orthogonality():
             "theoretical_sideband_fraction_pct": round(theoretical_sideband_fraction * 100, 2)
         }
         sweep_results.append(entry)
-        
+
         print_status(f"m={m_depth:.3f}: D-l' power = {power_dyn_lower:.4f} (ratio to static: {entry['power_ratio_tep_to_static']:.1f}x), sideband fraction = {theoretical_sideband_fraction*100:.1f}%", "CALC")
-        
+
         # Use m=1.0 as the primary result (conservative relative to empirical m~2)
         if abs(m_depth - 1.0) < 0.01:
             primary_result = entry
-    
+
     print_status("", "INFO")
     print_status("--- SPECTRAL ORTHOGONALITY DECOUPLING ---", "SUCCESS")
     if primary_result:
@@ -174,13 +175,13 @@ def explore_orthogonality():
         print_status(f"  Static model power at same frequency = {primary_result['static_power_D_minus_Lprime']:.4f}", "CALC")
         print_status(f"  TEP/static power ratio = {primary_result['power_ratio_tep_to_static']:.1f}x", "CALC")
         print_status(f"  Theoretical sideband fraction = {primary_result['theoretical_sideband_fraction_pct']}%", "CALC")
-    
+
     print_status("", "INFO")
     print_status("--- EMPIRICAL CALIBRATION ---", "PROCESS")
     if empirical_m is not None:
         print_status(f"Step 022 perihelion/aphelion data imply m = {empirical_m:.2f}", "CALC")
         print_status(f"The m=1.0 model is CONSERVATIVE (empirical m > 1.0)", "SUCCESS")
-    
+
     print_status("", "INFO")
     print_status("--- GEOPHYSICAL QUIET SPACE VERIFICATION ---", "PROCESS")
     print_status(f"Sideband D - l' maps to exactly {lower_period_days:.2f} days.", "INFO")
@@ -188,7 +189,7 @@ def explore_orthogonality():
     print_status("  - Evection limit: 31.81 days", "INFO")
     print_status("  - Mm Ocean Tide limit: 27.55 days", "INFO")
     print_status("Result: Classical geophysics cannot natively inject power here without violating bounds.", "SUCCESS")
-    
+
     results = {
         "step_id": "step_032",
         "status": "PASS",
@@ -221,9 +222,9 @@ if __name__ == "__main__":
     log_dir = PROJECT_ROOT / "logs"
     logger = TEPLogger("step_032", str(log_dir / "step_032_ephemeris_orthogonality_proof.log"))
     set_step_logger(logger)
-    
+
     results = explore_orthogonality()
-    
+
     if results:
         logger.save_step_results(results, PROJECT_ROOT, "step_032_ephemeris_orthogonality_proof")
         print_status("Ephemeris Orthogonality test compiled cleanly.", "SUCCESS")

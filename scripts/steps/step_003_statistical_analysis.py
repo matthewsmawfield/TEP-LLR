@@ -151,6 +151,7 @@ def ar1_gls_regression(y, x, station_ids=None, verbose=False):
         "rho_error": rho_error,
         "durbin_watson": dw_stat,
         "n_obs": n,
+        "n_obs_transformed": n - 1,
         "n_clusters": n_clusters
     }
     return result
@@ -159,8 +160,8 @@ def run_statistical_analysis(verbose=False):
     print_status("═══ Starting Step 003: Statistical Analysis...", "TITLE")
     print_status("═══ STEP PURPOSE: Primary TEP Nordtvedt parameter estimation using OLS and Bayesian MCMC methods", "INFO")
     print_status("═══ METHOD: Unweighted OLS regression + Bayesian MCMC with emcee sampler", "INFO")
-    print_status(f"═══ PARAMETERS: 6σ MAD outlier cleaning, {TEP_CONFIG.get('MCMC_STANDARD_WALKERS', 32)} walkers, {TEP_CONFIG.get('MCMC_STANDARD_STEPS', 3000)} steps, {TEP_CONFIG.get('MCMC_BURN_IN', 1000)} burn-in", "INFO")
-    
+    print_status(f"═══ PARAMETERS: 6σ-equivalent (MAD-based) outlier cleaning, {TEP_CONFIG.get('MCMC_STANDARD_WALKERS', 32)} walkers, {TEP_CONFIG.get('MCMC_STANDARD_STEPS', 3000)} steps, {TEP_CONFIG.get('MCMC_BURN_IN', 1000)} burn-in", "INFO")
+
     input_path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     if not input_path.exists():
         print_status(f"CRITICAL DATA FAILURE: {input_path} not found. Cannot proceed.", "ERROR")
@@ -192,8 +193,8 @@ def run_statistical_analysis(verbose=False):
     print_status("═══ DATA SUMMARY", "INFO")
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
     print_status(f"    Stations: 5 (APO, Grasse, Matera, McDonald2, Haleakala)", "DATA")
-    
-    # Apply 6σ MAD outlier cleaning for consistency with other steps (CRITICAL FIX for standardization)
+
+    # Apply 6σ-equivalent (MAD-based) outlier cleaning for consistency with other steps (CRITICAL FIX for standardization)
     outlier_mask = detect_outliers_sigma(df['residual_m'].values, sigma_threshold=6.0)
     n_outliers = int(np.sum(outlier_mask))
     df_clean = df[~outlier_mask]  # PERFORMANCE FIX: Removed unnecessary .copy()
@@ -201,7 +202,7 @@ def run_statistical_analysis(verbose=False):
         ["date_julian", "station"], kind="mergesort"
     ).reset_index(drop=True)
     if verbose:
-        print_status(f"Applied 6σ MAD outlier cleaning: removed {n_outliers}/{len(df)} outliers", "INFO")
+        print_status(f"Applied 6σ-equivalent (MAD-based) outlier cleaning: removed {n_outliers}/{len(df)} outliers", "INFO")
         print_status(f"    Cleaned dataset: N = {len(df_clean):,} observations", "DATA")
     print_status(
         "Rows sorted by date_julian (+ station) for AR(1) / lag-1 diagnostics.",
@@ -215,7 +216,7 @@ def run_statistical_analysis(verbose=False):
         x = np.cos(df_clean['elongation_rad'].values)
     y = df_clean['residual_m'].values
     n = len(y)
-    
+
     # Use the fixed per-observation sigma_m for the MCMC likelihood.
     # sigma_m is now station-specific RMS estimated from the data itself
     # (fixed in parse_inpop_mini.py; previously parts[6] was incorrectly interpreted).
@@ -227,7 +228,7 @@ def run_statistical_analysis(verbose=False):
     reg = linear_regression(y, x, weights=None)
     eta_ols = reg['eta']
     eta_err_ols = reg['eta_error']
-    
+
     print_status("═══ ANALYSIS TRACE", "INFO")
     print_status(">>> Performing unweighted OLS regression", "PROCESS")
     if verbose:
@@ -284,9 +285,9 @@ def run_statistical_analysis(verbose=False):
     eta_mcmc = np.mean(flat_samples[:, 0])
     eta_err_mcmc = np.std(flat_samples[:, 0])
     snr = abs(eta_mcmc) / eta_err_mcmc
-    
+
     status = "STRONG DETECTION" if snr > 5 else "DETECTION" if snr > 3 else "INCONCLUSIVE"
-    
+
     # Extract station IDs for cluster-robust SE computation
     station_ids = df_clean['station'].values if 'station' in df_clean.columns else None
 
@@ -336,6 +337,7 @@ def run_statistical_analysis(verbose=False):
             "durbin_watson": float(ar1_gls_results['durbin_watson']),
             "n_clusters": int(ar1_gls_results['n_clusters']) if ar1_gls_results.get('n_clusters') is not None else None,
             "n_obs": int(len(y)),
+            "n_obs_transformed": int(ar1_gls_results['n_obs_transformed']),
             "interpretation": "Significant autocorrelation" if abs(ar1_gls_results['rho']) > 0.1 else "Weak autocorrelation"
         },
         "convergence_diagnostics": {
@@ -350,20 +352,20 @@ def run_statistical_analysis(verbose=False):
         },
         "regression_metrics": reg,
         "outlier_cleaning": {
-            "method": "6σ MAD (detect_outliers_sigma)",
+            "method": "6σ-equivalent (MAD-based; detect_outliers_sigma)",
             "sigma_threshold": 6.0,
             "n_outliers_removed": n_outliers,
             "n_original": len(df),
             "n_cleaned": len(df_clean)
         }
     }
-    
+
     print_status("═══ REPRODUCIBILITY", "INFO")
     print_status(f"    Output file: results/outputs/step_003_statistical_analysis.json", "INFO")
     print_status(f"    MCMC walkers: {n_walkers}", "INFO")
     print_status(f"    MCMC steps: {n_steps}", "INFO")
     print_status(f"    MCMC burn-in: {burn_in}", "INFO")
-    
+
     return results
 
 if __name__ == "__main__":

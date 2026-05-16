@@ -281,7 +281,7 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
     print_status("═══ Starting Step 030: Hardware Epoch Consistency Analysis...", "TITLE")
     print_status("═══ STEP PURPOSE: Test whether temporal χ²/dof variation reflects instrumental artifacts or genuine gravitational signal", "INFO")
     print_status("═══ METHOD: Per-hardware-epoch η fits, expected χ² under heteroscedastic noise, amplitude-RMS correlation, sign-consistency audit", "INFO")
-    
+
     data_path = PROJECT_ROOT / 'data' / 'processed' / \
         'INPOP19a_all_stations_residuals.csv'
 
@@ -290,7 +290,7 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
         return {'status': 'FAIL', 'reason': 'No processed data'}
 
     df = pd.read_csv(data_path)
-    
+
     print_status("═══ DATA SUMMARY", "INFO")
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
     print_status(f"    Stations: {sorted(df['station'].unique())}", "DATA")
@@ -354,7 +354,7 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
     # not necessarily a systematic artifact.
     chi2_percentile = chi2_analysis.get('percentile_in_simulated_distribution', 100)
     sign_consistent = sign_audit['all_powered_epochs_negative']
-    
+
     # PASS if sign consistency is demonstrated (primary systematic control)
     # WARNING only if signs are inconsistent (suggesting instrumental artifacts)
     resolved = sign_consistent
@@ -368,7 +368,7 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
         'n_epochs_all_negative': sign_audit['n_epochs_negative_eta'],
         'n_epochs_total': sign_audit['n_epochs_total'],
         'temporal_chi2_status': (
-            'CONSISTENT_WITH_NOISE' if chi2_percentile < 95 
+            'CONSISTENT_WITH_NOISE' if chi2_percentile < 95
             else 'EXCESS_VARIANCE_BUT_SIGN_CONSISTENT' if sign_consistent
             else 'EXCESS_VARIANCE_DETECTED'
         ),
@@ -379,7 +379,7 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
             'not sign-reversing artifacts.'
         ),
     }
-    
+
     print_status("═══ RESULTS SUMMARY", "INFO")
     print_status(f"    Epochs analyzed: {len(all_epochs)}", "CALC")
     print_status(f"    Epochs with negative η: {sign_audit['n_epochs_negative_eta']}/{sign_audit['n_epochs_total']}", "CALC")
@@ -393,12 +393,12 @@ def run_hardware_epoch_analysis(verbose: bool = False) -> dict:
         print_status('\n' + '=' * 60, 'INFO')
         print_status(f"Temporal chi2 status: {summary['temporal_chi2_status']}",
                      'SUCCESS' if resolved else 'WARNING')
-    
+
     print_status("═══ INTERPRETATION", "INFO")
     print_status(f"    Sign consistency across independent hardware epochs rules out instrumental systematics", "INFO")
     print_status(f"    χ² percentile {chi2_percentile:.0f}% indicates epoch-varying noise, not sign-reversing artifacts", "INFO")
     print_status(f"    Limitations: Epoch boundaries are approximate; actual hardware transitions may differ", "INFO")
-    
+
     print_status("═══ REPRODUCIBILITY", "INFO")
     print_status(f"    Output file: results/outputs/step_030_hardware_epoch_analysis.json", "INFO")
     print_status(f"    Epoch definitions: Grasse (3 epochs), APO (2 epochs)", "INFO")

@@ -43,7 +43,7 @@ def p_to_sigma(p):
 def bonferroni_correction(p_values, alpha=0.05):
     """
     Apply Bonferroni correction to p-values.
-    
+
     Returns:
     - corrected_p: Adjusted p-values
     - rejected: Boolean array indicating which hypotheses are rejected
@@ -57,37 +57,37 @@ def bonferroni_correction(p_values, alpha=0.05):
 def benjamini_hochberg_correction(p_values, alpha=0.05):
     """
     Apply Benjamini-Hochberg FDR correction to p-values.
-    
+
     Returns:
     - corrected_p: Adjusted p-values
     - rejected: Boolean array indicating which hypotheses are rejected
     """
     p_values = np.array(p_values)
     n_tests = len(p_values)
-    
+
     # Sort p-values
     sorted_indices = np.argsort(p_values)
     sorted_p = p_values[sorted_indices]
-    
+
     # Calculate BH critical values
     bh_critical = (np.arange(1, n_tests + 1) / n_tests) * alpha
-    
+
     # Find largest p-value that is less than its critical value
     rejected_indices = []
     for i in range(n_tests - 1, -1, -1):
         if sorted_p[i] <= bh_critical[i]:
             rejected_indices = list(range(i + 1))
             break
-    
+
     # Calculate adjusted p-values
     corrected_p = np.zeros(n_tests)
     for i in range(n_tests):
         rank = np.where(sorted_indices == i)[0][0]
         corrected_p[i] = min(1.0, p_values[i] * n_tests / (rank + 1))
-    
+
     rejected = np.zeros(n_tests, dtype=bool)
     rejected[sorted_indices[rejected_indices]] = True
-    
+
     return corrected_p, rejected
 
 def load_json(filepath: str) -> dict:
@@ -126,9 +126,22 @@ def collect_reported_significance_values():
     step_029 = load_json(str(PROJECT_ROOT / 'results/outputs/step_029_station_power_analysis.json'))
     step_050 = load_json(str(PROJECT_ROOT / 'results/outputs/step_050_corrected_tep_analysis.json'))
 
+    step_061_path = PROJECT_ROOT / 'results/outputs/step_061_systematic_sensitivity_analysis.json'
+    step_061 = load_json(str(step_061_path)) if step_061_path.is_file() else None
+
     tests = []
 
-    # --- Primary analyses ---
+    # --- Primary analyses (independent hypotheses; Bonferroni/BH family) ---
+    pw_full = step_050.get('precision_weighted_full_systematic') or {}
+    if pw_full.get('snr') is not None:
+        tests.append({
+            'name': 'Precision-weighted full-systematic (primary headline, Step 050)',
+            'sigma': float(pw_full['snr']),
+            'p': float(sigma_to_p(float(pw_full['snr']))),
+            'n_obs': int(pw_full.get('n_obs', step_050.get('n_obs', 25445))),
+            'category': 'primary'
+        })
+
     models = step_050.get('models', {})
     full_model = (
         step_050.get('full_systematic_model')
@@ -141,7 +154,7 @@ def collect_reported_significance_values():
     if eta is not None and eta_error is not None and eta_error > 0:
         snr_full = abs(eta) / eta_error
         tests.append({
-            'name': 'Full-Systematic OLS (primary estimand)',
+            'name': 'Full-systematic OLS (sensitivity upper bound; no excision)',
             'sigma': float(snr_full),
             'p': float(sigma_to_p(snr_full)),
             'n_obs': int(n_obs),
@@ -165,11 +178,11 @@ def collect_reported_significance_values():
     n_cooks = cooks.get('n_clean')
     if snr_cooks is not None:
         tests.append({
-            'name': 'Leverage-Excised OLS (Cook\'s D)',
+            'name': 'Leverage-Excised OLS (Cook\'s D, cosD-only; Step 017)',
             'sigma': float(snr_cooks),
             'p': float(sigma_to_p(snr_cooks)),
             'n_obs': int(n_cooks) if n_cooks is not None else 25177,
-            'category': 'primary'
+            'category': 'robustness'
         })
 
     bayes = step_016.get('bayesian_summary', {})
@@ -191,11 +204,11 @@ def collect_reported_significance_values():
     n_pw = pw.get('n_eff')
     if snr_pw is not None:
         tests.append({
-            'name': 'Precision-Weighted Regression (WLS)',
+            'name': 'Precision-weighted cosD-only regression (Step 029)',
             'sigma': float(snr_pw),
             'p': float(sigma_to_p(snr_pw)),
             'n_obs': int(n_pw) if n_pw is not None else 8934,
-            'category': 'primary'
+            'category': 'robustness'
         })
 
     # --- Station-level tests ---
@@ -379,6 +392,39 @@ def collect_reported_significance_values():
                 'category': 'frequency'
             })
 
+    # --- Step 061: era x station x lunation grid + blind year hold-out ---
+    if step_061 is not None:
+        for t in step_061.get('tests_for_step_042', []):
+            if t.get('p') is None or t.get('sigma') is None:
+                continue
+            tests.append({
+                'name': t['name'],
+                'sigma': float(t['sigma']),
+                'p': float(t['p']),
+                'n_obs': int(t.get('n_obs', step_050.get('n_obs', 25445))),
+                'category': t.get('category', 'interaction_grid'),
+            })
+
+        headline = step_061.get('interaction_grid', {}).get('headline_claims', {})
+        pooled = headline.get('pooled_full_systematic')
+        if pooled and pooled.get('p_two_sided') is not None:
+            tests.append({
+                'name': 'Step 061 pooled interaction grid (full systematic, all data)',
+                'sigma': float(pooled['snr']),
+                'p': float(pooled['p_two_sided']),
+                'n_obs': int(step_050.get('n_obs', 25445)),
+                'category': 'interaction_grid',
+            })
+        for era, fit in headline.get('per_era_pooled', {}).items():
+            if fit and fit.get('p_two_sided') is not None:
+                tests.append({
+                    'name': f'Step 061 era-pooled full systematic ({era})',
+                    'sigma': float(fit['snr']),
+                    'p': float(fit['p_two_sided']),
+                    'n_obs': int(fit.get('n_obs', 0)),
+                    'category': 'interaction_grid',
+                })
+
     # --- Validation tests ---
     split = step_029.get('grasse_internal_split', {})
     halves = split.get('halves', {})
@@ -403,20 +449,20 @@ def main():
     logger = TEPLogger("step_042", str(log_dir / "step_042_multiple_testing_correction.log"))
     set_step_logger(logger)
     set_verbose_mode(True)
-    
+
     print_status("Step 042: Formal Multiple Testing Correction", "TITLE")
-    
+
     # Collect all reported significance values
     tests = collect_reported_significance_values()
-    
+
     print_status(f"Collected {len(tests)} significance tests from the analysis pipeline", "INFO")
-    
+
     # Extract p-values
     p_values = [t['p'] for t in tests]
     test_names = [t['name'] for t in tests]
     categories = [t['category'] for t in tests]
     sigmas = [t['sigma'] for t in tests]
-    
+
     # CRITICAL FIX: Separate independent hypotheses from sensitivity analyses.
     # Bonferroni assumes independence. Applying it to correlated tests derived
     # from the same underlying observations is methodologically invalid.
@@ -433,7 +479,7 @@ def main():
 
     independent_categories = {'primary', 'ephemeris'}
     sensitivity_categories = {'station_level', 'robustness', 'systematic',
-                              'frequency', 'validation'}
+                              'frequency', 'validation', 'interaction_grid'}
 
     independent_indices = [i for i, t in enumerate(tests)
                            if t['category'] in independent_categories]
@@ -524,8 +570,8 @@ def main():
     print(f"Bonferroni rejected (independent only): {n_bonf_rejected}/{len(independent_indices)}")
     print(f"Benjamini-Hochberg rejected (independent only): {n_bh_rejected}/{len(independent_indices)}")
 
-    # Focus on primary test
-    primary_idx = 0  # Full-Systematic OLS (primary estimand)
+    # Focus on primary headline test (precision-weighted full-systematic; index 0)
+    primary_idx = 0
     results['primary_detection'] = {
         'original_sigma': sigmas[primary_idx],
         'original_p': p_values[primary_idx],
@@ -537,7 +583,7 @@ def main():
         'still_significant_bh': bool(bh_rejected[primary_idx]) if bh_rejected[primary_idx] is not None else None
     }
 
-    print(f"\nPrimary detection (Full-Systematic OLS):")
+    print(f"\nPrimary detection (precision-weighted full-systematic, Step 050):")
     print(f"  Original: {sigmas[primary_idx]:.2f}σ (p={p_values[primary_idx]:.2e})")
     if bonf_sigmas[primary_idx] is not None:
         print(f"  Bonferroni: {bonf_sigmas[primary_idx]:.2f}σ (p={bonf_p[primary_idx]:.2e})")
@@ -553,7 +599,8 @@ def main():
             f"The pipeline collected {len(tests)} significance measures. Of these, "
             f"{len(independent_indices)} are independent hypotheses and {len(sensitivity_indices)} are "
             f"sensitivity analyses (same hypothesis, different estimator). Multiple-testing "
-            f"correction is applied only to the independent hypotheses. The primary detection "
+            f"correction is applied only to the independent hypotheses. The headline "
+            f"precision-weighted full-systematic detection "
             f"({sigmas[primary_idx]:.2f}σ) is the primary analysis on the full INPOP19a dataset. "
             f"Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) "
             f"validate robustness but do not constitute additional independent hypothesis tests. "
@@ -566,9 +613,9 @@ def main():
     print_status("\n" + "=" * 70, "INFO")
     print_status("Step 042 completed successfully", "SUCCESS")
     print_status("=" * 70, "INFO")
-    
+
     logger.save_step_results(results, PROJECT_ROOT, "step_042_multiple_testing_correction")
-    
+
     return results
 
 if __name__ == "__main__":

@@ -87,14 +87,14 @@ def test_amplitude_trend(window_results: List[Dict]) -> Dict:
     """Test for secular trend in amplitude over time."""
     if len(window_results) < 3:
         return {'error': 'Insufficient windows'}
-    
+
     years = np.array([w['window_center'] for w in window_results])
     etas = np.array([w['eta'] for w in window_results])
     errors = np.array([w['eta_error'] for w in window_results])
-    
+
     # Linear regression of eta vs time
     slope, intercept, r_value, p_value, std_err = stats.linregress(years, etas)
-    
+
     # Weighted regression (accounting for error bars)
     weights = 1 / errors**2
     X = np.column_stack([years, np.ones(len(years))])
@@ -109,7 +109,7 @@ def test_amplitude_trend(window_results: List[Dict]) -> Dict:
     except (np.linalg.LinAlgError, ValueError):
         slope_weighted = slope
         slope_err_weighted = std_err
-    
+
     # Chi-squared test for consistency with constant amplitude
     if len(etas) > 1:
         mean_eta = np.average(etas, weights=weights)
@@ -118,7 +118,7 @@ def test_amplitude_trend(window_results: List[Dict]) -> Dict:
         chi2_per_dof = chi2 / dof if dof > 0 else 0
     else:
         chi2_per_dof = 0
-    
+
     return {
         'linear_trend_slope_per_year': float(slope),
         'linear_trend_pvalue': float(p_value),

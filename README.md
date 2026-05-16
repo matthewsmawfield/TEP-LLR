@@ -5,7 +5,7 @@
 
 **Author:** Matthew Lukin Smawfield  
 **Version:** v0.1 (Lucknow)  
-**First published:** 10 May 2026 · **Last updated:** 12 May 2026  
+**First published:** 14 May 2026 · **Last updated:** 14 May 2026  
 **Status:** Preprint (Open for Collaboration)  
 **DOI:** [10.5281/zenodo.19446029](https://doi.org/10.5281/zenodo.19446029)  
 **Website:** [https://mlsmawfield.com/tep/llr/](https://mlsmawfield.com/tep/llr/)  
@@ -13,17 +13,17 @@
 
 ## Abstract
 
-The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field $\phi$ that couples universally to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$, with $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. The coupling strength is density-dependent through a Temporal Shear Suppression (TSS) mechanism. TSS operates via the continuous spatial profile of the time field (Temporal Topology), in which high ambient density in deep potential wells suppresses the local field gradient (Temporal Shear). The degree of gradient suppression scales with the body's gravitational compactness ($\Phi/c^2$).
+The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field $\phi$ that couples universally to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$, with $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. The coupling strength is density-dependent through a screening of Temporal Shear governed by Temporal Topology, in which high ambient density in deep potential wells suppresses the local field gradient. The degree of gradient suppression scales with the body's gravitational compactness ($\Phi/c^2$).
 
 TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent suppression. Bodies with different gravitational potentials acquire different effective couplings to $\phi$, which may cause them to fall at different rates in an external gravitational field. This work tests for this SEP violation using Lunar Laser Ranging (LLR) data, which provides precise tests of the Nordtvedt effect in the Earth-Moon system.
 
 This analysis uses 26,207 raw LLR O-C residuals from five international laser ranging stations (APO, Grasse, Matera, McDonald2, Haleakala) spanning 35 years of measurements (1984–2019), with 25,445 retained after standard $6\sigma$ MAD outlier cleaning. The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). The analysis searches for the predicted TEP Nordtvedt signal: a synodic-phase-dependent modulation of the Earth-Moon range given by $\delta r = 13 \eta \cos(D)$, where $\eta$ is the Nordtvedt parameter and $D$ is the Moon-Sun elongation angle.
 
-Analysis of the full 35-year dataset detects a synodic modulation correlated with $\cos(D)$. The primary estimand, extracted from a Cook's-Distance-excised full systematic model controlling for annual, monthly, and thermal $\cos(2D)$ aliases, is $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ at $7.82\sigma$ significance. The signal strengthens as more systematics are controlled and is stable across mixed-model and station-specific specifications.
+Analysis of the full 35-year dataset detects a synodic modulation correlated with $\cos(D)$. The headline estimand is a precision-weighted full-systematic regression controlling for annual, monthly, and thermal $\cos(2D)$ aliases: $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$ ($6.78\sigma$ cluster-robust). The unweighted full-systematic OLS sensitivity bound is $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$ / $6.52\sigma$ cluster-robust). A Cook's-Distance leverage diagnostic returns a consistent $\eta = -3.87 \times 10^{-4}$ ($7.82\sigma$ / $8.65\sigma$ cluster-robust), confirming the detection is not driven by high-leverage outliers. The signal strengthens as more systematics are controlled and is stable across mixed-model and station-specific specifications.
 
-Independent confirmation comes from a phase-locked new/full-moon differential ($\eta = -5.74 \times 10^{-4}$, $5.99\sigma$) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component.
+Independent confirmation comes from a phase-locked new/full-moon differential ($\eta = -5.95 \times 10^{-4}$, $6.16\sigma$) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component.
 
-In the TEP framework, differential Temporal Shear Suppression between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven gradient suppression dominating in the Earth-Moon system. Source-level INPOP or DE430 integrator refits with $\eta$ free remain the definitive external confirmation test.
+In the TEP framework, differential screening of Temporal Shear between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven Temporal Shear suppression dominating in the Earth-Moon system. Source-level INPOP or DE430 integrator refits with $\eta$ free remain the definitive external confirmation test.
 
 Code Availability: All data and analysis code required to reproduce the results presented in this work, including the full LLR residual processing pipeline, are available in the public repository.
 
@@ -33,11 +33,11 @@ Code Availability: All data and analysis code required to reproduce the results 
 - **26,207 observations** from 5 stations (APO, Grasse, Matera, McDonald2, Haleakala); **25,445** after $6\sigma$ MAD cleaning
 - **Date range:** 1984–2019
 - **Residual precision:** 9.5 cm RMS
-- **Cook's-Distance-excised full-systematic OLS (primary):** $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($N = 23{,}837$ after excision), 7.82σ; cluster-robust 8.65σ
+- **Cook's-Distance-excised full-systematic OLS (leverage diagnostic):** $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($N = 23{,}837$ after excision), 7.82σ; cluster-robust 8.65σ
 - **Precision-weighted full-systematic (consensus):** $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, 6.94σ; cluster-robust 6.78σ
 - **Full-systematic OLS without excision (sensitivity upper bound):** $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($N = 25{,}445$), 6.17σ; cluster-robust 6.52σ
 - **Common-$\eta$ mixed model with station systematics (pooling):** $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$, 6.40σ; $F(4, 25{,}410) = 1.19$, $p = 0.31$
-- **Phase-locked new/full-moon differential (robustness):** $\eta = -5.74 \times 10^{-4} \pm 9.59 \times 10^{-5}$, 5.99σ
+- **Phase-locked new/full-moon differential (robustness):** $\eta = -5.95 \times 10^{-4} \pm 9.66 \times 10^{-5}$, 6.16σ
 - **cosD-only OLS (baseline):** $\eta = -3.18 \times 10^{-4} \pm 6.05 \times 10^{-5}$, 5.25σ
 
 ---
@@ -80,7 +80,7 @@ TEP-LLR/
 │   │   ├── step_002_de430_preprocessing.py     # DE430 ephemeris processing
 │   │   ├── step_003_statistical_analysis.py    # Basic TEP detection analysis
 │   │   ├── step_004_detection_analysis_advanced.py  # Advanced analysis (M4 Pro optimized)
-│   │   ├── ... (60 canonical steps: step_000 through step_057, including 006b and 046b)
+│   │   ├── ... (74 canonical steps: step_000 through step_073, including 006b and 046b)
 │   │   └── run_all_steps.py                     # Run complete pipeline
 │   └── utils/               # Shared utilities
 │       ├── crd_parser.py                          # CRD format parser
@@ -89,6 +89,8 @@ TEP-LLR/
 │       ├── parse_inpop_mini.py                   # INPOP parser
 │       ├── logger.py                              # Logging utilities
 │       ├── pipeline_runner.py                     # Pipeline execution
+│       ├── pipeline_quality_gate.py               # Reviewer-facing audit gate
+│       ├── generate_evidence_ledger.py            # Evidence summary artifact
 │       ├── residual_computation.py                # Residual calculations
 │       ├── schema_validation.py                   # Output schema checks
 │       ├── statistical_utils.py                   # Statistical utilities
@@ -136,6 +138,12 @@ python scripts/steps/run_all_steps.py
 # Validate structured outputs and manuscript consistency
 python scripts/utils/schema_validation.py
 python scripts/utils/verify_value_consistency.py
+
+# Run the reviewer-facing quality gate
+python scripts/utils/pipeline_quality_gate.py
+
+# Generate the evidence ledger directly
+python scripts/utils/generate_evidence_ledger.py
 
 # Rebuild the manuscript from site/components/ (runs node directly; avoids zsh
 # `compdef` noise when npm is wired into an interactive shell)

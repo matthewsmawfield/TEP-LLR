@@ -16,6 +16,7 @@ Output format for TEP analysis:
 
 from scripts.utils.astronomical_utils import compute_elongation
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+import re
 import sys
 from pathlib import Path
 
@@ -78,11 +79,22 @@ def parse_de430_file(filepath: Path) -> pd.DataFrame:
                 # Position 7-8: "03"
                 # Position 9-10: "26"
 
-                if len(timestamp) >= 10:
+                # Robust regex-based date extraction; avoids silent mis-assignment
+                # if the fixed-width position assumption breaks.
+                date_match = re.search(r'(\d{4})(\d{2})(\d{2})', timestamp)
+                if date_match:
                     try:
-                        year = int(timestamp[2:6])  # 2015
-                        month = int(timestamp[6:8])  # 03
-                        day = int(timestamp[8:10])   # 26
+                        year = int(date_match.group(1))
+                        month = int(date_match.group(2))
+                        day = int(date_match.group(3))
+
+                        # Validate extracted date components
+                        if not (1900 <= year <= 2100 and 1 <= month <= 12 and 1 <= day <= 31):
+                            print_status(
+                                f"Line {line_num}: implausible date "
+                                f"{year:04d}-{month:02d}-{day:02d} in timestamp, skipping",
+                                "WARNING")
+                            continue
 
                         # Create astropy Time object
                         time = Time(
@@ -96,13 +108,13 @@ def parse_de430_file(filepath: Path) -> pd.DataFrame:
                             'station': 'DE430'
                         })
                     except (ValueError, IndexError) as e:
-                        # If date decoding fails, skip this line
                         print_status(
-                            f"Line {line_num} date decode error: {e}", "DEBUG")
+                            f"Line {line_num} date decode error: {e}", "WARNING")
                         continue
                 else:
                     print_status(
-                        f"Line {line_num}: timestamp too short: {timestamp[:20]}...", "DEBUG")
+                        f"Line {line_num}: no date pattern found in timestamp: "
+                        f"{timestamp[:40]}...", "WARNING")
                     continue
 
             except (ValueError, IndexError) as e:

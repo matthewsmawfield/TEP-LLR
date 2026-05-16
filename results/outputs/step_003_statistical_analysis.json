@@ -1,76 +1,77 @@
 {
     "step_id": "step_003",
-    "eta_ols": -0.0003177266624680195,
-    "eta_ols_error": 6.0519384376391265e-05,
-    "eta_mcmc": -0.0002886075503245693,
-    "eta_err_mcmc": 6.574650606533859e-05,
-    "snr": 4.389701713392228,
+    "eta_ols": -0.00031772666444063755,
+    "eta_ols_error": 6.0519384375507376e-05,
+    "eta_mcmc": -0.0002881660536498668,
+    "eta_err_mcmc": 6.60715775613479e-05,
+    "snr": 4.361422328418036,
     "status": "PASS",
     "detection_status": "DETECTION",
     "ar1_gls": {
-        "eta": -0.000326475573266719,
-        "eta_error": 9.000115600904749e-05,
-        "eta_error_cluster": 9.478568316511143e-05,
-        "rho": 0.4161967521465981,
-        "rho_error": 0.005700248943975197,
-        "durbin_watson": 1.167516626809958,
+        "eta": -0.0003264755751631174,
+        "eta_error": 9.000115600746706e-05,
+        "eta_error_cluster": 9.478568318283261e-05,
+        "rho": 0.4161967521392108,
+        "rho_error": 0.005700248943996396,
+        "durbin_watson": 1.1675166268247381,
         "n_clusters": 5,
         "n_obs": 25445,
+        "n_obs_transformed": 25444,
         "interpretation": "Significant autocorrelation"
     },
     "convergence_diagnostics": {
-        "autocorr_time": 33.31264296408388,
+        "autocorr_time": 34.52853943514779,
         "convergence_status": "CONVERGED",
-        "n_steps_after_burnin": 2000,
-        "steps_per_autocorr": 60.03726579594137,
-        "acceptance_fraction": 0.7158020833333334,
+        "n_steps_after_burnin": 4000,
+        "steps_per_autocorr": 115.84619753502409,
+        "acceptance_fraction": 0.71675625,
         "n_walkers": 32,
-        "n_steps": 3000,
+        "n_steps": 5000,
         "burn_in": 1000
     },
     "regression_metrics": {
-        "amplitude": -0.004130446612084253,
-        "amplitude_error": 0.0007867519968930864,
-        "intercept": -0.0010502057897677716,
-        "intercept_error": 0.0004081638296111844,
-        "eta": -0.0003177266624680195,
-        "eta_error": 6.0519384376391265e-05,
-        "chi2_red": 0.003799022896551237,
-        "birge_ratio": 0.06163621416465516,
-        "condition_number": 2.110264710336413,
-        "rss": 96.65853955695312,
+        "amplitude": -0.004130446637728288,
+        "amplitude_error": 0.0007867519968815959,
+        "intercept": -0.0010502057931526534,
+        "intercept_error": 0.0004081638295527715,
+        "eta": -0.00031772666444063755,
+        "eta_error": 6.0519384375507376e-05,
+        "chi2_red": 0.00379902289650007,
+        "birge_ratio": 0.06163621416424008,
+        "condition_number": 2.110264710128539,
+        "rss": 96.65853955565127,
         "n_obs": 25445,
         "method": "QR-Decomposition with Birge Scaling",
         "regression_metrics": {
             "coefficients": [
-                -0.004130446612084253,
-                -0.0010502057897677716
+                -0.004130446637728288,
+                -0.0010502057931526534
             ],
             "errors": [
-                0.0007867519968930864,
-                0.0004081638296111844
+                0.0007867519968815959,
+                0.0004081638295527715
             ],
-            "chi2_red": 0.003799022896551237,
-            "birge_ratio": 0.06163621416465516,
-            "condition_number": 2.110264710336413,
+            "chi2_red": 0.00379902289650007,
+            "birge_ratio": 0.06163621416424008,
+            "condition_number": 2.110264710128539,
             "n_obs": 25445,
             "dof": 25443,
-            "rss": 96.65853955695312,
-            "mse": 0.003799022896551237,
+            "rss": 96.65853955565127,
+            "mse": 0.00379902289650007,
             "cov": [
                 [
-                    6.18978704615259e-07,
-                    1.0346430399894785e-07
+                    6.189787045971786e-07,
+                    1.0346430386081343e-07
                 ],
                 [
-                    1.0346430399894785e-07,
-                    1.6659771180286794e-07
+                    1.0346430386081343e-07,
+                    1.6659771175518393e-07
                 ]
             ]
         }
     },
     "outlier_cleaning": {
-        "method": "6\u03c3 MAD (detect_outliers_sigma)",
+        "method": "6\u03c3-equivalent (MAD-based; detect_outliers_sigma)",
         "sigma_threshold": 6.0,
         "n_outliers_removed": 762,
         "n_original": 26207,

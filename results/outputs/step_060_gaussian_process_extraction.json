@@ -17,9 +17,9 @@
         "n_bins": 48
     },
     "parametric_comparison": {
-        "step_003_eta_ols": -0.0003177266624680195,
+        "step_003_eta_ols": -0.00031772666444063755,
         "gp_eta_cos": -0.0005320355748909872,
-        "ratio": 1.6745071715362847
+        "ratio": 1.6745071611400435
     },
     "interpretation": "GP extraction on 48 elongation bins recovers amplitude 1.13 cm (eta=-5.32e-04). Shape fidelity R^2=0.985 (excellent agreement with sinusoid). Phase=232.3 degrees. Differs from parametric OLS by 67.5%, consistent with subsampling."
 }

@@ -1,64 +1,65 @@
 {
     "step_id": "step_049",
-    "status": "SUCCESS",
+    "status": "PASS",
     "observations": 25445,
     "pole_tide": {
         "range_effect_mm": {
-            "min": -8.24702486717502,
-            "max": 10.31164160771561,
-            "rms": 3.148713297056644
+            "min": -8.247026225007529,
+            "max": 10.311643862564603,
+            "rms": 3.1487133766110684
         },
         "correlation_residuals": {
-            "r": 0.06816080222031717,
-            "p": 1.3621472992083441e-27
+            "r": 0.06816080173390988,
+            "p": 1.3621484631530958e-27
         },
         "cos_D_component": {
-            "eta": -2.4673503950016123e-05,
-            "eta_error": 3.0879091411735703e-06,
-            "snr": 7.990359438049681
+            "eta": -2.4673494315319884e-05,
+            "eta_error": 3.087909222388917e-06,
+            "snr": 7.990356107758759
         },
         "annual_part_cosD": {
-            "eta": -1.4190097182409203e-05,
-            "eta_error": 2.2715211709940445e-06,
-            "snr": 6.246957925643919
+            "eta": -1.4190089493031254e-05,
+            "eta_error": 2.2715210631467443e-06,
+            "snr": 6.246954837114161
         },
         "residual_part_cosD": {
-            "eta": -1.0483406767606942e-05,
-            "eta_error": 2.0945328996096376e-06,
-            "snr": 5.005128718465466
+            "eta": -1.0483404822288655e-05,
+            "eta_error": 2.0945331342728244e-06,
+            "snr": 5.005127228950838
         },
-        "randomization_z_score": -7.393859782977132
+        "randomization_z_score": -8.196402902190327,
+        "n_randomizations": 1000
     },
     "tep_after_corrections": {
         "original": {
-            "eta": -0.00031772666246801957,
-            "eta_error": 6.0519384376391265e-05,
-            "snr": 5.249998256624127
+            "eta": -0.00031772666444063755,
+            "eta_error": 6.051938437550738e-05,
+            "snr": 5.249998289295616
         },
         "after_pole_tide": {
-            "eta": -0.00029305315851800367,
-            "eta_error": 6.0392267624270415e-05,
-            "snr": 4.8524946991762175
+            "eta": -0.00029305317012531774,
+            "eta_error": 6.0392267621749354e-05,
+            "snr": 4.852494891577463
         },
         "after_annual_pole_tide": {
-            "eta": -0.00030353656528561034,
-            "eta_error": 6.040376427599372e-05,
-            "snr": 5.025126644404262
+            "eta": -0.0003035365749476065,
+            "eta_error": 6.040376430146432e-05,
+            "snr": 5.025126802242159
         }
     },
     "balanced_subsample": {
         "original": {
-            "eta": 5.510201185998956e-05,
-            "eta_error": 0.00031120587289756765,
-            "snr": 0.17705967868455427,
+            "eta": -0.00031461940537639833,
+            "eta_error": 0.000295998608422315,
+            "snr": 1.0629083935675676,
             "n_total": 1725,
             "n_per_station": 345,
             "n_stations": 5
         },
         "after_pole_tide": {
-            "eta": 7.39745680430892e-05,
-            "eta_error": 0.0003100251014222936,
-            "snr": 0.2386083181771996,
+            "eta": -0.0003105830830372244,
+            "eta_error": 0.0002958023397789587,
+            "snr": 1.049968310829829,
             "n_total": 1725,
             "n_per_station": 345,
             "n_stations": 5
@@ -67,54 +68,54 @@
     "per_station": {
         "Grasse": {
             "N": 18742,
-            "eta_orig": -0.00037818227856385603,
-            "eta_error_orig": 6.595420877741816e-05,
-            "snr_orig": 5.7340128185017445,
-            "eta_no_pole": -0.00035817962696480605,
-            "eta_error_no_pole": 6.574472501453902e-05,
-            "snr_no_pole": 5.448035973769713,
-            "pole_range_rms_mm": 2.8939706424641773
+            "eta_orig": -0.00037818228146582576,
+            "eta_error_orig": 6.595420878131981e-05,
+            "snr_orig": 5.734012862162303,
+            "eta_no_pole": -0.0003581796534851481,
+            "eta_error_no_pole": 6.574472500981866e-05,
+            "snr_no_pole": 5.448036377544444,
+            "pole_range_rms_mm": 2.8939705097966524
         },
         "APO": {
             "N": 2595,
-            "eta_orig": -0.00023983556703264082,
-            "eta_error_orig": 8.664124510072114e-05,
-            "snr_orig": 2.768145434127015,
-            "eta_no_pole": -0.0002588364251105556,
-            "eta_error_no_pole": 8.627019387998689e-05,
-            "snr_no_pole": 3.0002995643041084,
-            "pole_range_rms_mm": 2.0730491630026386
+            "eta_orig": -0.00023983556784707943,
+            "eta_error_orig": 8.664124510162064e-05,
+            "snr_orig": 2.768145443498402,
+            "eta_no_pole": -0.0002588364339566096,
+            "eta_error_no_pole": 8.627019399225122e-05,
+            "snr_no_pole": 3.0002996629387235,
+            "pole_range_rms_mm": 2.073049326473451
         },
         "McDonald2": {
             "N": 3097,
-            "eta_orig": -8.792794223699519e-05,
-            "eta_error_orig": 0.00030644184819733384,
-            "snr_orig": 0.2869319016127778,
-            "eta_no_pole": -6.360593793341816e-05,
-            "eta_error_no_pole": 0.0003068475471825541,
-            "snr_no_pole": 0.2072884027180338,
-            "pole_range_rms_mm": 4.502966057961114
+            "eta_orig": -8.792793726778155e-05,
+            "eta_error_orig": 0.00030644184818751384,
+            "snr_orig": 0.2869318854061272,
+            "eta_no_pole": -6.360592195729528e-05,
+            "eta_error_no_pole": 0.0003068475469272727,
+            "snr_no_pole": 0.20728835082514382,
+            "pole_range_rms_mm": 4.502966297868128
         },
         "Matera": {
             "N": 345,
-            "eta_orig": 0.00038459381879929683,
-            "eta_error_orig": 0.0008301659372563961,
-            "snr_orig": 0.4632734270817418,
-            "eta_no_pole": 0.00037687230272545104,
-            "eta_error_no_pole": 0.000824061107466871,
-            "snr_no_pole": 0.45733538363913395,
-            "pole_range_rms_mm": 3.8862249532737922
+            "eta_orig": 0.0003845938253044743,
+            "eta_error_orig": 0.0008301659369748619,
+            "snr_orig": 0.46327343507484836,
+            "eta_no_pole": 0.0003768723440870944,
+            "eta_error_no_pole": 0.0008240611100151978,
+            "snr_no_pole": 0.45733543241731667,
+            "pole_range_rms_mm": 3.886224921267755
         },
         "Haleakala": {
             "N": 666,
-            "eta_orig": 0.002570816131279777,
-            "eta_error_orig": 0.0011645019042028442,
-            "snr_orig": 2.2076530076948395,
-            "eta_no_pole": 0.0023573743896651944,
-            "eta_error_no_pole": 0.0011643899261381827,
-            "snr_no_pole": 2.0245575272912792,
-            "pole_range_rms_mm": 3.365682331132214
+            "eta_orig": 0.0025708161272214283,
+            "eta_error_orig": 0.001164501902528554,
+            "snr_orig": 2.207653007383894,
+            "eta_no_pole": 0.002357374402650637,
+            "eta_error_no_pole": 0.0011643899247866035,
+            "snr_no_pole": 2.0245575407934506,
+            "pole_range_rms_mm": 3.3656828067714644
         }
     },
-    "conclusion": "Pole tide contributes modestly to TEP signal (0.4\u03c3 reduction). Balanced subsample eliminates signal regardless of EOP correction. Root cause is station-specific systematics, not EOP modeling."
+    "conclusion": "Pole tide contributes modestly to the cosD-only signal (0.4\u03c3 reduction), and the signal remains negative after pole-tide correction. The equal-N balanced subsample is underpowered and near zero both before and after EOP correction, so this step supports 'EOP is not the dominant driver' rather than diagnosing a full root cause for station imbalance."
 }

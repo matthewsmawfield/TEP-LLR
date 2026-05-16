@@ -3,394 +3,394 @@
     "null_test_summary": {
         "correction_mode": "fdr_bh",
         "primary_test_frequency_factor": 1.23,
-        "non_physical_snr": 0.00032894483257726236,
-        "max_null_region_snr": 0.0016899629640789778,
+        "non_physical_snr": 0.0003289442122366514,
+        "max_null_region_snr": 0.0016899619688351534,
         "pass_null": true,
         "systematic_peaks": [],
         "test_results": [
             {
                 "frequency_factor": 0.4,
                 "label": "Null Region",
-                "snr": 0.0007220012878511067,
-                "p_two_sided": 0.9994239263695937,
+                "snr": 0.0007220008349924282,
+                "p_two_sided": 0.9994239267309225,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.45,
                 "label": "Null Region",
-                "snr": 0.0006806045753241951,
-                "p_two_sided": 0.9994569561592621,
+                "snr": 0.0006806041346970477,
+                "p_two_sided": 0.9994569565108316,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.5,
                 "label": "Null Region",
-                "snr": 0.0006349372990625727,
-                "p_two_sided": 0.9994933933660395,
+                "snr": 0.000634936873066622,
+                "p_two_sided": 0.9994933937059349,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.55,
                 "label": "Null Region",
-                "snr": 0.0005852007939417102,
-                "p_two_sided": 0.9995330773481947,
+                "snr": 0.0005852003855990585,
+                "p_two_sided": 0.999533077674005,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.6000000000000001,
                 "label": "Null Region",
-                "snr": 0.0005316188205294377,
-                "p_two_sided": 0.9995758295708471,
+                "snr": 0.0005316184330462981,
+                "p_two_sided": 0.9995758298800138,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.65,
                 "label": "Null Region",
-                "snr": 0.0004744383727466436,
-                "p_two_sided": 0.9996214529615344,
+                "snr": 0.0004744380100655447,
+                "p_two_sided": 0.9996214532509119,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.7000000000000001,
                 "label": "Null Region",
-                "snr": 0.0004139308925708849,
-                "p_two_sided": 0.9996697309410096,
+                "snr": 0.00041393055931748807,
+                "p_two_sided": 0.9996697312069074,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.75,
                 "label": "Null Region",
-                "snr": 0.00035039408305231114,
-                "p_two_sided": 0.9997204259766567,
+                "snr": 0.00035039378464174665,
+                "p_two_sided": 0.9997204262147539,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.8,
                 "label": "Null Region",
-                "snr": 0.0002841546033141291,
-                "p_two_sided": 0.9997732774321857,
+                "snr": 0.0002841543461920828,
+                "p_two_sided": 0.9997732776373394,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.8500000000000001,
                 "label": "Null Region",
-                "snr": 0.0002155720566433172,
-                "p_two_sided": 0.999827998385596,
+                "snr": 0.00021557184843069507,
+                "p_two_sided": 0.9998279985517255,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 0.9,
                 "label": "Lunar Orbital (Sidereal/Anomalistic)",
-                "snr": 0.00014504486672175458,
-                "p_two_sided": 0.9998842709406248,
+                "snr": 0.00014504471646365779,
+                "p_two_sided": 0.9998842710605134,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.1,
                 "label": "Null Region",
-                "snr": 0.00014657641967485467,
-                "p_two_sided": 0.9998830489381825,
+                "snr": 0.00014657620803091052,
+                "p_two_sided": 0.9998830491070498,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.15,
                 "label": "Null Region",
-                "snr": 0.00021861736823193743,
-                "p_two_sided": 0.9998255685785539,
+                "snr": 0.00021861702024871037,
+                "p_two_sided": 0.9998255688562042,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.2000000000000002,
                 "label": "Null Region",
-                "snr": 0.00028853244704723114,
-                "p_two_sided": 0.9997697844184046,
+                "snr": 0.0002885319374910432,
+                "p_two_sided": 0.9997697848249716,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.23,
                 "label": "Null Region",
-                "snr": 0.00032894483257726236,
-                "p_two_sided": 0.999737540001464,
+                "snr": 0.0003289442122366514,
+                "p_two_sided": 0.9997375404964242,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.25,
                 "label": "Null Region",
-                "snr": 0.0003550500268770449,
-                "p_two_sided": 0.9997167110711941,
+                "snr": 0.0003550493263376335,
+                "p_two_sided": 0.9997167116301436,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.3,
                 "label": "Null Region",
-                "snr": 0.0004165698351605328,
-                "p_two_sided": 0.999667625369642,
+                "snr": 0.0004165689100153493,
+                "p_two_sided": 0.999667626107801,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.35,
                 "label": "Null Region",
-                "snr": 0.00047108912815762346,
-                "p_two_sided": 0.9996241252717836,
+                "snr": 0.00047108794096664084,
+                "p_two_sided": 0.9996241262190249,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.4,
                 "label": "Null Region",
-                "snr": 0.0005161623774479568,
-                "p_two_sided": 0.9995881620264542,
+                "snr": 0.0005161608882248806,
+                "p_two_sided": 0.9995881632146821,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.4500000000000002,
                 "label": "Null Region",
-                "snr": 0.0005489558145978055,
-                "p_two_sided": 0.9995619966529683,
+                "snr": 0.0005489539834678958,
+                "p_two_sided": 0.9995619981139984,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.5,
                 "label": "Null Region",
-                "snr": 0.0005664866840552981,
-                "p_two_sided": 0.9995480090450664,
+                "snr": 0.0005664844754609421,
+                "p_two_sided": 0.9995480108072694,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.5500000000000003,
                 "label": "Null Region",
-                "snr": 0.0005661301521773435,
-                "p_two_sided": 0.9995482935163016,
+                "snr": 0.00056612754034881,
+                "p_two_sided": 0.999548295600239,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.6,
                 "label": "Null Region",
-                "snr": 0.0005463790493207396,
-                "p_two_sided": 0.9995640526138914,
+                "snr": 0.0005463760240972397,
+                "p_two_sided": 0.9995640550276702,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.65,
                 "label": "Null Region",
-                "snr": 0.0005076350868129423,
-                "p_two_sided": 0.9995949658191059,
+                "snr": 0.000507631657629445,
+                "p_two_sided": 0.9995949685551981,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.7000000000000002,
                 "label": "Null Region",
-                "snr": 0.0004526176765140277,
-                "p_two_sided": 0.9996388633562936,
+                "snr": 0.00045261387231933237,
+                "p_two_sided": 0.9996388663916015,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.75,
                 "label": "Null Region",
-                "snr": 0.00038604266397661513,
-                "p_two_sided": 0.9996919825262525,
+                "snr": 0.000386038528679463,
+                "p_two_sided": 0.9996919858257419,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.8000000000000003,
                 "label": "Null Region",
-                "snr": 0.00031362548838817077,
-                "p_two_sided": 0.9997497630690431,
+                "snr": 0.00031362107344530446,
+                "p_two_sided": 0.9997497665916577,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.85,
                 "label": "Null Region",
-                "snr": 0.000240882663043721,
-                "p_two_sided": 0.9998078034440511,
+                "snr": 0.00024087801985273082,
+                "p_two_sided": 0.9998078071487814,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.9,
                 "label": "Null Region",
-                "snr": 0.00017225008410651728,
-                "p_two_sided": 0.999862564317974,
+                "snr": 0.00017224525856955223,
+                "p_two_sided": 0.9998625681681954,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 1.9500000000000002,
                 "label": "Semi-Synodic Harmonic",
-                "snr": 0.00011073049416795605,
-                "p_two_sided": 0.9999116498484739,
+                "snr": 0.0001107255241982107,
+                "p_two_sided": 0.999911653813936,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.0,
                 "label": "Semi-Synodic Harmonic",
-                "snr": 5.796536386512869e-05,
-                "p_two_sided": 0.9999537503311366,
+                "snr": 5.7960279254078026e-05,
+                "p_two_sided": 0.9999537543880692,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.0500000000000003,
                 "label": "Null Region",
-                "snr": 1.4511132187879317e-05,
-                "p_two_sided": 0.9999884217916679,
+                "snr": 1.4505955735341812e-05,
+                "p_two_sided": 0.9999884259218795,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.1,
                 "label": "Null Region",
-                "snr": 1.9853292527381354e-05,
-                "p_two_sided": 0.9999841593644123,
+                "snr": 1.985854318012258e-05,
+                "p_two_sided": 0.9999841551749976,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.15,
                 "label": "Null Region",
-                "snr": 4.587079291465577e-05,
-                "p_two_sided": 0.9999634004025545,
+                "snr": 4.5876103584269396e-05,
+                "p_two_sided": 0.9999633961652532,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.2,
                 "label": "Null Region",
-                "snr": 6.461951134538408e-05,
-                "p_two_sided": 0.9999484410896068,
+                "snr": 6.462486963122827e-05,
+                "p_two_sided": 0.9999484368143132,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.25,
                 "label": "Null Region",
-                "snr": 7.738194809724635e-05,
-                "p_two_sided": 0.99993825813839,
+                "snr": 7.738734207244696e-05,
+                "p_two_sided": 0.9999382538346204,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.3000000000000003,
                 "label": "Null Region",
-                "snr": 8.554739769481341e-05,
-                "p_two_sided": 0.9999317430522457,
+                "snr": 8.555281479931139e-05,
+                "p_two_sided": 0.9999317387300217,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.35,
                 "label": "Null Region",
-                "snr": 9.052662690232051e-05,
-                "p_two_sided": 0.9999277702021517,
+                "snr": 9.053205304133499e-05,
+                "p_two_sided": 0.9999277658727193,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.4,
                 "label": "Null Region",
-                "snr": 9.366181963342322e-05,
-                "p_two_sided": 0.9999252686802871,
+                "snr": 9.366723846146162e-05,
+                "p_two_sided": 0.9999252643566878,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.45,
                 "label": "Null Region",
-                "snr": 9.611914707576837e-05,
-                "p_two_sided": 0.9999233080166688,
+                "snr": 9.612453941466082e-05,
+                "p_two_sided": 0.9999233037142049,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.5,
                 "label": "Null Region",
-                "snr": 9.875535215196706e-05,
-                "p_two_sided": 0.9999212046293494,
+                "snr": 9.876069557711892e-05,
+                "p_two_sided": 0.9999212003659129,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.55,
                 "label": "Null Region",
-                "snr": 0.00010195379609154676,
-                "p_two_sided": 0.9999186526403242,
+                "snr": 0.00010195906467243711,
+                "p_two_sided": 0.9999186484366049,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.6,
                 "label": "Null Region",
-                "snr": 0.00010542996885562611,
-                "p_two_sided": 0.99991587905576,
+                "snr": 0.00010543513304865401,
+                "p_two_sided": 0.9999158749353302,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.65,
                 "label": "Null Region",
-                "snr": 0.00010801177247853983,
-                "p_two_sided": 0.999913819074522,
+                "snr": 0.000108016799235435,
+                "p_two_sided": 0.9999138150637503,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.7,
                 "label": "Null Region",
-                "snr": 0.00010740580207719608,
-                "p_two_sided": 0.9999143025689468,
+                "snr": 0.00010741065515241537,
+                "p_two_sided": 0.999914298696753,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.75,
                 "label": "Null Region",
-                "snr": 9.996674595394194e-05,
-                "p_two_sided": 0.9999202380769425,
+                "snr": 9.997138643768496e-05,
+                "p_two_sided": 0.9999202343743722,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.8000000000000003,
                 "label": "Null Region",
-                "snr": 8.049186079079787e-05,
-                "p_two_sided": 0.9999357767870741,
+                "snr": 8.049624786115777e-05,
+                "p_two_sided": 0.9999357732866984,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.85,
                 "label": "Null Region",
-                "snr": 4.206505262349648e-05,
-                "p_two_sided": 0.9999664369439722,
+                "snr": 4.20691444740089e-05,
+                "p_two_sided": 0.999966433679148,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.9,
                 "label": "Null Region",
-                "snr": 2.402551304421296e-05,
-                "p_two_sided": 0.9999808304140785,
+                "snr": 2.4021758159154776e-05,
+                "p_two_sided": 0.9999808334100433,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 2.95,
                 "label": "Null Region",
-                "snr": 0.00012827632465695744,
-                "p_two_sided": 0.9998976503013204,
+                "snr": 0.00012827294728764199,
+                "p_two_sided": 0.9998976529960711,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 3.0,
                 "label": "Null Region",
-                "snr": 0.0002828505619867973,
-                "p_two_sided": 0.9997743179065856,
+                "snr": 0.00028284760037791825,
+                "p_two_sided": 0.9997743202696074,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 3.0500000000000003,
                 "label": "Null Region",
-                "snr": 0.0005013473594599149,
-                "p_two_sided": 0.9995999826990449,
+                "snr": 0.0005013448485080659,
+                "p_two_sided": 0.9995999847024944,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 3.1,
                 "label": "Null Region",
-                "snr": 0.0007984589996775711,
-                "p_two_sided": 0.9993629219594166,
+                "snr": 0.00079845697005731,
+                "p_two_sided": 0.9993629235788187,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 3.15,
                 "label": "Null Region",
-                "snr": 0.0011895211233542717,
-                "p_two_sided": 0.99905089968475,
+                "snr": 0.001189519600789906,
+                "p_two_sided": 0.9990509008995797,
                 "significant_after_fdr_bh": false
             },
             {
                 "frequency_factor": 3.2,
                 "label": "Null Region",
-                "snr": 0.0016899629640789778,
-                "p_two_sided": 0.998651605284463,
+                "snr": 0.0016899619688351534,
+                "p_two_sided": 0.9986516060785515,
                 "significant_after_fdr_bh": false
             }
         ],

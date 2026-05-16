@@ -64,16 +64,22 @@
       "order": 7
     },
     {
+      "id": "section-acknowledgements",
+      "title": "Acknowledgements",
+      "file": "7_acknowledgements.html",
+      "order": 8
+    },
+    {
       "id": "section-references",
       "title": "References",
-      "file": "7_references.html",
-      "order": 8
+      "file": "8_references.html",
+      "order": 9
     },
     {
       "id": "section-reproducibility",
       "title": "Data Availability & Reproducibility",
-      "file": "8_reproducibility.html",
-      "order": 9
+      "file": "9_reproducibility.html",
+      "order": 10
     }
   ]
 }

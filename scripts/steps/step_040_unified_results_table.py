@@ -79,12 +79,11 @@ def correlation_sigma_fisher(r: float, n_obs: int) -> float:
 
 def reconcile_de430_results():
     """
-    Reconcile conflicting DE430 results from different sections.
-    
-    Section 4.6 reports: η = -7.03 × 10⁻⁴ ± 2.12 × 10⁻³ (0.33σ)
-    Section 6.1 reports: η = -5.62 × 10⁻⁶ ± 5.60 × 10⁻⁴ (0.01σ)
-    
-    We need to determine which is correct by checking the source data.
+    Load authoritative DE430 results from step_006.
+
+    Prior manuscript drafts contained inconsistent hard-coded DE430
+    values across sections.  This function always sources the single
+    authoritative JSON artifact so the unified table is self-consistent.
     """
     step_006 = load_json_strict("results/outputs/step_006_multi_ephemeris_comparison.json")
     try:
@@ -103,12 +102,14 @@ def reconcile_de430_results():
 
 def reconcile_bayesian_results():
     """
-    Reconcile conflicting Bayesian Bayes factor values.
-    
-    Section 4.13 reports: Bayes factor = 9.86 × 10⁷⁴
-    Section 5.1 reports: Bayes factor = 8.2 × 10¹⁴
-    
-    We check step_016 for the authoritative value.
+    Load authoritative Bayesian results from step_016.
+
+    Prior manuscript drafts contained inconsistent hard-coded Bayes
+    factor values (up to ~72 orders of magnitude apart).  This
+    function sources the single authoritative JSON artifact so the
+    unified table is self-consistent.  The BIC-approximation BF is
+    treated as primary; Savage-Dickey is retained only as a
+    sensitivity analysis.
     """
     step_016 = load_json_strict("results/outputs/step_016_bayesian_analysis.json")
     if "bayesian_summary" not in step_016:
@@ -116,7 +117,7 @@ def reconcile_bayesian_results():
             "step_016_bayesian_analysis.json missing bayesian_summary; re-run step_016."
         )
     bs = step_016["bayesian_summary"]
-    return {
+    out = {
         "posterior_mean_eta": bs["posterior_mean_eta"],
         "posterior_std_eta": bs["posterior_std_eta"],
         "bayes_factor_savage_dickey": bs["bayes_factor_savage_dickey"],
@@ -124,14 +125,17 @@ def reconcile_bayesian_results():
         "credible_interval_95": bs["credible_interval_95"],
         "source": "step_016_bayesian_analysis",
     }
+    if "prior_sensitivity_table" in bs:
+        out["prior_sensitivity_table"] = bs["prior_sensitivity_table"]
+    return out
 
 def address_station_power_contradiction():
     """
     Address the station power analysis contradiction.
-    
+
     The manuscript claims no stations meet the 3σ threshold, but step_029
     may have inconsistent power flags.
-    
+
     This function verifies the actual power status based on observed SNR.
     """
     step_029 = load_json_strict("results/outputs/step_029_station_power_analysis.json")
@@ -179,7 +183,7 @@ def address_station_power_contradiction():
 
 def create_unified_results_table():
     """Create the master unified results table."""
-    
+
     # Load actual results from JSON files instead of hardcoding
     step_017 = load_json_strict("results/outputs/step_017_leverage_diagnostics.json")
     step_003_json = load_json_strict("results/outputs/step_003_statistical_analysis.json")
@@ -187,7 +191,7 @@ def create_unified_results_table():
     step_010 = load_json_strict("results/outputs/step_010_systematic_control_analysis.json")
     step_050 = load_json_strict("results/outputs/step_050_corrected_tep_analysis.json")
     step_004 = load_json_strict("results/outputs/step_004_detection_analysis_advanced.json")
-    
+
     # Extract leverage-excised results from step_017
     if not (step_017 and 'conclusion' in step_017 and 'formal_cooks_d_excision' in step_017['conclusion']):
         raise RuntimeError("step_017_leverage_diagnostics.json missing required keys. Run upstream steps first.")
@@ -354,7 +358,17 @@ def create_unified_results_table():
             'purpose': 'Consolidate all statistical measures with consistent reporting'
         },
         'primary_estimands': {
-            'note': 'Primary estimand is the Cook\'s Distance excised full-systematic OLS from step_050. Full-systematic OLS (no excision) is reported as a sensitivity upper bound.',
+            'note': 'Primary estimand is the precision-weighted full-systematic WLS from step_050. It uses all 25,445 observations, organically down-weighting high-variance epochs without excising any data. Cook\'s Distance excision and full-systematic OLS (no excision) are reported as secondary robustness and sensitivity bounds.',
+            'precision_weighted_full_systematic': {
+                'eta': pw_full_eta,
+                'eta_error': pw_full_error,
+                'snr': pw_full_snr,
+                'snr_cluster': pw_full_cluster_snr,
+                'n_obs': pw_full_n,
+                'method': 'Full-systematic WLS with 1/σ² per-station weights on cosD + cos2D + sin_m + cos_m + sin_y + cos_y + const',
+                'source': 'step_050_corrected_tep_analysis',
+                'status': 'PRIMARY HEADLINE ESTIMAND — uses every observation; no data deleted'
+            },
             'cooks_excised_full_systematic': {
                 'eta': cooks_full_eta,
                 'eta_error': cooks_full_error,
@@ -363,17 +377,7 @@ def create_unified_results_table():
                 'n_obs': cooks_full_n,
                 'method': 'Full-systematic OLS with Cook\'s Distance excision (D > 4/n) on cosD + cos2D + sin_m + cos_m + sin_y + cos_y + const',
                 'source': 'step_050_corrected_tep_analysis',
-                'status': 'PRIMARY ROBUST ESTIMAND'
-            },
-            'precision_weighted_full_systematic': {
-                'eta': pw_full_eta,
-                'eta_error': pw_full_error,
-                'snr': pw_full_snr,
-                'snr_cluster': pw_full_cluster_snr,
-                'n_obs': pw_full_n,
-                'method': 'Full-systematic WLS with 1/σ² station weights',
-                'source': 'step_050_corrected_tep_analysis',
-                'status': 'CROSS-STATION CONSENSUS'
+                'status': 'SECONDARY ROBUSTNESS CHECK — confirms signal persists after removing 1,608 high-leverage points'
             },
             'full_systematic_ols': {
                 'eta': fullsys_eta,
@@ -407,7 +411,7 @@ def create_unified_results_table():
                 'eta_error': full_error,
                 'snr': full_snr,
                 'n_obs': full_n,
-                'method': 'cosD-only OLS with 6σ MAD outlier cleaning (step_003)',
+                'method': 'cosD-only OLS with 6σ-equivalent (MAD-based) outlier cleaning (step_003)',
                 'source': 'step_003_statistical_analysis',
                 'status': 'SECONDARY - cosD-only baseline'
             },
@@ -416,7 +420,7 @@ def create_unified_results_table():
                 'eta_error': bayes_error,
                 'snr': bayes_snr,
                 'n_obs': bayes_n,
-                'method': 'Ensemble MCMC (32 walkers, 3000 steps)',
+                'method': 'Ensemble MCMC (32 walkers, 5000 steps)',
                 'source': 'step_016_bayesian_analysis',
                 'status': 'SECONDARY - consistent with primary'
             },
@@ -489,11 +493,11 @@ def create_unified_results_table():
         },
         'bayesian_evidence': reconcile_bayesian_results(),
         'effect_size_analysis': {
-            'primary_eta': cooks_full_eta,
-            'predicted_amplitude_mm': ETA_SCALE_FACTOR * abs(cooks_full_eta) * 1000,
+            'primary_eta': pw_full_eta,
+            'predicted_amplitude_mm': ETA_SCALE_FACTOR * abs(pw_full_eta) * 1000,
             'residual_rms_mm': global_rms_mm,
-            'effect_size_r_squared': calculate_effect_size_r_squared(cooks_full_eta, global_rms_mm / 10.0 if global_rms_mm else None),
-            'variance_explained_percent': calculate_effect_size_r_squared(cooks_full_eta, global_rms_mm / 10.0 if global_rms_mm else None) * 100,
+            'effect_size_r_squared': calculate_effect_size_r_squared(pw_full_eta, global_rms_mm / 10.0 if global_rms_mm else None),
+            'variance_explained_percent': calculate_effect_size_r_squared(pw_full_eta, global_rms_mm / 10.0 if global_rms_mm else None) * 100,
             'interpretation': 'Small effect size but statistically significant due to large N'
         },
         'power_analysis_correction': address_station_power_contradiction(),
@@ -526,11 +530,11 @@ def create_unified_results_table():
                 'snr': bayes_snr,
                 'interpretation': 'Consistent with leverage-excised OLS'
             },
-            'primary_reported_snr': cooks_full_snr,
-            'rationale': 'Cook\'s Distance excision on the full systematic model is the primary robust estimand because it controls leverage without manual data trimming while preserving all systematic nuisance terms. The full-systematic OLS (no excision) is reported as a sensitivity upper bound. Precision-weighted regression provides cross-station consensus. The signal is stable across all full-systematic treatments: Cook\'s-excised, precision-weighted, and standard OLS all agree within ~3%.'
+            'primary_reported_snr': pw_full_snr,
+            'rationale': 'Precision-weighted full-systematic regression is the primary headline estimand because it retains every observation (N = 25,445) while objectively down-weighting epochs with higher station-specific variance. Cook\'s Distance excision is retained as a secondary robustness check: removing 1,608 high-leverage points yields a consistent central value and confirms that the detection is not driven by a small subset of influential observations. Full-systematic OLS (no excision) is reported as a sensitivity upper bound. All three full-systematic treatments agree within ~5% on η.'
         }
     }
-    
+
     return results
 
 def save_results(results, output_path):
@@ -547,7 +551,7 @@ def create_markdown_table(results):
     md_lines.append("")
     md_lines.append("| Estimator | η (×10⁻⁴) | Error (×10⁻⁵) | SNR | N | Method | Status |")
     md_lines.append("|-----------|-----------|----------------|-----|---|--------|--------|")
-    
+
     # Primary estimands
     primary = results['primary_estimands']
     for key, value in primary.items():
@@ -559,15 +563,15 @@ def create_markdown_table(results):
         n = value['n_obs']
         method = value['method']
         status = value['status']
-        
+
         md_lines.append(f"| {key} | {eta_x10_4:.2f} | {err_x10_5:.2f} | {snr:.2f}σ | {n:,} | {method} | {status} |")
-    
+
     md_lines.append("")
     md_lines.append("### Robust Estimands")
     md_lines.append("")
     md_lines.append("| Estimator | η (×10⁻⁴) | Error (×10⁻⁵) | SNR | Method | Status |")
     md_lines.append("|-----------|-----------|----------------|-----|--------|--------|")
-    
+
     robust = results['robust_estimands']
     for key, value in robust.items():
         if key == 'note':
@@ -582,7 +586,7 @@ def create_markdown_table(results):
         status = value['status']
 
         md_lines.append(f"| {key} | {eta_x10_4:.2f} | {err_str} | {snr_str} | {method} | {status} |")
-    
+
     md_lines.append("")
     md_lines.append("### Table A: Station-level regression estimates")
     md_lines.append("")
@@ -625,40 +629,42 @@ def main():
     logger = TEPLogger("step_040", str(log_dir / "step_040_unified_results_table.log"))
     set_step_logger(logger)
     set_verbose_mode(True)
-    
+
     print_status("Step 040: Unified Results Table with Consistent Statistical Measures", "TITLE")
-    
+
     # Create unified results
     results = create_unified_results_table()
-    
+
     # Save to JSON
     logger.save_step_results(results, PROJECT_ROOT, "step_040_unified_results_table")
-    
+
     # Create markdown table
     md_table = create_markdown_table(results)
     output_md = PROJECT_ROOT / 'results/outputs/step_040_unified_results_table.md'
     with open(output_md, 'w') as f:
         f.write(md_table)
     print_status(f"Markdown table saved to {output_md}", "INFO")
-    
+
     # Print summary
     print("\n" + "=" * 70)
     print("SUMMARY OF KEY CORRECTIONS:")
     print("=" * 70)
-    
+
     print("\n1. PRIMARY ESTIMAND RECONCILIATION:")
-    pri = results['primary_estimands']['cooks_excised_full_systematic']
-    print(f"   - Primary: Cook's-excised full-systematic: η = {pri['eta']:.2e} ± {pri['eta_error']:.2e} at {pri['snr']:.2f}σ")
+    pri = results['primary_estimands']['precision_weighted_full_systematic']
+    print(f"   - Primary: Precision-weighted full-systematic: η = {pri['eta']:.2e} ± {pri['eta_error']:.2e} at {pri['snr']:.2f}σ")
     if pri.get('snr_cluster'):
         print(f"   - Cluster-robust SNR: {pri['snr_cluster']:.2f}σ")
-    print(f"   - Rationale: Controls leverage without manual trimming; preserves all systematic terms")
-    pw = results['primary_estimands']['precision_weighted_full_systematic']
-    print(f"   - Cross-station consensus: Precision-weighted full-systematic: η = {pw['eta']:.2e} ± {pw['eta_error']:.2e} at {pw['snr']:.2f}σ")
+    print(f"   - Rationale: Uses every observation; objective inverse-variance weights prevent single-station leverage distortion without data deletion")
+    cooks = results['primary_estimands']['cooks_excised_full_systematic']
+    print(f"   - Secondary robustness: Cook's-excised full-systematic: η = {cooks['eta']:.2e} ± {cooks['eta_error']:.2e} at {cooks['snr']:.2f}σ")
+    if cooks.get('snr_cluster'):
+        print(f"   - Cluster-robust SNR: {cooks['snr_cluster']:.2f}σ")
     sens = results['primary_estimands']['full_systematic_ols']
     print(f"   - Sensitivity upper bound: Full-systematic OLS: η = {sens['eta']:.2e} ± {sens['eta_error']:.2e} at {sens['snr']:.2f}σ")
     ar1f = results['primary_estimands']['ar1_gls_full_model']
     print(f"   - Robustness check: Full-model AR(1) GLS: η = {ar1f['eta']:.2e} ± {ar1f['eta_error']:.2e} at {ar1f['snr']:.2f}σ")
-    
+
     print("\n2. STATION POWER CONTRADICTION:")
     print(f"   - Original claim: No stations meet 3σ threshold")
     pac = results['power_analysis_correction']
@@ -667,25 +673,25 @@ def main():
     print(f"   - With SNR ≥ 3σ: {pac['n_actually_3sigma']} stations")
     print(f"   - Interpretation: {pac['interpretation']}")
     print(f"   - Correction: {pac['corrected_interpretation']}")
-    
+
     print("\n3. DE430 RECONCILIATION:")
     de430 = results['cross_validation']['de430']
     print(f"   - Authoritative value: η = {de430['eta']:.2e} ± {de430['eta_error']:.2e} at {de430['snr']:.2f}σ")
     print(f"   - Source: {de430['source']}")
-    
+
     print("\n4. BAYESIAN EVIDENCE RECONCILIATION:")
     bayesian = results['bayesian_evidence']
     print(f"   - Savage-Dickey Bayes Factor: {bayesian['bayes_factor_savage_dickey']:.2e}")
     print(f"   - BIC Bayes Factor: {bayesian['bayes_factor_bic']:.2e}")
     print(f"   - Source: {bayesian['source']}")
-    
+
     print("\n5. EFFECT SIZE:")
     print(f"   - Amplitude: {results['effect_size_analysis']['predicted_amplitude_mm']:.2f} mm")
     print(f"   - Variance explained: {results['effect_size_analysis']['variance_explained_percent']:.2f}%")
     print_status(f"Interpretation: {results['effect_size_analysis']['interpretation']}", "INFO")
-    
+
     print_status("Step 040 completed successfully", "SUCCESS")
     return results
-    
+
 if __name__ == "__main__":
     results = main()

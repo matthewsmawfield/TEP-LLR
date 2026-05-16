@@ -1,22 +1,22 @@
-[20:16:26] ═══ Starting Step 060: Gaussian Process Non-Parametric Extraction
-[20:16:26]     Loaded data: 26,207 observations
-[20:16:26] >>> >>> Computing elongation bin means (N_bins=50)...
-[20:16:26]       Clean N = 25,445, Valid bins = 48
-[20:16:26] 
-[20:16:26] >>> >>> Fitting GP to bin means...
-[20:16:26] ═══ ═══ GAUSSIAN PROCESS RESULTS
-[20:16:26]       Kernel: 0.0316**2 * ExpSineSquared(length_scale=5, periodicity=5) + 0.021**2 * RBF(length_scale=3.16) + WhiteKernel(noise_level=2.36e-05)
-[20:16:26]       Log-marginal-likelihood: 174.22
-[20:16:26]       Amplitude = 1.132 cm
-[20:16:26]       Phase = 232.3 deg
-[20:16:26]       eta (GP, sinusoid) = -5.320e-04
-[20:16:26]       eta (GP, cos-only) = -5.320e-04
-[20:16:26]       R^2 (sinusoid fit) = 0.9852
-[20:16:26]       R^2 (cos-only fit) = 0.7453
-[20:16:26] 
-[20:16:26] ═══ ═══ COMPARISON TO PARAMETRIC FIT (Step 003)
-[20:16:26]       Step 003 eta_ols = -3.177e-04
-[20:16:26]       GP cos-only eta = -5.320e-04
-[20:16:26]       Ratio GP/OLS = 1.67
-[20:16:26] Results saved to results/outputs/step_060_gaussian_process_extraction.json
-[20:16:26] ✓   Gaussian Process Extraction Complete.
+[13:30:03] ═══ Starting Step 060: Gaussian Process Non-Parametric Extraction
+[13:30:03]     Loaded data: 26,207 observations
+[13:30:03] >>> >>> Computing elongation bin means (N_bins=50)...
+[13:30:03]       Clean N = 25,445, Valid bins = 48
+[13:30:03] 
+[13:30:03] >>> >>> Fitting GP to bin means...
+[13:30:03] ═══ ═══ GAUSSIAN PROCESS RESULTS
+[13:30:03]       Kernel: 0.0316**2 * ExpSineSquared(length_scale=5, periodicity=5) + 0.021**2 * RBF(length_scale=3.16) + WhiteKernel(noise_level=2.36e-05)
+[13:30:03]       Log-marginal-likelihood: 174.22
+[13:30:03]       Amplitude = 1.132 cm
+[13:30:03]       Phase = 232.3 deg
+[13:30:03]       eta (GP, sinusoid) = -5.320e-04
+[13:30:03]       eta (GP, cos-only) = -5.320e-04
+[13:30:03]       R^2 (sinusoid fit) = 0.9852
+[13:30:03]       R^2 (cos-only fit) = 0.7453
+[13:30:03] 
+[13:30:03] ═══ ═══ COMPARISON TO PARAMETRIC FIT (Step 003)
+[13:30:03]       Step 003 eta_ols = -3.177e-04
+[13:30:03]       GP cos-only eta = -5.320e-04
+[13:30:03]       Ratio GP/OLS = 1.67
+[13:30:03] Results saved to results/outputs/step_060_gaussian_process_extraction.json
+[13:30:03] ✓   Gaussian Process Extraction Complete.

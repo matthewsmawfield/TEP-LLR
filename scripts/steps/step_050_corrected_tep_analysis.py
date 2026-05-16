@@ -26,7 +26,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.config import get_config
 from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression, cluster_robust_variance, robust_regression
-from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR, CROSS_VALIDATION_SPLIT_JD
 from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning, hat_diagonal_from_qr
 import numpy as np
 import pandas as pd
@@ -460,32 +460,8 @@ def run_corrected_analysis():
         err_cr = gls5['eta_error_cluster']
         print_status(f"  η (cluster) = {eta_gls:.4e} ± {err_cr:.4e} ({abs(eta_gls)/err_cr:.2f}σ)", "RESULT")
 
-    # --- FULL-SYSTEMATIC COOK'S DISTANCE EXCISION ---
-    print_status("--- Cook's Distance excision on full systematic model ---", "INFO")
-    cooks_full = cooks_distance_excision_full_model(
-        res_c, X_full,
-        ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'const'],
-        cluster_ids=st_c,
-    )
-    print_status(
-        f"  Removed {cooks_full['n_removed']}/{cooks_full['n']} observations "
-        f"(D > {cooks_full['threshold']:.2e})",
-        "RESULT",
-    )
-    print_status(
-        f"  η (Cook's-excised full) = {cooks_full['eta']:.4e} ± "
-        f"{cooks_full['eta_error']:.4e} ({cooks_full['snr']:.2f}σ)",
-        "RESULT",
-    )
-    if cooks_full['eta_error_cluster'] is not None:
-        print_status(
-            f"  η (cluster) = {cooks_full['eta']:.4e} ± "
-            f"{cooks_full['eta_error_cluster']:.4e} ({cooks_full['snr_cluster']:.2f}σ)",
-            "RESULT",
-        )
-
-    # --- FULL-SYSTEMATIC PRECISION-WEIGHTED REGRESSION ---
-    print_status("--- Precision-weighted regression on full systematic model ---", "INFO")
+    # --- FULL-SYSTEMATIC PRECISION-WEIGHTED REGRESSION (headline estimand) ---
+    print_status("--- Precision-weighted regression on full systematic model (primary headline) ---", "INFO")
     station_rms_map = {}
     for s in np.unique(st_c):
         mask = st_c == s
@@ -511,9 +487,33 @@ def run_corrected_analysis():
         "RESULT",
     )
 
+    # --- FULL-SYSTEMATIC COOK'S DISTANCE EXCISION (secondary leverage diagnostic) ---
+    print_status("--- Cook's Distance excision on full systematic model (leverage diagnostic) ---", "INFO")
+    cooks_full = cooks_distance_excision_full_model(
+        res_c, X_full,
+        ['cosD', 'cos2D', 'sin_m', 'cos_m', 'sin_y', 'cos_y', 'const'],
+        cluster_ids=st_c,
+    )
+    print_status(
+        f"  Removed {cooks_full['n_removed']}/{cooks_full['n']} observations "
+        f"(D > {cooks_full['threshold']:.2e})",
+        "RESULT",
+    )
+    print_status(
+        f"  η (Cook's-excised full) = {cooks_full['eta']:.4e} ± "
+        f"{cooks_full['eta_error']:.4e} ({cooks_full['snr']:.2f}σ)",
+        "RESULT",
+    )
+    if cooks_full['eta_error_cluster'] is not None:
+        print_status(
+            f"  η (cluster) = {cooks_full['eta']:.4e} ± "
+            f"{cooks_full['eta_error_cluster']:.4e} ({cooks_full['snr_cluster']:.2f}σ)",
+            "RESULT",
+        )
+
     # --- CROSS-VALIDATION: PRE/POST 2008 ---
     print_status("--- Cross-Validation (train pre-2008, test post-2008) ---", "INFO")
-    split_jd = 2454600
+    split_jd = CROSS_VALIDATION_SPLIT_JD
     pre_mask = jd_c < split_jd
     post_mask = jd_c >= split_jd
 

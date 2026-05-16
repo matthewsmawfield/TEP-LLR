@@ -296,6 +296,99 @@ def main():
         'eta_train': float(eta_train)
     }
 
+    # --- Temporal CV: cos(D)-only (isolates physical transport vs nuisance basis) ---
+    X1_tr = np.column_stack([np.cos(train['elongation_rad'].values), np.ones(len(train))])
+    X1_te = np.column_stack([np.cos(test['elongation_rad'].values), np.ones(len(test))])
+    reg_m1 = robust_regression(y_tr, X1_tr, scale_errors_by_birge=False)
+    c_m1 = reg_m1['coefficients']
+    with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):
+        y_pred_m1 = X1_te @ c_m1
+    if not np.all(np.isfinite(y_pred_m1)):
+        raise RuntimeError("Non-finite predictions in cos(D)-only temporal hold-out.")
+    ss_res_m1 = np.sum((y_te - y_pred_m1) ** 2)
+    r2_pred_m1 = 1 - ss_res_m1 / ss_tot if ss_tot > 0 else float('nan')
+    eta_train_m1 = float(c_m1[0] / ETA_SCALE_FACTOR)
+    print_status(
+        f"  cos(D)-only temporal hold-out: R²_pred = {r2_pred_m1:.4f}, η_train = {eta_train_m1:.4e}",
+        "RESULT",
+    )
+    results['temporal_cv_m1'] = {
+        'split_year': split_year,
+        'n_train': len(y_tr),
+        'n_test': len(y_te),
+        'r2_pred': float(r2_pred_m1),
+        'rmse': float(np.sqrt(ss_res_m1 / len(y_te))),
+        'eta_train': eta_train_m1,
+    }
+
+    # --- Nuisance coefficient transportability (separate fits pre vs post split) ---
+    nuisance_names = ['cos2D', 'sin_y', 'cos_y', 'sin_m', 'cos_m']
+    fit_pre = fit_model(y_tr, X_tr, full_names)
+    fit_post = fit_model(y_te, X_te, full_names)
+    name_to_idx = {n: i for i, n in enumerate(full_names)}
+    transport = {}
+    for nm in nuisance_names:
+        i = name_to_idx[nm]
+        d = float(fit_post['coeffs'][i] - fit_pre['coeffs'][i])
+        se = float(np.sqrt(fit_pre['errs'][i] ** 2 + fit_post['errs'][i] ** 2))
+        z = float(abs(d) / max(se, 1e-20))
+        p = float(2 * (1 - stats.norm.cdf(z)))
+        transport[nm] = {'delta_coeff': d, 'se_delta': se, 'z': z, 'p': p}
+    results['nuisance_transportability'] = transport
+    print_status(
+        "  Nuisance transportability (|Δ|/SE) on clean subset, pre- vs post-2013 separate fits:",
+        "INFO",
+    )
+    for nm, row in transport.items():
+        print_status(f"    {nm}: z={row['z']:.2f}, p={row['p']:.4g}", "RESULT")
+
+    # --- Grasse-only era split (2010–2013 vs 2013–2019) within clean subset ---
+    df_gr = df_sub[df_sub['station'] == 'Grasse'].copy()
+    g_pre = df_gr[df_gr['date_julian_year'] < split_year]
+    g_post = df_gr[df_gr['date_julian_year'] >= split_year]
+    if len(g_pre) < 30 or len(g_post) < 30:
+        raise RuntimeError(
+            f"Insufficient Grasse rows for era split: pre={len(g_pre)}, post={len(g_post)}"
+        )
+    Xg_pre = build_X(g_pre)
+    Xg_post = build_X(g_post)
+    yg_pre = g_pre['residual_m'].values
+    yg_post = g_post['residual_m'].values
+    fg_pre = fit_model(yg_pre, Xg_pre, full_names)
+    fg_post = fit_model(yg_post, Xg_post, full_names)
+    cosd_i = name_to_idx['cosD']
+    eta_g_pre = fg_pre['coeffs'][cosd_i] / ETA_SCALE_FACTOR
+    eta_g_post = fg_post['coeffs'][cosd_i] / ETA_SCALE_FACTOR
+    eg_pre = fg_pre['errs'][cosd_i] / ETA_SCALE_FACTOR
+    eg_post = fg_post['errs'][cosd_i] / ETA_SCALE_FACTOR
+    se_g = float(np.sqrt(eg_pre ** 2 + eg_post ** 2))
+    z_g = float(abs(eta_g_pre - eta_g_post) / max(se_g, 1e-20))
+    p_g = float(2 * (1 - stats.norm.cdf(z_g)))
+    grasse_nuis = {}
+    for nm in nuisance_names:
+        i = name_to_idx[nm]
+        d = float(fg_post['coeffs'][i] - fg_pre['coeffs'][i])
+        se = float(np.sqrt(fg_pre['errs'][i] ** 2 + fg_post['errs'][i] ** 2))
+        z = float(abs(d) / max(se, 1e-20))
+        p_n = float(2 * (1 - stats.norm.cdf(z)))
+        grasse_nuis[nm] = {'delta_coeff': d, 'se_delta': se, 'z': z, 'p': p_n}
+    results['grasse_era_split'] = {
+        'split_year': split_year,
+        'n_pre': len(g_pre),
+        'n_post': len(g_post),
+        'eta_pre': float(eta_g_pre),
+        'eta_post': float(eta_g_post),
+        'eta_se_pre': float(eg_pre),
+        'eta_se_post': float(eg_post),
+        'p_equality_cosD': p_g,
+        'nuisance_deltas': grasse_nuis,
+    }
+    print_status(
+        f"  Grasse era split: η_pre={eta_g_pre:.4e}±{eg_pre:.2e}, η_post={eta_g_post:.4e}±{eg_post:.2e}, "
+        f"p(η_pre=η_post)={p_g:.3f}",
+        "RESULT",
+    )
+
     # --- Per-station within subset ---
     print_status("--- Per-station cosD-only within clean subset ---", "INFO")
     per_station = {}

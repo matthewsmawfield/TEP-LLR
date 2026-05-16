@@ -27,7 +27,7 @@ r061 = load_json(PROJECT_ROOT / "results" / "outputs" / "step_061_systematic_sen
 # Construct Section 4.4: Grasse-Specific Systematic Sufficiency
 # ============================================================================
 
-section_4_4 = """    <h3>4.4 Grasse-Specific Systematic Sufficiency</h3>
+section_4_4 = r"""    <h3>4.4 Grasse-Specific Systematic Sufficiency</h3>
 
     <p>
         The central critic objection is that the detection could be a
@@ -55,13 +55,13 @@ section_4_4 = """    <h3>4.4 Grasse-Specific Systematic Sufficiency</h3>
 
     <p>
         A Grasse $\times$ $\cos(D)$ interaction term yields
-        $t = -0.34$ ($p = 0.733$), providing no evidence that Grasse has a
+        $t = -0.42$ ($p = 0.676$), providing no evidence that Grasse has a
         differential $\cos(D)$ coefficient. Monte Carlo station-dominance
         (5,000 random station subsets) places the Grasse SNR at the
-        $100^{\rm th}$ percentile; no random station produces SNR
-        $\geq$ Grasse by chance ($p = 1.0$ in the sense that Grasse is
-        the maximum). The Grasse-specific systematic hypothesis is
-        quantitatively falsified.
+        $100^{\rm th}$ percentile, as expected from its precision and
+        sample share. Step 059 therefore rules against a simple
+        Grasse-specific differential $\cos(D)$ systematic, while explicitly
+        retaining material station-leverage risk.
     </p>
 
 """
@@ -70,7 +70,7 @@ section_4_4 = """    <h3>4.4 Grasse-Specific Systematic Sufficiency</h3>
 # Construct Section 4.5: Gaussian Process Non-Parametric Extraction
 # ============================================================================
 
-section_4_5 = """    <h3>4.5 Gaussian Process Non-Parametric Extraction</h3>
+section_4_5 = r"""    <h3>4.5 Gaussian Process Non-Parametric Extraction</h3>
 
     <p>
         To test whether the $\cos(D)$ modulation shape is genuinely sinusoidal
@@ -104,7 +104,7 @@ req_cm = r061["required_amplitude_cm"]
 sys_data = r061["systematics"]
 ephem_ratio = sys_data["ephemeris"]["ratio_required_to_known"]
 
-section_4_6 = f"""    <h3>4.6 Systematic Amplitude Sensitivity</h3>
+section_4_6 = rf"""    <h3>4.6 Systematic Amplitude Sensitivity</h3>
 
     <p>
         Step 061 quantifies how large each known systematic would need to be

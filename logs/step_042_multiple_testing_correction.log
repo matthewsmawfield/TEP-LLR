@@ -1,9 +1,9 @@
-[20:12:37] ═══ Step 042: Formal Multiple Testing Correction
-[20:12:39]     Collected 19 significance tests from the analysis pipeline
-[20:12:39] ✓   
-The pipeline collected 19 significance measures. Of these, 5 are independent hypotheses and 14 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The primary detection (6.17σ) is the primary analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
-[20:12:39]     
+[13:27:44] ═══ Step 042: Formal Multiple Testing Correction
+[13:27:46]     Collected 51 significance tests from the analysis pipeline
+[13:27:46] ✓   
+The pipeline collected 51 significance measures. Of these, 4 are independent hypotheses and 47 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The headline precision-weighted full-systematic detection (6.94σ) is the primary analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
+[13:27:46]     
 ======================================================================
-[20:12:39] ✓   Step 042 completed successfully
-[20:12:39]     ======================================================================
-[20:12:39] Results saved to results/outputs/step_042_multiple_testing_correction.json
+[13:27:46] ✓   Step 042 completed successfully
+[13:27:46]     ======================================================================
+[13:27:46] Results saved to results/outputs/step_042_multiple_testing_correction.json

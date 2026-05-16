@@ -135,9 +135,9 @@ def main():
     log_dir.mkdir(parents=True, exist_ok=True)
     logger = TEPLogger("step_024", str(log_dir / "step_024_thermal_array_modeling.log"))
     set_step_logger(logger)
-    
+
     results = run_thermal_model(logger)
-    
+
     # Save output to JSON
     output_path = PROJECT_ROOT / "results" / "outputs" / "step_024_thermal_array_modeling.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)

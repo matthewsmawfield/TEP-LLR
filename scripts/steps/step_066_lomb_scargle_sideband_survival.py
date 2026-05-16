@@ -21,10 +21,9 @@ For each dataset, power is extracted at frequencies of physical interest:
     - Semi-annual sidebands: f_D ± 2f_annual
 
 The sideband survival fraction (post-fit / pre-fit power ratio) is computed
-for each peak.  The key claim is that while the central synodic carrier may
-be partially attenuated by basis correlations (as shown in Step 065), the
-cross-frequency sidebands are far more robust because the basis lacks explicit
-product-of-frequency terms.
+for each peak.  The key diagnostic is whether sideband power is more robust
+than the central synodic carrier under the same high-dimensional linear
+stress-test basis used in Step 065.
 
 Expected result:
     - Central carrier survival: ~40-50% (consistent with Step 065).
@@ -35,6 +34,12 @@ Expected result:
 
 This provides direct spectral evidence that the residual signal carries
 a dynamical sideband structure inconsistent with simple static absorption.
+It must be stressed that this 82-parameter proxy is a linear regression
+stress test; it is not a symplectic N-body numerical integrator and cannot
+emulate the iterative dynamic planetary potentials handled by the actual
+Fortran/C++ code underlying INPOP or DE430. While the proxy strongly suggests
+sideband survival, only a source-level numerical refit with a dynamic eta
+parameter inside IMCCE or JPL integrators can definitively close the loop.
 """
 
 from __future__ import annotations
@@ -53,7 +58,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
-from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression
+from scripts.utils.upstream_outputs import load_headline_eta
 
 # ---------------------------------------------------------------------------
 # Physical constants
@@ -64,7 +70,7 @@ YEAR_DAYS = 365.25
 
 
 def load_inpop_residuals() -> pd.DataFrame:
-    """Load cleaned INPOP19a residuals."""
+    """Load the canonical 6-sigma-cleaned INPOP19a residual sample."""
     path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     if not path.exists():
         raise FileNotFoundError(f"Missing INPOP residual archive: {path}")
@@ -74,6 +80,8 @@ def load_inpop_residuals() -> pd.DataFrame:
     if missing:
         raise KeyError(f"Residual frame missing columns: {sorted(missing)}")
     df = df.dropna(subset=list(required))
+    outlier_mask = detect_outliers_sigma(df["residual_m"].values, 6.0)
+    df = df.loc[~outlier_mask].copy()
     return df.sort_values("date_julian").reset_index(drop=True)
 
 
@@ -174,7 +182,7 @@ def run_lomb_scargle_sideband_survival() -> dict:
     # -----------------------------------------------------------------------
     df = load_inpop_residuals()
     n = len(df)
-    print_status(f"Loaded INPOP19a residuals: N={n:,}", "DATA")
+    print_status(f"Loaded canonical 6σ-cleaned INPOP19a residuals: N={n:,}", "DATA")
 
     t_days = (df["date_julian"] - df["date_julian"].iloc[0]).values
     cosD = np.cos(df["elongation_rad"].values)
@@ -232,7 +240,7 @@ def run_lomb_scargle_sideband_survival() -> dict:
     # 5. Synthetic modulated TEP signal: pre-fit vs post-fit
     # -----------------------------------------------------------------------
     print_status("--- Synthetic modulated TEP signal ---", "INFO")
-    eta_injected = -4.06e-4
+    eta_injected = load_headline_eta()
     amplitude_injected_m = ETA_SCALE_FACTOR * eta_injected
     e_earth = 0.0167
     helio_mod = 1.0 + e_earth * np.cos(2 * np.pi * t_days / YEAR_DAYS)
@@ -308,10 +316,12 @@ def run_lomb_scargle_sideband_survival() -> dict:
                 f"{synth_survival['D']*100:.1f}% and sideband mean survival is "
                 f"{synth_sideband_mean_survival*100:.1f}%. "
                 f"The sidebands (D±M, D±annual) are substantially more robust to absorption "
-                f"than the central carrier because the basis lacks explicit cross-frequency "
-                f"product terms. This spectral persistence is direct evidence that the residual "
-                f"signal carries a dynamical sideband signature that cannot be reproduced by "
-                f"static ephemeris parameter adjustments."
+                f"than the central carrier in this linear stress test. This spectral persistence "
+                f"is evidence that the residual signal carries a dynamical sideband signature. "
+                f"This proxy is a linear regression stress test, not a symplectic N-body integrator, "
+                f"and cannot emulate the iterative dynamic potentials of the actual Fortran/C++ code "
+                f"underlying INPOP or DE430. The definitive external confirmation remains a "
+                f"source-level INPOP/DE430 refit with η or the equivalent TEP parameter explicitly estimated."
             ),
         },
     }

@@ -1,0 +1,291 @@
+{
+    "step_id": "step_064_pi",
+    "status": "PASS",
+    "n_outliers_removed": 762,
+    "n_clean": 25445,
+    "prediction_interval_coverage": {
+        "wls_published_sigma": {
+            "mse": 0.003764815659478159,
+            "rmse": 0.06135809367539183,
+            "chi2": 12129.926011894979,
+            "chi2_reduced": 0.47684275540117066,
+            "df": 25438,
+            "n_observations": 25445,
+            "n_parameters": 7,
+            "r2": 0.010271144361273188,
+            "inflation_factor": 1.0,
+            "use_published_sigma": true,
+            "coverage": {
+                "68pct": {
+                    "nominal_coverage": 0.68,
+                    "observed_coverage": 0.8590685792886619,
+                    "n_covered": 21859,
+                    "n_total": 25445
+                },
+                "90pct": {
+                    "nominal_coverage": 0.9,
+                    "observed_coverage": 0.9584987227353114,
+                    "n_covered": 24389,
+                    "n_total": 25445
+                },
+                "95pct": {
+                    "nominal_coverage": 0.95,
+                    "observed_coverage": 0.9783847514246414,
+                    "n_covered": 24895,
+                    "n_total": 25445
+                },
+                "99pct": {
+                    "nominal_coverage": 0.99,
+                    "observed_coverage": 0.9977598742385537,
+                    "n_covered": 25388,
+                    "n_total": 25445
+                }
+            }
+        },
+        "ols_homoskedastic": {
+            "mse": 0.003764815659478159,
+            "rmse": 0.06135809367539183,
+            "chi2": 25438.0,
+            "chi2_reduced": 1.0,
+            "df": 25438,
+            "n_observations": 25445,
+            "n_parameters": 7,
+            "r2": 0.010271144361273188,
+            "inflation_factor": 1.0,
+            "use_published_sigma": false,
+            "coverage": {
+                "68pct": {
+                    "nominal_coverage": 0.68,
+                    "observed_coverage": 0.02157594812340342,
+                    "n_covered": 549,
+                    "n_total": 25445
+                },
+                "90pct": {
+                    "nominal_coverage": 0.9,
+                    "observed_coverage": 0.03702102574179603,
+                    "n_covered": 942,
+                    "n_total": 25445
+                },
+                "95pct": {
+                    "nominal_coverage": 0.95,
+                    "observed_coverage": 0.04421300844959717,
+                    "n_covered": 1125,
+                    "n_total": 25445
+                },
+                "99pct": {
+                    "nominal_coverage": 0.99,
+                    "observed_coverage": 0.05918648064452741,
+                    "n_covered": 1506,
+                    "n_total": 25445
+                }
+            }
+        },
+        "cluster_robust_scaled": {
+            "mse": 0.003764815659478159,
+            "rmse": 0.06135809367539183,
+            "chi2": 12129.926011894979,
+            "chi2_reduced": 0.47684275540117066,
+            "df": 25438,
+            "n_observations": 25445,
+            "n_parameters": 7,
+            "r2": 0.010271144361273188,
+            "inflation_factor": 0.9463080775992047,
+            "use_published_sigma": true,
+            "coverage": {
+                "68pct": {
+                    "nominal_coverage": 0.68,
+                    "observed_coverage": 0.845981528787581,
+                    "n_covered": 21526,
+                    "n_total": 25445
+                },
+                "90pct": {
+                    "nominal_coverage": 0.9,
+                    "observed_coverage": 0.9513460404794655,
+                    "n_covered": 24207,
+                    "n_total": 25445
+                },
+                "95pct": {
+                    "nominal_coverage": 0.95,
+                    "observed_coverage": 0.9738651994497937,
+                    "n_covered": 24780,
+                    "n_total": 25445
+                },
+                "99pct": {
+                    "nominal_coverage": 0.99,
+                    "observed_coverage": 0.9966987620357635,
+                    "n_covered": 25361,
+                    "n_total": 25445
+                }
+            },
+            "error_model": "cluster_robust_inflation_on_model_component"
+        },
+        "cluster_ar1_scaled": {
+            "mse": 0.003764815659478159,
+            "rmse": 0.06135809367539183,
+            "chi2": 12129.926011894979,
+            "chi2_reduced": 0.47684275540117066,
+            "df": 25438,
+            "n_observations": 25445,
+            "n_parameters": 7,
+            "r2": 0.010271144361273188,
+            "inflation_factor": 1.0155120754363463,
+            "use_published_sigma": true,
+            "coverage": {
+                "68pct": {
+                    "nominal_coverage": 0.68,
+                    "observed_coverage": 0.862880723128316,
+                    "n_covered": 21956,
+                    "n_total": 25445
+                },
+                "90pct": {
+                    "nominal_coverage": 0.9,
+                    "observed_coverage": 0.9607388484967577,
+                    "n_covered": 24446,
+                    "n_total": 25445
+                },
+                "95pct": {
+                    "nominal_coverage": 0.95,
+                    "observed_coverage": 0.9794851640793869,
+                    "n_covered": 24923,
+                    "n_total": 25445
+                },
+                "99pct": {
+                    "nominal_coverage": 0.99,
+                    "observed_coverage": 0.9978384751424642,
+                    "n_covered": 25390,
+                    "n_total": 25445
+                }
+            },
+            "error_model": "cluster_robust_ar1_inflation_on_model_component",
+            "rho": 0.4115370913097373
+        },
+        "sigma_calibrated_wls": {
+            "scale_factor": 0.5140625,
+            "target_nominal_68pct": 0.68,
+            "achieved_observed_68pct": 0.6790332088819021,
+            "coverage": {
+                "68pct": {
+                    "nominal_coverage": 0.68,
+                    "observed_coverage": 0.6790332088819021,
+                    "n_covered": 17278,
+                    "n_total": 25445
+                },
+                "90pct": {
+                    "nominal_coverage": 0.9,
+                    "observed_coverage": 0.8180782078993909,
+                    "n_covered": 20816,
+                    "n_total": 25445
+                },
+                "95pct": {
+                    "nominal_coverage": 0.95,
+                    "observed_coverage": 0.8623698172528984,
+                    "n_covered": 21943,
+                    "n_total": 25445
+                },
+                "99pct": {
+                    "nominal_coverage": 0.99,
+                    "observed_coverage": 0.9223030064845745,
+                    "n_covered": 23468,
+                    "n_total": 25445
+                }
+            }
+        }
+    },
+    "headline_eta_intervals": {
+        "eta": -0.0003908842592328793,
+        "sigma_wls": 5.628330931172215e-05,
+        "snr_wls": 6.944940942757778,
+        "sigma_cluster": 5.766110410373851e-05,
+        "snr_cluster": 6.778993661474754,
+        "sigma_cluster_ar1": 9.865140367069084e-05,
+        "snr_cluster_ar1": 4.512566980414503,
+        "station_block_bootstrap": {
+            "eta_mean": -0.00031764603469870375,
+            "eta_std": 0.00019258636870109587,
+            "eta_ci68_lower": -0.00046412744348567006,
+            "eta_ci68_upper": -0.00010561545939787174,
+            "eta_ci95_lower": -0.000544068635645031,
+            "eta_ci95_upper": 5.1992323632360365e-05,
+            "snr_bootstrap": 1.6493692510071003,
+            "p_negative": 0.945,
+            "n_bootstrap": 2000,
+            "n_clusters": 5
+        },
+        "loso_conformal": {
+            "scores": [
+                4.5544829114176955e-05,
+                0.00028505130860883595,
+                2.6079600345776163e-06,
+                9.096765830745874e-06,
+                8.411847356202184e-06
+            ],
+            "intervals": {
+                "68pct": {
+                    "nominal_coverage": 0.6799999999999999,
+                    "half_width": 5.465379493701235e-05,
+                    "ci_lower": -0.00044553805416989165,
+                    "ci_upper": -0.0003362304642958669,
+                    "snr_conformal": 7.152005815577259
+                },
+                "95pct": {
+                    "nominal_coverage": 0.95,
+                    "half_width": 0.0003420615703306031,
+                    "ci_lower": -0.0007329458295634824,
+                    "ci_upper": -4.882268890227617e-05,
+                    "snr_conformal": 1.1427307044608634
+                }
+            }
+        },
+        "sigma_calibration_scale_68pct": 0.5140625,
+        "eta_error_if_sigma_calibrated": 2.8933138693057167e-05,
+        "snr_if_sigma_calibrated": 13.509915511747655
+    },
+    "cluster_ar1_full_model": {
+        "eta": -0.00044517106677590155,
+        "eta_error_cluster": 9.865140367069084e-05,
+        "rho": 0.4115370913097373,
+        "snr_cluster": 4.512566980414503
+    },
+    "interpretation": "Prediction intervals are conservative (observed coverage exceeds nominal at 68\u201395%). Published \u03c3 and/or the pooled regression variance scale are larger than residual scatter after the full-systematic fit (\u03c7\u00b2_red < 1). Headline formal \u03c3-based significance is therefore not inflated by underestimated errors; station-block bootstrap and LOSO conformal intervals provide \u03c3-free significance brackets alongside WLS and cluster-robust paths.",
+    "abstract_linkage": {
+        "recommended_policy": "significance_exceeds_nominal_because_errors_are_conservative",
+        "errors_conservative": true,
+        "wls_68pct_observed": 0.8590685792886619,
+        "wls_95pct_observed": 0.9783847514246414,
+        "chi2_reduced_wls": 0.47684275540117066,
+        "headline_snr_wls": 6.944940942757778,
+        "headline_snr_bootstrap": 1.6493692510071003,
+        "headline_snr_conformal_95": 1.1427307044608634,
+        "abstract_sentence": "Step 064-PI shows prediction-interval coverage of 86% at 68% nominal and 98% at 95% nominal ($\\chi^2_{\\rm red} = 0.48$), so published uncertainties are conservative; the headline $6.94\\sigma$ WLS significance is not inflated by under-estimated errors (\u03c3 scaled to nominal coverage would yield $13.5\\sigma$). Station-block bootstrap and LOSO conformal bands on \u03b7 provide \u03c3-free brackets; LOSO 95% CI excludes \u03b7 = 0."
+    },
+    "coverage": {
+        "68pct": {
+            "nominal_coverage": 0.68,
+            "observed_coverage": 0.8590685792886619,
+            "n_covered": 21859,
+            "n_total": 25445
+        },
+        "90pct": {
+            "nominal_coverage": 0.9,
+            "observed_coverage": 0.9584987227353114,
+            "n_covered": 24389,
+            "n_total": 25445
+        },
+        "95pct": {
+            "nominal_coverage": 0.95,
+            "observed_coverage": 0.9783847514246414,
+            "n_covered": 24895,
+            "n_total": 25445
+        },
+        "99pct": {
+            "nominal_coverage": 0.99,
+            "observed_coverage": 0.9977598742385537,
+            "n_covered": 25388,
+            "n_total": 25445
+        }
+    },
+    "chi2": 12129.926011894979,
+    "chi2_reduced": 0.47684275540117066,
+    "mse": 0.003764815659478159,
+    "rmse": 0.06135809367539183
+}

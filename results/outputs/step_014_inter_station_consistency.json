@@ -1,5 +1,6 @@
 {
     "step_id": "step_014",
+    "consistency_result": "POOLING_SUPPORTED",
     "n_stations": 5,
     "station_names": [
         "Grasse",
@@ -9,35 +10,35 @@
         "APO"
     ],
     "meta_analysis": {
-        "weighted_mean_eta": -0.00035117824866607656,
-        "weighted_error_eta": 6.633538684379649e-05,
-        "snr": 5.293980564144668,
+        "weighted_mean_eta": -0.0003511782505422583,
+        "weighted_error_eta": 6.633538684508227e-05,
+        "snr": 5.293980592325326,
         "method": "inverse-variance fixed-effects on cosD-only station slopes (Step 004)"
     },
     "heterogeneity": {
-        "Q": 12.254773500983264,
+        "Q": 12.254773640074248,
         "df": 4,
-        "p_value": 0.015553927531026357,
-        "I_squared_pct": 67.35965785349636,
+        "p_value": 0.01555392660108823,
+        "I_squared_pct": 67.35965822396238,
         "is_consistent": false
     },
     "controlled_pooling": {
         "common_eta": {
-            "eta": -0.0004321302464283162,
-            "eta_error": 6.756305488649927e-05,
-            "snr": 6.395954818121557
+            "eta": -0.0004321302481762647,
+            "eta_error": 6.756305491449571e-05,
+            "snr": 6.395954841342599
         },
         "f_test_station_specific_eta": {
-            "F": 1.1848563101302072,
-            "p": 0.31512202423218394
+            "F": 1.1848563308535363,
+            "p": 0.31512201504916215
         },
         "pooled_meta_analysis": {
-            "eta": -0.0004371711964514779,
-            "err": 6.778366518477076e-05,
-            "snr": 6.449506606935427,
-            "cochran_q": 3.586808376850394,
-            "p_het": 0.16639277210204328,
-            "I2": 44.240121303714126
+            "eta": -0.00043717119837746515,
+            "err": 6.778366521478272e-05,
+            "snr": 6.449506632493574,
+            "cochran_q": 3.5868084265515274,
+            "p_het": 0.16639276796708868,
+            "I2": 44.24012207635901
         },
         "interpretation": "CosD-only station slopes can disagree under unequal phase coverage, but a common-eta model with station-specific systematics leaves no evidence for station-specific Nordtvedt parameters."
     },

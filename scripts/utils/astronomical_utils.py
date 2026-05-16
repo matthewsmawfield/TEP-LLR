@@ -7,11 +7,35 @@ phase, and related computations that are used across multiple parsing modules.
 
 import numpy as np
 import pandas as pd
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+CANONICAL_EPHEMERIS = PROJECT_ROOT / "data" / "raw" / "de440.bsp"
+
+
+def resolve_skyfield_kernel_path(project_root: Path | None = None) -> Path:
+    """Return the manifest-checked JPL kernel path (de440.bsp)."""
+    root = project_root or PROJECT_ROOT
+    eph_path = root / "data" / "raw" / "de440.bsp"
+    if not eph_path.exists():
+        raise FileNotFoundError(
+            f"Required Skyfield kernel missing: {eph_path}. "
+            "Place de440.bsp under data/raw and verify via Step 000 manifest."
+        )
+    return eph_path
+
+
+def load_skyfield_planets(project_root: Path | None = None):
+    """Load Skyfield planets from the canonical de440 kernel."""
+    from skyfield.api import load
+
+    eph_path = resolve_skyfield_kernel_path(project_root)
+    return load(str(eph_path)), eph_path
 
 
 def compute_elongation(df: pd.DataFrame, verbose: bool = False) -> pd.DataFrame:
     """
-    Compute lunar elongation (angular separation Sun–Moon as seen from Earth) using Skyfield/DE421.
+    Compute lunar elongation (angular separation Sun–Moon as seen from Earth) using Skyfield/de440.
 
     Elongation is the geometric separation angle; ``cos(elongation)`` matches the
     sky-plane dot product used with range residuals.
@@ -23,26 +47,18 @@ def compute_elongation(df: pd.DataFrame, verbose: bool = False) -> pd.DataFrame:
     Returns:
         DataFrame with added 'elongation_rad' column
     """
-    from skyfield.api import load
-    from pathlib import Path
-    
-    PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-    eph_path = PROJECT_ROOT / "de421.bsp"
-
-    if not eph_path.exists():
-        raise FileNotFoundError(
-            f"Required Skyfield ephemeris missing: {eph_path}. "
-            "Download DE421 (de421.bsp) to the project root; mean-synodic elongation fallback is disabled."
-        )
-
     if verbose:
-        print_status(f"Computing precise elongation via Skyfield ({eph_path.name})...", "INFO")
+        print_status("Computing precise elongation via Skyfield (de440.bsp)...", "INFO")
 
-    planets = load(str(eph_path))
+    from skyfield.api import load as skyfield_load
+
+    planets, eph_path = load_skyfield_planets()
+    if verbose:
+        print_status(f"Using ephemeris: {eph_path.relative_to(PROJECT_ROOT)}", "INFO")
     earth = planets['earth']
     moon = planets['moon']
     sun = planets['sun']
-    ts = load.timescale()
+    ts = skyfield_load.timescale()
 
     times = ts.tt(jd=df['date_julian'].values)
 

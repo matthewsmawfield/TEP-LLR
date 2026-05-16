@@ -5,7 +5,7 @@ Step 059: Grasse-Specific Systematic Sufficiency Analysis
 Directly addresses the central critic objection: "The detection could be
 a Grasse-specific systematic perfectly correlated with cos(D)."
 
-This step quantitatively falsifies that hypothesis by computing:
+This step stress-tests that hypothesis by computing:
 
   1. Required systematic amplitude: If the entire pooled eta were driven
      by a Grasse-only systematic, how large would that systematic need to be?
@@ -44,6 +44,11 @@ from scipy import stats
 from scripts.utils.statistical_utils import robust_regression, detect_outliers_sigma
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.full_systematic_model import (
+    fit_common_eta_station_systematics,
+    fit_full_systematic_on_df,
+    fit_non_grasse_with_grasse_nuisance,
+)
 
 
 def build_full_systematic_design(df: pd.DataFrame) -> np.ndarray:
@@ -231,8 +236,16 @@ def main():
         print_status(f"Input file not found: {input_path}", "ERROR")
         sys.exit(1)
 
-    df = pd.read_csv(input_path)
-    print_status(f"Loaded data: {len(df):,} observations", "INFO")
+    df_raw = pd.read_csv(input_path)
+    print_status(f"Loaded data: {len(df_raw):,} observations", "INFO")
+
+    outlier_mask = detect_outliers_sigma(df_raw["residual_m"].values, sigma_threshold=6.0)
+    df = df_raw.loc[~outlier_mask].copy()
+    print_status(
+        f"Canonical 6σ-cleaned sample: {len(df):,} observations "
+        f"({int(outlier_mask.sum()):,} outliers removed)",
+        "INFO",
+    )
 
     # Station counts
     stations = df['station'].unique()
@@ -327,11 +340,62 @@ def main():
         print_status(f"  p(Grasse > random) = {mc_result['p_grasse_dominant']:.3f}", "CALC")
         print_status(f"  Percentile = {mc_result['percentile']:.1f}%", "CALC")
 
+    # --- Grasse-conditioned estimand (full Step 050 design) ---
+    print_status("", "INFO")
+    print_status(">>> Grasse-conditioned estimands (full-systematic + cluster-robust)", "PROCESS")
+    non_grasse_df = df[df["station"] != "Grasse"].copy()
+    gc_non_grasse = fit_full_systematic_on_df(non_grasse_df)
+    gc_common_eta = fit_common_eta_station_systematics(df)
+    gc_grasse_interaction = fit_non_grasse_with_grasse_nuisance(df)
+    gc_pooled = fit_full_systematic_on_df(df)
+
+    print_status("═══ GRASSE-CONDITIONED ESTIMANDS", "TITLE")
+    for label, result in [
+        ("non_grasse_direct", gc_non_grasse),
+        ("common_eta_station_systematics", gc_common_eta),
+        ("pooled_grasse_cosd_interaction", gc_grasse_interaction),
+        ("pooled_reference", gc_pooled),
+    ]:
+        snr = result["snr_cluster"] or result["snr"]
+        err = result["eta_err_cluster"] or result["eta_err"]
+        print_status(
+            f"  {label}: eta={result['eta']:.3e} +/- {err:.3e} ({snr:.2f}sigma), N={result['n']}",
+            "CALC",
+        )
+
+    non_grasse_snr = gc_non_grasse["snr_cluster"] or gc_non_grasse["snr"]
+    grasse_conditioned = {
+        "non_grasse_direct": gc_non_grasse,
+        "common_eta_station_systematics": gc_common_eta,
+        "pooled_grasse_cosd_interaction": gc_grasse_interaction,
+        "pooled_reference": gc_pooled,
+        "sign_consistent": bool(
+            gc_non_grasse["eta"] < 0
+            and gc_common_eta["eta"] < 0
+            and gc_grasse_interaction["eta"] < 0
+        ),
+        "non_grasse_negative_significant_2sigma": bool(
+            gc_non_grasse["eta"] < 0 and non_grasse_snr >= 2.0
+        ),
+        "interpretation": (
+            "Non-Grasse direct fit and pooled models with explicit Grasse nuisance "
+            "structure all return negative eta. Underpowered non-Grasse SNR reflects "
+            "sample size, not sign reversal; common-eta mixed model absorbs per-station "
+            "systematics while retaining a single Nordtvedt parameter."
+        ),
+    }
+
     # --- Construct output ---
+    largest_known_cm = max(abs(v['amplitude_cm']) for v in known_systematics.values()) if known_systematics else 1.0
+    grasse_leverage_flag = bool(grasse_fraction > 0.70 and partition['non_grasse']['snr'] < 2.0)
+    status = "PASS"
+
     output = {
         "step_id": "step_059",
-        "status": "PASS",
+        "status": status,
         "method": "Grasse-specific systematic sufficiency analysis",
+        "n_raw": int(len(df_raw)),
+        "n_outliers_removed": int(outlier_mask.sum()),
         "n_total": total_n,
         "grasse_fraction": float(grasse_fraction),
         "partition_test": {
@@ -345,15 +409,24 @@ def main():
         },
         "known_systematics_comparison": known_systematics,
         "interaction_test": interact,
+        "grasse_conditioned_estimand": grasse_conditioned,
         "monte_carlo_station_dominance": mc_result if mc_result else {},
+        "risk_flags": {
+            "grasse_dominates_clean_sample": bool(grasse_fraction > 0.70),
+            "non_grasse_subset_underpowered": bool(partition['non_grasse']['snr'] < 2.0),
+            "material_station_leverage": grasse_leverage_flag,
+        },
         "interpretation": (
             f"A Grasse-only systematic would need amplitude {required_amp_cm:.1f} cm "
             f"to explain the pooled eta={pooled_eta:.2e}. This is "
-            f"{required_amp_cm/max(abs(v['amplitude_cm']) for v in known_systematics.values()):.1f}x "
+            f"{required_amp_cm/largest_known_cm:.1f}x "
             f"larger than the largest known systematic projection. "
             f"The Grasse x cos(D) interaction is t={interact['t_interact']:.2f} (p={interact['p_interact']:.3f}), "
             f"providing no evidence that Grasse has a differential cos(D) coefficient. "
-            f"The Grasse-specific systematic hypothesis is quantitatively falsified."
+            f"However, Grasse contributes {grasse_fraction*100:.1f}% of the cleaned sample and the "
+            f"non-Grasse subset is underpowered (SNR={partition['non_grasse']['snr']:.2f}), "
+            f"so this step rules against a simple Grasse-specific differential cos(D) systematic "
+            f"but does not by itself remove all station-leverage risk."
         ),
     }
 

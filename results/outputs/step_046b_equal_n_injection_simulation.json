@@ -1,7 +1,7 @@
 {
     "step_id": "step_046b",
     "status": "PASS",
-    "eta_true": -0.0003177266624680195,
+    "eta_true": -0.0003908842592328793,
     "n_mc": 2000,
     "n_successful": 2000,
     "equal_n_params": {
@@ -20,41 +20,41 @@
         "phase_model": "Bootstrap from observed elongation distribution"
     },
     "observed_step_046": {
-        "snr": 0.08280902939607791,
-        "t_stat": 0.08280902939607791
+        "snr": 0.0828090279627328,
+        "t_stat": 0.0828090279627328
     },
     "t_stat_distribution": {
-        "mean": 0.9095680913332495,
-        "median": 0.7751740211835583,
-        "std": 0.6625563381989067,
-        "min": 0.0017088062702584964,
-        "max": 3.4950608606072966,
-        "percentile_2_5": 0.042276428916905945,
-        "percentile_25": 0.3631865671644008,
-        "percentile_50": 0.7751740211835583,
-        "percentile_75": 1.3197048816722319,
-        "percentile_97_5": 2.4063385809751905
+        "mean": 1.0010026432928483,
+        "median": 0.881968007993699,
+        "std": 0.7097369700697304,
+        "min": 0.0010786169019753186,
+        "max": 3.649484664921356,
+        "percentile_2_5": 0.04007598059069241,
+        "percentile_25": 0.41419039308503913,
+        "percentile_50": 0.881968007993699,
+        "percentile_75": 1.4618842832703816,
+        "percentile_97_5": 2.566912825372464
     },
     "snr_distribution": {
-        "mean": 0.9095680913332495,
-        "median": 0.7751740211835583,
-        "std": 0.6625563381989067,
-        "percentile_25": 0.3631865671644008,
-        "percentile_75": 1.3197048816722319
+        "mean": 1.0010026432928483,
+        "median": 0.881968007993699,
+        "std": 0.7097369700697304,
+        "percentile_25": 0.41419039308503913,
+        "percentile_75": 1.4618842832703816
     },
     "eta_distribution": {
-        "mean": -0.00031947157435067,
-        "median": -0.0003195272951263909,
-        "std": 0.0004171133146971843,
-        "percentile_2_5": -0.0011230941784235733,
-        "percentile_97_5": 0.0004887556537465909
+        "mean": -0.000392640773798074,
+        "median": -0.00039268489293272415,
+        "std": 0.00041700580807143114,
+        "percentile_2_5": -0.001196251776998206,
+        "percentile_97_5": 0.00041559805697487186
     },
     "fraction_below_thresholds": {
-        "|t|_lt_0_5": 0.336,
-        "|t|_lt_1_0": 0.6045,
-        "|t|_lt_observed": 0.052
+        "|t|_lt_0_5": 0.2995,
+        "|t|_lt_1_0": 0.554,
+        "|t|_lt_observed": 0.049
     },
-    "percentile_of_observed": 5.2,
+    "percentile_of_observed": 4.9,
     "observed_in_bulk_25_75": false,
-    "interpretation": "For a genuine signal at eta=-3.18e-04, 33.6% of equal-N subsamples yield |t|<0.5. The observed Step 046 value (|t|=0.083) lies at the 5th percentile of the alternative distribution, outside the 25th\u201375th percentile bulk. This confirms the equal-N collapse is consistent with low statistical power, not an anomalous signal suppression."
+    "interpretation": "For a genuine signal at eta=-3.91e-04, 29.9% of equal-N subsamples yield |t|<0.5. The observed Step 046 value (|t|=0.083) lies at the 5th percentile of the alternative distribution, outside the 25th\u201375th percentile bulk. This confirms the equal-N collapse is consistent with low statistical power, not an anomalous signal suppression."
 }

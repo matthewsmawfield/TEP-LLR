@@ -2,37 +2,37 @@
     "step_id": "step_007",
     "individual_results": {
         "INPOP19a": {
-            "eta": -0.0003177266624680195,
-            "eta_error": 6.0519384376391265e-05,
-            "snr": 5.249998256624126,
+            "eta": -0.00031772666444063755,
+            "eta_error": 6.0519384375507376e-05,
+            "snr": 5.249998289295616,
             "n_obs": 25445,
             "baseline_years": 35.50749417999987,
-            "r": -0.032895757484115176,
-            "p_value": 1.5332126372717151e-07
+            "r": -0.03289575768860865,
+            "p_value": 1.533212365632588e-07
         },
         "DE430": {
-            "eta": -0.0007041204781558812,
-            "eta_error": 0.00011823679986658583,
-            "snr": 5.955171984952109,
+            "eta": -0.0007041204853598174,
+            "eta_error": 0.0001182367999086916,
+            "snr": 5.955172043759427,
             "n_obs": 4560,
             "baseline_years": 4.517808219177596,
-            "r": -0.00014558335525479207,
-            "p_value": 0.9921265718449307
+            "r": -0.00014558354242604626,
+            "p_value": 0.9921265617226875
         }
     },
     "meta_analysis": {
         "sign_consistent": true,
         "sign_consistent_note": "Qualitative check only; not used for quantitative weighting (identical weights after renormalisation)",
-        "eta_combined_statistical": -0.0003301913315887359,
-        "eta_error_statistical": 5.8691159909543226e-05,
-        "snr_statistical": 5.625912524094562,
-        "systematic_uncertainty": 0.0003863938156878617,
-        "eta_combined_total": -0.0003301913315887359,
-        "eta_error_total": 0.00039082583468004364,
-        "snr_total": 0.8448554376121342,
+        "eta_combined_statistical": -0.0003301913337211672,
+        "eta_error_statistical": 5.8691159909997933e-05,
+        "snr_statistical": 5.625912560384068,
+        "systematic_uncertainty": 0.0003863938209191798,
+        "eta_combined_total": -0.0003301913337211672,
+        "eta_error_total": 0.0003908258398521062,
+        "snr_total": 0.84485543188781,
         "weights": {
-            "INPOP19a": 0.9677410232393946,
-            "DE430": 0.032258976760605344
+            "INPOP19a": 0.9677410232625412,
+            "DE430": 0.032258976737458894
         },
         "interpretation_notes": {
             "headline_estimands": "Primary inference is anchored in Step 040 (unified table) and Step 050 (corrected full-systematic / cluster-robust models), not in snr_total from this ephemeris-combination bookkeeping step.",

@@ -287,18 +287,21 @@ def run_systematic_projection_analysis(df, verbose=False):
         # Mean-difference method (regression within a phase bin is ill-conditioned
         # because cos(elongation) ≈ constant). In new moon bin cos≈+1, full moon
         # cos≈-1. Model: residual = A*cos(D) + intercept + noise.
-        # mean_0 ≈ A + intercept, mean_π ≈ -A + intercept.
-        # mean_0 - mean_π = 2A = 2 * ETA_SCALE_FACTOR * η.
+        # mean_0 ≈ A * μ_bin + intercept, mean_π ≈ -A * μ_bin + intercept.
+        # mean_0 - mean_π = 2A * μ_bin = 2 * ETA_SCALE_FACTOR * η * μ_bin.
+        # where μ_bin = sin(w)/w is the mean of cos(D) over [-w, w].
         # The intercept cancels. This cancels all common-mode systematics.
+        w = ELONGATION_MASK_WIDTH
+        bin_mean_cos = np.sin(w) / w  # exact mean of cos(x) over [-w, w]
         mean_0 = np.mean(res_0)
         mean_pi = np.mean(res_pi)
         sem_0 = np.std(res_0, ddof=1) / np.sqrt(n_0)
         sem_pi = np.std(res_pi, ddof=1) / np.sqrt(n_pi)
         sem_diff = np.sqrt(sem_0**2 + sem_pi**2)
 
-        A_diff = mean_0 - mean_pi  # = 2A = 2 * 13 * η = 26η
-        eta_diff = A_diff / (2.0 * ETA_SCALE_FACTOR)
-        eta_diff_error = sem_diff / (2.0 * ETA_SCALE_FACTOR)
+        A_diff = mean_0 - mean_pi  # = 2A * μ_bin = 2 * 13 * η * μ_bin
+        eta_diff = A_diff / (2.0 * ETA_SCALE_FACTOR * bin_mean_cos)
+        eta_diff_error = sem_diff / (2.0 * ETA_SCALE_FACTOR * bin_mean_cos)
         snr_diff = abs(eta_diff) / eta_diff_error if eta_diff_error > 0 else 0.0
 
         # Null test: random-phase subsets
@@ -310,7 +313,7 @@ def run_systematic_projection_analysis(df, verbose=False):
             perm_mask_pi = np.random.choice(n, n_pi, replace=False)
             perm_mean_0 = np.mean(residuals[perm_mask_0])
             perm_mean_pi = np.mean(residuals[perm_mask_pi])
-            perm_eta = (perm_mean_0 - perm_mean_pi) / (2.0 * ETA_SCALE_FACTOR)
+            perm_eta = (perm_mean_0 - perm_mean_pi) / (2.0 * ETA_SCALE_FACTOR * bin_mean_cos)
             perm_eta_diffs.append(perm_eta)
 
         perm_eta_diffs = np.array(perm_eta_diffs)

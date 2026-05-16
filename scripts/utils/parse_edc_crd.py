@@ -196,10 +196,11 @@ def compute_expected_range_skyfield(df: pd.DataFrame, station_name: str = 'WETL'
     """
     if verbose:
         print_status(
-            "Loading ephemeris (DE421) for range computation...", "PROCESS")
+            "Loading ephemeris (de440.bsp) for range computation...", "PROCESS")
 
-    # Load ephemeris
-    ephemeris = load('de421.bsp')
+    from scripts.utils.astronomical_utils import load_skyfield_planets
+
+    ephemeris, _eph_path = load_skyfield_planets()
     ts = load.timescale()
 
     # Station positions (approximate ITRF coordinates)

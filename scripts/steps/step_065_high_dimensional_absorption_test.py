@@ -36,9 +36,13 @@ C.  Sideband survival on REAL INPOP19a residuals.
 
 Key physical insight: while a large linear basis may partially absorb a pure
 synodic carrier on a non-uniform sampling manifold (via correlations with
-station trends and annual cycles), it cannot absorb cross-frequency sidebands
-without explicit product-of-frequency basis functions, which real ephemeris
-integrators do not include.
+station trends and annual cycles), sideband survival is the critical diagnostic.
+This step is a high-dimensional linear stress test. It is not a symplectic
+N-body numerical integrator and cannot emulate the iterative dynamic planetary
+potentials handled by the actual Fortran/C++ code underlying INPOP or DE430.
+While the proxy strongly suggests sideband survival, only a source-level
+numerical refit with a dynamic eta parameter inside IMCCE or JPL integrators
+can definitively close the absorption loop.
 """
 
 from __future__ import annotations
@@ -56,7 +60,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
-from scripts.utils.statistical_utils import linear_regression
+from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression
+from scripts.utils.upstream_outputs import load_headline_eta
 
 from scipy import signal as sp_signal
 
@@ -94,7 +99,7 @@ def compute_sideband_power(t_days: np.ndarray, residuals: np.ndarray, D: np.ndar
 
 
 def load_inpop_residuals() -> pd.DataFrame:
-    """Load cleaned INPOP19a residuals with realistic sampling and station structure."""
+    """Load the canonical 6-sigma-cleaned INPOP19a residual sample."""
     path = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
     if not path.exists():
         raise FileNotFoundError(f"Missing INPOP residual archive: {path}")
@@ -104,6 +109,8 @@ def load_inpop_residuals() -> pd.DataFrame:
     if missing:
         raise KeyError(f"Residual frame missing columns: {sorted(missing)}")
     df = df.dropna(subset=list(required))
+    outlier_mask = detect_outliers_sigma(df["residual_m"].values, 6.0)
+    df = df.loc[~outlier_mask].copy()
     return df.sort_values("date_julian").reset_index(drop=True)
 
 
@@ -170,12 +177,10 @@ def build_ephemeris_like_basis(df: pd.DataFrame) -> tuple[np.ndarray, list[str],
         terms[f"rnd_sin_{i}"] = np.sin(2 * np.pi * freq * t_days)
 
     # NOTE: Cross-terms (annual × Keplerian products) are deliberately
-    # EXCLUDED.  Real ephemeris integrators do not have explicit basis
-    # functions of the form cos(M)·cos(annual); they fit orbital elements
-    # and annual cycles as independent parameters.  cos(D) = cos(M−λ☉)
-    # expands into product terms that are NOT in the standard ephemeris
-    # parameter space, which is why the synodic signal is spectrally
-    # isolated.
+    # excluded in this stress-test basis.  This isolates the question of
+    # whether a large set of ordinary ephemeris-like nuisance terms can absorb
+    # sideband structure.  It does not claim to emulate every nonlinearity in a
+    # source-level planetary/lunar ephemeris refit.
 
     names = list(terms.keys())
     X = np.column_stack([terms[name] for name in names])
@@ -259,14 +264,14 @@ def run_single_test(
 
 
 def run_high_dimensional_absorption_test() -> dict:
-    print_status("═══ Step 063: High-Dimensional Ephemeris-Like Basis Absorption Test ═══", "TITLE")
+    print_status("═══ Step 065: High-Dimensional Ephemeris-Like Basis Absorption Test ═══", "TITLE")
 
     # -----------------------------------------------------------------------
     # 1. Load INPOP data and build basis
     # -----------------------------------------------------------------------
     df = load_inpop_residuals()
     n = len(df)
-    print_status(f"Loaded INPOP19a residuals: N={n:,}", "DATA")
+    print_status(f"Loaded canonical 6σ-cleaned INPOP19a residuals: N={n:,}", "DATA")
     print_status(f"Stations: {list(df['station'].unique())}", "DATA")
 
     cosD = np.cos(df["elongation_rad"].values)
@@ -280,7 +285,7 @@ def run_high_dimensional_absorption_test() -> dict:
     print_status(f"Basis size: {n_params} parameters", "CALC")
     print_status(f"Condition number: {cond:.2e}", "CALC")
 
-    eta_injected = -4.06e-4
+    eta_injected = load_headline_eta()
     amplitude_injected_m = ETA_SCALE_FACTOR * eta_injected
     print_status(f"Injected η = {eta_injected:.2e} (amp = {abs(amplitude_injected_m)*1000:.2f} mm)", "INFO")
 
@@ -417,9 +422,21 @@ def run_high_dimensional_absorption_test() -> dict:
     # -----------------------------------------------------------------------
     # Results assembly
     # -----------------------------------------------------------------------
+    static_absorption_pct = abs(test_a["absorption_fraction"]) * 100
+    carrier_warning = bool(static_absorption_pct > 80.0)
+    status = "PASS"
+
+    if carrier_warning:
+        print_status(
+            "Static central-carrier absorption is strong in this high-dimensional basis; "
+            "interpret Step 065 as a sideband stress test, not as proof that a static cos(D) "
+            "carrier cannot be absorbed.",
+            "INFO",
+        )
+
     results = {
         "step_id": "step_065",
-        "status": "PASS",
+        "status": status,
         "step": "065_high_dimensional_absorption_test",
         "simulation": {
             "n_observations": n,
@@ -437,24 +454,35 @@ def run_high_dimensional_absorption_test() -> dict:
             "n_above_0_001": n_above_001,
             "top_5_projections": projections_sorted[:5],
         },
+        "risk_flags": {
+            "static_carrier_absorption_warning": carrier_warning,
+            "basis_condition_number_warning": bool(cond > 1e12),
+            "interpretation": (
+                "The high-dimensional basis has strong projection onto the central cos(D) carrier. "
+                "The defensible positive evidence from this step is sideband-structure survival; "
+                "central-carrier absorption remains a source-level refit question."
+            ),
+        },
         "conclusion": {
-            "white_noise_absorption_pct": round(abs(test_a["absorption_fraction"]) * 100, 2),
+            "white_noise_absorption_pct": round(static_absorption_pct, 2),
             "modulated_sideband_ratio_survival_pct": round(test_b["sideband_ratio_survival_fraction"] * 100, 2) if test_b["sideband_ratio_survival_fraction"] > 0 else None,
             "real_sideband_ratio_survival_pct": round(test_c["sideband_ratio_survival_fraction"] * 100, 2) if test_c["sideband_ratio_survival_fraction"] > 0 else None,
             "key_finding": (
-                f"A {n_params}-parameter ephemeris-like basis can partially absorb a "
+                f"A {n_params}-parameter ephemeris-like basis can strongly absorb or over-absorb a "
                 f"static synodic carrier on the real LLR sampling manifold "
                 f"(absorption {abs(test_a['absorption_fraction'])*100:.1f}% in the worst-case linear scenario). "
                 f"However, the dynamically modulated TEP signal's sideband-to-carrier ratio "
                 f"survives at {test_b['sideband_ratio_survival_fraction']*100:.1f}% after fitting. "
                 f"On real INPOP19a residuals, the sideband-to-carrier ratio survives at "
                 f"{test_c['sideband_ratio_survival_fraction']*100:.1f}%. "
-                f"The persistence of sideband structure — which requires explicit cross-frequency (annual × synodic) "
-                f"terms that real ephemeris integrators do not include — demonstrates that the residual signal "
-                f"carries a genuine dynamical signature, not merely leakage from a partially absorbed static component. "
+                f"The persistence of sideband structure under this high-dimensional linear stress test supports the "
+                f"interpretation that the residual signal carries a dynamical signature, not merely leakage from a "
+                f"partially absorbed static component. "
                 f"Moreover, the actual INPOP19a residuals exhibit η = {test_c['pre_fit_eta']:.2e}, "
-                f"confirming that INPOP's own 100+ parameter fit did not absorb the signal, "
-                f"regardless of what an idealised linear basis might achieve in principle."
+                f"confirming that INPOP's own 100+ parameter fit did not absorb the signal. "
+                f"This proxy is a linear stress test, not a symplectic N-body integrator, and cannot emulate "
+                f"the iterative dynamic potentials of the actual Fortran/C++ code underlying INPOP or DE430. "
+                f"A source-level INPOP/DE430 refit with η free remains the definitive absorption test."
             ),
         },
     }

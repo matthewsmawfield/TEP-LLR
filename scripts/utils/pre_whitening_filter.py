@@ -145,13 +145,10 @@ def apply_pre_whitening(df: pd.DataFrame, n_harmonics: int = 5, verbose: bool = 
         if verbose:
             print_status(f"Jointly whitened {len(peaks)} harmonics (N_params={X_full.shape[1]})", "SUCCESS")
     except np.linalg.LinAlgError as e:
-        print_status(f"Error in joint whitening fit: {e}. Falling back to iterative.", "WARNING")
-        for f in peaks:
-            c = np.cos(f * phase)
-            s = np.sin(f * phase)
-            M = np.column_stack([c, s, np.ones_like(phase)])
-            cf, _, _, _ = stable_lstsq(M, y_whitened)
-            y_whitened -= (cf[0] * c + cf[1] * s)
+        raise RuntimeError(
+            f"Joint pre-whitening fit failed (N_params={X_full.shape[1]}): {e}. "
+            "Iterative fallback is disabled; fix rank/conditioning or reduce harmonics."
+        ) from e
 
     df_clean['residual_whitened_m'] = y_whitened
     return df_clean

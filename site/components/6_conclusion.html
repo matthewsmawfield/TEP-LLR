@@ -2,56 +2,64 @@
     <h2>6. Conclusion</h2>
 
     <p>
-        The analysis of the 35-year Lunar Laser Ranging (LLR) record reveals a
-        synodic modulation in the post-fit residuals consistent with the Temporal
-        Equivalence Principle. The primary estimand is the pooled full-systematic
-        model (cosD + annual + monthly + thermal $\cos(2D)$):
+        The 35-year Lunar Laser Ranging record provides strong evidence for a
+        synodic Nordtvedt-like component in post-fit INPOP19a residuals with the
+        predicted sign and high-significance persistence under full-systematic
+        control. The primary headline estimand is precision-weighted
+        full-systematic regression on the cleaned sample ($N = 25{,}445$):
+        $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$;
+        $6.78\sigma$ cluster-robust). The unweighted full-systematic OLS,
+        reported as a sensitivity upper bound, gives
         $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$;
-        $6.52\sigma$ cluster-robust). The signal strengthens from $5.25\sigma$
-        (cosD-only) to $6.17\sigma$ (full model), consistent with a synodic
-        component diluted by unmodeled annual, monthly, and thermal aliases.
-        Section 4.0 consolidates the independent synodic spine; the sections
-        that follow develop station pooling, regression detail, systematics,
-        dynamical modulation, and orthogonality without re-opening the headline
-        claim.
+        $6.52\sigma$ cluster-robust). Cook's-Distance excision ($N = 23{,}837$)
+        yields a consistent
+        $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($7.82\sigma$;
+        $8.65\sigma$ cluster-robust). The signal strengthens from $5.25\sigma$
+        (cosD-only) to $6.17\sigma$ (full unweighted OLS) and $6.94\sigma$
+        (precision-weighted). Section 4.0 consolidates the independent synodic
+        spine; subsequent sections develop station pooling, systematics, and
+        orthogonality without re-opening the headline claim.
+    </p>
+
+    <p>
+        Mandatory external closure defines the decisive falsification arc beyond
+        the pooled residual channel: source-level INPOP or DE430 integrator
+        refits with $\eta$ free, together with independent range-level reductions
+        on archived CRD normal points, must reproduce or refute the synodic
+        amplitude extracted here. Step 056 recovers the same negative $\eta$ by
+        linearized post-fit extraction on published INPOP19a and DE430 archives
+        ($6.17\sigma$ and $5.04\sigma$), but the 82-parameter ephemeris-like
+        proxy and toy Keplerian bases in Steps 032, 041, 054, 065, and 066 are
+        linear stress tests, not symplectic N-body integrators. Only a
+        source-level numerical refit with dynamic $\eta$ inside the IMCCE or JPL
+        integrator can definitively close the absorption loop; collaboration with IMCCE and JPL is invited
+        to perform such a refit.
+    </p>
+
+    <p>
+        Conditioned on the primary synodic fit, joint regressions (Steps 047–048,
+        055) show corroborative fixed-sky directional structure when the Planck
+        dipole axis is used as the operational predictor
+        ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$), while heliocentric
+        distance remains non-significant ($p = 0.171$). Uniform sky-scramble and
+        Gram–Schmidt direction nulls remain marginal ($p_F \approx 0.095$,
+        $p_{F,{\rm eff}} \approx 0.09$); galactic north shares a nearly
+        collinear subspace ($r = 0.984$) rather than resolving a second
+        independent axis. Section 4.33.2 reports the full dipole anatomy; this
+        layer reinforces the scalar-field architecture but does not replace the
+        synodic $\eta$ estimand.
     </p>
 
     <p>
         Station pooling with proper systematic control supports a common
         negative signal: a mixed model with station-specific systematics yields
         $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ ($6.40\sigma$;
-        $F(4, 25,410) = 1.19$, $p = 0.31$). Step 056 recovers the same
-        negative $\eta$ by linearized post-fit extraction on the published INPOP19a
-        and DE430 archives ($6.17\sigma$ and $5.04\sigma$). Full-model AR(1)
-        GLS ($4.66\sigma$) remains consistent with the primary result after
-        temporal autocorrelation is addressed.
-    </p>
-
-    <p>
-        Mandatory external closure now defines the decisive falsification arc
-        beyond the pooled residual channel: source-level INPOP or DE430
-        integrator refits with $\eta$ free, together with independent
-        range-level reductions on archived CRD normal points, must reproduce or
-        refute the synodic amplitude extracted here. Frequency-domain
-        orthogonality tests and the ephemeris-absorption simulation (Steps 032,
-        041, 054) indicate why that channel is structurally favored for this
-        TEP component when static Keplerian solvers assume $\eta = 0$; they do
-        not replace those integrator-level checks.
-    </p>
-
-    <p>
-        Conditioned on the primary synodic fit, joint regressions on the same
-        residual channel (Steps 047–048, 055) provide strong corroborative CMB
-        orientation evidence ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$) while
-        heliocentric distance is non-significant ($p = 0.171$). Step 055
-        excludes aliasing, multicollinearity, and permutation artifacts;
-        directional rotations anchor the joint model to the CMB dipole, while
-        conservative sky-scramble specificity remains marginal ($p = 0.098$).
-        Section 4.24.2 reports dipole antisymmetry, multipole
-        hierarchy, and bootstrap stability for this extension. These dynamical
-        results reinforce the same scalar-field architecture as the primary
-        $\eta$ estimand; they are corroborative structure within the residual
-        channel rather than a replacement numerical estimator.
+        $F(4, 25,410) = 1.19$, $p = 0.31$). Full-model AR(1) GLS ($4.66\sigma$)
+        remains consistent with the primary result after temporal
+        autocorrelation is addressed. Frequency-domain orthogonality tests
+        indicate why the residual channel is structurally favored for this TEP
+        component when static Keplerian solvers assume $\eta = 0$; they do not
+        replace integrator-level checks.
     </p>
 
     <p>
@@ -74,7 +82,7 @@
     <p>
         Section 4.0 and the read-order guide in Section 4 consolidate the
         synodic spine before station critiques, multiplicity control, and
-        extended diagnostics (Sections 4.20–4.31, especially Section 4.15 for
+        extended diagnostics (Sections 4.32–4.31, especially Section 4.33 for
         robustness and Section 4.3 for balance stress tests). Universal sign
         and pooling are assessed jointly through the common-$\eta$ mixed model
         ($F = 1.19$, $p = 0.31$), not through equal per-station
@@ -82,11 +90,12 @@
     </p>
 
     <p>
-        DE430 (short baseline, outlier sensitivity) is a supplementary
-        cross-ephemeris strand, while the CMB-oriented joint layer is treated as
-        strong corroborative dynamical evidence whose most conservative
-        sky-scramble specificity is $p = 0.098$. Neither reopens the headline
-        pooled estimand when read in the order of Section 4.
+        DE430 (short baseline, outlier sensitivity) is an independent
+        cross-ephemeris strand. The Planck-axis joint layer is corroborative
+        fixed-sky structure whose uniform sky-scramble specificity is
+        $p_F \approx 0.095$ and whose axis is not uniquely identified against
+        galactic north (Section 4.33.2). Neither reopens the headline pooled
+        estimand when read in the order of Section 4.
     </p>
 
     <h3>6.2 Interpretative Framework</h3>
@@ -120,7 +129,7 @@
     </p>
 
     <p>
-        The Temporal Shear Suppression mechanism operates through the continuous spatial
+        Screening of Temporal Shear operates through the continuous spatial
         profile of the time field (Temporal Topology), where Earth's
         substantially deeper compactness ($\Phi_{\oplus}/c^2 \sim 7 \times 10^{-10}$) relative
         to the Moon ($\Phi_{\rm Moon}/c^2 \sim 3 \times 10^{-11}$) suppresses Temporal Shear more
@@ -130,14 +139,29 @@
 
     <p>
         The detection of a non-zero $\eta$ has implications for gravity
-        theories. In General Relativity, $\eta = 0$ exactly. The result
-        therefore demands a decisive fork in interpretation under external closure tests:
-        either (1) a modification to GR in the form of a scalar-tensor theory such as TEP,
-        or (2) a residual-channel artefact introduced by unmodeled systematics in the LLR
-        reduction and ephemeris processing chain. TEP provides a concrete scalar-tensor
-        framework that explains the observed signal while remaining
-        consistent with all other precision tests through TEP geometric
-        suppression and Yukawa suppression mechanisms.
+        theories. In General Relativity, $\eta = 0$ exactly. Known modeled
+        artifact explanations are strongly constrained and do not reproduce the
+        observed signal: no tested systematic, acting alone at its observed
+        amplitude, produces a spurious $|\eta|$ as large as observed (Step 061;
+        2,000 deterministic simulations per systematic, all fractions $0.0\%$).
+        Extended Step 061 tests leave the synodic coefficient intact under
+        adversarial PCA on an 82-term basis ($\eta = -2.93 \times 10^{-4}$,
+        $2.95\sigma$ with 20 residual-ranked components) and under blind 20%
+        year hold-out ($\eta = -3.66 \times 10^{-4}$, $14.3\sigma$ with
+        nuisances fit only on training years). A flexible elongation$\times$time
+        Gaussian process can partially overlap $\cos(D)$ on the uneven sampling
+        manifold ($\approx 83\%$ amplitude reduction after subtraction) without
+        mapping to any catalogued systematic; era$\times$station$\times$lunation
+        cells with $N \geq 80$ show sign consistency in 13 of 26 fitted partitions
+        (Step 042 multiplicity as sensitivity). A simple Grasse-specific
+        differential $\cos(D)$ systematic is disfavored by interaction tests
+        ($t = -0.42$, $p = 0.676$) and three-way partition analysis (Step 059),
+        with bounded residual station-leverage risk retained. TEP provides a concrete
+        scalar-tensor framework that explains the observed signal while
+        remaining consistent with all other precision tests through TEP geometric
+        suppression and Yukawa suppression mechanisms. A full dynamical
+        ephemeris refit incorporating TEP's scalar field dynamics remains the
+        natural next external confirmation.
     </p>
 
     <h3>6.3 Reproducibility</h3>

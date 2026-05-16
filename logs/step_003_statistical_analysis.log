@@ -1,60 +1,60 @@
-[20:10:48] ═══ ═══ Starting Step 003: Statistical Analysis...
-[20:10:48]     ═══ STEP PURPOSE: Primary TEP Nordtvedt parameter estimation using OLS and Bayesian MCMC methods
-[20:10:48]     ═══ METHOD: Unweighted OLS regression + Bayesian MCMC with emcee sampler
-[20:10:48]     ═══ PARAMETERS: 6σ MAD outlier cleaning, 32 walkers, 3000 steps, 1000 burn-in
-[20:10:48]     ═══ DATA SUMMARY
-[20:10:48]         Dataset: N = 26,207 observations
-[20:10:48]         Stations: 5 (APO, Grasse, Matera, McDonald2, Haleakala)
-[20:10:48]     Applied 6σ MAD outlier cleaning: removed 762/26207 outliers
-[20:10:48]         Cleaned dataset: N = 25,445 observations
-[20:10:48]     Rows sorted by date_julian (+ station) for AR(1) / lag-1 diagnostics.
-[20:10:48]     ═══ ANALYSIS TRACE
-[20:10:48] >>> >>> Performing unweighted OLS regression
-[20:10:48]         Unweighted Regression Complete (N=25445, DOF=25443):
-[20:10:48]           RSS = 9.665854e+01
-[20:10:48]           χ²_red = 0.003799
-[20:10:48]           Birge Ratio = 0.062
-[20:10:48]           Condition Number κ(R) = 2.11e+00
-[20:10:48]           Final η = -3.17726662e-04 ± 6.05193844e-05
-[20:10:48] >>> >>> Running Bayesian MCMC analysis
-[20:10:48]         Number of walkers: 32
-[20:10:48]         Total steps: 3000
-[20:10:48]         Burn-in steps: 1000
-[20:10:48]         Initial position: η=-3.17726662e-04, b=-1.05020579e-03
-[20:11:01]     ═══ MCMC CONVERGENCE DIAGNOSTICS
-[20:11:01]         Autocorrelation time: 33.31
-[20:11:02]         Steps per autocorr: 60.0
-[20:11:02]         Acceptance fraction: 0.716
-[20:11:02]         Convergence status: CONVERGED
-[20:11:02] >>> >>> Performing AR(1) GLS regression (autocorrelation-aware error estimation)
-[20:11:02]     AR(1) GLS Regression Results:
-[20:11:02]       η (GLS) = -3.26475573e-04 ± 9.00011560e-05
-[20:11:02]       η (GLS, cluster-robust) = -3.26475573e-04 ± 9.47856832e-05
-[20:11:02]       Cluster-robust SE inflation: 1.05x
-[20:11:02]       AR(1) parameter ρ = 0.4162 ± 0.0057
-[20:11:02]       Durbin-Watson = 1.168
-[20:11:02]       Interpretation: Significant autocorrelation
-[20:11:02]     ═══ RESULTS SUMMARY
-[20:11:02]         OLS η: -3.17726662e-04 ± 6.05193844e-05
-[20:11:02]         MCMC η: -2.88607550e-04 ± 6.57465061e-05
-[20:11:02]         AR(1) GLS η: -3.26475573e-04 ± 9.00011560e-05
-[20:11:02]         AR(1) GLS η (cluster-robust): -3.26475573e-04 ± 9.47856832e-05
-[20:11:02]         Cluster-robust SNR: 3.44σ
-[20:11:02]         AR(1) parameter ρ: 0.4162 ± 0.0057
-[20:11:02]         Durbin-Watson: 1.168
-[20:11:02]         SNR (MCMC): 4.39σ
-[20:11:02]         Status: DETECTION
-[20:11:02]     ═══ INTERPRETATION
-[20:11:02]         The negative η indicates TEP Nordtvedt violation is present
-[20:11:02]         Statistical significance: 4.39σ (DETECTION)
-[20:11:02]         Convergence: CONVERGED
-[20:11:02]         Temporal autocorrelation: ρ = 0.4162 (DW = 1.168)
-[20:11:02]         Autocorrelation impact: Error inflation factor = 0.73x if significant
-[20:11:02]         Limitations: OLS is unweighted (Birge ratio diagnostic); MCMC uses fixed station-specific sigma_m
-[20:11:02]     ═══ REPRODUCIBILITY
-[20:11:02]         Output file: results/outputs/step_003_statistical_analysis.json
-[20:11:02]         MCMC walkers: 32
-[20:11:02]         MCMC steps: 3000
-[20:11:02]         MCMC burn-in: 1000
-[20:11:02] Results saved to results/outputs/step_003_statistical_analysis.json
-[20:11:02] ✓   Statistical Analysis Complete. SNR = 4.4σ
+[13:25:49] ═══ ═══ Starting Step 003: Statistical Analysis...
+[13:25:49]     ═══ STEP PURPOSE: Primary TEP Nordtvedt parameter estimation using OLS and Bayesian MCMC methods
+[13:25:49]     ═══ METHOD: Unweighted OLS regression + Bayesian MCMC with emcee sampler
+[13:25:49]     ═══ PARAMETERS: 6σ-equivalent (MAD-based) outlier cleaning, 32 walkers, 5000 steps, 1000 burn-in
+[13:25:49]     ═══ DATA SUMMARY
+[13:25:49]         Dataset: N = 26,207 observations
+[13:25:49]         Stations: 5 (APO, Grasse, Matera, McDonald2, Haleakala)
+[13:25:49]     Applied 6σ-equivalent (MAD-based) outlier cleaning: removed 762/26207 outliers
+[13:25:49]         Cleaned dataset: N = 25,445 observations
+[13:25:49]     Rows sorted by date_julian (+ station) for AR(1) / lag-1 diagnostics.
+[13:25:49]     ═══ ANALYSIS TRACE
+[13:25:49] >>> >>> Performing unweighted OLS regression
+[13:25:49]         Unweighted Regression Complete (N=25445, DOF=25443):
+[13:25:49]           RSS = 9.665854e+01
+[13:25:49]           χ²_red = 0.003799
+[13:25:49]           Birge Ratio = 0.062
+[13:25:49]           Condition Number κ(R) = 2.11e+00
+[13:25:49]           Final η = -3.17726664e-04 ± 6.05193844e-05
+[13:25:49] >>> >>> Running Bayesian MCMC analysis
+[13:25:49]         Number of walkers: 32
+[13:25:49]         Total steps: 5000
+[13:25:49]         Burn-in steps: 1000
+[13:25:49]         Initial position: η=-3.17726664e-04, b=-1.05020579e-03
+[13:26:05]     ═══ MCMC CONVERGENCE DIAGNOSTICS
+[13:26:05]         Autocorrelation time: 34.53
+[13:26:05]         Steps per autocorr: 115.8
+[13:26:05]         Acceptance fraction: 0.717
+[13:26:05]         Convergence status: CONVERGED
+[13:26:05] >>> >>> Performing AR(1) GLS regression (autocorrelation-aware error estimation)
+[13:26:05]     AR(1) GLS Regression Results:
+[13:26:05]       η (GLS) = -3.26475575e-04 ± 9.00011560e-05
+[13:26:05]       η (GLS, cluster-robust) = -3.26475575e-04 ± 9.47856832e-05
+[13:26:05]       Cluster-robust SE inflation: 1.05x
+[13:26:05]       AR(1) parameter ρ = 0.4162 ± 0.0057
+[13:26:05]       Durbin-Watson = 1.168
+[13:26:05]       Interpretation: Significant autocorrelation
+[13:26:05]     ═══ RESULTS SUMMARY
+[13:26:05]         OLS η: -3.17726664e-04 ± 6.05193844e-05
+[13:26:05]         MCMC η: -2.88166054e-04 ± 6.60715776e-05
+[13:26:05]         AR(1) GLS η: -3.26475575e-04 ± 9.00011560e-05
+[13:26:05]         AR(1) GLS η (cluster-robust): -3.26475575e-04 ± 9.47856832e-05
+[13:26:05]         Cluster-robust SNR: 3.44σ
+[13:26:05]         AR(1) parameter ρ: 0.4162 ± 0.0057
+[13:26:05]         Durbin-Watson: 1.168
+[13:26:05]         SNR (MCMC): 4.36σ
+[13:26:05]         Status: DETECTION
+[13:26:05]     ═══ INTERPRETATION
+[13:26:05]         The negative η indicates TEP Nordtvedt violation is present
+[13:26:05]         Statistical significance: 4.36σ (DETECTION)
+[13:26:05]         Convergence: CONVERGED
+[13:26:05]         Temporal autocorrelation: ρ = 0.4162 (DW = 1.168)
+[13:26:05]         Autocorrelation impact: Error inflation factor = 0.73x if significant
+[13:26:05]         Limitations: OLS is unweighted (Birge ratio diagnostic); MCMC uses fixed station-specific sigma_m
+[13:26:05]     ═══ REPRODUCIBILITY
+[13:26:05]         Output file: results/outputs/step_003_statistical_analysis.json
+[13:26:05]         MCMC walkers: 32
+[13:26:05]         MCMC steps: 5000
+[13:26:05]         MCMC burn-in: 1000
+[13:26:05] Results saved to results/outputs/step_003_statistical_analysis.json
+[13:26:05] ✓   Statistical Analysis Complete. SNR = 4.4σ

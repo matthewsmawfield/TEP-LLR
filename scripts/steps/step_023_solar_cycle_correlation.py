@@ -56,11 +56,11 @@ def run_solar_correlation(df, verbose=False):
     print_status("═══ Starting Step 023: Solar Cycle Correlation & Haleakala Station Anomaly...", "TITLE")
     print_status("═══ STEP PURPOSE: Test if TEP signal correlates with 11-year solar cycle and investigate Haleakala anomaly", "INFO")
     print_status("═══ METHOD: Compare η at solar minima vs maxima, Monte Carlo permutation test", "INFO")
-    
+
     print_status("═══ DATA SUMMARY", "INFO")
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
     print_status(f"    Data source: INPOP19a_all_stations_residuals.csv", "DATA")
-    
+
     if verbose:
         print_status(">>> Initializing Solar Cycle Correlation...", "PROCESS")
 
@@ -68,8 +68,8 @@ def run_solar_correlation(df, verbose=False):
         df['residual_m'].values, sigma_threshold=6.0)
     n_outliers = int(np.sum(outlier_mask))
     df_clean = df[~outlier_mask]  # PERFORMANCE FIX: Removed unnecessary .copy()
-    
-    print_status(f"    Applied 6σ MAD outlier cleaning: removed {n_outliers}/{len(df)} outliers", "INFO")
+
+    print_status(f"    Applied 6σ-equivalent (MAD-based) outlier cleaning: removed {n_outliers}/{len(df)} outliers", "INFO")
     print_status(f"    Cleaned dataset: N = {len(df_clean):,} observations", "DATA")
 
     years = df_clean['date_julian_year'].values
@@ -82,7 +82,7 @@ def run_solar_correlation(df, verbose=False):
     # High activity: index > 0.9. Low activity: index < 0.1
     low_solar = df_clean[df_clean['solar_activity'] < 0.1]
     high_solar = df_clean[df_clean['solar_activity'] > 0.9]
-    
+
     print_status("═══ ANALYSIS TRACE", "INFO")
     print_status(">>> Comparing TEP signal at solar minima vs maxima", "PROCESS")
     print_status(f"    Low solar activity (index < 0.1): N = {len(low_solar):,}", "DATA")
@@ -114,30 +114,30 @@ def run_solar_correlation(df, verbose=False):
     n_permutations = 10000
     if verbose:
         print_status(f">>> Running Monte-Carlo permutation test ({n_permutations} iterations)...", "PROCESS")
-    
+
     res_clean = df_clean['residual_m'].values
     cos_elong = np.cos(df_clean['elongation_rad'].values)
     solar_idx_clean = df_clean['solar_activity'].values
-    
+
     diff_solar_perms = []
     np.random.seed(TEP_CONFIG.get("RANDOM_SEED", 42))
-    
+
     for _ in range(n_permutations):
         shuffled_solar = np.random.permutation(solar_idx_clean)
         mask_low = shuffled_solar < 0.1
         mask_high = shuffled_solar > 0.9
-        
+
         if np.sum(mask_low) < 10 or np.sum(mask_high) < 10:
             diff_solar_perms.append(0.0)
             continue
-            
+
         reg_l = linear_regression(res_clean[mask_low], cos_elong[mask_low])
         reg_h = linear_regression(res_clean[mask_high], cos_elong[mask_high])
         diff_solar_perms.append(reg_l['eta'] - reg_h['eta'])
-        
+
     diff_solar_perms = np.array(diff_solar_perms)
     p_value_empirical = np.mean(np.abs(diff_solar_perms) >= abs(diff_solar))
-    
+
     if verbose:
         print_status(f"    Empirical null test p-value: p = {p_value_empirical:.4f}", "CALC")
         if p_value_empirical > 0.05:
@@ -180,19 +180,19 @@ def run_solar_correlation(df, verbose=False):
             else:
                 print_status(
                     "    RESULT: Haleakala's timing may only partially explain its sign flip.", "WARNING")
-    
+
     print_status("═══ RESULTS SUMMARY", "INFO")
     print_status(f"    Solar modulation differential: {diff_solar:.4e} ± {err_solar:.4e}", "CALC")
     print_status(f"    Differential significance: {sig_solar:.2f}σ", "CALC")
     print_status(f"    Empirical p-value: {p_value_empirical:.4f}", "CALC")
     if len(haleakala) > 0:
         print_status(f"    Haleakala η: {reg_hal['eta']:.4e} ± {reg_hal['eta_error']:.4e}", "CALC")
-    
+
     print_status("═══ INTERPRETATION", "INFO")
     print_status(f"    Solar cycle modulation test: {'SIGNIFICANT' if p_value_empirical < 0.05 else 'NOT SIGNIFICANT'}", "PASS" if p_value_empirical < 0.05 else "INFO")
     print_status(f"    Haleakala anomaly: {'EXPLAINED by solar cycle timing' if len(haleakala) > 0 else 'N/A'}", "INFO")
     print_status(f"    Limitations: Solar activity index is simplified sine wave model", "INFO")
-    
+
     print_status("═══ REPRODUCIBILITY", "INFO")
     print_status(f"    Output file: results/outputs/step_023_solar_cycle_correlation.json", "INFO")
     print_status(f"    Permutations: {n_permutations}", "INFO")

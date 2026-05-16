@@ -45,21 +45,21 @@ def load_environmental_modulation_summary() -> str:
 
 
 def analyze_tidal_resonance_model() -> dict:
-    
+
     # Literature values
     measured_recession = 3.82  # cm/year (LLRE)
     historical_average = 1.7   # cm/year (tidal rhythmites, 2-3 Gyr)
     discrepancy_factor = measured_recession / historical_average  # ~2.25
-    
+
     # Tidal resonance model parameters (from literature)
     # Q factor = quality factor of tidal dissipation
     # Standard value from modern LLR measurements: Q ~ 12-15 (Williams et al. 2014)
     q_nominal = 12.0  # Lower bound of modern LLR constraint range
     q_required_for_current = q_nominal / discrepancy_factor  # ~5.3
-    
+
     # Historical Q inferred from rhythmites
     q_historical = q_nominal * discrepancy_factor  # ~27
-    
+
     # Resonance model critique
     resonance_issues = {
         "ad_hoc_nature": {
@@ -83,7 +83,7 @@ def analyze_tidal_resonance_model() -> dict:
             "full_moon_deficit": "Dust/thermal vs. resonance = separate ad hoc explanations"
         }
     }
-    
+
     # TEP alternative assessment
     tep_advantages = {
         "physical_mechanism": {
@@ -112,7 +112,7 @@ def analyze_tidal_resonance_model() -> dict:
             "universal_coupling": "A(φ) applies to all matter universally"
         }
     }
-    
+
     # Quantitative comparison
     comparison = {
         "resonance_model": {
@@ -128,7 +128,7 @@ def analyze_tidal_resonance_model() -> dict:
             "parsimony": "Explains 6+ anomalies with single mechanism"
         }
     }
-    
+
     return {
         "measured_recession_cm_per_year": measured_recession,
         "historical_average_cm_per_year": historical_average,
@@ -149,7 +149,7 @@ def analyze_tidal_resonance_model() -> dict:
     }
 
 def test_resonance_predictive_power() -> dict:
-    
+
     predictions = {
         "resonance_model": {
             "future_recession": "Cannot predict - continental drift too slow to measure",
@@ -164,7 +164,7 @@ def test_resonance_predictive_power() -> dict:
             "status": "Makes multiple independent predictions (some confirmed)"
         }
     }
-    
+
     return {
         "predictive_assessment": predictions,
         "scientific_rigor": "TEP > Resonance (Popperian criterion)"
@@ -174,7 +174,7 @@ def main():
     parser = argparse.ArgumentParser(description='Tidal Resonance Analysis (Step 038)')
     parser.add_argument('--verbose', action='store_true', help='Enable verbose output')
     args = parser.parse_args()
-    
+
     # Setup logging
     log_dir = PROJECT_ROOT / "logs"
     log_dir.mkdir(exist_ok=True)
@@ -182,18 +182,18 @@ def main():
     logger = TEPLogger("step_038", str(log_file))
     set_step_logger(logger)
     set_verbose_mode(args.verbose)
-    
+
     print_status("Step 038: Tidal Resonance Analysis", "STEP")
     print_status("Critiquing North Atlantic resonance explanation vs TEP", "INFO")
-    
+
     # Analyze resonance model
     print_status("Analyzing tidal resonance model...", "INFO")
     resonance_analysis = analyze_tidal_resonance_model()
-    
+
     # Test predictive power
     print_status("Testing predictive power...", "INFO")
     predictive_test = test_resonance_predictive_power()
-    
+
     # Compile results
     output = {
         "step_id": "step_038",
@@ -213,16 +213,16 @@ def main():
         },
         "status": "PASS"
     }
-    
+
     # Save output
     output_path = PROJECT_ROOT / "results/outputs/step_038_tidal_resonance_analysis.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, 'w') as f:
         json.dump(output, f, indent=4, default=str)
-    
+
     output_rel = output_path.relative_to(PROJECT_ROOT) if output_path.is_relative_to(PROJECT_ROOT) else output_path
     print_status(f"Results saved to: {output_rel}", "INFO")
-    
+
     # Summary
     print_status("\n=== Tidal Resonance Analysis Summary ===", "STEP")
     print_status(f"Measured recession: {resonance_analysis['measured_recession_cm_per_year']:.2f} cm/yr", "INFO")
@@ -239,7 +239,7 @@ def main():
     print_status("  - Makes multiple testable predictions", "PASS")
     print_status(f"  - Perihelion-aphelion split: {load_environmental_modulation_summary()}", "PASS")
     print_status("\nVerdict: TEP provides superior explanation", "PASS")
-    
+
     print_status("Step 038 completed successfully", "PASS")
 
 if __name__ == "__main__":

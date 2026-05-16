@@ -570,6 +570,23 @@ Z_ALPHA_2 = 1.96  # Z-score for α/2 = 0.025 (two-tailed test at α=0.05)
 # Data processing constants
 SIGMA_UNCERTAINTY_FLOOR_MM = 5.0  # Minimum uncertainty in mm to prevent infinite weights
 
+# Null-test scan parameters (Step 015) — centralized to avoid magic numbers
+NULL_TEST_SCAN_MIN_FACTOR = 0.2
+NULL_TEST_SCAN_MAX_FACTOR = 3.5
+NULL_TEST_SCAN_POINTS = 80
+NULL_TEST_EXCLUDE_SYNODIC_WINDOW = 0.08
+NULL_TEST_PRIMARY_FREQUENCY_FACTOR = 1.23  # Non-physical control frequency between systematic bands
+
+# IPW validation threshold (Step 021) — Monte-Carlo calibrated
+IPW_VALIDATION_THRESHOLD = 8.0
+
+# Temporal drift analysis defaults (Step 005)
+TEMPORAL_DRIFT_MAX_LAG = 30
+TEMPORAL_DRIFT_ERA_SPLIT_YEAR = 2000.0
+
+# Cross-validation temporal split (Step 050) — Julian date for pre/post 2008
+CROSS_VALIDATION_SPLIT_JD = 2454600
+
 # =============================================================================
 # TEP COUPLING CONSTANTS (UPDATED FRAMEWORK)
 # =============================================================================

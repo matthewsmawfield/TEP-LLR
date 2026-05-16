@@ -1,28 +1,28 @@
-[20:11:12] ═══ Starting Ephemeris-Independent Analysis...
-[20:11:12] ═══ ═══ Starting Step 009: Systematic-Corrected Residual Analysis...
-[20:11:12]     ═══ STEP PURPOSE: Test TEP detection on residuals after systematic corrections
-[20:11:12]     ═══ METHOD: Linear regression using corrected residuals (systematic errors removed)
-[20:11:12]     ═══ DATA SUMMARY
-[20:11:12]         Dataset: N = 26,207 observations
-[20:11:12]         Data source: INPOP19a_all_stations_residuals.csv
-[20:11:12]     ═══ ANALYSIS TRACE
-[20:11:12] >>> >>> Performing linear regression on corrected residuals
-[20:11:12]         Linear Regression Complete (N=26207, DOF=26205):
-[20:11:12]           RSS = 2.353485e+02
-[20:11:12]           χ²_red = 0.008981
-[20:11:12]           Birge Ratio = 0.095
-[20:11:12]           Condition Number κ(R) = 2.12e+00
-[20:11:12]           Final η = -4.53298314e-04 ± 9.19473276e-05
-[20:11:12]     ═══ RESULTS SUMMARY
-[20:11:12]         η = -4.5330e-04 ± 9.1947e-05
-[20:11:12]         SNR = 4.93σ
-[20:11:12]         Status = SIGNIFICANT (>3σ)
-[20:11:12]     ═══ INTERPRETATION
-[20:11:12]         This test uses ephemeris-independent residuals
-[20:11:12]         Low SNR expected: systematic correction removes ephemeris-dependent signal
-[20:11:12]         Result is consistent with TEP being absorbed into ephemeris fit
-[20:11:12]     ═══ REPRODUCIBILITY
-[20:11:12]         Output file: results/outputs/step_009_ephemeris_independent_analysis.json
-[20:11:12]         Data source: INPOP19a_all_stations_residuals.csv
-[20:11:12] Results saved to results/outputs/step_009_ephemeris_independent_analysis.json
-[20:11:12] ✓   Analysis Complete.
+[13:26:14] ═══ Starting Ephemeris-Independent Analysis...
+[13:26:14] ═══ ═══ Starting Step 009: Systematic-Corrected Residual Analysis...
+[13:26:14]     ═══ STEP PURPOSE: Test TEP detection on residuals after systematic corrections
+[13:26:14]     ═══ METHOD: Linear regression using corrected residuals (systematic errors removed)
+[13:26:14]     ═══ DATA SUMMARY
+[13:26:14]         Dataset: N = 26,207 observations
+[13:26:14]         Data source: INPOP19a_all_stations_residuals.csv
+[13:26:14]     ═══ ANALYSIS TRACE
+[13:26:14] >>> >>> Performing linear regression on corrected residuals
+[13:26:14]         Linear Regression Complete (N=26207, DOF=26205):
+[13:26:14]           RSS = 2.353485e+02
+[13:26:14]           χ²_red = 0.008981
+[13:26:14]           Birge Ratio = 0.095
+[13:26:14]           Condition Number κ(R) = 2.12e+00
+[13:26:14]           Final η = -4.53298317e-04 ± 9.19473276e-05
+[13:26:14]     ═══ RESULTS SUMMARY
+[13:26:14]         η = -4.5330e-04 ± 9.1947e-05
+[13:26:14]         SNR = 4.93σ
+[13:26:14]         Status = SIGNIFICANT (>3σ)
+[13:26:14]     ═══ INTERPRETATION
+[13:26:14]         This test uses ephemeris-independent residuals
+[13:26:14]         Low SNR expected: systematic correction removes ephemeris-dependent signal
+[13:26:14]         Result is consistent with TEP being absorbed into ephemeris fit
+[13:26:14]     ═══ REPRODUCIBILITY
+[13:26:14]         Output file: results/outputs/step_009_ephemeris_independent_analysis.json
+[13:26:14]         Data source: INPOP19a_all_stations_residuals.csv
+[13:26:14] Results saved to results/outputs/step_009_ephemeris_independent_analysis.json
+[13:26:14] ✓   Analysis Complete.

@@ -1,18 +1,18 @@
-[22:07:57] ═══ === Step 063: Atmospheric Seeing Analysis ===
-[22:07:57]     Purpose: Bound synodic-correlated range bias from atmospheric seeing.
-[22:07:57]     Measured eta from step_003: -3.1773e-04
-[22:07:57]     TEP signal amplitude: 4.13 mm
-[22:07:57]     Loaded elevation-systematic bound from Step 027: 0.445 mm (eta diff = 3.420e-05, p=0.281)
-[22:07:57] ═══ === Results ===
-[22:07:57]     Lateral wander at Moon (typical): 791.3 m
-[22:07:57]     Max LOS range shift (reflector switching): 208.8 m
-[22:07:57]     Coherent bias after shot averaging: 6604.1610 mm
-[22:07:57]     OPL coherent bias (turbulence): 0.0003 mm
-[22:07:57]     Step 027 total elevation bound: 0.445 mm
-[22:07:57]     Seeing-specific bound (25% cap): 0.111 mm
-[22:07:57]     Max plausible synodic bias: 0.111 mm
-[22:07:57]     Ratio to TEP signal: 0.03
-[22:07:57]     Can explain >10% of signal? False
-[22:07:57]     Atmospheric seeing cannot produce a synodic-correlated range bias exceeding 0.111 mm, which is 0.03 times smaller than the 4.13 mm TEP signal. The dominant elevation-dependent channel is already bounded by Step 027 (p=0.281). Fast stochastic wander averages to zero over LLR integration times.
-[22:07:57] Saved results to results/outputs/step_063_atmospheric_seeing_analysis.json
-[22:07:57] ✓   Step 063 complete.
+[13:27:30] ═══ === Step 063: Atmospheric Seeing Analysis ===
+[13:27:30]     Purpose: Bound synodic-correlated range bias from atmospheric seeing.
+[13:27:30]     Measured eta from step_003: -3.1773e-04
+[13:27:30]     TEP signal amplitude: 4.13 mm
+[13:27:30]     Loaded elevation-systematic bound from Step 027: 0.445 mm (eta diff = 3.420e-05, p=0.281)
+[13:27:30] ═══ === Results ===
+[13:27:30]     Lateral wander at Moon (typical): 791.3 m
+[13:27:30]     Max LOS range shift (reflector switching): 208.8 m
+[13:27:30]     Coherent bias after shot averaging: 6604.1610 mm
+[13:27:30]     OPL coherent bias (turbulence): 0.0003 mm
+[13:27:30]     Step 027 total elevation bound: 0.445 mm
+[13:27:30]     Seeing-specific bound (25% cap): 0.111 mm
+[13:27:30]     Max plausible synodic bias: 0.111 mm
+[13:27:30]     Ratio to TEP signal: 0.03
+[13:27:30]     Can explain >10% of signal? False
+[13:27:30]     Atmospheric seeing cannot produce a synodic-correlated range bias exceeding 0.111 mm, which is 0.03 times smaller than the 4.13 mm TEP signal. The dominant elevation-dependent channel is already bounded by Step 027 (p=0.281). Fast stochastic wander averages to zero over LLR integration times.
+[13:27:30] Saved results to results/outputs/step_063_atmospheric_seeing_analysis.json
+[13:27:30] ✓   Step 063 complete.

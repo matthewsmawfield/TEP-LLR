@@ -5,7 +5,7 @@ Combines INPOP19a and DE430 results using inverse-variance weighting,
 baseline-aware weights, and an ephemeris-difference systematic term.
 
 Author: TEP-LLR Analysis Pipeline
-Date: 2026-05-10
+Date: 2026-05-14
 """
 
 import sys
@@ -30,7 +30,7 @@ def meta_analysis_ephemerides(verbose=False):
 
     Loads η and formal errors from step_003 and step_006 outputs. Pearson r and
     p-values for each ephemeris are computed from the corresponding processed
-    residual CSVs using the same 6σ MAD outlier mask as Step 003 for INPOP19a.
+    residual CSVs using the same 6σ-equivalent (MAD-based) outlier mask as Step 003 for INPOP19a.
     """
     processed_dir = PROJECT_ROOT / "data" / "processed"
     outputs_dir = PROJECT_ROOT / "results" / "outputs"
@@ -128,48 +128,48 @@ def meta_analysis_ephemerides(verbose=False):
 
     # Meta-analysis: Bayesian combination
     # Weight by inverse variance, but also account for baseline and sign consistency
-    
+
     # Check sign consistency
     sign_consistent = (stats_inpop['eta'] < 0 and stats_de430['eta'] < 0) or \
                      (stats_inpop['eta'] > 0 and stats_de430['eta'] > 0)
-    
+
     if verbose:
         print_status(f"Sign consistency: {sign_consistent}", "CALC")
 
     # Variance weights
     var_inpop = stats_inpop['eta_error']**2
     var_de430 = stats_de430['eta_error']**2
-    
+
     # Baseline weighting (longer baseline gets more weight)
     baseline_inpop = stats_inpop['baseline_years']
     baseline_de430 = stats_de430['baseline_years']
     total_baseline = baseline_inpop + baseline_de430
-    
+
     weight_inpop = (1/var_inpop) * (baseline_inpop / total_baseline)
     weight_de430 = (1/var_de430) * (baseline_de430 / total_baseline)
-    
+
     # Normalize weights
     total_weight = weight_inpop + weight_de430
     weight_inpop_norm = weight_inpop / total_weight
     weight_de430_norm = weight_de430 / total_weight
-    
+
     if verbose:
         print_status(f"INPOP19a weight: {weight_inpop_norm:.3f} (baseline: {baseline_inpop:.1f} years)", "CALC")
         print_status(f"DE430 weight:   {weight_de430_norm:.3f} (baseline: {baseline_de430:.1f} years)", "CALC")
 
     # Combined estimate
     eta_combined = weight_inpop_norm * stats_inpop['eta'] + weight_de430_norm * stats_de430['eta']
-    
+
     # Combined error (propagation)
     var_combined = (weight_inpop_norm**2 * var_inpop) + (weight_de430_norm**2 * var_de430)
     eta_error_combined = np.sqrt(var_combined)
-    
+
     # Combined SNR
     if eta_error_combined > 0:
         snr_combined = abs(eta_combined) / eta_error_combined
     else:
         snr_combined = 0
-    
+
     # Systematic uncertainty from ephemeris differences
     # The difference between INPOP19a and DE430 eta estimates represents ephemeris-level systematic uncertainty
     # Standard metrological practice for combining measurements with unknown systematic biases:
@@ -177,11 +177,11 @@ def meta_analysis_ephemerides(verbose=False):
     # (BIPM GUM: Guide to the Expression of Uncertainty in Measurement)
     systematic_diff = abs(stats_inpop['eta'] - stats_de430['eta'])
     systematic_uncertainty = systematic_diff  # Ephemeris difference as systematic uncertainty
-    
+
     # Total uncertainty (statistical + systematic)
     eta_error_total = np.sqrt(eta_error_combined**2 + systematic_uncertainty**2)
     snr_total = abs(eta_combined) / eta_error_total if eta_error_total > 0 else 0
-    
+
     if verbose:
         print_status("Meta-Analysis Results:", "CALC")
         print_status(f"  Combined η (statistical only): {eta_combined:.3e} ± {eta_error_combined:.3e} ({snr_combined:.2f}σ)", "CALC")
@@ -277,7 +277,7 @@ def main():
     if results:
         outputs_dir = PROJECT_ROOT / "results" / "outputs"
         outputs_dir.mkdir(parents=True, exist_ok=True)
-        
+
         logger.save_step_results(results, PROJECT_ROOT, "step_007_meta_analysis")
         print_status("Step 007 Complete", "SUCCESS")
     else:

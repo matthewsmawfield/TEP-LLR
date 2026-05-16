@@ -2,26 +2,26 @@
     "step_id": "step_033",
     "status": "PASS",
     "measured_parameters": {
-        "eta_measured": -0.0003177266624680195,
-        "eta_error": 6.0519384376391265e-05
+        "eta_measured": -0.00031772666444063755,
+        "eta_error": 6.0519384375507376e-05
     },
     "theoretical_comparison": {
         "microscopic_coupling_only": {
             "eta_microscopic_only": 4.342713907650999e-24,
             "compactness_squared_differential": 4.825237675167776e-19,
-            "enhancement_factor": 7.316315769920931e+19,
+            "enhancement_factor": 7.316315815344554e+19,
             "caveat": "This baseline uses the bare \u03b1_0 with surface compactness only. It yields ~10\u207b\u00b2\u2074, confirming that the measured \u03b7 is not produced by the microscopic coupling alone. \u03b7 is an emergent observable response coefficient."
         },
         "standard_scalar_tensor": {
             "eta_standard_st": 3.6e-05,
             "formula": "\u03b7 \u2248 4\u03b1_0\u00b2",
-            "enhancement_factor": 8.825740624111653,
+            "enhancement_factor": 8.825740678906598,
             "caveat": "Standard scalar-tensor Nordtvedt formula. The ~8.8\u00d7 enhancement (using the Cassini upper-bound \u03b1_0 \u2272 3\u00d710\u207b\u00b3) indicates that \u03b7 absorbs additional contributions from the TEP screening mechanism beyond bare scalar-tensor physics."
         },
         "volumetric_tep": {
             "eta_volumetric": -9.659372411064314e-05,
             "shielding_differential": 0.032197908036881044,
-            "enhancement_factor": 3.2893095839651028,
+            "enhancement_factor": 3.289309604386906,
             "caveat": "Phenomenological TEP prediction from integrated density profiles (step_026). The ~3\u20135\u00d7 residual is absorbed into PREM simplification, (\u03c1/\u03c1_T)\u00b3 exponent uncertainty, \u03c1_T = 20 \u00b1 8 g/cm\u00b3 uncertainty, and the upper-bound nature of the Cassini \u03b1_0 constraint."
         },
         "alpha_0_cassini_bound": 0.003
@@ -34,13 +34,25 @@
         "kappa_msp_typical": 1000000.0,
         "kappa_cep_measured": 1050000.0,
         "kappa_cep_error": 430000.0,
-        "eta_LL_measured": -0.0003177266624680195,
-        "screening_ratio": -3.025968213981138e-10
+        "eta_LL_measured": -0.00031772666444063755,
+        "screening_ratio": -3.0259682327679764e-10
     },
     "amplitude_prediction": {
-        "amplitude_measured_mm": 0.004130446612084253,
+        "amplitude_measured_mm": 0.004130446637728288,
         "amplitude_microscopic_only_mm": 5.645528079946299e-23,
         "amplitude_volumetric_mm": 0.0012557184134383609
+    },
+    "cmb_orientation_prediction": {
+        "eta_0_synodic": -0.00031772666444063755,
+        "eta_0_synodic_error": 6.0519384375507376e-05,
+        "eta_theta_predicted_center": -0.00031772666444063755,
+        "formula": "\u03b7_\u03b8 \u2248 \u03b7\u2080 m_CMB from eq:cmb_anisotropy; |m_CMB| ~ O(1) \u21d2 |\u03b7_\u03b8| ~ |\u03b7\u2080|",
+        "order_of_magnitude_band": {
+            "lo": -0.001,
+            "hi": -0.0001,
+            "note": "Same response-coefficient decade as pooled synodic \u03b7 (Step 033)."
+        },
+        "volumetric_scale_anchor": -9.659372411064314e-05
     },
     "independent_priors": {
         "rho_T_g_cm3": 20.0,

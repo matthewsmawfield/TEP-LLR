@@ -1,18 +1,18 @@
 {
     "step_id": "step_010",
     "control_results": {
-        "r_original": -0.030440487524779684,
-        "p_original": 8.274105654898864e-07,
-        "r_partial_linear_time": -0.027599461681388382,
-        "p_partial_linear_time": 7.8733963353366e-06,
-        "r_partial_quadratic_time": -0.03214878581047581,
-        "p_partial_quadratic_time": 1.934458805364073e-07,
-        "r_partial_seasonal": -0.03477635445683833,
-        "p_partial_seasonal": 1.7892755278144515e-08,
-        "r_partial_all_controls": -0.03477635445683833,
-        "p_partial_all_controls": 1.7892755278144515e-08,
+        "r_original": -0.030440487729118233,
+        "p_original": 8.274104253274299e-07,
+        "r_partial_linear_time": -0.027599461885022176,
+        "p_partial_linear_time": 7.873395121529214e-06,
+        "r_partial_quadratic_time": -0.032148786014800534,
+        "p_partial_quadratic_time": 1.9344584605112717e-07,
+        "r_partial_seasonal": -0.034776354486513776,
+        "p_partial_seasonal": 1.789275477924256e-08,
+        "r_partial_all_controls": -0.034776354486513776,
+        "p_partial_all_controls": 1.789275477924256e-08,
         "signal_persists": true,
-        "attenuation_percent": -14.243749967963204
+        "attenuation_percent": -14.243749298563358
     },
     "status": "PASS"
 }

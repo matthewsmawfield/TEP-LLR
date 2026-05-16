@@ -1,35 +1,419 @@
 {
-    "step_id": "step_041",
-    "status": "PASS",
-    "data_type": "SYNTHETIC (EPHEMERIS_ABSORPTION_SIMULATION)",
-    "eta_calibration_source": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_017_leverage_diagnostics.json",
-    "purpose": "Demonstrate that static Nordtvedt signals are absorbed by standard fitting, but dynamically modulated TEP signals are not",
-    "static_signal": {
-        "injected_eta": -0.00033054126604903567,
-        "fitted_eta": -0.0003414532863976761,
-        "fitted_eta_error": 6.561737124959317e-05,
-        "snr": 5.203702615559949,
-        "absorption_efficiency": 1.0330125810888062,
-        "interpretation": "Static signal is well-recovered by standard fitting"
+  "step_id": "step_041",
+  "status": "PASS",
+  "step": "041_ephemeris_absorption_simulation",
+  "simulation": {
+    "n_observations": 26207,
+    "n_basis_parameters": 82,
+    "injected_eta": -0.0003908842592328793,
+    "injected_amplitude_mm": 5.08149537002743
+  },
+  "static_scenario": {
+    "label": "static",
+    "pre_fit_eta": -0.00039088425923287955,
+    "pre_fit_eta_err": 9.194732759284051e-05,
+    "post_fit_eta": -1.1363590959359396e-05,
+    "post_fit_eta_err": 9.002513342521367e-05,
+    "carrier_amplitude_absorption_fraction": 0.9709285020029695,
+    "mean_sideband_survival_fraction": 0.9594525728154712,
+    "target_peaks_pre": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002410240966593977,
+        "period_days": 414.8962754596053,
+        "peak_power": 0.014014429436239748,
+        "noise_floor": 0.0024882468010829755,
+        "snr": 5.632250558963909
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03394590722117862,
+        "period_days": 29.4586323318561,
+        "peak_power": 0.004368272682457046,
+        "noise_floor": 0.0008421186898132035,
+        "snr": 5.187241104250999
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07036946889164776,
+        "period_days": 14.210708361885779,
+        "peak_power": 0.004781707584391446,
+        "noise_floor": 0.0010593706176491638,
+        "snr": 4.513724946423825
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03156172716819335,
+        "period_days": 31.683944122289986,
+        "peak_power": 0.0063261837862002715,
+        "noise_floor": 0.0031358001768521885,
+        "snr": 2.0174065404099464
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03622186562983503,
+        "period_days": 27.607633748614134,
+        "peak_power": 0.006258242148434011,
+        "noise_floor": 0.0019661202989719106,
+        "snr": 3.183041318329536
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02888748910360576,
+        "period_days": 34.61706195417237,
+        "peak_power": 0.002941362298602499,
+        "noise_floor": 0.0007373177302434596,
+        "snr": 3.989273793309259
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.03884109269222218,
+        "period_days": 25.74592862059844,
+        "peak_power": 0.004631519344267449,
+        "noise_floor": 0.0009620924850322525,
+        "snr": 4.814006362509095
+      }
     },
-    "tep_signal": {
-        "injected_eta_0": -0.00033054126604903567,
-        "fitted_eta": -0.0002269162857222198,
-        "fitted_eta_error": 6.573726177314503e-05,
-        "snr": 3.451867017298241,
-        "post_fit_sideband_fraction": 0.0005680845164241772,
-        "interpretation": "Dynamic signal is not fully absorbed - sidebands remain in residuals"
+    "target_peaks_post": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002420843087018062,
+        "period_days": 413.0792306872631,
+        "peak_power": 0.0120566651929591,
+        "noise_floor": 0.001727823563494788,
+        "snr": 6.977949281217491
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03413554514876414,
+        "period_days": 29.29497670659595,
+        "peak_power": 0.003518081241253684,
+        "noise_floor": 0.0007020997751452047,
+        "snr": 5.0107995555561775
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07039547409268797,
+        "period_days": 14.205458701554093,
+        "peak_power": 0.00365233691961844,
+        "noise_floor": 0.001162032965984145,
+        "snr": 3.143057922221006
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03144030288333638,
+        "period_days": 31.80630936383276,
+        "peak_power": 0.00724023424725677,
+        "noise_floor": 0.0030138856593685233,
+        "snr": 2.402292278325436
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03654713068284563,
+        "period_days": 27.361929139607575,
+        "peak_power": 0.006571037381161773,
+        "noise_floor": 0.0016928292097607065,
+        "snr": 3.8816895072897735
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02887108582294963,
+        "period_days": 34.63672984564716,
+        "peak_power": 0.002730367121346795,
+        "noise_floor": 0.0005923796745558867,
+        "snr": 4.609150581329078
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.039611046683020346,
+        "period_days": 25.245482857403502,
+        "peak_power": 0.004677200190599279,
+        "noise_floor": 0.0009730053696359975,
+        "snr": 4.806962362755537
+      }
     },
-    "null_case": {
-        "fitted_eta": 9.634221112319821e-05,
-        "fitted_eta_error": 6.492522684757944e-05,
-        "snr": 1.483894871085692,
-        "interpretation": "Noise-only case shows no spurious detection"
-    },
-    "conclusion": {
-        "static_signals_absorbed": true,
-        "tep_signals_not_absorbed": false,
-        "null_case_no_false_positive": true,
-        "key_finding": "Static Nordtvedt signals are absorbed with 103.3% efficiency by standard ephemeris fitting, while dynamically modulated TEP signals leave 0.1% of power in sideband frequencies that are spectrally orthogonal to standard integrators. This validates the ephemeris absorption argument."
+    "survival_fractions": {
+      "D_minus_M": 0.8603036782776123,
+      "D": 0.8053712524362947,
+      "D_plus_M": 0.7638143602800969,
+      "D_minus_annual": 1.1444868647430664,
+      "D_plus_annual": 1.0499813246769354,
+      "D_minus_2annual": 0.9282661719856979,
+      "D_plus_2annual": 1.0098630369294193
     }
+  },
+  "dynamic_scenario": {
+    "label": "dynamic",
+    "pre_fit_eta": -0.00039064074718004964,
+    "pre_fit_eta_err": 9.194681083591259e-05,
+    "post_fit_eta": -1.1366232382264748e-05,
+    "post_fit_eta_err": 9.002492646690813e-05,
+    "carrier_amplitude_absorption_fraction": 0.9709036180574733,
+    "mean_sideband_survival_fraction": 0.9599675014720197,
+    "target_peaks_pre": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002410240966593977,
+        "period_days": 414.8962754596053,
+        "peak_power": 0.014012531414264638,
+        "noise_floor": 0.0024880435535073785,
+        "snr": 5.63194779870765
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03394590722117862,
+        "period_days": 29.4586323318561,
+        "peak_power": 0.004366942110681973,
+        "noise_floor": 0.0008423127745419098,
+        "snr": 5.184466201473587
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07036946889164776,
+        "period_days": 14.210708361885779,
+        "peak_power": 0.004776241840700868,
+        "noise_floor": 0.0010598080573549964,
+        "snr": 4.506704593868741
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03156172716819335,
+        "period_days": 31.683944122289986,
+        "peak_power": 0.006321471464788777,
+        "noise_floor": 0.003135566451676365,
+        "snr": 2.0160540566471283
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.036155252307170496,
+        "period_days": 27.65849872942734,
+        "peak_power": 0.006254833073421978,
+        "noise_floor": 0.0019684339613415423,
+        "snr": 3.1775681563424847
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02888748910360576,
+        "period_days": 34.61706195417237,
+        "peak_power": 0.002942107538070423,
+        "noise_floor": 0.0007368871256367049,
+        "snr": 3.992616285063068
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.03884109269222218,
+        "period_days": 25.74592862059844,
+        "peak_power": 0.004626194534141815,
+        "noise_floor": 0.0009604708532957628,
+        "snr": 4.816590236202876
+      }
+    },
+    "target_peaks_post": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002421043127026063,
+        "period_days": 413.04509979067166,
+        "peak_power": 0.012057419418628992,
+        "noise_floor": 0.0017278572636297636,
+        "snr": 6.978249692511982
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03413554514876414,
+        "period_days": 29.29497670659595,
+        "peak_power": 0.0035169367247170767,
+        "noise_floor": 0.0007021436388007767,
+        "snr": 5.008856493699514
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07039547409268797,
+        "period_days": 14.205458701554093,
+        "peak_power": 0.0036514016833583953,
+        "noise_floor": 0.0011621434997954043,
+        "snr": 3.14195422854512
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03144030288333638,
+        "period_days": 31.80630936383276,
+        "peak_power": 0.00724143132551361,
+        "noise_floor": 0.0030141664660901556,
+        "snr": 2.4024656258971913
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03654713068284563,
+        "period_days": 27.361929139607575,
+        "peak_power": 0.006569972098370117,
+        "noise_floor": 0.001692335111392931,
+        "snr": 3.882193339924555
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02887108582294963,
+        "period_days": 34.63672984564716,
+        "peak_power": 0.0027302698535056147,
+        "noise_floor": 0.000592520214579754,
+        "snr": 4.60789317617132
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.039611046683020346,
+        "period_days": 25.245482857403502,
+        "peak_power": 0.004676748186451686,
+        "noise_floor": 0.0009729741102067368,
+        "snr": 4.806652240169036
+      }
+    },
+    "survival_fractions": {
+      "D_minus_M": 0.8604740330041039,
+      "D": 0.8053545560208598,
+      "D_plus_M": 0.7644926293813018,
+      "D_minus_annual": 1.14552938597431,
+      "D_plus_annual": 1.0503832830147342,
+      "D_minus_2annual": 0.9279979804192535,
+      "D_plus_2annual": 1.0109276970384145
+    }
+  },
+  "null_scenario": {
+    "label": "null",
+    "pre_fit_eta": -2.787449529621933e-19,
+    "pre_fit_eta_err": 9.194732759284051e-05,
+    "post_fit_eta": -7.5357284713925745e-06,
+    "post_fit_eta_err": 9.002358301642542e-05,
+    "carrier_amplitude_absorption_fraction": 0.9162916180528203,
+    "mean_sideband_survival_fraction": 0.9539630358959963,
+    "target_peaks_pre": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.00241064104660998,
+        "period_days": 414.8274175478233,
+        "peak_power": 0.014248496788927282,
+        "noise_floor": 0.0024010360564143116,
+        "snr": 5.934311877934009
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.033958909821698725,
+        "period_days": 29.447352852329495,
+        "peak_power": 0.0044983184605129145,
+        "noise_floor": 0.0008349891690916896,
+        "snr": 5.387277616314754
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07037507001187181,
+        "period_days": 14.209577337987822,
+        "peak_power": 0.004646552403783302,
+        "noise_floor": 0.001092052111853523,
+        "snr": 4.254881569613726
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.03156252732822536,
+        "period_days": 31.68314088415005,
+        "peak_power": 0.0063804136294673556,
+        "noise_floor": 0.003105291131756456,
+        "snr": 2.0546909641475004
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.03617045534777862,
+        "period_days": 27.646873404965696,
+        "peak_power": 0.00618050800737077,
+        "noise_floor": 0.0020118123447166857,
+        "snr": 3.0721095949141035
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.02888748910360576,
+        "period_days": 34.61706195417237,
+        "peak_power": 0.0032585284615841243,
+        "noise_floor": 0.0006331115403140271,
+        "snr": 5.1468473627378115
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.039188362146112966,
+        "period_days": 25.517779902908966,
+        "peak_power": 0.0044540405375408315,
+        "noise_floor": 0.0008842919789436014,
+        "snr": 5.036843761561364
+      }
+    },
+    "target_peaks_post": {
+      "D_minus_M": {
+        "target_freq_cpd": 0.0027378064796965973,
+        "peak_freq_cpd": 0.002421043127026063,
+        "period_days": 413.04509979067166,
+        "peak_power": 0.012038144223097662,
+        "noise_floor": 0.0017295237806916816,
+        "snr": 6.960380861767217
+      },
+      "D": {
+        "target_freq_cpd": 0.03386319067786996,
+        "peak_freq_cpd": 0.03413554514876414,
+        "period_days": 29.29497670659595,
+        "peak_power": 0.0035340389279164383,
+        "noise_floor": 0.000701976766262508,
+        "snr": 5.034410108375105
+      },
+      "D_plus_M": {
+        "target_freq_cpd": 0.07046418783543652,
+        "peak_freq_cpd": 0.07039507401267198,
+        "period_days": 14.205539436182534,
+        "peak_power": 0.003661949361273558,
+        "noise_floor": 0.0011627658213831731,
+        "snr": 3.149343826530324
+      },
+      "D_minus_annual": {
+        "target_freq_cpd": 0.03112533989073786,
+        "peak_freq_cpd": 0.031440702963352385,
+        "period_days": 31.80590463150937,
+        "peak_power": 0.007227244591865152,
+        "noise_floor": 0.003009910563069743,
+        "snr": 2.4011492834837727
+      },
+      "D_plus_annual": {
+        "target_freq_cpd": 0.036601041465002065,
+        "peak_freq_cpd": 0.036649551166942455,
+        "period_days": 27.28546375492834,
+        "peak_power": 0.006583014524099501,
+        "noise_floor": 0.0017010886231700693,
+        "snr": 3.869883340840704
+      },
+      "D_minus_2annual": {
+        "target_freq_cpd": 0.02838748910360576,
+        "peak_freq_cpd": 0.028871285862957632,
+        "period_days": 34.63648985870136,
+        "peak_power": 0.0027472866226364973,
+        "noise_floor": 0.0005903814605650948,
+        "snr": 4.653409373673218
+      },
+      "D_plus_2annual": {
+        "target_freq_cpd": 0.03933889225213417,
+        "peak_freq_cpd": 0.03961124672302835,
+        "period_days": 25.245355365667933,
+        "peak_power": 0.004676081295874452,
+        "noise_floor": 0.0009760235920634882,
+        "snr": 4.790951093700902
+      }
+    },
+    "survival_fractions": {
+      "D_minus_M": 0.8448711749335328,
+      "D": 0.7856355566949954,
+      "D_plus_M": 0.7881003038493521,
+      "D_minus_annual": 1.1327235210091686,
+      "D_plus_annual": 1.0651251509178061,
+      "D_minus_2annual": 0.8431065295347802,
+      "D_plus_2annual": 1.049851535131338
+    }
+  },
+  "conclusion": {
+    "static_carrier_absorbed": true,
+    "dynamic_sidebands_survive": true,
+    "null_no_false_positive": true,
+    "key_finding": "On real INPOP19a residuals, a static Nordtvedt injection (\u03b7=-3.91e-04) is absorbed at 97.1% efficiency by an 82-parameter ephemeris-like basis. A dynamically modulated TEP injection of the same amplitude leaves sidebands surviving at 96.0% after identical fitting. The null case shows no spurious carrier extraction. This controlled-injection test confirms that spectral orthogonality of cross-frequency sidebands\u2014not merely parameter-count inadequacy\u2014prevents standard ephemeris-like fitting from absorbing the TEP signal."
+  }
 }

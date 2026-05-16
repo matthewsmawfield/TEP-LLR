@@ -3,148 +3,153 @@
   "status": "PASS",
   "step": "065_high_dimensional_absorption_test",
   "simulation": {
-    "n_observations": 26207,
+    "n_observations": 25445,
     "n_basis_parameters": 82,
-    "condition_number": 1.0249304285898822e+21,
-    "injected_eta": -0.000406,
-    "injected_amplitude_mm": 5.278
+    "condition_number": 1.4393576324432496e+20,
+    "injected_eta": -0.0003908842592328793,
+    "injected_amplitude_mm": 5.08149537002743
   },
   "test_a_white_noise_static": {
     "test_surface": "white_noise",
-    "n_observations": 26207,
-    "injected_eta": -0.000406,
-    "injected_amplitude_mm": 5.278,
+    "n_observations": 25445,
+    "injected_eta": -0.0003908842592328793,
+    "injected_amplitude_mm": 5.08149537002743,
     "pre_clean": {
-      "amplitude_m": -0.001070546238090112,
-      "amplitude_err_m": 0.0011942393458116373,
-      "eta": -8.23497106223163e-05,
-      "eta_err": 9.186456506243364e-05,
-      "snr": 0.8964251947021054
+      "amplitude_m": 0.00019054965397780164,
+      "amplitude_err_m": 0.0007870820335456231,
+      "eta": 1.4657665690600126e-05,
+      "eta_err": 6.054477181120178e-05,
+      "snr": 0.24209630744513297
     },
     "pre_fit": {
-      "amplitude_m": -0.006348546238090112,
-      "amplitude_err_m": 0.0011942393458116373,
-      "eta": -0.0004883497106223163,
-      "eta_err": 9.186456506243364e-05,
-      "snr": 5.315974775370902
+      "amplitude_m": -0.004890945716049628,
+      "amplitude_err_m": 0.0007870820335456231,
+      "eta": -0.0003762265935422791,
+      "eta_err": 6.054477181120178e-05,
+      "snr": 6.214022817948271
     },
     "post_fit_without_cosd": {
-      "amplitude_m": -0.00011474797510412764,
-      "amplitude_err_m": 0.001192684712010608,
-      "eta": -8.826767315702127e-06,
-      "eta_err": 9.174497784696985e-05,
-      "snr": 0.0962098146715467
+      "amplitude_m": -1.4073611425215214e-05,
+      "amplitude_err_m": 0.0007858554135901538,
+      "eta": -1.0825854942473242e-06,
+      "eta_err": 6.045041643001183e-05,
+      "snr": 0.017908652382911505
     },
     "post_fit_with_cosd": {
-      "amplitude_m": 2.6534132109684516e-14,
-      "amplitude_err_m": 0.0011926634123812145,
-      "eta": 2.0410870853603473e-15,
-      "eta_err": 9.174333941393957e-05,
-      "snr": 2.224779584435121e-11
+      "amplitude_m": 5.889566303220941e-16,
+      "amplitude_err_m": 0.0007858549178275234,
+      "eta": 4.530435617862262e-17,
+      "eta_err": 6.045037829442488e-05,
+      "snr": 7.494470250949758e-13
     },
-    "joint_fit_eta": -0.0009013501412698853,
-    "eta_survived": 7.352294330661418e-05,
-    "absorption_fraction": 1.1810909933660447,
-    "survival_fraction": -0.18109099336604473
+    "joint_fit_eta": -0.00010944176424070856,
+    "eta_survived": -1.574025118484745e-05,
+    "absorption_fraction": 0.9597316831950764,
+    "survival_fraction": 0.0402683168049236
   },
   "test_b_modulated_tep": {
     "test_surface": "modulated_tep",
-    "injected_eta": -0.000406,
+    "injected_eta": -0.0003908842592328793,
     "pre_fit": {
-      "amplitude_m": -0.005274711925432581,
-      "amplitude_err_m": 0.0011953082839281659,
-      "eta": -0.0004057470711871216,
-      "eta_err": 9.194679107139737e-05,
-      "snr": 4.412846456730132
+      "amplitude_m": -0.00507846555511559,
+      "amplitude_err_m": 0.0007867454358884207,
+      "eta": -0.00039065119654735304,
+      "eta_err": 6.0518879683724666e-05,
+      "snr": 6.455030208571604
     },
     "post_fit_without_cosd": {
-      "amplitude_m": -0.00014968668457236516,
-      "amplitude_err_m": 0.0011703248837463907,
-      "eta": -1.1514360351720397e-05,
-      "eta_err": 9.002499105741467e-05,
-      "snr": 0.12790182166612998
+      "amplitude_m": -0.00018272672399989224,
+      "amplitude_err_m": 0.0007752382201069498,
+      "eta": -1.4055901846145556e-05,
+      "eta_err": 5.963370923899614e-05,
+      "snr": 0.2357039671943467
     },
     "post_fit_with_cosd": {
-      "amplitude_m": 1.078715092690154e-14,
-      "amplitude_err_m": 0.0011702879459898716,
-      "eta": 8.297808405308877e-16,
-      "eta_err": 9.002214969152858e-05,
-      "snr": 9.217518614854552e-12
+      "amplitude_m": 7.135105924062059e-15,
+      "amplitude_err_m": 0.0007751534977791982,
+      "eta": 5.488543018509276e-16,
+      "eta_err": 5.96271921368614e-05,
+      "snr": 9.204765178127967e-12
     },
-    "joint_fit_eta": -0.0011757951659213451,
+    "joint_fit_eta": -0.0014209526208522729,
     "sideband_pre_fit": {
-      "power_minus": 0.006978887562542365,
-      "power_centre": 0.002441956649284094,
-      "power_plus": 0.0011774589203133548,
-      "total_sideband_power": 0.010598303132139813,
-      "sideband_fraction": 0.7695898467105782
+      "power_minus": 0.006377076830746036,
+      "power_centre": 0.0027814089752751622,
+      "power_plus": 0.000656277319090138,
+      "total_sideband_power": 0.009814763125111337,
+      "sideband_fraction": 0.7166096685350609
     },
     "sideband_post_fit": {
-      "power_minus": 5.426084424624867e-09,
-      "power_centre": 0.000132525970721242,
-      "power_plus": 0.00017785909296986886,
-      "total_sideband_power": 0.00031039048977553546,
-      "sideband_fraction": 0.573034693114855
+      "power_minus": 9.097782614623422e-10,
+      "power_centre": 9.333546698254982e-05,
+      "power_plus": 0.0005761049466888606,
+      "total_sideband_power": 0.0006694413234496719,
+      "sideband_fraction": 0.8605770756702223
     },
-    "sideband_ratio_pre": 3.340086518426487,
-    "sideband_ratio_post": 1.3421106677152177,
-    "sideband_ratio_survival_fraction": 0.4018191326215961
+    "sideband_ratio_pre": 2.5287018961820853,
+    "sideband_ratio_post": 6.172421643048423,
+    "sideband_ratio_survival_fraction": 2.4409447599844576
   },
   "test_c_real_inpop_sidebands": {
     "test_surface": "real_inpop_sidebands",
-    "pre_fit_eta": -0.00045329831411731396,
-    "pre_fit_eta_err": 9.194732759479532e-05,
-    "post_fit_eta": -1.1974801061106526e-05,
-    "post_fit_eta_err": 9.002543913031064e-05,
+    "pre_fit_eta": -0.0003177266644406375,
+    "pre_fit_eta_err": 6.051938437550738e-05,
+    "post_fit_eta": -1.332924135307353e-05,
+    "post_fit_eta_err": 5.9633145161012106e-05,
     "sideband_pre_fit": {
-      "power_minus": 0.00699510857716358,
-      "power_centre": 0.0026907051111281647,
-      "power_plus": 0.0011915389881081428,
-      "total_sideband_power": 0.010877352676399887,
-      "sideband_fraction": 0.7526323553923127
+      "power_minus": 0.00628200121721645,
+      "power_centre": 0.002165810080777394,
+      "power_plus": 0.000596362165689843,
+      "total_sideband_power": 0.009044173463683688,
+      "sideband_fraction": 0.7605297941847236
     },
     "sideband_post_fit": {
-      "power_minus": 5.424844443962806e-09,
-      "power_centre": 0.00013297222396382478,
-      "power_plus": 0.00017807950079430353,
-      "total_sideband_power": 0.0003110571496025723,
-      "sideband_fraction": 0.5725151338468859
+      "power_minus": 9.105415327735327e-10,
+      "power_centre": 9.175117100296209e-05,
+      "power_plus": 0.0005745362936885295,
+      "total_sideband_power": 0.0006662883752330244,
+      "sideband_fraction": 0.8622951046221188
     },
-    "sideband_ratio_pre": 3.0425658803759466,
-    "sideband_ratio_post": 1.339264098396938,
-    "sideband_ratio_survival_fraction": 0.4401758749202352
+    "sideband_ratio_pre": 3.175884831248629,
+    "sideband_ratio_post": 6.2619059566173165,
+    "sideband_ratio_survival_fraction": 1.9717043562172842
   },
   "basis_projection": {
-    "max_projection": 0.9267559839062915,
-    "n_above_0_01": 65,
-    "n_above_0_001": 80,
+    "max_projection": 0.9258296861397776,
+    "n_above_0_01": 69,
+    "n_above_0_001": 81,
     "top_5_projections": [
       {
         "name": "sin_2D",
-        "projection": 0.9267559839062915
+        "projection": 0.9258296861397776
       },
       {
         "name": "cos_3D",
-        "projection": 0.5840861171383732
+        "projection": 0.5805124327203737
       },
       {
         "name": "cos_2D",
-        "projection": 0.35812158204137157
+        "projection": 0.3564632111519827
       },
       {
         "name": "sin_3D",
-        "projection": 0.3128608191937719
+        "projection": 0.3108236892747462
       },
       {
         "name": "t3",
-        "projection": 0.19419047989724503
+        "projection": 0.1999584310049603
       }
     ]
   },
+  "risk_flags": {
+    "static_carrier_absorption_warning": true,
+    "basis_condition_number_warning": true,
+    "interpretation": "The high-dimensional basis has strong projection onto the central cos(D) carrier. The defensible positive evidence from this step is sideband-structure survival; central-carrier absorption remains a source-level refit question."
+  },
   "conclusion": {
-    "white_noise_absorption_pct": 118.11,
-    "modulated_sideband_ratio_survival_pct": 40.18,
-    "real_sideband_ratio_survival_pct": 44.02,
-    "key_finding": "A 82-parameter ephemeris-like basis can partially absorb a static synodic carrier on the real LLR sampling manifold (absorption 118.1% in the worst-case linear scenario). However, the dynamically modulated TEP signal's sideband-to-carrier ratio survives at 40.2% after fitting. On real INPOP19a residuals, the sideband-to-carrier ratio survives at 44.0%. The persistence of sideband structure \u2014 which requires explicit cross-frequency (annual \u00d7 synodic) terms that real ephemeris integrators do not include \u2014 demonstrates that the residual signal carries a genuine dynamical signature, not merely leakage from a partially absorbed static component. Moreover, the actual INPOP19a residuals exhibit \u03b7 = -4.53e-04, confirming that INPOP's own 100+ parameter fit did not absorb the signal, regardless of what an idealised linear basis might achieve in principle."
+    "white_noise_absorption_pct": 95.97,
+    "modulated_sideband_ratio_survival_pct": 244.09,
+    "real_sideband_ratio_survival_pct": 197.17,
+    "key_finding": "A 82-parameter ephemeris-like basis can strongly absorb or over-absorb a static synodic carrier on the real LLR sampling manifold (absorption 96.0% in the worst-case linear scenario). However, the dynamically modulated TEP signal's sideband-to-carrier ratio survives at 244.1% after fitting. On real INPOP19a residuals, the sideband-to-carrier ratio survives at 197.2%. The persistence of sideband structure under this high-dimensional linear stress test supports the interpretation that the residual signal carries a dynamical signature, not merely leakage from a partially absorbed static component. Moreover, the actual INPOP19a residuals exhibit \u03b7 = -3.18e-04, confirming that INPOP's own 100+ parameter fit did not absorb the signal. This proxy is a linear stress test, not a symplectic N-body integrator, and cannot emulate the iterative dynamic potentials of the actual Fortran/C++ code underlying INPOP or DE430. A source-level INPOP/DE430 refit with \u03b7 free remains the definitive absorption test."
   }
 }

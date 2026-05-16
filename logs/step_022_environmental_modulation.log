@@ -1,22 +1,22 @@
-[20:11:32]     Computing Earth-Sun distances via Skyfield...
-[20:11:32]     Using ephemeris: data/raw/de440.bsp
-[20:11:32]     Computed distances for 25,445 cleaned observations.
-[20:11:32]     Distance range: 0.9832 AU to 1.0168 AU
-[20:11:32]     Removed 762 outliers (6σ threshold)
-[20:11:32] 
-[20:11:32] >>> --- DIFFERENTIAL SUPPRESSION ANALYSIS ---
-[20:11:32]     Hypothesis: Eta magnitude should scale with solar scalar gradient (varies with solar distance)
-[20:11:32]     Perihelion threshold: r <= 15th percentile
-[20:11:32]     Aphelion threshold: r >= 85th percentile
-[20:11:32] 
-[20:11:32]     DEEP PERIHELION (High Shear, r <= 15th percentile):
-[20:11:32]       N = 3,817
-[20:11:32]       η = -2.8082e-04 ± 1.9181e-04
-[20:11:32]       SNR = 1.46σ
-[20:11:32] 
-[20:11:32]     DEEP APHELION (Low Shear, r >= 85th percentile):
-[20:11:32]       N = 3,818
-[20:11:32]       η = 7.1236e-05 ± 1.5734e-04
-[20:11:32]       SNR = 0.45σ
-[20:11:32] Results saved to results/outputs/step_022_environmental_modulation.json
-[20:11:32] ✓   Environmental Modulation Tests Complete.
+[13:26:43]     Computing Earth-Sun distances via Skyfield...
+[13:26:43]     Using ephemeris: data/raw/de440.bsp
+[13:26:43]     Computed distances for 25,445 cleaned observations.
+[13:26:43]     Distance range: 0.9832 AU to 1.0168 AU
+[13:26:43]     Removed 762 outliers (6σ threshold)
+[13:26:43] 
+[13:26:43] >>> --- DIFFERENTIAL SUPPRESSION ANALYSIS ---
+[13:26:43]     Hypothesis: Eta magnitude should scale with solar scalar gradient (varies with solar distance)
+[13:26:43]     Perihelion threshold: r <= 15th percentile
+[13:26:43]     Aphelion threshold: r >= 85th percentile
+[13:26:43] 
+[13:26:43]     DEEP PERIHELION (High Shear, r <= 15th percentile):
+[13:26:43]       N = 3,817
+[13:26:43]       η = -2.8082e-04 ± 1.9181e-04
+[13:26:43]       SNR = 1.46σ
+[13:26:43] 
+[13:26:43]     DEEP APHELION (Low Shear, r >= 85th percentile):
+[13:26:43]       N = 3,818
+[13:26:43]       η = 7.1236e-05 ± 1.5734e-04
+[13:26:43]       SNR = 0.45σ
+[13:26:43] Results saved to results/outputs/step_022_environmental_modulation.json
+[13:26:43] ✓   Environmental Modulation Tests Complete.

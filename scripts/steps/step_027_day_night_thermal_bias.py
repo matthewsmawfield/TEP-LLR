@@ -63,14 +63,14 @@ def main():
     log_dir.mkdir(parents=True, exist_ok=True)
     logger = TEPLogger("step_027", str(log_dir / "step_027_day_night_thermal_bias.log"))
     set_step_logger(logger)
-    
+
     # Load data
     DATA_PATH = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
-    
+
     if not DATA_PATH.exists():
         logger.error("Data file not found!")
         return {"status": "FAIL", "reason": "Data file not found"}
-    
+
     df = pd.read_csv(DATA_PATH)
 
     logger.info("Computing Solar Altitude for 26,000+ observations... (Vectorized for M4 Pro)")
@@ -81,13 +81,13 @@ def main():
         mask = df['station'] == station_name
         if mask.sum() == 0:
             continue
-        
+
         # Get all JDs for this station at once
         jds = df.loc[mask, 'date_julian'].values
-        
+
         # Vectorized astropy: create Time with array of JDs
         t = Time(jds, format='jd')
-        
+
         try:
             # Vectorized sun calculation
             sun = get_sun(t)
@@ -119,11 +119,11 @@ def main():
         d_sta = df[df['station'] == station]
         if len(d_sta) < 100:
             continue
-        
+
         mean_day = d_sta[d_sta['is_day'] == 1]['residual_m'].mean()
         mean_night = d_sta[d_sta['is_day'] == 0]['residual_m'].mean()
         day_night_diff = mean_day - mean_night
-        
+
         # Simple regression of residual ~ day_night
         reg_dn = linear_regression(d_sta['residual_m'].values, d_sta['is_day'].values)
         dn_coeff = reg_dn['amplitude']
@@ -150,7 +150,7 @@ def main():
         # Because New Moon (which predicts negative eta) is strictly day-ranged,
         # mapping Day-Night directly to a spurious eta:
         spurious_eta = day_night_diff / ETA_SCALE_FACTOR
-        
+
         results.append({
             'Station': station,
             'N': len(d_sta),
@@ -165,7 +165,7 @@ def main():
     res_df = pd.DataFrame(results)
     logger.info("DAY / NIGHT THERMAL FALSE POSITIVE INVESTIGATION")
     logger.info("\n" + res_df.to_string(index=False))
-    
+
     # Global test
     logger.info("GLOBAL ANALYSIS:")
     X_global = np.column_stack([
@@ -197,9 +197,9 @@ def main():
             "cleaned_pval": float(global_res['cos_elong']['p'])
         }
     }
-    
+
     logger.save_step_results(output_data, PROJECT_ROOT, "step_027_day_night_thermal_bias")
-    
+
     return output_data
 
 if __name__ == "__main__":

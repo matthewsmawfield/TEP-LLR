@@ -18,7 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
-from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR, CROSS_VALIDATION_SPLIT_JD
 import numpy as np
 from scripts.utils.numerics import stable_lstsq
 from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
@@ -106,11 +106,11 @@ def analyze_temporal_epochs(df):
     return results
 
 
-def analyze_covariate_shift(df, split_jd=2454600):
+def analyze_covariate_shift(df, split_jd=CROSS_VALIDATION_SPLIT_JD):
     """Analyze how station mix and elongation distribution differ pre vs post split."""
     pre = df[df['date_julian'] < split_jd]
     post = df[df['date_julian'] >= split_jd]
-    
+
     results = {
         'split_jd': split_jd,
         'pre': {
@@ -132,7 +132,7 @@ def analyze_covariate_shift(df, split_jd=2454600):
             'mean_abs_cosD': float(np.mean(np.abs(post['cosD'])))
         }
     }
-    
+
     # KS test for elongation and cosD distributions
     ks_elong = stats.ks_2samp(pre['elongation_rad'].values, post['elongation_rad'].values)
     ks_cosD = stats.ks_2samp(pre['cosD'].values, post['cosD'].values)
@@ -152,14 +152,14 @@ def analyze_leave_one_station_out(df):
     for held_out in stations:
         train = df[df['station'] != held_out]
         test = df[df['station'] == held_out]
-        
+
         # Compare elongation distributions
         ks = stats.ks_2samp(train['elongation_rad'].values, test['elongation_rad'].values)
-        
+
         # Effective leverage: how much does cosD range differ?
         train_cosD_range = float(np.ptp(train['cosD']))
         test_cosD_range = float(np.ptp(test['cosD']))
-        
+
         results[held_out] = {
             'n_train': len(train),
             'n_test': len(test),
@@ -177,22 +177,22 @@ def analyze_leave_one_station_out(df):
 
 def main():
     print_status("Step 052: Station Sample and Distribution Analysis", "TITLE")
-    
+
     df = load_data()
     print_status(f"Loaded {len(df)} observations from {df['station'].nunique()} stations", "INFO")
-    
+
     print_status("Analyzing per-station coverage...", "PROCESS")
     station_coverage = analyze_station_coverage(df)
-    
+
     print_status("Analyzing temporal epochs...", "PROCESS")
     temporal_epochs = analyze_temporal_epochs(df)
-    
+
     print_status("Analyzing covariate shift (pre/post 2008)...", "PROCESS")
-    covariate_shift = analyze_covariate_shift(df, split_jd=2454600)
-    
+    covariate_shift = analyze_covariate_shift(df, split_jd=CROSS_VALIDATION_SPLIT_JD)
+
     print_status("Analyzing leave-one-station-out covariate shift...", "PROCESS")
     loso_shift = analyze_leave_one_station_out(df)
-    
+
     # Summary: compute per-station cosD-only regression
     print_status("Computing per-station cosD-only regression...", "PROCESS")
     per_station_regression = {}
@@ -219,7 +219,7 @@ def main():
             }
         except Exception as e:
             per_station_regression[stn] = {'error': str(e)}
-    
+
     results = {
         'step_id': 'step_052',
         'status': 'PASS',
@@ -231,25 +231,25 @@ def main():
         'leave_one_station_out_shift': loso_shift,
         'per_station_cosD_regression': per_station_regression
     }
-    
+
     output_path = PROJECT_ROOT / "results/outputs/step_052_station_distribution_analysis.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, 'w') as f:
         json.dump(results, f, indent=2)
-    
+
     print_status(f"Results saved to {output_path}", "SUCCESS")
-    
+
     # Print summary
     print_status("\n=== Station Coverage Summary ===", "TITLE")
     for stn, info in station_coverage.items():
         print_status(f"{stn}: n={info['n_obs']}, years={info['date_range'][0]:.1f}-{info['date_range'][1]:.1f}, "
                     f"RMS={info['residual_rms_m']:.3f}m, mean|cosD|={info['mean_abs_cosD']:.3f}", "INFO")
-    
+
     print_status("\n=== Temporal Epoch Composition ===", "TITLE")
     for epoch, info in temporal_epochs.items():
         print_status(f"{epoch}: n={info['n_total']}, dominant={info['dominant_station']}, "
                     f"mean|cosD|={info['mean_abs_cosD']:.3f}", "INFO")
-    
+
     print_status("\n=== Covariate Shift (pre/post 2008) ===", "TITLE")
     print_status(f"Pre: n={covariate_shift['pre']['n']}, mean|cosD|={covariate_shift['pre']['mean_abs_cosD']:.3f}", "INFO")
     print_status(f"Post: n={covariate_shift['post']['n']}, mean|cosD|={covariate_shift['post']['mean_abs_cosD']:.3f}", "INFO")
@@ -257,13 +257,13 @@ def main():
                 f"p={covariate_shift['ks_test']['elongation_pvalue']:.2e}", "INFO")
     print_status(f"KS test cosD: D={covariate_shift['ks_test']['cosD_statistic']:.4f}, "
                 f"p={covariate_shift['ks_test']['cosD_pvalue']:.2e}", "INFO")
-    
+
     print_status("\n=== Leave-One-Station-Out Shift ===", "TITLE")
     for stn, info in loso_shift.items():
         print_status(f"Hold out {stn}: train n={info['n_train']}, test n={info['n_test']}, "
                     f"train|cosD|={info['train_mean_abs_cosD']:.3f}, test|cosD|={info['test_mean_abs_cosD']:.3f}, "
                     f"KS_D={info['ks_elongation_statistic']:.4f}", "INFO")
-    
+
     print_status("\n=== Per-Station cosD Regression ===", "TITLE")
     for stn, info in per_station_regression.items():
         if 'error' not in info:

@@ -31,7 +31,7 @@ def inject_ephemeris_uncertainty(df: pd.DataFrame, rng: np.random.RandomState,
                                  position_error_m: float = 0.5,
                                  velocity_error_mm_s: float = 0.1) -> pd.DataFrame:
     """Simulate ephemeris uncertainties in Earth-Moon range.
-    
+
     Parameter ranges based on ephemeris accuracy specifications:
     - Position error: 0.3-0.7 m (INPOP19a/DE430 ephemeris accuracy ~0.5 m)
       Source: INPOP19a documentation, Folkner et al. 2014
@@ -62,7 +62,7 @@ def inject_ephemeris_uncertainty(df: pd.DataFrame, rng: np.random.RandomState,
 def inject_tidal_uncertainty(df: pd.DataFrame, rng: np.random.RandomState,
                              love_number_error: float = 0.01) -> pd.DataFrame:
     """Simulate tidal model uncertainties via Love number variations.
-    
+
     Parameter ranges based on tidal model accuracy:
     - Love number error: 0.005-0.015 (h2 ~0.6, k2 ~0.3, relative error ~1-2%)
       Source: IERS2010 conventions, Williams et al. 2014
@@ -90,7 +90,7 @@ def inject_tidal_uncertainty(df: pd.DataFrame, rng: np.random.RandomState,
 def inject_atmospheric_uncertainty(df: pd.DataFrame, rng: np.random.RandomState,
                                    zenith_delay_error_mm: float = 5.0) -> pd.DataFrame:
     """Simulate atmospheric delay model uncertainties.
-    
+
     Parameter ranges based on atmospheric delay model accuracy:
     - Zenith delay error: 3-7 mm (typical for Saastamoinen/Marini-Murray models)
       Source: Mendes et al. 2002, Atmospheric delay models for LLR
@@ -115,7 +115,7 @@ def inject_atmospheric_uncertainty(df: pd.DataFrame, rng: np.random.RandomState,
 def inject_instrumental_uncertainty(df: pd.DataFrame, rng: np.random.RandomState,
                                     calibration_drift_mm_yr: float = 0.5) -> pd.DataFrame:
     """Simulate slow instrumental calibration drift.
-    
+
     Parameter ranges based on LLR station calibration stability:
     - Calibration drift: 0.3-0.7 mm/yr (typical for retroreflector array calibration)
       Source: Murphy et al. 2002, LLR calibration and systematics
@@ -139,9 +139,9 @@ def inject_instrumental_uncertainty(df: pd.DataFrame, rng: np.random.RandomState
 
 def compute_eta_with_error(df: pd.DataFrame) -> Tuple[float, float]:
     """Compute eta and its statistical error.
-    
+
     Uses proper error propagation: sigma_eta = sigma_res / (A * sqrt(N_eff))
-    where A = 13.0 is the ETA_SCALE_FACTOR and N_eff accounts for the 
+    where A = 13.0 is the ETA_SCALE_FACTOR and N_eff accounts for the
     elongation distribution.
     """
     cos_elong = np.cos(df['elongation_rad'].values)
@@ -283,7 +283,7 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
             f"Required upstream data not found: {step_003_path}. "
             "Step 003 must be run before Step 019 to ensure methodological consistency."
         )
-    
+
     with open(step_003_path, 'r') as f:
         step_003_data = json.load(f)
     final_stat_error = step_003_data.get("eta_err_mcmc", None)
@@ -292,7 +292,7 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
             f"{step_003_path} missing a valid eta_err_mcmc. "
             "Re-run step_003_statistical_analysis.py and ensure MCMC uncertainty is persisted."
         )
-    
+
     # Load data-driven systematic error budget from step_008.
     step_008_path = Path(__file__).parent.parent.parent / 'results' / 'outputs' / 'step_008_systematic_error_analysis.json'
     data_driven_systematic_cm = None
@@ -327,9 +327,9 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
         f"serves as independent upper-bound cross-check."
     )
     literature_floor_applied = False
-    
+
     total_uncertainty_corrected = np.sqrt(final_stat_error**2 + effective_systematic**2)
-    
+
     results['error_budget'] = {
         'statistical': float(final_stat_error),
         'systematic_combined': float(effective_systematic),

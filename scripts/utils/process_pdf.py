@@ -166,11 +166,13 @@ def main():
             'gradient suppression scales with gravitational compactness (Φ/c²). TEP preserves the Weak Equivalence '
             'Principle through universal conformal coupling, but predicts violation of the Strong Equivalence '
             'Principle (SEP) via compactness-dependent suppression. This work tests for SEP violation using '
-            'Lunar Laser Ranging data, analysing 26,207 O-C residuals from five international stations spanning '
-            '35 years (1984-2019). The full cleaned OLS extraction gives η = -3.17 × 10⁻⁴ ± 9.80 × 10⁻⁴, '
-            'Bayesian MCMC gives η = -3.16 × 10⁻⁴ ± 6.05 × 10⁻⁵ at 5.22σ, Cook distance excision gives '
-            'η = -3.31 × 10⁻⁴ ± 5.84 × 10⁻⁵ at 5.67σ, and precision-weighted regression gives '
-            'η = -3.50 × 10⁻⁴ ± 1.13 × 10⁻⁴ at 3.11σ. DE430 residuals provide sign-consistent '
+            'Lunar Laser Ranging data, analysing 25,445 cleaned O-C residuals from five international stations spanning '
+            '35 years (1984-2019). The headline estimand is precision-weighted full-systematic regression on the full '
+            'cleaned sample: η = -3.91 × 10⁻⁴ ± 5.63 × 10⁻⁵ at 6.94σ (6.78σ cluster-robust). Unweighted full-systematic '
+            'OLS yields η = -4.06 × 10⁻⁴ ± 6.58 × 10⁻⁵ at 6.17σ as a sensitivity upper bound. Cook\'s-Distance excision on '
+            'the unweighted full-systematic row (N = 23,837) returns η = -3.87 × 10⁻⁴ ± 4.95 × 10⁻⁵ at 7.82σ as a '
+            'secondary leverage diagnostic. AR(1) GLS on the full-systematic design remains sign-consistent at 4.51σ. '
+            'DE430 residuals provide sign-consistent '
             'cross-ephemeris validation at η = -7.03 × 10⁻⁴ ± 2.12 × 10⁻³. '
             'The observed negative sign establishes that gravitational potential suppression dominates in the '
             'Earth-Moon system, providing the first physical explanation for the unexplained ~1 cm synodic '
@@ -192,8 +194,8 @@ def main():
         'Copyright': 'Creative Commons Attribution 4.0 International License (CC BY 4.0)',
 
         # Dates
-        'CreationDate': '2026:04:18 00:00:00',
-        'ModifyDate': '2026:04:19 00:00:00',
+        'CreationDate': '2026:05:14 00:00:00',
+        'ModifyDate': '2026:05:14 00:00:00',
 
         # XMP Dublin Core metadata (exiftool uses these prefixes)
         'XMP-dc:Creator': 'Matthew Lukin Smawfield',
@@ -203,7 +205,7 @@ def main():
         'XMP-dc:Identifier': f'doi:{args.doi}',
         'XMP-dc:Source': 'https://github.com/matthewsmawfield/TEP-LLR',
         'XMP-dc:Publisher': 'Zenodo',
-        'XMP-dc:Date': '2026-04-19',
+        'XMP-dc:Date': '2026-05-14',
         'XMP-dc:Type': 'Preprint',
         'XMP-dc:Format': 'application/pdf',
         'XMP-dc:Language': 'en',

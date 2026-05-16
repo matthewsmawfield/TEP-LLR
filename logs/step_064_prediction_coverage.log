@@ -1,0 +1,20 @@
+[13:30:46]     ============================================================
+[13:30:46]     UNCERTAINTY CALIBRATION (Step 064-PI)
+[13:30:46]     ============================================================
+[13:30:47]     Full dataset: 26207; 6σ retained: 25445
+[13:30:47]     
+--- Prediction-interval coverage ---
+[13:30:47]       wls_published_sigma: 68% nominal → 0.859 observed (χ²_red=0.477)
+[13:30:47]       ols_homoskedastic: 68% nominal → 0.022 observed (χ²_red=1.000)
+[13:30:47]       cluster_robust_scaled: 68% nominal → 0.846 observed (χ²_red=0.477)
+[13:30:47]       cluster_ar1_scaled: 68% nominal → 0.863 observed (χ²_red=0.477)
+[13:30:47]       σ calibration scale for 68% nominal PI coverage: c = 0.514
+[13:30:47]     
+--- Headline η intervals ---
+[13:30:52]       η (WLS) = -3.9088e-04 ± 5.6283e-05 (6.94σ)
+[13:30:52]       η bootstrap SNR = 1.65σ (95% CI [-5.4407e-04, 5.1992e-05])
+[13:30:52]       η LOSO conformal 95%: [-7.3295e-04, -4.8823e-05] (SNR = 1.14σ vs half-width)
+[13:30:52]     
+Interpretation: Prediction intervals are conservative (observed coverage exceeds nominal at 68–95%). Published σ and/or the pooled regression variance scale are larger than residual scatter after the full-systematic fit (χ²_red < 1). Headline formal σ-based significance is therefore not inflated by underestimated errors; station-block bootstrap and LOSO conformal intervals provide σ-free significance brackets alongside WLS and cluster-robust paths.
+[13:30:52] Results saved to results/outputs/step_064_prediction_coverage.json
+[13:30:52] ✓   ✓   Uncertainty calibration complete.

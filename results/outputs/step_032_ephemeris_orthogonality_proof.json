@@ -4,55 +4,55 @@
     "peak_frequencies": {
         "static_ratio_synodic": 0.9999959999199985
     },
-    "empirical_modulation_depth": 1.679784731783574,
-    "perihelion_aphelion_differential_sigma": 1.4190991353129907,
+    "empirical_modulation_depth": 1.6797847232264278,
+    "perihelion_aphelion_differential_sigma": 1.419099139037726,
     "primary_model_m1": {
         "modulation_depth_m": 1.0,
-        "sideband_power_D_minus_Lprime": 0.1598468096688225,
-        "sideband_power_D_plus_Lprime": 0.024291918031923397,
-        "static_power_D_minus_Lprime": 0.013430250050701578,
-        "power_ratio_tep_to_static": 11.90199803170994,
+        "sideband_power_D_minus_Lprime": 0.159846809430667,
+        "sideband_power_D_plus_Lprime": 0.024291917921967127,
+        "static_power_D_minus_Lprime": 0.013430250084126485,
+        "power_ratio_tep_to_static": 11.901997984355745,
         "theoretical_sideband_fraction_pct": 33.33
     },
     "modulation_depth_sweep": [
         {
             "modulation_depth_m": 0.017,
-            "sideband_power_D_minus_Lprime": 0.014678312788853442,
-            "sideband_power_D_plus_Lprime": 0.024580851136387687,
-            "static_power_D_minus_Lprime": 0.013430250050701578,
-            "power_ratio_tep_to_static": 1.0929292256987178,
+            "sideband_power_D_minus_Lprime": 0.014678312816284109,
+            "sideband_power_D_plus_Lprime": 0.02458085112860734,
+            "static_power_D_minus_Lprime": 0.013430250084126485,
+            "power_ratio_tep_to_static": 1.092929225021114,
             "theoretical_sideband_fraction_pct": 0.01
         },
         {
             "modulation_depth_m": 0.1,
-            "sideband_power_D_minus_Lprime": 0.021911586524381185,
-            "sideband_power_D_plus_Lprime": 0.016556998623181336,
-            "static_power_D_minus_Lprime": 0.013430250050701578,
-            "power_ratio_tep_to_static": 1.6315099452103317,
+            "sideband_power_D_minus_Lprime": 0.02191158652204642,
+            "sideband_power_D_plus_Lprime": 0.01655699861134343,
+            "static_power_D_minus_Lprime": 0.013430250084126485,
+            "power_ratio_tep_to_static": 1.6315099409760223,
             "theoretical_sideband_fraction_pct": 0.5
         },
         {
             "modulation_depth_m": 0.5,
-            "sideband_power_D_minus_Lprime": 0.07756720818820466,
-            "sideband_power_D_plus_Lprime": 0.0004769365862005289,
-            "static_power_D_minus_Lprime": 0.013430250050701578,
-            "power_ratio_tep_to_static": 5.775559494080503,
+            "sideband_power_D_minus_Lprime": 0.07756720804999857,
+            "sideband_power_D_plus_Lprime": 0.00047693653536329326,
+            "static_power_D_minus_Lprime": 0.013430250084126485,
+            "power_ratio_tep_to_static": 5.7755594694157635,
             "theoretical_sideband_fraction_pct": 11.11
         },
         {
             "modulation_depth_m": 1.0,
-            "sideband_power_D_minus_Lprime": 0.1598468096688225,
-            "sideband_power_D_plus_Lprime": 0.024291918031923397,
-            "static_power_D_minus_Lprime": 0.013430250050701578,
-            "power_ratio_tep_to_static": 11.90199803170994,
+            "sideband_power_D_minus_Lprime": 0.159846809430667,
+            "sideband_power_D_plus_Lprime": 0.024291917921967127,
+            "static_power_D_minus_Lprime": 0.013430250084126485,
+            "power_ratio_tep_to_static": 11.901997984355745,
             "theoretical_sideband_fraction_pct": 33.33
         },
         {
             "modulation_depth_m": 1.68,
-            "sideband_power_D_minus_Lprime": 0.2354412979536399,
-            "sideband_power_D_plus_Lprime": 0.07810007040492917,
-            "static_power_D_minus_Lprime": 0.013430250050701578,
-            "power_ratio_tep_to_static": 17.530671213477575,
+            "sideband_power_D_minus_Lprime": 0.23544129768794275,
+            "sideband_power_D_plus_Lprime": 0.0781000702443056,
+            "static_power_D_minus_Lprime": 0.013430250084126485,
+            "power_ratio_tep_to_static": 17.530671150064148,
             "theoretical_sideband_fraction_pct": 58.53
         }
     ],

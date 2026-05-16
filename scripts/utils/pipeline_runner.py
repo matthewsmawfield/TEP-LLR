@@ -90,12 +90,19 @@ def generate_audit_report(pipeline_name: str, results: list, elapsed_total: floa
     Generate a formal Research-Grade Audit Report (JSON).
     Captures system state, dependency hashes, and pipeline telemetry.
     """
+    if any(r["status"] == "FAIL" for r in results):
+        audit_status = "FAIL"
+    elif any(r["status"] == "WARNING" for r in results):
+        audit_status = "WARNING"
+    else:
+        audit_status = "PASS"
+
     audit_data = {
         "report_metadata": {
             "pipeline_name": pipeline_name,
             "timestamp": datetime.datetime.now().isoformat(),
             "elapsed_total_s": round(elapsed_total, 2),
-            "status": "PASS" if all(r["status"] == "PASS" for r in results) else "FAIL"
+            "status": audit_status
         },
         "system_telemetry": {
             "os": platform.system(),
@@ -134,7 +141,7 @@ def run_step(script_name: str, step_idx: int, total: int, label: str = "STEP") -
     """
     Run a single pipeline step as a subprocess.
 
-    Returns a dict with keys: name, status ("PASS" | "FAIL"), elapsed_s, returncode.
+    Returns a dict with keys: name, status ("PASS" | "WARNING" | "FAIL"), elapsed_s, returncode.
     Never raises — failures are captured in the return dict.
     """
     script_path = STEPS_DIR / script_name
@@ -162,9 +169,16 @@ def run_step(script_name: str, step_idx: int, total: int, label: str = "STEP") -
     if result.returncode == 0:
         output_ok, output_check = _validate_step_output(output_path, pre_run_mtime)
 
-    status = "PASS" if result.returncode == 0 and output_ok else "FAIL"
+    output_warning = output_check.endswith("status=WARNING")
+    if result.returncode == 0 and output_ok:
+        status = "WARNING" if output_warning else "PASS"
+    else:
+        status = "FAIL"
     if status == "PASS":
         print(f"\n✓  PASS  {script_name}  ({_fmt_elapsed(elapsed)})")
+    elif status == "WARNING":
+        print(f"\n⚠  WARNING  {script_name}  ({_fmt_elapsed(elapsed)})")
+        print(f"   output check: {output_check}")
     else:
         print(f"\n✗  FAIL  {script_name}  rc={result.returncode}  ({_fmt_elapsed(elapsed)})")
         if result.returncode == 0:
@@ -215,12 +229,13 @@ def run_pipeline(
     for i, step in enumerate(steps, start=1):
         r = run_step(step, i, n, label=pipeline_name)
         results.append(r)
-        if stop_on_failure and r["status"] != "PASS":
+        if stop_on_failure and r["status"] == "FAIL":
             print(f"\n  ⚠  Pipeline stopped at {step} (stop_on_failure=True)")
             break
 
     total_elapsed = time.perf_counter() - wall_start
     n_pass = sum(1 for r in results if r["status"] == "PASS")
+    n_warn = sum(1 for r in results if r["status"] == "WARNING")
     n_fail = sum(1 for r in results if r["status"] == "FAIL")
 
     # Generate Audit Report
@@ -231,14 +246,14 @@ def run_pipeline(
     print(f"║  {pipeline_name} — COMPLETE" + " " * (42 - len(pipeline_name)) + "  ║")
     print("╠" + "═" * 68 + "╣")
     for r in results:
-        icon = "✓" if r["status"] == "PASS" else "✗"
+        icon = "✓" if r["status"] == "PASS" else "⚠" if r["status"] == "WARNING" else "✗"
         t = _fmt_elapsed(r["elapsed_s"])
         name = r["name"][:52]
         stat = r["status"]
         print(f"║  {icon} {name:<52}  {stat:<8}  {t:>5}  ║")
     print("╠" + "═" * 68 + "╣")
     pct = 100 * n_pass // len(results) if results else 0
-    print(f"║  PASS {n_pass}/{len(results)} ({pct}%)   FAIL: {n_fail}   "
+    print(f"║  PASS {n_pass}/{len(results)} ({pct}%)   WARNING: {n_warn}   FAIL: {n_fail}   "
           f"Total: {_fmt_elapsed(total_elapsed):<37}  ║")
     print(f"║  AUDIT: {str(audit_path.relative_to(PROJECT_ROOT)):<58}  ║")
     print("╚" + "═" * 68 + "╝")

@@ -2,81 +2,146 @@
     "step_id": "step_059",
     "status": "PASS",
     "method": "Grasse-specific systematic sufficiency analysis",
-    "n_total": 26207,
-    "grasse_fraction": 0.7398786583737169,
+    "n_raw": 26207,
+    "n_outliers_removed": 762,
+    "n_total": 25445,
+    "grasse_fraction": 0.7365690705443113,
     "partition_test": {
         "grasse": {
-            "eta": -0.00046794259045642556,
-            "eta_err": 6.847973824855893e-05,
-            "snr": 6.833299928191137,
-            "n_used": 18664,
-            "n_outliers": 726,
-            "amplitude_m": -0.0060832536759335325,
-            "amplitude_err_m": 0.000890236597231266
+            "eta": -0.00045764667795905714,
+            "eta_err": 6.72408628075154e-05,
+            "snr": 6.806079798070448,
+            "n_used": 18612,
+            "n_outliers": 130,
+            "amplitude_m": -0.005949406813467743,
+            "amplitude_err_m": 0.0008741312164977003
         },
         "non_grasse": {
-            "eta": -0.00019001247751226224,
-            "eta_err": 0.0001907228123468508,
-            "snr": 0.9962755643866202,
-            "n_used": 6765,
-            "n_outliers": 52,
-            "amplitude_m": -0.0024701622076594093,
-            "amplitude_err_m": 0.0024793965605090606
+            "eta": -0.00016478018808587322,
+            "eta_err": 0.00017987260287175968,
+            "snr": 0.9160938656308509,
+            "n_used": 6703,
+            "n_outliers": 0,
+            "amplitude_m": -0.002142142445116352,
+            "amplitude_err_m": 0.002338343837332876
         },
         "pooled": {
-            "eta": -0.0004061154555979797,
-            "eta_err": 6.577799889845754e-05,
-            "snr": 6.174031779606219,
-            "n_used": 25445,
-            "n_outliers": 762,
-            "amplitude_m": -0.005279500922773736,
-            "amplitude_err_m": 0.000855113985679948
+            "eta": -0.00039761125159355103,
+            "eta_err": 6.479610412679798e-05,
+            "snr": 6.136345031106729,
+            "n_used": 25384,
+            "n_outliers": 61,
+            "amplitude_m": -0.005168946270716164,
+            "amplitude_err_m": 0.0008423493536483739
         }
     },
     "required_systematic": {
-        "pooled_eta": -0.0004061154555979797,
-        "required_amplitude_cm": 0.7135630772724668,
-        "required_amplitude_m": 0.007135630772724668
+        "pooled_eta": -0.00039761125159355103,
+        "required_amplitude_cm": 0.7017598861294033,
+        "required_amplitude_m": 0.007017598861294033
     },
     "known_systematics_comparison": {
         "ephemeris": {
-            "amplitude_cm": 0.3551881934658616,
-            "eta_equivalent": 0.000273221687281432
+            "amplitude_cm": 0.35518819827469233,
+            "eta_equivalent": 0.00027322169098053254
         },
         "atmospheric": {
-            "amplitude_cm": -0.07998379696114187,
-            "eta_equivalent": -6.152599766241682e-05
+            "amplitude_cm": -0.0799838002821101,
+            "eta_equivalent": -6.152600021700777e-05
         },
         "instrumental": {
-            "amplitude_cm": 0.009774929385785638,
-            "eta_equivalent": 7.519176450604337e-06
+            "amplitude_cm": 0.009774929479535906,
+            "eta_equivalent": 7.519176522719928e-06
         },
         "tidal": {
-            "amplitude_cm": -0.009117936585027405,
-            "eta_equivalent": -7.0137973730980044e-06
+            "amplitude_cm": -0.00911793526730031,
+            "eta_equivalent": -7.013796359461777e-06
         },
         "thermal": {
-            "amplitude_cm": -0.05561137739642375,
-            "eta_equivalent": -4.2777982612633655e-05
+            "amplitude_cm": -0.055611378604961646,
+            "eta_equivalent": -4.277798354227819e-05
         }
     },
     "interaction_test": {
-        "base_eta": -0.00037136896673205445,
-        "base_eta_err": 0.00012138914095495504,
-        "interact_eta": -4.486282394323817e-05,
-        "interact_eta_err": 0.00013172501404717644,
-        "t_interact": -0.3405793824942835,
-        "p_interact": 0.7334202528446623,
-        "n_used": 25445
+        "base_eta": -0.00035557919874927633,
+        "base_eta_err": 0.00011954637575313703,
+        "interact_eta": -5.4279691413085165e-05,
+        "interact_eta_err": 0.00012973575506182967,
+        "t_interact": -0.4183865225682501,
+        "p_interact": 0.6756645388074649,
+        "n_used": 25384
+    },
+    "grasse_conditioned_estimand": {
+        "non_grasse_direct": {
+            "eta": -0.00016478018808587322,
+            "eta_err": 0.00017987260287175968,
+            "eta_err_cluster": 0.00015768718371760195,
+            "snr": 0.9160938656308509,
+            "snr_cluster": 1.0449814893071714,
+            "n": 6703,
+            "n_clusters": 4,
+            "amplitude_m": -0.002142142445116352,
+            "amplitude_err_m": 0.002338343837332876
+        },
+        "common_eta_station_systematics": {
+            "eta": -0.0004321302481762647,
+            "eta_err": 6.756305491449571e-05,
+            "eta_err_cluster": 6.35379211439121e-05,
+            "snr": 6.395954841342599,
+            "snr_cluster": 6.80113923144414,
+            "n": 25445,
+            "n_clusters": 5,
+            "amplitude_m": -0.005617693226291441,
+            "amplitude_err_m": 0.0008783197138884443,
+            "method": "common_eta_station_specific_systematics",
+            "stations_modeled": [
+                "Grasse",
+                "APO",
+                "McDonald2",
+                "Matera",
+                "Haleakala"
+            ]
+        },
+        "pooled_grasse_cosd_interaction": {
+            "eta": -0.00037136896685114533,
+            "eta_err": 0.00012138914096370842,
+            "eta_err_cluster": 0.00013424541255633866,
+            "snr": 3.0593260970696967,
+            "snr_cluster": 2.7663438159966414,
+            "n": 25445,
+            "n_clusters": 5,
+            "amplitude_m": -0.0048277965690648895,
+            "amplitude_err_m": 0.0015780588325282096,
+            "method": "pooled_cosD_with_grasse_interaction"
+        },
+        "pooled_reference": {
+            "eta": -0.00040611545725110945,
+            "eta_err": 6.57779989203431e-05,
+            "eta_err_cluster": 6.224625170663243e-05,
+            "snr": 6.1740318026839605,
+            "snr_cluster": 6.524335941787115,
+            "n": 25445,
+            "n_clusters": 5,
+            "amplitude_m": -0.005279500944264423,
+            "amplitude_err_m": 0.0008551139859644602
+        },
+        "sign_consistent": true,
+        "non_grasse_negative_significant_2sigma": false,
+        "interpretation": "Non-Grasse direct fit and pooled models with explicit Grasse nuisance structure all return negative eta. Underpowered non-Grasse SNR reflects sample size, not sign reversal; common-eta mixed model absorbs per-station systematics while retaining a single Nordtvedt parameter."
     },
     "monte_carlo_station_dominance": {
-        "grasse_snr": 6.833299928191137,
-        "random_snr_mean": 1.9263874907195182,
-        "random_snr_std": 2.5362654878606827,
-        "random_snr_95th": 6.833299928191137,
+        "grasse_snr": 6.806079798070448,
+        "random_snr_mean": 1.9630057902117812,
+        "random_snr_std": 2.50181717861322,
+        "random_snr_95th": 6.806079798070448,
         "p_grasse_dominant": 1.0,
         "percentile": 100.0,
         "n_mc": 5000
     },
-    "interpretation": "A Grasse-only systematic would need amplitude 0.7 cm to explain the pooled eta=-4.06e-04. This is 2.0x larger than the largest known systematic projection. The Grasse x cos(D) interaction is t=-0.34 (p=0.733), providing no evidence that Grasse has a differential cos(D) coefficient. The Grasse-specific systematic hypothesis is quantitatively falsified."
+    "risk_flags": {
+        "grasse_dominates_clean_sample": true,
+        "non_grasse_subset_underpowered": true,
+        "material_station_leverage": true
+    },
+    "interpretation": "A Grasse-only systematic would need amplitude 0.7 cm to explain the pooled eta=-3.98e-04. This is 2.0x larger than the largest known systematic projection. The Grasse x cos(D) interaction is t=-0.42 (p=0.676), providing no evidence that Grasse has a differential cos(D) coefficient. However, Grasse contributes 73.7% of the cleaned sample and the non-Grasse subset is underpowered (SNR=0.92), so this step rules against a simple Grasse-specific differential cos(D) systematic but does not by itself remove all station-leverage risk."
 }

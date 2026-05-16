@@ -40,7 +40,7 @@ def compute_leverage(X: np.ndarray) -> np.ndarray:
 
 def theil_sen_regression(x: np.ndarray, y: np.ndarray, sample_size: int = 10000) -> Tuple[float, float]:
     """Compute Theil-Sen robust regression (median of pairwise slopes).
-    
+
     Optimized for M4 Pro: Vectorized sampling eliminates Python loops.
     """
     n = len(x)
@@ -50,14 +50,14 @@ def theil_sen_regression(x: np.ndarray, y: np.ndarray, sample_size: int = 10000)
         # Generate (sample_size, 2) array of random indices
         idx = rng.choice(n, size=(sample_size, 2), replace=False)
         i, j = idx[:, 0], idx[:, 1]
-        
+
         # Vectorized slope calculation
         dx = x[i] - x[j]
         dy = y[i] - y[j]
         # Filter out zero dx values
         valid = dx != 0
         slopes = dy[valid] / dx[valid]
-        
+
         slope = np.median(slopes)
         # Intercept via median residual
         intercept = np.median(y - slope * x)
@@ -69,7 +69,7 @@ def theil_sen_regression(x: np.ndarray, y: np.ndarray, sample_size: int = 10000)
         dy = y[i_idx] - y[j_idx]
         valid = dx != 0
         slopes = dy[valid] / dx[valid]
-        
+
         slope = np.median(slopes)
         intercept = np.median(y - slope * x)
 
@@ -159,7 +159,7 @@ def formal_cooks_distance_excision(df: pd.DataFrame) -> Dict:
     cos_elong = np.cos(df['elongation_rad'].values)
     residuals = df['residual_m'].values
     n = len(df)
-    
+
     X = np.column_stack([np.ones(n), cos_elong])
     from scripts.utils.numerics import hat_diagonal_from_qr
     leverage = hat_diagonal_from_qr(X)
@@ -169,25 +169,25 @@ def formal_cooks_distance_excision(df: pd.DataFrame) -> Dict:
     resid = residuals - y_pred
     mse = np.sum(resid**2) / (n - 2)
     std_resid = resid / np.sqrt(mse * (1 - leverage))
-    
+
     cooks_d = (std_resid**2 / 2) * (leverage / (1 - leverage))
     threshold = 4 / n
     mask = cooks_d < threshold
-    
+
     X_clean = np.column_stack([cos_elong[mask], np.ones(mask.sum())])
     res_clean = residuals[mask]
     coeffs_clean, _, _, _ = stable_lstsq(X_clean, res_clean)
     eta_clean = coeffs_clean[0] / ETA_SCALE_FACTOR
-    
+
     resid_clean = res_clean - np.dot(X_clean, coeffs_clean)
     mse_clean = np.sum(resid_clean**2) / (mask.sum() - 2)
     XtX_clean_inv = np.linalg.pinv(np.dot(X_clean.T, X_clean), rcond=1e-10, hermitian=True)
     se_clean = np.sqrt(mse_clean * XtX_clean_inv[0, 0]) / ETA_SCALE_FACTOR
     snr_clean = abs(eta_clean) / se_clean if se_clean > 0 else 0.0
-    
+
     slope_ts, intercept_ts = theil_sen_regression(cos_elong[mask], res_clean, sample_size=10000)
     eta_ts = slope_ts / ETA_SCALE_FACTOR
-    
+
     return {
         'n': n,
         'n_removed': int(n - mask.sum()),
@@ -372,8 +372,17 @@ def main():
                       if 'eta_ols' in v and v['eta_ols'] is not None])))
             ],
             'formal_cooks_d_excision': cooks_d_results,
-            'recommended_reporting': f'η = {cooks_d_results["eta_clean_ols"]:.2e} ± {cooks_d_results["eta_clean_se"]:.2e} (Leverage-Excised OLS)',
-            'key_finding': 'Cooks D excision converges OLS cleanly towards robust estimates while maintaining ~5.7 sigma detection.'
+            'recommended_reporting': (
+                f'CosD-only Cook\'s-D leverage excision (Step 017): '
+                f'η = {cooks_d_results["eta_clean_ols"]:.2e} ± {cooks_d_results["eta_clean_se"]:.2e} '
+                f'({cooks_d_results["eta_clean_snr"]:.2f}σ). '
+                f'Headline inference uses precision-weighted full-systematic regression (Step 050); '
+                f'treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.'
+            ),
+            'key_finding': (
+                'Cook\'s-D excision on the simple cosD-only design stabilizes OLS against high-leverage shots '
+                'while preserving strong negative η; full-systematic Cook\'s diagnostics are reported in Step 050.'
+            )
         }
     }
 

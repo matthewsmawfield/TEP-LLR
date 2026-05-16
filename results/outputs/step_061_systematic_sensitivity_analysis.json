@@ -1,81 +1,2077 @@
 {
     "step_id": "step_061",
     "status": "PASS",
-    "method": "Systematic amplitude sensitivity with Monte Carlo falsification",
-    "observed_abs_eta": 0.000406,
-    "required_amplitude_m": 0.005278,
-    "required_amplitude_cm": 0.5277999999999999,
+    "method": "Systematic amplitude sensitivity with Monte Carlo falsification; adversarial PCA/GP nuisance search; era\u00d7station\u00d7lunation grid; blind year hold-out",
+    "n_raw": 26207,
+    "n_outliers_removed": 762,
+    "n_observations": 25445,
+    "observed_abs_eta": 0.00040611545725110945,
+    "required_amplitude_m": 0.005279500944264423,
+    "required_amplitude_cm": 0.5279500944264424,
     "systematics": {
         "ephemeris": {
-            "known_amplitude_m": 0.003551881934658616,
-            "known_eta": 0.000273221687281432,
-            "required_amplitude_m": 0.005278,
-            "ratio_required_to_known": 1.4859728158467878,
+            "known_amplitude_m": 0.003551881982746923,
+            "known_eta": 0.00027322169098053254,
+            "required_amplitude_m": 0.005279500944264423,
+            "ratio_required_to_known": 1.48639537290634,
             "monte_carlo": {
                 "n_mc": 2000,
-                "mean_abs_eta": 7.837973105700874e-05,
-                "std_abs_eta": 5.8843361033632636e-05,
-                "max_abs_eta": 0.000331018626122954,
+                "mean_abs_eta": 5.018601102987766e-05,
+                "std_abs_eta": 3.753400535755947e-05,
+                "max_abs_eta": 0.00020822084462942392,
                 "p_exceed_observed": 0.0,
                 "percentile_of_observed": 100.0
             }
         },
         "atmospheric": {
-            "known_amplitude_m": -0.0007998379696114187,
-            "known_eta": -6.152599766241682e-05,
-            "required_amplitude_m": 0.005278,
-            "ratio_required_to_known": 6.598836515055899,
+            "known_amplitude_m": -0.0007998380028211011,
+            "known_eta": -6.152600021700777e-05,
+            "required_amplitude_m": 0.005279500944264423,
+            "ratio_required_to_known": 6.600712801396214,
             "monte_carlo": {
                 "n_mc": 2000,
-                "mean_abs_eta": 8.105944847970434e-05,
-                "std_abs_eta": 6.018271651522609e-05,
-                "max_abs_eta": 0.0003226034120742951,
+                "mean_abs_eta": 5.129684416949356e-05,
+                "std_abs_eta": 3.9589054004869644e-05,
+                "max_abs_eta": 0.00023606093555570662,
                 "p_exceed_observed": 0.0,
                 "percentile_of_observed": 100.0
             }
         },
         "instrumental": {
-            "known_amplitude_m": 9.774929385785637e-05,
-            "known_eta": 7.519176450604337e-06,
-            "required_amplitude_m": 0.005278,
-            "ratio_required_to_known": 53.99527497022213,
+            "known_amplitude_m": 9.774929479535906e-05,
+            "known_eta": 7.519176522719928e-06,
+            "required_amplitude_m": 0.005279500944264423,
+            "ratio_required_to_known": 54.01062949167264,
             "monte_carlo": {
                 "n_mc": 2000,
-                "mean_abs_eta": 8.069338914280954e-05,
-                "std_abs_eta": 6.006680421273423e-05,
-                "max_abs_eta": 0.0003282662876165224,
+                "mean_abs_eta": 5.1562766246605464e-05,
+                "std_abs_eta": 3.91337726489264e-05,
+                "max_abs_eta": 0.00022482675762505757,
                 "p_exceed_observed": 0.0,
                 "percentile_of_observed": 100.0
             }
         },
         "tidal": {
-            "known_amplitude_m": -9.117936585027406e-05,
-            "known_eta": -7.0137973730980044e-06,
-            "required_amplitude_m": 0.005278,
-            "ratio_required_to_known": 57.885903798311354,
+            "known_amplitude_m": -9.11793526730031e-05,
+            "known_eta": -7.013796359461777e-06,
+            "required_amplitude_m": 0.005279500944264423,
+            "ratio_required_to_known": 57.90237361300776,
             "monte_carlo": {
                 "n_mc": 2000,
-                "mean_abs_eta": 8.054980357500221e-05,
-                "std_abs_eta": 6.0113452741578614e-05,
-                "max_abs_eta": 0.0003171963142021023,
+                "mean_abs_eta": 4.95075881803677e-05,
+                "std_abs_eta": 3.715906118894574e-05,
+                "max_abs_eta": 0.00021387315599725602,
                 "p_exceed_observed": 0.0,
                 "percentile_of_observed": 100.0
             }
         },
         "thermal": {
-            "known_amplitude_m": -0.0005561137739642375,
-            "known_eta": -4.2777982612633655e-05,
-            "required_amplitude_m": 0.005278,
-            "ratio_required_to_known": 9.490863645357967,
+            "known_amplitude_m": -0.0005561137860496165,
+            "known_eta": -4.277798354227819e-05,
+            "required_amplitude_m": 0.005279500944264423,
+            "ratio_required_to_known": 9.493562426796926,
             "monte_carlo": {
                 "n_mc": 2000,
-                "mean_abs_eta": 7.886623238722601e-05,
-                "std_abs_eta": 6.022837073628325e-05,
-                "max_abs_eta": 0.0003531366669195711,
+                "mean_abs_eta": 4.961780991366692e-05,
+                "std_abs_eta": 3.813339451306737e-05,
+                "max_abs_eta": 0.00026888578577337785,
                 "p_exceed_observed": 0.0,
                 "percentile_of_observed": 100.0
             }
         }
     },
-    "interpretation": "For a systematic to fully explain the observed |eta|=4.06e-04, it would need amplitude 0.53 cm. The smallest ratio to a known systematic is 1.5x (ephemeris). Monte Carlo falsification: no known systematic, when injected at its observed amplitude as the sole signal, produces |eta| >= observed in more than 0.0% of simulations. All systematic-only simulations produce |eta| significantly below observed. The systematic hypothesis is formally falsified."
+    "adversarial_pca": {
+        "basis_n_terms": 82,
+        "basis_condition_number": 1.0535180579116366e+20,
+        "pca_n_components_used": 20,
+        "pc_ranked_by_residual_correlation": true,
+        "top_pc_residual_correlations": [
+            -0.03487617264994521,
+            -0.025431457840539427,
+            0.021764648222476868,
+            0.019578750469105954,
+            -0.01582314517514084
+        ],
+        "baseline_cosd_only": {
+            "eta": -0.00031772666444063755,
+            "eta_err": 6.051938437550738e-05,
+            "snr": 5.249998289295616,
+            "p_two_sided": 1.5210062276338476e-07,
+            "n_obs": 25445,
+            "amplitude_m": -0.004130446637728288
+        },
+        "full_systematic": {
+            "eta": -0.00040611545725110945,
+            "eta_err": 6.57779989203431e-05,
+            "snr": 6.1740318026839605,
+            "p_two_sided": 6.657014939293049e-10,
+            "n_obs": 25445,
+            "amplitude_m": -0.005279500944264423
+        },
+        "joint_cosd_plus_all_pcs": {
+            "eta": -0.00029268432604201455,
+            "eta_err": 9.918101872681454e-05,
+            "snr": 2.9510114919084263,
+            "p_two_sided": 0.0031673513231866846,
+            "n_obs": 25445,
+            "amplitude_m": -0.0038048962385461888
+        },
+        "pca_by_n_components": {
+            "1": {
+                "eta": -0.0002819329433073277,
+                "eta_err": 6.068179025891205e-05,
+                "snr": 4.646088095034762,
+                "p_two_sided": 3.382885868985497e-06,
+                "n_obs": 25445,
+                "amplitude_m": -0.0036651282629952603,
+                "absorption_fraction": 0.11265570422402293,
+                "survival_fraction": 0.8873442957759771,
+                "variance_explained_cumulative": 0.019603280004342936
+            },
+            "3": {
+                "eta": -0.0002216005705272829,
+                "eta_err": 6.663336830066607e-05,
+                "snr": 3.325669648386479,
+                "p_two_sided": 0.0008820640361846266,
+                "n_obs": 25445,
+                "amplitude_m": -0.002880807416854678,
+                "absorption_fraction": 0.3025433640660473,
+                "survival_fraction": 0.6974566359339527,
+                "variance_explained_cumulative": 0.0713748983233724
+            },
+            "5": {
+                "eta": -0.00025659062569549846,
+                "eta_err": 6.675587512052644e-05,
+                "snr": 3.843716006002903,
+                "p_two_sided": 0.00012118523664628178,
+                "n_obs": 25445,
+                "amplitude_m": -0.00333567813404148,
+                "absorption_fraction": 0.19241708546171277,
+                "survival_fraction": 0.8075829145382872,
+                "variance_explained_cumulative": 0.1236081474239363
+            },
+            "10": {
+                "eta": -0.00019965078443663303,
+                "eta_err": 7.76665534826654e-05,
+                "snr": 2.5706147045805707,
+                "p_two_sided": 0.010151820171801607,
+                "n_obs": 25445,
+                "amplitude_m": -0.0025954601976762295,
+                "absorption_fraction": 0.3716272293730173,
+                "survival_fraction": 0.6283727706269827,
+                "variance_explained_cumulative": 0.2914800733623743
+            },
+            "20": {
+                "eta": -0.00029268432604201455,
+                "eta_err": 9.918101872681454e-05,
+                "snr": 2.9510114919084263,
+                "p_two_sided": 0.0031673513231866846,
+                "n_obs": 25445,
+                "amplitude_m": -0.0038048962385461888,
+                "absorption_fraction": 0.07881723884493741,
+                "survival_fraction": 0.9211827611550626,
+                "variance_explained_cumulative": 0.5428249537161278
+            }
+        },
+        "cosd_survives_rich_pc_basis": true
+    },
+    "adversarial_gp": {
+        "method": "2D binned elongation x time GP (Step 060-style bin means)",
+        "n_valid_bins": 455,
+        "gp_train_n": 455,
+        "kernel": "0.1**2 * RBF(length_scale=[1.74, 1.09]) + WhiteKernel(noise_level=0.000107)",
+        "log_marginal_likelihood": 1087.5648267376437,
+        "baseline_cosd_only": {
+            "eta": -0.00031772666444063755,
+            "eta_err": 6.051938437550738e-05,
+            "snr": 5.249998289295616,
+            "p_two_sided": 1.5210062276338476e-07,
+            "n_obs": 25445,
+            "amplitude_m": -0.004130446637728288
+        },
+        "cosd_after_gp_subtraction": {
+            "eta": 5.3467784845642356e-05,
+            "eta_err": 5.880928942026237e-05,
+            "snr": 0.9091724347075747,
+            "p_two_sided": 0.3632591122557547,
+            "n_obs": 25445,
+            "amplitude_m": 0.0006950812029933506
+        },
+        "joint_cosd_plus_gp_mean": {
+            "eta": 1.7979689316097785e-05,
+            "eta_err": 5.941841991288192e-05,
+            "snr": 0.3025945378968212,
+            "p_two_sided": 0.7621988775683202,
+            "n_obs": 25445,
+            "amplitude_m": 0.00023373596110927121
+        },
+        "absorption_fraction_gp_subtract": 0.8317176654349323,
+        "survival_fraction_gp_subtract": 0.1682823345650677,
+        "cosd_survives_gp_nuisance": false
+    },
+    "interaction_grid": {
+        "min_cell_n": 80,
+        "n_cells_total": 60,
+        "n_cells_fitted": 26,
+        "n_cells_negative_eta": 13,
+        "n_cells_significant_05": 9,
+        "fraction_negative_eta": 0.5,
+        "cells": [
+            {
+                "era": "pre_1990",
+                "station": "APO",
+                "lunation_quartile": "Q0",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "APO",
+                "lunation_quartile": "Q1",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "APO",
+                "lunation_quartile": "Q2",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "APO",
+                "lunation_quartile": "Q3",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "Grasse",
+                "lunation_quartile": "Q0",
+                "n_obs": 454,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.0009639042266524984,
+                    "eta_err": 0.0023637020071701482,
+                    "snr": 0.4077943089816537,
+                    "p_two_sided": 0.6834246921014522,
+                    "n_obs": 454,
+                    "amplitude_m": -0.012530754946482479
+                }
+            },
+            {
+                "era": "pre_1990",
+                "station": "Grasse",
+                "lunation_quartile": "Q1",
+                "n_obs": 83,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.011048145371134771,
+                    "eta_err": 0.041093484464141454,
+                    "snr": 0.26885394400602564,
+                    "p_two_sided": 0.7880420797351273,
+                    "n_obs": 83,
+                    "amplitude_m": 0.14362588982475202
+                }
+            },
+            {
+                "era": "pre_1990",
+                "station": "Grasse",
+                "lunation_quartile": "Q2",
+                "n_obs": 549,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.0005100813841615933,
+                    "eta_err": 0.0025387732147509516,
+                    "snr": 0.20091648249551552,
+                    "p_two_sided": 0.8407638793405445,
+                    "n_obs": 549,
+                    "amplitude_m": 0.006631057994100713
+                }
+            },
+            {
+                "era": "pre_1990",
+                "station": "Grasse",
+                "lunation_quartile": "Q3",
+                "n_obs": 196,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.06858094761847174,
+                    "eta_err": 0.02324370215432218,
+                    "snr": 2.9505173987836124,
+                    "p_two_sided": 0.0031724217618285255,
+                    "n_obs": 196,
+                    "amplitude_m": -0.8915523190401325
+                }
+            },
+            {
+                "era": "pre_1990",
+                "station": "Haleakala",
+                "lunation_quartile": "Q0",
+                "n_obs": 237,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.012170025670557963,
+                    "eta_err": 0.006731930153706591,
+                    "snr": 1.8078062892344722,
+                    "p_two_sided": 0.0706366545908097,
+                    "n_obs": 237,
+                    "amplitude_m": -0.15821033371725352
+                }
+            },
+            {
+                "era": "pre_1990",
+                "station": "Haleakala",
+                "lunation_quartile": "Q1",
+                "n_obs": 1,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "Haleakala",
+                "lunation_quartile": "Q2",
+                "n_obs": 160,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.02917650812686951,
+                    "eta_err": 0.009158547204787626,
+                    "snr": 3.18571357164786,
+                    "p_two_sided": 0.0014439748017895937,
+                    "n_obs": 160,
+                    "amplitude_m": -0.3792946056493037
+                }
+            },
+            {
+                "era": "pre_1990",
+                "station": "Haleakala",
+                "lunation_quartile": "Q3",
+                "n_obs": 227,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.019311396131749536,
+                    "eta_err": 0.016836212973200877,
+                    "snr": 1.147015434081794,
+                    "p_two_sided": 0.25137524216369056,
+                    "n_obs": 227,
+                    "amplitude_m": 0.251048149712744
+                }
+            },
+            {
+                "era": "pre_1990",
+                "station": "Matera",
+                "lunation_quartile": "Q0",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "Matera",
+                "lunation_quartile": "Q1",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "Matera",
+                "lunation_quartile": "Q2",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "Matera",
+                "lunation_quartile": "Q3",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "McDonald2",
+                "lunation_quartile": "Q0",
+                "n_obs": 12,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "McDonald2",
+                "lunation_quartile": "Q1",
+                "n_obs": 3,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "McDonald2",
+                "lunation_quartile": "Q2",
+                "n_obs": 65,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "pre_1990",
+                "station": "McDonald2",
+                "lunation_quartile": "Q3",
+                "n_obs": 8,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "APO",
+                "lunation_quartile": "Q0",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "APO",
+                "lunation_quartile": "Q1",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "APO",
+                "lunation_quartile": "Q2",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "APO",
+                "lunation_quartile": "Q3",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Grasse",
+                "lunation_quartile": "Q0",
+                "n_obs": 1515,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.0029837984693883196,
+                    "eta_err": 0.0007624828207636643,
+                    "snr": 3.913266486974615,
+                    "p_two_sided": 9.105595162184343e-05,
+                    "n_obs": 1515,
+                    "amplitude_m": -0.03878938010204815
+                }
+            },
+            {
+                "era": "era_1990s",
+                "station": "Grasse",
+                "lunation_quartile": "Q1",
+                "n_obs": 243,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.024934775263394562,
+                    "eta_err": 0.01794750058920624,
+                    "snr": 1.3893174227496903,
+                    "p_two_sided": 0.16473624819912658,
+                    "n_obs": 243,
+                    "amplitude_m": 0.3241520784241293
+                }
+            },
+            {
+                "era": "era_1990s",
+                "station": "Grasse",
+                "lunation_quartile": "Q2",
+                "n_obs": 2106,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.00018846851897586734,
+                    "eta_err": 0.000849787612849181,
+                    "snr": 0.2217830857100484,
+                    "p_two_sided": 0.824482747222981,
+                    "n_obs": 2106,
+                    "amplitude_m": -0.0024500907466862756
+                }
+            },
+            {
+                "era": "era_1990s",
+                "station": "Grasse",
+                "lunation_quartile": "Q3",
+                "n_obs": 1273,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.0193333217334047,
+                    "eta_err": 0.0056824944876991265,
+                    "snr": 3.4022596546737467,
+                    "p_two_sided": 0.0006683110937628634,
+                    "n_obs": 1273,
+                    "amplitude_m": -0.25133318253426107
+                }
+            },
+            {
+                "era": "era_1990s",
+                "station": "Haleakala",
+                "lunation_quartile": "Q0",
+                "n_obs": 6,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Haleakala",
+                "lunation_quartile": "Q1",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Haleakala",
+                "lunation_quartile": "Q2",
+                "n_obs": 7,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Haleakala",
+                "lunation_quartile": "Q3",
+                "n_obs": 28,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Matera",
+                "lunation_quartile": "Q0",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Matera",
+                "lunation_quartile": "Q1",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Matera",
+                "lunation_quartile": "Q2",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "Matera",
+                "lunation_quartile": "Q3",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "McDonald2",
+                "lunation_quartile": "Q0",
+                "n_obs": 556,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.0005479706625553265,
+                    "eta_err": 0.0010983893249224828,
+                    "snr": 0.49888564111272543,
+                    "p_two_sided": 0.6178599501782858,
+                    "n_obs": 556,
+                    "amplitude_m": -0.007123618613219245
+                }
+            },
+            {
+                "era": "era_1990s",
+                "station": "McDonald2",
+                "lunation_quartile": "Q1",
+                "n_obs": 62,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "era_1990s",
+                "station": "McDonald2",
+                "lunation_quartile": "Q2",
+                "n_obs": 1114,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.0028059386649120018,
+                    "eta_err": 0.001055889522310637,
+                    "snr": 2.657416903590137,
+                    "p_two_sided": 0.007874199975382634,
+                    "n_obs": 1114,
+                    "amplitude_m": 0.036477202643856024
+                }
+            },
+            {
+                "era": "era_1990s",
+                "station": "McDonald2",
+                "lunation_quartile": "Q3",
+                "n_obs": 535,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.010410116072160506,
+                    "eta_err": 0.009805614796255272,
+                    "snr": 1.0616484828810622,
+                    "p_two_sided": 0.28839529493206206,
+                    "n_obs": 535,
+                    "amplitude_m": -0.13533150893808657
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "APO",
+                "lunation_quartile": "Q0",
+                "n_obs": 677,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.00013264851867595472,
+                    "eta_err": 0.00036720422728745317,
+                    "snr": 0.3612390839175046,
+                    "p_two_sided": 0.7179207272021975,
+                    "n_obs": 677,
+                    "amplitude_m": 0.0017244307427874113
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "APO",
+                "lunation_quartile": "Q1",
+                "n_obs": 313,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.0032399209515274236,
+                    "eta_err": 0.01020018933701147,
+                    "snr": 0.31763341291826264,
+                    "p_two_sided": 0.7507630258546234,
+                    "n_obs": 313,
+                    "amplitude_m": 0.042118972369856504
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "APO",
+                "lunation_quartile": "Q2",
+                "n_obs": 942,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.002398369546554891,
+                    "eta_err": 0.0005807333538607363,
+                    "snr": 4.129898051507536,
+                    "p_two_sided": 3.62924133430198e-05,
+                    "n_obs": 942,
+                    "amplitude_m": -0.031178804105213585
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "APO",
+                "lunation_quartile": "Q3",
+                "n_obs": 663,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.00027622520380273164,
+                    "eta_err": 0.0034957675949548743,
+                    "snr": 0.0790170388332973,
+                    "p_two_sided": 0.9370190704089936,
+                    "n_obs": 663,
+                    "amplitude_m": -0.0035909276494355113
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "Grasse",
+                "lunation_quartile": "Q0",
+                "n_obs": 4427,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.001629566336017345,
+                    "eta_err": 0.00017292005617163054,
+                    "snr": 9.42381336263233,
+                    "p_two_sided": 0.0,
+                    "n_obs": 4427,
+                    "amplitude_m": -0.021184362368225487
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "Grasse",
+                "lunation_quartile": "Q1",
+                "n_obs": 1449,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.0053279003587260515,
+                    "eta_err": 0.0014770663768374503,
+                    "snr": 3.6070825538210607,
+                    "p_two_sided": 0.00030965916196845633,
+                    "n_obs": 1449,
+                    "amplitude_m": 0.06926270466343867
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "Grasse",
+                "lunation_quartile": "Q2",
+                "n_obs": 3845,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 4.8893783235402934e-05,
+                    "eta_err": 0.00019474890917376873,
+                    "snr": 0.25106062695209475,
+                    "p_two_sided": 0.8017672362694952,
+                    "n_obs": 3845,
+                    "amplitude_m": 0.0006356191820602381
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "Grasse",
+                "lunation_quartile": "Q3",
+                "n_obs": 2602,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.00019406101130261028,
+                    "eta_err": 0.0016248457869280429,
+                    "snr": 0.11943349508232708,
+                    "p_two_sided": 0.9049319259643005,
+                    "n_obs": 2602,
+                    "amplitude_m": 0.0025227931469339335
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "Haleakala",
+                "lunation_quartile": "Q0",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "Haleakala",
+                "lunation_quartile": "Q1",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "Haleakala",
+                "lunation_quartile": "Q2",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "Haleakala",
+                "lunation_quartile": "Q3",
+                "n_obs": 0,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "Matera",
+                "lunation_quartile": "Q0",
+                "n_obs": 252,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": -0.002491931074135856,
+                    "eta_err": 0.002023030885757954,
+                    "snr": 1.231781032943658,
+                    "p_two_sided": 0.21803089030254608,
+                    "n_obs": 252,
+                    "amplitude_m": -0.03239510396376613
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "Matera",
+                "lunation_quartile": "Q1",
+                "n_obs": 15,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "Matera",
+                "lunation_quartile": "Q2",
+                "n_obs": 36,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "Matera",
+                "lunation_quartile": "Q3",
+                "n_obs": 42,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "McDonald2",
+                "lunation_quartile": "Q0",
+                "n_obs": 172,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.0012094925108744358,
+                    "eta_err": 0.0020114837971374863,
+                    "snr": 0.6012936880702928,
+                    "p_two_sided": 0.5476443928835417,
+                    "n_obs": 172,
+                    "amplitude_m": 0.015723402641367665
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "McDonald2",
+                "lunation_quartile": "Q1",
+                "n_obs": 22,
+                "sufficient_n": false,
+                "fit": null
+            },
+            {
+                "era": "post_2000",
+                "station": "McDonald2",
+                "lunation_quartile": "Q2",
+                "n_obs": 395,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.0016757186357845661,
+                    "eta_err": 0.0023738340664321254,
+                    "snr": 0.7059122874174489,
+                    "p_two_sided": 0.48024268577462825,
+                    "n_obs": 395,
+                    "amplitude_m": 0.02178434226519936
+                }
+            },
+            {
+                "era": "post_2000",
+                "station": "McDonald2",
+                "lunation_quartile": "Q3",
+                "n_obs": 153,
+                "sufficient_n": true,
+                "fit": {
+                    "eta": 0.1104962213555559,
+                    "eta_err": 0.03393479703211913,
+                    "snr": 3.256133262001589,
+                    "p_two_sided": 0.0011294072929193266,
+                    "n_obs": 153,
+                    "amplitude_m": 1.4364508776222267
+                }
+            }
+        ],
+        "headline_claims": {
+            "pooled_full_systematic": {
+                "claim": "Primary pooled synodic coefficient (full systematic)",
+                "source_cell": "all_data",
+                "eta": -0.0004768429542390225,
+                "eta_err": 0.0003272624868948589,
+                "snr": 1.457065729602611,
+                "p_two_sided": 0.14509823720374637
+            },
+            "per_era_pooled": {
+                "pre_1990": {
+                    "eta": -0.00014011318882860212,
+                    "eta_err": 0.0005616364924497084,
+                    "snr": 0.24947308572750643,
+                    "p_two_sided": 0.8029948573539005,
+                    "n_obs": 1995,
+                    "amplitude_m": -0.0018214714547718277
+                },
+                "era_1990s": {
+                    "eta": -0.0013543568414854797,
+                    "eta_err": 0.000217615686455942,
+                    "snr": 6.223617715902479,
+                    "p_two_sided": 4.858200508550681e-10,
+                    "n_obs": 7445,
+                    "amplitude_m": -0.017606638939311237
+                },
+                "post_2000": {
+                    "eta": -0.0004066054375439316,
+                    "eta_err": 4.5776396374285536e-05,
+                    "snr": 8.882425654902324,
+                    "p_two_sided": 0.0,
+                    "n_obs": 16005,
+                    "amplitude_m": -0.00528587068807111
+                }
+            },
+            "per_station_pooled": {
+                "APO": {
+                    "eta": -7.988255319498363e-05,
+                    "eta_err": 0.00010296614301930689,
+                    "snr": 0.7758137855081653,
+                    "p_two_sided": 0.43785894316355867,
+                    "n_obs": 2595,
+                    "amplitude_m": -0.0010384731915347872
+                },
+                "Grasse": {
+                    "eta": -0.0004799123114837171,
+                    "eta_err": 7.044747070248388e-05,
+                    "snr": 6.812342681691141,
+                    "p_two_sided": 9.602096895378054e-12,
+                    "n_obs": 18742,
+                    "amplitude_m": -0.006238860049288322
+                },
+                "Haleakala": {
+                    "eta": -0.0004747375221657033,
+                    "eta_err": 0.002923427335247813,
+                    "snr": 0.1623907378992407,
+                    "p_two_sided": 0.8709981641188689,
+                    "n_obs": 666,
+                    "amplitude_m": -0.006171587788154143
+                },
+                "Matera": {
+                    "eta": 0.0005987505462615628,
+                    "eta_err": 0.0009034972661782234,
+                    "snr": 0.6627032185656371,
+                    "p_two_sided": 0.5075206480368046,
+                    "n_obs": 345,
+                    "amplitude_m": 0.007783757101400317
+                },
+                "McDonald2": {
+                    "eta": -0.0005467804098727859,
+                    "eta_err": 0.00045100489061779123,
+                    "snr": 1.2123602675877867,
+                    "p_two_sided": 0.2253745031679033,
+                    "n_obs": 3097,
+                    "amplitude_m": -0.007108145328346216
+                }
+            }
+        },
+        "pooled_interaction_model": {
+            "eta_cosD": -0.0004768429542390225,
+            "eta_cosD_err": 0.0003272624868948589,
+            "interaction_term_names": [
+                "cosD",
+                "cosD_x_era_1990s",
+                "cosD_x_era_post",
+                "cosD_x_sin_lunation",
+                "cosD_x_cos_lunation",
+                "cosD_x_station_Grasse",
+                "cosD_x_station_Haleakala",
+                "cosD_x_station_Matera",
+                "cosD_x_station_McDonald2"
+            ]
+        },
+        "cell_tests_for_step_042": [
+            {
+                "name": "Grid pre_1990 / Grasse / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 0.4077943089816537,
+                "p": 0.6834246921014522,
+                "n_obs": 454,
+                "eta": -0.0009639042266524984
+            },
+            {
+                "name": "Grid pre_1990 / Grasse / lunation Q1",
+                "category": "interaction_grid",
+                "sigma": 0.26885394400602564,
+                "p": 0.7880420797351273,
+                "n_obs": 83,
+                "eta": 0.011048145371134771
+            },
+            {
+                "name": "Grid pre_1990 / Grasse / lunation Q2",
+                "category": "interaction_grid",
+                "sigma": 0.20091648249551552,
+                "p": 0.8407638793405445,
+                "n_obs": 549,
+                "eta": 0.0005100813841615933
+            },
+            {
+                "name": "Grid pre_1990 / Grasse / lunation Q3",
+                "category": "interaction_grid",
+                "sigma": 2.9505173987836124,
+                "p": 0.0031724217618285255,
+                "n_obs": 196,
+                "eta": -0.06858094761847174
+            },
+            {
+                "name": "Grid pre_1990 / Haleakala / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 1.8078062892344722,
+                "p": 0.0706366545908097,
+                "n_obs": 237,
+                "eta": -0.012170025670557963
+            },
+            {
+                "name": "Grid pre_1990 / Haleakala / lunation Q2",
+                "category": "interaction_grid",
+                "sigma": 3.18571357164786,
+                "p": 0.0014439748017895937,
+                "n_obs": 160,
+                "eta": -0.02917650812686951
+            },
+            {
+                "name": "Grid pre_1990 / Haleakala / lunation Q3",
+                "category": "interaction_grid",
+                "sigma": 1.147015434081794,
+                "p": 0.25137524216369056,
+                "n_obs": 227,
+                "eta": 0.019311396131749536
+            },
+            {
+                "name": "Grid era_1990s / Grasse / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 3.913266486974615,
+                "p": 9.105595162184343e-05,
+                "n_obs": 1515,
+                "eta": -0.0029837984693883196
+            },
+            {
+                "name": "Grid era_1990s / Grasse / lunation Q1",
+                "category": "interaction_grid",
+                "sigma": 1.3893174227496903,
+                "p": 0.16473624819912658,
+                "n_obs": 243,
+                "eta": 0.024934775263394562
+            },
+            {
+                "name": "Grid era_1990s / Grasse / lunation Q2",
+                "category": "interaction_grid",
+                "sigma": 0.2217830857100484,
+                "p": 0.824482747222981,
+                "n_obs": 2106,
+                "eta": -0.00018846851897586734
+            },
+            {
+                "name": "Grid era_1990s / Grasse / lunation Q3",
+                "category": "interaction_grid",
+                "sigma": 3.4022596546737467,
+                "p": 0.0006683110937628634,
+                "n_obs": 1273,
+                "eta": -0.0193333217334047
+            },
+            {
+                "name": "Grid era_1990s / McDonald2 / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 0.49888564111272543,
+                "p": 0.6178599501782858,
+                "n_obs": 556,
+                "eta": -0.0005479706625553265
+            },
+            {
+                "name": "Grid era_1990s / McDonald2 / lunation Q2",
+                "category": "interaction_grid",
+                "sigma": 2.657416903590137,
+                "p": 0.007874199975382634,
+                "n_obs": 1114,
+                "eta": 0.0028059386649120018
+            },
+            {
+                "name": "Grid era_1990s / McDonald2 / lunation Q3",
+                "category": "interaction_grid",
+                "sigma": 1.0616484828810622,
+                "p": 0.28839529493206206,
+                "n_obs": 535,
+                "eta": -0.010410116072160506
+            },
+            {
+                "name": "Grid post_2000 / APO / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 0.3612390839175046,
+                "p": 0.7179207272021975,
+                "n_obs": 677,
+                "eta": 0.00013264851867595472
+            },
+            {
+                "name": "Grid post_2000 / APO / lunation Q1",
+                "category": "interaction_grid",
+                "sigma": 0.31763341291826264,
+                "p": 0.7507630258546234,
+                "n_obs": 313,
+                "eta": 0.0032399209515274236
+            },
+            {
+                "name": "Grid post_2000 / APO / lunation Q2",
+                "category": "interaction_grid",
+                "sigma": 4.129898051507536,
+                "p": 3.62924133430198e-05,
+                "n_obs": 942,
+                "eta": -0.002398369546554891
+            },
+            {
+                "name": "Grid post_2000 / APO / lunation Q3",
+                "category": "interaction_grid",
+                "sigma": 0.0790170388332973,
+                "p": 0.9370190704089936,
+                "n_obs": 663,
+                "eta": -0.00027622520380273164
+            },
+            {
+                "name": "Grid post_2000 / Grasse / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 9.42381336263233,
+                "p": 0.0,
+                "n_obs": 4427,
+                "eta": -0.001629566336017345
+            },
+            {
+                "name": "Grid post_2000 / Grasse / lunation Q1",
+                "category": "interaction_grid",
+                "sigma": 3.6070825538210607,
+                "p": 0.00030965916196845633,
+                "n_obs": 1449,
+                "eta": 0.0053279003587260515
+            },
+            {
+                "name": "Grid post_2000 / Grasse / lunation Q2",
+                "category": "interaction_grid",
+                "sigma": 0.25106062695209475,
+                "p": 0.8017672362694952,
+                "n_obs": 3845,
+                "eta": 4.8893783235402934e-05
+            },
+            {
+                "name": "Grid post_2000 / Grasse / lunation Q3",
+                "category": "interaction_grid",
+                "sigma": 0.11943349508232708,
+                "p": 0.9049319259643005,
+                "n_obs": 2602,
+                "eta": 0.00019406101130261028
+            },
+            {
+                "name": "Grid post_2000 / Matera / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 1.231781032943658,
+                "p": 0.21803089030254608,
+                "n_obs": 252,
+                "eta": -0.002491931074135856
+            },
+            {
+                "name": "Grid post_2000 / McDonald2 / lunation Q0",
+                "category": "interaction_grid",
+                "sigma": 0.6012936880702928,
+                "p": 0.5476443928835417,
+                "n_obs": 172,
+                "eta": 0.0012094925108744358
+            },
+            {
+                "name": "Grid post_2000 / McDonald2 / lunation Q2",
+                "category": "interaction_grid",
+                "sigma": 0.7059122874174489,
+                "p": 0.48024268577462825,
+                "n_obs": 395,
+                "eta": 0.0016757186357845661
+            },
+            {
+                "name": "Grid post_2000 / McDonald2 / lunation Q3",
+                "category": "interaction_grid",
+                "sigma": 3.256133262001589,
+                "p": 0.0011294072929193266,
+                "n_obs": 153,
+                "eta": 0.1104962213555559
+            }
+        ]
+    },
+    "blind_year_holdout": {
+        "holdout_year_fraction": 0.2,
+        "n_calendar_years": 36,
+        "n_holdout_years_per_split": 7,
+        "n_replicates": 20,
+        "blind_test_eta_mean": -0.00027847708685157667,
+        "blind_test_eta_std": 0.0005032648098136159,
+        "blind_test_snr_mean": 3.5275783890871137,
+        "blind_test_snr_min": 0.1975783197587599,
+        "inverse_variance_combined": {
+            "eta": -0.0003657904361719658,
+            "eta_err": 2.5639660528065986e-05,
+            "snr": 14.266586555292337,
+            "p_two_sided": 0.0
+        },
+        "n_splits_negative_eta": 15,
+        "n_splits_positive_eta": 5,
+        "all_splits_negative_eta": false,
+        "splits": [
+            {
+                "replicate": 0,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 19625,
+                "n_test_obs": 5820,
+                "test_years": [
+                    1993,
+                    2003,
+                    2004,
+                    2013,
+                    2015,
+                    2016,
+                    2019
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00030028882625494875,
+                    "eta_err": 7.490061593110345e-05,
+                    "snr": 4.0091636433426165,
+                    "p_two_sided": 6.0934180069693866e-05,
+                    "n_obs": 19625,
+                    "amplitude_m": -0.0039037547413143334
+                },
+                "blind_test_eta": {
+                    "eta": -0.000539796286828808,
+                    "eta_err": 8.381907228177817e-05,
+                    "snr": 6.440017434387149,
+                    "p_two_sided": 1.1945977540506192e-10,
+                    "n_obs": 5820,
+                    "amplitude_m": -0.007017351728774504
+                }
+            },
+            {
+                "replicate": 1,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 18580,
+                "n_test_obs": 6865,
+                "test_years": [
+                    1995,
+                    1996,
+                    1997,
+                    2008,
+                    2014,
+                    2015,
+                    2017
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0003727778893893093,
+                    "eta_err": 7.288493843387419e-05,
+                    "snr": 5.11460800268792,
+                    "p_two_sided": 3.1439316461323585e-07,
+                    "n_obs": 18580,
+                    "amplitude_m": -0.004846112562061021
+                },
+                "blind_test_eta": {
+                    "eta": -0.0002521233360069789,
+                    "eta_err": 0.00010469036564029035,
+                    "snr": 2.4082763916716,
+                    "p_two_sided": 0.01602804154360471,
+                    "n_obs": 6865,
+                    "amplitude_m": -0.003277603368090726
+                }
+            },
+            {
+                "replicate": 2,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 16750,
+                "n_test_obs": 8695,
+                "test_years": [
+                    2004,
+                    2005,
+                    2007,
+                    2012,
+                    2015,
+                    2016,
+                    2018
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00023276246558988445,
+                    "eta_err": 9.517149289050886e-05,
+                    "snr": 2.445716238345328,
+                    "p_two_sided": 0.01445647293879615,
+                    "n_obs": 16750,
+                    "amplitude_m": -0.003025912052668498
+                },
+                "blind_test_eta": {
+                    "eta": -0.00037924985542344455,
+                    "eta_err": 4.9247461784336435e-05,
+                    "snr": 7.700901562891676,
+                    "p_two_sided": 1.354472090042691e-14,
+                    "n_obs": 8695,
+                    "amplitude_m": -0.004930248120504779
+                }
+            },
+            {
+                "replicate": 3,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 17891,
+                "n_test_obs": 7554,
+                "test_years": [
+                    1989,
+                    1992,
+                    1994,
+                    1998,
+                    2001,
+                    2004,
+                    2018
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00012580790896377154,
+                    "eta_err": 7.794697739956951e-05,
+                    "snr": 1.6140190827266943,
+                    "p_two_sided": 0.10652328718508053,
+                    "n_obs": 17891,
+                    "amplitude_m": -0.00163550281652903
+                },
+                "blind_test_eta": {
+                    "eta": -0.0008597956574063361,
+                    "eta_err": 9.385710965698169e-05,
+                    "snr": 9.160687565903315,
+                    "p_two_sided": 0.0,
+                    "n_obs": 7554,
+                    "amplitude_m": -0.01117734354628237
+                }
+            },
+            {
+                "replicate": 4,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 21464,
+                "n_test_obs": 3981,
+                "test_years": [
+                    1984,
+                    1987,
+                    1991,
+                    1997,
+                    2009,
+                    2013,
+                    2017
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00033672327963328087,
+                    "eta_err": 6.503500590648968e-05,
+                    "snr": 5.177569755547298,
+                    "p_two_sided": 2.2479490491278398e-07,
+                    "n_obs": 21464,
+                    "amplitude_m": -0.004377402635232651
+                },
+                "blind_test_eta": {
+                    "eta": 3.2921790314690954e-05,
+                    "eta_err": 0.00016662653248032455,
+                    "snr": 0.1975783197587599,
+                    "p_two_sided": 0.8433749987316714,
+                    "n_obs": 3981,
+                    "amplitude_m": 0.00042798327409098244
+                }
+            },
+            {
+                "replicate": 5,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 22331,
+                "n_test_obs": 3114,
+                "test_years": [
+                    1986,
+                    1987,
+                    1990,
+                    2003,
+                    2005,
+                    2008,
+                    2016
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00038523702775977785,
+                    "eta_err": 6.290977908440746e-05,
+                    "snr": 6.123642991066567,
+                    "p_two_sided": 9.145970647495005e-10,
+                    "n_obs": 22331,
+                    "amplitude_m": -0.005008081360877112
+                },
+                "blind_test_eta": {
+                    "eta": 0.00037297065751407555,
+                    "eta_err": 0.0002053582523481775,
+                    "snr": 1.816195128509943,
+                    "p_two_sided": 0.06934044510808635,
+                    "n_obs": 3114,
+                    "amplitude_m": 0.004848618547682982
+                }
+            },
+            {
+                "replicate": 6,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 21591,
+                "n_test_obs": 3854,
+                "test_years": [
+                    1984,
+                    1985,
+                    1989,
+                    1990,
+                    1991,
+                    1995,
+                    2004
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0004138032245055512,
+                    "eta_err": 5.529172294811511e-05,
+                    "snr": 7.483999456733473,
+                    "p_two_sided": 7.216449660063518e-14,
+                    "n_obs": 21591,
+                    "amplitude_m": -0.005379441918572166
+                },
+                "blind_test_eta": {
+                    "eta": 0.000876762409469509,
+                    "eta_err": 0.00029453507008642447,
+                    "snr": 2.9767674498396524,
+                    "p_two_sided": 0.0029130487837079055,
+                    "n_obs": 3854,
+                    "amplitude_m": 0.011397911323103617
+                }
+            },
+            {
+                "replicate": 7,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 21565,
+                "n_test_obs": 3880,
+                "test_years": [
+                    1997,
+                    2004,
+                    2007,
+                    2009,
+                    2010,
+                    2014,
+                    2019
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0003276886546268778,
+                    "eta_err": 6.753375087150086e-05,
+                    "snr": 4.852220562284241,
+                    "p_two_sided": 1.2208673565439199e-06,
+                    "n_obs": 21565,
+                    "amplitude_m": -0.0042599525101494114
+                },
+                "blind_test_eta": {
+                    "eta": -0.0002361719516290883,
+                    "eta_err": 0.0001316689300349934,
+                    "snr": 1.793680191418897,
+                    "p_two_sided": 0.07286422876774479,
+                    "n_obs": 3880,
+                    "amplitude_m": -0.003070235371178148
+                }
+            },
+            {
+                "replicate": 8,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 22306,
+                "n_test_obs": 3139,
+                "test_years": [
+                    1989,
+                    1991,
+                    1993,
+                    1994,
+                    2003,
+                    2005,
+                    2010
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00034991343056073635,
+                    "eta_err": 6.0443256908875904e-05,
+                    "snr": 5.789122698802696,
+                    "p_two_sided": 7.075499963704601e-09,
+                    "n_obs": 22306,
+                    "amplitude_m": -0.0045488745972895725
+                },
+                "blind_test_eta": {
+                    "eta": -0.00013850043641524385,
+                    "eta_err": 0.00026336592508022336,
+                    "snr": 0.5258859374957315,
+                    "p_two_sided": 0.5989674601290873,
+                    "n_obs": 3139,
+                    "amplitude_m": -0.0018005056733981701
+                }
+            },
+            {
+                "replicate": 9,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 18598,
+                "n_test_obs": 6847,
+                "test_years": [
+                    1985,
+                    1987,
+                    1988,
+                    1992,
+                    2003,
+                    2011,
+                    2018
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0002146682693446764,
+                    "eta_err": 7.431053940511499e-05,
+                    "snr": 2.888799772726454,
+                    "p_two_sided": 0.003867152289438014,
+                    "n_obs": 18598,
+                    "amplitude_m": -0.002790687501480793
+                },
+                "blind_test_eta": {
+                    "eta": -0.00045587969045947715,
+                    "eta_err": 0.00010618314286359477,
+                    "snr": 4.293333933853421,
+                    "p_two_sided": 1.760099743286503e-05,
+                    "n_obs": 6847,
+                    "amplitude_m": -0.005926435975973203
+                }
+            },
+            {
+                "replicate": 10,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 20905,
+                "n_test_obs": 4540,
+                "test_years": [
+                    1990,
+                    1994,
+                    1996,
+                    2004,
+                    2005,
+                    2013,
+                    2014
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00030344006097987315,
+                    "eta_err": 6.299438300492137e-05,
+                    "snr": 4.816938376175019,
+                    "p_two_sided": 1.4577768503443167e-06,
+                    "n_obs": 20905,
+                    "amplitude_m": -0.003944720792738351
+                },
+                "blind_test_eta": {
+                    "eta": -0.0005504350768858842,
+                    "eta_err": 0.00018913950686817418,
+                    "snr": 2.910206788629964,
+                    "p_two_sided": 0.0036118969363734266,
+                    "n_obs": 4540,
+                    "amplitude_m": -0.007155655999516495
+                }
+            },
+            {
+                "replicate": 11,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 20935,
+                "n_test_obs": 4510,
+                "test_years": [
+                    1985,
+                    1992,
+                    2002,
+                    2003,
+                    2013,
+                    2016,
+                    2019
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0002391001634272693,
+                    "eta_err": 6.625602348159121e-05,
+                    "snr": 3.608730963060312,
+                    "p_two_sided": 0.0003076985033951818,
+                    "n_obs": 20935,
+                    "amplitude_m": -0.0031083021245545007
+                },
+                "blind_test_eta": {
+                    "eta": -0.0007554584209782268,
+                    "eta_err": 0.00014608920482883246,
+                    "snr": 5.1712131766571705,
+                    "p_two_sided": 2.3257905334972406e-07,
+                    "n_obs": 4510,
+                    "amplitude_m": -0.009820959472716948
+                }
+            },
+            {
+                "replicate": 12,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 20179,
+                "n_test_obs": 5266,
+                "test_years": [
+                    1990,
+                    1992,
+                    1996,
+                    1997,
+                    2011,
+                    2013,
+                    2019
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0002710197254186727,
+                    "eta_err": 6.390987419812325e-05,
+                    "snr": 4.240654966374999,
+                    "p_two_sided": 2.2286850339892084e-05,
+                    "n_obs": 20179,
+                    "amplitude_m": -0.0035232564304427455
+                },
+                "blind_test_eta": {
+                    "eta": -0.0004891823961353715,
+                    "eta_err": 0.0001653509862123881,
+                    "snr": 2.95844861491804,
+                    "p_two_sided": 0.0030919178604504882,
+                    "n_obs": 5266,
+                    "amplitude_m": -0.0063593711497598295
+                }
+            },
+            {
+                "replicate": 13,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 22217,
+                "n_test_obs": 3228,
+                "test_years": [
+                    1985,
+                    1988,
+                    1992,
+                    1999,
+                    2001,
+                    2006,
+                    2007
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0002106690836032298,
+                    "eta_err": 5.8235764282245226e-05,
+                    "snr": 3.617520714284814,
+                    "p_two_sided": 0.0002974385327574325,
+                    "n_obs": 22217,
+                    "amplitude_m": -0.0027386980868419875
+                },
+                "blind_test_eta": {
+                    "eta": -0.0011480803441461242,
+                    "eta_err": 0.0002857700351061626,
+                    "snr": 4.017497298901953,
+                    "p_two_sided": 5.881950935826552e-05,
+                    "n_obs": 3228,
+                    "amplitude_m": -0.014925044473899616
+                }
+            },
+            {
+                "replicate": 14,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 20400,
+                "n_test_obs": 5045,
+                "test_years": [
+                    1987,
+                    1996,
+                    1999,
+                    2000,
+                    2001,
+                    2007,
+                    2017
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00042447279491804557,
+                    "eta_err": 6.748090113271104e-05,
+                    "snr": 6.290265657289577,
+                    "p_two_sided": 3.1692315438647256e-10,
+                    "n_obs": 20400,
+                    "amplitude_m": -0.0055181463339345925
+                },
+                "blind_test_eta": {
+                    "eta": 0.0001403065939424694,
+                    "eta_err": 0.00013693794931525196,
+                    "snr": 1.0245997887660951,
+                    "p_two_sided": 0.30555206423536596,
+                    "n_obs": 5045,
+                    "amplitude_m": 0.0018239857212521023
+                }
+            },
+            {
+                "replicate": 15,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 20942,
+                "n_test_obs": 4503,
+                "test_years": [
+                    1999,
+                    2001,
+                    2006,
+                    2007,
+                    2014,
+                    2016,
+                    2019
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0003006700058829036,
+                    "eta_err": 7.160175338582881e-05,
+                    "snr": 4.199198925516972,
+                    "p_two_sided": 2.678609263995213e-05,
+                    "n_obs": 20942,
+                    "amplitude_m": -0.003908710076477747
+                },
+                "blind_test_eta": {
+                    "eta": -0.000380094480697984,
+                    "eta_err": 9.238925913590121e-05,
+                    "snr": 4.11405486149509,
+                    "p_two_sided": 3.88768975649878e-05,
+                    "n_obs": 4503,
+                    "amplitude_m": -0.004941228249073792
+                }
+            },
+            {
+                "replicate": 16,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 21642,
+                "n_test_obs": 3803,
+                "test_years": [
+                    1987,
+                    1988,
+                    1989,
+                    1992,
+                    2008,
+                    2010,
+                    2015
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.00023159539034476256,
+                    "eta_err": 6.263848647332357e-05,
+                    "snr": 3.69733375411927,
+                    "p_two_sided": 0.00021787581128962508,
+                    "n_obs": 21642,
+                    "amplitude_m": -0.0030107400744819133
+                },
+                "blind_test_eta": {
+                    "eta": -0.0009005209281185551,
+                    "eta_err": 0.00019595127811786845,
+                    "snr": 4.595636919381942,
+                    "p_two_sided": 4.314293812868186e-06,
+                    "n_obs": 3803,
+                    "amplitude_m": -0.011706772065541217
+                }
+            },
+            {
+                "replicate": 17,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 21055,
+                "n_test_obs": 4390,
+                "test_years": [
+                    1987,
+                    1990,
+                    1993,
+                    1999,
+                    2009,
+                    2010,
+                    2017
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0004764704928199145,
+                    "eta_err": 6.50911482580449e-05,
+                    "snr": 7.320050507190514,
+                    "p_two_sided": 2.4780177909633494e-13,
+                    "n_obs": 21055,
+                    "amplitude_m": -0.006194116406658888
+                },
+                "blind_test_eta": {
+                    "eta": 0.0006217224478253702,
+                    "eta_err": 0.00015951560563397135,
+                    "snr": 3.897565039824321,
+                    "p_two_sided": 9.716473152510119e-05,
+                    "n_obs": 4390,
+                    "amplitude_m": 0.008082391821729812
+                }
+            },
+            {
+                "replicate": 18,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 21657,
+                "n_test_obs": 3788,
+                "test_years": [
+                    1987,
+                    1990,
+                    1994,
+                    1995,
+                    2002,
+                    2003,
+                    2013
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0003281678317019091,
+                    "eta_err": 6.113805135148483e-05,
+                    "snr": 5.367652786564305,
+                    "p_two_sided": 7.976792759656348e-08,
+                    "n_obs": 21657,
+                    "amplitude_m": -0.004266181812124818
+                },
+                "blind_test_eta": {
+                    "eta": -0.0002432121851490637,
+                    "eta_err": 0.00023892645639680274,
+                    "snr": 1.0179374390634386,
+                    "p_two_sided": 0.3087076879474999,
+                    "n_obs": 3788,
+                    "amplitude_m": -0.0031617584069378282
+                }
+            },
+            {
+                "replicate": 19,
+                "n_train_years": 29,
+                "n_test_years": 7,
+                "n_train_obs": 18327,
+                "n_test_obs": 7118,
+                "test_years": [
+                    1989,
+                    1997,
+                    2007,
+                    2008,
+                    2009,
+                    2012,
+                    2018
+                ],
+                "train_eta_cosd_only": {
+                    "eta": -0.0003176053693976643,
+                    "eta_err": 8.095789097353274e-05,
+                    "snr": 3.923093420275707,
+                    "p_two_sided": 8.741923404032015e-05,
+                    "n_obs": 18327,
+                    "amplitude_m": -0.004128869802169636
+                },
+                "blind_test_eta": {
+                    "eta": -0.00028572458981706254,
+                    "eta_err": 8.091696340377108e-05,
+                    "snr": 3.5310839383741204,
+                    "p_two_sided": 0.0004138603910250893,
+                    "n_obs": 7118,
+                    "amplitude_m": -0.0037144196676218134
+                }
+            }
+        ],
+        "cell_tests_for_step_042": [
+            {
+                "name": "Blind 20% year hold-out (inverse-variance combined)",
+                "category": "validation",
+                "sigma": 14.266586555292337,
+                "p": 0.0,
+                "n_obs": 4997,
+                "eta": -0.0003657904361719658
+            }
+        ]
+    },
+    "tests_for_step_042": [
+        {
+            "name": "Grid pre_1990 / Grasse / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 0.4077943089816537,
+            "p": 0.6834246921014522,
+            "n_obs": 454,
+            "eta": -0.0009639042266524984
+        },
+        {
+            "name": "Grid pre_1990 / Grasse / lunation Q1",
+            "category": "interaction_grid",
+            "sigma": 0.26885394400602564,
+            "p": 0.7880420797351273,
+            "n_obs": 83,
+            "eta": 0.011048145371134771
+        },
+        {
+            "name": "Grid pre_1990 / Grasse / lunation Q2",
+            "category": "interaction_grid",
+            "sigma": 0.20091648249551552,
+            "p": 0.8407638793405445,
+            "n_obs": 549,
+            "eta": 0.0005100813841615933
+        },
+        {
+            "name": "Grid pre_1990 / Grasse / lunation Q3",
+            "category": "interaction_grid",
+            "sigma": 2.9505173987836124,
+            "p": 0.0031724217618285255,
+            "n_obs": 196,
+            "eta": -0.06858094761847174
+        },
+        {
+            "name": "Grid pre_1990 / Haleakala / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 1.8078062892344722,
+            "p": 0.0706366545908097,
+            "n_obs": 237,
+            "eta": -0.012170025670557963
+        },
+        {
+            "name": "Grid pre_1990 / Haleakala / lunation Q2",
+            "category": "interaction_grid",
+            "sigma": 3.18571357164786,
+            "p": 0.0014439748017895937,
+            "n_obs": 160,
+            "eta": -0.02917650812686951
+        },
+        {
+            "name": "Grid pre_1990 / Haleakala / lunation Q3",
+            "category": "interaction_grid",
+            "sigma": 1.147015434081794,
+            "p": 0.25137524216369056,
+            "n_obs": 227,
+            "eta": 0.019311396131749536
+        },
+        {
+            "name": "Grid era_1990s / Grasse / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 3.913266486974615,
+            "p": 9.105595162184343e-05,
+            "n_obs": 1515,
+            "eta": -0.0029837984693883196
+        },
+        {
+            "name": "Grid era_1990s / Grasse / lunation Q1",
+            "category": "interaction_grid",
+            "sigma": 1.3893174227496903,
+            "p": 0.16473624819912658,
+            "n_obs": 243,
+            "eta": 0.024934775263394562
+        },
+        {
+            "name": "Grid era_1990s / Grasse / lunation Q2",
+            "category": "interaction_grid",
+            "sigma": 0.2217830857100484,
+            "p": 0.824482747222981,
+            "n_obs": 2106,
+            "eta": -0.00018846851897586734
+        },
+        {
+            "name": "Grid era_1990s / Grasse / lunation Q3",
+            "category": "interaction_grid",
+            "sigma": 3.4022596546737467,
+            "p": 0.0006683110937628634,
+            "n_obs": 1273,
+            "eta": -0.0193333217334047
+        },
+        {
+            "name": "Grid era_1990s / McDonald2 / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 0.49888564111272543,
+            "p": 0.6178599501782858,
+            "n_obs": 556,
+            "eta": -0.0005479706625553265
+        },
+        {
+            "name": "Grid era_1990s / McDonald2 / lunation Q2",
+            "category": "interaction_grid",
+            "sigma": 2.657416903590137,
+            "p": 0.007874199975382634,
+            "n_obs": 1114,
+            "eta": 0.0028059386649120018
+        },
+        {
+            "name": "Grid era_1990s / McDonald2 / lunation Q3",
+            "category": "interaction_grid",
+            "sigma": 1.0616484828810622,
+            "p": 0.28839529493206206,
+            "n_obs": 535,
+            "eta": -0.010410116072160506
+        },
+        {
+            "name": "Grid post_2000 / APO / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 0.3612390839175046,
+            "p": 0.7179207272021975,
+            "n_obs": 677,
+            "eta": 0.00013264851867595472
+        },
+        {
+            "name": "Grid post_2000 / APO / lunation Q1",
+            "category": "interaction_grid",
+            "sigma": 0.31763341291826264,
+            "p": 0.7507630258546234,
+            "n_obs": 313,
+            "eta": 0.0032399209515274236
+        },
+        {
+            "name": "Grid post_2000 / APO / lunation Q2",
+            "category": "interaction_grid",
+            "sigma": 4.129898051507536,
+            "p": 3.62924133430198e-05,
+            "n_obs": 942,
+            "eta": -0.002398369546554891
+        },
+        {
+            "name": "Grid post_2000 / APO / lunation Q3",
+            "category": "interaction_grid",
+            "sigma": 0.0790170388332973,
+            "p": 0.9370190704089936,
+            "n_obs": 663,
+            "eta": -0.00027622520380273164
+        },
+        {
+            "name": "Grid post_2000 / Grasse / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 9.42381336263233,
+            "p": 0.0,
+            "n_obs": 4427,
+            "eta": -0.001629566336017345
+        },
+        {
+            "name": "Grid post_2000 / Grasse / lunation Q1",
+            "category": "interaction_grid",
+            "sigma": 3.6070825538210607,
+            "p": 0.00030965916196845633,
+            "n_obs": 1449,
+            "eta": 0.0053279003587260515
+        },
+        {
+            "name": "Grid post_2000 / Grasse / lunation Q2",
+            "category": "interaction_grid",
+            "sigma": 0.25106062695209475,
+            "p": 0.8017672362694952,
+            "n_obs": 3845,
+            "eta": 4.8893783235402934e-05
+        },
+        {
+            "name": "Grid post_2000 / Grasse / lunation Q3",
+            "category": "interaction_grid",
+            "sigma": 0.11943349508232708,
+            "p": 0.9049319259643005,
+            "n_obs": 2602,
+            "eta": 0.00019406101130261028
+        },
+        {
+            "name": "Grid post_2000 / Matera / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 1.231781032943658,
+            "p": 0.21803089030254608,
+            "n_obs": 252,
+            "eta": -0.002491931074135856
+        },
+        {
+            "name": "Grid post_2000 / McDonald2 / lunation Q0",
+            "category": "interaction_grid",
+            "sigma": 0.6012936880702928,
+            "p": 0.5476443928835417,
+            "n_obs": 172,
+            "eta": 0.0012094925108744358
+        },
+        {
+            "name": "Grid post_2000 / McDonald2 / lunation Q2",
+            "category": "interaction_grid",
+            "sigma": 0.7059122874174489,
+            "p": 0.48024268577462825,
+            "n_obs": 395,
+            "eta": 0.0016757186357845661
+        },
+        {
+            "name": "Grid post_2000 / McDonald2 / lunation Q3",
+            "category": "interaction_grid",
+            "sigma": 3.256133262001589,
+            "p": 0.0011294072929193266,
+            "n_obs": 153,
+            "eta": 0.1104962213555559
+        },
+        {
+            "name": "Blind 20% year hold-out (inverse-variance combined)",
+            "category": "validation",
+            "sigma": 14.266586555292337,
+            "p": 0.0,
+            "n_obs": 4997,
+            "eta": -0.0003657904361719658
+        }
+    ],
+    "interpretation": "Known systematics: to explain |eta|=4.06e-04 requires 0.53 cm; smallest ratio to a known systematic is 1.5x. Adversarial PCA (20 residual-ranked PCs): joint eta=-2.93e-04 (survival=True). GP elongation nuisance absorbs 83% of cos(D) amplitude (eta after subtraction=5.35e-05). Interaction grid: 13/26 fitted cells have negative eta; blind 20% year hold-out combined eta=-3.66e-04 (14.3\u03c3). Modeled known-systematic-only MC falsification remains below observed |eta|. Unmodeled or data-driven nuisances are additionally stress-tested above."
 }

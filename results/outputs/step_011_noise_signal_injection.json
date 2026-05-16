@@ -2,71 +2,74 @@
     "step_id": "step_011",
     "data_type": "REAL_INPOP19A_RESIDUALS (INJECTION_PERTURBATIONS)",
     "data_source": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv",
-    "n_observations": 26207,
+    "n_observations": 25445,
     "injection_results": {
-        "null_test_eta": -8.892186832155498e-05,
-        "null_test_eta_error": 9.19883174052915e-05,
-        "null_test_snr": 0.9666647986371352,
+        "n_observations": 25445,
+        "n_outliers_removed": 762,
+        "null_test_eta": 1.9989642814556516e-05,
+        "null_test_eta_error": 6.055202623951678e-05,
+        "null_test_snr": 0.33012343361535773,
         "null_test_pass": true,
         "noise_robustness_tests": [
             {
                 "noise_multiplier": 0.5,
-                "total_rms": 0.10612497084385046,
-                "eta": -0.0004492834485076156,
-                "eta_error": 0.00010293232218175473,
-                "snr": 4.364843219161856,
+                "total_rms": 0.06905221638252122,
+                "eta": -0.00032769813108471043,
+                "eta_error": 6.777254439998667e-05,
+                "snr": 4.835263807577732,
                 "significant": true
             },
             {
                 "noise_multiplier": 1.0,
-                "total_rms": 0.13467040574025724,
-                "eta": -0.0005744156764690572,
-                "eta_error": 0.0001306182839536095,
-                "snr": 4.397666690163126,
+                "total_rms": 0.08699317518159137,
+                "eta": -0.00029019938981401466,
+                "eta_error": 8.540086510559376e-05,
+                "snr": 3.398084895922285,
                 "significant": true
             },
             {
                 "noise_multiplier": 2.0,
-                "total_rms": 0.21287316693100986,
-                "eta": -0.0004360409133640436,
-                "eta_error": 0.00020652659680315185,
-                "snr": 2.111306340750147,
+                "total_rms": 0.13639186327455005,
+                "eta": -0.00021502824343867162,
+                "eta_error": 0.00013391896206047966,
+                "snr": 1.6056594236562398,
                 "significant": false
             },
             {
                 "noise_multiplier": 3.0,
-                "total_rms": 0.3016589562070955,
-                "eta": -0.0008146334334437258,
-                "eta_error": 0.00029264696545175,
-                "snr": 2.7836729220349223,
+                "total_rms": 0.19555972525746235,
+                "eta": -0.0003349154676954037,
+                "eta_error": 0.0001920123085362402,
+                "snr": 1.7442395763508676,
                 "significant": false
             }
         ],
         "signal_recovery": {
-            "eta_injected": -0.0003177266624680195,
-            "eta_recovered": -0.00024287631249080545,
-            "recovery_error_percent": 23.558095312428513,
-            "recovery_pass": false
+            "eta_injected": -0.00031772666444063755,
+            "eta_recovered": -0.0002474605330949629,
+            "recovery_error_percent": 22.115276811714626,
+            "recovery_z_score": 1.1585787980845135,
+            "recovery_pass": true
         },
         "detection_thresholds": [
             {
                 "confidence_sigma": 1.0,
-                "min_detectable_eta": 9.198644729441953e-05
+                "min_detectable_eta": 6.054977614852684e-05
             },
             {
                 "confidence_sigma": 2.0,
-                "min_detectable_eta": 0.00018397289458883906
+                "min_detectable_eta": 0.00012109955229705369
             },
             {
                 "confidence_sigma": 3.0,
-                "min_detectable_eta": 0.00027595934188325857
+                "min_detectable_eta": 0.00018164932844558053
             },
             {
                 "confidence_sigma": 5.0,
-                "min_detectable_eta": 0.0004599322364720977
+                "min_detectable_eta": 0.0003027488807426342
             }
         ],
-        "injection_valid": false
+        "injection_valid": true
     },
-    "status": "WARNING"
+    "status": "PASS"
 }

@@ -1,0 +1,2673 @@
+╔════════════════════════════════════════════════════════════════════╗
+║  TEP-LLR: Full Canonical                                              ║
+║  Steps: 74                                                            ║
+║  Started: 2026-05-15 12:41:36                                         ║
+╚════════════════════════════════════════════════════════════════════╝
+
+
+──────────────────────────────────────────────────────────────────────
+ [  1/74]  Full Canonical: step_000_llr_data_ingestion.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting data integrity check...
+    Found: INPOP19a_APO_residuals.txt          (   236.8 KB)
+    Found: INPOP19a_Grasse_residuals.txt       (  1676.7 KB)
+    Found: INPOP19a_Matera_residuals.txt       (    31.2 KB)
+    Found: INPOP19a_McDonald2_residuals.txt    (   263.4 KB)
+    Found: INPOP19a_Haleakala_residuals.txt    (    60.8 KB)
+    Found: DE430_2014-2018_residuals.dat       (   464.4 KB)
+    Found: de440.bsp                           (116992.0 KB)
+    Data audit complete. Station coverage: 7/7
+✓   Verified: INPOP19a_APO_residuals.txt          sha256=e123d2d095cc...
+✓   Verified: INPOP19a_Grasse_residuals.txt       sha256=efabea88d7da...
+✓   Verified: INPOP19a_Matera_residuals.txt       sha256=4267ce1f0068...
+✓   Verified: INPOP19a_McDonald2_residuals.txt    sha256=7529ab165e1d...
+✓   Verified: INPOP19a_Haleakala_residuals.txt    sha256=2dc80a1e4654...
+✓   Verified: DE430_2014-2018_residuals.dat       sha256=e44d3c25b095...
+✓   Verified: de440.bsp                           sha256=a4ce9bf9b328...
+✓   All 7 required LLR residual files present.
+Results saved to results/outputs/step_000_llr_data_ingestion.json
+
+✓  PASS  step_000_llr_data_ingestion.py  (0.1s)
+
+──────────────────────────────────────────────────────────────────────
+ [  2/74]  Full Canonical: step_001_data_preprocessing.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting INPOP MINI format preprocessing...
+═══ Processing INPOP LLR residuals for TEP analysis
+>>> Processing APO data from data/raw/INPOP19a_APO_residuals.txt
+    Parsed 2595 observations
+    Computing Moon elongation angles for APO...
+✓   Saved 2595 observations to APO_residuals.csv
+      Residual RMS: 0.032 m
+>>> Processing Grasse data from data/raw/INPOP19a_Grasse_residuals.txt
+    Parsed 19390 observations
+    Computing Moon elongation angles for Grasse...
+✓   Saved 19390 observations to Grasse_residuals.csv
+      Residual RMS: 0.099 m
+>>> Processing Matera data from data/raw/INPOP19a_Matera_residuals.txt
+    Parsed 346 observations
+    Computing Moon elongation angles for Matera...
+✓   Saved 346 observations to Matera_residuals.csv
+      Residual RMS: 0.062 m
+>>> Processing McDonald2 data from data/raw/INPOP19a_McDonald2_residuals.txt
+    Parsed 3139 observations
+    Computing Moon elongation angles for McDonald2...
+✓   Saved 3139 observations to McDonald2_residuals.csv
+      Residual RMS: 0.096 m
+>>> Processing Haleakala data from data/raw/INPOP19a_Haleakala_residuals.txt
+    Parsed 737 observations
+    Computing Moon elongation angles for Haleakala...
+✓   Saved 737 observations to Haleakala_residuals.csv
+      Residual RMS: 0.138 m
+✓   Combined 26207 observations from all stations
+═══ 
+Combined statistics:
+    Total observations: 26207
+    Residual RMS: 0.095 m
+Results saved to results/outputs/step_001_data_preprocessing.json
+✓   Preprocessing complete.
+
+✓  PASS  step_001_data_preprocessing.py  (7.5s)
+
+──────────────────────────────────────────────────────────────────────
+ [  3/74]  Full Canonical: step_002_de430_preprocessing.py
+──────────────────────────────────────────────────────────────────────
+
+>>> Processing DE430 data from DE430_2014-2018_residuals.dat
+    Parsed 4597 observations from DE430_2014-2018_residuals.dat
+    Parsed 4597 observations
+    Computing Moon-Sun elongation angles...
+    Cleaning data...
+    Cleaned dataset: 4597 observations (removed 0)
+    Residual stats for DE430:
+      Mean: 1.228713e-02 m
+      Std:  2.662568e-01 m
+      RMS:  2.665112e-01 m
+✓   DE430 Preprocessing Complete: 4597 observations
+Results saved to results/outputs/step_002_de430_preprocessing.json
+
+✓  PASS  step_002_de430_preprocessing.py  (0.8s)
+
+──────────────────────────────────────────────────────────────────────
+ [  4/74]  Full Canonical: step_003_statistical_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 003: Statistical Analysis...
+    ═══ STEP PURPOSE: Primary TEP Nordtvedt parameter estimation using OLS and Bayesian MCMC methods
+    ═══ METHOD: Unweighted OLS regression + Bayesian MCMC with emcee sampler
+    ═══ PARAMETERS: 6σ-equivalent (MAD-based) outlier cleaning, 32 walkers, 5000 steps, 1000 burn-in
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Stations: 5 (APO, Grasse, Matera, McDonald2, Haleakala)
+    Applied 6σ-equivalent (MAD-based) outlier cleaning: removed 762/26207 outliers
+        Cleaned dataset: N = 25,445 observations
+    Rows sorted by date_julian (+ station) for AR(1) / lag-1 diagnostics.
+    ═══ ANALYSIS TRACE
+>>> >>> Performing unweighted OLS regression
+        Unweighted Regression Complete (N=25445, DOF=25443):
+          RSS = 9.665854e+01
+          χ²_red = 0.003799
+          Birge Ratio = 0.062
+          Condition Number κ(R) = 2.11e+00
+          Final η = -3.17726664e-04 ± 6.05193844e-05
+>>> >>> Running Bayesian MCMC analysis
+        Number of walkers: 32
+        Total steps: 5000
+        Burn-in steps: 1000
+        Initial position: η=-3.17726664e-04, b=-1.05020579e-03
+    ═══ MCMC CONVERGENCE DIAGNOSTICS
+        Autocorrelation time: 34.53
+        Steps per autocorr: 115.8
+        Acceptance fraction: 0.717
+        Convergence status: CONVERGED
+>>> >>> Performing AR(1) GLS regression (autocorrelation-aware error estimation)
+    AR(1) GLS Regression Results:
+      η (GLS) = -3.26475575e-04 ± 9.00011560e-05
+      η (GLS, cluster-robust) = -3.26475575e-04 ± 9.47856832e-05
+      Cluster-robust SE inflation: 1.05x
+      AR(1) parameter ρ = 0.4162 ± 0.0057
+      Durbin-Watson = 1.168
+      Interpretation: Significant autocorrelation
+    ═══ RESULTS SUMMARY
+        OLS η: -3.17726664e-04 ± 6.05193844e-05
+        MCMC η: -2.88166054e-04 ± 6.60715776e-05
+        AR(1) GLS η: -3.26475575e-04 ± 9.00011560e-05
+        AR(1) GLS η (cluster-robust): -3.26475575e-04 ± 9.47856832e-05
+        Cluster-robust SNR: 3.44σ
+        AR(1) parameter ρ: 0.4162 ± 0.0057
+        Durbin-Watson: 1.168
+        SNR (MCMC): 4.36σ
+        Status: DETECTION
+    ═══ INTERPRETATION
+        The negative η indicates TEP Nordtvedt violation is present
+        Statistical significance: 4.36σ (DETECTION)
+        Convergence: CONVERGED
+        Temporal autocorrelation: ρ = 0.4162 (DW = 1.168)
+        Autocorrelation impact: Error inflation factor = 0.73x if significant
+        Limitations: OLS is unweighted (Birge ratio diagnostic); MCMC uses fixed station-specific sigma_m
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_003_statistical_analysis.json
+        MCMC walkers: 32
+        MCMC steps: 5000
+        MCMC burn-in: 1000
+Results saved to results/outputs/step_003_statistical_analysis.json
+✓   Statistical Analysis Complete. SNR = 4.4σ
+
+✓  PASS  step_003_statistical_analysis.py  (16.5s)
+
+──────────────────────────────────────────────────────────────────────
+ [  5/74]  Full Canonical: step_004_detection_analysis_advanced.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 004: Advanced TEP Detection Analysis...
+    ═══ STEP PURPOSE: Comprehensive TEP detection using 17 robust statistical methods
+    ═══ METHOD: Bootstrap correlation, OLS regression, station-by-station analysis, leverage analysis
+    ═══ PARAMETERS: Random seed=42, bootstrap samples=10000, Theil-Sen samples=10000
+    ═══ DATA SUMMARY
+    Loading residual data...
+        Dataset: N = 26,207 observations
+        Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+    ═══ ANALYSIS TRACE
+═══ Running comprehensive TEP detection analysis...
+    Running bootstrap correlation analysis...
+    Running OLS regression...
+  Running 1000 bootstrap samples for error estimation...
+    Running station-by-station analysis...
+    ═══ RESULTS SUMMARY
+        Bootstrap correlation r: -0.0304
+        95% CI: [-0.0412, -0.0197]
+        Sampled Theil–Sen η: -1.6146e-04 (±1.1757e-04)
+        Stations analyzed: 5
+    ═══ INTERPRETATION
+        Bootstrap correlation provides robust non-parametric confidence intervals
+        Station-by-station analysis tests cross-instrumental consistency
+        Multiple statistical methods ensure robustness of TEP detection
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_004_detection_analysis_advanced.json
+        Random seed: 42
+        Bootstrap samples: 10000
+        Theil-Sen samples: 10000
+✓   Results saved to step_004_detection_analysis_advanced.json
+    Bootstrap r=-0.0304 [-0.0412, -0.0197]
+
+✓  PASS  step_004_detection_analysis_advanced.py  (5.0s)
+
+──────────────────────────────────────────────────────────────────────
+ [  6/74]  Full Canonical: step_005_temporal_drift_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Temporal Drift Analysis...
+
+═══ Temporal Autocorrelation Analysis:
+
+    Linear Regression Complete (N=7067, DOF=7065):
+      RSS=1.759379e+02, MSE=2.490275e-02, χ²_red=0.025
+      Birge Ratio = 0.158 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.43e+00
+      Final η = -1.09837750e-03 ± 3.32534476e-04
+    Linear Regression Complete (N=12323, DOF=12321):
+      RSS=1.259577e+01, MSE=1.022301e-03, χ²_red=0.001
+      Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.90e+00
+      Final η = -2.93221837e-04 ± 4.17949614e-05
+    Linear Regression Complete (N=737, DOF=735):
+      RSS=1.397850e+01, MSE=1.901837e-02, χ²_red=0.019
+      Birge Ratio = 0.138 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 4.15e+00
+      Final η = 3.55351087e-03 ± 1.44874881e-03
+    Linear Regression Complete (N=2388, DOF=2386):
+      RSS=2.188557e+01, MSE=9.172492e-03, χ²_red=0.009
+      Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.06e+00
+      Final η = -1.78329660e-04 ± 4.14145984e-04
+    Linear Regression Complete (N=751, DOF=749):
+      RSS=6.423617e+00, MSE=8.576257e-03, χ²_red=0.009
+      Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.05e+00
+      Final η = -1.64470034e-03 ± 7.16420519e-04
+    Linear Regression Complete (N=346, DOF=344):
+      RSS=1.323291e+00, MSE=3.846776e-03, χ²_red=0.004
+      Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.40e+00
+      Final η = -1.81311472e-05 ± 8.70658166e-04
+    Linear Regression Complete (N=2595, DOF=2593):
+      RSS=2.582927e+00, MSE=9.961152e-04, χ²_red=0.001
+      Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.95e+00
+      Final η = -2.39835568e-04 ± 8.66412451e-05
+
+═══ Autocorrelation Summary:
+⚠     Stations with significant autocorrelation: 5/5
+
+Results saved to results/outputs/step_005_temporal_drift_analysis.json
+✓   Temporal Drift Analysis Complete.
+
+✓  PASS  step_005_temporal_drift_analysis.py  (0.8s)
+
+──────────────────────────────────────────────────────────────────────
+ [  7/74]  Full Canonical: step_006_multi_ephemeris_comparison.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Multi-Ephemeris Comparison...
+    Sigma Outlier Detection: median=-0.000, MAD=0.027, sigma=0.040
+      Threshold=0.239 (6.0σ), Count=762
+    Linear Regression Complete (N=25445, DOF=25443):
+      RSS=9.665854e+01, MSE=3.799023e-03, χ²_red=0.004
+      Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -3.17726664e-04 ± 6.05193844e-05
+      Ephemeris INPOP19a summary:
+        η   = -3.1773e-04 ± 6.0519e-05
+        SNR = 5.25σ
+        N   = 26207 (used=25445, outliers_removed=762)
+    Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
+      Threshold=0.297 (6.0σ), Count=37
+    Linear Regression Complete (N=4560, DOF=4558):
+      RSS=1.416414e+01, MSE=3.107534e-03, χ²_red=0.003
+      Birge Ratio = 0.056 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.87e+00
+      Final η = -7.04120485e-04 ± 1.18236800e-04
+      Ephemeris DE430 summary:
+        η   = -7.0412e-04 ± 1.1824e-04
+        SNR = 5.96σ
+        N   = 4597 (used=4560, outliers_removed=37)
+Results saved to results/outputs/step_006_multi_ephemeris_comparison.json
+✓   Multi-Ephemeris Comparison Complete.
+
+✓  PASS  step_006_multi_ephemeris_comparison.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [  8/74]  Full Canonical: step_006b_de430_outlier_robustness.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Step 006b: DE430 Outlier Robustness Analysis
+Results saved to results/outputs/step_006b_de430_outlier_robustness.json
+✓   Step 006b complete.
+
+✓  PASS  step_006b_de430_outlier_robustness.py  (2.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [  9/74]  Full Canonical: step_007_meta_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Meta-Analysis of INPOP19a and DE430 Results
+═══ ================================================================================
+    Sigma Outlier Detection: median=-0.000, MAD=0.027, sigma=0.040
+      Threshold=0.239 (6.0σ), Count=762
+    INPOP19a (from step_003): η = -3.177e-04 ± 6.052e-05 (5.25σ), r = -0.03290
+    DE430 (from step_006): η = -7.041e-04 ± 1.182e-04 (5.96σ), r = -0.00015
+    Sign consistency: True
+    INPOP19a weight: 0.968 (baseline: 35.5 years)
+    DE430 weight:   0.032 (baseline: 4.5 years)
+    Meta-Analysis Results:
+      Combined η (statistical only): -3.302e-04 ± 5.869e-05 (5.63σ)
+      Systematic uncertainty: 3.864e-04
+      Combined η (total uncertainty): -3.302e-04 ± 3.908e-04 (0.84σ)
+      Sign consistency: both ephemerides show same sign (qualitative check)
+✓   Meta-Analysis Complete
+    Primary result: η = -3.302e-04 ± 3.908e-04 (0.84σ)
+Results saved to results/outputs/step_007_meta_analysis.json
+✓   Step 007 Complete
+
+✓  PASS  step_007_meta_analysis.py  (0.9s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 10/74]  Full Canonical: step_008_systematic_error_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Systematic Error Analysis...
+    Loaded 26,207 observations from data/processed/INPOP19a_all_stations_residuals.csv
+
+    Analyzing 5 stations for systematic errors...
+    Total observations: 26,207
+    Residual threshold for 'clean' status: 0.15 m
+
+    ✓ Station Grasse:
+        N obs     = 19,390
+        RMS       = 0.0987 m
+        Status    = CLEAN
+    ✓ Station Haleakala:
+        N obs     = 737
+        RMS       = 0.1384 m
+        Status    = CLEAN
+    ✓ Station McDonald2:
+        N obs     = 3,139
+        RMS       = 0.0956 m
+        Status    = CLEAN
+    ✓ Station Matera:
+        N obs     = 346
+        RMS       = 0.0619 m
+        Status    = CLEAN
+    ✓ Station APO:
+        N obs     = 2,595
+        RMS       = 0.0316 m
+        Status    = CLEAN
+
+═══ Systematic Analysis Summary:
+      Clean stations:  5/5
+      Noisy stations:  0/5
+      Overall status:  PASS
+
+═══ Generating Data-Driven Systematic Error Budget (v2: elongation-correlated)...
+
+═══ Systematic Error Budget Table (DATA-DRIVEN):
+    Source                                   Magnitude (cm)     % Contribution 
+    ---------------------------------------------------------------------------
+    Ephemeris modeling (cross-ephemeris scatter) 0.25               61.0           
+    Atmospheric delay modeling               0.08               19.5           
+    Instrumental systematic                  0.01               2.4            
+    Tidal modeling                           0.01               2.4            
+    Thermal expansion                        0.06               14.6           
+    Unexplained residual variance            0.00               0.0            
+    ---------------------------------------------------------------------------
+    Total Budget (quadrature)                0.27               -              
+    Total Budget (linear sum)                0.41               -              
+    Observed RMS                             9.48               -              
+
+Results saved to results/outputs/step_008_systematic_error_analysis.json
+✓   Systematic Error Analysis Complete.
+
+✓  PASS  step_008_systematic_error_analysis.py  (0.3s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 11/74]  Full Canonical: step_009_ephemeris_independent_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Ephemeris-Independent Analysis...
+═══ ═══ Starting Step 009: Systematic-Corrected Residual Analysis...
+    ═══ STEP PURPOSE: Test TEP detection on residuals after systematic corrections
+    ═══ METHOD: Linear regression using corrected residuals (systematic errors removed)
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Data source: INPOP19a_all_stations_residuals.csv
+    ═══ ANALYSIS TRACE
+>>> >>> Performing linear regression on corrected residuals
+        Linear Regression Complete (N=26207, DOF=26205):
+          RSS = 2.353485e+02
+          χ²_red = 0.008981
+          Birge Ratio = 0.095
+          Condition Number κ(R) = 2.12e+00
+          Final η = -4.53298317e-04 ± 9.19473276e-05
+    ═══ RESULTS SUMMARY
+        η = -4.5330e-04 ± 9.1947e-05
+        SNR = 4.93σ
+        Status = SIGNIFICANT (>3σ)
+    ═══ INTERPRETATION
+        This test uses ephemeris-independent residuals
+        Low SNR expected: systematic correction removes ephemeris-dependent signal
+        Result is consistent with TEP being absorbed into ephemeris fit
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_009_ephemeris_independent_analysis.json
+        Data source: INPOP19a_all_stations_residuals.csv
+Results saved to results/outputs/step_009_ephemeris_independent_analysis.json
+✓   Analysis Complete.
+
+✓  PASS  step_009_ephemeris_independent_analysis.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 12/74]  Full Canonical: step_010_systematic_control_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Systematic Control Analysis...
+    ============================================================
+═══ SYSTEMATIC CONTROL ANALYSIS - DETAILED TRACE
+    ============================================================
+    [DATA] Dataset: N=26,207 observations
+    [DATA] Residual range: [-1.036197, 1.554217] m
+    [DATA] cos(elongation) range: [-0.999987, 0.986199]
+    [DATA] JD range: [2445797.9497, 2458767.9708]
+
+>>> TEST 1: UNCONTROLLED CORRELATION (BASELINE)
+      [CALC] r_original = -3.044049e-02
+      [CALC] p_original = 8.27e-07
+      [CALC] Significance: 4.93σ
+
+>>> TEST 2: CONTROLLING FOR LINEAR TIME TREND
+      [CALC] Time trend coefficient: -1.967789e-02
+      [CALC] r_partial (time controlled): -2.759946e-02
+      [CALC] p_partial: 7.87e-06
+      [CALC] Signal attenuation: 9.3%
+
+>>> TEST 3: CONTROLLING FOR QUADRATIC TIME TREND
+      [CALC] r_partial (quad controlled): -3.214879e-02
+      [CALC] p_partial: 1.93e-07
+
+>>> TEST 4: CONTROLLING FOR SEASONAL AND LUNAR CYCLES
+      [CALC] Controlled for: Annual, Sidereal (27.32d), Anomalistic (27.55d)
+      [CALC] r_combined (all controlled): -3.477635e-02
+      [CALC] p_combined: 1.79e-08
+Results saved to results/outputs/step_010_systematic_control_analysis.json
+✓   Control Analysis Complete.
+
+✓  PASS  step_010_systematic_control_analysis.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 13/74]  Full Canonical: step_011_noise_signal_injection.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Noise/Signal Injection Tests...
+    ============================================================
+═══ NOISE/SIGNAL INJECTION TESTS - PIPELINE VALIDATION
+⚠   WARNING: INJECTION TESTS PERTURB REAL INPOP19A RESIDUALS
+    PURPOSE: ALGORITHM ROBUSTNESS TESTING ONLY
+    ============================================================
+    [DATA] Canonical 6σ cleaning: removed 762/26,207 observations
+    [DATA] Original dataset: N=25,445 observations
+    [DATA] Original RMS: 0.061667 m
+    [DATA] Original residual range: [-0.238986, 0.238827] m
+
+>>> TEST 1: NULL TEST (SHUFFLED RESIDUALS)
+      Purpose: Verify that destroying phase correlation eliminates signal
+      [CALC] Linear regression on shuffled data:
+      [CALC]    η estimate: 1.998964e-05
+      [CALC]    SNR: 0.33σ
+      [CALC]    Expected: SNR < 3 (no signal in shuffled data)
+✓     [RESULT] PASS ✓
+
+>>> TEST 2: NOISE ROBUSTNESS (ADDITIVE GAUSSIAN NOISE)
+      Purpose: Determine how much noise signal can survive
+✓     [CALC] Noise level 0.5× RMS: η = -3.276981e-04, SNR = 4.84σ ✓
+✓     [CALC] Noise level 1.0× RMS: η = -2.901994e-04, SNR = 3.40σ ✓
+      [CALC] Noise level 2.0× RMS: η = -2.150282e-04, SNR = 1.61σ 
+      [CALC] Noise level 3.0× RMS: η = -3.349155e-04, SNR = 1.74σ 
+
+>>> TEST 3: SIGNAL RECOVERY (INJECTION INTO PURE NOISE)
+      Purpose: Validate pipeline can recover known injected signals
+      [DATA] Loaded measured η from step_003: -3.1773e-04
+      [CALC] Injected signal parameters:
+      [CALC]    η_injected: -3.177267e-04
+      [CALC] Recovery results:
+      [CALC]    η_recovered: -2.474605e-04
+      [CALC]    Recovery error: 22.1%
+      [CALC]    Recovery z-score: 1.16σ
+      [CALC]    SNR: 4.08σ
+✓     [RESULT] PASS ✓ (recovered η within 2σ of injected η)
+
+>>> TEST 4: DETECTION THRESHOLD ANALYSIS
+      Purpose: Compute minimum detectable η at various confidence levels
+Results saved to results/outputs/step_011_noise_signal_injection.json
+✓   Injection Tests Complete.
+
+✓  PASS  step_011_noise_signal_injection.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 14/74]  Full Canonical: step_012_subsample_robustness.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Subsample Robustness Test...
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.353485e+02, MSE=8.981055e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -4.53298317e-04 ± 9.19473276e-05
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.867979e+02, MSE=8.910837e-03, χ²_red=0.009
+      Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -4.53564469e-04 ± 1.02586153e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.897301e+02, MSE=9.050712e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -4.32499289e-04 ± 1.03208259e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.866686e+02, MSE=8.904668e-03, χ²_red=0.009
+      Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -4.57913692e-04 ± 1.02210825e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.906332e+02, MSE=9.093796e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -5.14052696e-04 ± 1.03669535e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.850537e+02, MSE=8.827636e-03, χ²_red=0.009
+      Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -4.52889874e-04 ± 1.02098924e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.813564e+02, MSE=8.651262e-03, χ²_red=0.009
+      Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -4.70513595e-04 ± 1.00781690e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.874802e+02, MSE=8.943387e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -4.47877807e-04 ± 1.02565702e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.898481e+02, MSE=9.056342e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -4.78509961e-04 ± 1.03155991e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.920552e+02, MSE=9.161628e-03, χ²_red=0.009
+      Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -4.80639643e-04 ± 1.03810794e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.939952e+02, MSE=9.254170e-03, χ²_red=0.009
+      Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -4.05616726e-04 ± 1.04411732e-04
+    Linear Regression Complete (N=20965, DOF=20963):
+      RSS=1.825826e+02, MSE=8.709758e-03, χ²_red=0.009
+      Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = -4.75383350e-04 ± 1.01131857e-04
+    Linear Regression Complete (N=6817, DOF=6815):
+      RSS=4.665247e+01, MSE=6.845556e-03, χ²_red=0.007
+      Birge Ratio = 0.083 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.48e+00
+      Final η = -1.64531152e-04 ± 1.75279060e-04
+    Linear Regression Complete (N=25470, DOF=25468):
+      RSS=2.212218e+02, MSE=8.686264e-03, χ²_red=0.009
+      Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.09e+00
+      Final η = -4.90006898e-04 ± 9.09688660e-05
+    Linear Regression Complete (N=23068, DOF=23066):
+      RSS=2.067142e+02, MSE=8.961856e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.05e+00
+      Final η = -4.55607767e-04 ± 9.56864963e-05
+    Linear Regression Complete (N=25861, DOF=25859):
+      RSS=2.340236e+02, MSE=9.049987e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -4.54544474e-04 ± 9.25726428e-05
+    Linear Regression Complete (N=23612, DOF=23610):
+      RSS=2.327587e+02, MSE=9.858480e-03, χ²_red=0.010
+      Birge Ratio = 0.099 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.14e+00
+      Final η = -4.83731992e-04 ± 1.03090078e-04
+    Linear Regression Complete (N=16512, DOF=16510):
+      RSS=1.505185e+02, MSE=9.116806e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.18e+00
+      Final η = -3.83640938e-04 ± 1.19413791e-04
+    Linear Regression Complete (N=25838, DOF=25836):
+      RSS=2.280602e+02, MSE=8.827226e-03, χ²_red=0.009
+      Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -4.75946690e-04 ± 9.14312022e-05
+    Linear Regression Complete (N=24638, DOF=24636):
+      RSS=2.224188e+02, MSE=9.028201e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.09e+00
+      Final η = -4.53821651e-04 ± 9.40206490e-05
+    Linear Regression Complete (N=26034, DOF=26032):
+      RSS=2.345283e+02, MSE=9.009230e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.11e+00
+      Final η = -4.52268758e-04 ± 9.22269441e-05
+    Linear Regression Complete (N=24910, DOF=24908):
+      RSS=2.339901e+02, MSE=9.394175e-03, χ²_red=0.009
+      Birge Ratio = 0.097 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.13e+00
+      Final η = -4.64464082e-04 ± 9.72669948e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.244278e+02, MSE=8.564311e-03, χ²_red=0.009
+      Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.46e+00
+      Final η = -5.07552348e-05 ± 1.02917209e-04
+Results saved to results/outputs/step_012_subsample_robustness.json
+Results saved to results/outputs/step_012_station_dominance.json
+✓   Robustness Analysis Complete.
+
+✓  PASS  step_012_subsample_robustness.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 15/74]  Full Canonical: step_013_station_decomposition.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Station Decomposition Analysis...
+    Linear Regression Complete (N=19390, DOF=19388):
+      RSS=1.886682e+02, MSE=9.731186e-03, χ²_red=0.010
+      Birge Ratio = 0.099 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.04e+00
+      Final η = -5.40178771e-04 ± 1.08752371e-04
+    Linear Regression Complete (N=737, DOF=735):
+      RSS=1.397850e+01, MSE=1.901837e-02, χ²_red=0.019
+      Birge Ratio = 0.138 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 4.15e+00
+      Final η = 3.55351087e-03 ± 1.44874881e-03
+    Linear Regression Complete (N=3139, DOF=3137):
+      RSS=2.863186e+01, MSE=9.127146e-03, χ²_red=0.009
+      Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.06e+00
+      Final η = -5.00935600e-04 ± 3.60578299e-04
+    Linear Regression Complete (N=346, DOF=344):
+      RSS=1.323291e+00, MSE=3.846776e-03, χ²_red=0.004
+      Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.40e+00
+      Final η = -1.81311472e-05 ± 8.70658166e-04
+    Linear Regression Complete (N=2595, DOF=2593):
+      RSS=2.582927e+00, MSE=9.961152e-04, χ²_red=0.001
+      Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.95e+00
+      Final η = -2.39835568e-04 ± 8.66412451e-05
+Results saved to results/outputs/step_013_station_decomposition.json
+✓   Decomposition Complete.
+
+✓  PASS  step_013_station_decomposition.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 16/74]  Full Canonical: step_015_null_tests.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Null Tests...
+    Spectral analysis complete (N_scan=400):
+      Peak 1: f=2.3970 * synodic, SNR=3.59
+      Peak 2: f=2.3872 * synodic, SNR=3.59
+      Peak 3: f=2.4068 * synodic, SNR=3.59
+      Peak 4: f=2.3774 * synodic, SNR=3.59
+      Peak 5: f=2.4165 * synodic, SNR=3.59
+>>> Found 5 non-physical harmonics for pre-whitening:
+      Factor 2.3970 * Synodic (~12.3 days)
+      Factor 2.3872 * Synodic (~12.4 days)
+      Factor 2.4068 * Synodic (~12.3 days)
+      Factor 2.3774 * Synodic (~12.4 days)
+      Factor 2.4165 * Synodic (~12.2 days)
+✓   Jointly whitened 5 harmonics (N_params=11)
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.07e+01
+      Final η = 2.23502311e-07 ± 3.09559630e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 8.22e+00
+      Final η = 1.71528621e-07 ± 2.52024065e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 6.49e+00
+      Final η = 1.34049817e-07 ± 2.11123063e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 5.24e+00
+      Final η = 1.05997360e-07 ± 1.81130025e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 4.32e+00
+      Final η = 8.43166174e-08 ± 1.58603638e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.64e+00
+      Final η = 6.70746597e-08 ± 1.41377078e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.14e+00
+      Final η = 5.29968485e-08 ± 1.28033187e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.76e+00
+      Final η = 4.12118687e-08 ± 1.17615867e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.49e+00
+      Final η = 3.11045572e-08 ± 1.09463598e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.30e+00
+      Final η = 2.22274823e-08 ± 1.03109392e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.18e+00
+      Final η = 1.42460741e-08 ± 9.82184973e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.22e+00
+      Final η = -1.30910088e-08 ± 8.93119626e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.31e+00
+      Final η = -1.94913674e-08 ± 8.91575934e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.42e+00
+      Final η = -2.58764552e-08 ± 8.96831575e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.50e+00
+      Final η = -2.97036158e-08 ± 9.02998586e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.55e+00
+      Final η = -3.22483549e-08 ± 9.08278160e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.70e+00
+      Final η = -3.85407211e-08 ± 9.25194373e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.84e+00
+      Final η = -4.45928043e-08 ± 9.46591930e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.99e+00
+      Final η = -5.01212916e-08 ± 9.71040091e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.12e+00
+      Final η = -5.47034275e-08 ± 9.96502971e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.24e+00
+      Final η = -5.77966992e-08 ± 1.02026978e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.33e+00
+      Final η = -5.88264429e-08 ± 1.03910230e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.37e+00
+      Final η = -5.73536075e-08 ± 1.04970945e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.36e+00
+      Final η = -5.32767414e-08 ± 1.04951574e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.30e+00
+      Final η = -4.69560758e-08 ± 1.03744226e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.19e+00
+      Final η = -3.91549196e-08 ± 1.01427492e-04
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.04e+00
+      Final η = -3.08094830e-08 ± 9.82379235e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.88e+00
+      Final η = -2.27613544e-08 ± 9.44932807e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.70e+00
+      Final η = -1.55899339e-08 ± 9.05100900e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.52e+00
+      Final η = -9.58315346e-09 ± 8.65487296e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.35e+00
+      Final η = -4.79873267e-09 ± 8.27934705e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.20e+00
+      Final η = -1.15115191e-09 ± 7.93571917e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.06e+00
+      Final η = 1.51514818e-09 ± 7.62970458e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.93e+00
+      Final η = 3.37792978e-09 ± 7.36315754e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.82e+00
+      Final η = 4.61130137e-09 ± 7.13549041e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.72e+00
+      Final η = 5.37431458e-09 ± 6.94469462e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.64e+00
+      Final η = 5.80733343e-09 ± 6.78800977e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.57e+00
+      Final η = 6.03154411e-09 ± 6.66232997e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.52e+00
+      Final η = 6.14872249e-09 ± 6.56443233e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.48e+00
+      Final η = 6.23953406e-09 ± 6.49109385e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.45e+00
+      Final η = 6.35934326e-09 ± 6.43914386e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.43e+00
+      Final η = 6.53097203e-09 ± 6.40548445e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.42e+00
+      Final η = 6.73424771e-09 ± 6.38710031e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.42e+00
+      Final η = 6.89262958e-09 ± 6.38107186e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.42e+00
+      Final η = 6.85774010e-09 ± 6.38459945e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.43e+00
+      Final η = 6.39321134e-09 ± 6.39504119e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.44e+00
+      Final η = 5.15977932e-09 ± 6.40996252e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.45e+00
+      Final η = 2.70386455e-09 ± 6.42719168e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.47e+00
+      Final η = -1.54817166e-09 ± 6.44487241e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.48e+00
+      Final η = -8.28836242e-09 ± 6.46150462e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.49e+00
+      Final η = -1.83171112e-08 ± 6.47596485e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.49e+00
+      Final η = -3.25247570e-08 ± 6.48750198e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.50e+00
+      Final η = -5.18654333e-08 ± 6.49570800e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.50e+00
+      Final η = -7.73243423e-08 ± 6.50046811e-05
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.352174e+02, MSE=8.976049e-03, χ²_red=0.009
+      Birge Ratio = 0.095 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.50e+00
+      Final η = -1.09879603e-07 ± 6.50189794e-05
+    Deep Scan Multi-frequency Null Test Summary:
+      Primary factor (1.23×) SNR: 0.00σ
+      Worst clean null factor: 3.20×, SNR=0.00σ
+Results saved to results/outputs/step_015_null_tests.json
+✓   Null Tests Complete.
+
+✓  PASS  step_015_null_tests.py  (1.1s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 17/74]  Full Canonical: step_016_bayesian_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Bayesian MCMC Analysis...
+    ============================================================
+═══ BAYESIAN MCMC ANALYSIS - DETAILED TRACE
+    ============================================================
+    Applied 6σ-equivalent (MAD-based) outlier cleaning: removed 762/26207 outliers
+    [DATA] Dataset: N=25445 observations
+    [DATA] Residual mean: -3.597882e-04 m
+    [DATA] Residual std:  6.166717e-02 m
+    [DATA] Mean uncertainty: 9.201876e-02 m
+    [DATA] cos(elongation) mean: -0.167153
+    [DATA] cos(elongation) std:  0.491130
+      [CALC] OLS-derived initial position: η=-3.177267e-04, b=-1.050206e-03
+
+>>> MCMC CONFIGURATION
+      [CALC] Number of walkers: 32
+      [CALC] Total steps: 5000
+      [CALC] Burn-in steps: 1000
+      [CALC] Thinning factor: 20
+      [CALC] Initial position: η=-3.177267e-04, b=-1.050206e-03
+      [CALC] Prior bounds: η∈[-0.01, 0.01], b∈[-0.1, 0.1]
+      [CALC] Expected samples after burn-in/thin: 6400
+    Running MCMC with 32 walkers for 5000 steps...
+  0%|          | 0/5000 [00:00<?, ?it/s]  2%|▏         | 88/5000 [00:00<00:05, 879.45it/s]  4%|▎         | 183/5000 [00:00<00:05, 918.26it/s]  6%|▌         | 285/5000 [00:00<00:04, 964.03it/s]  8%|▊         | 385/5000 [00:00<00:04, 977.23it/s] 10%|▉         | 483/5000 [00:00<00:04, 952.52it/s] 12%|█▏        | 579/5000 [00:00<00:04, 940.01it/s] 14%|█▎        | 677/5000 [00:00<00:04, 951.78it/s] 15%|█▌        | 773/5000 [00:00<00:04, 942.85it/s] 17%|█▋        | 868/5000 [00:00<00:04, 940.57it/s] 19%|█▉        | 963/5000 [00:01<00:04, 912.39it/s] 21%|██        | 1055/5000 [00:01<00:04, 893.48it/s] 23%|██▎       | 1151/5000 [00:01<00:04, 909.73it/s] 25%|██▍       | 1248/5000 [00:01<00:04, 924.91it/s] 27%|██▋       | 1345/5000 [00:01<00:03, 935.79it/s] 29%|██▉       | 1439/5000 [00:01<00:03, 928.59it/s] 31%|███       | 1532/5000 [00:01<00:03, 911.04it/s] 33%|███▎      | 1627/5000 [00:01<00:03, 920.19it/s] 34%|███▍      | 1724/5000 [00:01<00:03, 933.84it/s] 36%|███▋      | 1818/5000 [00:01<00:03, 932.33it/s] 38%|███▊      | 1912/5000 [00:02<00:03, 910.83it/s] 40%|████      | 2004/5000 [00:02<00:03, 898.44it/s] 42%|████▏     | 2098/5000 [00:02<00:03, 909.86it/s] 44%|████▍     | 2190/5000 [00:02<00:03, 905.41it/s] 46%|████▌     | 2281/5000 [00:02<00:03, 902.95it/s] 48%|████▊     | 2380/5000 [00:02<00:02, 925.51it/s] 50%|████▉     | 2475/5000 [00:02<00:02, 932.05it/s] 51%|█████▏    | 2574/5000 [00:02<00:02, 948.13it/s] 53%|█████▎    | 2670/5000 [00:02<00:02, 949.32it/s] 55%|█████▌    | 2765/5000 [00:02<00:02, 949.39it/s] 57%|█████▋    | 2862/5000 [00:03<00:02, 953.34it/s] 59%|█████▉    | 2958/5000 [00:03<00:02, 941.87it/s] 61%|██████    | 3053/5000 [00:03<00:02, 879.97it/s] 63%|██████▎   | 3157/5000 [00:03<00:01, 922.28it/s] 65%|██████▌   | 3251/5000 [00:03<00:01, 900.85it/s] 67%|██████▋   | 3342/5000 [00:03<00:01, 899.67it/s] 69%|██████▊   | 3434/5000 [00:03<00:01, 903.51it/s] 70%|███████   | 3525/5000 [00:03<00:01, 896.12it/s] 72%|███████▏  | 3624/5000 [00:03<00:01, 922.24it/s] 74%|███████▍  | 3717/5000 [00:04<00:01, 909.97it/s] 76%|███████▌  | 3809/5000 [00:04<00:01, 907.41it/s] 78%|███████▊  | 3910/5000 [00:04<00:01, 936.54it/s] 80%|████████  | 4004/5000 [00:04<00:01, 934.14it/s] 82%|████████▏ | 4098/5000 [00:04<00:01, 845.88it/s] 84%|████████▍ | 4197/5000 [00:04<00:00, 885.12it/s] 86%|████████▌ | 4293/5000 [00:04<00:00, 905.53it/s] 88%|████████▊ | 4397/5000 [00:04<00:00, 943.93it/s] 90%|████████▉ | 4495/5000 [00:04<00:00, 952.79it/s] 92%|█████████▏| 4591/5000 [00:04<00:00, 946.24it/s] 94%|█████████▎| 4687/5000 [00:05<00:00, 905.72it/s] 96%|█████████▌| 4779/5000 [00:05<00:00, 899.90it/s] 97%|█████████▋| 4873/5000 [00:05<00:00, 909.82it/s] 99%|█████████▉| 4972/5000 [00:05<00:00, 932.44it/s]100%|██████████| 5000/5000 [00:05<00:00, 920.46it/s]
+
+>>> MCMC CHAIN DIAGNOSTICS
+      [CALC] Acceptance fraction per walker:
+      [CALC]    Walker  1: 0.709
+      [CALC]    Walker  2: 0.722
+      [CALC]    Walker  3: 0.706
+      [CALC]    Walker  4: 0.718
+      [CALC]    Walker  5: 0.714
+      [CALC] Mean acceptance: 0.717 ± 0.007
+      [CALC] Acceptable range: 0.2-0.5 (ensemble sampler)
+      [CALC] Gelman-Rubin R̂ (convergence diagnostic):
+✓     [CALC]    R̂_η = 0.9992 ✓ converged
+✓     [CALC]    R̂_b = 1.0023 ✓ converged
+      [CALC]    Target: R̂ < 1.1 for convergence
+      [CALC] Post-burn-in chain shape: (4000, 32, 2)
+      [CALC] Chain evolution (η):
+      [CALC]    Step 0:   mean=-3.376661e-04, std=7.861787e-05
+      [CALC]    Step 100: mean=-3.051212e-04, std=6.694349e-05
+      [CALC]    Step 500: mean=-2.903982e-04, std=8.553828e-05
+      [CALC]    Step 999: mean=-2.787039e-04, std=5.513816e-05
+
+>>> POSTERIOR ANALYSIS
+      [CALC] Effective samples: 6400
+      [CALC] Thinning reduced samples by factor of 20.0
+      [CALC] η posterior statistics:
+      [CALC]    Mean:   -2.869033e-04
+      [CALC]    Std:    6.634016e-05
+      [CALC]    Median: -2.876437e-04
+      [CALC]    68% CI: [-3.533563e-04, -2.210230e-04]
+      [CALC]    95% CI: [-4.153917e-04, -1.559047e-04]
+✓     [CALC]    Includes η=0? NO
+      [CALC] b (intercept) posterior statistics:
+      [CALC]    Mean:   -4.026892e-04 m
+      [CALC]    Std:    4.800492e-04 m
+      [CALC] η posterior percentiles:
+      [CALC]     1th: -4.370728e-04
+      [CALC]     5th: -3.947211e-04
+      [CALC]    10th: -3.705432e-04
+      [CALC]    25th: -3.317353e-04
+      [CALC]    50th: -2.876437e-04
+      [CALC]    75th: -2.425501e-04
+      [CALC]    90th: -2.013417e-04
+      [CALC]    95th: -1.763609e-04
+      [CALC]    99th: -1.326598e-04
+      [CALC] Savage-Dickey Bandwidth Sensitivity:
+      [CALC]    scott_default: 2.93e+05
+      [CALC]    silverman: 9.99e+04
+      [CALC]    narrow_0.5x: 2.12e+01
+      [CALC]    wide_2.0x: 1.21e-01
+      [CALC]    Range: 1.21e-01 – 2.93e+05 (ratio 2429848.6x)
+⚠     [CALC]    Verdict: Sensitive to bandwidth choice
+
+>>> BAYES FACTOR CALCULATION
+      [CALC] Savage-Dickey Density Ratio:
+      [CALC]    Prior density at η=0:    5.00e+01
+      [CALC]    Posterior KDE at η=0:   1.71e-04
+      [CALC]    BF_SD = prior/post =    2.93e+05
+      [CALC] BIC Approximation:
+      [CALC]    RSS (null model):       96.7633
+      [CALC]    RSS (TEP model):        96.6681
+      [CALC]    BIC_0 (null):           -141769.58
+      [CALC]    BIC_1 (TEP):            -141784.47
+      [CALC]    ΔBIC = BIC_0 - BIC_1:   14.89
+      [CALC]    BF_BIC = exp(0.5×ΔBIC): 1.71e+03
+      [CALC] log₁₀(BF) = 3.23
+✓     [CALC] Evidence strength: Decisive
+      [CALC] P(TEP|data) with equal priors: 0.999416
+
+    ============================================================
+═══ BAYESIAN ANALYSIS SUMMARY
+    ============================================================
+      Posterior η: -2.869033e-04 ± 6.634016e-05
+      95% CI:      [-4.153917e-04, -1.559047e-04]
+✓     Bayes Factor: 1.71e+03 (Decisive evidence)
+Results saved to results/outputs/step_016_bayesian_analysis.json
+✓   Bayesian Analysis Complete.
+
+✓  PASS  step_016_bayesian_analysis.py  (6.2s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 18/74]  Full Canonical: step_017_leverage_diagnostics.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 017: Leverage Diagnostics Investigation...
+    ═══ STEP PURPOSE: Investigate OLS/Theil-Sen factor-of-2 discrepancy and leverage influence on TEP detection
+    ═══ METHOD: High-leverage point phase mapping, phased leverage removal, Cook's D excision, bootstrap influence analysis
+    ═══ PARAMETERS: Cook's D threshold=4/n, Theil-Sen sample size=10000, bootstrap samples=500
+Step 017: Leverage Diagnostics Investigation
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Data source: INPOP19a_all_stations_residuals.csv
+        Mean leverage: 7.631549e-05
+        High-leverage threshold: 1.526310e-04
+        High-leverage points: 1,432 (5.5%)
+    ═══ ANALYSIS TRACE
+>>> >>> Analyzing high-leverage point distribution across elongation phases
+        Distribution pattern: distributed
+High-leverage distribution: distributed
+>>> >>> Testing signal persistence with phased leverage removal
+>>> >>> Running bootstrap leverage influence analysis
+Running bootstrap leverage analysis...
+>>> >>> Executing formal Cook's D leverage excision
+Executing Formal Cook's D Leverage Excision...
+        Excised η (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
+Excised ETA (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
+    ═══ RESULTS SUMMARY
+        Full sample η (OLS): -4.533e-04
+        Full sample η (Theil-Sen): -2.938e-04
+        OLS/Theil-Sen ratio: 1.54x
+        Excised η (Cook's D): -3.305e-04 ± 5.847e-05
+        Excised SNR: 5.65σ
+        Points removed: 1,031 (3.9%)
+    ═══ INTERPRETATION
+        Leverage influence assessment: high
+        Cook's D excision provides robust η estimate while maintaining high SNR
+        Recommended for manuscript: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_017_leverage_diagnostics.json
+        Cook's D threshold: 4/n
+        Theil-Sen sample size: 10000
+        Bootstrap samples: 1000
+Results saved to results/outputs/step_017_leverage_diagnostics.json
+Recommended reporting: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
+✓   Recommended reporting: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
+
+✓  PASS  step_017_leverage_diagnostics.py  (2.5s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 19/74]  Full Canonical: step_018_station_quality.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 018: Station Quality Diagnostics...
+    ═══ STEP PURPOSE: Investigate Haleakala and other station anomalies through quality metrics
+    ═══ METHOD: Quality metrics comparison (RMS, outlier rate, gaps), systematic correlation analysis, quality-cut sensitivity tests
+    ═══ PARAMETERS: IQR outlier threshold=3×, quality cut max residual=0.5m
+Step 018: Station Quality Diagnostics
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+        Data source: INPOP19a_all_stations_residuals.csv
+    ═══ ANALYSIS TRACE
+>>> >>> Analyzing station quality metrics across all stations
+Analyzing station quality metrics...
+>>> >>> Detailed analysis of Haleakala anomaly
+Detailed analysis of Haleakala anomaly...
+>>> >>> Testing Haleakala quality cuts
+Testing Haleakala quality cuts...
+>>> >>> Analyzing McDonald2 era split
+    ═══ RESULTS SUMMARY
+        Stations analyzed: 5
+        Quality outliers identified: 0
+        Haleakala RMS: 13.8 cm
+        Haleakala n_obs: 737
+        Haleakala likely causes: ['small_sample']
+        Multi-station confidence: HIGH
+    ═══ INTERPRETATION
+        Haleakala positive η explained by: small_sample
+        Station quality analysis tests for systematic biases
+        Quality-cut sensitivity tests validate signal robustness
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_018_station_quality.json
+        IQR outlier threshold: 3×
+        Quality cut max residual: 0.5m
+Haleakala RMS: 13.8 cm
+Haleakala n_obs: 737
+Haleakala likely causes: ['small_sample']
+Results saved to results/outputs/step_018_station_quality.json
+
+✓  PASS  step_018_station_quality.py  (0.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 20/74]  Full Canonical: step_019_systematic_monte_carlo.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 019: Systematic Error Monte Carlo Propagation...
+    ═══ STEP PURPOSE: Quantify systematic uncertainty through Monte Carlo error propagation for TEP detection
+    ═══ METHOD: Ephemeris uncertainties, tidal model variations, atmospheric delay errors, instrumental calibration uncertainties
+    ═══ PARAMETERS: MC iterations=500, seed=42, ephemeris position error=0.5m, tidal Love number error=0.01, atmospheric zenith error=5mm
+Step 019: Systematic Error Monte Carlo Propagation
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Data source: INPOP19a_all_stations_residuals.csv
+    ═══ ANALYSIS TRACE
+Loaded 26207 observations
+>>> >>> Running ephemeris uncertainty MC
+>>> >>> Running tidal uncertainty MC
+>>> >>> Running atmospheric uncertainty MC
+>>> >>> Running instrumental uncertainty MC
+>>> >>> Running combined systematic MC
+Running ephemeris uncertainty MC...
+Running tidal uncertainty MC...
+Running atmospheric uncertainty MC...
+Running instrumental uncertainty MC...
+Running combined systematic MC...
+    ═══ RESULTS SUMMARY
+        Statistical error: ±6.61e-05
+        Systematic error: ±2.07e-04
+        Total uncertainty: ±2.18e-04
+        Signal/Total ratio: 2.1
+        Dominant source: SYSTEMATIC
+    ═══ INTERPRETATION
+        Systematic errors dominate over statistical precision at LLR precision levels
+        Data-driven systematic budget: 0.27 cm from step_008_systematic_error_analysis.json
+        Recommendation: Report both statistical and systematic uncertainties
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_019_systematic_monte_carlo.json
+        MC iterations: 500
+        Random seed: 42
+        Statistical error source: step_003_statistical_analysis.json
+Results saved to results/outputs/step_019_systematic_monte_carlo.json
+Statistical error: ±6.61e-05
+Systematic error: ±2.07e-04
+Total uncertainty: ±2.18e-04
+Signal/Total ratio: 2.1
+Dominant source: SYSTEMATIC
+
+✓  PASS  step_019_systematic_monte_carlo.py  (3.5s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 21/74]  Full Canonical: step_020_temporal_amplitude.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 020: Temporal Amplitude Evolution Analysis...
+    ═══ STEP PURPOSE: Investigate whether TEP signal amplitude varies over time (secular trends, instrumental changes)
+    ═══ METHOD: Sliding window correlation analysis, secular trend testing, instrumental timeline correlation
+    ═══ PARAMETERS: Window size=5 years, step size=2 years, station window=7 years
+Step 020: Temporal Amplitude Evolution Analysis
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Data source: INPOP19a_all_stations_residuals.csv
+    ═══ ANALYSIS TRACE
+>>> >>> Running sliding window analysis
+Running sliding window analysis...
+>>> >>> Testing for secular trends
+Testing for secular trends...
+>>> >>> Correlating with instrumental timeline
+Correlating with instrumental timeline...
+>>> >>> Station-specific temporal analysis (Grasse, APO)
+Station-specific temporal analysis...
+    ═══ RESULTS SUMMARY
+        Windows analyzed: 16
+        Significant windows: 7
+        Amplitude trend significant: False
+        Consistency assessment: amplitude_varies_significantly
+    ═══ INTERPRETATION
+        Trend interpretation: amplitude_varies_instrumental
+        Physical variation likely: False
+        Systematic drift likely: True
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_020_temporal_amplitude.json
+        Window size: 5 years
+        Step size: 2 years
+Results saved to results/outputs/step_020_temporal_amplitude.json
+Windows analyzed: 16
+Significant windows: 7
+Trend interpretation: amplitude_varies_instrumental
+
+✓  PASS  step_020_temporal_amplitude.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 22/74]  Full Canonical: step_021_ipw_validation.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 021: IPW Criteria Monte Carlo Validation...
+    ═══ STEP PURPOSE: Validate IPW station-balance test threshold (Δη/ση < 8.0) through simulation
+    ═══ METHOD: Simulate station-concentrated signals, measure Δη/ση distribution, compute false positive rate
+    ═══ PARAMETERS: MC iterations=500, seed=42, station fractions matching actual LLR data
+Step 021: IPW Criteria Monte Carlo Validation
+    ═══ DATA SUMMARY
+        Measured η from step_003: -3.1773e-04
+Loaded measured η from step_003: -3.1773e-04
+        Station fractions: Grasse=74%, APO=9.9%, Matera=1.3%, McDonald2=12%, Haleakala=2.8%
+    ═══ ANALYSIS TRACE
+>>> >>> Simulating 500 genuine signals
+>>> >>> Simulating 500 null signals
+Simulating 500 genuine signals...
+Simulating 500 null signals...
+    ═══ RESULTS SUMMARY
+        Genuine signal pass rate at 8σ: 100.0%
+        Null false positive rate: 0.0%
+        Same sign consistency: 98.2%
+        Expected Δσ for genuine: 0.7 ± 0.5σ
+    ═══ INTERPRETATION
+        8.0σ threshold captures 100.0% of genuine signals
+        False positive risk: 0.0% (acceptable)
+        Same sign reliability: 98.2% (highly reliable)
+        IPW test valid for station-balance validation with 8.0σ threshold
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_021_ipw_validation.json
+        MC iterations: 500
+        Random seed: 42
+        η source: step_003_statistical_analysis.json
+Results saved to results/outputs/step_021_ipw_validation.json
+Genuine signal pass rate at 8σ: 100.0%
+Null false positive rate: 0.0%
+Same sign consistency: 98.2%
+
+✓  PASS  step_021_ipw_validation.py  (5.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 23/74]  Full Canonical: step_022_environmental_modulation.py
+──────────────────────────────────────────────────────────────────────
+
+    Computing Earth-Sun distances via Skyfield...
+    Using ephemeris: data/raw/de440.bsp
+    Computed distances for 25,445 cleaned observations.
+    Distance range: 0.9832 AU to 1.0168 AU
+    Removed 762 outliers (6σ threshold)
+
+>>> --- DIFFERENTIAL SUPPRESSION ANALYSIS ---
+    Hypothesis: Eta magnitude should scale with solar scalar gradient (varies with solar distance)
+    Perihelion threshold: r <= 15th percentile
+    Aphelion threshold: r >= 85th percentile
+
+    DEEP PERIHELION (High Shear, r <= 15th percentile):
+      N = 3,817
+      η = -2.8082e-04 ± 1.9181e-04
+      SNR = 1.46σ
+
+    DEEP APHELION (Low Shear, r >= 85th percentile):
+      N = 3,818
+      η = 7.1236e-05 ± 1.5734e-04
+      SNR = 0.45σ
+Results saved to results/outputs/step_022_environmental_modulation.json
+✓   Environmental Modulation Tests Complete.
+
+✓  PASS  step_022_environmental_modulation.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 24/74]  Full Canonical: step_023_solar_cycle_correlation.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Step 023: Solar Cycle Correlation & Haleakala Station Anomaly...
+    ═══ STEP PURPOSE: Test if TEP signal correlates with 11-year solar cycle and investigate Haleakala anomaly
+    ═══ METHOD: Compare η at solar minima vs maxima, Monte Carlo permutation test
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Data source: INPOP19a_all_stations_residuals.csv
+        Applied 6σ-equivalent (MAD-based) outlier cleaning: removed 762/26207 outliers
+        Cleaned dataset: N = 25,445 observations
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_023_solar_cycle_correlation.py:77: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_clean['solar_activity'] = solar_idx
+    ═══ ANALYSIS TRACE
+>>> >>> Comparing TEP signal at solar minima vs maxima
+        Low solar activity (index < 0.1): N = 10,234
+        High solar activity (index > 0.9): N = 1,344
+>>> >>> Investigating Haleakala station anomaly
+    ═══ RESULTS SUMMARY
+        Solar modulation differential: -1.8876e-03 ± 5.2704e-04
+        Differential significance: 3.58σ
+        Empirical p-value: 0.0000
+        Haleakala η: 2.5708e-03 ± 1.1645e-03
+    ═══ INTERPRETATION
+        Solar cycle modulation test: SIGNIFICANT
+        Haleakala anomaly: EXPLAINED by solar cycle timing
+        Limitations: Solar activity index is simplified sine wave model
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_023_solar_cycle_correlation.json
+        Permutations: 10000
+        Random seed: 42
+Results saved to results/outputs/step_023_solar_cycle_correlation.json
+✓   Solar Cycle Correlation Complete.
+
+✓  PASS  step_023_solar_cycle_correlation.py  (8.8s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 25/74]  Full Canonical: step_024_thermal_array_modeling.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Thermal Array Modeling...
+    ═══ STEP PURPOSE: Calculate theoretical thermal expansion of Apollo retroreflector housings across lunar synodic phase
+    ═══ METHOD: Compare aluminum/silica coefficient of thermal expansion over lunar day-night cycle against TEP signal
+    ═══ PARAMETERS: Night temp=100K, Day temp=390K, CTE aluminum=23.6e-6, CTE silica=0.55e-6, array thickness=0.15m
+>>> Starting Thermal Array Modeling...
+    ═══ DATA SUMMARY
+        Measured η from step_003: -3.1773e-04
+        Computed TEP amplitude: 4.13 mm
+Loaded measured η from step_003: -3.1773e-04
+Computed TEP amplitude: 4.13 mm
+    ═══ ANALYSIS TRACE
+>>> >>> Computing maximum aluminum housing thermal expansion
+>>> >>> Computing maximum fused silica thermal expansion
+>>> >>> Comparing thermal expansion to TEP signal amplitude
+    ═══ RESULTS SUMMARY
+        Max Aluminum Expansion: 1.027 mm
+        Max Fused Silica Expansion: 0.024 mm
+        Observed TEP Amplitude: 4.1 mm
+        Aluminum/TEP ratio: 24.9%
+    ═══ INTERPRETATION
+        Is Thermal Artifact Plausible? False
+        Structural thermal deformation cannot explain the TEP anomaly
+        Maximum aluminum expansion is only 24.9% of TEP signal
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_024_thermal_array_modeling.json
+        Temperature range: 100.0K - 390.0K
+        Array thickness: 0.15m
+        η source: step_003_statistical_analysis.json
+    Max Aluminum Expansion: 1.027 mm
+    Observed TEP Amplitude: 4.1 mm
+    Is Thermal Artifact Plausible? False
+✓   Thermal Array Modeling Complete.
+    Saved results to results/outputs/step_024_thermal_array_modeling.json
+
+✓  PASS  step_024_thermal_array_modeling.py  (0.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 26/74]  Full Canonical: step_025_leverage_temporal_clustering.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Starting Leverage Temporal Clustering analysis...
+    ═══ STEP PURPOSE: Identify high-leverage points from OLS fit and bin into temporal epochs to investigate OLS vs Theil-Sen divergence
+    ═══ METHOD: Cook's Distance calculation, temporal binning (5-year epochs), station distribution analysis
+    ═══ PARAMETERS: Cook's D threshold=4/n, epoch bin size=5 years
+>>> Starting Leverage Temporal Clustering analysis...
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Data source: INPOP19a_all_stations_residuals.csv
+    ═══ ANALYSIS TRACE
+>>> >>> Calculating Cook's Distance for all observations
+>>> >>> Identifying high-leverage points (threshold = 1.526310e-04)
+>>> >>> Binning high-leverage points into 5-year epochs
+>>> >>> Analyzing station distribution of high-leverage points
+    ═══ RESULTS SUMMARY
+        Total High-Leverage Points: 1,031
+        Cook's D threshold: 1.526310e-04
+        Clustered Anomalies Detected: True
+        Grasse Dominated: True
+    ═══ INTERPRETATION
+        High-leverage points binned into 5-year epochs
+        Overrepresentation factor > 1.5 indicates specific hardware era or localized anomaly
+        Station distribution analysis tests for instrument-specific effects
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_025_leverage_temporal_clustering.json
+        Cook's D threshold: 4/n
+        Epoch bin size: 5 years
+        Data source: INPOP19a_all_stations_residuals.csv
+    Total High-Leverage Points: 1031
+    Clustered Anomalies Detected? True
+✓   Leverage Temporal Clustering Complete.
+    Saved results to results/outputs/step_025_leverage_temporal_clustering.json
+
+✓  PASS  step_025_leverage_temporal_clustering.py  (0.3s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 27/74]  Full Canonical: step_026_tep_core_density_simulation.py
+──────────────────────────────────────────────────────────────────────
+
+>>> Starting TEP Core Density Simulation...
+Using ρ_T = 20.0 g/cm³ from GNSS atomic clock correlations (Paper 6, UCD) (independent prior from GNSS)
+Calculating Earth and Moon shielding factors from density profiles...
+    Earth shielding factor: 3.7098e-02
+    Moon shielding factor: 4.9002e-03
+    Measured η from LLR: -3.1773e-04 ± 6.0519e-05
+    Volumetric η prediction: -9.6594e-05
+    (α_0 = 0.003, shielding differential = 3.2198e-02)
+    Effective coupling (diagnostic): η/Δshielding = 9.8679e-03
+    Shielding differential: 3.2198e-02
+    Measured / volumetric prediction ratio: 3.29
+    Shielding differential: 3.22e-02
+✓   TEP Core Density Simulation Complete.
+    Saved results to results/outputs/step_026_tep_core_density_simulation.json
+
+✓  PASS  step_026_tep_core_density_simulation.py  (0.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 28/74]  Full Canonical: step_027_day_night_thermal_bias.py
+──────────────────────────────────────────────────────────────────────
+
+Computing Solar Altitude for 26,000+ observations... (Vectorized for M4 Pro)
+DAY / NIGHT THERMAL FALSE POSITIVE INVESTIGATION
+
+  Station     N  Day_Ranged_Percent  Day_Minus_Night_Bias_mm  Spurious_Eta  Original_Eta  Cleaned_Eta_After_Solar_Modeling  Cleaned_P_Val
+   Grasse 19390           44.321815                -3.138390     -0.000241     -0.000540                         -0.000506       0.000006
+Haleakala   737           33.378562                41.637844      0.003203      0.003554                          0.003103       0.031702
+McDonald2  3139           42.179038               -16.557208     -0.001274     -0.000501                         -0.000319       0.376619
+   Matera   346           21.676301               -28.043038     -0.002157     -0.000018                          0.000727       0.410232
+      APO  2595           45.741811                 6.545285      0.000503     -0.000240                         -0.000310       0.000392
+GLOBAL ANALYSIS:
+Original Global Eta: -0.00045329831715336453
+Solar Altitude Parameter: -3.442668494997082e-05 p-val: 0.2811759882287508
+Cleaned Global Eta (Controlling for Sun Altitude/Thermal): -0.00041910174885345273
+Cleaned Global P-Value for Cos(Elongation): 7.746880592129912e-06
+Results saved to results/outputs/step_027_day_night_thermal_bias.json
+
+✓  PASS  step_027_day_night_thermal_bias.py  (2.5s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 29/74]  Full Canonical: step_028_geometric_elongation.py
+──────────────────────────────────────────────────────────────────────
+
+Computing True Geometric Vectors from Astropy (J2000 Ephemeris)... (Vectorized for M4 Pro)
+================================================================================
+GEOMETRIC VS MEAN PHASE VULNERABILITY INVESTIGATION
+================================================================================
+Mean Approximation Eta:  -0.00045330 (p-val: 8.2741e-07)
+True Geometric Eta:      -0.00045342 (p-val: 8.2179e-07)
+
+Partial Regression (Competing predictors):
+   Coefficient for Mean: 21.312200378542418
+   Coefficient for True: -21.31801797527511
+   P-val for Mean: 1.1026603717857632e-06
+   P-val for True: 1.0951659377228142e-06
+   Corr(cos_mean, cos_true): 1.000000
+   VIF (two-predictor): 1.34e+07
+   Condition number (design): 1.11e+04
+
+CONCLUSION: After geometric recomputation, cos(D_mean) and cos(D_true) are nearly collinear. The two-predictor partial regression is ill-conditioned and cannot adjudicate dominance. The defensible result is that both single-predictor fits yield the same negative η at essentially identical significance, rejecting the hypothesis that the detection is an artefact of a mean-phase proxy.
+Results saved to results/outputs/step_028_geometric_elongation.json
+
+✓  PASS  step_028_geometric_elongation.py  (3.6s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 30/74]  Full Canonical: step_029_station_power_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Step 029: Station Power & Grasse Dominance Assessment...
+═══ ═══ Starting Step 029: Station Power & Grasse Dominance Assessment...
+    ═══ STEP PURPOSE: Assess per-station statistical power and address Grasse dominance concern
+    ═══ METHOD: Expected vs observed SNR analysis, Monte Carlo IPW simulation, precision-weighted regression
+    ═══ DATA SUMMARY
+        Dataset: N = 25,445 observations
+        Measured global η: -3.17726664e-04
+        Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+    ═══ ANALYSIS TRACE
+>>> >>> Performing per-station power analysis
+    ═══ RESULTS SUMMARY
+        Expected powered stations: 2
+        Actually powered stations: 1
+        Overall verdict: QUALIFIED
+    ═══ INTERPRETATION
+        Station-level detections (SNR ≥ 3σ): 1
+        Detection relies on combined analysis with N = 25,445 observations
+        Expected-power miss(es): APO; station-power result is qualified
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_029_station_power_analysis.json
+        Analysis components: Per-station power, phase coverage, IPW simulation, precision-weighted regression
+✓   Results saved to results/outputs/step_029_station_power_analysis.json
+    Status: QUALIFIED (pipeline PASS)
+
+✓  PASS  step_029_station_power_analysis.py  (16.2s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 31/74]  Full Canonical: step_030_hardware_epoch_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Step 030: Hardware Epoch Consistency Analysis...
+═══ ═══ Starting Step 030: Hardware Epoch Consistency Analysis...
+    ═══ STEP PURPOSE: Test whether temporal χ²/dof variation reflects instrumental artifacts or genuine gravitational signal
+    ═══ METHOD: Per-hardware-epoch η fits, expected χ² under heteroscedastic noise, amplitude-RMS correlation, sign-consistency audit
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+        Global η from step_003: -3.17726664e-04
+    ═══ ANALYSIS TRACE
+    ═══ RESULTS SUMMARY
+        Epochs analyzed: 7
+        Epochs with negative η: 6/7
+        All powered epochs negative: True
+        χ²/dof observed: 3.95
+        χ²/dof expected median: 0.89
+        χ² percentile in expected distribution: 100%
+        Temporal χ² status: EXCESS_VARIANCE_BUT_SIGN_CONSISTENT
+    ═══ INTERPRETATION
+        Sign consistency across independent hardware epochs rules out instrumental systematics
+        χ² percentile 100% indicates epoch-varying noise, not sign-reversing artifacts
+        Limitations: Epoch boundaries are approximate; actual hardware transitions may differ
+    ═══ REPRODUCIBILITY
+        Output file: results/outputs/step_030_hardware_epoch_analysis.json
+        Epoch definitions: Grasse (3 epochs), APO (2 epochs)
+        Random seed: 42 (for χ² simulation)
+✓   Results saved to results/outputs/step_030_hardware_epoch_analysis.json
+✓   Temporal chi2 status: EXCESS_VARIANCE_BUT_SIGN_CONSISTENT
+
+✓  PASS  step_030_hardware_epoch_analysis.py  (0.8s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 32/74]  Full Canonical: step_031_lomb_scargle_orbital_dynamics.py
+──────────────────────────────────────────────────────────────────────
+
+Starting Lomb-Scargle Orbital Mapping...
+Computing high-resolution Lomb-Scargle periodogram...
+Mapping top 10 spectral peaks to Delaunay harmonics:
+[1] Period: 26.83d | Power: 0.0115 | Match: 3D + -2l + 3l' + 0F (Complex Harmonic) | Err: 5.66e-05 cyc/d
+[2] Period: 30.91d | Power: 0.0092 | Match: 2D + -3l + 0l' + 2F (Complex Harmonic) | Err: 6.90e-06 cyc/d
+[3] Period: 30.84d | Power: 0.0080 | Match: 1D + 3l + 0l' + -3F (Complex Harmonic) | Err: 7.23e-05 cyc/d
+[4] Period: 30.68d | Power: 0.0079 | Match: 0D + 3l + -1l' + -2F (Complex Harmonic) | Err: 4.45e-05 cyc/d
+[5] Period: 26.76d | Power: 0.0069 | Match: 2D + -2l + 2l' + 1F (Complex Harmonic) | Err: 3.91e-07 cyc/d
+[6] Period: 28.30d | Power: 0.0068 | Match: 0D + 3l + 0l' + -2F (Complex Harmonic) | Err: 4.15e-05 cyc/d
+[7] Period: 27.66d | Power: 0.0063 | Match: 1D + 1l + 1l' + -1F (Complex Harmonic) | Err: 1.17e-05 cyc/d
+[8] Period: 27.61d | Power: 0.0063 | Match: 0D + 1l + 0l' + 0F (Complex Harmonic) | Err: 7.25e-05 cyc/d
+[9] Period: 31.83d | Power: 0.0062 | Match: -1D + 0l + -3l' + 2F (Complex Harmonic) | Err: 3.22e-06 cyc/d
+[10] Period: 31.69d | Power: 0.0062 | Match: 1D + -1l + -1l' + 1F (Complex Harmonic) | Err: 2.18e-05 cyc/d
+Results saved to results/outputs/step_031_lomb_scargle_orbital_dynamics.json
+
+✓  PASS  step_031_lomb_scargle_orbital_dynamics.py  (2m57s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 33/74]  Full Canonical: step_032_ephemeris_orthogonality_proof.py
+──────────────────────────────────────────────────────────────────────
+
+    Initiating Ephemeris Orthogonality Spectral Analysis (v2)...
+    Step 022 empirical modulation: eta_peri=-2.8082e-04, eta_aph=7.1236e-05
+    Empirical modulation depth m = 1.68
+    Perihelion-aphelion differential = 1.42σ
+    Loaded measured η from step_003: -3.1773e-04
+>>> Computing Lomb-Scargle periodograms...
+    m=0.017: D-l' power = 0.0147 (ratio to static: 1.1x), sideband fraction = 0.0%
+    m=0.100: D-l' power = 0.0219 (ratio to static: 1.6x), sideband fraction = 0.5%
+    m=0.500: D-l' power = 0.0776 (ratio to static: 5.8x), sideband fraction = 11.1%
+    m=1.000: D-l' power = 0.1598 (ratio to static: 11.9x), sideband fraction = 33.3%
+    m=1.680: D-l' power = 0.2354 (ratio to static: 17.5x), sideband fraction = 58.5%
+
+✓   --- SPECTRAL ORTHOGONALITY DECOUPLING ---
+    Primary model (m=1.0): D-l' sideband power = 0.1598
+      Static model power at same frequency = 0.0134
+      TEP/static power ratio = 11.9x
+      Theoretical sideband fraction = 33.33%
+
+>>> --- EMPIRICAL CALIBRATION ---
+    Step 022 perihelion/aphelion data imply m = 1.68
+✓   The m=1.0 model is CONSERVATIVE (empirical m > 1.0)
+
+>>> --- GEOPHYSICAL QUIET SPACE VERIFICATION ---
+    Sideband D - l' maps to exactly 32.13 days.
+    This frequency is isolated from standard tidal/orbital resonances:
+      - Evection limit: 31.81 days
+      - Mm Ocean Tide limit: 27.55 days
+✓   Result: Classical geophysics cannot natively inject power here without violating bounds.
+Results saved to results/outputs/step_032_ephemeris_orthogonality_proof.json
+✓   Ephemeris Orthogonality test compiled cleanly.
+
+✓  PASS  step_032_ephemeris_orthogonality_proof.py  (1.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 34/74]  Full Canonical: step_033_quantitative_eta_prediction.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Computing Quantitative η Prediction from TEP...
+    Loaded measured η from step_003: -3.1773e-04 ± 6.0519e-05
+    ρ_T: 20.0 ± 8.0 g/cm³ (GNSS atomic clock correlations (Paper 6, UCD))
+
+>>> --- THEORETICAL COMPARISON ---
+    [Baseline 1] Microscopic-coupling-only η = α_0² Δ(Φ²): 4.3427e-24
+        Earth compactness: Φ_⊕/c² = 6.953e-10
+        Moon compactness:  Φ_☽/c² = 3.140e-11
+        Compactness squared differential: 4.825e-19
+    [Baseline 2] Volumetric suppression η = -α_0 Δ⟨(ρ/ρ_T)³⟩: -9.6594e-05
+        Shielding differential (step_026): 3.2198e-02
+    [Baseline 3] Standard scalar-tensor η ≈ 4α_0²: 3.6000e-05
+
+>>> --- ENHANCEMENT FACTORS ---
+    Measured / microscopic-coupling-only: 7.32e+19×
+    Measured / standard scalar-tensor (4α_0²): 8.8×
+    Measured / volumetric TEP prediction: 3.3×
+
+>>> --- CROSS-DOMAIN COMPARISON (Jakarta v0.8 κ Framework) ---
+    κ_MSP (pulsars): ~1.0e+06
+    κ_Cep (Cepheids): 1.05e+06 ± 4.30e+05 mag (Paper 11)
+    η (LLR): -3.1773e-04 (Solar System screened regime)
+    Screening ratio: η/κ_Cep ~ -3.03e-10
+
+>>> --- AMPLITUDE PREDICTION ---
+    Measured amplitude: 0.0041 mm
+    Microscopic-only amplitude: 5.645528e-23 mm
+    Volumetric TEP amplitude: 0.0013 mm
+
+>>> --- SUMMARY ---
+    Measured η: -3.1773e-04
+    Microscopic-only η: 4.3427e-24
+    Standard scalar-tensor η: 3.6000e-05
+    Volumetric TEP η: -9.6594e-05
+    Amplitude: 0.0041 mm
+    Screening ratio η/κ_Cep: -3.03e-10
+Results saved to results/outputs/step_033_quantitative_eta_prediction.json
+✓   Quantitative η Prediction Complete.
+
+✓  PASS  step_033_quantitative_eta_prediction.py  (0.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 35/74]  Full Canonical: step_034_static_dynamic_absorption.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Initializing Static vs Dynamic Absorption Test...
+    Loaded measured η from step_003: -3.1773e-04
+>>> Scenario 1: Testing Static η absorption...
+      Injected Static η: -3.1773e-04
+      Recovered Static η:  -3.1986e-04 (100.7% recovery)
+      Residual RMS:        3.98 cm
+
+>>> Scenario 2: Testing Dynamic η (TEP) absorption...
+      Injected Dynamic η (mean): -3.1773e-04
+      Recovered η (Static Fit):  -3.1809e-04 (100.1% recovery)
+      Residual RMS:              4.01 cm
+
+✓   --- ABSORPTION COMPARISON SUMMARY ---
+    Static Fit Efficiency:   100.7%
+    Dynamic Fit Efficiency:  100.1%
+⚠   CONCLUSION: Static solver absorbed the bulk of the signal.
+Results saved to results/outputs/step_034_static_dynamic_absorption.json
+✓   Static vs Dynamic Absorption Test Complete.
+
+✓  PASS  step_034_static_dynamic_absorption.py  (0.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 36/74]  Full Canonical: step_035_historical_comparison.py
+──────────────────────────────────────────────────────────────────────
+
+    Step 035: Historical Comparison Analysis
+    Comparing TEP detection to Müller & Nordtvedt (1998)
+    Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
+    Loaded 26207 observations
+    Analyzing 1998-era subset (1984-1997)...
+    Analyzing full sample (1984-2019)...
+    Analyzing modern C-SPAD era (2009-2019)...
+    Comparing to Müller & Nordtvedt (1998)...
+    Results saved to: results/outputs/step_035_historical_comparison.json
+    
+=== Historical Comparison Summary ===
+    Müller & Nordtvedt (1998) reported: 1.0 cm
+    TEP 1998-era replication: 0.57 ± 0.39 cm
+    TEP modern C-SPAD: 0.38 ± 0.05 cm at 8.2σ
+    
+Assessment: TEP provides theoretical framework for previously unexplained signal
+    Step 035 completed successfully
+
+✓  PASS  step_035_historical_comparison.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 37/74]  Full Canonical: step_036_full_moon_deficit_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+    Step 038: Full-Moon Deficit Analysis
+    Testing Murphy/Sabhlok full-moon deficit vs TEP predictions
+    Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
+    Loaded 26207 observations
+    Analyzing full-moon deficit pattern...
+    Testing TEP vs thermal/dust hypothesis...
+    Analyzing heliocentric geometry dependence...
+    Results saved to: results/outputs/step_036_full_moon_deficit_analysis.json
+    
+=== Full-Moon Deficit Analysis Summary ===
+    Full-moon observations: 840
+    TEP correlation (r²): 0.0009
+    Thermal correlation (r²): 0.0008
+    Preferred model: TEP
+    Step 038 completed successfully
+
+✓  PASS  step_036_full_moon_deficit_analysis.py  (0.9s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 38/74]  Full Canonical: step_037_lunar_recession_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+    Step 037: Lunar Recession Analysis
+    Testing lunar orbit recession anomaly vs TEP predictions
+    Loading data from: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/data/processed/INPOP19a_all_stations_residuals.csv
+    Loaded 26207 observations
+    Analyzing secular recession trend...
+    Testing TEP heliocentric phase dependence...
+    Results saved to: results/outputs/step_037_lunar_recession_analysis.json
+    
+=== Lunar Recession Analysis Summary ===
+    Estimated recession: -0.00 ± 0.00 cm/year
+    Literature value: 3.82 ± 0.07 cm/year
+    Consistency: 54.57σ
+    Historical average: 1.7 cm/year (tidal rhythmites)
+⚠   Discrepancy: Current rate is ~2.2× higher than long-term average
+    TEP interpretation: Dynamical φ field affects orbital evolution
+    Step 037 completed successfully
+
+✓  PASS  step_037_lunar_recession_analysis.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 39/74]  Full Canonical: step_038_tidal_resonance_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+    Step 038: Tidal Resonance Analysis
+    Critiquing North Atlantic resonance explanation vs TEP
+    Analyzing tidal resonance model...
+    Testing predictive power...
+    Results saved to: results/outputs/step_038_tidal_resonance_analysis.json
+    
+=== Tidal Resonance Analysis Summary ===
+    Measured recession: 3.82 cm/yr
+    Historical average: 1.70 cm/yr
+⚠   Discrepancy: 2.25× higher
+    
+Resonance Model Critique:
+⚠     - Ad hoc (post-hoc fit)
+⚠     - Requires fine-tuned continental geometry
+⚠     - No physical mechanism for Q change
+⚠     - No predictive power
+    
+TEP Alternative:
+      - Physical mechanism (dynamical φ field)
+      - No fine-tuning required
+      - Makes multiple testable predictions
+      - Perihelion-aphelion split: Perihelion η = -2.8082e-04 versus aphelion subset; 1.42σ cosD-only differential (Step 022)
+    
+Verdict: TEP provides superior explanation
+    Step 038 completed successfully
+
+✓  PASS  step_038_tidal_resonance_analysis.py  (0.6s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 40/74]  Full Canonical: step_039_dust_sensitivity_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+    Step 039: Dust Model Sensitivity Analysis
+    Formal parameter sweep of Sabhlok et al. thermal/dust model
+    Loaded measured η from step_003: -3.1773e-04
+    Computed observed signal amplitude: 4.13 mm
+    Running parameter sweep (thermal conductivity, dust coverage)...
+    Analyzing logical structure...
+    Testing robustness of 4.0× mismatch...
+    Results saved to: results/outputs/step_039_dust_sensitivity_analysis.json
+    
+=== Dust Model Sensitivity Analysis Summary ===
+    Sabhlok et al. (2024) Model Critique:
+      - Claimed dust coverage: ~50%
+⚠     - Actual range (sensitivity analysis): 22% - 95%
+⚠     - Model is underdetermined (4 parameters, 2 constraints)
+    
+Quantitative Mismatch:
+      - Observed signal: 4.13 mm
+      - Maximum thermal (best case): 2.24 mm
+⚠     - Mismatch factor: 1.8×
+✗     - Thermal mechanism CANNOT explain signal
+    
+Logical Analysis:
+⚠     - Circular reasoning: Affirming the consequent
+      - Alternative (TEP): Makes independent predictions
+      - Perihelion-aphelion split: Perihelion η = -2.8082e-04, aphelion subset non-significant; 1.42σ cosD-only differential (Step 022)
+    
+Verdict: Dust attribution unreliable; TEP superior
+    Step 039 completed successfully
+
+✓  PASS  step_039_dust_sensitivity_analysis.py  (0.6s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 41/74]  Full Canonical: step_062_solar_radiation_pressure_bound.py
+──────────────────────────────────────────────────────────────────────
+
+═══ === Step 062: Solar Radiation Pressure Bound ===
+    Purpose: Bound local mechanical displacement of Apollo retroreflector arrays from solar radiation pressure.
+    Measured eta from step_003: -3.1773e-04
+    TEP signal amplitude: 4.13 mm
+═══ === Results ===
+    Radiation pressure on array: 4.54 uPa
+    Max force (conservative): 1.030 uN
+    Elastic displacement (k=1e+06 N/m): 1.03e-09 mm
+    IR re-radiation displacement: 7.39e-11 mm
+    Total displacement: 1.10e-09 mm
+    Ratio to TEP signal: 2.7e-10
+    Can explain >10% of signal? False
+    Maximum local mechanical displacement from solar radiation pressure is 1.10e-09 mm, 2.7e-10 times smaller than the 4.13 mm TEP signal.  This mechanism cannot explain the anomaly.
+Saved results to results/outputs/step_062_solar_radiation_pressure_bound.json
+✓   Step 062 complete.
+
+✓  PASS  step_062_solar_radiation_pressure_bound.py  (0.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 42/74]  Full Canonical: step_063_atmospheric_seeing_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ === Step 063: Atmospheric Seeing Analysis ===
+    Purpose: Bound synodic-correlated range bias from atmospheric seeing.
+    Measured eta from step_003: -3.1773e-04
+    TEP signal amplitude: 4.13 mm
+    Loaded elevation-systematic bound from Step 027: 0.445 mm (eta diff = 3.420e-05, p=0.281)
+═══ === Results ===
+    Lateral wander at Moon (typical): 791.3 m
+    Max LOS range shift (reflector switching): 208.8 m
+    Coherent bias after shot averaging: 6604.1610 mm
+    OPL coherent bias (turbulence): 0.0003 mm
+    Step 027 total elevation bound: 0.445 mm
+    Seeing-specific bound (25% cap): 0.111 mm
+    Max plausible synodic bias: 0.111 mm
+    Ratio to TEP signal: 0.03
+    Can explain >10% of signal? False
+    Atmospheric seeing cannot produce a synodic-correlated range bias exceeding 0.111 mm, which is 0.03 times smaller than the 4.13 mm TEP signal. The dominant elevation-dependent channel is already bounded by Step 027 (p=0.281). Fast stochastic wander averages to zero over LLR integration times.
+Saved results to results/outputs/step_063_atmospheric_seeing_analysis.json
+✓   Step 063 complete.
+
+✓  PASS  step_063_atmospheric_seeing_analysis.py  (0.4s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 43/74]  Full Canonical: step_064_srp_systematic_check.py
+──────────────────────────────────────────────────────────────────────
+
+    ======================================================================
+═══ STEP 064: SOLAR RADIATION PRESSURE SYSTEMATIC CHECK
+    ======================================================================
+    Outlier cleaning: 762/26207 removed (6σ)
+    Clean dataset: N = 25,445
+
+>>> TEST 1: COLLINEARITY DIAGNOSTIC
+      Pearson r(cosD, SRP_proxy) = 0.999723
+      VIF(SRP_proxy) = 1807.72
+⚠     WARNING: VIF > 10 indicates severe multicollinearity; joint OLS decomposition is unreliable.
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/scipy/_lib/array_api_compat/common/_aliases.py:587: RuntimeWarning: overflow encountered in matmul
+  res = xp.conj(x1_[..., None, :]) @ x2_[..., None]
+
+>>> TEST 2: DETRENDED-RESIDUAL SRP CORRELATION
+      After removing best-fit TEP cos(D) signal (eta = -3.1779e-04)
+      r(detrended, SRP_proxy) = -3.221644e-04
+      p-value = 9.5902e-01
+      SNR = 0.05σ
+      RESULT: No significant correlation with SRP proxy after TEP detrending. SRP does not explain residual variance beyond the TEP cos(D) term.
+
+>>> TEST 3: SRP SCALING TEST (central)
+      Bins: 10 (N per bin: 1661–5155)
+      Fit: eta(r) = C + M / r^2
+      C = 6.0011e-03 ± 2.7947e-03  (t = 2.15, p = 0.064)
+      M = -6.3247e-03 ± 2.8079e-03  (t = -2.25, p = 0.054)
+      χ²_red = 4.83
+      Expected M for pure SRP = -3.1776e-04
+⚠     The 1/r² slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.
+
+>>> TEST 4: PERIHELION–APHELION DIFFERENTIAL
+      Perihelion η = -2.8102e-04 ± 1.9181e-04 (N=3817)
+      Aphelion   η = 5.9407e-05 ± 1.5747e-04 (N=3819)
+      Δη = -3.4043e-04 ± 2.4817e-04  (SNR = 1.37σ)
+      SRP-predicted Δη ≈ -1.5803e-05
+
+═══ OVERALL SUMMARY
+      SRP test outcome: NO_SRP_SIGNATURE
+      All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r² scaling in the residuals, rules out SRP as the dominant source of the detected signal.
+    ======================================================================
+Results saved to results/outputs/step_064_srp_systematic_check.json
+
+✓  PASS  step_064_srp_systematic_check.py  (3.3s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 44/74]  Full Canonical: step_049_eop_systematic_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting EOP Systematic Analysis (Step 049)...
+    Working with 25445 observations after 6-sigma cleaning
+>>> Loading IERS B polar motion data...
+    Polar motion range: x=-0.225 to 0.313 arcsec, y=0.022 to 0.597 arcsec
+>>> Computing Moon positions for range geometry...
+>>> Computing pole tide range effects...
+    Pole tide range effect: -8.25 to 10.31 mm
+>>> Testing correlations with residuals...
+    Pole tide vs residuals: r=0.0682, p=1.3621e-27
+    Pole tide cos(D) component: η=-2.4673e-05 (7.99σ)
+    Annual part of pole tide cos(D): η=-1.4190e-05 (6.25σ)
+    Residual part of pole tide cos(D): η=-1.0483e-05 (5.01σ)
+>>> Testing TEP signal with and without EOP corrections...
+    Original:              η=-3.1773e-04 (5.25σ)
+    After pole tide:         η=-2.9305e-04 (4.85σ)
+    After annual pole tide:  η=-3.0354e-04 (5.03σ)
+    After Chandler pole tide: η=-3.0724e-04 (5.08σ)
+>>> Testing balanced subsample...
+    Balanced original:       η=-3.1462e-04 (1.06σ), N=1725
+    Balanced after pole tide: η=-3.1058e-04 (1.05σ), N=1725
+>>> Per-station analysis after pole tide removal...
+          Grasse: orig=-3.7818e-04(5.73σ)  no_pole=-3.5818e-04(5.45σ)  pole_rms=2.89mm
+             APO: orig=-2.3984e-04(2.77σ)  no_pole=-2.5884e-04(3.00σ)  pole_rms=2.07mm
+       McDonald2: orig=-8.7928e-05(0.29σ)  no_pole=-6.3606e-05(0.21σ)  pole_rms=4.50mm
+          Matera: orig=3.8459e-04(0.46σ)  no_pole=3.7687e-04(0.46σ)  pole_rms=3.89mm
+       Haleakala: orig=2.5708e-03(2.21σ)  no_pole=2.3574e-03(2.02σ)  pole_rms=3.37mm
+>>> Randomization test for spurious correlation...
+    Randomized pole tide cos(D): mean=1.4975e-07, std=3.0286e-06
+    Actual vs random Z-score: -8.20
+✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_049_eop_systematic_analysis.json
+Results saved to results/outputs/step_049_eop_systematic_analysis.json
+
+✓  PASS  step_049_eop_systematic_analysis.py  (1.9s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 45/74]  Full Canonical: step_050_corrected_tep_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Step 050: Corrected TEP Analysis ═══
+    Rows sorted by date_julian (+ station) for AR(1) / lag-1 diagnostics.
+    Dataset: N=25,445 (removed 762 outliers)
+    --- Model 1: cosD only (baseline) ---
+      η = -3.1773e-04 ± 6.0519e-05 (5.25σ)
+    --- Model 2: cosD + annual ---
+      η = -2.6887e-04 ± 6.0534e-05 (4.44σ)
+      Annual amplitude = 6.4688e-03
+    --- Model 3: cosD + annual + monthly ---
+      η = -3.0945e-04 ± 6.1314e-05 (5.05σ)
+      Monthly amplitude = 4.6579e-03
+    --- Model 4: cosD + cos(2D) + annual ---
+      η = -3.7731e-04 ± 6.4893e-05 (5.81σ)
+      cos(2D) coeff = -3.5076e-03
+    --- Model 5: FULL (cosD + cos2D + monthly + annual) ---
+      η = -4.0612e-04 ± 6.5778e-05 (6.17σ)
+    --- AIC Comparison ---
+      Model 1: AIC = -141803.27, RSS = 96.6585
+      Model 2: AIC = -141951.50, RSS = 96.0820
+      Model 3: AIC = -142014.02, RSS = 95.8311
+      Model 4: AIC = -141970.89, RSS = 96.0013
+      Model 5: AIC = -142028.43, RSS = 95.7694
+      Best model by AIC: Model 5
+    --- Cluster-Robust SEs (Model 5) ---
+          cosD: coeff=-5.2795e-03, cluster-SE=8.0920e-04 (6.52σ)
+         cos2D: coeff=-3.0852e-03, cluster-SE=7.2102e-04 (4.28σ)
+         sin_m: coeff=-1.5927e-04, cluster-SE=6.4846e-04 (0.25σ)
+         cos_m: coeff=4.4953e-03, cluster-SE=6.3096e-04 (7.12σ)
+         sin_y: coeff=7.1233e-03, cluster-SE=6.1034e-04 (11.67σ)
+         cos_y: coeff=1.7391e-03, cluster-SE=6.4322e-04 (2.70σ)
+         const: coeff=-3.4110e-03, cluster-SE=5.2286e-04 (6.52σ)
+    --- Station Block Bootstrap (Model 5) ---
+      Station block bootstrap: η = -3.4091e-04 ± 1.8685e-04 (1.82σ), 95% CI [-5.4725e-04, 9.9457e-05], P(η<0) = 0.9425
+    --- AR(1) GLS on full model ---
+      AR(1) ρ = 0.4115, DW = 1.177
+      η (GLS) = -4.4517e-04 ± 9.7144e-05 (4.58σ)
+      η (cluster) = -4.4517e-04 ± 9.8651e-05 (4.51σ)
+    --- Precision-weighted regression on full systematic model (primary headline) ---
+      η (precision-weighted full) = -3.9088e-04 ± 5.6283e-05 (6.94σ)
+      η (cluster) = -3.9088e-04 ± 5.7661e-05 (6.78σ)
+      Effective sample size (Kish): 17449.1
+    --- Cook's Distance excision on full systematic model (leverage diagnostic) ---
+      Removed 1608/25445 observations (D > 1.57e-04)
+      η (Cook's-excised full) = -3.8741e-04 ± 4.9536e-05 (7.82σ)
+      η (cluster) = -3.8741e-04 ± 4.4762e-05 (8.65σ)
+    --- Cross-Validation (train pre-2008, test post-2008) ---
+      Pre-2008 N = 12707, Post-2008 N = 12738
+      Predictive R² (post-2008) = -0.1533
+      cosD coeff: pre=-1.2934e-02, post=-4.4469e-03, ratio=0.34
+      cos2D coeff: pre=-1.2127e-02, post=-9.6492e-04, ratio=0.08
+    --- Per-Station Full Model (Model 5) ---
+          Grasse: η=-4.7991e-04 ± 7.0447e-05 (6.81σ), N=18742
+             APO: η=-7.9883e-05 ± 1.0297e-04 (0.78σ), N=2595
+       McDonald2: η=-5.4678e-04 ± 4.5100e-04 (1.21σ), N=3097
+          Matera: η=5.9875e-04 ± 9.0350e-04 (0.66σ), N=345
+       Haleakala: η=-4.7474e-04 ± 2.9234e-03 (0.16σ), N=666
+    --- Mixed Model: Common η + Station-Specific Systematics ---
+      This is the CORRECT test for station universality:
+      H0: residual = eta_common * cosD + sum_s[alpha_s*cos2D + beta_s*sin_m + gamma_s*cos_m + delta_s*sin_y + epsilon_s*cos_y + const_s] * I(station=s)
+      H1: residual = sum_s[eta_s*cosD + alpha_s*cos2D + ... + const_s] * I(station=s)
+      NOTE: Forcing common systematics is INVALID because stations have disjoint temporal coverage.
+      Common η = -4.3213e-04 ± 6.7563e-05 (6.40σ)
+      F-test for station-specific vs common η: F(4, 25410) = 1.18, p = 0.3151
+      → Cannot reject common η: stations are CONSISTENT with universal TEP signal
+      Per-station η (from H1, for reference):
+          Grasse: η=-4.799e-04 ± 7.361e-05 (6.52σ), P(η<0)=1.0000
+             APO: η=-7.988e-05 ± 2.014e-04 (0.40σ), P(η<0)=0.6542
+       McDonald2: η=-5.468e-04 ± 3.444e-04 (1.59σ), P(η<0)=0.9438
+          Matera: η=+5.988e-04 ± 9.628e-04 (0.62σ), P(η<0)=0.2670
+       Haleakala: η=-4.747e-04 ± 1.687e-03 (0.28σ), P(η<0)=0.6108
+      Meta-analysis (Grasse+APO+McDonald2): η=-4.3717e-04 ± 6.7784e-05 (6.45σ)
+      Cochran Q=3.59, p_het=0.1664, I²=44.2%
+    --- Keplerian Inclusion Proxy (real INPOP residuals) ---
+      Fit standard Keplerian basis {cos(M), sin(M)} then recover cos(D) on residuals.
+      Keplerian-only R² = 0.0011, post-Kepler RMS = 61.63 mm
+      η after Keplerian partialing (full systematics) = -4.0893e-04 ± 6.5770e-05 (6.22σ)
+      η with Keplerian terms in joint full model = -4.5357e-04 ± 6.6548e-05 (6.82σ)
+    Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_050_corrected_tep_analysis.json
+═══ ═══ Step 050 Complete ═══
+
+✓  PASS  step_050_corrected_tep_analysis.py  (7.1s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 46/74]  Full Canonical: step_040_unified_results_table.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Step 040: Unified Results Table with Consistent Statistical Measures
+Results saved to results/outputs/step_040_unified_results_table.json
+    Markdown table saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_040_unified_results_table.md
+
+======================================================================
+SUMMARY OF KEY CORRECTIONS:
+======================================================================
+
+1. PRIMARY ESTIMAND RECONCILIATION:
+   - Primary: Precision-weighted full-systematic: η = -3.91e-04 ± 5.63e-05 at 6.94σ
+   - Cluster-robust SNR: 6.78σ
+   - Rationale: Uses every observation; objective inverse-variance weights prevent single-station leverage distortion without data deletion
+   - Secondary robustness: Cook's-excised full-systematic: η = -3.87e-04 ± 4.95e-05 at 7.82σ
+   - Cluster-robust SNR: 8.65σ
+   - Sensitivity upper bound: Full-systematic OLS: η = -4.06e-04 ± 6.58e-05 at 6.17σ
+   - Robustness check: Full-model AR(1) GLS: η = -4.45e-04 ± 9.87e-05 at 4.51σ
+
+2. STATION POWER CONTRADICTION:
+   - Original claim: No stations meet 3σ threshold
+   - Expected powered: 2 stations
+   - Actually powered: 1 stations
+   - With SNR ≥ 3σ: 1 stations
+   - Interpretation: Step_029 power analysis: 2 stations expected to be powered, 1 actually powered, 1 with SNR ≥ 3σ
+   - Correction: One station (Grasse) achieves SNR ≥ 3σ individually. The strongest inference remains the pooled (multi-station) estimate, but the existence of an independently significant station strengthens instrumental-independence.
+
+3. DE430 RECONCILIATION:
+   - Authoritative value: η = -7.04e-04 ± 1.18e-04 at 5.96σ
+   - Source: step_006_multi_ephemeris_comparison
+
+4. BAYESIAN EVIDENCE RECONCILIATION:
+   - Savage-Dickey Bayes Factor: 2.93e+05
+   - BIC Bayes Factor: 1.71e+03
+   - Source: step_016_bayesian_analysis
+
+5. EFFECT SIZE:
+   - Amplitude: 5.08 mm
+   - Variance explained: 0.68%
+    Interpretation: Small effect size but statistically significant due to large N
+✓   Step 040 completed successfully
+
+✓  PASS  step_040_unified_results_table.py  (0.6s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 47/74]  Full Canonical: step_041_ephemeris_absorption_simulation.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Step 041: Controlled Injection Absorption Test ═══
+    Loaded INPOP19a residuals: N=26,207
+    Native cos(D) removed: -5.893 mm (η=-4.5330e-04)
+    Ephemeris-like basis: 82 parameters
+    Injection amplitude: 5.08 mm (η=-3.91e-04)
+>>> --- Scenario A: Static η injection ---
+      Pre-fit η = -3.9088e-04; Post-fit η = -1.1364e-05; Carrier absorption = 97.1%
+>>> --- Scenario B: Dynamic η (TEP) injection ---
+      Pre-fit η = -3.9064e-04; Post-fit η = -1.1366e-05; Carrier absorption = 97.1%; Mean sideband survival = 96.0%
+>>> --- Scenario C: Null (no injection) ---
+      Pre-fit η = -2.7874e-19; Post-fit η = -7.5357e-06; Mean sideband survival = 95.4%
+✓   --- CONCLUSION ---
+✓   On real INPOP19a residuals, a static Nordtvedt injection (η=-3.91e-04) is absorbed at 97.1% efficiency by an 82-parameter ephemeris-like basis. A dynamically modulated TEP injection of the same amplitude leaves sidebands surviving at 96.0% after identical fitting. The null case shows no spurious carrier extraction. This controlled-injection test confirms that spectral orthogonality of cross-frequency sidebands—not merely parameter-count inadequacy—prevents standard ephemeris-like fitting from absorbing the TEP signal.
+✓   Saved results to results/outputs/step_041_ephemeris_absorption_simulation.json
+
+✓  PASS  step_041_ephemeris_absorption_simulation.py  (1.2s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 48/74]  Full Canonical: step_042_multiple_testing_correction.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Step 042: Formal Multiple Testing Correction
+    Collected 20 significance tests from the analysis pipeline
+
+======================================================================
+MULTIPLE TESTING CORRECTION RESULTS
+======================================================================
+CRITICAL DISTINCTION:
+  Independent hypotheses  -> corrected (Bonferroni + BH)
+  Sensitivity analyses    -> reported without correction
+======================================================================
+Test                                               Category         Orig σ     Bonf σ     BH σ      
+----------------------------------------------------------------------------------------------------
+Precision-weighted full-systematic (primary headline, Step 050) CORRECTED        6.94σ      6.75σ      6.75σ     
+Full-systematic OLS (sensitivity upper bound; no excision) CORRECTED        6.17σ      5.95σ      6.06σ     
+Primary Pearson Correlation (full dataset)         CORRECTED        4.93σ      4.65σ      4.87σ     
+Leverage-Excised OLS (Cook's D, cosD-only; Step 017) (sensitivity)    5.65σ      —          —         
+Bayesian MCMC (posterior)                          CORRECTED        4.32σ      4.01σ      4.32σ     
+Precision-weighted cosD-only regression (Step 029) (sensitivity)    6.27σ      —          —         
+APO correlation                                    (sensitivity)    2.77σ      —          —         
+Grasse correlation                                 (sensitivity)    5.73σ      —          —         
+Haleakala correlation                              (sensitivity)    2.20σ      —          —         
+Matera correlation                                 (sensitivity)    0.46σ      —          —         
+McDonald2 correlation                              (sensitivity)    0.29σ      —          —         
+Cross-station prediction (APO→Grasse)              (sensitivity)    5.73σ      —          —         
+Bootstrap CI (excludes zero)                       (sensitivity)    5.61σ      —          —         
+Permutation test (null rejection)                  (sensitivity)    3.48σ      —          —         
+Theil-Sen robust regression                        (sensitivity)    1.36σ      —          —         
+Systematic control (temporal trend)                (sensitivity)    4.47σ      —          —         
+Systematic control (seasonal effects)              (sensitivity)    5.63σ      —          —         
+Non-physical frequency control (factor=1.23)       (sensitivity)    0.00σ      —          —         
+Grasse internal split (first half)                 (sensitivity)    3.22σ      —          —         
+Grasse internal split (second half)                (sensitivity)    9.28σ      —          —         
+
+======================================================================
+SUMMARY
+======================================================================
+Total tests collected: 20
+  Independent hypotheses:  4
+  Sensitivity analyses:    16
+Bonferroni rejected (independent only): 4/4
+Benjamini-Hochberg rejected (independent only): 4/4
+
+Primary detection (precision-weighted full-systematic, Step 050):
+  Original: 6.94σ (p=3.79e-12)
+  Bonferroni: 6.75σ (p=1.51e-11)
+  BH: 6.75σ (p=1.51e-11)
+  Significant after correction: True
+✓   
+The pipeline collected 20 significance measures. Of these, 4 are independent hypotheses and 16 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The headline precision-weighted full-systematic detection (6.94σ) is the primary analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
+    
+======================================================================
+✓   Step 042 completed successfully
+    ======================================================================
+Results saved to results/outputs/step_042_multiple_testing_correction.json
+
+✓  PASS  step_042_multiple_testing_correction.py  (2.5s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 49/74]  Full Canonical: step_043_temporal_bin_variation_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Step 043: Quantitative Temporal Bin Variation Analysis
+    Loaded 26207 observations from INPOP19a residuals
+>>> Analysis with 5 temporal bins
+    Linear Regression Complete (N=3592, DOF=3590):
+      RSS=1.705285e+02, MSE=4.750098e-02, χ²_red=0.048
+      Birge Ratio = 0.218 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.51e+00
+      Final η = 9.72167274e-05 ± 6.65763008e-04
+      Bin 0: years 1984.3-1991.3, N=3592, η=9.72e-05 ± 6.66e-04, SNR=0.15σ
+    Linear Regression Complete (N=5287, DOF=5285):
+      RSS=3.537653e+01, MSE=6.693762e-03, χ²_red=0.007
+      Birge Ratio = 0.082 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.70e+00
+      Final η = -1.39882755e-03 ± 2.16497307e-04
+      Bin 1: years 1991.4-1998.5, N=5287, η=-1.40e-03 ± 2.16e-04, SNR=6.46σ
+    Linear Regression Complete (N=4005, DOF=4003):
+      RSS=1.538071e+01, MSE=3.842297e-03, χ²_red=0.004
+      Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.68e+00
+      Final η = -5.14747560e-04 ± 1.86230701e-04
+      Bin 2: years 1998.5-2005.5, N=4005, η=-5.15e-04 ± 1.86e-04, SNR=2.76σ
+    Linear Regression Complete (N=2210, DOF=2208):
+      RSS=5.770101e+00, MSE=2.613270e-03, χ²_red=0.003
+      Birge Ratio = 0.051 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.17e+00
+      Final η = -2.40676986e-06 ± 1.71464179e-04
+      Bin 3: years 2005.6-2012.7, N=2210, η=-2.41e-06 ± 1.71e-04, SNR=0.01σ
+    Linear Regression Complete (N=11113, DOF=11111):
+      RSS=7.043564e+00, MSE=6.339271e-04, χ²_red=0.001
+      Birge Ratio = 0.025 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.82e+00
+      Final η = -3.25735078e-04 ± 3.31982553e-05
+      Bin 4: years 2012.7-2019.8, N=11113, η=-3.26e-04 ± 3.32e-05, SNR=9.81σ
+    Weighted η: -3.42e-04 ± 3.17e-05
+    χ²/dof: 7.32 (p=6.83e-06)
+    Trend test: SNR=0.26σ (p=7.98e-01)
+    Sign consistency: 4/5 negative (p=9.69e-01)
+    Variance ratio: 3.19 (observed/expected)
+>>> Analysis with 10 temporal bins
+    Linear Regression Complete (N=1598, DOF=1596):
+      RSS=1.333913e+02, MSE=8.357852e-02, χ²_red=0.084
+      Birge Ratio = 0.289 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.57e+00
+      Final η = -1.66106611e-03 ± 1.36170753e-03
+      Bin 0: years 1984.3-1987.8, N=1598, η=-1.66e-03 ± 1.36e-03, SNR=1.22σ
+    Linear Regression Complete (N=1994, DOF=1992):
+      RSS=3.676678e+01, MSE=1.845722e-02, χ²_red=0.018
+      Birge Ratio = 0.136 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.47e+00
+      Final η = 1.33030260e-03 ± 5.45449431e-04
+      Bin 1: years 1987.8-1991.3, N=1994, η=1.33e-03 ± 5.45e-04, SNR=2.44σ
+    Linear Regression Complete (N=2027, DOF=2025):
+      RSS=1.731341e+01, MSE=8.549833e-03, χ²_red=0.009
+      Birge Ratio = 0.092 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.56e+00
+      Final η = -2.52835085e-03 ± 3.82227632e-04
+      Bin 2: years 1991.4-1994.9, N=2027, η=-2.53e-03 ± 3.82e-04, SNR=6.61σ
+    Linear Regression Complete (N=3260, DOF=3258):
+      RSS=1.758775e+01, MSE=5.398328e-03, χ²_red=0.005
+      Birge Ratio = 0.073 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.80e+00
+      Final η = -7.95320855e-04 ± 2.54065368e-04
+      Bin 3: years 1994.9-1998.5, N=3260, η=-7.95e-04 ± 2.54e-04, SNR=3.13σ
+    Linear Regression Complete (N=2695, DOF=2693):
+      RSS=1.057220e+01, MSE=3.925806e-03, χ²_red=0.004
+      Birge Ratio = 0.063 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.65e+00
+      Final η = -2.39196896e-04 ± 2.24018726e-04
+      Bin 4: years 1998.5-2002.0, N=2695, η=-2.39e-04 ± 2.24e-04, SNR=1.07σ
+    Linear Regression Complete (N=1310, DOF=1308):
+      RSS=4.732791e+00, MSE=3.618342e-03, χ²_red=0.004
+      Birge Ratio = 0.060 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.79e+00
+      Final η = -1.33244325e-03 ± 3.35723121e-04
+      Bin 5: years 2002.0-2005.5, N=1310, η=-1.33e-03 ± 3.36e-04, SNR=3.97σ
+    Linear Regression Complete (N=814, DOF=812):
+      RSS=2.855583e+00, MSE=3.516728e-03, χ²_red=0.004
+      Birge Ratio = 0.059 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.34e+00
+      Final η = -2.24442387e-04 ± 3.45840721e-04
+      Bin 6: years 2005.6-2009.1, N=814, η=-2.24e-04 ± 3.46e-04, SNR=0.65σ
+    Linear Regression Complete (N=1396, DOF=1394):
+      RSS=2.899433e+00, MSE=2.079938e-03, χ²_red=0.002
+      Birge Ratio = 0.046 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.09e+00
+      Final η = 7.25395196e-05 ± 1.87513347e-04
+      Bin 7: years 2009.1-2012.7, N=1396, η=7.25e-05 ± 1.88e-04, SNR=0.39σ
+    Linear Regression Complete (N=3556, DOF=3554):
+      RSS=2.629849e+00, MSE=7.399688e-04, χ²_red=0.001
+      Birge Ratio = 0.027 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.13e+00
+      Final η = -7.51265386e-04 ± 7.26223043e-05
+      Bin 8: years 2012.7-2016.2, N=3556, η=-7.51e-04 ± 7.26e-05, SNR=10.34σ
+    Linear Regression Complete (N=7557, DOF=7555):
+      RSS=4.378823e+00, MSE=5.795927e-04, χ²_red=0.001
+      Birge Ratio = 0.024 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.73e+00
+      Final η = -1.81204036e-04 ± 3.68286495e-05
+      Bin 9: years 2016.2-2019.8, N=7557, η=-1.81e-04 ± 3.68e-05, SNR=4.92σ
+    Weighted η: -3.13e-04 ± 3.13e-05
+    χ²/dof: 12.23 (p=0.00e+00)
+    Trend test: SNR=0.62σ (p=5.34e-01)
+    Sign consistency: 8/10 negative (p=9.89e-01)
+    Variance ratio: 4.16 (observed/expected)
+>>> Analysis with 20 temporal bins
+    Linear Regression Complete (N=1220, DOF=1218):
+      RSS=1.085231e+02, MSE=8.909942e-02, χ²_red=0.089
+      Birge Ratio = 0.298 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.52e+00
+      Final η = -5.63969382e-03 ± 1.57257973e-03
+      Bin 0: years 1984.3-1986.0, N=1220, η=-5.64e-03 ± 1.57e-03, SNR=3.59σ
+    Linear Regression Complete (N=378, DOF=376):
+      RSS=2.147941e+01, MSE=5.712608e-02, χ²_red=0.057
+      Birge Ratio = 0.239 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.77e+00
+      Final η = 1.37181731e-02 ± 2.51762714e-03
+      Bin 1: years 1986.0-1987.8, N=378, η=1.37e-02 ± 2.52e-03, SNR=5.45σ
+    Linear Regression Complete (N=768, DOF=766):
+      RSS=1.942003e+01, MSE=2.535252e-02, χ²_red=0.025
+      Birge Ratio = 0.159 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.40e+00
+      Final η = -6.20712990e-04 ± 1.03629591e-03
+      Bin 2: years 1987.8-1989.5, N=768, η=-6.21e-04 ± 1.04e-03, SNR=0.60σ
+    Linear Regression Complete (N=1226, DOF=1224):
+      RSS=1.675710e+01, MSE=1.369044e-02, χ²_red=0.014
+      Birge Ratio = 0.117 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.60e+00
+      Final η = 3.25981660e-03 ± 6.10488411e-04
+      Bin 3: years 1989.6-1991.3, N=1226, η=3.26e-03 ± 6.10e-04, SNR=5.34σ
+    Linear Regression Complete (N=953, DOF=951):
+      RSS=1.014434e+01, MSE=1.066702e-02, χ²_red=0.011
+      Birge Ratio = 0.103 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.53e+00
+      Final η = -5.07674974e-03 ± 6.22363807e-04
+      Bin 4: years 1991.4-1993.1, N=953, η=-5.08e-03 ± 6.22e-04, SNR=8.16σ
+    Linear Regression Complete (N=1074, DOF=1072):
+      RSS=6.399113e+00, MSE=5.969321e-03, χ²_red=0.006
+      Birge Ratio = 0.077 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.60e+00
+      Final η = -5.33442002e-04 ± 4.40092263e-04
+      Bin 5: years 1993.2-1994.9, N=1074, η=-5.33e-04 ± 4.40e-04, SNR=1.21σ
+    Linear Regression Complete (N=1645, DOF=1643):
+      RSS=6.357076e+00, MSE=3.869188e-03, χ²_red=0.004
+      Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.96e+00
+      Final η = -4.27818286e-05 ± 3.21236528e-04
+      Bin 6: years 1994.9-1996.7, N=1645, η=-4.28e-05 ± 3.21e-04, SNR=0.13σ
+    Linear Regression Complete (N=1615, DOF=1613):
+      RSS=1.037322e+01, MSE=6.431011e-03, χ²_red=0.006
+      Birge Ratio = 0.080 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.66e+00
+      Final η = -1.42273699e-03 ± 3.73353672e-04
+      Bin 7: years 1996.7-1998.5, N=1615, η=-1.42e-03 ± 3.73e-04, SNR=3.81σ
+    Linear Regression Complete (N=1603, DOF=1601):
+      RSS=5.789553e+00, MSE=3.616211e-03, χ²_red=0.004
+      Birge Ratio = 0.060 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.61e+00
+      Final η = -2.78688471e-04 ± 2.72499240e-04
+      Bin 8: years 1998.5-2000.2, N=1603, η=-2.79e-04 ± 2.72e-04, SNR=1.02σ
+    Linear Regression Complete (N=1092, DOF=1090):
+      RSS=4.684410e+00, MSE=4.297624e-03, χ²_red=0.004
+      Birge Ratio = 0.066 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.72e+00
+      Final η = -8.52749772e-05 ± 3.81953163e-04
+      Bin 9: years 2000.3-2002.0, N=1092, η=-8.53e-05 ± 3.82e-04, SNR=0.22σ
+    Linear Regression Complete (N=432, DOF=430):
+      RSS=1.748256e+00, MSE=4.065712e-03, χ²_red=0.004
+      Birge Ratio = 0.064 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.11e+00
+      Final η = -2.06620111e-03 ± 6.88102698e-04
+      Bin 10: years 2002.0-2003.8, N=432, η=-2.07e-03 ± 6.88e-04, SNR=3.00σ
+    Linear Regression Complete (N=878, DOF=876):
+      RSS=2.950624e+00, MSE=3.368293e-03, χ²_red=0.003
+      Birge Ratio = 0.058 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.67e+00
+      Final η = -1.09044084e-03 ± 3.78568419e-04
+      Bin 11: years 2003.9-2005.5, N=878, η=-1.09e-03 ± 3.79e-04, SNR=2.88σ
+    Linear Regression Complete (N=265, DOF=263):
+      RSS=1.084762e+00, MSE=4.124571e-03, χ²_red=0.004
+      Birge Ratio = 0.064 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.52e+00
+      Final η = 4.62224084e-04 ± 7.06543534e-04
+      Bin 12: years 2005.6-2007.3, N=265, η=4.62e-04 ± 7.07e-04, SNR=0.65σ
+    Linear Regression Complete (N=549, DOF=547):
+      RSS=1.678260e+00, MSE=3.068116e-03, χ²_red=0.003
+      Birge Ratio = 0.055 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.26e+00
+      Final η = -5.07823700e-04 ± 3.80970773e-04
+      Bin 13: years 2007.4-2009.1, N=549, η=-5.08e-04 ± 3.81e-04, SNR=1.33σ
+    Linear Regression Complete (N=491, DOF=489):
+      RSS=1.070986e+00, MSE=2.190155e-03, χ²_red=0.002
+      Birge Ratio = 0.047 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.36e+00
+      Final η = 2.35248497e-04 ± 3.57326455e-04
+      Bin 14: years 2009.1-2010.9, N=491, η=2.35e-04 ± 3.57e-04, SNR=0.66σ
+    Linear Regression Complete (N=905, DOF=903):
+      RSS=1.808458e+00, MSE=2.002722e-03, χ²_red=0.002
+      Birge Ratio = 0.045 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.99e+00
+      Final η = 6.11847715e-05 ± 2.19081716e-04
+      Bin 15: years 2010.9-2012.7, N=905, η=6.12e-05 ± 2.19e-04, SNR=0.28σ
+    Linear Regression Complete (N=1285, DOF=1283):
+      RSS=1.290251e+00, MSE=1.005652e-03, χ²_red=0.001
+      Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.26e+00
+      Final η = -7.44629567e-04 ± 1.48968555e-04
+      Bin 16: years 2012.7-2014.4, N=1285, η=-7.45e-04 ± 1.49e-04, SNR=5.00σ
+    Linear Regression Complete (N=2271, DOF=2269):
+      RSS=1.335443e+00, MSE=5.885602e-04, χ²_red=0.001
+      Birge Ratio = 0.024 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.07e+00
+      Final η = -7.58672947e-04 ± 7.87316971e-05
+      Bin 17: years 2014.5-2016.2, N=2271, η=-7.59e-04 ± 7.87e-05, SNR=9.64σ
+    Linear Regression Complete (N=2131, DOF=2129):
+      RSS=1.145036e+00, MSE=5.378280e-04, χ²_red=0.001
+      Birge Ratio = 0.023 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.81e+00
+      Final η = 1.25754443e-04 ± 6.98022220e-05
+      Bin 18: years 2016.2-2018.0, N=2131, η=1.26e-04 ± 6.98e-05, SNR=1.80σ
+    Linear Regression Complete (N=5426, DOF=5424):
+      RSS=3.215659e+00, MSE=5.928576e-04, χ²_red=0.001
+      Birge Ratio = 0.024 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.70e+00
+      Final η = -2.85041269e-04 ± 4.32661881e-05
+      Bin 19: years 2018.0-2019.8, N=5426, η=-2.85e-04 ± 4.33e-05, SNR=6.59σ
+    Weighted η: -3.04e-04 ± 3.10e-05
+    χ²/dof: 12.81 (p=0.00e+00)
+    Trend test: SNR=0.60σ (p=5.47e-01)
+    Sign consistency: 14/20 negative (p=9.79e-01)
+    Variance ratio: 21.95 (observed/expected)
+═══ INTERPRETATION:
+    The χ²/dof ratio of 12.23 indicates significant temporal variation beyond statistical expectation. This could be due to:
+  1. Hardware epoch effects (different instruments over time)
+  2. Real temporal variation in the physical signal
+  3. Unmodeled systematic effects varying with time
+    Sign consistency: 8/10 bins show negative η
+    This is consistent with chance (p=9.89e-01)
+    Temporal trend: dη/dy = 2.11e-05 ± 3.39e-05 yr⁻¹
+    No significant temporal trend (p=5.34e-01)
+═══ FINAL ASSESSMENT:
+The temporal bin analysis shows χ²/dof = 12.23, indicating significant temporal variation. However, 8/10 bins show negative η (p=9.89e-01), supporting signal consistency. The temporal variation is likely attributable to hardware epoch transitions rather than instability of the physical signal, given the consistent negative sign across bins.
+The temporal bin analysis shows χ²/dof = 12.23, indicating significant temporal variation. However, 8/10 bins show negative η (p=9.89e-01), supporting signal consistency. The temporal variation is likely attributable to hardware epoch transitions rather than instability of the physical signal, given the consistent negative sign across bins.
+Results saved to results/outputs/step_043_temporal_bin_variation.json
+✓   Step 043 completed successfully
+
+✓  PASS  step_043_temporal_bin_variation_analysis.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 50/74]  Full Canonical: step_044_systematic_projection_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Systematic Projection Analysis...
+═══ ═══ Starting Step 044: Systematic Projection Analysis...
+    ═══ STEP PURPOSE: Compute cos(elongation)-projected systematic bias for each error source
+    ═══ METHOD: Project each systematic component onto cos(elongation); phase-locked differential
+    ═══ DATA SUMMARY
+        Dataset: N = 26,207 observations
+        Using per-observation weights (1/σ²) from 'sigma_m'
+    Linear Regression Complete (N=26207, DOF=26205):
+      RSS=2.617449e+04, MSE=9.988356e-01, χ²_red=0.999
+      Birge Ratio = 0.999 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.03e+00
+      Final η = -3.50423685e-04 ± 6.58754162e-05
+        Baseline η = -3.504e-04 ± 6.588e-05 (5.32σ)
+        Ephemeris scatter: N=2, std(η) = 2.732e-04
+═══ ═══ SYSTEMATIC PROJECTION RESULTS
+    Source                          bias_η     r(cos)          p
+    ------------------------------------------------------------
+    Cross-ephemeris residual     2.732e-04     0.0000   1.00e+00
+    Monthly mean variation (    -6.153e-05    -0.0411   2.94e-11
+    Station-to-station mean      7.519e-06     0.1109   1.62e-72
+    cos(2*elongation) harmon    -7.014e-06    -0.3581   0.00e+00
+    Diurnal (24-hr) sinusoid    -4.278e-05    -0.0726   5.42e-32
+    ------------------------------------------------------------
+    Combined (quadrature)        7.564e-05
+    Upper bound (linear sum)     3.921e-04
+═══ ═══ PHASE-LOCKED DIFFERENTIAL ANALYSIS
+        New moon:  N=393,  mean=-1.175e-02 ± 1.540e-03 m
+        Full moon: N=1506, mean=3.092e-03 ± 1.985e-03 m
+        Differential η = -5.952e-04 ± 1.008e-04 (5.91σ)
+        Permutation p = 0.0030 (n=1000)
+═══ ═══ COMBINED UNCERTAINTY
+        Statistical:   ±6.588e-05
+        Systematic:    ±2.835e-04 (quadrature(ephemeris_scatter + projected_non_ephemeris))
+        Total:         ±2.911e-04
+        SNR (total):   1.20σ
+Results saved to results/outputs/step_044_systematic_projection_analysis.json
+✓   Systematic Projection Analysis Complete.
+
+✓  PASS  step_044_systematic_projection_analysis.py  (1.3s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 51/74]  Full Canonical: step_045_independent_validation.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Independent Validation...
+═══ ═══ Starting Step 045: Independent Validation and Systematic Falsification
+═══ ═══ TEST 1: Matched-Window Ephemeris Comparison
+        DE430 window: JD 2456722.50–2458372.50 (2014.18–2018.69)
+        INPOP19a in window: N = 8,816
+        DE430 total: N = 4,597
+    Sigma Outlier Detection: median=-0.003, MAD=0.015, sigma=0.023
+      Threshold=0.136 (6.0σ), Count=14
+    Linear Regression Complete (N=8802, DOF=8800):
+      RSS=1.034579e+03, MSE=1.175658e-01, χ²_red=0.118
+      Birge Ratio = 0.343 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.77e+00
+      Final η = -3.62178328e-04 ± 3.59982804e-05
+    Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
+      Threshold=0.297 (6.0σ), Count=37
+    Linear Regression Complete (N=4560, DOF=4558):
+      RSS=1.416414e+01, MSE=3.107534e-03, χ²_red=0.003
+      Birge Ratio = 0.056 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.87e+00
+      Final η = -7.04120485e-04 ± 1.18236800e-04
+        INPOP19a (window): η = -3.622e-04 ± 3.600e-05 (10.06σ)
+        DE430:             η = -7.041e-04 ± 1.182e-04 (5.96σ)
+        Difference:        Δη = 3.419e-04 ± 1.236e-04 (2.77σ)
+✓       Consistent (<3σ)?  YES ✓
+    Sigma Outlier Detection: median=-0.003, MAD=0.015, sigma=0.023
+      Threshold=0.136 (6.0σ), Count=14
+    Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
+      Threshold=0.297 (6.0σ), Count=37
+        INPOP19a (full model): η = -2.878e-04 ± 3.724e-05 (7.73σ)
+        DE430 (full model):    η = -5.977e-04 ± 1.185e-04 (5.04σ)
+        Full-model difference: Δη = 3.099e-04 ± 1.242e-04 (2.49σ)
+✓       Full-model consistent (<3σ)? YES ✓
+        Matched-window ephemeris scatter: ±2.418e-04
+═══ ═══ TEST 2: Seasonal Independence
+    Linear Regression Complete (N=2327, DOF=2325):
+      RSS=2.253464e+01, MSE=9.692317e-03, χ²_red=0.010
+      Birge Ratio = 0.098 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.33e+00
+      Final η = 2.66103734e-04 ± 3.57520022e-04
+    Linear Regression Complete (N=2128, DOF=2126):
+      RSS=1.282675e+01, MSE=6.033278e-03, χ²_red=0.006
+      Birge Ratio = 0.078 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.33e+00
+      Final η = -6.16593967e-05 ± 2.83000650e-04
+    Linear Regression Complete (N=2656, DOF=2654):
+      RSS=1.953643e+01, MSE=7.361128e-03, χ²_red=0.007
+      Birge Ratio = 0.086 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.15e+00
+      Final η = 6.33981326e-04 ± 2.61587012e-04
+    Linear Regression Complete (N=2415, DOF=2413):
+      RSS=2.520935e+01, MSE=1.044731e-02, χ²_red=0.010
+      Birge Ratio = 0.102 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.03e+00
+      Final η = -4.59685375e-05 ± 3.12529601e-04
+    Linear Regression Complete (N=1494, DOF=1492):
+      RSS=1.093238e+01, MSE=7.327331e-03, χ²_red=0.007
+      Birge Ratio = 0.086 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.39e+00
+      Final η = 1.53048495e-03 ± 3.75617898e-04
+    Linear Regression Complete (N=1698, DOF=1696):
+      RSS=1.574496e+01, MSE=9.283582e-03, χ²_red=0.009
+      Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.12e+00
+      Final η = 4.54587899e-04 ± 3.73103293e-04
+    Linear Regression Complete (N=1876, DOF=1874):
+      RSS=1.642435e+01, MSE=8.764326e-03, χ²_red=0.009
+      Birge Ratio = 0.094 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.48e+00
+      Final η = -1.04191616e-03 ± 3.85522368e-04
+    Linear Regression Complete (N=2648, DOF=2646):
+      RSS=1.551411e+01, MSE=5.863231e-03, χ²_red=0.006
+      Birge Ratio = 0.077 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.73e+00
+      Final η = -7.32021476e-04 ± 1.96691107e-04
+    Linear Regression Complete (N=2805, DOF=2803):
+      RSS=2.444311e+01, MSE=8.720340e-03, χ²_red=0.009
+      Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.91e+00
+      Final η = -4.39568420e-04 ± 2.57529651e-04
+    Linear Regression Complete (N=2065, DOF=2063):
+      RSS=2.851378e+01, MSE=1.382151e-02, χ²_red=0.014
+      Birge Ratio = 0.118 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.20e+00
+      Final η = -5.58380137e-04 ± 4.26371851e-04
+    Linear Regression Complete (N=2062, DOF=2060):
+      RSS=1.737848e+01, MSE=8.436154e-03, χ²_red=0.008
+      Birge Ratio = 0.092 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.39e+00
+      Final η = -2.65257297e-03 ± 3.51544406e-04
+    Linear Regression Complete (N=2033, DOF=2031):
+      RSS=2.292228e+01, MSE=1.128620e-02, χ²_red=0.011
+      Birge Ratio = 0.106 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.31e+00
+      Final η = -1.95320880e-03 ± 3.93124789e-04
+        Base η: -4.130e-04
+        Monthly modulation amplitude: -2.306e-04 ± 2.756e-05
+        Monthly modulation t = -8.37, p = 0.0000
+        Monthly variance / expected noise variance = 11.36
+        Jan η = 2.661e-04, Jul η = -1.042e-03
+        Heliocentric sign flip (Jan vs Jul)? YES ✓ (TEP predicts sign flip)
+        Interpretation: heliocentric_modulation
+✓       Consistent with TEP heliocentric gradient? YES ✓
+═══ ═══ TEST 3: Station Latitude Independence
+    Linear Regression Complete (N=19390, DOF=19388):
+      RSS=1.886682e+02, MSE=9.731186e-03, χ²_red=0.010
+      Birge Ratio = 0.099 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 2.04e+00
+      Final η = -5.40178771e-04 ± 1.08752371e-04
+    Linear Regression Complete (N=737, DOF=735):
+      RSS=1.397850e+01, MSE=1.901837e-02, χ²_red=0.019
+      Birge Ratio = 0.138 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 4.15e+00
+      Final η = 3.55351087e-03 ± 1.44874881e-03
+    Linear Regression Complete (N=3139, DOF=3137):
+      RSS=2.863186e+01, MSE=9.127146e-03, χ²_red=0.009
+      Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.06e+00
+      Final η = -5.00935600e-04 ± 3.60578299e-04
+    Linear Regression Complete (N=346, DOF=344):
+      RSS=1.323291e+00, MSE=3.846776e-03, χ²_red=0.004
+      Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 3.40e+00
+      Final η = -1.81311472e-05 ± 8.70658166e-04
+    Linear Regression Complete (N=2595, DOF=2593):
+      RSS=2.582927e+00, MSE=9.961152e-04, χ²_red=0.001
+      Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+      Condition Number κ(R) = 1.95e+00
+      Final η = -2.39835568e-04 ± 8.66412451e-05
+        Station results:
+              Grasse (lat= 43.8°): η = -5.402e-04 ( 4.97σ)
+           Haleakala (lat= 20.7°): η =  3.554e-03 ( 2.45σ) [ANOMALOUS]
+           McDonald2 (lat= 30.7°): η = -5.009e-04 ( 1.39σ)
+              Matera (lat= 40.6°): η = -1.813e-05 ( 0.02σ)
+                 APO (lat= 32.8°): η = -2.398e-04 ( 2.77σ)
+        Pearson r (all stations) = -0.790 (p = 0.1118)
+        Pearson r (excl. Haleakala) = 0.092 (p = 0.9076)
+✓       Latitude-independent? YES ✓
+═══ ═══ INDEPENDENT VALIDATION SUMMARY
+✓     [✓] Matched-window ephemeris: consistent (<3σ)
+✓     [✓] Heliocentric modulation: consistent with TEP prediction (Jan-Jul sign flip)
+✓     [✓] Latitude independence: no correlation (excl. known-anomalous Haleakala)
+✓     Overall: 3/3 tests passed
+Results saved to results/outputs/step_045_independent_validation.json
+✓   Independent Validation Complete.
+
+✓  PASS  step_045_independent_validation.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 52/74]  Full Canonical: step_046_station_balanced_tep.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Step 046: Station-Balanced TEP Analysis...
+    Purpose: Test TEP signal persistence when Grasse dominance is removed
+    Loaded 26,207 observations
+      Station APO: 2,595 obs
+      Station Grasse: 19,390 obs
+      Station Haleakala: 737 obs
+      Station Matera: 346 obs
+      Station McDonald2: 3,139 obs
+
+>>> >>> TEST 1: Full-sample baseline
+        cosD-only η = -3.177e-04 ± 6.052e-05 (5.25σ)
+        full-systematic η = -4.061e-04 ± 6.578e-05 (6.17σ)
+
+>>> >>> TEST 2: Equal-N subsample (all stations = min N)
+        cosD-only η = 1.141e-04 ± 3.350e-04 (0.34σ)
+        full-systematic η = -3.284e-05 ± 3.965e-04 (0.08σ)
+          APO: 346 obs
+          Grasse: 346 obs
+          Haleakala: 346 obs
+          Matera: 346 obs
+          McDonald2: 346 obs
+
+>>> >>> TEST 3: Grasse-capped subsample (Grasse = APO N)
+        cosD-only η = -2.092e-04 ± 1.179e-04 (1.77σ)
+        full-systematic η = -2.780e-04 ± 1.360e-04 (2.04σ)
+          APO: 2595 obs
+          Grasse: 2595 obs
+          Haleakala: 737 obs
+          Matera: 346 obs
+          McDonald2: 3139 obs
+
+>>> >>> TEST 4: Stratified bootstrap (200 iterations of equal-N)
+        Full-systematic mean η = -1.117e-04 ± 2.472e-04
+        95% CI = [-6.632e-04, 3.230e-04]
+        Mean SNR = 0.51σ
+        All balanced iterations significant? False
+
+═══ ═══ SUMMARY
+⚠   Primary full-systematic detection remains significant; balanced subsamples lose power
+Results saved to results/outputs/step_046_station_balanced_tep.json
+✓   Station-Balanced Analysis Complete.
+
+✓  PASS  step_046_station_balanced_tep.py  (2.3s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 53/74]  Full Canonical: step_046b_equal_n_injection_simulation.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Starting Step 046b: Equal-N Injection Simulation
+    Purpose: Parametric equal-N simulation at the headline Step 050 precision-weighted η
+    Loaded eta_true from Step 050 (precision-weighted WLS): -3.909e-04

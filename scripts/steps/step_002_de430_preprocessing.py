@@ -22,7 +22,7 @@ import numpy as np
 def process_de430(verbose=False):
     raw_dir = PROJECT_ROOT / "data" / "raw"
     processed_dir = PROJECT_ROOT / "data" / "processed"
-    
+
     # Use original DE430 data (2014-2018) only
     # Investigation revealed:
     # 1. Geoazur data has opposite sign convention (corrected by negation)
@@ -31,7 +31,7 @@ def process_de430(verbose=False):
     # 4. Systematic differences between datasets (offset, std)
     # 5. Combining them doesn't strengthen evidence due to dominant original dataset
     original_file = raw_dir / "DE430_2014-2018_residuals.dat"
-    
+
     if original_file.exists():
         print_status(f"Processing DE430 data from {original_file.name}", "PROCESS")
         df = parse_de430_file(original_file)

@@ -1,41 +1,41 @@
-[20:12:32] ═══ Step 052: Station Sample and Distribution Analysis
-[20:12:32]     Loaded 26207 observations from 5 stations
-[20:12:32] >>> Analyzing per-station coverage...
-[20:12:32] >>> Analyzing temporal epochs...
-[20:12:32] >>> Analyzing covariate shift (pre/post 2008)...
-[20:12:32] >>> Analyzing leave-one-station-out covariate shift...
-[20:12:32] >>> Computing per-station cosD-only regression...
-[20:12:32] ✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_052_station_distribution_analysis.json
-[20:12:32] ═══ 
+[22:29:37] ═══ Step 052: Station Sample and Distribution Analysis
+[22:29:37]     Loaded 26207 observations from 5 stations
+[22:29:37] >>> Analyzing per-station coverage...
+[22:29:37] >>> Analyzing temporal epochs...
+[22:29:37] >>> Analyzing covariate shift (pre/post 2008)...
+[22:29:37] >>> Analyzing leave-one-station-out covariate shift...
+[22:29:37] >>> Computing per-station cosD-only regression...
+[22:29:37] ✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_052_station_distribution_analysis.json
+[22:29:37] ═══ 
 === Station Coverage Summary ===
-[20:12:32]     Grasse: n=19390, years=1984.3-2019.8, RMS=0.099m, mean|cosD|=0.439
-[20:12:32]     Haleakala: n=737, years=1984.9-1990.7, RMS=0.138m, mean|cosD|=0.355
-[20:12:32]     McDonald2: n=3139, years=1988.2-2013.9, RMS=0.096m, mean|cosD|=0.410
-[20:12:32]     Matera: n=346, years=2003.1-2019.2, RMS=0.062m, mean|cosD|=0.251
-[20:12:32]     APO: n=2595, years=2006.3-2016.9, RMS=0.032m, mean|cosD|=0.516
-[20:12:32] ═══ 
+[22:29:37]     Grasse: n=19390, years=1984.3-2019.8, RMS=0.099m, mean|cosD|=0.439
+[22:29:37]     Haleakala: n=737, years=1984.9-1990.7, RMS=0.138m, mean|cosD|=0.355
+[22:29:37]     McDonald2: n=3139, years=1988.2-2013.9, RMS=0.096m, mean|cosD|=0.410
+[22:29:37]     Matera: n=346, years=2003.1-2019.2, RMS=0.062m, mean|cosD|=0.251
+[22:29:37]     APO: n=2595, years=2006.3-2016.9, RMS=0.032m, mean|cosD|=0.516
+[22:29:37] ═══ 
 === Temporal Epoch Composition ===
-[20:12:32]     pre_1990: n=2659, dominant=Grasse, mean|cosD|=0.376
-[20:12:32]     1990_2000: n=7533, dominant=Grasse, mean|cosD|=0.416
-[20:12:32]     2000_2010: n=3716, dominant=Grasse, mean|cosD|=0.406
-[20:12:32]     post_2010: n=12299, dominant=Grasse, mean|cosD|=0.474
-[20:12:32] ═══ 
+[22:29:37]     pre_1990: n=2659, dominant=Grasse, mean|cosD|=0.376
+[22:29:37]     1990_2000: n=7533, dominant=Grasse, mean|cosD|=0.416
+[22:29:37]     2000_2010: n=3716, dominant=Grasse, mean|cosD|=0.406
+[22:29:37]     post_2010: n=12299, dominant=Grasse, mean|cosD|=0.474
+[22:29:37] ═══ 
 === Covariate Shift (pre/post 2008) ===
-[20:12:32]     Pre: n=13466, mean|cosD|=0.405
-[20:12:32]     Post: n=12741, mean|cosD|=0.473
-[20:12:32]     KS test elongation: D=0.2010, p=1.94e-232
-[20:12:32]     KS test cosD: D=0.2010, p=1.94e-232
-[20:12:32] ═══ 
+[22:29:37]     Pre: n=13466, mean|cosD|=0.405
+[22:29:37]     Post: n=12741, mean|cosD|=0.473
+[22:29:37]     KS test elongation: D=0.2010, p=1.94e-232
+[22:29:37]     KS test cosD: D=0.2010, p=1.94e-232
+[22:29:37] ═══ 
 === Leave-One-Station-Out Shift ===
-[20:12:32]     Hold out Grasse: train n=6817, test n=19390, train|cosD|=0.436, test|cosD|=0.439, KS_D=0.1512
-[20:12:32]     Hold out Haleakala: train n=25470, test n=737, train|cosD|=0.440, test|cosD|=0.355, KS_D=0.2894
-[20:12:32]     Hold out McDonald2: train n=23068, test n=3139, train|cosD|=0.442, test|cosD|=0.410, KS_D=0.1973
-[20:12:32]     Hold out Matera: train n=25861, test n=346, train|cosD|=0.440, test|cosD|=0.251, KS_D=0.2812
-[20:12:32]     Hold out APO: train n=23612, test n=2595, train|cosD|=0.429, test|cosD|=0.516, KS_D=0.1248
-[20:12:32] ═══ 
+[22:29:37]     Hold out Grasse: train n=6817, test n=19390, train|cosD|=0.436, test|cosD|=0.439, KS_D=0.1512
+[22:29:37]     Hold out Haleakala: train n=25470, test n=737, train|cosD|=0.440, test|cosD|=0.355, KS_D=0.2894
+[22:29:37]     Hold out McDonald2: train n=23068, test n=3139, train|cosD|=0.442, test|cosD|=0.410, KS_D=0.1973
+[22:29:37]     Hold out Matera: train n=25861, test n=346, train|cosD|=0.440, test|cosD|=0.251, KS_D=0.2812
+[22:29:37]     Hold out APO: train n=23612, test n=2595, train|cosD|=0.429, test|cosD|=0.516, KS_D=0.1248
+[22:29:37] ═══ 
 === Per-Station cosD Regression ===
-[20:12:32]     Grasse: eta=-5.402e-04 +/- 1.087e-04, SNR=4.97sigma, n=19390
-[20:12:32]     Haleakala: eta=3.554e-03 +/- 1.447e-03, SNR=2.46sigma, n=737
-[20:12:32]     McDonald2: eta=-5.009e-04 +/- 3.605e-04, SNR=1.39sigma, n=3139
-[20:12:32]     Matera: eta=-1.813e-05 +/- 8.681e-04, SNR=0.02sigma, n=346
-[20:12:32]     APO: eta=-2.398e-04 +/- 8.661e-05, SNR=2.77sigma, n=2595
+[22:29:37]     Grasse: eta=-5.402e-04 +/- 1.087e-04, SNR=4.97sigma, n=19390
+[22:29:37]     Haleakala: eta=3.554e-03 +/- 1.447e-03, SNR=2.46sigma, n=737
+[22:29:37]     McDonald2: eta=-5.009e-04 +/- 3.605e-04, SNR=1.39sigma, n=3139
+[22:29:37]     Matera: eta=-1.813e-05 +/- 8.681e-04, SNR=0.02sigma, n=346
+[22:29:37]     APO: eta=-2.398e-04 +/- 8.661e-05, SNR=2.77sigma, n=2595

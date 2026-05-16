@@ -2,23 +2,23 @@
     "step_id": "step_028",
     "status": "PASS",
     "mean_approximation": {
-        "eta": -0.0004532983141173145,
-        "p_value": 8.274105654898572e-07
+        "eta": -0.0004532983171533657,
+        "p_value": 8.27410425327391e-07
     },
     "true_geometric": {
         "eta": -0.0004534190936383188,
         "p_value": 8.217910657541519e-07
     },
     "partial_regression": {
-        "coefficient_mean": 21.311896493169023,
-        "coefficient_true": -21.317714090646014,
-        "p_value_mean": 1.1025161446109127e-06,
-        "p_value_true": 1.0950225079711573e-06
+        "coefficient_mean": 21.312200378542418,
+        "coefficient_true": -21.31801797527511,
+        "p_value_mean": 1.1026603717857632e-06,
+        "p_value_true": 1.0951659377228142e-06
     },
     "collinearity": {
-        "corr_cos_mean_cos_true": 0.9999999626746201,
-        "vif_two_predictor": 13395711.203304365,
-        "condition_number_design": 11080.528193506918,
+        "corr_cos_mean_cos_true": 0.9999999626760807,
+        "vif_two_predictor": 13396235.42215931,
+        "condition_number_design": 11080.74491736156,
         "near_collinear": true
     },
     "conclusion": "After geometric recomputation, cos(D_mean) and cos(D_true) are nearly collinear. The two-predictor partial regression is ill-conditioned and cannot adjudicate dominance. The defensible result is that both single-predictor fits yield the same negative \u03b7 at essentially identical significance, rejecting the hypothesis that the detection is an artefact of a mean-phase proxy."

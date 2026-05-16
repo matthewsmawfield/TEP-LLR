@@ -51,13 +51,13 @@
         coupling: all non-gravitational processes couple to the same matter
         metric, ensuring local experiments remain metric-compatible. Where TEP
         diverges from standard scalar-tensor theories is in its 
-        Temporal Shear Suppression (TSS) mechanism, which allows the theory 
+        screening of Temporal Shear, which allows the theory 
         to evade tight solar-system constraints while maintaining large bare 
         couplings.
         The Cassini bound on PPN-$\gamma$ ($|\gamma - 1| < 2.3 \times 10^{-5}$;
         Bertotti et al. 2003) constrains the effective scalar coupling to
         $\alpha_{\rm eff} \lesssim 3 \times 10^{-3}$ in the Solar System. TEP
-        Temporal Shear Suppression operates via the continuous spatial profile of the time field
+        Temporal Shear screening operates via the continuous spatial profile of the time field
         (Temporal Topology), in which high ambient density in deep potential
         wells suppresses the local field gradient (Temporal Shear). Bodies with
         high gravitational compactness $\Phi/c^2$ experience stronger
@@ -252,8 +252,8 @@
                 <td>4</td>
                 <td>TEP interpretation</td>
                 <td>The sign, scale, and screened Solar-System response are
-                    interpreted using the Temporal Shear Suppression and
-                    Observable Response Coefficient framework established in
+                    interpreted using the Temporal Topology and
+                    Temporal Shear framework established in
                     the preceding papers.</td>
             </tr>
             <tr>
@@ -308,23 +308,30 @@
     <p>
         This analysis uses 26,207 raw LLR O-C residuals from five international
         laser ranging stations spanning 35 years of measurements (1984–2019),
-        with 25,445 retained after standard $6\sigma$ MAD outlier cleaning.
+        with 25,445 retained after 6σ-equivalent (MAD-based) outlier cleaning.
         The residuals are processed against the INPOP19a lunar and planetary
-        ephemeris from the Paris Observatory (Geoazur). To eliminate synodic 
-        blurring and ensure millimeter-level coordinate precision, Moon-Sun 
-        elongation angles were computed using high-precision Skyfield/DE421 
+        ephemeris from the Paris Observatory (Geoazur). To eliminate synodic
+        blurring and ensure millimeter-level coordinate precision, Moon-Sun
+        elongation angles were computed using high-precision Skyfield/DE421
         ephemerides rather than mean-phase approximations. The analysis searches
         for the predicted TEP Nordtvedt signal: a modulation of the form $\delta
         r = 13 \eta \cos(D)$, where $D$ is the Moon-Sun elongation angle.
     </p>
 
     <p>
-        Because ordinary least squares is unstable against heavy-tailed 1980s
-        PMT variance, the analysis adopts a fixed estimator hierarchy
-        (Section 4.0, Step 040). The headline synodic amplitude is the pooled
-        full-systematic OLS estimand on 25,445 cleaned residuals; AR(1) GLS,
-        cosD-only slopes, leverage excision, and hardware-epoch splits bound
-        that amplitude without receiving equal multiplicity credit.
+        The predicted amplitude for $\eta \sim 10^{-4}$ is $\sim$1–5 mm,
+        smaller than the 9.5 cm per-observation residual RMS. This is expected
+        for a suppressed PPN signal in precision LLR metrology: the signal
+        explains only $\sim$0.1% of the total variance, but with
+        $N = 25{,}445$ observations the standard error of the mean is
+        $\sigma_r \approx 1/\sqrt{N} = 0.0063$, and the observed correlation
+        coefficient $r = -0.0329$ is significant at $5.25\sigma$. The operative
+        statistical leverage is not per-shot variance explained but synodic
+        phase coherence across 35 years of independent observations. As hardware
+        precision improved from $\sim$10 cm (PMT era) to $\sim$2 cm (C-SPAD
+        era), the extracted physical amplitude did not scale to zero; it
+        converged to a fixed negative boundary, consistent with a permanent
+        modulation beneath the noise envelope.
     </p>
 
     <p>
@@ -340,7 +347,7 @@
         multi-body mean-motion basis used in static direct-fit ephemerides, and
         a synodic coupling parameterized with $\eta$ fixed at zero is expected
         to project into post-fit residuals. Source-level integrator refits that
-        leave $\eta$ free (Section 4.13) supply the decisive dynamical closure;
+        leave $\eta$ free (Section 4.34) supply the decisive dynamical closure;
         Steps 032, 041, and 054 supply the internal linearized and simulation
         checks on that channel.
     </p>

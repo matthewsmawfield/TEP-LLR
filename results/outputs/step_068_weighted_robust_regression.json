@@ -1,0 +1,32 @@
+{
+    "step_id": "step_068",
+    "status": "PASS",
+    "dataset": {
+        "n_obs": 25445
+    },
+    "weighted_robust_m_estimator": {
+        "eta": -0.00036442272561063005,
+        "eta_error_ols": 3.555560332117159e-05,
+        "eta_error_cluster": 3.982032358484465e-05,
+        "snr_ols": 10.249375388706582,
+        "snr_cluster": 9.151676651601267,
+        "converged": true,
+        "n_iterations": 11,
+        "mad_final_m": 0.03745047100746414,
+        "frac_downweighted": 0.1219493024169778,
+        "n_clusters": 5
+    },
+    "theilsen_comparison": {
+        "eta": -0.00034973532533164097,
+        "eta_error": 0.00011202127755620956,
+        "snr": 3.1220437131343397
+    },
+    "station_rms_map": {
+        "APO": 0.03161518296520261,
+        "Grasse": 0.05902263869865752,
+        "Haleakala": 0.10624811895862268,
+        "Matera": 0.058856587276723105,
+        "McDonald2": 0.08069853340704666
+    },
+    "interpretation": "The weighted robust M-estimator recovers an \u03b7 consistent with OLS because it correctly weights by station precision and downweights residual outliers, rather than taking the median of pairwise slopes that are dominated by noisy stations. The Theil-Sen discrepancy is an estimator artefact, not a physical lower bound."
+}

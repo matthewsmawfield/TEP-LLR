@@ -300,7 +300,7 @@ if __name__ == "__main__":
 
     sys_results = analyze_systematics(df)
     error_budget, total_systematic_cm, eta_fit = generate_systematic_error_budget(df, sys_results, logger=logger)
-    
+
     all_clean = all(v.get("clean_profile", False)
                     for v in sys_results.values())
 

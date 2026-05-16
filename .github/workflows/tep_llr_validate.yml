@@ -42,5 +42,8 @@ jobs:
       - name: Manuscript values vs canonical outputs
         run: python3 scripts/utils/verify_value_consistency.py
 
+      - name: Pipeline quality gate (ledger, warning scan, compile)
+        run: python3 scripts/utils/pipeline_quality_gate.py
+
       - name: Byte-compile analysis scripts
         run: python3 -m compileall -q scripts

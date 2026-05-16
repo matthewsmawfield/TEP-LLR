@@ -1,0 +1,37 @@
+{
+    "step_id": "step_073",
+    "status": "PASS",
+    "model": "synodic_only: r = 13 \u03b7 cos(D) + b",
+    "prior_eta": "uniform on [-0.01, 0.01]",
+    "prior_intercept": "uniform on [-0.1, 0.1] m",
+    "posterior_prob_negative_eta": 1.0,
+    "posterior_prob_positive_eta": 0.0,
+    "map_eta": -0.0002863313919714783,
+    "map_b": -0.0004116129252003425,
+    "posterior_cov_det": 8.603227810261063e-16,
+    "log_ml_laplace": 55835.35331646201,
+    "log_bf_laplace": 32.4324668444533,
+    "bf_laplace": 121686215642957.73,
+    "bf_bic": 8057.059123963125,
+    "evidence_cross_checks": {
+        "grid_quadrature": {
+            "log_evidence_m1": 32424.05870467235,
+            "log_evidence_m0": 32419.815153805146,
+            "log_bf10": 4.24355086720243,
+            "bf10": 69.65474799174753,
+            "n_eta": 121,
+            "n_b": 81
+        },
+        "bridge_sampling": {
+            "log_bf10": 4.5792796474822595,
+            "bf10": 97.44417476208444,
+            "bridge_mixture_c": 0.010158041371333104,
+            "n_samples": 4000,
+            "n_iterations": 8,
+            "max_samples_used": 4000
+        },
+        "note": "Grid quadrature and bridge sampling are bandwidth-free synodic-only cross-checks on the same uniform priors as Steps 016/073 MCMC. Laplace and BIC are model-dependent approximations retained as secondary summaries."
+    },
+    "n_samples": 128000,
+    "n_obs": 25445
+}

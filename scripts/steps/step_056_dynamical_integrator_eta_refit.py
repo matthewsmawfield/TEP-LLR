@@ -45,15 +45,9 @@ SIDEREAL_MONTH_DAYS = 27.32166
 
 
 def load_ephemeris():
-    for candidate in (
-        PROJECT_ROOT / "data" / "raw" / "de440.bsp",
-        PROJECT_ROOT / "de421.bsp",
-    ):
-        if candidate.exists():
-            return load(str(candidate)), candidate
-    raise FileNotFoundError(
-        "No Skyfield ephemeris kernel found. Expected data/raw/de440.bsp or de421.bsp."
-    )
+    from scripts.utils.astronomical_utils import load_skyfield_planets
+
+    return load_skyfield_planets(PROJECT_ROOT)
 
 
 def clean_residual_frame(df: pd.DataFrame) -> pd.DataFrame:

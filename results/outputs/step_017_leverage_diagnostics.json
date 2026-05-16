@@ -2,15 +2,15 @@
     "step_id": "step_017",
     "status": "PASS",
     "summary": {
-        "full_sample_eta_ols": -0.0004532983141173137,
-        "full_sample_eta_theilsen": -0.00029380969190499675,
-        "ols_theilsen_ratio_full": 1.5428296839979245,
+        "full_sample_eta_ols": -0.00045329831715336437,
+        "full_sample_eta_theilsen": -0.00029380969132409483,
+        "ols_theilsen_ratio_full": 1.5428296973817015,
         "interpretation": "OLS inflated by leverage"
     },
     "leverage_statistics": {
         "n_observations": 26207,
-        "mean_leverage": 7.6315488228336e-05,
-        "high_leverage_threshold": 0.000152630976456672,
+        "mean_leverage": 7.631548822833599e-05,
+        "high_leverage_threshold": 0.00015263097645667198,
         "n_high_leverage": 1432,
         "fraction_high_leverage": 0.054641889571488536
     },
@@ -35,69 +35,69 @@
             "n_original": 26207,
             "n_removed": 1432,
             "n_remaining": 24775,
-            "eta_ols": -0.00040141883732081003,
-            "eta_theil_sen": -0.00026268726545749756,
-            "ols_theilsen_ratio": 1.5281244662610378,
+            "eta_ols": -0.00040141884084070117,
+            "eta_theil_sen": -0.0002626872586486009,
+            "ols_theilsen_ratio": 1.5281245192698238,
             "removal_type": "all_high"
         },
         "near_new_moon_only": {
             "n_original": 26207,
             "n_removed": 393,
             "n_remaining": 25814,
-            "eta_ols": -0.0004180326924878801,
-            "eta_theil_sen": -0.0003318680083554396,
-            "ols_theilsen_ratio": 1.2596354031213393,
+            "eta_ols": -0.0004180326957896138,
+            "eta_theil_sen": -0.00033186800717953326,
+            "ols_theilsen_ratio": 1.2596354175335356,
             "removal_type": "near_new_moon"
         },
         "near_full_moon_only": {
             "n_original": 26207,
             "n_removed": 0,
             "n_remaining": 26207,
-            "eta_ols": -0.0004532983141173137,
-            "eta_theil_sen": -0.00029380969190499675,
-            "ols_theilsen_ratio": 1.5428296839979245,
+            "eta_ols": -0.00045329831715336437,
+            "eta_theil_sen": -0.00029380969132409483,
+            "ols_theilsen_ratio": 1.5428296973817015,
             "removal_type": "near_full_moon"
         }
     },
     "bootstrap_analysis": {
         "eta_ols_with_highlev": {
-            "mean": -0.00045437597690039285,
-            "std": 8.066279087012035e-05,
+            "mean": -0.0004543759799354681,
+            "std": 8.066279088802572e-05,
             "ci_95": [
-                -0.0006107039996745083,
-                -0.00029481413153383977
+                -0.0006107040030636857,
+                -0.00029481413408659617
             ]
         },
         "eta_ols_without_highlev": {
-            "mean": -0.00040089180821204005,
-            "std": 9.857444092469683e-05
+            "mean": -0.00040089181173163575,
+            "std": 9.857444091026843e-05
         },
         "eta_theilsen_with_highlev": {
-            "mean": -0.0003130345372808468,
-            "std": 0.00034956483707011886
+            "mean": -0.00031303453733302016,
+            "std": 0.00034956483699538957
         },
         "eta_theilsen_without_highlev": {
-            "mean": -0.0002775577970868152,
-            "std": 0.0005635246895454319
+            "mean": -0.00027755779744458075,
+            "std": 0.0005635246899081297
         },
         "leverage_influence": "high"
     },
     "conclusion": {
         "true_eta_range": [
-            -0.0003318680083554396,
-            -0.00040141883732081003
+            -0.00033186800717953326,
+            -0.00040141884084070117
         ],
         "formal_cooks_d_excision": {
             "n": 26207,
             "n_removed": 1031,
             "n_clean": 25176,
             "threshold": 0.00015263097645667187,
-            "eta_clean_ols": -0.00033054126604903567,
-            "eta_clean_se": 5.8468839652482596e-05,
-            "eta_clean_snr": 5.653289307837339,
-            "eta_clean_theilsen": -0.0004063059824606161
+            "eta_clean_ols": -0.00033054126789804083,
+            "eta_clean_se": 5.846883965213078e-05,
+            "eta_clean_snr": 5.653289339495125,
+            "eta_clean_theilsen": -0.0004063059808540395
         },
-        "recommended_reporting": "\u03b7 = -3.31e-04 \u00b1 5.85e-05 (Leverage-Excised OLS)",
-        "key_finding": "Cooks D excision converges OLS cleanly towards robust estimates while maintaining ~5.7 sigma detection."
+        "recommended_reporting": "CosD-only Cook's-D leverage excision (Step 017): \u03b7 = -3.31e-04 \u00b1 5.85e-05 (5.65\u03c3). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.",
+        "key_finding": "Cook's-D excision on the simple cosD-only design stabilizes OLS against high-leverage shots while preserving strong negative \u03b7; full-systematic Cook's diagnostics are reported in Step 050."
     }
 }

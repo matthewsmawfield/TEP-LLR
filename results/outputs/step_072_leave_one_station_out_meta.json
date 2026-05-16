@@ -1,0 +1,116 @@
+{
+    "step_id": "step_072",
+    "status": "PASS",
+    "main_results": true,
+    "figure": {
+        "path": "results/figures/fig_05_loso_forest.png",
+        "description": "LOSO forest plot of \u03b7 \u00b1 cluster-robust \u03c3 with powered/underpowered flags"
+    },
+    "full_sample": {
+        "eta": -0.00040611545725110945,
+        "eta_err": 6.57779989203431e-05,
+        "eta_err_cluster": 6.224625170663243e-05,
+        "snr": 6.1740318026839605,
+        "snr_cluster": 6.524335941787115,
+        "n": 25445,
+        "powered": true
+    },
+    "loso": [
+        {
+            "excluded_station": "APO",
+            "eta": -0.0004123294403760757,
+            "eta_err": 7.294593056817689e-05,
+            "eta_err_cluster": 7.186322448228173e-05,
+            "snr": 5.6525352019562405,
+            "snr_cluster": 5.737697457170708,
+            "n": 22850,
+            "delta_sigma": 0.09982903314809755,
+            "powered": true,
+            "power_label": "powered"
+        },
+        {
+            "excluded_station": "Grasse",
+            "eta": -0.00016478018808587322,
+            "eta_err": 0.00017987260287175968,
+            "eta_err_cluster": 0.00015768718371760195,
+            "snr": 0.9160938656308509,
+            "snr_cluster": 1.0449814893071714,
+            "n": 6703,
+            "delta_sigma": 3.877105248082297,
+            "powered": false,
+            "power_label": "underpowered"
+        },
+        {
+            "excluded_station": "Haleakala",
+            "eta": -0.0004178442667827617,
+            "eta_err": 6.43420677422237e-05,
+            "eta_err_cluster": 6.382950235289965e-05,
+            "snr": 6.4941069108439065,
+            "snr_cluster": 6.54625606310684,
+            "n": 24779,
+            "delta_sigma": 0.18842595674564153,
+            "powered": true,
+            "power_label": "powered"
+        },
+        {
+            "excluded_station": "Matera",
+            "eta": -0.0004183856125108533,
+            "eta_err": 6.601533093600553e-05,
+            "eta_err_cluster": 6.452090615733158e-05,
+            "snr": 6.337703781511469,
+            "snr_cluster": 6.48449684650487,
+            "n": 25100,
+            "delta_sigma": 0.19712279733040455,
+            "powered": true,
+            "power_label": "powered"
+        },
+        {
+            "excluded_station": "McDonald2",
+            "eta": -0.00043246461909445704,
+            "eta_err": 6.449666192377934e-05,
+            "eta_err_cluster": 6.423791945507584e-05,
+            "snr": 6.705224831721272,
+            "snr_cluster": 6.732232655774242,
+            "n": 22348,
+            "delta_sigma": 0.4233051970347003,
+            "powered": true,
+            "power_label": "powered"
+        }
+    ],
+    "grasse_leverage": {
+        "exclude_grasse_eta": -0.00016478018808587322,
+        "exclude_grasse_snr": 1.0449814893071714,
+        "exclude_grasse_delta_sigma": 3.877105248082297,
+        "exclude_grasse_powered": false,
+        "interpretation": "Excluding Grasse drops SNR below the powered threshold because the remaining four stations lack Grasse's precision and phase coverage; four other exclusions remain powered with the same negative sign."
+    },
+    "power_accounting": {
+        "snr_threshold": 3.0,
+        "n_powered": 4,
+        "n_underpowered": 1,
+        "powered_stations": [
+            "APO",
+            "Haleakala",
+            "Matera",
+            "McDonald2"
+        ],
+        "underpowered_stations": [
+            "Grasse"
+        ]
+    },
+    "consistency": {
+        "all_same_sign_full": true,
+        "all_same_sign_powered": true,
+        "max_shift_sigma": 3.877105248082297,
+        "max_shift_powered_sigma": 0.4233051970347003,
+        "jackknife_consistent": true
+    },
+    "meta_analysis": {
+        "eta": -0.00042067098858038904,
+        "eta_err": 3.293980616979328e-05,
+        "snr": 12.770900545436605,
+        "cochrans_Q": 0.05039569615801788,
+        "Q_df": 3,
+        "I2_percent": 0.0
+    }
+}

@@ -13,6 +13,7 @@ from typing import Dict
 # Import constants from llr_constants module
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR, Z_ALPHA_2
 from scripts.utils.config import get_config
+from scripts.utils.logger import print_status
 
 TEP_CONFIG = get_config()
 
@@ -84,6 +85,9 @@ def robust_regression(y: np.ndarray, X: np.ndarray, weights: np.ndarray = None,
             cond = s[0] / s[-1] if s[-1] > 0 else np.inf
 
             if cond > 1e12:
+                print_status(
+                    f"robust_regression: design matrix ill-conditioned "
+                    f"(κ = {cond:.2e}); returning NaN coefficients.", "ERROR")
                 return {
                     'coefficients': np.full(k, np.nan),
                     'errors': np.full(k, np.nan),

@@ -37,7 +37,7 @@ import numpy as np
 from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
 import pandas as pd
 from scipy import stats
-from scripts.utils.statistical_utils import linear_regression, require_step003_eta_ols
+from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression, require_step003_eta_ols
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
@@ -50,15 +50,15 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
     print_status("═══ Starting Step 029: Station Power & Grasse Dominance Assessment...", "TITLE")
     print_status("═══ STEP PURPOSE: Assess per-station statistical power and address Grasse dominance concern", "INFO")
     print_status("═══ METHOD: Expected vs observed SNR analysis, Monte Carlo IPW simulation, precision-weighted regression", "INFO")
-    
+
     print_status("═══ DATA SUMMARY", "INFO")
     print_status(f"    Dataset: N = {len(df):,} observations", "DATA")
     print_status(f"    Measured global η: {eta_measured:.8e}", "DATA")
     print_status(f"    Stations: {sorted(df['station'].unique())}", "DATA")
-    
+
     print_status("═══ ANALYSIS TRACE", "INFO")
     print_status(">>> Performing per-station power analysis", "PROCESS")
-    
+
     stations = sorted(df['station'].unique())
     result_rows = []
 
@@ -136,10 +136,10 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
     expected_underpowered_rows = [r for r in result_rows if not r['powered_at_3sigma_expected']]
     actually_powered_rows = [r for r in result_rows if r['actually_powered']]
     actually_underpowered_rows = [r for r in result_rows if not r['actually_powered']]
-    
+
     n_expected_powered = len(expected_powered_rows)
     n_actually_powered = len(actually_powered_rows)
-    
+
     return {
         'stations': result_rows,
         'n_expected_powered': n_expected_powered,
@@ -149,14 +149,16 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
         'power_analysis_conclusion': (
             f'Expected powered stations (based on SNR >= 3.0 at global η): {n_expected_powered}. '
             f'Actually powered stations (based on observed SNR >= 3.0): {n_actually_powered}. '
-            f'No individual station achieves conventional statistical significance (SNR ≥ 3σ). '
-            f'Detection relies on combined analysis with N = 25,177 observations.'
+            f'{n_actually_powered} station(s) achieve conventional station-level significance '
+            f'(SNR ≥ 3σ). The strongest inference remains the combined analysis with '
+            f'N = {sum(r["n_obs"] for r in result_rows):,} observations.'
         ),
         'conclusion': (
             'Pattern of detections/non-detections matches per-station power analysis. '
             'Underpowered stations failing to detect is expected and consistent with '
             'the global signal, not evidence against it. '
-            'The detection is achieved through combined analysis, not individual station measurements.'
+            'The detection is achieved primarily through combined analysis, with station-level '
+            'results used as power diagnostics rather than independent discovery claims.'
         )
     }
 
@@ -212,9 +214,9 @@ def leave_one_station_out_influence(df: pd.DataFrame) -> dict:
         },
         "leave_one_out": results_sorted,
         "interpretation": (
-            "If exclusion of any station shifts eta by << 1 sigma, the pooled detection is not driven "
-            "by that station. In particular, Haleakala's small N implies low influence even if its "
-            "station-level sign differs."
+            "Large leave-one-station shifts indicate material station leverage. "
+            "This diagnostic is intentionally conservative because it uses a cosD-only fit; "
+            "the controlled common-eta model in Step 050 is the primary station-pooling test."
         ),
     }
 
@@ -598,7 +600,9 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
         print_status(f'Data not found: {data_path}', 'ERROR')
         return {'status': 'FAIL', 'reason': 'No processed data'}
 
-    df = pd.read_csv(data_path)
+    df_raw = pd.read_csv(data_path)
+    outlier_mask = detect_outliers_sigma(df_raw["residual_m"].values, 6.0)
+    df = df_raw.loc[~outlier_mask].copy()
 
     # Load measured η from step_003 statistical output (deterministic pipeline result)
     step_003_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_003_statistical_analysis.json'
@@ -616,6 +620,10 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
         print_status('=' * 60, 'INFO')
         print_status(f'Dataset: {len(df)} observations across '
                      f'{df["station"].nunique()} stations', 'INFO')
+        print_status(
+            f'Canonical 6σ cleaning removed {int(outlier_mask.sum())}/{len(df_raw)} observations',
+            'INFO',
+        )
 
     # --- 1. Per-station power ---
     if verbose:
@@ -635,12 +643,10 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
     # --- 2. MC IPW distribution ---
     if verbose:
         print_status('\n[2/5] Monte Carlo IPW SNR distribution (n=2000)...', 'PROCESS')
-    station_fracs = {
-        'Grasse': 0.740, 'APO': 0.099,
-        'Matera': 0.013, 'McDonald2': 0.120, 'Haleakala': 0.028
-    }
+    station_counts = df["station"].value_counts()
+    station_fracs = (station_counts / station_counts.sum()).to_dict()
     mc_ipw = monte_carlo_ipw_distribution(
-        station_fracs, eta_true=eta_global, n_total=26207,
+        station_fracs, eta_true=eta_global, n_total=len(df),
         noise_rms=0.095, n_mc=2000, seed=42
     )
     if verbose:
@@ -674,7 +680,8 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
     cross_val = cross_station_validation(df, verbose=verbose)
 
     # --- Summary verdict ---
-    # Good coverage stations = APO + Grasse (both negative, both powered)
+    # Good coverage stations are the stations with enough phase leverage for a
+    # meaningful sign check. They need not each cross 3σ individually.
     good_cov_stations = [s for s in phase_cov['stations'] if s['good_phase_coverage']]
     good_cov_negative = sum(
         1 for s in power['stations']
@@ -683,26 +690,71 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
     )
     good_cov_total = len(good_cov_stations)
 
-    all_pass = (
+    max_leave_one_sigma = max(
+        (
+            r["delta_eta_in_full_sigma"]
+            for r in influence["leave_one_out"]
+            if r["delta_eta_in_full_sigma"] is not None
+        ),
+        default=0.0,
+    )
+    grasse_leave_one = next(
+        (r for r in influence["leave_one_out"] if r["excluded_station"] == "Grasse"),
+        None,
+    )
+    expected_power_misses = [
+        r["station"]
+        for r in power["stations"]
+        if r["powered_at_3sigma_expected"] and not r["actually_powered"]
+    ]
+
+    core_support = (
         good_cov_negative == good_cov_total  # all well-covered stations are negative
         and pwr['eta_precision_weighted'] < 0
         and pwr['snr'] >= 3.0
         and grasse_split['both_negative_eta']
         and cross_val['prediction_r'] > 0
     )
+    qualified_by_leverage = bool(max_leave_one_sigma >= 3.0 or expected_power_misses)
+    all_pass = core_support and not qualified_by_leverage
+    overall_verdict = (
+        "CONSISTENT" if all_pass
+        else "QUALIFIED" if core_support
+        else "INCONSISTENT"
+    )
+    # Top-level status: PASS for completed analyses; FAIL only for internally inconsistent
+    # station-power checks. Qualified (Grasse leverage) outcomes stay PASS with flags in summary.
+    pipeline_status = "FAIL" if overall_verdict == "INCONSISTENT" else "PASS"
+
+    grasse_frac = station_fracs.get("Grasse", 0.0)
+    mcd_phase = next(
+        (s for s in phase_cov["stations"] if s["station"] == "McDonald2"),
+        {},
+    )
+    positive_low_power = [
+        s["station"]
+        for s in power["stations"]
+        if s["eta_obs"] > 0 and not s["actually_powered"]
+    ]
 
     ipw_explanation = (
         'The observed IPW SNR = 0.52 is explained by two structural data issues: '
-        '(1) McDonald2 has severe phase truncation (mean cos(D) = -0.326, vs -0.11 for Grasse), '
+        f'(1) McDonald2 has severe phase truncation (mean cos(D) = '
+        f'{mcd_phase.get("mean_cos_elong", float("nan")):+.3f}), '
         'meaning its obs cluster near new moon. This sharply reduces cos(D) leverage and '
         'inflates station-level uncertainty, which degrades station-balanced estimators. '
-        '(2) Haleakala is opposite-signed (marginal early-era result, 1.5σ). '
+        f'(2) Low-power opposite-sign stations ({", ".join(positive_low_power) or "none"}) '
+        'are amplified by equal-station weighting. '
         'When the IPW regression gives these stations equal weight to APO and Grasse, '
         'it amplifies phase-truncated noise to match the well-powered signal. '
         'The correct comparison is: all stations with good phase coverage and sufficient '
         f'data (APO, Grasse) detect negative η. The precision-weighted regression '
         f'(η_WLS = {pwr["eta_precision_weighted"]:.3e} at {pwr["snr"]:.2f}σ) which weights '
-        'by data quality, not station identity, confirms the detection.'
+        f'by data quality, not station identity, supports the detection. '
+        f'However, Grasse contributes {grasse_frac:.1%} of the cleaned archive and leave-one-Grasse '
+        f'shifts the cosD-only eta by '
+        f'{(grasse_leave_one or {}).get("delta_eta_in_full_sigma", float("nan")):.2f}σ, so this step is '
+        'best read as a qualified station-power diagnosis rather than a complete Grasse-dominance falsification.'
     )
 
     summary = {
@@ -715,33 +767,61 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
         'precision_weighted_snr': pwr['snr'],
         'grasse_both_halves_negative': grasse_split['both_negative_eta'],
         'cross_station_r': cross_val['prediction_r'],
-        'overall_verdict': 'CONSISTENT' if all_pass
-                           else 'INCONSISTENT',
+        'overall_verdict': overall_verdict,
+        'core_support': bool(core_support),
+        'qualified_by_leverage': qualified_by_leverage,
+        'max_leave_one_station_shift_sigma': float(max_leave_one_sigma),
+        'expected_power_misses': expected_power_misses,
         'interpretation': ipw_explanation,
     }
 
     if verbose:
         print_status('\n' + '=' * 60, 'INFO')
-        print_status('Status: ' + summary['overall_verdict'], 'SUCCESS' if all_pass else 'WARNING')
+        _verdict_level = (
+            "SUCCESS"
+            if overall_verdict == "CONSISTENT"
+            else "INFO"
+            if overall_verdict == "QUALIFIED"
+            else "WARNING"
+        )
+        print_status('Status: ' + summary['overall_verdict'], _verdict_level)
         print_status(summary['interpretation'], 'INFO')
-    
+
     print_status("═══ RESULTS SUMMARY", "INFO")
     print_status(f"    Expected powered stations: {power['n_expected_powered']}", "CALC")
     print_status(f"    Actually powered stations: {power['n_actually_powered']}", "CALC")
-    print_status(f"    Overall verdict: {summary['overall_verdict']}", "PASS" if all_pass else "WARNING")
-    
+    _summary_level = (
+        "SUCCESS"
+        if overall_verdict == "CONSISTENT"
+        else "INFO"
+        if overall_verdict == "QUALIFIED"
+        else "WARNING"
+    )
+    print_status(f"    Overall verdict: {summary['overall_verdict']}", _summary_level)
+
     print_status("═══ INTERPRETATION", "INFO")
-    print_status(f"    No individual station achieves conventional statistical significance (SNR ≥ 3σ)", "INFO")
-    print_status(f"    Detection relies on combined analysis with N = 25,177 observations", "INFO")
-    print_status(f"    Pattern of detections matches per-station power analysis expectations", "INFO")
-    
+    print_status(
+        f"    Station-level detections (SNR ≥ 3σ): {power['n_actually_powered']}",
+        "INFO",
+    )
+    print_status(f"    Detection relies on combined analysis with N = {len(df):,} observations", "INFO")
+    if expected_power_misses:
+        print_status(
+            f"    Expected-power miss(es): {', '.join(expected_power_misses)}; station-power result is qualified",
+            "INFO",
+        )
+    else:
+        print_status("    Pattern of detections matches per-station power analysis expectations", "INFO")
+
     print_status("═══ REPRODUCIBILITY", "INFO")
     print_status(f"    Output file: results/outputs/step_029_station_power_analysis.json", "INFO")
     print_status(f"    Analysis components: Per-station power, phase coverage, IPW simulation, precision-weighted regression", "INFO")
 
     results = {
         'step_id': 'step_029',
-        'status': 'PASS' if all_pass else 'WARNING',
+        'status': pipeline_status,
+        'n_observations': int(len(df)),
+        'n_outliers_removed': int(outlier_mask.sum()),
         'summary': summary,
         'per_station_power': power,
         'leave_one_station_out_influence': influence,
@@ -775,4 +855,8 @@ if __name__ == '__main__':
 
     output_rel = output_path.relative_to(PROJECT_ROOT) if output_path.is_relative_to(PROJECT_ROOT) else output_path
     print_status(f'Results saved to {output_rel}', 'SUCCESS')
-    print_status(f"Status: {results['summary']['overall_verdict']}", 'SUCCESS')
+    ov = results['summary']['overall_verdict']
+    _final_level = (
+        'SUCCESS' if ov == 'CONSISTENT' else 'INFO' if ov == 'QUALIFIED' else 'WARNING'
+    )
+    print_status(f"Status: {ov} (pipeline {results['status']})", _final_level)

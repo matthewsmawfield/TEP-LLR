@@ -8,8 +8,7 @@
         metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$, where $A(\phi) =
         \exp(\beta\phi/M_{\rm Pl})$ is the conformal factor. The rate at which
         proper time accumulates depends on the local value of $\phi$, which in
-        turn depends on the ambient matter density through a Temporal Shear 
-        Suppression (TSS) mechanism. TSS operates via the continuous spatial 
+        turn depends on the ambient matter density through screening of Temporal Shear. This operates via the continuous spatial 
         profile of the time field (Temporal Topology), in which high ambient 
         density in deep potential wells suppresses the local field gradient 
         (Temporal Shear), naturally attenuating fifth-force effects in dense 
@@ -53,7 +52,7 @@
         Weak Equivalence Principle (all non-gravitational processes couple to
         the same matter metric $\tilde{g}_{\mu\nu}$, consistent with the TEP framework paper, Paper 0,
         \S7.2). However, the <em>Strong</em> Equivalence Principle may be
-        violated through the Temporal Shear Suppression mechanism.
+        violated through the suppression of Temporal Shear.
     </p>
 
     <p>
@@ -93,13 +92,35 @@
     <p>
         where $\Phi_{\oplus}/c^2 \approx 7 \times 10^{-10}$ is Earth's compactness
         and $\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$ is the Moon's
-        compactness. The quadratic dependence on compactness arises because the
-        effective coupling scales as $\alpha_{\rm eff} \propto \alpha_0 \Phi$
-        via gradient suppression, and the Nordtvedt parameter $\eta \propto
-        (\alpha_{\rm eff,\oplus}^2 - \alpha_{\rm eff,\Moon}^2)$. Earth's deeper
-        potential well flattens Temporal Topology more strongly than the Moon's,
-        suppressing Temporal Shear and yielding a significantly smaller
-        effective coupling.
+        compactness. The quadratic dependence on compactness follows from two
+        steps. First, gradient suppression gives an effective scalar coupling
+        that scales linearly with the surface compactness:
+    </p>
+
+    <div class="equation">
+        \begin{equation} \label{eq:alpha_eff_scaling}
+        \alpha_{\rm eff} \approx \alpha_0 \left( \frac{\Phi}{c^2} \right) .
+        \end{equation}
+    </div>
+
+    <p>
+        Second, in the Damour&ndash;Esposito-Far&egrave;se (DEF) scalar-tensor
+        framework the Nordtvedt parameter is the squared difference of the
+        effective couplings:
+    </p>
+
+    <div class="equation">
+        \begin{equation} \label{eq:eta_from_alpha_eff}
+        \eta \approx \alpha_{\rm eff,\oplus}^2 - \alpha_{\rm eff,\Moon}^2 .
+        \end{equation}
+    </div>
+
+    <p>
+        Substituting Eq.~(\ref{eq:alpha_eff_scaling}) into
+        Eq.~(\ref{eq:eta_from_alpha_eff}) yields the TEP prediction in
+        Eq.~(\ref{eq:tep_prediction}). Earth's deeper potential well flattens
+        Temporal Topology more strongly than the Moon's, suppressing Temporal
+        Shear and yielding a significantly smaller effective coupling.
     </p>
 
     <p>
@@ -130,11 +151,11 @@
         calibration (Paper 6), the Earth-Moon shielding differential is
         $\Delta\langle(\rho/\rho_T)^3\rangle \approx 3.2\times10^{-2}$, giving $\eta \approx -9.7\times10^{-5}$. The current TEP
         framework robustly predicts the sign of the effect under
-        compactness-driven TSS and gives an order-of-magnitude expectation
+        compactness-driven Temporal Shear screening and gives an order-of-magnitude expectation
         in the $10^{-4}$ regime under this phenomenological volumetric model.
         It does not yet provide a first-principles, parameter-free
-        prediction of $\eta$. The primary full-systematic estimate
-        $\eta = -4.06\times10^{-4}$ and the naïve OLS robustness check
+        prediction of $\eta$. The headline precision-weighted estimate
+        $\eta = -3.91\times10^{-4}$ and the naïve OLS robustness check
         $\eta = -3.18\times10^{-4}$ lie in the same order-of-magnitude
         regime, but the phenomenological model
         uncertainties — PREM simplification, the exponent in $(\rho/\rho_T)^3$,
@@ -175,8 +196,8 @@
     <p>
         The predicted amplitude scales linearly: $|\delta r| = 13 |\eta|$
         meters. For the order-of-magnitude estimate $\eta \sim 10^{-4}$, this
-        gives $\sim$1.3 mm. The primary full-systematic estimate
-        ($\eta = -4.06 \times 10^{-4}$, Section 4.0) predicts an amplitude
+        gives $\sim$1.3 mm. The headline precision-weighted estimate
+        ($\eta = -3.91 \times 10^{-4}$, Section 4.0) predicts an amplitude
         of $\sim$5.3 mm, while the leverage-excised robustness check
         ($\eta \approx -3.6 \times 10^{-4}$) predicts $\sim$4.7 mm and the
         naïve cosD-only OLS robustness check ($\eta \approx -3.18 \times
@@ -189,7 +210,7 @@
     <h3>2.3 Continuous Gradient Suppression and the Critical Density</h3>
 
     <p>
-        TEP incorporates a Temporal Shear Suppression (TSS) mechanism that
+        TEP incorporates a Temporal Shear screening mechanism that
         suppresses scalar field effects in dense environments. The suppression
         transition is governed by the body's gravitational compactness
         ($\Phi/c^2$), which determines the degree of Temporal Shear suppression
@@ -203,7 +224,7 @@
         $\kappa$ reported in Papers 10 and 11. LLR therefore probes the
         strongly screened planetary channel: $\eta$ is the Solar System response
         coefficient, expected to be smaller in magnitude than galactic $\kappa$
-        while sharing the same TSS ontology.
+        while sharing the same screening ontology.
     </p>
 
     <p>
@@ -267,16 +288,18 @@
     </p>
 
     <p>
-        A further TEP prediction arises if the scalar field possesses a
-        cosmological rest frame, as defined by the CMB dipole. The Planck 2018
-        CMB dipole specifies a preferred direction $(l, b) = (264.02^\circ,
+        A further TEP-motivated probe uses a <em>fixed celestial axis</em> tied to
+        the Planck 2018 dipole as an operational reference: $(l, b) = (264.02^\circ,
         48.25^\circ)$ in galactic coordinates, equivalent to $(\alpha, \delta) =
-        (168.14^\circ, -7.22^\circ)$ in J2000 equatorial coordinates, with an
-        amplitude $v_{\rm CMB} \approx 369$ km/s. If the scalar field
-        $\phi$ originates from a cosmological potential with a preferred rest
-        frame, the Earth-Moon system should exhibit anisotropic coupling
-        depending on its velocity and orientation relative to that frame. Two
-        distinct predictions emerge:
+        (168.14^\circ, -7.22^\circ)$ in J2000 equatorial coordinates, with
+        amplitude $v_{\rm CMB} \approx 369$ km/s for the kinematic dipole.
+        Some scalar-field embeddings single out a large-scale rest frame; the
+        LLR regressions reported here do not, by themselves, establish Lorentz
+        violation or uniqueness of that frame. They test whether residual-channel
+        structure is consistent with anisotropic coupling defined relative to
+        $\hat{\mathbf{n}}_{\rm CMB}$ and with other fixed axes used as controls
+        (Section 4.33.2, Step 055). Two operational predictions tied to
+        $\hat{\mathbf{n}}_{\rm CMB}$ are:
     </p>
 
     <p>
@@ -293,10 +316,10 @@
 
     <p>
         Second, a <em>monthly orientation anisotropy</em>: the Earth-Moon
-        line sweeps across the celestial sphere with synodic period. If the
-        scalar gradient carries a preferred direction aligned with the CMB
-        dipole, the effective coupling should depend on the cosine of the
-        angle $\theta$ between the Earth-Moon vector and the CMB dipole:
+        line sweeps across the celestial sphere with synodic period. If an
+        effective gradient projection onto $\hat{\mathbf{n}}_{\rm CMB}$ is
+        present in the same channel, the coupling should depend on the cosine of the
+        angle $\theta$ between the Earth-Moon vector and that axis:
     </p>
 
     <div class="equation">
@@ -314,7 +337,7 @@
     <p>
         For the Earth-Moon system, the TEP potential produces a 
         density-dependent effective mass $m_{\rm eff}(\rho)$ that grows with 
-        local density (see the TEP framework paper, Paper 0, §4.8), limiting the scalar field range inside 
+        local density (see the TEP framework paper, Paper 0, §4.32), limiting the scalar field range inside 
         massive objects. For a body in the strongly suppressed regime, this 
         translates to a suppressed effective coupling $\alpha_{\rm eff} \ll 
         \alpha_0$, where the degree of suppression scales with the body's 

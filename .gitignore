@@ -19,6 +19,10 @@ venv/
 *.swp
 *.swo
 .windsurf/
+.cursor/
+
+# Ephemeris binaries
+*.bsp
 
 # OS
 .DS_Store

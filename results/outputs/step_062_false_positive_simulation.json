@@ -1,0 +1,27 @@
+{
+    "step_id": "step_062",
+    "n_simulations": 10000,
+    "observed_eta": -0.00040611545724941793,
+    "observed_eta_error": 6.577799892034155e-05,
+    "observed_snr": 6.17403180265839,
+    "null_ar1_rho": 0.41257357700879366,
+    "null_ar1_sigma_eps": 0.05593805287350597,
+    "n_extreme": 0,
+    "false_positive_rate": 0.0,
+    "false_positive_rate_upper_bound": 0.00029952835977664627,
+    "null_eta_mean": 1.7076907866739297e-06,
+    "null_eta_std": 0.00010029596558682121,
+    "null_eta_ci95": [
+        -0.00020634110598131207,
+        0.0001938540663980136
+    ],
+    "null_eta_ci99": [
+        -0.0002715128481894554,
+        0.0002703050036806631
+    ],
+    "equivalent_gaussian_sigma": 4.049170421494812,
+    "n_observations": 25445,
+    "n_outliers_removed": 762,
+    "method": "Parametric bootstrap under GR null with AR(1) noise model",
+    "status": "PASS"
+}

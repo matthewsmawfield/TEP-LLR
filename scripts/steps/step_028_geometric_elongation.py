@@ -29,16 +29,16 @@ def main():
     log_dir.mkdir(parents=True, exist_ok=True)
     logger = TEPLogger("step_028", str(log_dir / "step_028_geometric_elongation.log"))
     set_step_logger(logger)
-    
+
     # Load data
     DATA_PATH = PROJECT_ROOT / "data" / "processed" / "INPOP19a_all_stations_residuals.csv"
-    
+
     if not DATA_PATH.exists():
         logger.error("Data file not found!")
         return {"status": "FAIL", "reason": "Data file not found"}
-    
+
     df = pd.read_csv(DATA_PATH)
-    
+
     logger.info("Computing True Geometric Vectors from Astropy (J2000 Ephemeris)... (Vectorized for M4 Pro)")
 
     # Vectorized approach: process all times at once instead of row-by-row
@@ -49,7 +49,7 @@ def main():
         # Vectorized sun and moon calculations
         sun = get_sun(t)
         moon = get_body('moon', t)
-        
+
         # Vectorized angular separation
         sep = sun.separation(moon).radian
         true_elongations = sep
@@ -133,7 +133,7 @@ def main():
                 "a smooth, low-pass gravitational coupling and inconsistent with localized systematics."
             )
     logger.info(f"\nCONCLUSION: {conclusion}")
-    
+
     # Save results
     output_data = {
         "step_id": "step_028",
@@ -160,9 +160,9 @@ def main():
         },
         "conclusion": conclusion
     }
-    
+
     logger.save_step_results(output_data, PROJECT_ROOT, "step_028_geometric_elongation")
-    
+
     return output_data
 
 if __name__ == "__main__":

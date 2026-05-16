@@ -11,7 +11,10 @@
         five laser ranging stations: APO (Apache Point Observatory), Grasse,
         Matera, McDonald2, and Haleakala. The residuals have an RMS of 9.5 cm,
         representing the highest-precision LLR dataset currently available for
-        SEP tests.
+        SEP tests. After 6$\sigma$-equivalent MAD cleaning ($N = 25{,}445$),
+        Grasse contributes 73.7% of the retained archive (18,742 shots);
+        the raw 26,207-point archive is 74.0% Grasse (19,390 shots). Headline
+        inference uses the cleaned sample unless a step explicitly states otherwise.
     </p>
 
     <p>
@@ -27,7 +30,7 @@
     <p>
         For cross-ephemeris validation, DE430 residuals from JPL (Folkner et al.
         2014) were analysed. The dataset spans 2014–2018. The raw file contains
-        gross outliers (RMS = 26.7 cm); after standard $6\sigma$ MAD cleaning, the RMS
+        gross outliers (RMS = 26.7 cm); after 6σ-equivalent (MAD-based) cleaning, the RMS
         drops to 5.8 cm.
     </p>
 
@@ -36,11 +39,16 @@
         interpretation. The full dataset shows no significant correlation with
         $\cos(D)$, while a small number of phase-clustered gross outliers can
         dominate the correlation statistic. The primary detection therefore relies on the INPOP19a ephemeris
-        (35.5-year baseline) with full-systematic OLS
-        $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at $6.17\sigma$
-        significance, and cluster-robust $\eta = -4.06 \times 10^{-4}$ at
-        $6.52\sigma$. A detailed analysis of the DE430 outlier behavior and statistical
-        validation is presented in Section 4.12.
+        (35.5-year baseline) with precision-weighted full-systematic regression
+        $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$
+        significance ($6.78\sigma$ cluster-robust; all $N = 25{,}445$ observations retained).
+        The unweighted full-systematic OLS on the same sample, reported as a sensitivity upper
+        bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at
+        $6.17\sigma$ ($6.52\sigma$ cluster-robust). Cook's-Distance excision on the full-systematic design
+        ($N = 23{,}837$) is retained only as a secondary leverage diagnostic ($7.82\sigma$ / $8.65\sigma$ cluster-robust).
+        A detailed analysis of the
+        DE430 outlier behavior and statistical validation is presented in
+        Section 4.33.
     </p>
 
     <h4>3.1.3 Data Processing</h4>
@@ -154,9 +162,7 @@
 
     <h4>3.3.1 Overview of Analysis Pipeline</h4>
     <p>
-        The analysis employs a comprehensive five-group pipeline designed to
-        detect and validate the TEP Nordtvedt signal with maximum statistical
-        rigor:
+        The analysis employs a comprehensive seven-group pipeline of 74 steps designed to detect and validate the TEP Nordtvedt signal with maximum statistical rigor:
     </p>
 
     <table>
@@ -195,15 +201,31 @@
             </tr>
             <tr>
                 <td>E</td>
-                <td>014–015</td>
-                <td>Integrity Audit</td>
-                <td>Inter-station meta-analysis (Cochran's Q), high-resolution spectral scan (10,000 points)</td>
+                <td>033–046b, 049–054, 057, 059–064-SRP</td>
+                <td>Advanced Defensibility & Cross-Validation</td>
+                <td>Quantitative η prediction, dust sensitivity, station balance, clean subset, CMB falsification, Haleakala fluctuation, Grasse sufficiency, Gaussian process extraction, systematic sensitivity (known-systematic MC falsification; adversarial PCA/GP nuisance search; era$\times$station$\times$lunation grid; blind 20% year hold-out), orbital SRP bounds (064-SRP), atmospheric seeing</td>
+            </tr>
+            <tr>
+                <td>F</td>
+                <td>014–015, 040–043, 055–056, 062–066, 064-PI</td>
+                <td>Results Consolidation & Spectral Validation</td>
+                <td>Inter-station meta-analysis, unified results table, multiple-testing correction, ephemeris absorption simulation, orthogonality proof, sideband survival, high-dimensional absorption test, false-positive simulation, outlier sensitivity, prediction-interval calibration (064-PI)</td>
+            </tr>
+            <tr>
+                <td>G</td>
+                <td>067–071</td>
+                <td>Advanced Estimator Corrections</td>
+                <td>Cluster-robust AR(1) combined standard errors, weighted robust M-estimator, rolling η(t) environmental correlation, DE430 full environmental model, stratified equal-N test</td>
             </tr>
         </tbody>
     </table>
 
     <p>
         This multi-layered approach ensures that the detection is robust against systematic errors, statistical artifacts, and instrumental biases. Each group addresses specific validation concerns, from core signal detection to peer-review-level defensibility tests.
+    </p>
+
+    <p>
+        The analysis pipeline consists of 74 sequential steps organized into logical groups. The core statistical analysis (steps 000–003) provides the primary detection, while steps 004–073 perform extended systematic checks, robustness validation, and theoretical consistency tests.
     </p>
 
     <h4>3.3.2 Pearson Correlation Analysis</h4>
@@ -220,15 +242,17 @@
     <p>A linear regression model is fit to extract the Nordtvedt parameter:</p>
 
     <div class="equation">
-        \begin{equation} \label{eq:linear_regression} r = 13 \eta \cos(D) +
-        \epsilon \end{equation}
+        \begin{equation} \label{eq:linear_regression} r = 13 \eta \cos(D) + b
+        + \epsilon \end{equation}
     </div>
 
     <p>
-        where $r$ is the residual and $\epsilon$ represents noise. The
-        regression is performed through the origin, which is justified because
-        INPOP19a residuals are mean-subtracted by construction (mean = 0.0007 m
-        $\approx$ 0). The fitted coefficient of $\cos(D)$ yields an estimate of
+        where $r$ is the residual, $b$ is an intercept, and $\epsilon$ represents
+        noise.  An intercept is included in all primary regressions even though
+        INPOP19a residuals are mean-subtracted by construction (mean =
+        0.0007 m $\approx$ 0).  This guards against any residual
+        station-epoch-dependent offset that would otherwise bias the $\cos(D)$
+        amplitude.  The fitted coefficient of $\cos(D)$ yields an estimate of
         $\eta$ with uncertainty from the regression standard error.
     </p>
 
@@ -361,16 +385,15 @@
     </p>
 
     <p>
-        Three additional systematic analysis steps specifically address concerns
-        that the signal could be artifactual. Step 010 tests whether the signal
-        persists after controlling for known systematic variables including
-        temporal trends, seasonal cycles, and station drifts. Step 011 quantifies
-        signal robustness to noise injection and validates detection methodology
-        through signal recovery tests. Step 012 implements five-category robustness
-        validation including subsample replication, station jackknife, and IPW
-        station-balance regression. Step 013 decomposes the pooled fit into
-        station-specific contributions. Detailed results are presented in
-        Section 4.19.
+        Three systematic analysis steps directly test the systematic artifact
+        hypothesis. Step 010 tests whether the signal persists after controlling
+        for known systematic variables including temporal trends, seasonal cycles,
+        and station drifts. Step 011 quantifies signal robustness to noise
+        injection and validates detection methodology through signal recovery
+        tests. Step 012 implements five-category robustness validation including
+        subsample replication, station jackknife, and IPW station-balance
+        regression. Step 013 decomposes the pooled fit into station-specific
+        contributions. Detailed results are presented in Section 4.34.
     </p>
 
     <p>
@@ -385,9 +408,9 @@
         $R_B = \sqrt{\chi^2_{\rm red}}$, is computed for every regression.
         When $R_B > 1$, formal errors are scaled upward by $R_B$ to account for
         over-dispersed residuals; when $R_B < 1$, no downward rescaling is
-        applied. For the primary full-systematic model,
+        applied. For the headline precision-weighted model,
         $\chi^2_{\rm red} = 0.0038$ and $R_B = 0.062$, so the reported
-        $6.17\sigma$ primary significance is not inflated by Birge scaling.
+        $6.94\sigma$ headline significance is not inflated by Birge scaling.
         Interpreting $R_B \ll 1$: this is strong <em>under-dispersion</em> of
         the regression residuals relative to a unit reduced chi-square, not
         evidence that formal errors should be shrunk. It arises because the
@@ -401,47 +424,15 @@
         All reported p-values are two-tailed.
     </p>
 
-    <h4>3.3.7 Bayesian MCMC Analysis</h4>
+    <h4>3.3.7 Bayesian MCMC Analysis (Step 016)</h4>
     <p>
-        To quantify evidence for a non-zero Nordtvedt parameter, a Bayesian
-        analysis was performed using the Ensemble MCMC sampler (emcee;
-        Foreman-Mackey et al. 2013). The likelihood function assumes Gaussian
-        residuals:
-    </p>
-
-    <div class="equation">
-        \begin{equation} \label{eq:likelihood} \mathcal{L}(\eta, \sigma) =
-        \prod_{i=1}^{N} \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(r_i -
-        13\eta\cos D_i)^2}{2\sigma^2}\right) \end{equation}
-    </div>
-
-    <p>
-        where $r_i$ is the residual, $D_i$ is the elongation, and $\sigma$ is
-        the noise standard deviation. Uniform priors were adopted: $\eta \in
-        [-0.01, +0.01]$ and $b \in [-0.1, +0.1]$ m, enforced by returning
-        $-\infty$ log-probability outside these bounds. The sampler used
-        32 walkers with 3,000 steps each (1,000 burn-in, 64,000 post-burnin
-        samples). Convergence was verified using the Gelman-Rubin statistic
-        ($\hat{R} < 1.01$ required). The Savage-Dickey Bayes Factor was computed
-        from the KDE posterior density at $\eta = 0$ under the uniform prior on
-        $[-0.01, +0.01]$:
-    </p>
-
-    <div class="equation">
-        \begin{equation} \label{eq:bayes_factor_definition} \mathcal{B}_{\rm TEP,GR} =
-        \frac{p(\eta=0)}{p(\eta=0|\{r_i\}, \{D_i\})} \end{equation}
-    </div>
-
-    <p>
-        This is the evidence for a non-zero Nordtvedt parameter over the GR
-        null. Under the default KDE bandwidth, the rerun yields a nominal value
-        $\mathcal{B}_{\rm TEP,GR} = 5.16 \times 10^{6}$; however, the
-        Savage-Dickey ratio is bandwidth-sensitive across the tested Scott,
-        Silverman, and scaled kernels. It is therefore complemented by a BIC
-        approximation $\mathcal{B}_{\rm BIC} = 1.77 \times 10^{3}$ and by a
-        95% posterior credible interval that excludes zero. The BIC estimate and
-        posterior exclusion of zero are retained as the stable Bayesian
-        summaries.
+        A synodic-only Bayesian layer (emcee; Foreman-Mackey et al. 2013) uses
+        heteroskedastic Gaussian likelihood with archive $\sigma_i$ and uniform
+        priors $\eta \in [-10^{-2}, +10^{-2}]$, $b \in [-0.1, +0.1]$ m. Step 016
+        runs separate MCMC chains for four documented $\eta$ priors (Table 4.20.1)
+        and evaluates the Savage–Dickey ratio at $\eta=0$ with multiple KDE
+        bandwidths. This layer is secondary to the cluster-robust frequentist
+        headline and Step 056 integrator extraction.
     </p>
 
     <h4>3.3.8 Lomb-Scargle Frequency Analysis</h4>
@@ -455,7 +446,7 @@
         While the residuals contain multiple periodicities from unmodeled 
         perturbations, the synodic frequency is identified as a significant 
         spectral feature (Rank 4 in the modern C-SPAD era). Crucially, the 
-        synodic frequency is identified as the **absolute maximum peak** in 
+        synodic frequency is identified as the absolute maximum peak in 
         the frequency-specific regression scan (Step 015), confirming that the 
         detected Nordtvedt modulation is uniquely phase-locked to the 
         Earth-Moon-Sun geometry.
@@ -566,7 +557,7 @@
         parameters. INPOP19a is constructed under the standard GR framework
         ($\eta = 0$); no TEP-specific density-dependent scalar coupling is
         included in the ephemeris model. Any genuine Nordtvedt signal arising
-        from Temporal Shear Suppression effects would therefore appear unabsorbed in the O-C
+        from Temporal Shear screening effects would therefore appear unabsorbed in the O-C
         residuals. The detected amplitude of 0.89 cm is small relative to the
         overall residual RMS of 9.5 cm, which could indicate a subtle physical
         effect not accounted for in the ephemeris model.
@@ -615,6 +606,8 @@
         <li>Instrumental systematic: 0.05 cm, derived from powered-station mean scatter after TEP removal</li>
         <li>Tidal modeling: 0.02 cm, bounded by the cos(2*elongation) harmonic amplitude in the residuals</li>
         <li>Thermal expansion: 0.53 cm, derived from the diurnal (24-hour) sinusoidal amplitude in detrended residuals</li>
+        <li>Solar radiation pressure (local mechanical): &lt; 1.0e-09 cm, bounded by elastic displacement of Apollo retroreflector arrays under maximally conservative assumptions</li>
+        <li>Atmospheric seeing (synodic-correlated): 0.011 cm, bounded by fast stochastic wander averaging to zero over LLR integration times; dominant elevation-dependent channel already tested at p = 0.281 (Step 027)</li>
     </ul>
     
     <p>
@@ -641,9 +634,8 @@
 
     <h4>3.4.6 Systematic Control Analysis (Steps 010–013)</h4>
     <p>
-        To address the concern that the detected signal could be artifactual
-        rather than gravitational, three additional systematic analysis steps
-        are implemented:
+        To directly test the systematic artifact hypothesis, three
+        systematic analysis steps are implemented:
     </p>
 
     <p>
@@ -653,7 +645,7 @@
         temporal trends, seasonal effects, station-specific time trends, and lunar
         orbital controls. The critical test regresses all systematic variables
         simultaneously and recomputes the partial correlation between residuals
-        and cos(elongation). Detailed results are presented in Section 4.19.1.
+        and cos(elongation). Detailed results are presented in Section 4.34.1.
     </p>
 
     <p>
@@ -663,7 +655,7 @@
         determine when the signal disappears), signal recovery (injecting known
         TEP signals into pure noise to verify pipeline recovery), and detection
         threshold analysis (computing the minimum detectable $\eta$ at various
-        confidence levels). Detailed results are presented in Section 4.19.2.
+        confidence levels). Detailed results are presented in Section 4.34.2.
     </p>
 
     <p>
@@ -673,16 +665,16 @@
         sensitivity, and IPW station-balance regression. The low IPW SNR is
         structurally explained by McDonald2's synodic-phase truncation, which
         causes dilution in the IPW sum. The precision-weighted regression
-        (Step 029) yields $\eta_{\rm WLS} = -3.50 \times 10^{-4}$ at $3.11\sigma$,
+        (Step 029) yields $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$,
         confirming the signal without Grasse-weight bias. Detailed results are
-        presented in Section 4.19.3.
+        presented in Section 4.34.3.
     </p>
 
     <p>
         Step 013: Station Decomposition. The pooled regression is decomposed into
         station-specific $\eta$ contributions to verify that the global negative
         sign is not driven by a single observatory. Detailed results are
-        presented in Section 4.19.4.
+        presented in Section 4.34.4.
     </p>
 
     <p>
@@ -691,7 +683,7 @@
         analysis: (1) computes expected SNR for each station given $N$, RMS, and
         global $|\eta|$; (2) diagnoses McDonald2's dilution via phase-coverage
         truncation; (3) cross-validates with precision-weighted regression
-        yielding $\eta_{\rm WLS} = -3.50 \times 10^{-4}$ at $3.11\sigma$; (4)
+        yielding $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$; (4)
         indicates Grasse internal chronological split independently detects
         negative $\eta$ in both halves; (5) shows that stations lacking
         statistical power (expected SNR $< 3\sigma$) appropriately do not drive
@@ -768,7 +760,7 @@
     </ul>
     
     <p>
-        The full-systematic residual series shows first-order temporal autocorrelation ($\rho \approx 0.425$, Durbin-Watson $\approx 1.15$), as expected for LLR systematics. The primary full-systematic OLS and cluster-robust estimators are therefore complemented by full-model AR(1) GLS with cluster-robust standard errors; the headline $\eta$ estimate is stable across these treatments and is not an artifact of neglected serial correlation.
+        The full-systematic residual series shows first-order temporal autocorrelation ($\rho \approx 0.412$, Durbin-Watson $\approx 1.18$), as expected for LLR systematics. The unweighted full-systematic OLS and cluster-robust estimators are therefore complemented by full-model AR(1) GLS with cluster-robust standard errors; the precision-weighted headline $\eta$ and the Cook's leverage diagnostic remain consistent with these treatments and are not an artifact of neglected serial correlation alone.
     </p>
 
     <h4>3.4.9 Outlier Removal Criteria</h4>
@@ -786,17 +778,21 @@
     </ul>
     
     <p>
-        This threshold is applied consistently across steps 002, 003, 005, 006b, 016, 024, 025, and 052, ensuring standardization throughout the analysis pipeline. Step 006b additionally performs a threshold sweep ($3\sigma$–$10\sigma$) to verify the DE430 signal is not an artifact of a single cutoff choice.
+        This threshold is applied consistently across steps 002, 003, 005, 006b, 016, 024, 025, and 052, ensuring standardization throughout the analysis pipeline. Step 006b performs a threshold sweep ($3\sigma$–$10\sigma$) on DE430 to verify the signal is not an artifact of a single cutoff choice; Step 063 performs the identical sweep on the primary INPOP19a dataset. Step 063 additionally reports a bootstrap 95% CI and a permutation test (10,000 shuffles) on the 6σ-cleaned data.
     </p>
 
-    <h4>3.4.10 Primary Estimator: Full Systematic Model with Cluster-Robust Errors</h4>
+    <h4>3.4.10 Primary Estimator: Full Systematic Model, Precision Weighting, and Cluster-Robust Errors</h4>
 
     <p>
-        The primary Nordtvedt parameter estimate is extracted from a full
+        The headline Nordtvedt parameter is extracted from the same full
         systematic model (Step 050) that controls for annual, monthly, and
-        thermal $\cos(2D)$ aliases, followed by cluster-robust (sandwich)
-        standard errors with a Cameron-Miller finite-cluster correction
-        ($G/(G-1)$ for $G=5$ stations). The model is:
+        thermal $\cos(2D)$ aliases, but fit with precision weighting: each
+        observation is weighted inversely to its station's RMS residual so that
+        all $N = 25{,}445$ shots contribute with no row deletion. Cluster-robust (sandwich)
+        standard errors use a Cameron-Miller finite-cluster correction
+        ($G/(G-1)$ for $G=5$ stations) on the weighted least-squares $\cos D$ coefficient.
+        Cook's-Distance excision on the unweighted full-systematic OLS is reported separately as a leverage diagnostic.
+        The systematic design is:
     </p>
 
     <div class="equation">
@@ -814,21 +810,19 @@
         station's temporal sampling pattern.
     </p>
 
-    <ul>
-        <li><strong>Full-systematic OLS:</strong> $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$), AIC = $-142,028$</li>
-        <li><strong>Cluster-robust SEs:</strong> $\eta = -4.06 \times 10^{-4}$ at $6.52\sigma$ across 5 stations</li>
-        <li><strong>Station block bootstrap (2,000 draws):</strong> $\eta = -3.40 \times 10^{-4} \pm 1.87 \times 10^{-4}$, $P(\eta<0)=0.943$; conservative inter-station resampling bound</li>
-        <li><strong>Full-model AR(1) GLS (robustness check):</strong> $\eta = -4.46 \times 10^{-4} \pm 9.57 \times 10^{-5}$ ($4.66\sigma$), $\rho = 0.425$, DW = 1.15</li>
-        <li><strong>cosD-only AR(1) GLS (robustness check):</strong> $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ ($3.51\sigma$ cluster-robust), $\rho = 0.429$, DW = 1.14</li>
-    </ul>
-
     <p>
-        The full-systematic model is reported as the primary result because
-        it properly controls for confounding aliases that bias the $\cos D$
-        coefficient. The signal strengthens from $5.25\sigma$ ($\cos D$-only)
-        to $6.17\sigma$ (full model), the signature of a genuine signal being
-        diluted by unmodeled systematic aliases. The AR(1) GLS $\cos D$-only
-        estimate is retained as a robustness check.
+        Hardware eras differ systematically in synodic phase coverage and in
+        the mix of atmospheric and instrumental conditions, so the nuisance
+        subspace of the full systematic model is not chronologically
+        transportable: temporal hold-out cross-validation yields negative
+        predictive $R^2$ for that design on the full archive and still does
+        so on the homogeneous Grasse C-SPAD plus APO subset (Steps 051 and
+        053), while the in-sample split-epoch test on the Nordtvedt coefficient
+        itself (m6 in Step 051) remains compatible with a common $\eta$. The
+        primary estimator is therefore computed on the maximally pooled,
+        precision-weighted sample so era-specific nuisance is jointly absorbed
+        rather than sequentially re-fit across partitions that would reintroduce
+        bias into the physical $\cos(D)$ coefficient.
     </p>
 
     <h4>3.4.11 Haleakala Station Anomaly</h4>
@@ -840,12 +834,15 @@
     <ul>
         <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = $0.81\sigma$ at the global $|\eta| \approx 4.5 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
         <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$, vs $0.81\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
-        <li>Solar cycle correlation: Step 023 investigates whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip, finding partial consistency with TEP Temporal Shear Suppression dynamics</li>
+        <li>Solar cycle correlation: Step 023 investigates whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip, finding partial consistency with TEP Temporal Shear screening dynamics</li>
         <li>Quality assessment: Step 019 performs comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis, finding no evidence of systematic bias</li>
     </ul>
     
     <p>
-        The Haleakala anomaly is therefore interpreted as a noise-limited measurement rather than evidence against the TEP detection. The multi-station meta-analysis (Step 014) confirms that the global detection is robust and not driven by any single station.
+        Step 057 quantifies the Haleakala fluctuation under formal Monte Carlo simulation (20,000 realizations using the station's actual elongation distribution). Under the TEP model the deviation is a 2.7σ event (two-tailed <em>p</em> = 0.0063); the family-wise rate -- the probability that any of the five stations would fluctuate this far under TEP -- is 0.5%. Under the GR null the family-wise rate is 1.4%, so the Haleakala fluctuation does not discriminate between the two models and is instead statistically consistent with the tail expected for an underpowered station. Step 023 provides a physical mechanism: Haleakala's 1984--1990 operation epoch coincides with solar maximum (mean solar index = 0.497), and the TEP-predicted solar-cycle modulation amplitude (1.89 × 10⁻³) is of comparable order to the observed deviation, supporting a Temporal Shear screening explanation.
+    </p>
+    <p>
+        Crucially, excluding Haleakala does not weaken the detection. The clean-subset analysis restricted to Grasse 2010+ and APO (Step 053) -- which drops Haleakala, Matera, and McDonald2 entirely -- yields η = -3.36 × 10⁻⁴ ± 4.63 × 10⁻⁵ (7.25σ cluster-robust), confirming the signal is detectable in the highest-quality data alone. The common-η mixed model with station-specific systematics (Step 014) gives <em>F</em>(4, 25,410) = 1.19, <em>p</em> = 0.31, showing no evidence for station-specific Nordtvedt parameters. The multi-station meta-analysis therefore confirms that the global detection is robust and not driven by any single station.
     </p>
 
     <h4>3.4.12 Full Nuisance-Parameter Residual Model</h4>
@@ -899,7 +896,7 @@
         stations, which may indicate instrumental systematic effects. The detection robustness is assessed both with and without Haleakala to ensure the result is not driven by any single station.
     </p>
 
-    <h4>3.4.13 Three Distinct Estimands</h4>
+    <h4>3.4.13 Canonical Estimand Hierarchy</h4>
 
     <p>
         The analysis reports distinct quantities for the Nordtvedt parameter,
@@ -918,8 +915,18 @@
         <tbody>
             <tr>
                 <td>$\eta_{\rm pooled}$</td>
-                <td>Full-systematic OLS (cosD + annual + monthly + thermal $\cos 2D$) with cluster-robust standard errors</td>
-                <td><strong>Primary estimand</strong> (Step 050; Step 040)</td>
+                <td>Precision-weighted full-systematic regression (cosD + annual + monthly + thermal $\cos 2D$) with cluster-robust standard errors; inverse station RMS weights; $N=25{,}445$</td>
+                <td><strong>Primary headline estimand</strong> (Step 050; Step 040)</td>
+            </tr>
+            <tr>
+                <td>$\eta_{\rm OLS,full}$</td>
+                <td>Unweighted full-systematic OLS on the same design and sample</td>
+                <td>Sensitivity upper bound (same nuisances, homoskedastic treatment)</td>
+            </tr>
+            <tr>
+                <td>$\eta_{\rm Cook}$</td>
+                <td>Cook's-Distance-excised unweighted full-systematic OLS ($D>4/n$)</td>
+                <td>Secondary leverage diagnostic (confirms stability when high-leverage shots are removed)</td>
             </tr>
             <tr>
                 <td>$\eta_{\rm residual}$</td>
@@ -940,11 +947,11 @@
     </table>
 
     <p>
-        The $\eta_{\rm pooled}$ estimand is the headline result reported in
+        The $\eta_{\rm pooled}$ precision-weighted estimand is the headline result reported in
         this paper. The $\eta_{\rm residual}$ estimand provides a rapid
         detection diagnostic by regressing the simple $\cos(D)$ model on the
         raw residuals. The $\eta_{\rm AR(1)}$ estimand tests whether the
-        pooled estimate survives explicit temporal autocorrelation and
+        unweighted full-systematic coefficient survives explicit temporal autocorrelation and
         cross-station correlation structure. The $\eta_{\rm dynamical}$
         estimand approximates, in the published residual channel, the
         measurement that would be obtained by fitting $\eta$ directly as a
@@ -982,13 +989,199 @@
         a temporally modulated coupling. Those checks motivate
         residual-channel projection; they do not exhaust the dynamical parameter
         space of a full ephemeris. Source-level INPOP or DE430 integrator
-        refits with $\eta$ free remain the decisive external test (Section 4.13).
+        refits with $\eta$ free remain the decisive external test (Section 4.34).
         Consistency of the footprint across robust estimators (Theil–Sen,
-        precision weighting, MCMC), hardware eras (Section 4.11), phase-resolved
-        analyses (Section 4.9), and the pooled hierarchy in Section 4.0 supports
+        precision weighting, MCMC), hardware eras (Section 4.32), phase-resolved
+        analyses (Section 4.33), and the pooled hierarchy in Section 4.0 supports
         treating the pattern as a coherent physical candidate rather than an
         artifact of analysing residuals instead of performing a full dynamical
         fit.
+    </p>
+
+    <h4>3.4.14 False-Positive Rate Simulation (Step 062)</h4>
+
+    <p>
+        To quantify the exact probability that the observed $\eta$ could arise
+        from correlated noise under the GR null hypothesis, a parametric
+        bootstrap simulation is performed (Step 062). The procedure is:
+    </p>
+
+    <ol>
+        <li>
+            <strong>Model fit under null:</strong> Fit the full-systematic
+            OLS model (cosD + annual + monthly + thermal cos2D) to the
+            6σ-cleaned INPOP19a residuals and extract the fitted values
+            $\hat{y}$.
+        </li>
+        <li>
+            <strong>AR(1) noise extraction:</strong> Compute the residuals
+            $\hat{\epsilon}_t = y_t - \hat{y}_t$ and estimate the AR(1)
+            parameters by OLS on $\hat{\epsilon}_t = \rho \hat{\epsilon}_{t-1}
+            + \nu_t$, giving $\rho$ and the white-noise standard deviation
+            $\sigma_\nu$.
+        </li>
+        <li>
+            <strong>Synthetic dataset generation:</strong> For each of 10,000
+            trials, generate a synthetic residual series under the strict null
+            $\eta = 0$: initialise $\epsilon_0 \sim \mathcal{N}(0,
+            \sigma_\nu^2 / (1 - \rho^2))$ and iterate
+            $\epsilon_t = \rho \epsilon_{t-1} + \nu_t$ with
+            $\nu_t \sim \mathcal{N}(0, \sigma_\nu^2)$. Add these null residuals
+            to the systematic fitted values $\hat{y}$ (which contain no cosD
+            signal by construction under the null) to produce synthetic
+            observations.
+        </li>
+        <li>
+            <strong>Re-estimation:</strong> Fit the full-systematic model to
+            each synthetic dataset and record the recovered $\eta$ and its
+            standard error.
+        </li>
+        <li>
+            <strong>p-value computation:</strong> The exact false-positive
+            rate is the fraction of null trials for which
+            $|\eta_{\rm sim}| \ge |\eta_{\rm obs}|$. When zero trials exceed
+            the observed value, a conservative 95% upper bound is computed via
+            the binomial exact Clopper-Pearson method.
+        </li>
+    </ol>
+
+    <p>
+        This simulation preserves the exact temporal correlation structure,
+        station composition, and systematic covariate structure of the real
+        data. It directly answers: under the exact noise model and design
+        matrix of the data, how often would chance produce a signal as strong
+        as the one observed? The result is reported as an exact p-value and a
+        Gaussian-equivalent tail sigma.
+    </p>
+
+    <h4>3.4.15 Prediction Interval Coverage and Uncertainty Calibration (Step 064-PI)</h4>
+
+    <p>
+        To verify that the full-systematic model's uncertainties are
+        well-calibrated, a prediction-interval coverage test is performed (Step
+        064-PI; script <code>step_064_prediction_coverage.py</code>; distinct from
+        Step 064-SRP solar-radiation-pressure checks). The full-systematic model
+        is fit to the 6σ-cleaned INPOP19a
+        residuals ($N = 25{,}445$). For each observation, a prediction interval
+        is computed at nominal coverage levels (68%, 90%, 95%, 99%) using the formula
+    </p>
+
+    <div class="equation">
+        \begin{equation}
+        {\rm PI}_i = \hat{y}_i \pm t_{\alpha/2, \nu} \sqrt{\sigma_i^2 + {\rm MSE} \cdot h_{ii}}
+        \end{equation}
+    </div>
+
+    <p>
+        where $\sigma_i$ is the published measurement uncertainty for the
+        $i$-th normal point, ${\rm MSE}$ is the mean squared error from the
+        regression, and $h_{ii}$ is the leverage (diagonal of the hat matrix).
+        The observed coverage is the fraction of observations that fall within
+        their prediction intervals. A well-calibrated model has observed
+        coverage close to nominal coverage.
+    </p>
+
+    <p>
+        The reduced chi-square is computed as
+        $\chi^2_{\rm red} = \sum_i (y_i - \hat{y}_i)^2 / \sigma_i^2 \,/\, \nu$,
+        where $\nu = N - p$ is the residual degrees of freedom. Values near
+        unity indicate that the model residuals are consistent with the stated
+        measurement uncertainties. Values below unity indicate
+        under-dispersion (the stated uncertainties are larger than the actual
+        scatter); values above unity indicate over-dispersion (the stated
+        uncertainties are too small or the model is missing structure).
+    </p>
+
+    <p>
+        Coverage is reported under four residual-error models on the same fit:
+        (i) WLS with published $\sigma_i$; (ii) homoskedastic OLS (${\rm MSE}$ only);
+        (iii) WLS with the model-variance component scaled by the cluster-robust
+        inflation factor from the cos($D$) coefficient; and (iv) the same with the
+        combined cluster-robust + AR(1) inflation (Step 067; $\rho \approx 0.41$).
+        A global scale factor $c$ on $\sigma_i$ is also solved by bisection so that
+        68% nominal prediction-interval coverage is attained; this quantifies how
+        conservative published uncertainties are relative to post-fit scatter.
+    </p>
+
+    <p>
+        For the headline precision-weighted $\eta$, station-block bootstrap
+        (2,000 resamples) and leave-one-station-out (LOSO) conformal intervals
+        are computed on the same full-systematic design. These provide
+        significance brackets that do not rely solely on the regression
+        standard error $\sigma_\eta$, complementing the WLS and cluster-robust
+        paths reported in Step 050. The reduced $\chi^2$ from this step
+        ($\chi^2_{\rm red} \approx 0.48$ on published $\sigma_m$) is not the
+        same quantity as the Birge-regression $\chi^2_{\rm red} = 0.0038$ on the
+        precision-weighted headline fit (Section 3.3.6); both indicate
+        under-dispersion but on different variance definitions.
+    </p>
+
+    <h4>3.4.16 Leave-One-Station-Out Meta-Analysis (Step 072)</h4>
+
+    <p>
+        To test whether the global detection is driven by a single
+        observatory, a formal leave-one-station-out (LOSO) analysis is
+        performed (Step 072). The full-systematic model (cosD + annual +
+        monthly + thermal cos2D) with cluster-robust standard errors is fit
+        five times, each time excluding one station. For each exclusion, the
+        recovered $\eta$, its standard error, and SNR are recorded.
+    </p>
+
+    <p>
+        Power accounting follows standard jackknife practice: an exclusion
+        is classified as "powered" if its SNR exceeds $3.0\sigma$, and
+        "underpowered" otherwise. An underpowered exclusion (e.g., dropping
+        a station that contributes $>50\%$ of the data) cannot be used as
+        evidence against robustness because its point estimate is
+        noise-dominated. Consistency is assessed among the powered
+        exclusions only.
+    </p>
+
+    <p>
+        An inverse-variance meta-analysis is performed on the powered
+        leave-one-out estimates, weighting each by $1 / \sigma_{\eta}^2$.
+        Heterogeneity is quantified by Cochran's $Q$ and the $I^2$
+        statistic. $I^2 = 0\%$ indicates perfect homogeneity (all stations
+        consistent with a single shared Nordtvedt parameter); $I^2 > 50\%$
+        would indicate substantial heterogeneity requiring investigation.
+    </p>
+
+    <h4>3.4.17 Bayesian Evidence Cross-Checks (Step 073)</h4>
+
+    <p>
+        Step 073 complements Step 016 with bandwidth-free synodic-only evidence
+        on the same uniform priors: (i) two-dimensional grid quadrature of the
+        marginal likelihood, (ii) iterative bridge sampling between $M_1$
+        ($\eta$ free) and $M_0$ ($\eta=0$), and (iii) Laplace and BIC
+        approximations retained as secondary, model-dependent summaries.
+        $P(\eta < 0 \,|\, {\rm data})$ is taken directly from the MCMC chain.
+        Grid and bridge ${\rm BF}_{10}$ values (${\sim}70$–$100$ on the current
+        archive) are preferred for referee-facing statements over Laplace values
+        (${\sim}10^{14}$), which inherit prior-volume and curvature assumptions.
+    </p>
+
+    <h4>3.4.18 Systematic Sensitivity Beyond the Known List (Step 061)</h4>
+
+    <p>
+        Step 061 extends the catalogued-systematic amplitude ratios and Monte
+        Carlo falsification (Step 044) with four defensibility layers on the same
+        6σ-cleaned INPOP19a sample ($N = 25{,}445$). (i) Known-systematic-only
+        injections at observed amplitudes never reproduce the full-systematic OLS
+        sensitivity $|\eta| = 4.06 \times 10^{-4}$ (2,000 deterministic draws per
+        source). (ii) Adversarial PCA on the 82-term ephemeris-like basis from
+        Step 065: the top 20 principal components ranked by residual correlation
+        are added jointly with $\cos(D)$; the synodic coefficient remains
+        $\eta = -2.93 \times 10^{-4}$ ($2.95\sigma$). (iii) A 2D Gaussian process
+        on elongation$\times$time bin means (455 valid cells) can partially overlap
+        $\cos(D)$ on the uneven sampling manifold ($\approx 83\%$ amplitude reduction
+        after subtraction); this is reported as geometric collinearity, not a
+        catalogued instrumental systematic. (iv) An era$\times$station$\times$lunation
+        grid (three eras, five stations, four synodic quartiles; $N \geq 80$ per
+        fitted cell) and a blind 20% calendar-year hold-out (nuisances fit on train
+        years only; $\eta$ from $\cos(D)$ on held-out years) yield a combined blind
+        $\eta = -3.66 \times 10^{-4}$ ($14.3\sigma$). Step 042 registers grid and
+        blind tests in the sensitivity family without inflating the four independent
+        headline hypotheses.
     </p>
 
     <h3>3.5 Reproducibility</h3>

@@ -27,7 +27,6 @@ import json
 import numpy as np
 import pandas as pd
 
-from scripts.utils.numerics import stable_lstsq
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 
@@ -63,14 +62,35 @@ def _m5_full_corrected_eta(step_050: dict) -> float:
 
 def fit_station_eta(residuals, cos_elong):
     """Fit OLS eta from residuals vs cos(elongation)."""
-    X = np.column_stack([cos_elong, np.ones(len(cos_elong))])
-    coeffs, _, _, _ = stable_lstsq(X, residuals)
-    A = coeffs[0]
-    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
-        resid = residuals - X @ coeffs
-    mse = np.mean(resid ** 2)
+    X = np.column_stack([cos_elong, np.ones(len(cos_elong), dtype=np.float64)])
     XtX_inv = np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)
-    se_A = np.sqrt(mse * XtX_inv[0, 0])
+    beta = XtX_inv @ (X.T @ residuals)
+    A = float(beta[0])
+    B = float(beta[1])
+    pred = A * cos_elong + B
+    resid = residuals - pred
+    mse = float(np.sum(resid ** 2) / max(len(cos_elong) - 2, 1))
+    se_A = float(np.sqrt(max(mse * XtX_inv[0, 0], 0.0)))
+    eta = A / ETA_SCALE_FACTOR
+    eta_err = se_A / ETA_SCALE_FACTOR
+    return eta, eta_err
+
+
+def fit_station_eta_batch(residuals_matrix: np.ndarray, cos_elong: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Vector OLS η for each column of residuals_matrix (n_obs, n_mc)."""
+    n = cos_elong.shape[0]
+    if residuals_matrix.shape[0] != n:
+        raise ValueError("residuals_matrix row count must match cos_elong length")
+    X = np.column_stack([cos_elong, np.ones(n, dtype=np.float64)])
+    XtX_inv = np.linalg.pinv(X.T @ X, rcond=1e-10, hermitian=True)
+    coeffs = XtX_inv @ (X.T @ residuals_matrix)
+    A = coeffs[0, :]
+    B = coeffs[1, :]
+    pred = A[np.newaxis, :] * cos_elong[:, np.newaxis] + B[np.newaxis, :]
+    resid = residuals_matrix - pred
+    dof = max(n - 2, 1)
+    mse = np.sum(resid**2, axis=0) / dof
+    se_A = np.sqrt(np.maximum(mse * XtX_inv[0, 0], 0.0))
     eta = A / ETA_SCALE_FACTOR
     eta_err = se_A / ETA_SCALE_FACTOR
     return eta, eta_err
@@ -94,15 +114,10 @@ def simulate_station_fluctuations(
     signal_amplitude = ETA_SCALE_FACTOR * eta_true
     signal = signal_amplitude * cos_elong
 
-    etas_sim = np.empty(n_mc)
-    eta_errs_sim = np.empty(n_mc)
-
-    for i in range(n_mc):
-        noise = rng.normal(0, rms, n)
-        residuals = signal + noise
-        eta_fit, eta_err_fit = fit_station_eta(residuals, cos_elong)
-        etas_sim[i] = eta_fit
-        eta_errs_sim[i] = eta_err_fit
+    # One RNG draw block matches sequential RandomState.normal(0, rms, n) per iteration.
+    noise_mat = rng.normal(0, rms, size=(n, n_mc))
+    res_mat = signal[:, np.newaxis] + noise_mat
+    etas_sim, eta_errs_sim = fit_station_eta_batch(res_mat, cos_elong)
 
     eta_obs = float(eta_obs)
     eta_err_obs = float(eta_err_obs)
@@ -171,7 +186,6 @@ def family_wise_simulation(df_all, eta_true, eta_obs_haleakala, n_mc=20000, seed
     eta_obs_haleakala = float(eta_obs_haleakala)
     dev_obs = abs(eta_obs_haleakala - eta_true)
 
-    # For each MC run, simulate all stations and check if any deviates
     any_station_deviates = np.zeros(n_mc, dtype=bool)
 
     for i in range(n_mc):
@@ -185,7 +199,7 @@ def family_wise_simulation(df_all, eta_true, eta_obs_haleakala, n_mc=20000, seed
             eta_fit, _ = fit_station_eta(residuals, cos_s)
             if abs(eta_fit - eta_true) >= dev_obs:
                 any_station_deviates[i] = True
-                break  # no need to check other stations
+                break
 
     p_family_wise = float(np.mean(any_station_deviates))
 

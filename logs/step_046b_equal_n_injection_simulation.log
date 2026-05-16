@@ -1,29 +1,30 @@
-[20:12:44] ═══ Starting Step 046b: Equal-N Injection Simulation
-[20:12:44]     Purpose: Parametric simulation under true eta = -3.18e-4
-[20:12:44]     Loaded eta_true from Step 003: -3.177e-04
-[20:12:44]     Loaded real data: 26,207 observations
-[20:12:44]       APO: N=2,595, RMS=3.2 cm, mean_cosD=-0.231
-[20:12:44]       Grasse: N=19,390, RMS=9.9 cm, mean_cosD=-0.131
-[20:12:44]       Haleakala: N=737, RMS=13.8 cm, mean_cosD=-0.334
-[20:12:44]       Matera: N=346, RMS=6.2 cm, mean_cosD=-0.026
-[20:12:44]       McDonald2: N=3,139, RMS=9.6 cm, mean_cosD=-0.316
-[20:12:44] 
-[20:12:44] >>> >>> Running 2000 equal-N simulations under eta_true = -3.177e-04
-[20:13:59] 
-[20:13:59] ═══ ═══ SIMULATION RESULTS
-[20:13:59]       N_MC = 2000 (successful iterations)
-[20:13:59]       Mean |t| = 0.910
-[20:13:59]       Median |t| = 0.775
-[20:13:59]       Std |t| = 0.663
-[20:13:59]       Fraction with |t| < 0.5: 33.6%
-[20:13:59]       Fraction with |t| < 1.0: 60.5%
-[20:13:59]       Observed Step 046 |t| = 0.083
-[20:13:59]       Fraction below observed: 5.2%
-[20:13:59]       Percentile of observed: 5.2%
-[20:13:59]       25th percentile |t| = 0.363
-[20:13:59]       75th percentile |t| = 1.320
-[20:13:59]       Observed 0.08σ in bulk (25th–75th)? False
-[20:13:59]       Mean SNR = 0.910
-[20:13:59]       Median SNR = 0.775
-[20:13:59] Results saved to results/outputs/step_046b_equal_n_injection_simulation.json
-[20:13:59] ✓   Equal-N Injection Simulation Complete.
+[13:27:52] ═══ Starting Step 046b: Equal-N Injection Simulation
+[13:27:52]     Purpose: Parametric equal-N simulation at the headline Step 050 precision-weighted η
+[13:27:52]     Loaded eta_true from Step 050 (precision-weighted WLS): -3.909e-04
+[13:27:52]     Loaded observed equal-N |t| from Step 046: 0.0828
+[13:27:52]     Loaded real data: 26,207 observations
+[13:27:52]       APO: N=2,595, RMS=3.2 cm, mean_cosD=-0.231
+[13:27:52]       Grasse: N=19,390, RMS=9.9 cm, mean_cosD=-0.131
+[13:27:52]       Haleakala: N=737, RMS=13.8 cm, mean_cosD=-0.334
+[13:27:52]       Matera: N=346, RMS=6.2 cm, mean_cosD=-0.026
+[13:27:52]       McDonald2: N=3,139, RMS=9.6 cm, mean_cosD=-0.316
+[13:27:52] 
+[13:27:52] >>> >>> Running 2000 equal-N simulations under eta_true = -3.909e-04 (12 worker processes)
+[13:28:00] 
+[13:28:00] ═══ ═══ SIMULATION RESULTS
+[13:28:00]       N_MC = 2000 (successful iterations)
+[13:28:00]       Mean |t| = 1.001
+[13:28:00]       Median |t| = 0.882
+[13:28:00]       Std |t| = 0.710
+[13:28:00]       Fraction with |t| < 0.5: 29.9%
+[13:28:00]       Fraction with |t| < 1.0: 55.4%
+[13:28:00]       Observed Step 046 |t| = 0.083
+[13:28:00]       Fraction below observed: 4.9%
+[13:28:00]       Percentile of observed: 4.9%
+[13:28:00]       25th percentile |t| = 0.414
+[13:28:00]       75th percentile |t| = 1.462
+[13:28:00]       Observed 0.08σ in bulk (25th–75th)? False
+[13:28:00]       Mean SNR = 1.001
+[13:28:00]       Median SNR = 0.882
+[13:28:00] Results saved to results/outputs/step_046b_equal_n_injection_simulation.json
+[13:28:00] ✓   Equal-N Injection Simulation Complete.

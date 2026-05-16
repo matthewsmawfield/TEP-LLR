@@ -1,0 +1,38 @@
+{
+    "step_id": "step_067",
+    "status": "PASS",
+    "dataset": {
+        "n_obs": 25445,
+        "n_outliers_removed": 762
+    },
+    "full_systematic_cluster_ar1": {
+        "eta": -0.00044517106677590155,
+        "eta_error_ols": 9.71444909981028e-05,
+        "eta_error_cluster": 9.865140367069084e-05,
+        "snr_ols": 4.582566259826258,
+        "snr_cluster": 4.512566980414503,
+        "rho": 0.4115370913097373,
+        "durbin_watson": 1.1768551538769676,
+        "n_eff": 10607.89603320319,
+        "n_clusters": 5
+    },
+    "cosd_only_cluster_ar1": {
+        "eta": -0.00032647557516311723,
+        "eta_error_cluster": 9.478568318283267e-05,
+        "snr_cluster": 3.444355351993154,
+        "rho": 0.4161967521392108
+    },
+    "comparison": {
+        "cluster_robust_only": {
+            "eta": -0.00040611545725110945,
+            "eta_error": 6.224625170663243e-05,
+            "snr": 6.524335941787115
+        },
+        "ar1_gls_only": {
+            "eta": -0.00044517106677590155,
+            "eta_error": 9.71444909981028e-05,
+            "snr": 4.582566259826258
+        }
+    },
+    "interpretation": "The combined cluster-robust + AR(1) row is the most conservative frequentist sensitivity bound on the full-systematic design; the headline remains precision-weighted WLS (Step 050) because it retains all observations while down-weighting heterogeneous station noise."
+}

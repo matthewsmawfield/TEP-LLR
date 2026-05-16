@@ -1,23 +1,23 @@
-[20:11:49] ═══ Starting Step 029: Station Power & Grasse Dominance Assessment...
-[20:11:49] ═══ ═══ Starting Step 029: Station Power & Grasse Dominance Assessment...
-[20:11:49]     ═══ STEP PURPOSE: Assess per-station statistical power and address Grasse dominance concern
-[20:11:49]     ═══ METHOD: Expected vs observed SNR analysis, Monte Carlo IPW simulation, precision-weighted regression
-[20:11:49]     ═══ DATA SUMMARY
-[20:11:49]         Dataset: N = 26,207 observations
-[20:11:49]         Measured global η: -3.17726662e-04
-[20:11:49]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
-[20:11:49]     ═══ ANALYSIS TRACE
-[20:11:49] >>> >>> Performing per-station power analysis
-[20:12:04]     ═══ RESULTS SUMMARY
-[20:12:04]         Expected powered stations: 1
-[20:12:04]         Actually powered stations: 1
-[20:12:04]         Overall verdict: CONSISTENT
-[20:12:04]     ═══ INTERPRETATION
-[20:12:04]         No individual station achieves conventional statistical significance (SNR ≥ 3σ)
-[20:12:04]         Detection relies on combined analysis with N = 25,177 observations
-[20:12:04]         Pattern of detections matches per-station power analysis expectations
-[20:12:04]     ═══ REPRODUCIBILITY
-[20:12:04]         Output file: results/outputs/step_029_station_power_analysis.json
-[20:12:04]         Analysis components: Per-station power, phase coverage, IPW simulation, precision-weighted regression
-[20:12:04] ✓   Results saved to results/outputs/step_029_station_power_analysis.json
-[20:12:04] ✓   Status: CONSISTENT
+[13:26:59] ═══ Starting Step 029: Station Power & Grasse Dominance Assessment...
+[13:26:59] ═══ ═══ Starting Step 029: Station Power & Grasse Dominance Assessment...
+[13:26:59]     ═══ STEP PURPOSE: Assess per-station statistical power and address Grasse dominance concern
+[13:26:59]     ═══ METHOD: Expected vs observed SNR analysis, Monte Carlo IPW simulation, precision-weighted regression
+[13:26:59]     ═══ DATA SUMMARY
+[13:26:59]         Dataset: N = 25,445 observations
+[13:26:59]         Measured global η: -3.17726664e-04
+[13:26:59]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+[13:26:59]     ═══ ANALYSIS TRACE
+[13:26:59] >>> >>> Performing per-station power analysis
+[13:27:14]     ═══ RESULTS SUMMARY
+[13:27:14]         Expected powered stations: 2
+[13:27:14]         Actually powered stations: 1
+[13:27:14]         Overall verdict: QUALIFIED
+[13:27:14]     ═══ INTERPRETATION
+[13:27:14]         Station-level detections (SNR ≥ 3σ): 1
+[13:27:14]         Detection relies on combined analysis with N = 25,445 observations
+[13:27:14]         Expected-power miss(es): APO; station-power result is qualified
+[13:27:14]     ═══ REPRODUCIBILITY
+[13:27:14]         Output file: results/outputs/step_029_station_power_analysis.json
+[13:27:14]         Analysis components: Per-station power, phase coverage, IPW simulation, precision-weighted regression
+[13:27:14] ✓   Results saved to results/outputs/step_029_station_power_analysis.json
+[13:27:14]     Status: QUALIFIED (pipeline PASS)

@@ -3,17 +3,19 @@
 Step 048: CMB Dipole Anisotropy Test
 ====================================
 
-Tests the TEP prediction that if the scalar field possesses a cosmological
-rest frame (the CMB), the Earth-Moon system should exhibit anisotropic coupling
-depending on its velocity and orientation relative to that preferred frame.
+Tests whether residual-channel structure is consistent with anisotropic coupling
+defined relative to the Planck 2018 CMB dipole as an operational fixed celestial
+axis (velocity projection and Earth–Moon orientation), with Step 055 supplying
+adversarial nulls on uniqueness and synodic phase coupling.
 
 Physical Mechanism:
-The CMB dipole defines a precisely measured preferred frame in cosmology:
-direction (l, b) = (264.02°, 48.25°) in galactic coordinates, corresponding to
-(α, δ) ≈ (168.14°, -7.22°) in J2000 equatorial coordinates, with an amplitude
-v_CMB ≈ 369 km/s (Planck 2018). In TEP, if the scalar field originates from a
-cosmological potential with a preferred rest frame, motion through this frame
-should modulate the effective coupling.
+The CMB dipole defines a standard kinematic reference direction in cosmology:
+(l, b) = (264.02°, 48.25°) in galactic coordinates, corresponding to
+(α, δ) ≈ (168.14°, -7.22°) in J2000 equatorial coordinates, with amplitude
+v_CMB ≈ 369 km/s (Planck 2018). In TEP-motivated embeddings that single out a
+large-scale rest frame, motion and orientation relative to that axis should
+modulate the effective coupling; this step fits those predictors without
+asserting a unique cosmological origin (see Step 055).
 
 Two distinct predictions arise:
 
@@ -99,11 +101,9 @@ def compute_cmb_projections(jd_array):
         speed_kms : ndarray
             Total orbital speed [km/s]
     """
-    eph_path = PROJECT_ROOT / "de421.bsp"
-    if not eph_path.exists():
-        raise FileNotFoundError(f"Ephemeris not found at {eph_path}")
+    from scripts.utils.astronomical_utils import load_skyfield_planets
 
-    planets = load(str(eph_path))
+    planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets["earth"]
     moon = planets["moon"]
     sun = planets["sun"]
@@ -1456,33 +1456,35 @@ def cmb_anisotropy_analysis(df, verbose=False):
     # ------------------------------------------------------------------
     # 11. Compile results
     # ------------------------------------------------------------------
-    status = "PASS"
     if joint_result.get("available"):
         if joint_result.get("eta_vpar_p", 1.0) < 0.05 or joint_result.get("eta_theta_p", 1.0) < 0.05:
-            status = "PASS"
+            cmb_detection_result = "SIGNIFICANT"
             print_status(
                 "RESULT: Significant CMB-frame anisotropy detected.",
                 "SUCCESS",
             )
         elif diff_vp_sig > 2.0 or diff_ct_sig > 2.0:
-            status = "PASS"
+            cmb_detection_result = "MARGINAL"
             print_status(
                 "RESULT: Marginal CMB anisotropy detected.",
                 "SUCCESS",
             )
         else:
-            status = "WARNING"
+            cmb_detection_result = "NOT_SIGNIFICANT"
             print_status(
                 "RESULT: No significant CMB anisotropy detected.",
-                "WARNING",
+                "INFO",
             )
+        pipeline_status = "PASS"
     else:
-        status = "FAIL"
+        cmb_detection_result = "MODEL_FAILED"
+        pipeline_status = "FAIL"
         print_status("RESULT: Joint model failed to converge.", "ERROR")
 
     results = {
         "step_id": "step_048",
-        "status": status,
+        "status": pipeline_status,
+        "cmb_detection_result": cmb_detection_result,
         "n_observations": int(n_clean),
         "n_outliers_removed": int(n - n_clean),
         "cmb_direction": {

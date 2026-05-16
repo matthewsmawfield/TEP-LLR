@@ -1,29 +1,30 @@
-[20:16:26] ═══ Starting Step 061: Systematic Amplitude Sensitivity Analysis
-[20:16:26]     Loaded data: 26,207 observations
-[20:16:26]     Observed |eta| = 4.060e-04
-[20:16:26] 
-[20:16:26] >>> >>> Computing systematic sensitivity...
-[20:16:26]       ephemeris: known_amp=0.355 cm, required=0.528 cm, ratio=1.5x
-[20:16:26] >>>     Running MC (ephemeris, N=2000)...
-[20:16:34]         MC: mean|eta|=7.838e-05, max|eta|=3.310e-04, P(|eta|>observed)=0.0000, pctile=100.0%
-[20:16:34]       atmospheric: known_amp=-0.080 cm, required=0.528 cm, ratio=6.6x
-[20:16:34] >>>     Running MC (atmospheric, N=2000)...
-[20:16:41]         MC: mean|eta|=8.106e-05, max|eta|=3.226e-04, P(|eta|>observed)=0.0000, pctile=100.0%
-[20:16:41]       instrumental: known_amp=0.010 cm, required=0.528 cm, ratio=54.0x
-[20:16:41] >>>     Running MC (instrumental, N=2000)...
-[20:16:49]         MC: mean|eta|=8.069e-05, max|eta|=3.283e-04, P(|eta|>observed)=0.0000, pctile=100.0%
-[20:16:49]       tidal: known_amp=-0.009 cm, required=0.528 cm, ratio=57.9x
-[20:16:49] >>>     Running MC (tidal, N=2000)...
-[20:16:56]         MC: mean|eta|=8.055e-05, max|eta|=3.172e-04, P(|eta|>observed)=0.0000, pctile=100.0%
-[20:16:56]       thermal: known_amp=-0.056 cm, required=0.528 cm, ratio=9.5x
-[20:16:56] >>>     Running MC (thermal, N=2000)...
-[20:17:04]         MC: mean|eta|=7.887e-05, max|eta|=3.531e-04, P(|eta|>observed)=0.0000, pctile=100.0%
-[20:17:04] 
-[20:17:04] ═══ ═══ SYSTEMATIC SENSITIVITY SUMMARY
-[20:17:04]       ephemeris      : ratio=   1.5x, P(exceed|systematic-only)=0.0000
-[20:17:04]       atmospheric    : ratio=   6.6x, P(exceed|systematic-only)=0.0000
-[20:17:04]       instrumental   : ratio=  54.0x, P(exceed|systematic-only)=0.0000
-[20:17:04]       tidal          : ratio=  57.9x, P(exceed|systematic-only)=0.0000
-[20:17:04]       thermal        : ratio=   9.5x, P(exceed|systematic-only)=0.0000
-[20:17:04] Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
-[20:17:04] ✓   Systematic Sensitivity Analysis Complete.
+[12:12:29] ═══ Starting Step 061: Systematic Amplitude Sensitivity Analysis
+[12:12:29]     Loaded data: 26,207 observations
+[12:12:29]     Canonical 6σ-cleaned sample: 25,445 observations (762 outliers removed)
+[12:12:29]     Observed |eta| = 4.061e-04
+[12:12:29] 
+[12:12:29] >>> >>> Computing systematic sensitivity...
+[12:12:29]       ephemeris: known_amp=0.355 cm, required=0.528 cm, ratio=1.5x
+[12:12:29] >>>     Running MC (ephemeris, N=2000)...
+[12:12:34]         MC: mean|eta|=5.019e-05, max|eta|=2.082e-04, P(|eta|>observed)=0.0000, pctile=100.0%
+[12:12:34]       atmospheric: known_amp=-0.080 cm, required=0.528 cm, ratio=6.6x
+[12:12:34] >>>     Running MC (atmospheric, N=2000)...
+[12:12:39]         MC: mean|eta|=5.130e-05, max|eta|=2.361e-04, P(|eta|>observed)=0.0000, pctile=100.0%
+[12:12:39]       instrumental: known_amp=0.010 cm, required=0.528 cm, ratio=54.0x
+[12:12:39] >>>     Running MC (instrumental, N=2000)...
+[12:12:44]         MC: mean|eta|=5.092e-05, max|eta|=3.038e-04, P(|eta|>observed)=0.0000, pctile=100.0%
+[12:12:44]       tidal: known_amp=-0.009 cm, required=0.528 cm, ratio=57.9x
+[12:12:44] >>>     Running MC (tidal, N=2000)...
+[12:12:49]         MC: mean|eta|=4.951e-05, max|eta|=2.139e-04, P(|eta|>observed)=0.0000, pctile=100.0%
+[12:12:49]       thermal: known_amp=-0.056 cm, required=0.528 cm, ratio=9.5x
+[12:12:49] >>>     Running MC (thermal, N=2000)...
+[12:12:54]         MC: mean|eta|=4.962e-05, max|eta|=2.689e-04, P(|eta|>observed)=0.0000, pctile=100.0%
+[12:12:54] 
+[12:12:54] ═══ ═══ SYSTEMATIC SENSITIVITY SUMMARY
+[12:12:54]       ephemeris      : ratio=   1.5x, P(exceed|systematic-only)=0.0000
+[12:12:54]       atmospheric    : ratio=   6.6x, P(exceed|systematic-only)=0.0000
+[12:12:54]       instrumental   : ratio=  54.0x, P(exceed|systematic-only)=0.0000
+[12:12:54]       tidal          : ratio=  57.9x, P(exceed|systematic-only)=0.0000
+[12:12:54]       thermal        : ratio=   9.5x, P(exceed|systematic-only)=0.0000
+[12:12:54] Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
+[12:12:54] ✓   Systematic Sensitivity Analysis Complete.

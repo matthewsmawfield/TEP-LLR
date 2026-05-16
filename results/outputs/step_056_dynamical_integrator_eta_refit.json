@@ -8,66 +8,66 @@
     "ephemeris": "INPOP19a",
     "n_obs": 25445,
     "linearized_integrator_eta": {
-      "eta": -0.0004061154555979797,
-      "eta_error": 6.577799889845754e-05,
-      "snr": 6.174031779606219,
+      "eta": -0.00040611545725110945,
+      "eta_error": 6.57779989203431e-05,
+      "snr": 6.1740318026839605,
       "n_obs": 25445,
-      "rss_m2": 95.76938074729598,
-      "condition_number": 3.240037241446156
+      "rss_m2": 95.7693807458054,
+      "condition_number": 3.240037243387088
     },
     "gauss_newton_full_systematic": {
-      "eta": -0.0004061154555979797,
-      "eta_error": 6.577799889845754e-05,
-      "snr": 6.174031779606219,
+      "eta": -0.00040611545725110945,
+      "eta_error": 6.57779989203431e-05,
+      "snr": 6.1740318026839605,
       "iterations": 2,
       "history": [
-        -0.0004061154555979797,
-        -0.0004061154555979797
+        -0.00040611545725110945,
+        -0.00040611545725110945
       ],
       "note": "For a fixed linearized design, the WLS solution is a single solve; repeat-solve convergence demonstrates fixed-point closure, not a multi-iteration integrator update."
     },
     "extended_orbital_modulation": {
-      "eta0": -0.0004083769267525085,
-      "eta0_error": 6.590641691631937e-05,
-      "snr": 6.196315106479238,
-      "eta_helio_coupling_m": -0.0007387327825224821,
-      "eta_helio_coupling_error_m": 0.0013386042470135517
+      "eta0": -0.0004083769282745761,
+      "eta0_error": 6.590641694084082e-05,
+      "snr": 6.196315127268184,
+      "eta_helio_coupling_m": -0.0007387327321559241,
+      "eta_helio_coupling_error_m": 0.0013386042471135416
     }
   },
   "de430": {
     "ephemeris": "DE430",
     "n_obs": 4560,
     "linearized_integrator_eta": {
-      "eta": -0.0005976986078411144,
-      "eta_error": 0.00011851408872240027,
-      "snr": 5.043270502978974,
+      "eta": -0.0005976986169522779,
+      "eta_error": 0.00011851408878560842,
+      "snr": 5.043270577167519,
       "n_obs": 4560,
-      "rss_m2": 13.49181656293344,
-      "condition_number": 2.510832968398684
+      "rss_m2": 13.49181655812058,
+      "condition_number": 2.5108329724740734
     },
     "gauss_newton_full_systematic": {
-      "eta": -0.0005976986078411144,
-      "eta_error": 0.00011851408872240027,
-      "snr": 5.043270502978974,
+      "eta": -0.0005976986169522779,
+      "eta_error": 0.00011851408878560842,
+      "snr": 5.043270577167519,
       "iterations": 2,
       "history": [
-        -0.0005976986078411144,
-        -0.0005976986078411144
+        -0.0005976986169522779,
+        -0.0005976986169522779
       ],
       "note": "For a fixed linearized design, the WLS solution is a single solve; repeat-solve convergence demonstrates fixed-point closure, not a multi-iteration integrator update."
     },
     "extended_orbital_modulation": {
-      "eta0": -0.0006024118439961182,
-      "eta0_error": 0.00011846714159989819,
-      "snr": 5.085054267880098,
-      "eta_helio_coupling_m": 0.006438271714992336,
-      "eta_helio_coupling_error_m": 0.002663298331466185
+      "eta0": -0.0006024118530764266,
+      "eta0_error": 0.00011846714165735787,
+      "snr": 5.085054342062041,
+      "eta_helio_coupling_m": 0.006438271905048817,
+      "eta_helio_coupling_error_m": 0.002663298330505155
     }
   },
   "cross_ephemeris": {
-    "delta_eta": 0.00019158315224313466,
-    "delta_eta_error": 0.00013554458441703397,
-    "delta_sigma": 1.413432731872822,
+    "delta_eta": 0.00019158315970116847,
+    "delta_eta_error": 0.00013554458448292108,
+    "delta_sigma": 1.4134327862084994,
     "consistent_within_3sigma": true
   },
   "crd_range_forward_refit": {

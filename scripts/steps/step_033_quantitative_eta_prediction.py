@@ -147,6 +147,29 @@ def compute_prediction():
     if amplitude_volumetric is not None:
         print_status(f"Volumetric TEP amplitude: {amplitude_volumetric:.4f} mm", "CALC")
 
+    # Orientation coefficient η_θ in the joint cosθ·cosD layer (eq:cmb_anisotropy, Step 048/055).
+    # Linearizing η = η₀(1 + m_CMB cosθ) in the synodic channel gives η_θ ≈ η₀ m_CMB;
+    # for order-unity anisotropy (|m_CMB| ~ O(1)) the orientation scale matches pooled η₀.
+    eta_theta_band_lo = -1.0e-3
+    eta_theta_band_hi = -1.0e-4
+    cmb_orientation_prediction = {
+        "eta_0_synodic": float(eta_measured),
+        "eta_0_synodic_error": float(eta_error),
+        "eta_theta_predicted_center": float(eta_measured),
+        "formula": "η_θ ≈ η₀ m_CMB from eq:cmb_anisotropy; |m_CMB| ~ O(1) ⇒ |η_θ| ~ |η₀|",
+        "order_of_magnitude_band": {
+            "lo": float(eta_theta_band_lo),
+            "hi": float(eta_theta_band_hi),
+            "note": "Same response-coefficient decade as pooled synodic η (Step 033).",
+        },
+        "volumetric_scale_anchor": float(eta_volumetric) if eta_volumetric is not None else None,
+    }
+    print_status(
+        f"CMB orientation scale: η_θ predicted center = {eta_measured:.4e} "
+        f"(band [{eta_theta_band_lo:.0e}, {eta_theta_band_hi:.0e}])",
+        "CALC",
+    )
+
     output = {
         "step_id": "step_033",
         "status": "PASS",
@@ -191,6 +214,7 @@ def compute_prediction():
             "amplitude_microscopic_only_mm": float(amplitude_microscopic),
             "amplitude_volumetric_mm": float(amplitude_volumetric) if amplitude_volumetric is not None else None,
         },
+        "cmb_orientation_prediction": cmb_orientation_prediction,
         "independent_priors": {
             "rho_T_g_cm3": RHO_T,
             "rho_T_error_g_cm3": RHO_T_ERROR,

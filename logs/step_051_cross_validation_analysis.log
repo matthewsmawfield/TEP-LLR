@@ -1,241 +1,244 @@
-[22:05:36] ═══ ═══ Step 051: Rigorous Cross-Validation & Epoch-Dependence ═══
-[22:05:36]     Dataset: N=25,445 (removed 762 outliers)
-[22:05:36]     --- Temporal Hold-Out Cross-Validation ---
-[22:05:36]       Split: 1990s/2000s (JD 2453000)
-[22:05:36]         Null (mean only)                            R²_pred=-0.002  RMSE=0.0331  eta_train=[]
-[22:05:36]         cosD only                                   R²_pred=+0.001  RMSE=0.0331  eta_train=[cosD=-3.257e-04]
-[22:05:36]         cosD + annual                               R²_pred=+0.020  RMSE=0.0327  eta_train=[cosD=-2.542e-04]
-[22:05:36]         cosD + annual + monthly                     R²_pred=-0.098  RMSE=0.0347  eta_train=[cosD=-3.603e-04]
-[22:05:36]         Full pooled systematics                     R²_pred=-0.190  RMSE=0.0361  eta_train=[cosD=-1.078e-03]
-[22:05:36]         Full station-specific systematics           R²_pred=-0.156  RMSE=0.0356  eta_train=[cosD_common=-8.783e-04]
-[22:05:36]         Linear drift η(t)                           R²_pred=-0.238  RMSE=0.0368  eta_train=[cosD=5.522e-05]
-[22:05:36]       Split: pre-2000/post-2000 (JD 2454000)
-[22:05:36]         Null (mean only)                            R²_pred=-0.000  RMSE=0.0300  eta_train=[]
-[22:05:36]         cosD only                                   R²_pred=+0.005  RMSE=0.0299  eta_train=[cosD=-3.528e-04]
-[22:05:36]         cosD + annual                               R²_pred=+0.026  RMSE=0.0296  eta_train=[cosD=-2.639e-04]
-[22:05:36]         cosD + annual + monthly                     R²_pred=-0.047  RMSE=0.0307  eta_train=[cosD=-3.499e-04]
-[22:05:36]         Full pooled systematics                     R²_pred=-0.144  RMSE=0.0320  eta_train=[cosD=-1.031e-03]
-[22:05:36]         Full station-specific systematics           R²_pred=-0.383  RMSE=0.0352  eta_train=[cosD_common=-8.472e-04]
-[22:05:36]         Linear drift η(t)                           R²_pred=-0.171  RMSE=0.0324  eta_train=[cosD=1.171e-04]
-[22:05:36]       Split: pre-2008/post-2008 (step_050) (JD 2454600)
-[22:05:36]         Null (mean only)                            R²_pred=-0.000  RMSE=0.0286  eta_train=[]
-[22:05:36]         cosD only                                   R²_pred=+0.006  RMSE=0.0285  eta_train=[cosD=-3.410e-04]
-[22:05:36]         cosD + annual                               R²_pred=+0.028  RMSE=0.0282  eta_train=[cosD=-2.598e-04]
-[22:05:36]         cosD + annual + monthly                     R²_pred=-0.054  RMSE=0.0293  eta_train=[cosD=-3.423e-04]
-[22:05:36]         Full pooled systematics                     R²_pred=-0.153  RMSE=0.0307  eta_train=[cosD=-9.949e-04]
-[22:05:36]         Full station-specific systematics           R²_pred=-0.157  RMSE=0.0307  eta_train=[cosD_common=-8.011e-04]
-[22:05:36]         Linear drift η(t)                           R²_pred=-0.174  RMSE=0.0310  eta_train=[cosD=3.042e-05]
-[22:05:36]       Split: pre-2010/post-2010 (JD 2455000)
-[22:05:36]         Null (mean only)                            R²_pred=-0.001  RMSE=0.0279  eta_train=[]
-[22:05:36]         cosD only                                   R²_pred=+0.006  RMSE=0.0278  eta_train=[cosD=-3.355e-04]
-[22:05:36]         cosD + annual                               R²_pred=+0.030  RMSE=0.0274  eta_train=[cosD=-2.567e-04]
-[22:05:36]         cosD + annual + monthly                     R²_pred=-0.054  RMSE=0.0286  eta_train=[cosD=-3.335e-04]
-[22:05:36]         Full pooled systematics                     R²_pred=-0.142  RMSE=0.0298  eta_train=[cosD=-9.480e-04]
-[22:05:36]         Full station-specific systematics           R²_pred=-0.149  RMSE=0.0299  eta_train=[cosD_common=-7.829e-04]
-[22:05:36]         Linear drift η(t)                           R²_pred=-0.160  RMSE=0.0300  eta_train=[cosD=4.254e-06]
-[22:05:36]       Split: pre-2013/post-2013 (JD 2456000)
-[22:05:36]         Null (mean only)                            R²_pred=-0.005  RMSE=0.0258  eta_train=[]
-[22:05:36]         cosD only                                   R²_pred=+0.006  RMSE=0.0257  eta_train=[cosD=-3.082e-04]
-[22:05:36]         cosD + annual                               R²_pred=+0.032  RMSE=0.0254  eta_train=[cosD=-2.434e-04]
-[22:05:36]         cosD + annual + monthly                     R²_pred=-0.032  RMSE=0.0262  eta_train=[cosD=-3.293e-04]
-[22:05:36]         Full pooled systematics                     R²_pred=-0.112  RMSE=0.0272  eta_train=[cosD=-8.638e-04]
-[22:05:36]         Full station-specific systematics           R²_pred=-0.124  RMSE=0.0273  eta_train=[cosD_common=-5.279e-04]
-[22:05:36]         Linear drift η(t)                           R²_pred=-0.120  RMSE=0.0273  eta_train=[cosD=-8.836e-05]
-[22:05:36]       Split: pre-2015/post-2015 (JD 2457000)
-[22:05:36]         Null (mean only)                            R²_pred=-0.007  RMSE=0.0244  eta_train=[]
-[22:05:36]         cosD only                                   R²_pred=+0.005  RMSE=0.0242  eta_train=[cosD=-3.069e-04]
-[22:05:36]         cosD + annual                               R²_pred=+0.039  RMSE=0.0238  eta_train=[cosD=-2.572e-04]
-[22:05:36]         cosD + annual + monthly                     R²_pred=-0.040  RMSE=0.0248  eta_train=[cosD=-3.549e-04]
-[22:05:36]         Full pooled systematics                     R²_pred=-0.113  RMSE=0.0256  eta_train=[cosD=-7.916e-04]
-[22:05:36]         Full station-specific systematics           R²_pred=-0.207  RMSE=0.0267  eta_train=[cosD_common=-5.208e-04]
-[22:05:36]         Linear drift η(t)                           R²_pred=-0.110  RMSE=0.0256  eta_train=[cosD=-1.897e-04]
-[22:05:36]     --- Random 5-Fold Cross-Validation ---
-[22:05:36]       Null (mean only)                            R²=-0.000 ± 0.000  RMSE=0.0617  MAE=0.0420
-[22:05:36]       cosD only                                   R²=+0.001 ± 0.001  RMSE=0.0616  MAE=0.0420
-[22:05:36]       cosD + annual                               R²=+0.007 ± 0.001  RMSE=0.0615  MAE=0.0418
-[22:05:36]       cosD + annual + monthly                     R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
-[22:05:36]       Full pooled systematics                     R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
-[22:05:36]       Full station-specific systematics           R²=+0.012 ± 0.001  RMSE=0.0613  MAE=0.0418
-[22:05:36]       Epoch-dependent η (pre/post)                R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
-[22:05:36]       Linear drift η(t)                           R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
-[22:05:36]     --- Leave-One-Station-Out Cross-Validation ---
-[22:05:36]       cosD only                                   mean R²_pred=-0.001
-[22:05:36]         held-out Grasse    : R²_pred=+0.000  N_test=18742
-[22:05:36]         held-out APO       : R²_pred=+0.001  N_test=2595
-[22:05:36]         held-out McDonald2 : R²_pred=-0.000  N_test=3097
-[22:05:36]         held-out Matera    : R²_pred=-0.002  N_test=345
-[22:05:36]         held-out Haleakala : R²_pred=-0.002  N_test=666
-[22:05:36]       Full pooled systematics                     mean R²_pred=-0.002
-[22:05:36]         held-out Grasse    : R²_pred=+0.004  N_test=18742
-[22:05:36]         held-out APO       : R²_pred=-0.018  N_test=2595
-[22:05:36]         held-out McDonald2 : R²_pred=-0.001  N_test=3097
-[22:05:36]         held-out Matera    : R²_pred=+0.006  N_test=345
-[22:05:36]         held-out Haleakala : R²_pred=-0.000  N_test=666
-[22:05:36]       Full station-specific systematics           mean R²_pred=-0.001
-[22:05:36]         held-out Grasse    : R²_pred=+0.001  N_test=18742
-[22:05:36]         held-out APO       : R²_pred=-0.000  N_test=2595
-[22:05:36]         held-out McDonald2 : R²_pred=-0.001  N_test=3097
-[22:05:36]         held-out Matera    : R²_pred=-0.004  N_test=345
-[22:05:36]         held-out Haleakala : R²_pred=-0.004  N_test=666
-[22:05:36]     --- In-Sample Model Comparison (AIC / BIC) ---
-[22:05:36]       Null (mean only)                            AIC=-141777.7  BIC=-141769.6  k=  1  RSS=96.763
-[22:05:36]       cosD only                                   AIC=-141803.3  BIC=-141787.0  k=  2  RSS=96.659
-[22:05:36]         cosD           : η=-3.177e-04 ± 6.052e-05 (5.25σ)
-[22:05:36]       cosD + annual                               AIC=-141951.5  BIC=-141918.9  k=  4  RSS=96.082
-[22:05:36]         cosD           : η=-2.689e-04 ± 6.053e-05 (4.44σ)
-[22:05:36]       cosD + annual + monthly                     AIC=-142014.0  BIC=-141965.2  k=  6  RSS=95.831
-[22:05:36]         cosD           : η=-3.095e-04 ± 6.131e-05 (5.05σ)
-[22:05:36]       Full pooled systematics                     AIC=-142028.4  BIC=-141971.4  k=  7  RSS=95.769
-[22:05:36]         cosD           : η=-4.061e-04 ± 6.578e-05 (6.17σ)
-[22:05:36]       Full station-specific systematics           AIC=-142129.6  BIC=-141877.1  k= 31  RSS=95.210
-[22:05:36]         cosD_common    : η=-4.321e-04 ± 6.756e-05 (6.40σ)
-[22:05:36]       Epoch-dependent η (pre/post)                AIC=-142026.4  BIC=-141961.3  k=  8  RSS=95.769
-[22:05:36]         cosD_pre       : η=-4.157e-04 ± 9.954e-05 (4.18σ)
-[22:05:36]         cosD_post      : η=-4.004e-04 ± 7.950e-05 (5.04σ)
-[22:05:36]       Linear drift η(t)                           AIC=-142027.7  BIC=-141962.6  k=  8  RSS=95.765
-[22:05:36]         cosD           : η=-2.531e-04 ± 1.502e-04 (1.69σ)
-[22:05:36]     --- Honest Assessment ---
-[22:05:36]       Step 050 predictive R² (pre-2008 → post-2008) = -0.153
-[22:05:36]       Interpretation: the model trained on pre-2008 data predicts post-2008
-[22:05:36]       residuals worse than simply predicting the mean in this temporal split.
-[22:05:36]       This split is therefore a covariate-shift diagnostic; coefficient
-[22:05:36]       stability is assessed separately by the in-sample epoch test below.
-[22:05:36]       Best predictive model at 2008 split: cosD + annual (R² = +0.028)
-[22:05:36]       Pooled systematics R² = -0.153; Station-specific R² = -0.157
-[22:05:36]       → Station-specific systematics do NOT improve prediction.
-[22:05:36]       Epoch-dependence test (in-sample m6):
-[22:05:36]         η_pre=-4.157e-04, η_post=-4.004e-04, ratio=0.96
-[22:05:36]         Test η_pre = η_post: |Δη|=1.526e-05, SE_diff=1.274e-04, z=0.12, p=0.9046
-[22:05:36]         → Cannot reject equality at 5% level (ratio 0.96).
-[22:05:36]     --- Diagnostics: Why does prediction fail? ---
-[22:05:36]       Station coverage pre/post 2008:
-[22:05:36]         Grasse      : pre= 8736 (68.7%)  post=10006 (78.6%)
-[22:05:36]         APO         : pre=  365 ( 2.9%)  post= 2230 (17.5%)
-[22:05:36]         McDonald2   : pre= 2934 (23.1%)  post=  163 ( 1.3%)
-[22:05:36]         Matera      : pre=    6 ( 0.0%)  post=  339 ( 2.7%)
-[22:05:36]         Haleakala   : pre=  666 ( 5.2%)  post=    0 ( 0.0%)
-[22:05:36]       Elongation distribution by station & epoch:
-[22:05:36]         Grasse      : pre  μ=1.823 σ=0.471  range=[0.472, 3.135]  |  post μ=1.637 σ=0.657  range=[0.166, 3.135]
-[22:05:36]         APO         : pre  μ=1.856 σ=0.544  range=[0.747, 3.053]  |  post μ=1.872 σ=0.690  range=[0.575, 3.137]
-[22:05:36]         McDonald2   : pre  μ=1.924 σ=0.412  range=[0.700, 3.115]  |  post μ=1.809 σ=0.349  range=[0.836, 2.545]
-[22:05:36]         Matera      : pre  μ=2.056 σ=0.155  range=[1.986, 2.372]  |  post μ=1.590 σ=0.301  range=[1.068, 2.232]
-[22:05:36]         Haleakala   : pre  μ=1.944 σ=0.308  range=[1.143, 2.812]  |  post μ=N/A σ=N/A  range=[N/A, N/A]
-[22:05:36]       Per-station cosD coefficient (m1, full dataset):
-[22:05:36]         Grasse      : η=-3.782e-04 ± 6.595e-05 (5.73σ)  N=18742
-[22:05:36]         APO         : η=-2.398e-04 ± 8.664e-05 (2.77σ)  N=2595
-[22:05:36]         McDonald2   : η=-8.793e-05 ± 3.064e-04 (0.29σ)  N=3097
-[22:05:36]         Matera      : η=+3.846e-04 ± 8.302e-04 (0.46σ)  N=345
-[22:05:36]         Haleakala   : η=+2.571e-03 ± 1.165e-03 (2.21σ)  N=666
-[22:05:36]       Rolling-window η (2-year bins, m2 model):
-[22:05:36]         1985.3: η=-1.112e-04 ± 8.371e-04 (0.13σ)  N=787
-[22:05:36]         1986.3: η=+1.731e-03 ± 9.033e-04 (1.92σ)  N=663
-[22:05:36]         1987.3: η=+4.371e-03 ± 1.062e-03 (4.12σ)  N=414
-[22:05:36]         1988.3: η=+1.104e-03 ± 6.828e-04 (1.62σ)  N=743
-[22:05:36]         1989.3: η=+3.852e-04 ± 5.929e-04 (0.65σ)  N=1128
-[22:05:36]         1990.3: η=+1.434e-03 ± 5.348e-04 (2.68σ)  N=1211
-[22:05:36]         1991.3: η=-3.109e-05 ± 5.676e-04 (0.05σ)  N=913
-[22:05:36]         1992.3: η=-3.165e-03 ± 5.431e-04 (5.83σ)  N=1001
-[22:05:36]         1993.3: η=-1.858e-03 ± 4.437e-04 (4.19σ)  N=1333
-[22:05:36]         1994.3: η=-1.604e-03 ± 3.655e-04 (4.39σ)  N=1399
-[22:05:36]         1995.3: η=-3.058e-04 ± 3.536e-04 (0.86σ)  N=1555
-[22:05:36]         1996.3: η=-8.818e-04 ± 3.182e-04 (2.77σ)  N=2102
-[22:05:36]         1997.3: η=-7.560e-04 ± 3.221e-04 (2.35σ)  N=1874
-[22:05:36]         1998.3: η=-3.587e-04 ± 2.918e-04 (1.23σ)  N=1492
-[22:05:36]         1999.3: η=-6.933e-04 ± 2.636e-04 (2.63σ)  N=1726
-[22:05:36]         2000.3: η=-1.058e-03 ± 2.609e-04 (4.05σ)  N=1638
-[22:05:36]         2001.3: η=-1.658e-03 ± 3.714e-04 (4.46σ)  N=1152
-[22:05:36]         2002.3: η=-3.028e-03 ± 6.086e-04 (4.98σ)  N=639
-[22:05:36]         2003.3: η=-2.144e-03 ± 5.152e-04 (4.16σ)  N=586
-[22:05:36]         2004.3: η=+1.689e-04 ± 3.895e-04 (0.43σ)  N=875
-[22:05:36]         2005.3: η=+7.452e-04 ± 4.690e-04 (1.59σ)  N=718
-[22:05:36]         2006.3: η=-1.357e-03 ± 5.881e-04 (2.31σ)  N=375
-[22:05:36]         2007.3: η=-2.145e-04 ± 4.349e-04 (0.49σ)  N=459
-[22:05:36]         2008.3: η=-3.455e-04 ± 3.673e-04 (0.94σ)  N=585
-[22:05:36]         2009.3: η=-7.569e-05 ± 3.143e-04 (0.24σ)  N=573
-[22:05:36]         2010.3: η=+3.366e-04 ± 2.663e-04 (1.26σ)  N=696
-[22:05:36]         2011.2: η=-1.128e-04 ± 2.359e-04 (0.48σ)  N=899
-[22:05:36]         2012.2: η=-6.264e-04 ± 1.822e-04 (3.44σ)  N=1169
-[22:05:36]         2013.2: η=-5.705e-04 ± 1.599e-04 (3.57σ)  N=1345
-[22:05:36]         2014.2: η=-3.105e-04 ± 1.329e-04 (2.34σ)  N=1391
-[22:05:36]         2015.2: η=-5.989e-04 ± 7.503e-05 (7.98σ)  N=2459
-[22:05:36]         2016.2: η=-4.357e-04 ± 6.518e-05 (6.68σ)  N=2596
-[22:05:36]         2017.2: η=+9.086e-05 ± 5.977e-05 (1.52σ)  N=3272
-[22:05:36]         2018.2: η=-2.436e-04 ± 4.194e-05 (5.81σ)  N=5887
-[22:05:36]       Residual variance by station & epoch (after m2):
-[22:05:36]         Grasse      : pre_var=0.006791  post_var=0.000530
-[22:05:36]         APO         : pre_var=0.000659  post_var=0.001042
-[22:05:36]         McDonald2   : pre_var=0.006430  post_var=0.007885
-[22:05:36]         Matera      : pre_var=0.000812  post_var=0.003416
-[22:05:36]         Haleakala   : pre_var=0.011355  post_var=N/A
-[22:05:36]       Lag-1 autocorrelation of residuals (after m2), per station:
-[22:05:36]         Grasse      : ACF(1)=+0.445  (N_pairs=18733)
-[22:05:36]         APO         : ACF(1)=+0.372  (N_pairs=2594)
-[22:05:36]         McDonald2   : ACF(1)=+0.333  (N_pairs=3088)
-[22:05:36]         Matera      : ACF(1)=+0.628  (N_pairs=335)
-[22:05:36]         Haleakala   : ACF(1)=+0.510  (N_pairs=661)
-[22:05:36]       Station-mix sensitivity (reweighted η):
-[22:05:37]         η range across mixes: [-5.110e-04, +6.753e-04] = 1.186e-03
-[22:05:37]         Corr(Grasse_prop, η) = -0.208
-[22:05:37]         → η is NOT strongly correlated with station mix composition.
-[22:05:37]       Grasse-only temporal stability:
-[22:05:37]         Grasse total: N=18742
-[22:05:37]         pre-2008/post-2008: η_pre=-3.532e-04 ± 1.618e-04  η_post=-2.741e-04 ± 3.224e-05  |Δη|=7.912e-05  p=0.6316  R²_pred=+0.017
-[22:05:37]       Grasse-only rolling η (2-year bins, m2):
-[22:05:37]         1985.3: η=+3.092e-04 ± 9.157e-04 (0.34σ)  N=613
-[22:05:37]         1986.3: η=+2.862e-03 ± 1.030e-03 (2.78σ)  N=432
-[22:05:37]         1987.3: η=+3.971e-03 ± 1.669e-03 (2.38σ)  N=174
-[22:05:37]         1988.3: η=+2.200e-03 ± 8.598e-04 (2.56σ)  N=431
-[22:05:37]         1989.3: η=+8.855e-04 ± 6.597e-04 (1.34σ)  N=792
-[22:05:37]         1990.3: η=+1.309e-03 ± 5.833e-04 (2.24σ)  N=949
-[22:05:37]         1991.3: η=-3.481e-05 ± 5.846e-04 (0.06σ)  N=776
-[22:05:37]         1992.3: η=-3.180e-03 ± 5.472e-04 (5.81σ)  N=881
-[22:05:37]         1993.3: η=-1.987e-03 ± 4.623e-04 (4.30σ)  N=1113
-[22:05:37]         1994.3: η=-1.349e-03 ± 4.098e-04 (3.29σ)  N=969
-[22:05:37]         1995.3: η=-1.797e-03 ± 4.051e-04 (4.43σ)  N=842
-[22:05:37]         1996.3: η=-8.573e-04 ± 4.084e-04 (2.10σ)  N=1240
-[22:05:37]         1997.3: η=-1.041e-05 ± 3.963e-04 (0.03σ)  N=1157
-[22:05:37]         1998.3: η=-1.106e-03 ± 3.149e-04 (3.51σ)  N=786
-[22:05:37]         1999.3: η=-1.000e-03 ± 2.493e-04 (4.01σ)  N=1209
-[22:05:37]         2000.3: η=-1.215e-03 ± 2.603e-04 (4.67σ)  N=1448
-[22:05:37]         2001.3: η=-1.182e-03 ± 3.651e-04 (3.24σ)  N=974
-[22:05:37]         2002.3: η=-2.170e-03 ± 6.329e-04 (3.43σ)  N=464
-[22:05:37]         2003.3: η=-1.534e-03 ± 4.982e-04 (3.08σ)  N=470
-[22:05:37]         2004.3: η=+7.146e-04 ± 3.796e-04 (1.88σ)  N=810
-[22:05:37]         2005.3: η=+1.150e-03 ± 4.230e-04 (2.72σ)  N=616
-[22:05:37]         2006.3: η=-3.544e-03 ± 9.818e-04 (3.61σ)  N=107
-[22:05:37]         2011.2: η=-4.057e-04 ± 5.490e-04 (0.74σ)  N=174
-[22:05:37]         2012.2: η=-9.114e-04 ± 2.775e-04 (3.28σ)  N=524
-[22:05:37]         2013.2: η=-6.749e-04 ± 2.282e-04 (2.96σ)  N=832
-[22:05:37]         2014.2: η=-2.603e-04 ± 1.967e-04 (1.32σ)  N=938
-[22:05:37]         2015.2: η=-6.368e-04 ± 8.789e-05 (7.25σ)  N=1857
-[22:05:37]         2016.2: η=-3.273e-04 ± 7.197e-05 (4.55σ)  N=2101
-[22:05:37]         2017.2: η=+9.636e-05 ± 5.923e-05 (1.63σ)  N=3064
-[22:05:37]         2018.2: η=-2.732e-04 ± 3.696e-05 (7.39σ)  N=5608
-[22:05:37]       Fine-grained epoch analysis (2-year bins, SNR>=1.0σ):
-[22:05:37]         11/16 epochs powered (SNR>=1.0σ)
-[22:05:37]         Of powered epochs: 7/11 show negative η
-[22:05:37]         P(all negative by chance) = 0.0078
-[22:05:37]         → POSITIVE epochs at years: [1987.2662684214642, 1989.2648994960707, 2005.2539480929222, 2017.2457345405608]
-[22:05:37]         → Sign is NOT consistent across fine-grained epochs.
-[22:05:37]     --- Synthetic Injection Test ---
-[22:05:37]       Inject a known cos(D) signal into noise matched to the real data, then run identical CV analyses.  This tests two distinct claims: (i) the cosD-only signal generalizes across epochs, and (ii) the full-systematic model's predictive failure on real data is caused by epoch-dependent nuisance structure rather than signal absence.
-[22:05:46]       Injected η = -4.060e-04
-[22:05:46]       Temporal hold-out (m1):  synth=+0.009 ± 0.003  real=+0.006
-[22:05:46]       Temporal hold-out (m4):  synth=+0.003 ± 0.005  real=-0.153
-[22:05:46]       Random 5-fold (m1):      synth=+0.001 ± 0.001  real=+0.001
-[22:05:46]       Random 5-fold (m4):      synth=+0.001 ± 0.001  real=+0.009
-[22:05:46]       LOSO (m1):               synth=+0.001 ± 0.002  real=-0.001
-[22:05:46]       LOSO (m4):               synth=+0.001 ± 0.002  real=-0.002
-[22:05:46]       Temporal m1: real at 6.0th percentile of synth. Marginal / inconsistent.
-[22:05:46]       Temporal m4: real at 0.0th percentile of synth. Marginal / inconsistent.
-[22:05:46]       Random-kfold m1: real at 6.0th percentile of synth. Marginal / inconsistent.
-[22:05:46]       Random-kfold m4: real at 100.0th percentile of synth. Marginal / inconsistent.
-[22:05:46]       LOSO m1: real at 6.0th percentile of synth. Marginal / inconsistent.
-[22:05:46]       LOSO m4: real at 5.0th percentile of synth. Marginal / inconsistent.
-[22:05:46]       Ephemeris comparison (INPOP19a vs DE430):
-[22:05:46]         INPOP19a (2014-2018): η=-2.246e-04 ± 3.533e-05  N=9012
-[22:05:46]         DE430    (2014-2018): η=+6.699e-05 ± 5.611e-04  N=4597
-[22:05:46]         |Δη|=2.916e-04  z=0.52  p=0.6040
-[22:05:46]         → No significant ephemeris dependence (p=0.604).
-[22:05:46]     Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_051_cross_validation_analysis.json
-[22:05:46] ═══ ═══ Step 051 Complete ═══
+[12:53:57] ═══ ═══ Step 051: Rigorous Cross-Validation & Epoch-Dependence ═══
+[12:53:57]     Dataset: N=25,445 (removed 762 outliers)
+[12:53:57]     --- Temporal Hold-Out Cross-Validation ---
+[12:53:57]       Split: 1990s/2000s (JD 2453000)
+[12:53:57]         Null (mean only)                            R²_pred=-0.002  RMSE=0.0331  eta_train=[]
+[12:53:57]         cosD only                                   R²_pred=+0.001  RMSE=0.0331  eta_train=[cosD=-3.257e-04]
+[12:53:57]         cosD + annual                               R²_pred=+0.020  RMSE=0.0327  eta_train=[cosD=-2.542e-04]
+[12:53:57]         cosD + annual + monthly                     R²_pred=-0.098  RMSE=0.0347  eta_train=[cosD=-3.603e-04]
+[12:53:57]         Full pooled systematics                     R²_pred=-0.190  RMSE=0.0361  eta_train=[cosD=-1.078e-03]
+[12:53:57]         Full station-specific systematics           R²_pred=-0.156  RMSE=0.0356  eta_train=[cosD_common=-8.783e-04]
+[12:53:57]         Linear drift η(t)                           R²_pred=-0.238  RMSE=0.0368  eta_train=[cosD=5.522e-05]
+[12:53:57]       Split: pre-2000/post-2000 (JD 2454000)
+[12:53:58]         Null (mean only)                            R²_pred=-0.000  RMSE=0.0300  eta_train=[]
+[12:53:58]         cosD only                                   R²_pred=+0.005  RMSE=0.0299  eta_train=[cosD=-3.528e-04]
+[12:53:58]         cosD + annual                               R²_pred=+0.026  RMSE=0.0296  eta_train=[cosD=-2.639e-04]
+[12:53:58]         cosD + annual + monthly                     R²_pred=-0.047  RMSE=0.0307  eta_train=[cosD=-3.499e-04]
+[12:53:58]         Full pooled systematics                     R²_pred=-0.144  RMSE=0.0320  eta_train=[cosD=-1.031e-03]
+[12:53:58]         Full station-specific systematics           R²_pred=-0.383  RMSE=0.0352  eta_train=[cosD_common=-8.472e-04]
+[12:53:58]         Linear drift η(t)                           R²_pred=-0.171  RMSE=0.0324  eta_train=[cosD=1.171e-04]
+[12:53:58]       Split: pre-2008/post-2008 (step_050) (JD 2454600)
+[12:53:58]         Null (mean only)                            R²_pred=-0.000  RMSE=0.0286  eta_train=[]
+[12:53:58]         cosD only                                   R²_pred=+0.006  RMSE=0.0285  eta_train=[cosD=-3.410e-04]
+[12:53:58]         cosD + annual                               R²_pred=+0.028  RMSE=0.0282  eta_train=[cosD=-2.598e-04]
+[12:53:58]         cosD + annual + monthly                     R²_pred=-0.054  RMSE=0.0293  eta_train=[cosD=-3.423e-04]
+[12:53:58]         Full pooled systematics                     R²_pred=-0.153  RMSE=0.0307  eta_train=[cosD=-9.949e-04]
+[12:53:58]         Full station-specific systematics           R²_pred=-0.157  RMSE=0.0307  eta_train=[cosD_common=-8.011e-04]
+[12:53:58]         Linear drift η(t)                           R²_pred=-0.174  RMSE=0.0310  eta_train=[cosD=3.042e-05]
+[12:53:58]       Split: pre-2010/post-2010 (JD 2455000)
+[12:53:58]         Null (mean only)                            R²_pred=-0.001  RMSE=0.0279  eta_train=[]
+[12:53:58]         cosD only                                   R²_pred=+0.006  RMSE=0.0278  eta_train=[cosD=-3.355e-04]
+[12:53:58]         cosD + annual                               R²_pred=+0.030  RMSE=0.0274  eta_train=[cosD=-2.567e-04]
+[12:53:58]         cosD + annual + monthly                     R²_pred=-0.054  RMSE=0.0286  eta_train=[cosD=-3.335e-04]
+[12:53:58]         Full pooled systematics                     R²_pred=-0.142  RMSE=0.0298  eta_train=[cosD=-9.480e-04]
+[12:53:58]         Full station-specific systematics           R²_pred=-0.149  RMSE=0.0299  eta_train=[cosD_common=-7.829e-04]
+[12:53:58]         Linear drift η(t)                           R²_pred=-0.160  RMSE=0.0300  eta_train=[cosD=4.254e-06]
+[12:53:58]       Split: pre-2013/post-2013 (JD 2456000)
+[12:53:58]         Null (mean only)                            R²_pred=-0.005  RMSE=0.0258  eta_train=[]
+[12:53:58]         cosD only                                   R²_pred=+0.006  RMSE=0.0257  eta_train=[cosD=-3.082e-04]
+[12:53:58]         cosD + annual                               R²_pred=+0.032  RMSE=0.0254  eta_train=[cosD=-2.434e-04]
+[12:53:58]         cosD + annual + monthly                     R²_pred=-0.032  RMSE=0.0262  eta_train=[cosD=-3.293e-04]
+[12:53:58]         Full pooled systematics                     R²_pred=-0.112  RMSE=0.0272  eta_train=[cosD=-8.638e-04]
+[12:53:58]         Full station-specific systematics           R²_pred=-0.124  RMSE=0.0273  eta_train=[cosD_common=-5.279e-04]
+[12:53:58]         Linear drift η(t)                           R²_pred=-0.120  RMSE=0.0273  eta_train=[cosD=-8.836e-05]
+[12:53:58]       Split: pre-2015/post-2015 (JD 2457000)
+[12:53:58]         Null (mean only)                            R²_pred=-0.007  RMSE=0.0244  eta_train=[]
+[12:53:58]         cosD only                                   R²_pred=+0.005  RMSE=0.0242  eta_train=[cosD=-3.069e-04]
+[12:53:58]         cosD + annual                               R²_pred=+0.039  RMSE=0.0238  eta_train=[cosD=-2.572e-04]
+[12:53:58]         cosD + annual + monthly                     R²_pred=-0.040  RMSE=0.0248  eta_train=[cosD=-3.549e-04]
+[12:53:58]         Full pooled systematics                     R²_pred=-0.113  RMSE=0.0256  eta_train=[cosD=-7.916e-04]
+[12:53:58]         Full station-specific systematics           R²_pred=-0.207  RMSE=0.0267  eta_train=[cosD_common=-5.208e-04]
+[12:53:58]         Linear drift η(t)                           R²_pred=-0.110  RMSE=0.0256  eta_train=[cosD=-1.897e-04]
+[12:53:58]     --- Random 5-Fold Cross-Validation ---
+[12:53:58]       Null (mean only)                            R²=-0.000 ± 0.000  RMSE=0.0617  MAE=0.0420
+[12:53:58]       cosD only                                   R²=+0.001 ± 0.001  RMSE=0.0616  MAE=0.0420
+[12:53:58]       cosD + annual                               R²=+0.007 ± 0.001  RMSE=0.0615  MAE=0.0418
+[12:53:58]       cosD + annual + monthly                     R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+[12:53:58]       Full pooled systematics                     R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+[12:53:58]       Full station-specific systematics           R²=+0.012 ± 0.001  RMSE=0.0613  MAE=0.0418
+[12:53:58]       Epoch-dependent η (pre/post)                R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+[12:53:58]       Linear drift η(t)                           R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+[12:53:58]     --- Leave-One-Station-Out Cross-Validation ---
+[12:53:58]       cosD only                                   mean R²_pred=-0.001
+[12:53:58]         held-out Grasse    : R²_pred=+0.000  N_test=18742
+[12:53:58]         held-out APO       : R²_pred=+0.001  N_test=2595
+[12:53:58]         held-out McDonald2 : R²_pred=-0.000  N_test=3097
+[12:53:58]         held-out Matera    : R²_pred=-0.002  N_test=345
+[12:53:58]         held-out Haleakala : R²_pred=-0.002  N_test=666
+[12:53:58]       Full pooled systematics                     mean R²_pred=-0.002
+[12:53:58]         held-out Grasse    : R²_pred=+0.004  N_test=18742
+[12:53:58]         held-out APO       : R²_pred=-0.018  N_test=2595
+[12:53:58]         held-out McDonald2 : R²_pred=-0.001  N_test=3097
+[12:53:58]         held-out Matera    : R²_pred=+0.006  N_test=345
+[12:53:58]         held-out Haleakala : R²_pred=-0.000  N_test=666
+[12:53:58]       Full station-specific systematics           mean R²_pred=-0.001
+[12:53:58]         held-out Grasse    : R²_pred=+0.001  N_test=18742
+[12:53:58]         held-out APO       : R²_pred=-0.000  N_test=2595
+[12:53:58]         held-out McDonald2 : R²_pred=-0.001  N_test=3097
+[12:53:58]         held-out Matera    : R²_pred=-0.004  N_test=345
+[12:53:58]         held-out Haleakala : R²_pred=-0.004  N_test=666
+[12:53:58]     --- In-Sample Model Comparison (AIC / BIC) ---
+[12:53:58]       Null (mean only)                            AIC=-141777.7  BIC=-141769.6  k=  1  RSS=96.763
+[12:53:58]       cosD only                                   AIC=-141803.3  BIC=-141787.0  k=  2  RSS=96.659
+[12:53:58]         cosD           : η=-3.177e-04 ± 6.052e-05 (5.25σ)
+[12:53:58]       cosD + annual                               AIC=-141951.5  BIC=-141918.9  k=  4  RSS=96.082
+[12:53:58]         cosD           : η=-2.689e-04 ± 6.053e-05 (4.44σ)
+[12:53:58]       cosD + annual + monthly                     AIC=-142014.0  BIC=-141965.2  k=  6  RSS=95.831
+[12:53:58]         cosD           : η=-3.095e-04 ± 6.131e-05 (5.05σ)
+[12:53:58]       Full pooled systematics                     AIC=-142028.4  BIC=-141971.4  k=  7  RSS=95.769
+[12:53:58]         cosD           : η=-4.061e-04 ± 6.578e-05 (6.17σ)
+[12:53:58]       Full station-specific systematics           AIC=-142129.6  BIC=-141877.1  k= 31  RSS=95.210
+[12:53:58]         cosD_common    : η=-4.321e-04 ± 6.756e-05 (6.40σ)
+[12:53:58]       Epoch-dependent η (pre/post)                AIC=-142026.4  BIC=-141961.3  k=  8  RSS=95.769
+[12:53:58]         cosD_pre       : η=-4.157e-04 ± 9.954e-05 (4.18σ)
+[12:53:58]         cosD_post      : η=-4.004e-04 ± 7.950e-05 (5.04σ)
+[12:53:58]       Linear drift η(t)                           AIC=-142027.7  BIC=-141962.6  k=  8  RSS=95.765
+[12:53:58]         cosD           : η=-2.531e-04 ± 1.502e-04 (1.69σ)
+[12:53:58]     --- Honest Assessment ---
+[12:53:58]       Step 050 predictive R² (pre-2008 → post-2008) = -0.153
+[12:53:58]       Interpretation: the model trained on pre-2008 data predicts post-2008
+[12:53:58]       residuals worse than simply predicting the mean in this temporal split.
+[12:53:58]       This split is therefore a covariate-shift diagnostic; coefficient
+[12:53:58]       stability is assessed separately by the in-sample epoch test below.
+[12:53:58]       Best predictive model at 2008 split: cosD + annual (R² = +0.028)
+[12:53:58]       Pooled systematics R² = -0.153; Station-specific R² = -0.157
+[12:53:58]       → Station-specific systematics do NOT improve prediction.
+[12:53:58]       Epoch-dependence test (in-sample m6):
+[12:53:58]         η_pre=-4.157e-04, η_post=-4.004e-04, ratio=0.96
+[12:53:58]         Test η_pre = η_post: |Δη|=1.526e-05, SE_diff=1.274e-04, z=0.12, p=0.9046
+[12:53:58]         → Cannot reject equality at 5% level (ratio 0.96).
+[12:53:58]     --- Diagnostics: Why does prediction fail? ---
+[12:53:58]       Station coverage pre/post 2008:
+[12:53:58]         Grasse      : pre= 8736 (68.7%)  post=10006 (78.6%)
+[12:53:58]         APO         : pre=  365 ( 2.9%)  post= 2230 (17.5%)
+[12:53:58]         McDonald2   : pre= 2934 (23.1%)  post=  163 ( 1.3%)
+[12:53:58]         Matera      : pre=    6 ( 0.0%)  post=  339 ( 2.7%)
+[12:53:58]         Haleakala   : pre=  666 ( 5.2%)  post=    0 ( 0.0%)
+[12:53:58]       Elongation distribution by station & epoch:
+[12:53:58]         Grasse      : pre  μ=1.823 σ=0.471  range=[0.472, 3.135]  |  post μ=1.637 σ=0.657  range=[0.166, 3.135]
+[12:53:58]         APO         : pre  μ=1.856 σ=0.544  range=[0.747, 3.053]  |  post μ=1.872 σ=0.690  range=[0.575, 3.137]
+[12:53:58]         McDonald2   : pre  μ=1.924 σ=0.412  range=[0.700, 3.115]  |  post μ=1.809 σ=0.349  range=[0.836, 2.545]
+[12:53:58]         Matera      : pre  μ=2.056 σ=0.155  range=[1.986, 2.372]  |  post μ=1.590 σ=0.301  range=[1.068, 2.232]
+[12:53:58]         Haleakala   : pre  μ=1.944 σ=0.308  range=[1.143, 2.812]  |  post μ=N/A σ=N/A  range=[N/A, N/A]
+[12:53:58]       Per-station cosD coefficient (m1, full dataset):
+[12:53:58]         Grasse      : η=-3.782e-04 ± 6.595e-05 (5.73σ)  N=18742
+[12:53:58]         APO         : η=-2.398e-04 ± 8.664e-05 (2.77σ)  N=2595
+[12:53:58]         McDonald2   : η=-8.793e-05 ± 3.064e-04 (0.29σ)  N=3097
+[12:53:58]         Matera      : η=+3.846e-04 ± 8.302e-04 (0.46σ)  N=345
+[12:53:58]         Haleakala   : η=+2.571e-03 ± 1.165e-03 (2.21σ)  N=666
+[12:53:58]       Rolling-window η (2-year bins, m2 model):
+[12:53:58]         1985.3: η=-1.112e-04 ± 8.371e-04 (0.13σ)  N=787
+[12:53:58]         1986.3: η=+1.731e-03 ± 9.033e-04 (1.92σ)  N=663
+[12:53:58]         1987.3: η=+4.371e-03 ± 1.062e-03 (4.12σ)  N=414
+[12:53:58]         1988.3: η=+1.104e-03 ± 6.828e-04 (1.62σ)  N=743
+[12:53:58]         1989.3: η=+3.852e-04 ± 5.929e-04 (0.65σ)  N=1128
+[12:53:58]         1990.3: η=+1.434e-03 ± 5.348e-04 (2.68σ)  N=1211
+[12:53:58]         1991.3: η=-3.109e-05 ± 5.676e-04 (0.05σ)  N=913
+[12:53:58]         1992.3: η=-3.165e-03 ± 5.431e-04 (5.83σ)  N=1001
+[12:53:58]         1993.3: η=-1.858e-03 ± 4.437e-04 (4.19σ)  N=1333
+[12:53:58]         1994.3: η=-1.604e-03 ± 3.655e-04 (4.39σ)  N=1399
+[12:53:58]         1995.3: η=-3.058e-04 ± 3.536e-04 (0.86σ)  N=1555
+[12:53:58]         1996.3: η=-8.818e-04 ± 3.182e-04 (2.77σ)  N=2102
+[12:53:58]         1997.3: η=-7.560e-04 ± 3.221e-04 (2.35σ)  N=1874
+[12:53:58]         1998.3: η=-3.587e-04 ± 2.918e-04 (1.23σ)  N=1492
+[12:53:58]         1999.3: η=-6.933e-04 ± 2.636e-04 (2.63σ)  N=1726
+[12:53:58]         2000.3: η=-1.058e-03 ± 2.609e-04 (4.05σ)  N=1638
+[12:53:58]         2001.3: η=-1.658e-03 ± 3.714e-04 (4.46σ)  N=1152
+[12:53:58]         2002.3: η=-3.028e-03 ± 6.086e-04 (4.98σ)  N=639
+[12:53:58]         2003.3: η=-2.144e-03 ± 5.152e-04 (4.16σ)  N=586
+[12:53:58]         2004.3: η=+1.689e-04 ± 3.895e-04 (0.43σ)  N=875
+[12:53:58]         2005.3: η=+7.452e-04 ± 4.690e-04 (1.59σ)  N=718
+[12:53:58]         2006.3: η=-1.357e-03 ± 5.881e-04 (2.31σ)  N=375
+[12:53:58]         2007.3: η=-2.145e-04 ± 4.349e-04 (0.49σ)  N=459
+[12:53:58]         2008.3: η=-3.455e-04 ± 3.673e-04 (0.94σ)  N=585
+[12:53:58]         2009.3: η=-7.569e-05 ± 3.143e-04 (0.24σ)  N=573
+[12:53:58]         2010.3: η=+3.366e-04 ± 2.663e-04 (1.26σ)  N=696
+[12:53:58]         2011.2: η=-1.128e-04 ± 2.359e-04 (0.48σ)  N=899
+[12:53:58]         2012.2: η=-6.264e-04 ± 1.822e-04 (3.44σ)  N=1169
+[12:53:58]         2013.2: η=-5.705e-04 ± 1.599e-04 (3.57σ)  N=1345
+[12:53:58]         2014.2: η=-3.105e-04 ± 1.329e-04 (2.34σ)  N=1391
+[12:53:58]         2015.2: η=-5.989e-04 ± 7.503e-05 (7.98σ)  N=2459
+[12:53:58]         2016.2: η=-4.357e-04 ± 6.518e-05 (6.68σ)  N=2596
+[12:53:58]         2017.2: η=+9.086e-05 ± 5.977e-05 (1.52σ)  N=3272
+[12:53:58]         2018.2: η=-2.436e-04 ± 4.194e-05 (5.81σ)  N=5887
+[12:53:58]       Residual variance by station & epoch (after m2):
+[12:53:58]         Grasse      : pre_var=0.006791  post_var=0.000530
+[12:53:58]         APO         : pre_var=0.000659  post_var=0.001042
+[12:53:58]         McDonald2   : pre_var=0.006430  post_var=0.007885
+[12:53:58]         Matera      : pre_var=0.000812  post_var=0.003416
+[12:53:58]         Haleakala   : pre_var=0.011355  post_var=N/A
+[12:53:58]       Lag-1 autocorrelation of residuals (after m2), per station:
+[12:53:58]         Grasse      : ACF(1)=+0.445  (N_pairs=18733)
+[12:53:58]         APO         : ACF(1)=+0.372  (N_pairs=2594)
+[12:53:58]         McDonald2   : ACF(1)=+0.333  (N_pairs=3088)
+[12:53:58]         Matera      : ACF(1)=+0.628  (N_pairs=335)
+[12:53:58]         Haleakala   : ACF(1)=+0.510  (N_pairs=661)
+[12:53:58]       Station-mix sensitivity (reweighted η):
+[12:53:58]         η range across mixes: [-5.110e-04, +6.753e-04] = 1.186e-03
+[12:53:58]         Corr(Grasse_prop, η) = -0.208
+[12:53:58]         → η is NOT strongly correlated with station mix composition.
+[12:53:58]       Grasse-only temporal stability:
+[12:53:58]         Grasse total: N=18742
+[12:53:58]         pre-2008/post-2008: η_pre=-3.532e-04 ± 1.618e-04  η_post=-2.741e-04 ± 3.224e-05  |Δη|=7.912e-05  p=0.6316  R²_pred=+0.017
+[12:53:58]       Grasse-only rolling η (2-year bins, m2):
+[12:53:58]         1985.3: η=+3.092e-04 ± 9.157e-04 (0.34σ)  N=613
+[12:53:58]         1986.3: η=+2.862e-03 ± 1.030e-03 (2.78σ)  N=432
+[12:53:58]         1987.3: η=+3.971e-03 ± 1.669e-03 (2.38σ)  N=174
+[12:53:58]         1988.3: η=+2.200e-03 ± 8.598e-04 (2.56σ)  N=431
+[12:53:58]         1989.3: η=+8.855e-04 ± 6.597e-04 (1.34σ)  N=792
+[12:53:58]         1990.3: η=+1.309e-03 ± 5.833e-04 (2.24σ)  N=949
+[12:53:58]         1991.3: η=-3.481e-05 ± 5.846e-04 (0.06σ)  N=776
+[12:53:58]         1992.3: η=-3.180e-03 ± 5.472e-04 (5.81σ)  N=881
+[12:53:58]         1993.3: η=-1.987e-03 ± 4.623e-04 (4.30σ)  N=1113
+[12:53:58]         1994.3: η=-1.349e-03 ± 4.098e-04 (3.29σ)  N=969
+[12:53:58]         1995.3: η=-1.797e-03 ± 4.051e-04 (4.43σ)  N=842
+[12:53:58]         1996.3: η=-8.573e-04 ± 4.084e-04 (2.10σ)  N=1240
+[12:53:58]         1997.3: η=-1.041e-05 ± 3.963e-04 (0.03σ)  N=1157
+[12:53:58]         1998.3: η=-1.106e-03 ± 3.149e-04 (3.51σ)  N=786
+[12:53:58]         1999.3: η=-1.000e-03 ± 2.493e-04 (4.01σ)  N=1209
+[12:53:58]         2000.3: η=-1.215e-03 ± 2.603e-04 (4.67σ)  N=1448
+[12:53:58]         2001.3: η=-1.182e-03 ± 3.651e-04 (3.24σ)  N=974
+[12:53:58]         2002.3: η=-2.170e-03 ± 6.329e-04 (3.43σ)  N=464
+[12:53:58]         2003.3: η=-1.534e-03 ± 4.982e-04 (3.08σ)  N=470
+[12:53:58]         2004.3: η=+7.146e-04 ± 3.796e-04 (1.88σ)  N=810
+[12:53:58]         2005.3: η=+1.150e-03 ± 4.230e-04 (2.72σ)  N=616
+[12:53:58]         2006.3: η=-3.544e-03 ± 9.818e-04 (3.61σ)  N=107
+[12:53:58]         2011.2: η=-4.057e-04 ± 5.490e-04 (0.74σ)  N=174
+[12:53:58]         2012.2: η=-9.114e-04 ± 2.775e-04 (3.28σ)  N=524
+[12:53:58]         2013.2: η=-6.749e-04 ± 2.282e-04 (2.96σ)  N=832
+[12:53:58]         2014.2: η=-2.603e-04 ± 1.967e-04 (1.32σ)  N=938
+[12:53:58]         2015.2: η=-6.368e-04 ± 8.789e-05 (7.25σ)  N=1857
+[12:53:58]         2016.2: η=-3.273e-04 ± 7.197e-05 (4.55σ)  N=2101
+[12:53:58]         2017.2: η=+9.636e-05 ± 5.923e-05 (1.63σ)  N=3064
+[12:53:58]         2018.2: η=-2.732e-04 ± 3.696e-05 (7.39σ)  N=5608
+[12:53:58]       Fine-grained epoch analysis (2-year bins, SNR>=1.0σ):
+[12:53:58]         11/16 epochs powered (SNR>=1.0σ)
+[12:53:58]         Of powered epochs: 7/11 show negative η
+[12:53:58]         P(all negative by chance) = 0.0078
+[12:53:58]         → POSITIVE epochs at years: [1987.2662684214642, 1989.2648994960707, 2005.2539480929222, 2017.2457345405608]
+[12:53:58]         → Sign is NOT consistent across fine-grained epochs.
+[12:53:58]     --- Synthetic Injection Test ---
+[12:53:58]       Inject a known cos(D) signal into noise matched to the real data, then run identical CV analyses.  This tests two distinct claims: (i) the cosD-only signal generalizes across epochs, and (ii) the full-systematic model's predictive failure on real data is caused by epoch-dependent nuisance structure rather than signal absence.
+[12:54:08]       Injected η = -3.909e-04
+[12:54:08]       Temporal hold-out (m1):  synth=+0.008 ± 0.003  real=+0.006
+[12:54:08]       Temporal hold-out (m4):  synth=+0.002 ± 0.005  real=-0.153
+[12:54:08]       Random 5-fold (m1):      synth=+0.001 ± 0.001  real=+0.001
+[12:54:08]       Random 5-fold (m4):      synth=+0.001 ± 0.001  real=+0.009
+[12:54:08]       LOSO (m1):               synth=+0.001 ± 0.002  real=-0.001
+[12:54:08]       LOSO (m4):               synth=+0.000 ± 0.002  real=-0.002
+[12:54:08]       Era-varying nuisance temporal (m1): synth=-0.026 ± 0.017
+[12:54:08]       Era-varying nuisance temporal (m4): synth=-0.169 ± 0.045
+[12:54:08]       Temporal m1: real at 14.0th percentile of synth. Consistent.
+[12:54:08]       Temporal m4: real at 0.0th percentile of synth. Marginal / inconsistent.
+[12:54:08]       Temporal m4 (era-varying nuisance synth): real at 62.0th percentile of synth. Consistent.
+[12:54:08]       Random-kfold m1: real at 6.0th percentile of synth. Marginal / inconsistent.
+[12:54:08]       Random-kfold m4: real at 100.0th percentile of synth. Marginal / inconsistent.
+[12:54:08]       LOSO m1: real at 6.0th percentile of synth. Marginal / inconsistent.
+[12:54:08]       LOSO m4: real at 6.0th percentile of synth. Marginal / inconsistent.
+[12:54:08]       Ephemeris comparison (INPOP19a vs DE430):
+[12:54:08]         INPOP19a (2014-2018): η=-2.246e-04 ± 3.533e-05  N=9012
+[12:54:08]         DE430    (2014-2018): η=+6.699e-05 ± 5.611e-04  N=4597
+[12:54:08]         |Δη|=2.916e-04  z=0.52  p=0.6040
+[12:54:08]         → No significant ephemeris dependence (p=0.604).
+[12:54:09]     Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_051_cross_validation_analysis.json
+[12:54:09] ═══ ═══ Step 051 Complete ═══
