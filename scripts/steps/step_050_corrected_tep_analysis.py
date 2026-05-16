@@ -43,7 +43,6 @@ TEP_CONFIG = get_config()
 
 def fit_model(y, X, names):
     """Fit OLS using QR decomposition for numerical stability."""
-    from scripts.utils.statistical_utils import robust_regression
     result = robust_regression(y, X, scale_errors_by_birge=False)
     c = result['coefficients']
     errs = result['errors']
@@ -66,7 +65,6 @@ def fit_model(y, X, names):
 
 def cluster_robust_regression(y, X, cluster_ids, names):
     """Fit OLS with QR decomposition and compute cluster-robust standard errors."""
-    from scripts.utils.statistical_utils import robust_regression
     ols_result = robust_regression(y, X, scale_errors_by_birge=False)
     c = ols_result['coefficients']
     with suppress_scipy_array_api_matmul_runtime_warning(), np.errstate(over='ignore', divide='ignore', invalid='ignore'):

@@ -142,7 +142,7 @@ if __name__ == "__main__":
 
     # Insert after 4.3, before 4.7 Correlation Analysis
     insertion = section_4_4 + section_4_5 + section_4_6
-    marker = '    <h3>4.7 Correlation Analysis</h3>'
+    marker = '    <h3>4.10 Correlation Analysis</h3>'
     assert marker in text, f"Cannot find marker: {marker}"
     text = text.replace(marker, insertion + marker)
 

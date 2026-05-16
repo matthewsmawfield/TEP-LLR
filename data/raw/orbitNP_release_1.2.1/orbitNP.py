@@ -465,7 +465,7 @@ for opt, arg in opts:
   if opt == '-h':  
       print ( '\n\torbitNP.py - An program to adjust CPF orbits to flatten SLR data and output normal points.\n\n'
          '\tInput an epoch-range data file, either in ILRS FRD format or raw epoch-range data.\n'
-	     '\The corresponding CPF prediction file is required. This can be automatically fetched from the EDC Data Center.\n'
+	     '\\The corresponding CPF prediction file is required. This can be automatically fetched from the EDC Data Center.\n'
 	     '\tFor raw data, include the system delay calibration values and meteorological data.\n\n'
 	     
 	     '\tOptions:\n'

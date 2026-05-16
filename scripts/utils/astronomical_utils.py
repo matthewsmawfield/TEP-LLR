@@ -9,6 +9,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
+from scripts.utils.logger import get_verbose_mode
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 CANONICAL_EPHEMERIS = PROJECT_ROOT / "data" / "raw" / "de440.bsp"
 
@@ -111,8 +113,7 @@ def compute_cos_elongation(df: pd.DataFrame, verbose: bool = False) -> pd.DataFr
 
     df['cos_elong'] = np.cos(df['elongation_rad'])
 
-    from scripts.utils.logger import get_verbose_mode
-    if get_verbose_mode():
+    if verbose:
         print_status("Cos(elongation) computation complete:", "CALC")
         print_status(
             f"  Range: {df['cos_elong'].min():.6f} to {df['cos_elong'].max():.6f}", "CALC")

@@ -9,7 +9,7 @@ from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from typing import List
 from scripts.utils.llr_constants import SYNODIC_PERIOD_DAYS
-from scripts.utils.logger import print_status
+from scripts.utils.logger import print_status, get_verbose_mode
 
 
 def identify_peak_harmonics(phase: np.ndarray, y: np.ndarray,
@@ -67,10 +67,11 @@ def identify_peak_harmonics(phase: np.ndarray, y: np.ndarray,
 
     # Find peaks
     peaks_idx = np.argsort(snrs)[-n_peaks:][::-1]
-    peak_factors = [factors[i] for i in peaks_idx]
-
-    from scripts.utils.logger import get_verbose_mode
+    n = len(phase)
+    # Determine target periods
+    target_periods = [SYNODIC_PERIOD_DAYS]
     if get_verbose_mode():
+        print_status(f"Identifying top {n_peaks} harmonics (excluding synodic)...", "INFO")
         print_status(
             f"Spectral analysis complete (N_scan={len(factors)}):", "CALC")
         for i, idx in enumerate(peaks_idx):

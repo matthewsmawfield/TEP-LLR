@@ -132,7 +132,7 @@ if __name__ == "__main__":
     results_path = COMPONENTS_DIR / "4_results.html"
     text = results_path.read_text()
 
-    marker = '    <h3>4.7 Correlation Analysis</h3>'
+    marker = '    <h3>4.10 Correlation Analysis</h3>'
     assert marker in text, f"Cannot find marker: {marker}"
 
     insertion = section_4_4 + section_4_5 + section_4_6

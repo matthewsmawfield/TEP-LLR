@@ -111,37 +111,37 @@ TEP-LLR/
                 <td>010–013</td>
                 <td><code>step_010</code>–<code>step_013</code></td>
                 <td><code>step_010</code>–<code>step_013</code> outputs</td>
-                <td>§4.19.1–4.19.4</td>
+                <td>§4.25.1–4.25.4</td>
             </tr>
             <tr>
                 <td>029 (day/night)</td>
                 <td><code>step_027_day_night_thermal_bias.py</code></td>
                 <td><code>step_027_day_night_thermal_bias.json</code></td>
-                <td>§4.28.1</td>
+                <td>§4.19.1</td>
             </tr>
             <tr>
                 <td>029 (station power / WLS)</td>
                 <td><code>step_029_station_power_analysis.py</code></td>
                 <td><code>step_029_station_power_analysis.json</code></td>
-                <td>§4.24.4–4.24.5</td>
+                <td>§4.30.4–4.30.5</td>
             </tr>
             <tr>
                 <td>030 (geometric elongation)</td>
                 <td><code>step_028_geometric_elongation.py</code></td>
                 <td><code>step_028_geometric_elongation.json</code></td>
-                <td>§4.28.2 (Step 030)</td>
+                <td>§4.19.2 (Step 030)</td>
             </tr>
             <tr>
                 <td>032 (hardware epochs)</td>
                 <td><code>step_030_hardware_epoch_analysis.py</code></td>
                 <td><code>step_030_hardware_epoch_analysis.json</code></td>
-                <td>§4.11</td>
+                <td>§4.23</td>
             </tr>
             <tr>
                 <td>034 (orthogonality)</td>
                 <td><code>step_032_ephemeris_orthogonality_proof.py</code></td>
                 <td><code>step_032_ephemeris_orthogonality_proof.json</code></td>
-                <td>§4.24.6</td>
+                <td>§4.30.6</td>
             </tr>
             <tr>
                 <td>045 (matched-window)</td>
@@ -153,31 +153,31 @@ TEP-LLR/
                 <td>050 (primary extraction)</td>
                 <td><code>step_050_corrected_tep_analysis.py</code></td>
                 <td><code>step_050_corrected_tep_analysis.json</code></td>
-                <td>§4.24.3</td>
+                <td>§4.30.3</td>
             </tr>
             <tr>
                 <td>055 (CMB falsification; random-axis ΔAIC null; dual-axis primary; η_θ coverage)</td>
                 <td><code>step_055_cmb_rigorous_falsification.py</code></td>
                 <td><code>step_055_cmb_rigorous_falsification.json</code></td>
-                <td>§4.24.2 / §5.4</td>
+                <td>§4.30.2 / §5.4</td>
             </tr>
             <tr>
                 <td>056 (linearized post-fit $\eta$ extraction)</td>
                 <td><code>step_056_dynamical_integrator_eta_refit.py</code></td>
                 <td><code>step_056_dynamical_integrator_eta_refit.json</code></td>
-                <td>§4.13</td>
+                <td>§4.25</td>
             </tr>
             <tr>
                 <td>064-PI (prediction-interval calibration)</td>
                 <td><code>step_064_prediction_coverage.py</code></td>
                 <td><code>step_064_prediction_coverage.json</code></td>
-                <td>§4.8.5</td>
+                <td>§4.14.5</td>
             </tr>
             <tr>
                 <td>072 (leave-one-station-out meta; forest plot)</td>
                 <td><code>step_072_leave_one_station_out_meta.py</code></td>
                 <td><code>step_072_leave_one_station_out_meta.json</code></td>
-                <td>§4.2 / Figure 5</td>
+                <td>§4.12 / Figure 5</td>
             </tr>
             <tr>
                 <td>064-SRP (orbital SRP scaling)</td>
@@ -406,7 +406,7 @@ node site/build.js
             <li>JSON files in <code>results/outputs/</code> (step_000 through step_073, including 006b and 046b)</li>
             <li>Key result (headline): Precision-weighted full-systematic consensus $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust; $N = 25{,}445$)</li>
             <li>Key result (uncertainty calibration, Step 064-PI): prediction-interval coverage 86% at 68% nominal, 98% at 95% ($\chi^2_{\rm red}=0.48$ on published $\sigma$); LOSO conformal 95% band on $\eta$ excludes zero</li>
-            <li>Key result (LOSO meta, Step 072): four powered exclusions share negative sign; $\eta_{\rm meta} = -4.21 \times 10^{-4}$ ($12.8\sigma$); $I^2 = 0.0\%$; excluding Grasse underpowered ($0.92\sigma$); figure <code>results/figures/fig_05_loso_forest.png</code></li>
+            <li>Key result (LOSO meta, Step 072): four powered exclusions share negative sign; $\eta_{\rm meta} = -4.27 \times 10^{-4}$ ($12.8\sigma$); $I^2 = 0.0\%$; excluding Grasse underpowered ($0.92\sigma$); figure <code>results/figures/fig_05_loso_forest.png</code></li>
             <li>Key result (sensitivity upper bound): Full-systematic OLS without excision $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$); cluster-robust $6.52\sigma$; $N = 25{,}445$</li>
             <li>Key result (secondary leverage diagnostic): Cook's-Distance-excised full-systematic OLS $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($7.82\sigma$); cluster-robust $8.65\sigma$; $N = 23{,}837$</li>
             <li>Key result: Pearson correlation on the 6σ-cleaned primary sample ($N=25{,}445$): $r = -0.0329$ ($p = 1.55 \times 10^{-7}$), $5.25\sigma$</li>
