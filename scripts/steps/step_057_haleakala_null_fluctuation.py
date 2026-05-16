@@ -29,6 +29,7 @@ import pandas as pd
 
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.statistical_utils import detect_outliers_sigma
 
 
 def _load_required_json(rel_path: str) -> dict:

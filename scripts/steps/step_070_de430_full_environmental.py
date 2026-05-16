@@ -35,8 +35,9 @@ from scipy import stats
 from skyfield.api import load
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.astronomical_utils import load_skyfield_planets
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
-from scripts.utils.statistical_utils import robust_regression, cluster_robust_variance
+from scripts.utils.statistical_utils import robust_regression, cluster_robust_variance, detect_outliers_sigma
 from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 
 log_dir = PROJECT_ROOT / "logs"
@@ -56,8 +57,6 @@ _CMB_UNIT = _CMB_UNIT / np.linalg.norm(_CMB_UNIT)
 
 def compute_de430_environmental(jd_array):
     """Compute environmental variables for DE430 epochs."""
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
     planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets["earth"]
     sun = planets["sun"]
@@ -223,7 +222,6 @@ def main():
     # -----------------------------------------------------------------
     # Are the 6σ outliers predicted by sideband structure?
     # -----------------------------------------------------------------
-    from scripts.utils.statistical_utils import detect_outliers_sigma
     outlier_mask = detect_outliers_sigma(res, 6.0)
     n_out = int(np.sum(outlier_mask))
     print_status(f"  6σ outliers: {n_out} ({100*n_out/len(res):.2f}%)", "RESULT")

@@ -86,7 +86,7 @@
     <ul>
         <li>
             Powered-detection threshold: Stations with expected
-            SNR $\geq 3\sigma$ at the globally measured $|\eta| \approx 4.10
+            SNR $\geq 3\sigma$ at the globally measured $|\eta| \approx 4.16
             \times 10^{-4}$ are designated as <em>powered stations</em>. The
             threshold balances detection power with sample size requirements.
         </li>
@@ -429,7 +429,7 @@
         A synodic-only Bayesian layer (emcee; Foreman-Mackey et al. 2013) uses
         heteroskedastic Gaussian likelihood with archive $\sigma_i$ and uniform
         priors $\eta \in [-10^{-2}, +10^{-2}]$, $b \in [-0.1, +0.1]$ m. Step 016
-        runs separate MCMC chains for four documented $\eta$ priors (Table 4.26.1)
+        runs separate MCMC chains for four documented $\eta$ priors (Table 4.8.1)
         and evaluates the Savage–Dickey ratio at $\eta=0$ with multiple KDE
         bandwidths. This layer is secondary to the cluster-robust frequentist
         headline and Step 056 integrator extraction.
@@ -542,7 +542,7 @@
 
     <h3>3.4 Systematic Checks</h3>
 
-    <h4>3.4.2 Ephemeris Errors</h4>
+    <h4>3.4.7 Ephemeris Errors</h4>
     <p>
         To test whether any observed signal could arise from systematic errors
         in the INPOP19a ephemeris, residuals from each station are analyzed
@@ -563,7 +563,7 @@
         effect not accounted for in the ephemeris model.
     </p>
 
-    <h4>3.4.7 Environmental Effects</h4>
+    <h4>3.4.12 Environmental Effects</h4>
     <p>
         Atmospheric refraction, tidal effects, and other environmental factors
         are modeled in the residual computation by the ephemeris. The signal
@@ -572,7 +572,7 @@
         time or weather conditions.
     </p>
 
-    <h4>3.4.8 Instrumental Effects</h4>
+    <h4>3.4.14 Instrumental Effects</h4>
     <p>
         Different laser ranging systems could have systematic biases. The
         multi-station analysis tests whether the signal persists across stations
@@ -580,7 +580,7 @@
         instrumental origin.
     </p>
 
-    <h4>3.4.9 Outlier Detection and Removal</h4>
+    <h4>3.4.15 Outlier Detection and Removal</h4>
     <p>
         Robust statistical methods are employed to identify and handle outliers.
         Observations with residuals exceeding $5\sigma$ from the median are
@@ -592,7 +592,7 @@
         significant regardless of outlier treatment.
     </p>
 
-    <h4>3.4.10 Systematic Error Budget (Step 008)</h4>
+    <h4>3.4.16 Systematic Error Budget (Step 008)</h4>
     
     <p>
         A data-driven systematic error budget is constructed directly from the
@@ -632,7 +632,7 @@
         variance not accounted for by known systematics.
     </p>
 
-    <h4>3.4.11 Systematic Control Analysis (Steps 010–013)</h4>
+    <h4>3.4.17 Systematic Control Analysis (Steps 010–013)</h4>
     <p>
         To directly test the systematic artifact hypothesis, three
         systematic analysis steps are implemented:
@@ -704,7 +704,7 @@
         underlying signal is structurally permanent beneath the early-era noise scatter.
     </p>
 
-    <h4>3.4.12 Day/Night Thermal Bias and Geometric Elongation Tests (Steps 029–030)</h4>
+    <h4>3.4.18 Day/Night Thermal Bias and Geometric Elongation Tests (Steps 029–030)</h4>
     <p>
         Two additional false-positive diagnostic steps were executed to address
         the concern that the observed $\cos(D)$ modulation could arise from
@@ -746,7 +746,7 @@
         Earth-Moon-Sun geometry at sub-millimeter scales.
     </p>
 
-    <h4>3.4.14 Temporal Autocorrelation Analysis (Step 004)</h4>
+    <h4>3.4.20 Temporal Autocorrelation Analysis (Step 004)</h4>
     
     <p>
         To test for temporal dependencies in the residuals that could affect statistical inference, Step 004 performs comprehensive temporal autocorrelation analysis. The analysis includes:
@@ -763,7 +763,7 @@
         The full-systematic residual series shows first-order temporal autocorrelation ($\rho \approx 0.412$, Durbin-Watson $\approx 1.18$), as expected for LLR systematics. The unweighted full-systematic OLS and cluster-robust estimators are therefore complemented by full-model AR(1) GLS with cluster-robust standard errors; the precision-weighted headline $\eta$ and the Cook's leverage diagnostic remain consistent with these treatments and are not an artifact of neglected serial correlation alone.
     </p>
 
-    <h4>3.4.15 Outlier Removal Criteria</h4>
+    <h4>3.4.21 Outlier Removal Criteria</h4>
     
     <p>
         The pipeline employs a conservative $6\sigma$ Median Absolute Deviation (MAD) threshold for outlier detection, implemented in the <code>detect_outliers_sigma</code> function. The methodological justification for this choice includes:
@@ -781,7 +781,7 @@
         This threshold is applied consistently across steps 002, 003, 005, 006b, 016, 024, 025, and 052, ensuring standardization throughout the analysis pipeline. Step 006b performs a threshold sweep ($3\sigma$–$10\sigma$) on DE430 to verify the signal is not an artifact of a single cutoff choice; Step 063 performs the identical sweep on the primary INPOP19a dataset. Step 063 additionally reports a bootstrap 95% CI and a permutation test (10,000 shuffles) on the 6σ-cleaned data.
     </p>
 
-    <h4>3.4.16 Primary Estimator: Full Systematic Model, Precision Weighting, and Cluster-Robust Errors</h4>
+    <h4>3.4.22 Primary Estimator: Full Systematic Model, Precision Weighting, and Cluster-Robust Errors</h4>
 
     <p>
         The headline Nordtvedt parameter is extracted from the same full
@@ -825,14 +825,14 @@
         bias into the physical $\cos(D)$ coefficient.
     </p>
 
-    <h4>3.4.17 Haleakala Station Anomaly</h4>
+    <h4>3.4.23 Haleakala Station Anomaly</h4>
     
     <p>
         The Haleakala station shows a positive $\eta$ value ($+3.55 \times 10^{-3}$) opposite to the negative $\eta$ values from other stations. This anomaly is investigated in Steps 019 and 025, with the following conclusions:
     </p>
     
     <ul>
-        <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = $0.81\sigma$ at the global $|\eta| \approx 4.10 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
+        <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = $0.81\sigma$ at the global $|\eta| \approx 4.16 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
         <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$, vs $0.81\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
         <li>Solar cycle correlation: Step 023 investigates whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip, finding partial consistency with TEP Temporal Shear screening dynamics</li>
         <li>Quality assessment: Step 019 performs comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis, finding no evidence of systematic bias</li>
@@ -845,7 +845,7 @@
         Crucially, excluding Haleakala does not weaken the detection. The clean-subset analysis restricted to Grasse 2010+ and APO (Step 053) -- which drops Haleakala, Matera, and McDonald2 entirely -- yields η = -3.36 × 10⁻⁴ ± 4.63 × 10⁻⁵ (7.25σ cluster-robust), confirming the signal is detectable in the highest-quality data alone. The common-η mixed model with station-specific systematics (Step 014) gives <em>F</em>(4, 25,410) = 1.19, <em>p</em> = 0.31, showing no evidence for station-specific Nordtvedt parameters. The multi-station meta-analysis therefore confirms that the global detection is robust and not driven by any single station.
     </p>
 
-    <h4>3.4.18 Full Nuisance-Parameter Residual Model</h4>
+    <h4>3.4.24 Full Nuisance-Parameter Residual Model</h4>
 
     <p>
         To robustly extract the TEP Nordtvedt signal against systematic effects, the analysis implements a comprehensive nuisance-parameter residual model. The model accounts for station offsets, hardware epoch offsets, secular drift, annual and seasonal terms, and lunar libration effects:
@@ -896,7 +896,7 @@
         stations, which may indicate instrumental systematic effects. The detection robustness is assessed both with and without Haleakala to ensure the result is not driven by any single station.
     </p>
 
-    <h4>3.4.19 Canonical Estimand Hierarchy</h4>
+    <h4>3.4.25 Canonical Estimand Hierarchy</h4>
 
     <p>
         The analysis reports distinct quantities for the Nordtvedt parameter,
@@ -998,7 +998,7 @@
         fit.
     </p>
 
-    <h4>3.4.20 False-Positive Rate Simulation (Step 062)</h4>
+    <h4>3.4.26 False-Positive Rate Simulation (Step 062)</h4>
 
     <p>
         To quantify the exact probability that the observed $\eta$ could arise
@@ -1054,7 +1054,7 @@
         Gaussian-equivalent tail sigma.
     </p>
 
-    <h4>3.4.21 Prediction Interval Coverage and Uncertainty Calibration (Step 064-PI)</h4>
+    <h4>3.4.27 Prediction Interval Coverage and Uncertainty Calibration (Step 064-PI)</h4>
 
     <p>
         To verify that the full-systematic model's uncertainties are
@@ -1116,7 +1116,7 @@
         under-dispersion but on different variance definitions.
     </p>
 
-    <h4>3.4.22 Leave-One-Station-Out Meta-Analysis (Step 072)</h4>
+    <h4>3.4.28 Leave-One-Station-Out Meta-Analysis (Step 072)</h4>
 
     <p>
         To test whether the global detection is driven by a single
@@ -1146,7 +1146,7 @@
         would indicate substantial heterogeneity requiring investigation.
     </p>
 
-    <h4>3.4.23 Bayesian Evidence Cross-Checks (Step 073)</h4>
+    <h4>3.4.29 Bayesian Evidence Cross-Checks (Step 073)</h4>
 
     <p>
         Step 073 complements Step 016 with bandwidth-free synodic-only evidence
@@ -1160,7 +1160,7 @@
         (${\sim}10^{14}$), which inherit prior-volume and curvature assumptions.
     </p>
 
-    <h4>3.4.24 Systematic Sensitivity Beyond the Known List (Step 061)</h4>
+    <h4>3.4.30 Systematic Sensitivity Beyond the Known List (Step 061)</h4>
 
     <p>
         Step 061 extends the catalogued-systematic amplitude ratios and Monte

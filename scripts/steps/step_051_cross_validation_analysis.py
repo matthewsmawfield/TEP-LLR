@@ -49,6 +49,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.config import get_config
 from scripts.utils.statistical_utils import detect_outliers_sigma, robust_regression
+from scripts.utils.upstream_outputs import load_headline_eta
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR, CROSS_VALIDATION_SPLIT_JD
 from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 import numpy as np
@@ -1043,21 +1044,6 @@ def run_cross_validation_analysis():
         resid_rms = float(np.std(df_real["residual_m"].values))
         nrms = float(np.sqrt(np.mean(nuis**2)))
         if nrms > 1e-12 and resid_rms > 0:
-            scale = (0.55 * resid_rms) / nrms
-            nuis *= float(min(1.0, scale))
-        if not np.all(np.isfinite(nuis)):
-            raise RuntimeError("Non-finite nuisance projection in era-varying nuisance synthetic.")
-        df_syn['residual_m'] = signal + noise + nuis
-        return df_syn
-
-    from scripts.utils.upstream_outputs import load_headline_eta
-
-    eta_inject = load_headline_eta()
-    n_trials = 100
-    syn_temporal_m1 = []
-    syn_temporal_m4 = []
-    syn_random_m1 = []
-    syn_random_m4 = []
     syn_loso_m1 = []
     syn_loso_m4 = []
 

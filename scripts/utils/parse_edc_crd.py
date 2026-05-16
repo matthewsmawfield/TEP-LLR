@@ -3,7 +3,7 @@
 Parse EDC CRD format LLR data and compute residuals using skyfield ephemeris.
 """
 
-from scripts.utils.astronomical_utils import compute_elongation
+from scripts.utils.astronomical_utils import compute_elongation, load_skyfield_planets
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 import sys
 from pathlib import Path
@@ -198,9 +198,7 @@ def compute_expected_range_skyfield(df: pd.DataFrame, station_name: str = 'WETL'
         print_status(
             "Loading ephemeris (de440.bsp) for range computation...", "PROCESS")
 
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
-    ephemeris, _eph_path = load_skyfield_planets()
+    eph, ts = load_skyfield_planets()
     ts = load.timescale()
 
     # Station positions (approximate ITRF coordinates)

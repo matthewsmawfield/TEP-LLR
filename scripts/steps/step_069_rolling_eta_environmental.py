@@ -37,6 +37,7 @@ from skyfield.api import load
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.config import get_config
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.utils.astronomical_utils import load_skyfield_planets
 from scripts.utils.statistical_utils import robust_regression, detect_outliers_sigma
 from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warning
 
@@ -58,8 +59,6 @@ _CMB_UNIT = _CMB_UNIT / np.linalg.norm(_CMB_UNIT)
 
 def compute_environmental_projections(jd_array):
     """Compute heliocentric distance, radial velocity, and CMB cos(theta)."""
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
     planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets["earth"]
     sun = planets["sun"]

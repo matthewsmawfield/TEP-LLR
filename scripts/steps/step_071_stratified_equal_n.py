@@ -32,6 +32,7 @@ import pandas as pd
 from skyfield.api import load
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.astronomical_utils import load_skyfield_planets
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.statistical_utils import robust_regression
 from scripts.utils.full_systematic_model import (
@@ -57,8 +58,6 @@ _CMB_UNIT = _CMB_UNIT / np.linalg.norm(_CMB_UNIT)
 
 def compute_env_bins(jd_array, n_bins=5):
     """Compute environmental stratification bins for each observation."""
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
     planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets["earth"]
     sun = planets["sun"]

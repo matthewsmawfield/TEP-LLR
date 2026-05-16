@@ -32,6 +32,7 @@ from skyfield.api import load
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+from scripts.utils.astronomical_utils import load_skyfield_planets
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.statistical_utils import detect_outliers_sigma, robust_regression
@@ -45,9 +46,8 @@ SIDEREAL_MONTH_DAYS = 27.32166
 
 
 def load_ephemeris():
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
-    return load_skyfield_planets(PROJECT_ROOT)
+    eph, ts = load_skyfield_planets(PROJECT_ROOT)
+    return eph, ts
 
 
 def clean_residual_frame(df: pd.DataFrame) -> pd.DataFrame:

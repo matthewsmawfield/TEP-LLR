@@ -28,6 +28,7 @@ import pandas as pd
 from astropy.utils.iers import IERS_B
 from scipy import stats
 from skyfield.api import load
+from scripts.utils.astronomical_utils import load_skyfield_planets
 from scripts.utils.llr_constants import STATION_COORDS, pole_tide_displacement
 from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, set_verbose_mode
@@ -164,8 +165,6 @@ def main():
 
     # Load Moon positions
     print_status("Computing Moon positions for range geometry...", "PROCESS")
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
     planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     moon = planets['moon']
     ts = load.timescale()

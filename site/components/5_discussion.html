@@ -76,7 +76,7 @@
 
     <p>
         The finding is cross-checked across the estimator hierarchy in Section
-        4.15 and the independent spine in Section 4.0. Powered hardware-era
+        4.21 and the independent spine in Section 4.0. Powered hardware-era
         splits and the headline precision-weighted estimand show consistent negative
         $\eta$ values, with no sign reversals among the tests that retain
         adequate phase coverage and $N$.
@@ -142,7 +142,7 @@
         suppression ambiguities.
         Screening of Temporal Shear operates via the continuous spatial
         profile of the time field (Temporal Topology), in which Earth's substantially
-        deeper compactness ($\sim 4.11 \times 10^{-10}$) relative to the Moon
+        deeper compactness ($\sim 4.17 \times 10^{-10}$) relative to the Moon
         ($\sim 0.2 \times 10^{-10}$) produces stronger suppression of Temporal Shear,
         yielding the observed differential coupling.
     </p>
@@ -350,7 +350,7 @@
             observations and entered as a competing partial-regression
             covariate. The solar altitude coefficient was negligible ($p =
             0.281$), and the $\cos(D)$ amplitude persisted after controlling for it
-            (cleaned $\eta = -4.24 \times 10^{-4}$, $p = 7.74 \times 10^{-6}$;
+            (cleaned $\eta = -4.30 \times 10^{-4}$, $p = 7.74 \times 10^{-6}$;
             day/night thermal-bias control robustness check).
         </li>
         <li>
@@ -389,7 +389,7 @@
             heating could produce the observed signal. A formal parameter sweep
             (420 combinations of thermal conductivity 0.1–5.0 W/m·K and dust
             coverage 0–100%) found that the maximum thermal expansion achievable
-            is 1.35 mm, compared to the observed 4.18 mm signal—a 3.1× mismatch.
+            is 1.35 mm, compared to the observed 4.24 mm signal—a 3.1× mismatch.
             Even in the best-case scenario (thermal conductivity = 0.01 W/m·K,
             dust coverage = 100%, $\Delta T = 500$ K), thermal expansion reaches only
             2.24 mm, still 1.8× below the observed signal. The model is
@@ -443,7 +443,7 @@
             <strong>Matched-Window Ephemeris Consistency (Step 045):</strong>
             The concern that ephemeris scatter ($\pm 2.73 \times 10^{-4}$) is inflated by
             comparing mismatched time spans (INPOP19a: 35.5 years vs DE430:
-            4.10 years) is addressed by restricting INPOP19a to the DE430
+            4.16 years) is addressed by restricting INPOP19a to the DE430
             window (2014–2018). On the matched window, cosD-only fits give
             INPOP19a $\eta = -3.62 \times 10^{-4} \pm 3.60 \times 10^{-5}$
             ($10.0\sigma$; matched-window robustness check) and DE430
@@ -505,7 +505,7 @@
         shows heterogeneity ($Q = 12.27$, $p = 0.015$), which is expected because
         per-station cosD-only fits suffer from omitted-variable bias: annual,
         monthly, and thermal terms alias into the cosD coefficient with amplitudes
-        that depend on each station's temporal sampling pattern (Section 3.4.16).
+        that depend on each station's temporal sampling pattern (Section 3.4.22).
         Controlled pooling with a common Nordtvedt parameter and station-specific
         systematics (Step~014; the `common_eta_station_systematics` branch in Step~050)
         yields $\eta = -4.32 \times 10^{-4}$ at $6.40\sigma$, with no evidence for
@@ -524,7 +524,7 @@
         independent evidence consistent with the INPOP19a detection. Section 4.32
         documents that DE430 exhibits baseline-dependent outlier sensitivity
         (36× greater correlation change than INPOP19a despite removing 20× fewer outliers),
-        structurally expected from its shorter 4.10-year span. After
+        structurally expected from its shorter 4.16-year span. After
         appropriate outlier cleaning, the DE430 signal aligns with the INPOP19a
         detection, supporting the robustness of the primary finding. The canonical
         result therefore rests on the INPOP19a ephemeris (35.5-year baseline) with
@@ -542,7 +542,7 @@
         Haleakala underpowered-station diagnostic). Per the
         statistical power criteria in Section 3.1.4, this station is classified
         as <em>underpowered</em>: with 13.8 cm RMS and $N = 737$, its expected
-        SNR at the global $|\eta| \approx 4.10 \times 10^{-4}$ is only
+        SNR at the global $|\eta| \approx 4.16 \times 10^{-4}$ is only
         $0.81\sigma$, below the $3.0\sigma$ powered-detection threshold.
         Haleakala's opposite sign and observed SNR ($2.45\sigma$, vs $0.22\sigma$ expected at the pooled $|\eta| \approx 3.2 \times 10^{-4}$ once phase-truncation variance is accounted for) exceed the noise expectation, but the station remains underpowered for independent detection (expected SNR below the $3\sigma$ threshold).
         Underpowered stations lack the statistical power to independently
@@ -575,9 +575,9 @@
         $R^2$ in temporal and leave-one-station-out splits falsifies the synodic
         carrier. The analysis treats that reading as a category error: the headline
         estimand is the pooled $\cos D$ coefficient under a joint nuisance design
-        (Section~3.4.16), while temporal hold-out asks whether nuisance coefficients
+        (Section~3.4.22), while temporal hold-out asks whether nuisance coefficients
         learned in one hardware era transport chronologically. Step~052 documents severe
-        covariate shift (pre/post-2008 elongation $p = 4.10 \times 10^{-98}$; Matera mean
+        covariate shift (pre/post-2008 elongation $p = 4.16 \times 10^{-98}$; Matera mean
         $|\cos D| = 0.252$ vs APO $0.517$). Step~051 separates three layers: (i) the
         $\cos D$-only model remains mildly predictive on the full-archive temporal split
         (real $R^2_{\mathrm{pred}} \approx +0.006$); (ii) a noise-only synthetic ensemble
@@ -604,7 +604,7 @@
         hold-out on this subset still yields $R^2_{\mathrm{pred}} \approx -0.016$ for the
         full-systematic model, while the $\cos D$-only score is $\approx -8.5 \times 10^{-4}$,
         so most chronological extrapolation loss sits in the nuisance block rather than in
-        rejection of a fixed carrier amplitude. Step 046 (Section 4.14) shows that equal-$N$ balance stress
+        rejection of a fixed carrier amplitude. Step 046 (Section 4.26) shows that equal-$N$ balance stress
         tests lose power below $3\sigma$ even though the full-archive primary
         fit remains significant. Step 054 uses a toy
         orbital model to demonstrate that a synodic cos(D) perturbation of the observed
@@ -749,7 +749,7 @@
         effects. When $v_\parallel$ is orthogonalized against $r$, the residual
         $v_{\parallel\perp}$ has zero correlation with distance and yields a
         highly significant coefficient ($\eta_{v_{\parallel\perp}} = -5.52
-        \times 10^{-5}$, $t = -6.92$, $p = 4.12 \times 10^{-12}$), confirming
+        \times 10^{-5}$, $t = -6.92$, $p = 4.18 \times 10^{-12}$), confirming
         that the $v_\parallel$ channel defined from $\hat{\mathbf{n}}_{\rm CMB}$ is not a mathematical alias of
         heliocentric distance once $r$ is removed. Second, a full five-parameter regression including
         synodic, distance, radial velocity, and CMB orientation terms exposes
@@ -1036,7 +1036,7 @@
         $\sim 2$–$3$ cm RMS precision, refines this historical observation. For the
         headline precision-weighted $\eta = -3.91 \times 10^{-4}$, TEP predicts
         $\delta r = 13|\eta| \approx 5.3$ mm; the cosD-only robustness check
-        ($\eta = -3.17 \times 10^{-4}$) yields $\approx 4.2$ mm
+        ($\eta = -3.17 \times 10^{-4}$) yields $\approx 4.7$ mm
         — both within the ~1 cm upper bound implied by Müller & Nordtvedt's
         residual given the heavy-tailed PMT-era noise floors that dominated the
         1969–1997 dataset.
@@ -1217,7 +1217,7 @@
         LLRE, is anomalously high compared to the long-term average of ~1.7
         cm/yr inferred from tidal rhythmites over 2–3 Gyr (Riofrio 2012;
         *Planetary Science* 2012). At the current rate, the Moon would have
-        coincided with Earth < 2 Gyr ago, conflicting with the accepted ~4.10 Gyr
+        coincided with Earth < 2 Gyr ago, conflicting with the accepted ~4.16 Gyr
         age. Historical literature attributes this 30% discrepancy to North
         Atlantic tidal resonances, though papers explicitly note "significance
         for cosmology and the speed of light"—a connection that was never
@@ -1240,7 +1240,7 @@
     <p>
         A long-standing puzzle in Earth-Moon evolution is that present-day tidal
         dissipation rates, if extrapolated linearly to the past, imply a lunar
-        age of ~1.5 Gyr rather than the accepted ~4.10 Gyr (*Geology* 2016;
+        age of ~1.5 Gyr rather than the accepted ~4.16 Gyr (*Geology* 2016;
         Hansen 1982). The standard resolution—that tidal dissipation was
         significantly weaker in Earth's past—lacks a physical mechanism
         explaining why or how this would occur.
@@ -1334,7 +1334,7 @@
         the work integral over a closed orbit. The Earth-Moon system accumulates
         a non-zero net work per anomalistic cycle due to the heliocentric
         gradient, driving a secular increase in eccentricity. The measured
-        primary parameter $\eta \approx -4.10 \times 10^{-4}$ is the order of
+        primary parameter $\eta \approx -4.16 \times 10^{-4}$ is the order of
         magnitude required by this reading; it is not a separate fitted
         eccentricity solution.
     </p>
@@ -1536,7 +1536,7 @@
         Bayesian model comparison on the synodic-only channel is documented but
         not elevated above the frequentist hierarchy. Step 016 tabulates
         Savage–Dickey ratios under four uniform $\eta$ priors and four KDE
-        bandwidths (Table 4.26.1); the reference-prior Scott estimate is
+        bandwidths (Table 4.8.1); the reference-prior Scott estimate is
         $\mathcal{B}_{\rm SD} \sim 10^{5}$, but the same posterior spans
         $0.12$–$2.9 \times 10^{5}$ in $\mathcal{B}_{\rm SD}$ depending on
         bandwidth alone. Step 073 supplies bandwidth-free cross-checks:
