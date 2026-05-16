@@ -41,7 +41,7 @@ from typing import Dict, List, Tuple
 
 import pandas as pd
 import numpy as np
-from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
+from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning, hat_diagonal_from_qr
 from scipy import stats
 
 from scripts.utils.config import get_config
@@ -340,7 +340,6 @@ def leverage_analysis(residuals: np.ndarray, cos_elong: np.ndarray) -> dict:
     # Hat matrix: H = X(X'X)^(-1)X' using same design matrix as linear_regression
     # (includes intercept column, p = 2 parameters)
     X = np.column_stack([np.ones(n), cos_elong])
-    from scripts.utils.numerics import hat_diagonal_from_qr
     leverage = hat_diagonal_from_qr(X)
 
     # OLS fit for residuals (full model with intercept)

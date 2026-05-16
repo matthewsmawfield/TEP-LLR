@@ -161,7 +161,6 @@ def formal_cooks_distance_excision(df: pd.DataFrame) -> Dict:
     n = len(df)
 
     X = np.column_stack([np.ones(n), cos_elong])
-    from scripts.utils.numerics import hat_diagonal_from_qr
     leverage = hat_diagonal_from_qr(X)
     coeffs, _, _, _ = stable_lstsq(X, residuals)
     with np.errstate(over="ignore", divide="ignore", invalid="ignore"):

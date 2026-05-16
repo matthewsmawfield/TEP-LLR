@@ -1044,6 +1044,21 @@ def run_cross_validation_analysis():
         resid_rms = float(np.std(df_real["residual_m"].values))
         nrms = float(np.sqrt(np.mean(nuis**2)))
         if nrms > 1e-12 and resid_rms > 0:
+            scale = (0.55 * resid_rms) / nrms
+            nuis *= float(min(1.0, scale))
+        if not np.all(np.isfinite(nuis)):
+            raise RuntimeError("Non-finite nuisance projection in era-varying nuisance synthetic.")
+        df_syn['residual_m'] = signal + noise + nuis
+        return df_syn
+
+    from scripts.utils.upstream_outputs import load_headline_eta
+
+    eta_inject = load_headline_eta()
+    n_trials = 100
+    syn_temporal_m1 = []
+    syn_temporal_m4 = []
+    syn_random_m1 = []
+    syn_random_m4 = []
     syn_loso_m1 = []
     syn_loso_m4 = []
 

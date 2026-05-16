@@ -232,7 +232,6 @@ def run_haleakala_simulation(df, verbose=False):
         return {'status': 'FAIL', 'reason': 'Haleakala missing'}
 
     # Apply consistent 6σ outlier cleaning (same as primary pipeline)
-    from scripts.utils.statistical_utils import detect_outliers_sigma
     outlier_mask = detect_outliers_sigma(haleakala['residual_m'].values, sigma_threshold=6.0)
     haleakala_clean = haleakala[~outlier_mask].copy()
     n_removed = int(np.sum(outlier_mask))

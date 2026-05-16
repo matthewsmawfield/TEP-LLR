@@ -41,6 +41,7 @@ import pandas as pd
 from scripts.utils.statistical_utils import linear_regression, robust_regression, detect_outliers_sigma
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
+from scripts.utils.upstream_outputs import load_headline_eta
 from scripts.utils.config import get_config
 
 
@@ -174,10 +175,8 @@ def main():
         "INFO",
     )
 
-    from scripts.utils.upstream_outputs import load_headline_eta
-
-    eta_true = load_headline_eta()
-    print_status(f"Loaded eta_true from Step 050 (precision-weighted WLS): {eta_true:.3e}", "INFO")
+    eta_0, eta_err = load_headline_eta()
+    print_status(f"Loaded eta_true from Step 050 (precision-weighted WLS): {eta_0:.3e}", "INFO")
 
     step_046_path = PROJECT_ROOT / 'results' / 'outputs' / 'step_046_station_balanced_tep.json'
     if not step_046_path.is_file():

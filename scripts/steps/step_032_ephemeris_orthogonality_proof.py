@@ -30,6 +30,7 @@ import numpy as np
 import pandas as pd
 from astropy.timeseries import LombScargle
 from skyfield.api import load
+from scripts.utils.astronomical_utils import load_skyfield_planets
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.statistical_utils import require_step003_eta_ols
 
@@ -50,8 +51,6 @@ def explore_orthogonality():
     D_phase = df['elongation_rad'].values # Earth-Moon-Sun synodic phase
 
     # 2. Compute true Heliocentric Distance
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
     planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets['earth']
     sun = planets['sun']

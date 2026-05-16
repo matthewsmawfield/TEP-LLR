@@ -15,7 +15,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 import json
 import numpy as np
-from scripts.utils.numerics import stable_lstsq
+from scripts.utils.numerics import stable_lstsq, hat_diagonal_from_qr
 import pandas as pd
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
@@ -33,7 +33,6 @@ def compute_cooks_distance(X: np.ndarray, y: np.ndarray) -> np.ndarray:
     mse = np.sum(residuals**2) / (n - p)
 
     # leverage h_ii = sum_j Q[i,j]^2 for reduced QR of X
-    from scripts.utils.numerics import hat_diagonal_from_qr
     leverage = hat_diagonal_from_qr(X)
 
     # Cook's Distance formula

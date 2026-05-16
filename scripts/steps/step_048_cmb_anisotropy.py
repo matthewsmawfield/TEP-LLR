@@ -59,6 +59,7 @@ import pandas as pd
 from scipy import stats
 from skyfield.api import load
 
+from scripts.utils.astronomical_utils import load_skyfield_planets
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.statistical_utils import linear_regression, detect_outliers_sigma
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
@@ -101,8 +102,6 @@ def compute_cmb_projections(jd_array):
         speed_kms : ndarray
             Total orbital speed [km/s]
     """
-    from scripts.utils.astronomical_utils import load_skyfield_planets
-
     planets, _eph_path = load_skyfield_planets(PROJECT_ROOT)
     earth = planets["earth"]
     moon = planets["moon"]
