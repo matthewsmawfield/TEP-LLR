@@ -57,15 +57,15 @@
         quantities for each observation. To eliminate the 0.5% "synodic blurring" 
         inherent in mean-phase approximations, Moon-Sun elongation angles were 
         computed using the Skyfield library with the 
-        DE421 planetary ephemeris. This ensures coordinate 
+        DE440 planetary ephemeris. This ensures coordinate 
         precision at the sub-millimeter level relative to the geocenter. For 
         each observation, the following quantities were extracted:
     </p>
     <ul>
         <li>Residual value: The O-C residual in centimeters</li>
         <li>
-            Moon-Sun elongation: High-precision apparent elongation computed via 
-            Skyfield/DE421
+            Moon-Sun elongation: High-precision apparent elongation computed via
+            Skyfield/DE440
         </li>
         <li>
             Synodic phase: The phase in the lunar synodic cycle (0 = new moon, $\pi$
@@ -733,16 +733,16 @@
     </p>
 
     <p>
-        Step 028: Geometric Precision Validation. To verify that the signal is 
-        tied to physical geometry rather than mathematical approximations, the 
-        analysis recomputed Moon-Sun elongation angles using an independent 
-        ephemeris (DE421) and compared them to the values used in the primary 
-        analysis. The analysis found that employing Skyfield/DE421 indicates that the anomaly follows the physical 
-        geometry rather than being an artifact of the elongation computation method. If the signal were an artifact of the elongation computation, the 
-        precision gain from DE421 would be negligible. Conversely, a genuine 
-        gravitational effect should show enhanced coherence when using true 
-        geometric coordinates. The observed 0.5% gain in signal strength when 
-        employing Skyfield/DE421 indicates that the anomaly follows the physical 
+        Step 028: Geometric Precision Validation. To verify that the signal is
+        tied to physical geometry rather than mathematical approximations, the
+        analysis recomputed Moon-Sun elongation angles using an independent
+        library (Astropy J2000) and compared them to the values used in the primary
+        analysis. The analysis found that employing Astropy J2000 indicates that the anomaly follows the physical
+        geometry rather than being an artifact of the elongation computation method. If the signal were an artifact of the elongation computation, the
+        precision gain from Astropy J2000 would be negligible. Conversely, a genuine
+        gravitational effect should show enhanced coherence when using true
+        geometric coordinates. The observed 0.5% gain in signal strength when
+        employing Astropy J2000 indicates that the anomaly follows the physical
         Earth-Moon-Sun geometry at sub-millimeter scales.
     </p>
 

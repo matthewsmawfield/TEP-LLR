@@ -44,6 +44,7 @@ from scipy import stats
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.config import get_config
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
+from scripts.steps.step_050_corrected_tep_analysis import ar1_gls_regression
 from scripts.utils.statistical_utils import (
     robust_regression, detect_outliers_sigma, cluster_robust_variance
 )
@@ -194,7 +195,6 @@ def main():
     # For comparison: pure AR(1) GLS (no clustering) on same data
     # -----------------------------------------------------------------
     print_status("--- Pure AR(1) GLS (no clustering) for comparison ---", "INFO")
-    from scripts.steps.step_050_corrected_tep_analysis import ar1_gls_regression
     gls_only = ar1_gls_regression(res_c, X_full, names, target_name='cosD', cluster_ids=None)
     print_status(f"  η (AR(1) GLS only) = {gls_only['eta']:.4e} ± {gls_only['eta_error']:.4e} "
                  f"({abs(gls_only['eta'])/max(gls_only['eta_error'], 1e-20):.2f}σ)", "RESULT")

@@ -93,6 +93,7 @@ import numpy as np
 from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from scipy import stats
+from scipy.stats import ortho_group
 from skyfield.api import load
 
 from scripts.utils.config import get_config
@@ -867,7 +868,6 @@ def cmb_falsification_analysis(df, verbose=False):
     # D3–D5. Refined directional null tests
     # ------------------------------------------------------------------
     print_status("═══ D3–D5. Refined directional null tests ═══", "TITLE")
-    from scipy.stats import ortho_group
 
     n_refined = 5000
     local_cone_deg = 30.0

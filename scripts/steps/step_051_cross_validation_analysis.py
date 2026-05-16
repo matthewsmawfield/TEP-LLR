@@ -54,6 +54,7 @@ from scripts.utils.numerics import suppress_scipy_array_api_matmul_runtime_warni
 import numpy as np
 import pandas as pd
 from scipy import stats
+from scipy.stats import percentileofscore
 
 log_dir = PROJECT_ROOT / "logs"
 log_dir.mkdir(parents=True, exist_ok=True)
@@ -1176,7 +1177,6 @@ def run_cross_validation_analysis():
     )
 
     # Statistical comparison via percentile
-    from scipy.stats import percentileofscore
 
     def _compare(real_val, syn_vals, label):
         if np.isnan(real_val) or len(syn_vals) == 0:
