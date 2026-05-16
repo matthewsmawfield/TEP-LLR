@@ -17,8 +17,11 @@ Quality presets (from smallest to largest):
 """
 
 import argparse
+import os
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -53,10 +56,7 @@ def compress_pdf(input_path: str, output_path: str = None, quality: str = "ebook
         output_file = Path(output_path)
         # Check for in-place compression
         if output_file.resolve() == input_file.resolve():
-            import tempfile
-            import shutil
             temp_fd, temp_path = tempfile.mkstemp(suffix=".pdf", dir=input_file.parent)
-            import os
             os.close(temp_fd)
             temp_output = Path(temp_path)
 

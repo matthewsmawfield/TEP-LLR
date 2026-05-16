@@ -15,6 +15,7 @@ from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 import emcee
 from scipy import stats
+from scipy.stats import gaussian_kde
 
 from scripts.utils.bayesian_evidence import (
     ETA_PRIOR_SPECS,
@@ -254,7 +255,6 @@ def run_bayesian_analysis(verbose=False):
     bf_sd_max = ref_row["bf_max"]
     bf_sd_range_ratio = ref_row["bf_range_ratio"]
     bf_sd_gmean = ref_row["bf_geometric_mean"]
-    from scipy.stats import gaussian_kde
     posterior_density_at_zero = float(
         gaussian_kde(eta_samples).evaluate(0.0)[0]
     )

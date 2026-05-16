@@ -30,7 +30,7 @@ if __name__ == "__main__":
     inst_ratio = sys_data["instrumental"]["ratio_required_to_known"]
     tidal_ratio = sys_data["tidal"]["ratio_required_to_known"]
 
-    section_4_4 = """    <h3>4.4 Grasse-Specific Systematic Sufficiency</h3>
+    section_4_4 = r"""    <h3>4.4 Grasse-Specific Systematic Sufficiency</h3>
 
         <p>
             The central critic objection is that the detection could be a
@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     """
 
-    section_4_5 = """    <h3>4.5 Gaussian Process Non-Parametric Extraction</h3>
+    section_4_5 = r"""    <h3>4.5 Gaussian Process Non-Parametric Extraction</h3>
 
         <p>
             To test whether the $\cos(D)$ modulation shape is genuinely sinusoidal
@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
     """
 
-    section_4_6 = f"""    <h3>4.6 Systematic Amplitude Sensitivity</h3>
+    section_4_6 = r"""    <h3>4.6 Systematic Amplitude Sensitivity</h3>
 
         <p>
             Step 061 quantifies how large each known systematic would need to be

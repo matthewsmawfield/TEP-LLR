@@ -20,50 +20,17 @@ from pathlib import Path
 import argparse
 import tempfile
 
+from compress_pdf import compress_pdf as _compress_pdf
+
 
 def compress_pdf(input_path, output_path, quality='ebook'):
-    """Compress PDF using Ghostscript."""
-    quality_settings = {
-        'screen': '/screen',      # 72 dpi
-        'ebook': '/ebook',        # 150 dpi
-        'printer': '/printer',    # 300 dpi
-        'prepress': '/prepress',  # 300 dpi, color preserving
-        'default': '/default'
+    """Compress PDF using Ghostscript (wrapper with legacy return format)."""
+    result = _compress_pdf(input_path, output_path, quality=quality)
+    return {
+        'original_mb': result['original_size'] / (1024 * 1024),
+        'compressed_mb': result['compressed_size'] / (1024 * 1024),
+        'reduction_pct': result['reduction_percent']
     }
-
-    if quality not in quality_settings:
-        raise ValueError(f"Quality must be one of: {', '.join(quality_settings.keys())}")
-
-    gs_quality = quality_settings[quality]
-
-    # Get original size
-    original_size = os.path.getsize(input_path)
-
-    # Compress using Ghostscript
-    cmd = [
-        'gs',
-        '-sDEVICE=pdfwrite',
-        '-dCompatibilityLevel=1.4',
-        f'-dPDFSETTINGS={gs_quality}',
-        '-dNOPAUSE',
-        '-dQUIET',
-        '-dBATCH',
-        f'-sOutputFile={output_path}',
-        input_path
-    ]
-
-    try:
-        subprocess.run(cmd, check=True, capture_output=True)
-        compressed_size = os.path.getsize(output_path)
-        reduction = ((original_size - compressed_size) / original_size) * 100
-
-        return {
-            'original_mb': original_size / (1024 * 1024),
-            'compressed_mb': compressed_size / (1024 * 1024),
-            'reduction_pct': reduction
-        }
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Ghostscript compression failed: {e.stderr.decode()}")
 
 
 def embed_metadata(pdf_path, metadata):

@@ -11,10 +11,12 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 import argparse
+import json
 import pandas as pd
 import numpy as np
 from scripts.utils.numerics import stable_lstsq
 
+from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 
 def analyze_systematics(df, verbose=False, logger=None):
@@ -84,8 +86,6 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
     print_status("Generating Data-Driven Systematic Error Budget (v2: elongation-correlated)...", "TITLE")
     print_status("", "INFO")
 
-    import json
-    from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
     global_rms = df['residual_m'].std()
     global_mean = df['residual_m'].mean()

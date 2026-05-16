@@ -14,8 +14,6 @@ Output format for TEP analysis:
 - date_julian: Julian date
 """
 
-from scripts.utils.astronomical_utils import compute_elongation
-from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 import re
 import sys
 from pathlib import Path
@@ -26,6 +24,9 @@ from astropy.time import Time
 # Add the project root to the Python path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+
+from scripts.utils.astronomical_utils import compute_elongation
+from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 
 
 def parse_de430_file(filepath: Path) -> pd.DataFrame:

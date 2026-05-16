@@ -270,7 +270,7 @@ def permutation_test(residuals: np.ndarray, cos_elong: np.ndarray,
         'n_permutations': n_permutations
     }
 
-def robust_regression(residuals: np.ndarray, cos_elong: np.ndarray) -> Dict:
+def theil_sen_regression(residuals: np.ndarray, cos_elong: np.ndarray) -> Dict:
     n = len(residuals)
     n_samples = TEP_CONFIG["THEIL_SEN_SAMPLES"]
 
@@ -1151,7 +1151,6 @@ def _convert_to_serializable(obj):
 
 def main():
     """Main entry point for step 003 detection analysis."""
-    import argparse
     parser = argparse.ArgumentParser(
         description="Step 004: Advanced TEP Detection Analysis")
     parser.add_argument("--verbose", action="store_true",
@@ -1193,7 +1192,7 @@ def main():
 
     # Run OLS regression
     print_status("Running OLS regression...", "INFO")
-    reg_ols = robust_regression(residuals, cos_elong)
+    reg_ols = theil_sen_regression(residuals, cos_elong)
 
     # Run station-by-station analysis for inter-station consistency
     print_status("Running station-by-station analysis...", "INFO")

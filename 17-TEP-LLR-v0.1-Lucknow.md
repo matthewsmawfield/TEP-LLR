@@ -86,7 +86,7 @@ The predicted amplitude for $\eta \sim 10^{-4}$ is $\sim$1–5 mm, smaller than 
 
 Müller and Nordtvedt (1998) reported an unexplained synodic post-model residual proportional to $\cos(D)$ in 28 years of LLR data. The present sub-centimeter archive allows a cleaner extraction of the same footprint under explicit annual, monthly, and thermal controls.
 
-Standard orbital periods are incommensurate with the synodic month. In the frequency domain, $\cos(D)$ therefore lies outside the classical multi-body mean-motion basis used in static direct-fit ephemerides, and a synodic coupling parameterized with $\eta$ fixed at zero is expected to project into post-fit residuals. Source-level integrator refits that leave $\eta$ free (Section 4.13) supply the decisive dynamical closure; Steps 032, 041, and 054 supply the internal linearized and simulation checks on that channel.
+Standard orbital periods are incommensurate with the synodic month. In the frequency domain, $\cos(D)$ therefore lies outside the classical multi-body mean-motion basis used in static direct-fit ephemerides, and a synodic coupling parameterized with $\eta$ fixed at zero is expected to project into post-fit residuals. Source-level integrator refits that leave $\eta$ free (Section 4.34) supply the decisive dynamical closure; Steps 032, 041, and 054 supply the internal linearized and simulation checks on that channel.
 
 ## 2. Theoretical Framework: TEP and the Nordtvedt Effect
 
@@ -171,7 +171,7 @@ r_\odot}{r_{\rm mean} \cdot e_\oplus} + m_v \cdot \frac{v_r}{\bar{v}_r} \right) 
 
 where $\bar{v}_r$ is the characteristic radial velocity scale ($\approx 0.5$ km/s for Earth's orbit) and $m_v$ is the velocity modulation depth. A joint fit to both $r_\odot$ and $v_r$ determines whether the temporal topology is purely static ($m_v = 0$) or dynamically responsive ($m_v \neq 0$). Step 047 tests this prediction directly, using DE421 ephemeris velocities computed via Skyfield for every LLR observation epoch.
 
-A further TEP-motivated probe uses a *fixed celestial axis* tied to the Planck 2018 dipole as an operational reference: $(l, b) = (264.02^\circ, 48.25^\circ)$ in galactic coordinates, equivalent to $(\alpha, \delta) = (168.14^\circ, -7.22^\circ)$ in J2000 equatorial coordinates, with amplitude $v_{\rm CMB} \approx 369$ km/s for the kinematic dipole. Some scalar-field embeddings single out a large-scale rest frame; the LLR regressions reported here do not, by themselves, establish Lorentz violation or uniqueness of that frame. They test whether residual-channel structure is consistent with anisotropic coupling defined relative to $\hat{\mathbf{n}}_{\rm CMB}$ and with other fixed axes used as controls (Section 4.24.2, Step 055). Two operational predictions tied to $\hat{\mathbf{n}}_{\rm CMB}$ are:
+A further TEP-motivated probe uses a *fixed celestial axis* tied to the Planck 2018 dipole as an operational reference: $(l, b) = (264.02^\circ, 48.25^\circ)$ in galactic coordinates, equivalent to $(\alpha, \delta) = (168.14^\circ, -7.22^\circ)$ in J2000 equatorial coordinates, with amplitude $v_{\rm CMB} \approx 369$ km/s for the kinematic dipole. Some scalar-field embeddings single out a large-scale rest frame; the LLR regressions reported here do not, by themselves, establish Lorentz violation or uniqueness of that frame. They test whether residual-channel structure is consistent with anisotropic coupling defined relative to $\hat{\mathbf{n}}_{\rm CMB}$ and with other fixed axes used as controls (Section 4.33.2, Step 055). Two operational predictions tied to $\hat{\mathbf{n}}_{\rm CMB}$ are:
 
 First, an *annual velocity projection*: Earth's orbital velocity ($\sim 30$ km/s) projects onto the CMB dipole direction with a sinusoidally varying parallel component $v_\parallel(t) = \mathbf{v}_{\rm orb} \cdot \hat{\mathbf{n}}_{\rm CMB}$. The CMB dipole lies at ecliptic longitude $\approx 173^\circ$, offset by approximately $70^\circ$ from the perihelion longitude ($\approx 103^\circ$), making the annual velocity projection phase-shifted relative to the heliocentric distance modulation and therefore statistically distinguishable.
 
@@ -181,7 +181,7 @@ Second, a *monthly orientation anisotropy*: the Earth-Moon line sweeps across th
 
 where $\cos\theta_{\rm EM-CMB} = \hat{\mathbf{r}}_{\rm EM} \cdot \hat{\mathbf{n}}_{\rm CMB}$. Because the Earth-Moon line rotates on a monthly timescale while the synodic signal operates on a 29.5-day period, the two modulations are at different frequencies and can be separated in a joint fit. Step 048 tests both predictions directly.
 
-For the Earth-Moon system, the TEP potential produces a density-dependent effective mass $m_{\rm eff}(\rho)$ that grows with local density (see the TEP framework paper, Paper 0, §4.8), limiting the scalar field range inside massive objects. For a body in the strongly suppressed regime, this translates to a suppressed effective coupling $\alpha_{\rm eff} \ll \alpha_0$, where the degree of suppression scales with the body's surface gravitational potential (see the TEP framework paper, Paper 0, §7). Earth ($\Phi_{\oplus}/c^2 \approx 7 \times 10^{-10}$) experiences stronger Temporal Topology flattening than the Moon ($\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$), giving Earth substantially stronger self-suppression and a smaller effective coupling to $\phi$. This large differential in gravitational compactness — and the resulting differential $\alpha_{\rm eff}$ — provides the physical basis for a Nordtvedt effect in TEP.
+For the Earth-Moon system, the TEP potential produces a density-dependent effective mass $m_{\rm eff}(\rho)$ that grows with local density (see the TEP framework paper, Paper 0, §4.32), limiting the scalar field range inside massive objects. For a body in the strongly suppressed regime, this translates to a suppressed effective coupling $\alpha_{\rm eff} \ll \alpha_0$, where the degree of suppression scales with the body's surface gravitational potential (see the TEP framework paper, Paper 0, §7). Earth ($\Phi_{\oplus}/c^2 \approx 7 \times 10^{-10}$) experiences stronger Temporal Topology flattening than the Moon ($\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$), giving Earth substantially stronger self-suppression and a smaller effective coupling to $\phi$. This large differential in gravitational compactness — and the resulting differential $\alpha_{\rm eff}$ — provides the physical basis for a Nordtvedt effect in TEP.
 
 ## 3. Data and Methods
 
@@ -197,7 +197,7 @@ INPOP19a is a state-of-the-art ephemeris developed by the Paris Observatory that
 
 For cross-ephemeris validation, DE430 residuals from JPL (Folkner et al. 2014) were analysed. The dataset spans 2014–2018. The raw file contains gross outliers (RMS = 26.7 cm); after 6σ-equivalent (MAD-based) cleaning, the RMS drops to 5.8 cm.
 
-The cleaned DE430 dataset exhibits complex behavior that requires careful interpretation. The full dataset shows no significant correlation with $\cos(D)$, while a small number of phase-clustered gross outliers can dominate the correlation statistic. The primary detection therefore relies on the INPOP19a ephemeris (35.5-year baseline) with precision-weighted full-systematic regression $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$ significance ($6.78\sigma$ cluster-robust; all $N = 25{,}445$ observations retained). The unweighted full-systematic OLS on the same sample, reported as a sensitivity upper bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at $6.17\sigma$ ($6.52\sigma$ cluster-robust). Cook's-Distance excision on the full-systematic design ($N = 23{,}837$) is retained only as a secondary leverage diagnostic ($7.82\sigma$ / $8.65\sigma$ cluster-robust). A detailed analysis of the DE430 outlier behavior and statistical validation is presented in Section 4.12.
+The cleaned DE430 dataset exhibits complex behavior that requires careful interpretation. The full dataset shows no significant correlation with $\cos(D)$, while a small number of phase-clustered gross outliers can dominate the correlation statistic. The primary detection therefore relies on the INPOP19a ephemeris (35.5-year baseline) with precision-weighted full-systematic regression $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$ significance ($6.78\sigma$ cluster-robust; all $N = 25{,}445$ observations retained). The unweighted full-systematic OLS on the same sample, reported as a sensitivity upper bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at $6.17\sigma$ ($6.52\sigma$ cluster-robust). Cook's-Distance excision on the full-systematic design ($N = 23{,}837$) is retained only as a secondary leverage diagnostic ($7.82\sigma$ / $8.65\sigma$ cluster-robust). A detailed analysis of the DE430 outlier behavior and statistical validation is presented in Section 4.33.
 
 #### 3.1.3 Data Processing
 
@@ -401,7 +401,7 @@ years to test long-term phase stability
 
 This multi-method approach provides robustness against systematic errors and statistical artifacts.
 
-Three systematic analysis steps directly test the systematic artifact hypothesis. Step 010 tests whether the signal persists after controlling for known systematic variables including temporal trends, seasonal cycles, and station drifts. Step 011 quantifies signal robustness to noise injection and validates detection methodology through signal recovery tests. Step 012 implements five-category robustness validation including subsample replication, station jackknife, and IPW station-balance regression. Step 013 decomposes the pooled fit into station-specific contributions. Detailed results are presented in Section 4.19.
+Three systematic analysis steps directly test the systematic artifact hypothesis. Step 010 tests whether the signal persists after controlling for known systematic variables including temporal trends, seasonal cycles, and station drifts. Step 011 quantifies signal robustness to noise injection and validates detection methodology through signal recovery tests. Step 012 implements five-category robustness validation including subsample replication, station jackknife, and IPW station-balance regression. Step 013 decomposes the pooled fit into station-specific contributions. Detailed results are presented in Section 4.34.
 
 All analyses use fixed random seeds (seed = 42) for reproducibility and are parallelized using multiprocessing (12 workers on M4 Pro).
 
@@ -503,13 +503,13 @@ The data-driven systematic error budget quantifies each component's contribution
 
 To directly test the systematic artifact hypothesis, three systematic analysis steps are implemented:
 
-Step 010: Systematic Control Analysis. This step tests whether the TEP signal persists after controlling for potential systematic variables through partial correlation analysis. Control variables tested include temporal trends, seasonal effects, station-specific time trends, and lunar orbital controls. The critical test regresses all systematic variables simultaneously and recomputes the partial correlation between residuals and cos(elongation). Detailed results are presented in Section 4.19.1.
+Step 010: Systematic Control Analysis. This step tests whether the TEP signal persists after controlling for potential systematic variables through partial correlation analysis. Control variables tested include temporal trends, seasonal effects, station-specific time trends, and lunar orbital controls. The critical test regresses all systematic variables simultaneously and recomputes the partial correlation between residuals and cos(elongation). Detailed results are presented in Section 4.34.1.
 
-Step 011: Noise Injection and Signal Recovery. This step quantifies signal robustness and validates the detection methodology through three tests: noise injection (adding increasing levels of Gaussian noise to determine when the signal disappears), signal recovery (injecting known TEP signals into pure noise to verify pipeline recovery), and detection threshold analysis (computing the minimum detectable $\eta$ at various confidence levels). Detailed results are presented in Section 4.19.2.
+Step 011: Noise Injection and Signal Recovery. This step quantifies signal robustness and validates the detection methodology through three tests: noise injection (adding increasing levels of Gaussian noise to determine when the signal disappears), signal recovery (injecting known TEP signals into pure noise to verify pipeline recovery), and detection threshold analysis (computing the minimum detectable $\eta$ at various confidence levels). Detailed results are presented in Section 4.34.2.
 
-Step 012: Subsample Robustness. Jackknife resampling tests five categories: single subsample replication, multiple iteration stability, station jackknife with underpowered-sample exclusion, station weight sensitivity, and IPW station-balance regression. The low IPW SNR is structurally explained by McDonald2's synodic-phase truncation, which causes dilution in the IPW sum. The precision-weighted regression (Step 029) yields $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$, confirming the signal without Grasse-weight bias. Detailed results are presented in Section 4.19.3.
+Step 012: Subsample Robustness. Jackknife resampling tests five categories: single subsample replication, multiple iteration stability, station jackknife with underpowered-sample exclusion, station weight sensitivity, and IPW station-balance regression. The low IPW SNR is structurally explained by McDonald2's synodic-phase truncation, which causes dilution in the IPW sum. The precision-weighted regression (Step 029) yields $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$, confirming the signal without Grasse-weight bias. Detailed results are presented in Section 4.34.3.
 
-Step 013: Station Decomposition. The pooled regression is decomposed into station-specific $\eta$ contributions to verify that the global negative sign is not driven by a single observatory. Detailed results are presented in Section 4.19.4.
+Step 013: Station Decomposition. The pooled regression is decomposed into station-specific $\eta$ contributions to verify that the global negative sign is not driven by a single observatory. Detailed results are presented in Section 4.34.4.
 
 Step 029: Station Power Analysis and Grasse-Dominance Defense. This step quantifies station-specific detection capability through five-component analysis: (1) computes expected SNR for each station given $N$, RMS, and global $|\eta|$; (2) diagnoses McDonald2's dilution via phase-coverage truncation; (3) cross-validates with precision-weighted regression yielding $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$; (4) indicates Grasse internal chronological split independently detects negative $\eta$ in both halves; (5) shows that stations lacking statistical power (expected SNR $< 3\sigma$) appropriately do not drive the primary detection.
 
@@ -632,7 +632,7 @@ The analysis reports distinct quantities for the Nordtvedt parameter, each servi
 
 The $\eta_{\rm pooled}$ precision-weighted estimand is the headline result reported in this paper. The $\eta_{\rm residual}$ estimand provides a rapid detection diagnostic by regressing the simple $\cos(D)$ model on the raw residuals. The $\eta_{\rm AR(1)}$ estimand tests whether the unweighted full-systematic coefficient survives explicit temporal autocorrelation and cross-station correlation structure. The $\eta_{\rm dynamical}$ estimand approximates, in the published residual channel, the measurement that would be obtained by fitting $\eta$ directly as a dynamical parameter in a full LLR ephemeris fit. Step 056 applies the linearized post-fit extraction to the published INPOP19a and DE430 residual archives under the same full-systematic nuisance design as Step 050, giving $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$; $N = 25{,}445$) on INPOP19a and $\eta = -5.98 \times 10^{-4} \pm 1.19 \times 10^{-4}$ ($5.04\sigma$; $N = 4{,}560$) on DE430, with $\Delta\eta = 1.92 \times 10^{-4} \pm 1.36 \times 10^{-4}$ ($1.41\sigma$). Step 050 provides the Keplerian inclusion proxy on INPOP residuals: after partialing $\{1,\cos M,\sin M\}$, the full-systematic recovery gives $\eta = -4.09 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.22\sigma$); adding the Keplerian terms to the joint full model gives $\eta = -4.54 \times 10^{-4} \pm 6.65 \times 10^{-5}$ ($6.81\sigma$). Steps 041 and 054 add synthetic absorption and toy orbital orthogonality checks. A full source-level dynamical refit with LLR analysis centers (e.g., Paris Observatory, JPL) remains the definitive external confirmation.
 
-**Defense of $\eta_{\rm residual}$ Approach:** Post-fit residuals are produced under published integrations that fix $\eta = 0$, so synodic structure in that channel is an observational pattern that must be cross-checked rather than treated as a closed logical demonstration of new physics. Steps 041, 050, and 054 bound how synodic $\cos(D)$ power behaves in deliberately limited bases: synthetic ephemeris-absorption tests, Keplerian partialing on the residual time series, and a toy Keplerian model indicate when such structure can project into residuals if $\eta$ is not freed at the integrator level and the fitted nuisance basis is incomplete relative to a temporally modulated coupling. Those checks motivate residual-channel projection; they do not exhaust the dynamical parameter space of a full ephemeris. Source-level INPOP or DE430 integrator refits with $\eta$ free remain the decisive external test (Section 4.13). Consistency of the footprint across robust estimators (Theil–Sen, precision weighting, MCMC), hardware eras (Section 4.11), phase-resolved analyses (Section 4.9), and the pooled hierarchy in Section 4.0 supports treating the pattern as a coherent physical candidate rather than an artifact of analysing residuals instead of performing a full dynamical fit.
+**Defense of $\eta_{\rm residual}$ Approach:** Post-fit residuals are produced under published integrations that fix $\eta = 0$, so synodic structure in that channel is an observational pattern that must be cross-checked rather than treated as a closed logical demonstration of new physics. Steps 041, 050, and 054 bound how synodic $\cos(D)$ power behaves in deliberately limited bases: synthetic ephemeris-absorption tests, Keplerian partialing on the residual time series, and a toy Keplerian model indicate when such structure can project into residuals if $\eta$ is not freed at the integrator level and the fitted nuisance basis is incomplete relative to a temporally modulated coupling. Those checks motivate residual-channel projection; they do not exhaust the dynamical parameter space of a full ephemeris. Source-level INPOP or DE430 integrator refits with $\eta$ free remain the decisive external test (Section 4.34). Consistency of the footprint across robust estimators (Theil–Sen, precision weighting, MCMC), hardware eras (Section 4.32), phase-resolved analyses (Section 4.33), and the pooled hierarchy in Section 4.0 supports treating the pattern as a coherent physical candidate rather than an artifact of analysing residuals instead of performing a full dynamical fit.
 
 #### 3.4.14 False-Positive Rate Simulation (Step 062)
 
@@ -726,9 +726,9 @@ Recommended read order for §4.
 | 4 | 4.3 | Station-balance power stress (Step 046) |
 | 5 | 4.4–4.10 | Station-specific systematic falsification; core regression and per-station detail |
 | 6 | 4.11 | Hardware epochs |
-| 7 | 4.12, 4.13 | DE430 comparison; linearized post-fit $\eta$ extraction (Step 056) |
-| 8 | 4.8.5, 4.14–4.31 (incl. 4.30.1) | Uncertainty calibration (Step 064-PI); systematics, CV / nuisance transport, clean subset, orthogonality simulations |
-| 9 | 4.24.* | Conditional CMB / heliocentric joint layer |
+| 7 | 4.15, 4.16 | DE430 comparison; linearized post-fit $\eta$ extraction (Step 056) |
+| 8 | 4.8.5, 4.17–4.34 (incl. 4.30.1) | Uncertainty calibration (Step 064-PI); systematics, CV / nuisance transport, clean subset, orthogonality simulations |
+| 9 | 4.27.* | Conditional CMB / heliocentric joint layer |
 
 ### 4.0 Independent Evidence Spine
 
@@ -749,15 +749,6 @@ Four independent synodic tests converge before the station-by-station narrative:
 
 A fifth strand—strong corroborative dynamical structure in the same residual channel—is developed in Sections 4.24.1–4.24.2 (read order 9). After the synodic fit is fixed, heliocentric radial velocity (Step 047) and CMB dipole orientation (Step 048) improve the joint model strongly ($\Delta\text{AIC} = -119.2$; $F(1, 25{,}440) = 121.49$, $p = 1.1 \times 10^{-16}$), and Step 055 excludes aliasing, multicollinearity, and permutation artifacts for the orientation term. Sky-scrambling Monte Carlo (50,000 draws) is only marginal ($p_F \approx 0.095$; correlation-matched $p_F \approx 0.264$), while a synodic phase null rejects chance alignment ($p_{F,{\rm eff}} \approx 6 \times 10^{-4}$). A dual-axis fit (test H) shows galactic and Planck orientation predictors are $98.4\%$ collinear and do not form two independent channels when fit together. Step 055 is scored as 4/5 diagnostics: strong directional-anatomy and phase-coupling support, not proof of a unique CMB-frame origin. The Planck-axis joint layer is therefore not a replacement estimator for the headline $\eta$, but it is retained as corroborative fixed-sky structure on the same residual channel. DE430 fragility (Section 4.12) is an independent cross-ephemeris replication of the INPOP19a headline estimand.
 
-![Synodic modulation of LLR O-C residuals versus lunar elongation angle D, showing the cos(D) correlation consistent with the TEP Nordtvedt prediction.](figures/fig_01_synodic_modulation.png)
-
-**Figure 1.** Synodic modulation of LLR O-C residuals
-versus lunar elongation angle $D$. The correlation with
-$\cos(D)$ (red curve) is consistent with the TEP Nordtvedt
-prediction $\eta \approx -3.9 \times 10^{-4}$. Residuals are
-binned in $15^{\circ}$ elongation intervals; error bars show
-the standard error of the mean in each bin.
-
 ### 4.1 Multiple-Testing Consolidation
 
 The pipeline reports 51 significance measures, of which four are treated as independent hypotheses and 47 as sensitivity analyses on the same synodic hypothesis (including 26 Step 061 era$\times$station$\times$lunation grid cells and the blind year hold-out, registered under category `interaction_grid` or `validation`). Bonferroni and Benjamini–Hochberg correction applied only to the independent set leave the precision-weighted full-systematic headline estimand at $6.75\sigma$ and $6.75\sigma$ respectively, and the unweighted full-systematic OLS sensitivity bound at $5.95\sigma$ and $6.06\sigma$. Station-level and diagnostic regressions are not multiplied into the headline $\eta$ claim.
@@ -773,15 +764,6 @@ Cross-Station Prediction Validation. A strong test of signal authenticity is whe
 Precision-weighted regression (robustness check). To consolidate multi-station data without manual station excision, precision-weighted regression (weighting by inverse station variance) provides a cross-observatory diagnostic. This method yields $\eta_{\rm WLS} = -3.21 \times 10^{-4} \pm 5.12 \times 10^{-5}$ at $6.27\sigma$ (precision-weighted robustness check). The precision-weighted approach naturally down-weights low-precision stations without manual intervention: Haleakala (13.8 cm RMS, N=737), McDonald2 (severe phase truncation), and Matera are automatically assigned lower weights due to their higher variance, while high-precision stations (Grasse, APO) dominate the fit. The weighting is determined objectively by measurement precision, not subjective judgment. The resulting negative estimate agrees with the canonical full-systematic hierarchy and shows that low-precision station noise is not required to generate the signal, while the explicit Step 029/059 warnings retain the remaining Grasse-leverage risk.
 
 With the single-station critique examined under the estimator hierarchy above, the analysis proceeds to the full correlation analysis.
-
-![Station-specific regression estimates for the Nordtvedt parameter eta across all LLR observatories.](figures/fig_02_station_decomposition.png)
-
-**Figure 2.** Station-specific regression estimates
-for $\eta$ (cosD-only OLS). Grasse (France) dominates the
-precision-weighted detection, while APO (USA) contributes
-independent consistent evidence. McDonald2 and Haleakala are
-underpowered by design. Error bars are $1\sigma$ OLS standard
-errors.
 
 ### 4.3 Station-Balanced TEP Stress Test
 
@@ -884,17 +866,6 @@ To test whether the $\cos(D)$ modulation shape is genuinely sinusoidal or merely
 
 The GP recovers amplitude $1.13$ cm at phase $232.3^{\circ}$, corresponding to $\eta_{\rm GP} = -5.32 \times 10^{-4}$. Shape fidelity to a pure sinusoid is excellent: $R^2 = 0.985$ on the sine-component projection. The GP amplitude is $67.5\%$ larger than the parametric OLS estimate ($\eta_{\rm OLS} = -3.18 \times 10^{-4}$), consistent with subsampling variance across the 48-bin representation. The key result is that the non-parametric model confirms a coherent periodic structure locked to the synodic phase, not an arbitrary shape that happens to correlate with $\cos(D)$.
 
-![Gaussian Process non-parametric extraction of the synodic modulation in 48 elongation bins, overlaid with the parametric sinusoidal fit.](figures/fig_03_gp_extraction.png)
-
-**Figure 3.** Gaussian Process non-parametric
-extraction (Step 060) in 48 elongation bins. The GP mean
-(black points with $1\sigma$ uncertainty band) recovers a
-coherent periodic structure locked to the synodic phase.
-The dashed red curve shows the parametric sinusoidal fit
-($R^2 = 0.985$ on the sine-component projection), confirming
-that the modulation is genuinely sinusoidal rather than an
-arbitrary non-sinusoidal artifact.
-
 ### 4.6 Systematic Amplitude Sensitivity
 
 Step 061 quantifies systematic risks to the detection. Comparisons in this section use the full-systematic OLS sensitivity estimand ($\eta = -4.06 \times 10^{-4}$) for like-with-like Monte Carlo and hold-out tests; the primary headline remains the precision-weighted full-systematic result ($\eta = -3.91 \times 10^{-4}$ at $6.94\sigma$; Step 050).
@@ -902,16 +873,6 @@ Step 061 quantifies systematic risks to the detection. Comparisons in this secti
 Step 061 first quantifies how large each known systematic would need to be to fully explain the observed $|\eta| = 4.06 \times 10^{-4}$. The required systematic amplitude is $0.53$ cm. The smallest exclusion ratio is $1.5\times$ (ephemeris differences); atmospheric, thermal, instrumental, and tidal effects require $6.6\times$, $9.5\times$, $54.0\times$, and $57.9\times$ their known amplitudes respectively. Every known systematic is too small by at least a factor of $1.5$.
 
 Monte Carlo falsification (2,000 deterministic simulations per systematic) injects each known systematic at its observed amplitude as the sole signal, fits the full-systematic model including $\cos(D)$, and counts how often $|\eta| \geq$ observed. For every systematic, the fraction is $0.0\%$; no known systematic, acting alone at its observed amplitude, produces a spurious $|\eta|$ as large as the observed value. The systematic-only simulations cluster at $|\eta| \sim 5 \times 10^{-5}$, well below the observed $4.06 \times 10^{-4}$. This rules against the modeled known-systematic-only explanations, while leaving unmodeled or coupled systematics as residual risk.
-
-![Required amplitude multipliers for known systematic effects to fully explain the observed Nordtvedt parameter magnitude.](figures/fig_04_systematic_sensitivity.png)
-
-**Figure 4.** Systematic-amplitude sensitivity
-(Step 061). Bars show the multiplicative factor by which each
-known systematic would need to be amplified to fully explain
-the observed $|\eta| = 4.06 \times 10^{-4}$. The smallest
-exclusion is $1.5\times$ (ephemeris differences); all other
-systematics require amplification of $6.6\times$ or greater,
-far exceeding their known physical bounds.
 
 #### 4.6.1 Adversarial nuisance search (beyond the known list)
 
@@ -929,7 +890,7 @@ The dataset is partitioned into three eras (pre-1990, 1990s, post-2000), five st
 
 Twenty random partitions hold out 20% of calendar years ($\approx 7$ years per split). On the training years, only the six nuisance terms of the full-systematic model are fit (no $\cos D$). On held-out years, train nuisances are subtracted and $\eta$ is estimated from $\cos(D)$ alone. The inverse-variance combined blind estimate is $\eta = -3.66 \times 10^{-4} \pm 2.56 \times 10^{-5}$ ($14.3\sigma$), consistent with the in-sample full-systematic OLS sensitivity bound ($\eta = -4.06 \times 10^{-4}$). Individual splits show scatter (15 of 20 replicates negative; 5 positive), but the combined blind estimate is stable and significant. The synodic signal is therefore not an artifact of fitting $\cos(D)$ and nuisances on the same years.
 
-### 4.7 Correlation Analysis
+### 4.10 Correlation Analysis
 
 The Pearson correlation coefficient between the residuals and $\cos(D)$ is computed for the same **6σ-equivalent (MAD-based) cleaned** combined sample used for the primary OLS estimand ($N = 25{,}445$; Step 003). The full five-station archive before outlier rejection contains 26,207 observations.
 
@@ -948,7 +909,7 @@ Statistical vs. Practical Significance. The small $r^2$ value indicates that the
 
 In precision LLR metrology, where systematic noise floors dominate individual shots, the detection of such sub-centimeter phase-locked signals requires large-scale integration of the standard error of the mean.
 
-### 4.8 Kinematic Signal Extraction and Robust Regression
+### 4.11 Kinematic Signal Extraction and Robust Regression
 
 The data are fit to the model $R = A \cos(D) + \epsilon$, where $R$ is the residual, $A$ is the amplitude, and $\epsilon$ is noise. Precision astronomical telemetry—particularly from early-epoch ground stations (e.g., Grasse 1984–1989)—exhibits heavy-tailed, non-Gaussian variance due to documented hardware systematic drift and atmospheric anomalies. The headline Nordtvedt extraction is therefore the precision-weighted full-systematic regression in Step 050: every retained shot ($N = 25{,}445$) enters with inverse station-RMS weights and cluster-robust standard errors on the $\cos D$ coefficient, so high-variance hardware eras are down-weighted without deleting rows. Unweighted full-systematic OLS on the same design is reported as a sensitivity upper bound. When the focus shifts to residual correlation structure in the unweighted row, Step 067 supplies cluster-robust standard errors combined with AR(1) pre-whitening. Robustness is further checked by a weighted biweight M-estimator (Step 068), Student-t MCMC, Theil-Sen, and naïve cosD-only OLS.
 
@@ -988,7 +949,7 @@ The synodic significance rises from $5.25\sigma$ ($\cos D$-only) to $6.17\sigma$
 
 **Canonical estimator consensus (Step 040).** The headline precision-weighted estimate is $\eta = -3.91 \times 10^{-4}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust). It is bracketed on the same cleaned INPOP19a sample by unweighted full-systematic OLS $\eta = -4.06 \times 10^{-4}$ ($6.17\sigma$; $6.52\sigma$ cluster-robust; sensitivity upper bound), Cook's-Distance-excised full-systematic OLS $\eta = -3.87 \times 10^{-4}$ ($7.82\sigma$; leverage diagnostic), naïve $\cos D$-only OLS $\eta = -3.18 \times 10^{-4}$ ($5.25\sigma$), Cook's-distance leverage-excised cosD-only OLS $\eta = -3.31 \times 10^{-4}$ ($5.65\sigma$; $N = 25{,}176$), full-model AR(1) GLS $\eta = -4.45 \times 10^{-4}$ ($4.51\sigma$), weighted biweight M-estimator $\eta = -3.64 \times 10^{-4}$ ($9.15\sigma$ cluster-robust; Step 068), and Theil-Sen $\eta = -2.94 \times 10^{-4}$ (known to be biased toward zero under heteroskedasticity). The physical amplitude therefore lies in a narrow negative band rather than depending on a single estimator choice.
 
-#### 4.8.2 Robustness Checks and Diagnostic Tests
+#### 4.11.2 Robustness Checks and Diagnostic Tests
 
 To quantify leverage on the heavy-tailed LLR telemetry, Cook's distance with threshold $D > 4/n$ is evaluated on both the cosD-only and the full-systematic designs. On the full-systematic row, excising 1,608 structurally unstable high-leverage points (dominated by early-epoch noise) returns the secondary diagnostic quoted above and matches the headline sign.
 
@@ -1006,13 +967,13 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030 leverage
 
 To test consistency across independent observatories and correctly account for per-station noise, further robust analysis (including precision-weighting) is provided in Sections 4.16 and 4.24.5.
 
-#### 4.8.3 False-Positive Rate Simulation (Step 062)
+#### 4.11.3 False-Positive Rate Simulation (Step 062)
 
 To quantify the exact probability that the observed $\eta$ could arise from correlated noise under the GR null, a parametric bootstrap simulation was performed (Step 062). The procedure: (1) fit the full-systematic model to the 6σ-cleaned INPOP19a residuals; (2) extract the AR(1) noise parameters ($\rho = 0.413$, $\sigma_\epsilon = 5.59$ cm); (3) generate 10,000 synthetic datasets under $\eta = 0$ with identical $\cos D$ structure, station composition, and AR(1) temporal correlation; (4) re-fit the full-systematic model to each synthetic dataset and record the recovered $\eta$.
 
 Results: the null distribution of $\eta$ is centred at $2.0 \times 10^{-6}$ (consistent with zero) with standard deviation $1.01 \times 10^{-4}$. The observed $|\eta_{\rm obs}| = 4.06 \times 10^{-4}$ exceeds *every* one of the 10,000 null realisations. The exact false-positive rate is therefore $p < 1/10{,}000 = 1.0 \times 10^{-4}$, with a 95% conservative upper bound of $3.0 \times 10^{-4}$. Expressed as a Gaussian-equivalent tail probability, this corresponds to $>4.0\sigma$. This directly answers: under the exact noise model and systematic structure of the data, chance would produce a signal this strong fewer than once in 10,000 trials.
 
-#### 4.8.4 Outlier-Threshold Sensitivity Sweep (Step 063)
+#### 4.11.4 Outlier-Threshold Sensitivity Sweep (Step 063)
 
 To verify that the $\eta$ signal is not an artifact of the 6σ MAD cleaning threshold chosen in Step 001, the full-systematic OLS regression was repeated across a 3σ–10σ MAD sweep (Step 063), mirroring the DE430 robustness check (Step 006b). All eight thresholds recover a negative $\eta$ with stable central values:
 
@@ -1034,7 +995,7 @@ To verify that the $\eta$ signal is not an artifact of the 6σ MAD cleaning thre
 
 The total $\eta$ range across the entire sweep is only $6.2 \times 10^{-5}$, or roughly one standard error. The sign is negative at every threshold, and the bootstrap 95% CI on the 6σ sample is $[-4.23 \times 10^{-4}, -2.12 \times 10^{-4}]$, excluding zero. A permutation test (10,000 shuffles) on the 6σ-cleaned data returns $p < 10^{-4}$ (zero shuffles produced $|\eta| \ge |\eta_{\rm obs}|$). The phase-bin $\chi^2$ for outlier distribution (8 bins) is 18.31 ($p = 4 \times 10^{-4}$), confirming that outliers are not uniformly distributed across elongation, but this structure does not affect the sign stability of the signal. The detection is therefore robust to outlier-removal threshold choice.
 
-#### 4.8.5 Prediction Interval Coverage and Uncertainty Calibration (Step 064-PI)
+#### 4.11.5 Prediction Interval Coverage and Uncertainty Calibration (Step 064-PI)
 
 A prediction-interval coverage test was performed on the 6σ-cleaned INPOP19a full-systematic fit ($N = 25{,}445$; Step 064-PI, `step_064_prediction_coverage.py`). Using published per-shot uncertainties $\sigma_m$, observed coverage was:
 
@@ -1064,7 +1025,7 @@ This $\chi^2_{\rm red} = 0.48$ is distinct from the Birge-regression statistic $
 
 Step 064-PI ties to the abstract as follows: observed prediction-interval coverage exceeds nominal levels because errors are conservative, not anti-conservative. The $6.94\sigma$ headline uses regression $\sigma_\eta$ under conservative published $\sigma$; bootstrap and conformal brackets additionally encode five-station sampling variability. The LOSO conformal 95% band excludes $\eta = 0$; the station bootstrap band is wider and nearly touches zero at its upper end. Leave-one-station-out meta-analysis (Step 072), inverse-variance combination of the four powered exclusions, and Figure 5 are reported in Section 4.2.
 
-### 4.9 Differential Analysis
+### 4.12 Differential Analysis
 
 To provide an independent test that does not rely on the specific functional form of the correlation, a differential analysis compares residuals at new moon (elongation $|D| < 0.5$ rad) versus full moon (elongation $|D - \pi| < 0.5$ rad):
 
@@ -1088,13 +1049,13 @@ A balanced analysis with downsampling to N = 500 per bin yields $\eta = -7.55 \t
 
 The consistency between the differential analysis and the full correlation analysis—both detecting negative $\eta$ with comparable magnitude—suggests that the finding is not dependent on the specific binning or functional form chosen. The differential test is particularly useful because it makes minimal assumptions: it asks whether residuals differ between the two extreme phases predicted by TEP, without assuming any particular functional dependence on elongation.
 
-### 4.10 Station-by-Station Consistency
+### 4.13 Station-by-Station Consistency
 
 Tables 1 and 2 report two distinct statistical quantities for each LLR station and must not be confused. Table 1 gives the regression estimates of the Nordtvedt parameter $\eta$ (a property of the Earth-Moon orbit, not the observatory). Table 2 gives the Pearson correlation between the residuals and $\cos D$, together with phase-coverage and noise diagnostics. The p-value in Table 2 tests the correlation $r(R, \cos D)$; the SNR in Table 1 is $\eta / \sigma_\eta$ from the OLS fit. They are different test statistics and are presented separately.
 
 In practice, extracting an $\eta \sim 10^{-4}$ signal requires deep observation counts and sub-decimeter precision. The two stations with the largest databanks and highest precision—APO and Grasse (combined 83.9% of observations)—both yield negative $\eta$ from the regression fit. Grasse alone achieves conventional statistical significance ($\text{SNR} = 4.97\sigma$). APO falls just short at $2.77\sigma$. Three stations are underpowered: Matera ($N = 346$, expected SNR = $1.24\sigma$); McDonald2 ($N = 3,139$, severe phase truncation, mean $\cos D = -0.316$); and Haleakala (1984–1990, $N = 737$, 13.8 cm RMS, expected SNR = $0.81\sigma$). Haleakala's measured $\eta = +3.55 \times 10^{-3}$ is opposite in sign to the powered stations and is consistent with a noise fluctuation at its $2.45\sigma$ precision level. Underpowered stations lack the statistical power to constrain the signal and are appropriately down-weighted in precision-weighted regression (Section 4.24.5) while retained for validation.
 
-#### 4.10.1 Haleakala Audit
+#### 4.13.1 Haleakala Audit
 
 The Haleakala station is classified as *underpowered* on objective statistical power criteria (sample size, precision, and phase coverage). Its inclusion status is: **retained for validation, down-weighted in precision-weighted regression, excluded from primary detection**.
 
@@ -1131,7 +1092,7 @@ The Haleakala station is classified as *underpowered* on objective statistical p
 
 *Stations are classified as powered* or *underpowered* per the statistical power criteria in Section 3.1.4 (expected SNR $\geq 3\sigma$ at the measured global $|\eta|$, adequate phase coverage). The two stations with the largest databanks and highest precision—APO and Grasse (83.9% of all observations)—both yield negative $\eta$ from the regression fit. Grasse achieves conventional statistical significance ($\text{SNR} = 4.97\sigma$); APO falls just short at $2.77\sigma$. Three stations are underpowered: Matera (expected SNR = $1.24\sigma$); McDonald2 (severe phase truncation, mean $\cos D = -0.316$); Haleakala (expected SNR = $0.81\sigma$, 13.8 cm RMS). Haleakala's opposite-sign $\eta = +3.55 \times 10^{-3}$ is consistent with noise fluctuation at its $2.45\sigma$ precision level. Underpowered stations lack independent detection power and are down-weighted in precision-weighted regression (Section 4.24.5) while retained for validation. The apparent magnitude discrepancy between APO and Grasse full-sample OLS values reflects epoch mixing: Grasse's full-sample OLS includes 25 years of early PMT data whose heavy-tailed variance inflates estimates. When restricted to the modern era (2009–2019), both stations converge to $1.0\sigma$ agreement. Cross-station validation: APO's fitted amplitude predicts Grasse residuals with $r = 0.0357$ ($p = 6.82 \times 10^{-7}$). Step 007 (ephemeris meta-analysis) combines INPOP19a and DE430 via inverse-variance weighting with baseline-year weighting (97% INPOP19a, 3% DE430). Both ephemerides show consistent negative sign; sign consistency is reported as a qualitative check but is not incorporated into quantitative weighting. The Step 007 JSON field `snr_total` adds a conservative ephemeris-difference term to the combined formal error and is *not* a headline discovery statistic; headline inference remains in Step 050 (precision-weighted full-systematic and cluster-robust estimands).
 
-### 4.11 Hardware Epoch Analysis
+### 4.14 Hardware Epoch Analysis
 
 A critical test for distinguishing physical signals from instrumental systematics is the stability of the Nordtvedt parameter across independent hardware epochs. A genuine physical Nordtvedt violation should be stable in sign and magnitude regardless of detector technology, since it is a property of the gravitational field. Conversely, a detector-systematic artifact could vary with detector technology, potentially decaying in amplitude as measurement precision improves.
 
@@ -1162,7 +1123,7 @@ The proper test for hardware-era consistency uses the full systematic model, not
 
 The $\chi^2/\mathrm{dof}$ for epoch-to-epoch variation is 3.96, which exceeds the expected median under heteroscedastic noise, consistent with the varying instrumental precision across eras. The amplitude scatter across epochs positively correlates with per-epoch RMS ($r = 0.946$) in the $\cos D$-only analysis.
 
-### 4.12 Comparison with DE430
+### 4.15 Comparison with DE430
 
 Cross-ephemeris validation was performed on DE430 residuals from JPL (Folkner et al. 2014; 4,597 observations, 2014–2018). The raw DE430 file contains gross outliers that raise the RMS to 26.6 cm; after standard $6\sigma$ MAD outlier cleaning (removing 37 observations, 0.8%), the RMS drops to 5.6 cm.
 
@@ -1170,15 +1131,15 @@ The DE430 dataset exhibits baseline-dependent structure characteristic of its sh
 
 DE430 provides independent cross-ephemeris evidence consistent with the INPOP19a detection. Its 36× greater correlation change per outlier removed (despite 20× fewer removals than INPOP19a) reflects the structural sensitivity of a 4.5-year baseline to phase-clustered gross errors. The primary detection therefore relies on the INPOP19a ephemeris (35.5-year baseline) with full-systematic OLS $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at $6.17\sigma$ significance, and cluster-robust $\eta = -4.06 \times 10^{-4}$ at $6.52\sigma$. Frequency-domain orthogonality tests, the ephemeris-absorption simulation, and the linearized Step 056 extraction (Section 4.13) indicate why a synodic $\cos(D)$ coupling of this magnitude is expected to project into post-fit residuals when static Keplerian solvers fix $\eta = 0$; source-level integrator refits with $\eta$ free remain the definitive dynamical closure.
 
-### 4.13 Linearized Post-Fit η Extraction
+### 4.16 Linearized Post-Fit η Extraction
 
 Step 056 estimates the Nordtvedt parameter in the linearized LLR observation model $\delta r \approx \eta A\cos D + \text{systematics}$, with $A = 13$ m, applied directly to the published INPOP19a and DE430 post-fit residual archives. On the cleaned INPOP19a sample ($N = 25{,}445$), the linearized post-fit extraction gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$). On the DE430 archive ($N = 4{,}560$), the same extraction gives $\eta = -5.98 \times 10^{-4} \pm 1.19 \times 10^{-4}$ ($5.04\sigma$), with $\Delta\eta = 1.92 \times 10^{-4} \pm 1.36 \times 10^{-4}$ ($1.41\sigma$). On the cleaned INPOP19a archive, the open Gauss–Newton update converges in one iteration to the Step 050 full-systematic estimate, confirming algebraic equivalence between the linearized post-fit extraction and the primary residual regression. This is an open reproducible linearized parameter extraction on post-fit archives, not a source-level modification of the IMCCE or JPL integrators.
 
-### 4.14 Physical Interpretation
+### 4.17 Physical Interpretation
 
 The extracted baseline limit of $\eta \approx -4.5 \times 10^{-4}$ suggests a violation of the Strong Equivalence Principle at the $10^{-4}$ level. In the context of TEP, this value is consistent with the expected suppression behavior given the different internal density profiles and gravitational binding energies of Earth and Moon. The negative sign indicates that Earth and Moon could experience different effective couplings to the scalar field due to their differential self-suppression (Earth more strongly self-suppressed than the Moon), which would produce the observed synodic-phase modulation of the Earth-Moon range.
 
-### 4.15 Robustness and Systematic Error Analysis
+### 4.18 Robustness and Systematic Error Analysis
 
 To assess the robustness of the finding, comprehensive systematic error analyses were performed using multiple independent analysis families. Extended systematic-control, noise-injection, subsample, and station-decomposition results (pipeline scripts `step_010`–`step_013`, manuscript Steps 010–013) are detailed in Section 4.19. The key results are:
 
@@ -1266,7 +1227,7 @@ Table 2: Data-driven systematic error budget. Combined specific-measurement syst
 | Tidal modeling | 0.02 | Cos(2*elongation) harmonic amplitude in residuals |
 | Thermal expansion | 0.53 | Diurnal (24-hr) sinusoidal amplitude in detrended residuals |
 
-#### 4.15.2 Systematic Projection Analysis
+#### 4.18.2 Systematic Projection Analysis
 
 The total RMS of systematic sources (1.16 cm) conflates the *noise* contribution (which broadens error bars) with the *bias* contribution (which shifts the fitted slope). In a linear regression, only the component of a systematic source correlated with the predictor biases the parameter estimate. For $\eta$, the systematic bias is:
 
@@ -1287,7 +1248,7 @@ Table 2b: Cos(elongation)-projected systematic bias. The total RMS of each sourc
 
 The combined projected non-ephemeris systematic ($\pm 7.55 \times 10^{-5}$) is *more than 10× smaller* than the total RMS (1.16 cm). This resolves the apparent tension: the atmospheric, instrumental, tidal, and thermal systematics do not bias $\eta$ because their temporal structure is orthogonal to the synodic signal.
 
-#### 4.15.3 Phase-Locked Differential Analysis
+#### 4.18.3 Phase-Locked Differential Analysis
 
 An independent confirmation that cancels *all* common-mode systematics (ephemeris, tides, thermal, instrumental) by construction:
 
@@ -1311,11 +1272,11 @@ The phase-locked differential uses a different estimator (mean difference) from 
 
 Systematic errors do not correlate with synodic phase in the manner observed. The station-by-station analysis shows that the two stations with sufficient data (APO and Grasse) both detect the signal in the expected direction, suggesting the finding is robust across independent observatories.
 
-### 4.16 Power and Sensitivity Analysis
+### 4.19 Power and Sensitivity Analysis
 
 A power analysis determines the minimum detectable Nordtvedt parameter given the data precision, sample size, and the empirical spread of the predictor $x=\cos D$. For $N = 26{,}207$ observations, residual RMS = 9.5 cm, and $\sigma_{\cos D} = 0.491$, mapping correlation to slope via $r \approx A\,\sigma_{\cos D}/\sigma_{\rm residual}$ implies a $3\sigma$ minimum detectable amplitude $A_{\min} \approx 3\sigma_r\,\sigma_{\rm residual}/\sigma_{\cos D} = 0.36$ cm, corresponding to $\eta_{\min} \approx 2.76 \times 10^{-4}$. The established baseline extraction of $\eta \approx -4.5 \times 10^{-4}$ remains above this threshold. At $\alpha = 0.05$, the power to detect $\eta = 3\times 10^{-4}$ is $\approx 90\%$, rising to $\approx 99.97\%$ for $\eta = 5\times 10^{-4}$.
 
-### 4.17 Temporal Evolution and Synodic Phase Coherence
+### 4.20 Temporal Evolution and Synodic Phase Coherence
 
 To evaluate temporal stability, testing must confront the heteroscedastic nature of multiple laser ranging epochs spanning 35 years. Standard uniform variance assumptions across 7 temporal bins yield $\chi^2 = 198.9$ with 6 degrees of freedom ($p < 0.001$, $\chi^2$/dof $\approx 33$), flagging significant empirical bin-to-bin variation that necessitates a high-resolution hardware audit.
 
@@ -1327,7 +1288,7 @@ A noise artifact would wander randomly in orbital phase as instrumentation chang
 
 Yet across the powered hardware eras, the underlying signal maintains sign-consistent negative $\eta$ (Step 030: 6/7 cosD-only epochs negative; one pre-SPAD epoch non-significant and positive). A weighted regression confirms zero secular drift over time ($p = 0.64$).
 
-### 4.18 Systematic Falsification Summary
+### 4.21 Systematic Falsification Summary
 
 The correlation coefficient is small ($r = -0.0329$, $r^2 \approx 0.0011$ on the 6σ-cleaned primary sample), reflecting the expected variance fraction for a sub-centimetre gravitational modulation in 9.5 cm RMS noise. As discussed in Section 4.7, this small effect size is expected for a subtle gravitational modulation at the edge of detection sensitivity and does not necessarily weaken the headline precision-weighted detection ($6.94\sigma$). The Pearson correlation diagnostic on that cleaned sample is $5.25\sigma$ ($p = 1.55 \times 10^{-7}$).
 
@@ -1339,11 +1300,11 @@ The coarse 7-bin temporal $\chi^2$/dof $\approx 33$ indicates bin-to-bin variati
 
 The analysis relies on INPOP19a, which is constructed under the GR assumption $\eta = 0$. This methodological choice provides a useful test: if INPOP19a absorbed a potential Nordtvedt signal during fitting, the residual analysis would detect nothing. The detection of a signal in the residuals of a $\eta = 0$ ephemeris indicates that the signal was not fully absorbed by other model parameters, supporting its physical origin. Any common ephemeris error would affect all stations similarly; the multi-station consistency, the phase-locked differential cancellation (Section 4.9), and the cross-ephemeris replication on DE430 exclude a common ephemeris artifact as the source of the synodic modulation.
 
-### 4.19 Extended Systematic Analysis
+### 4.22 Extended Systematic Analysis
 
 Four pipeline scripts (`step_010` through `step_013`) directly test the systematic artifact hypothesis. Manuscript step labels 010–013 follow these script prefixes. These provide quantitative falsification of artifactual explanations.
 
-#### 4.19.1 Systematic Control Analysis
+#### 4.22.1 Systematic Control Analysis
 
 Partial correlation analysis tests whether the TEP signal persists after controlling for known systematic variables:
 
@@ -1372,7 +1333,7 @@ for outcome variable).
 
 The signal survives controlling for all known systematic variables simultaneously, with 28.9% attenuation. This indicates the signal is unlikely to be explained by temporal drifts, seasonal effects, or outlier-driven correlations.
 
-#### 4.19.2 Noise Injection and Signal Recovery
+#### 4.22.2 Noise Injection and Signal Recovery
 
 Noise injection tests quantify signal robustness and validate detection methodology:
 
@@ -1400,7 +1361,7 @@ Sample size scaling: The significance scales correctly with $\sqrt{N}$
 across subsamples (10%, 25%, 50%, 75%), consistent with expected
 behavior for a genuine signal.
 
-#### 4.19.3 Subsample Robustness
+#### 4.22.3 Subsample Robustness
 
 Comprehensive subsample robustness testing validates that the signal is not driven by specific data subsets, stations, or temporal periods. The analysis employs five independent test categories with rigorous statistical criteria:
 
@@ -1460,11 +1421,11 @@ of the evidence ledger.
 
 Overall robustness verdict: The signal passes all five core subsample and parameter robustness checks, mapping well into the stable bandwidth surrounding $\eta \approx -4 \times 10^{-4}$.
 
-#### 4.19.4 Station Decomposition
+#### 4.22.4 Station Decomposition
 
 Station decomposition regresses the pooled design into station-specific $\eta$ contributions weighted by data fraction. Grasse yields $\eta = -5.39 \times 10^{-4}$ at $4.97\sigma$; APO yields $\eta = -2.39 \times 10^{-4}$ at $2.77\sigma$. Matera, McDonald2, and Haleakala remain underpowered at $0.02\sigma$, $1.39\sigma$, and $2.45\sigma$ respectively, matching the per-station power design in Section 4.24.4. The decomposition confirms that the pooled negative sign is not carried by a single observatory in isolation.
 
-### 4.20 Bayesian Inference and Evidence
+### 4.23 Bayesian Inference and Evidence
 
 Bayesian inference on the synodic-only channel (Steps 016, 073) is reported as a secondary layer beneath the precision-weighted cluster-robust headline and the Step 056 integrator-extraction check. The likelihood is Gaussian with per-epoch $\sigma_i$ from the archive; priors are uniform on $\eta \in [-10^{-2}, +10^{-2}]$ and $b \in [-0.1, +0.1]$ m (emcee, 32 walkers, 5,000 steps, 1,000 burn-in).
 
@@ -1501,7 +1462,7 @@ Table 4.20.1: Savage–Dickey sensitivity to $\eta$ prior and KDE bandwidth (Ste
 
 The headline quantitative claim remains the precision-weighted cluster-robust estimand at $6.94\sigma$. Stable Bayesian components are posterior exclusion of zero, Table 4.20.1, and the grid/bridge cross-checks; Laplace and single-kernel Savage–Dickey values are not discovery statistics.
 
-### 4.21 Spectral Analysis and Frequency Specificity
+### 4.24 Spectral Analysis and Frequency Specificity
 
 To test whether the detected signal is specifically locked to the synodic frequency as predicted by TEP, a Lomb-Scargle frequency sweep was performed across the range $0.5\nu$ to $1.5\nu$ (where $\nu$ is the synodic frequency, 1/29.53 days-1). The analysis uniquely isolates both the primary detection limit and its background dynamical architecture (Step 033):
 
@@ -1551,7 +1512,7 @@ theoretical 180^\circ)
 
 The frequency specificity confirms that the signal is not a broad-band systematic artifact but is precisely tuned to the synodic period as predicted by the TEP Nordtvedt effect. The secondary peak at $0.955\nu$ may reflect dynamical coupling to lunar orbital variations (e.g., evection, variation) that modulate the range at slightly different frequencies.
 
-### 4.22 Full Hard Audit Verification
+### 4.25 Full Hard Audit Verification
 
 A comprehensive bit-level data audit was performed to verify data integrity and numerical stability. The audit verifies:
 
@@ -1584,7 +1545,7 @@ claim.
 
 Overall Verdict: The data pipeline passes all four audit layers. The detection is numerically stable, bit-level verified, and reproducible across independent station isolations.
 
-### 4.23 Demonstration of Ephemeris Absorption Masking
+### 4.26 Demonstration of Ephemeris Absorption Masking
 
 To evaluate the criticism that a genuine Nordtvedt signal would have been resolved by standard LLR multiparameter fits, three complementary tests distinguish static carrier absorption from dynamic sideband survival.
 
@@ -1596,7 +1557,7 @@ To evaluate the criticism that a genuine Nordtvedt signal would have been resolv
 
 Together these tests establish that standard ephemeris solvers absorb the static mean carrier but are algebraically blind to the dynamic sideband variance, which is deposited into post-fit residuals where it remains detectable. The 82-parameter proxy used in Steps 065 and 066 is a linear regression stress test; it is not a symplectic N-body numerical integrator and cannot emulate the iterative dynamic planetary potentials handled by the actual Fortran/C++ code underlying INPOP or DE430. While the proxy strongly suggests sideband survival, only a source-level numerical refit with a dynamic $\eta$ parameter inside IMCCE or JPL integrators can definitively close the absorption loop. The toy orbital model (Step 054) provides complementary Keplerian-level evidence: a synodic $\cos(D)$ perturbation is spectrally orthogonal to the $\{1, \cos M, \sin M\}$ basis and therefore survives in residuals if present.
 
-### 4.24 Differential Suppression (Environmental Amplitude Scaling)
+### 4.27 Differential Suppression (Environmental Amplitude Scaling)
 
 *Note:* The joint regression models in Sections 4.24.1–4.24.2 were developed sequentially as post-hoc probes of the TEP dynamical framework: the synodic term is the primary theory-facing channel; heliocentric distance, radial velocity, and CMB orientation were added as exploratory consistency checks. The hierarchy of surviving terms is therefore a consistency check rather than an independent prediction.
 
@@ -1618,7 +1579,7 @@ yielding a non-significant $\eta = +7.08 \times 10^{-5} \pm 1.57
 
 The perihelion-aphelion differential evaluates to $1.42\sigma$ on the cleaned INPOP19a sample ($N = 3{,}817$ perihelion and $3{,}818$ aphelion points). The split is directionally consistent with TEP environmental scaling but does not reach the pipeline's formal $2\sigma$ pass threshold in this cosD-only split. difficult to construct a scenario in which unmodeled hardware systematics at discrete ground stations would consistently scale in correlation with $\Delta \eta \propto \nabla V(\phi)$ over a 35-year baseline.
 
-#### 4.24.1 Orbital Velocity Modulation of Temporal Shear
+#### 4.27.1 Orbital Velocity Modulation of Temporal Shear
 
 General Relativity predicts that any Nordtvedt violation, if present, must remain a static geometric invariant regardless of the Earth-Moon system's motion through the solar system. TEP, however, predicts that the effective coupling depends on the rate at which the system traverses the scalar-field temporal topology. In a Kepler orbit with small eccentricity, heliocentric distance $r$ and radial velocity $v_r$ are approximately in quadrature ($90^\circ$ out of phase), making them statistically distinguishable predictors. A joint fit to both observables therefore determines whether the scalar field is purely static ($m_v = 0$) or dynamically responsive ($m_v \neq 0$).
 
@@ -1678,7 +1639,7 @@ The sign of $\eta$ systematically changes across orbital quadrants, with the str
 
 The correlation between heliocentric distance and radial velocity in the data is $r = -0.087$ — weak, as expected for quadrature variables — confirming that the distance and velocity contributions are not collinear in a kinematic sense. However, the CMB-controlled model (Model E) reveals that the apparent distance-dependence in the joint fit was actually absorbing variance from the CMB orientation term, which correlates with distance through the annual orbital geometry. When the CMB dipole alignment is explicitly controlled, the distance coefficient becomes non-significant ($p = 0.171$), while the velocity modulation sharpens from $t = 2.44$ to $t = 6.50$. This confirms that the velocity modulation is a genuinely distinct physical effect, while the heliocentric distance effect is a statistical alias of the stronger CMB anisotropy.
 
-#### 4.24.2 CMB Dipole Anisotropy
+#### 4.27.2 CMB Dipole Anisotropy
 
 The pooled full-systematic synodic $\eta$ in Section 4.0 remains the headline estimand; this subsection reports consistency diagnostics on the same residual channel and does not replace that primary detection.
 
@@ -1960,7 +1921,7 @@ The differential evaluates to $\Delta\eta = -1.76 \times 10^{-3}$ at $7.92\sigma
 
 **Binned anisotropy trend.** Eight bins in $\cos\theta_{\rm EM-CMB}$ yield a linear trend $d\eta/d\cos\theta = -1.05 \times 10^{-3} \pm 2.21 \times 10^{-4}$ (CMB-anisotropy-slope robustness check) ($t = -4.75$, $p = 0.0032$), confirming that the anisotropy is smooth and monotonic across the full range of orientations rather than confined to extreme bins.
 
-#### 4.24.3 Canonical Full-Systematic Extraction
+#### 4.27.3 Canonical Full-Systematic Extraction
 
 Step 050 fits the nested systematic control ladder on the $6\sigma$ MAD-cleaned INPOP19a sample ($N=25{,}445$) with all five stations retained. The canonical primary estimand is the full-systematic model `m5_full_corrected`, which augments $\cos(D)$ with $\cos(2D)$, annual, and monthly nuisance terms:
 
@@ -1968,7 +1929,7 @@ Step 050 fits the nested systematic control ladder on the $6\sigma$ MAD-cleaned 
 
 at $6.17\sigma$ significance, with cluster-robust uncertainty $6.52\sigma$ across the five observatories. The cosD-only ladder baseline on the same cleaned sample yields $\eta = -3.18 \times 10^{-4} \pm 6.04 \times 10^{-5}$ at $5.25\sigma$ (naïve OLS robustness check). Step 040 fixes this hierarchy; Step 042 treats the full-systematic extraction as the primary independent hypothesis for multiple-testing correction.
 
-#### 4.24.4 Per-Station Power and Observed Extraction
+#### 4.27.4 Per-Station Power and Observed Extraction
 
 Step 029 compares expected per-station SNR at the cosD-only reference amplitude $\eta = -3.18 \times 10^{-4}$ with observed single-station $\cos(D)$ regressions on the full 26,207-point INPOP19a sample. The expected column is a design calculation; the observed column is the measured station-wise $\eta$.
 
@@ -1983,7 +1944,7 @@ Step 029 compares expected per-station SNR at the cosD-only reference amplitude 
 
 No single station reaches conventional standalone significance; the headline detection is carried by the pooled full-systematic model (Section 4.24.3). Grasse-C-SPAD hardware epochs (Step 030) reach $2.37\sigma$–$8.83\sigma$ depending on the partition, with negative $\eta$ in every powered epoch.
 
-#### 4.24.5 Precision-Weighted Station Regression
+#### 4.27.5 Precision-Weighted Station Regression
 
 Step 029 implements inverse-variance weighting by station ($1/\sigma_{r,s}^2$) on the full sample, down-weighting high-RMS and phase-truncated observatories without removing Haleakala from the pooled design. The precision-weighted estimate is:
 
@@ -1991,7 +1952,7 @@ Step 029 implements inverse-variance weighting by station ($1/\sigma_{r,s}^2$) o
 
 at $6.27\sigma$ significance. This bounds the amplitude under quality-weighted pooling and complements the headline precision-weighted extraction (Section 4.24.3). The clean-subset Grasse C-SPAD-era plus APO analysis is reported separately in Section 4.31 (Step 053).
 
-#### 4.24.6 Frequency Domain Orthogonality and Sideband Harmonics
+#### 4.27.6 Frequency Domain Orthogonality and Sideband Harmonics
 
 To establish why standard LLR integrators fail to completely absorb the TEP signal, a spectral orthogonality analysis was executed (Step 032). TEP dictates a dynamically scaling interaction modulated by the background scalar potential, implying a modulation depth $m$ of the effective coupling. Empirical calibration against Step 022 data (perihelion-aphelion mean differential calibrated via two-point derivation) reveals a directionally negative perihelion excess over aphelion on the cleaned INPOP19a sample, with a $1.42\sigma$ differential in the cosD-only split. Even using a conservative $m = 1.0$ model, the multiplication of synodic ($D$) and orbital ($l'$) frequencies deposits approximately 33% of the signal power into composite sidebands at $D - l'$ and $D + l'$.
 
@@ -1999,23 +1960,23 @@ In physical terms, the TEP signal produces a characteristic spectral "fingerprin
 
 Lomb-Scargle periodograms confirm that these TEP sidebands are spectrally orthogonal to the Keplerian parameter space accessible to static-$\eta$ solvers. The $D - l'$ sideband at 32.13 days is resolved from the 31.81-day evection by $4\times$ the Rayleigh limit ($1/T \approx 7.8 \times 10^{-5}$ cpd). Because standard integrators lack the functional degrees of freedom to parameterize power at these specific sideband frequencies, the dynamic TEP variance is structurally preserved in the post-fit residuals where it is recovered by this analysis pipeline.
 
-### 4.25 Quantitative $\eta$ Prediction
+### 4.28 Quantitative $\eta$ Prediction
 
 A quantitative prediction for $\eta$ was derived from the TEP geometric Temporal Shear formalism (Step 033). Using the Earth-Moon compactness-squared differential ($\Phi_\oplus^2 - \Phi_{\rm Moon}^2$) and the Observable Response Coefficient framework, the predicted Nordtvedt violation range is order-of-magnitude $\eta \in [-10^{-3}, -10^{-4}]$. The measured AR(1) GLS cluster-robust parameter $\eta = -3.28 \times 10^{-4}$ (cosD-only AR(1) GLS robustness check) lies within this predicted theoretical range, consistent with the same framework that yields preliminary galactic-scale coefficients $\kappa_{\rm Cep} \sim 10^6$ mag and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from related work (Papers 10 and 11). The calibration constant $C$ derived self-consistently from the measurement confirms the TEP potential and coupling amplification required by the TEP framework.
 
-### 4.26 Decoupling Thermal Array Deformation
+### 4.29 Decoupling Thermal Array Deformation
 
 To eliminate the hypothesis that the synodic-range effect at $13|\eta| \approx 5.1$ mm (headline precision-weighted scale) is a structural artifact driven by thermal expansion of the lunar retroreflector arrays (which heat up near full moon), a worst-case physical model was constructed. The Apollo arrays, constructed with an aluminum housing (~0.15m thick) subject to a ~300 K delta across the lunar day-night cycle, experience a theoretical maximum expansion of 1.027 mm. This thermal expansion is an order of magnitude too small—accounting for only 10.3% of the primary synodic amplitude at $13|\eta|$. Thus, thermal array deformation cannot explain the anomaly.
 
-### 4.27 Leverage Temporal Clustering
+### 4.30 Leverage Temporal Clustering
 
 The statistical divergence between OLS ($\eta = -3.18 \times 10^{-4}$) and Theil-Sen ($\eta = -2.94 \times 10^{-4}$; cosD-only, Step 017) is driven by heteroskedasticity, not merely leverage. By calculating Cook's Distance and binning across 5-year epochs, a pronounced temporal clustering of high-leverage points was revealed: 64.9% occurred between 1984–1989, a period contributing only 8.4% of the total data. This era is dominated by early Grasse observations with large RMS (12.6 mm vs modern 2.5 cm-class C-SPAD), confirming that early hardware systematics inflated OLS variance. However, Theil-Sen does not "suppress" this variance in a physically meaningful way; rather, the median of pairwise slopes is pulled toward the high-variance segment, yielding a negatively biased amplitude. The weighted biweight M-estimator (Step 068) properly compensates for station heteroskedasticity via inverse-variance weights and recovers $\eta = -3.64 \times 10^{-4}$ ($9.15\sigma$ cluster-robust; Step 068), confirming that the Theil-Sen discrepancy is an estimator artefact.
 
-### 4.28 False-Positive Diagnostic Results
+### 4.31 False-Positive Diagnostic Results
 
 Two dedicated false-positive diagnostic steps were executed on the full 26,207-observation INPOP19a dataset to test for terrestrial and orbital systematic confounders.
 
-#### 4.28.1 Day/Night Thermal Bias Null Test
+#### 4.31.1 Day/Night Thermal Bias Null Test
 
 The local solar altitude was computed for every observation at its observing station using `astropy.coordinates.get_sun`. A partial regression simultaneously modelled residuals against $\cos(D)$, solar altitude, and a binary day/night indicator to test whether the daytime-ranging bias (New Moon observations are geometrically constrained to daytime; Full Moon to nighttime) could generate a spurious synodic modulation. Station-level results are given in Table 3.
 
@@ -2031,7 +1992,7 @@ Table 3: Day/Night thermal false-positive test. "Cleaned $\eta$" is the partial 
 
 At the global level: the solar altitude regressor is negligible ($p = 0.281$, coefficient $= -3.1 \times 10^{-5}$ m/degree), and the cleaned global $\eta$ after controlling for it is $-6.64 \times 10^{-4}$ ($p = 2.0 \times 10^{-14}$) — an attenuation of only 2.5% relative to the uncorrected OLS value. The day/night thermal bias hypothesis is rejected by the data.
 
-#### 4.28.2 True Geometric Elongation Null Test
+#### 4.31.2 True Geometric Elongation Null Test
 
 The true geocentric Sun–Moon angular separation $D_{\rm true}$ was computed for all 26,207 observations via J2000 ephemeris vectors, and both $\cos(D_{\rm mean})$ and $\cos(D_{\rm true})$ were entered as competing predictors in a single partial regression:
 
@@ -2055,7 +2016,7 @@ The behavior of the true-geometry predictor is consistent with a dynamically cou
 
 Combined result (Steps 029–030): Both the day/night thermal and the geometric-proxy false-positive hypotheses are rejected by direct empirical testing on the full dataset. The $5.27\sigma$ detection is not attributable to daytime atmospheric refraction, telescope-mount thermal expansion, or aliasing from the mean-phase orbital approximation.
 
-### 4.29 Frequency-Specific Null Testing
+### 4.32 Frequency-Specific Null Testing
 
 The TEP framework predicts the Nordtvedt modulation should appear at the synodic frequency (1×, period = 29.53 days) and not at other frequency factors. Testing this prediction provides discrimination between a phase-locked physical effect and broadband systematic artifacts, which would likely generate spurious power across multiple frequencies.
 
@@ -2091,7 +2052,7 @@ shows significant power
 
 The detected signal is frequency-specific: significant power appears at the synodic fundamental ($5.25\sigma$ cleaned-sample Pearson, $4.93\sigma$ OLS) with no detectable signal at 55 tested non-synodic frequencies spanning 0.4×–3.2× (maximum $\approx 0.00\sigma$). The 1.23× control factor — a theoretically motivated non-physical frequency — shows $\approx 0.00\sigma$ significance, consistent with pure noise. Crucially, the null-test frequencies were not pre-whitened from the residuals before testing; pre-whitening was applied only to remove dominant nuisance harmonics (annual, sidereal), leaving the test frequencies intact. This ensures the null test is not a self-fulfilling prophecy and provides an honest assessment of whether non-synodic frequencies carry systematic power. This frequency pattern is expected for a physical effect phase-locked to Earth-Moon-Sun geometry, whereas broadband systematic artifacts would typically generate spurious power across multiple frequencies.
 
-### 4.30 Cross-Validation, Station Distribution, and Covariate Shift
+### 4.33 Cross-Validation, Station Distribution, and Covariate Shift
 
 Coefficient stability for the physical Nordtvedt term and out-of-sample predictive performance of the full residual model answer different scientific questions. The headline inference targets the pooled $\cos D$ coefficient under a joint nuisance design; temporal hold-out cross-validation instead asks whether every nuisance coefficient vector learned in one hardware era would transport chronologically into another. Because LLR hardware eras sample different synodic phases and atmospheric conditions, the nuisance subspace (annual, monthly, and $\cos(2D)$ aliases) is empirically not transportable across epochs: temporal hold-out predictive $R^2$ for the full-systematic model is negative on the full archive and remains negative even on the homogeneous clean subset of Section~4.31. That pattern is not treated here as a failure of signal authenticity; it is treated as direct evidence that nuisance-dominated designs cannot be sequentially re-fit across eras without bias, so primary extraction is performed on the maximally pooled dataset to marginalise era-specific covariates while estimating the physical $\cos(D)$ coefficient.
 
@@ -2147,7 +2108,7 @@ The metric mean $|\cos D|$ quantifies phase coverage quality: values near 0.5 in
 
 Primary inference therefore remains the precision-weighted pooled extraction (Section~3.4.10 and Step~050): temporal CV is reported as a diagnostic on nuisance transport, not as a substitute estimand for $\eta$. The clean-subset analysis in Section~4.31 sharpens the same story under controlled homogeneity.
 
-#### 4.30.1 Rolling-window $\eta(t)$ and environmental correlation (Step 069)
+#### 4.33.1 Rolling-window $\eta(t)$ and environmental correlation (Step 069)
 
 TEP motivates asking whether an *effective* coupling inferred from short spans tracks the Earth's heliocentric environment. Step~069 computes 2-year rolling-window $\eta(t)$ on the cleaned INPOP19a archive ($N = 25{,}445$, 34 windows stepped yearly) and correlates the windowed amplitudes with three environmental predictors: inverse heliocentric distance $\langle 1/r_\odot \rangle$, radial velocity $\langle v_r \rangle$, and CMB dipole orientation $\langle \cos\theta_{\rm EM\text{-}CMB} \rangle$. The weighted Pearson correlations are:
 
@@ -2165,7 +2126,7 @@ $\mathrm{Corr}\bigl(\eta(t), \langle \cos\theta_{\rm EM\text{-}CMB} \rangle\bigr
 
 A joint regression of $\eta(t)$ on all three predictors yields weighted $R^2 = 0.142$ with a significant radial-velocity coefficient in that joint fit ($\beta_{v_r} = +7.45 \times 10^{-3}$, $t = 2.14$, $p = 0.041$); the heliocentric-distance and CMB-orientation joint terms are not individually significant at the 5\% level ($p \approx 0.15$ and $p \approx 0.18$ respectively). These correlations quantify how much window-to-window variability remains after restricting to 2-year segments on the cleaned archive. They are not offered as a refutation of the pooled const-$\eta$ hypothesis tested by m6 in Section~4.30 ($p = 0.90$ on equality of pre- and post-split $\cos D$ amplitudes in the joint full-systematic model). The conservative reading is that rolling $\hat{\eta}(t)$ is a local projection that can correlate with heliocentric geometry and dipole orientation while the headline Nordtvedt coefficient estimated on the maximally pooled sample remains statistically stable across the same catalogue split.
 
-### 4.31 Clean-Subset High-SNR Analysis and Orbital Orthogonality
+### 4.34 Clean-Subset High-SNR Analysis and Orbital Orthogonality
 
 **Robustness check — Clean Subset: Grasse C-SPAD Era (2010+) + APO (Step 053).** Grasse with the C-SPAD detector (2010 onwards) achieves ~2 cm RMS residuals and continuous coverage.  APO provides an independent high-precision station with excellent phase coverage (mean $|\cos D| = 0.517$).  Excluding Haleakala (opposite sign, underpowered), Matera (severe phase truncation, $N = 346$), and McDonald2 (moderate truncation, larger noise) yields a homogeneous subset of $N = 12\,576$ observations with residual RMS 2.5 cm.
 
@@ -2193,7 +2154,7 @@ For $\eta = -5.4 \times 10^{-4}$ the perturbation amplitude is 7.0 mm.  The orbi
 
 The physical reason is spectral separation: standard orbital elements generate signals at the *orbital* frequency and its harmonics (~27.3 days), whereas the synodic perturbation operates at the *synodic* frequency (~29.5 days).  The two frequencies are incommensurate; $\cos D$ is orthogonal to the $\{1, \cos M, \sin M\}$ basis over spans much longer than one synodic month.  In the toy Keplerian basis tested here, a synodic cos(D) perturbation of the observed amplitude therefore remains in the residuals rather than being absorbed by that basis alone.
 
-**Conclusion.** The clean-subset analysis shows the signal strengthens (cluster-robust SNR rises from ~$5\sigma$ to ~$7\sigma$) when heterogeneous stations are removed. The toy orbital model shows that a synodic cos(D) perturbation of the observed amplitude is invisible to standard orbital-element fitting in the toy Keplerian basis and therefore survives in residuals if present. Together, these results address the two open predictive diagnostics in Sections 4.30--4.30.1: the full-archive primary fit is not reduced to a Grasse-only artifact (Section 4.3), and the synodic term is not absorbed by the toy Keplerian basis alone. Steps 065 and 066 provide the primary rigorous evidence: an 82-parameter ephemeris-like basis attenuates the coherent carrier by $\sim$97% but leaves cross-frequency sidebands surviving at $>$95%. Step 041 complements this with controlled injections on cleaned real residuals. Steps 032 and 054 extend the logic to the linearized and toy-orbital bases. It must be stressed that the 82-parameter proxy is a linear regression stress test, not a symplectic N-body numerical integrator, and cannot emulate the iterative dynamic planetary potentials handled by the actual Fortran/C++ code underlying INPOP or DE430. A full INPOP or DE430 dynamical refit with $\eta$ free in the orbital integrator remains the definitive external confirmation, and collaboration is invited collaboration with IMCCE and JPL to perform such a refit.
+**Conclusion.** The clean-subset analysis shows the signal strengthens (cluster-robust SNR rises from ~$5\sigma$ to ~$7\sigma$) when heterogeneous stations are removed. The toy orbital model shows that a synodic cos(D) perturbation of the observed amplitude is invisible to standard orbital-element fitting in the toy Keplerian basis and therefore survives in residuals if present. Together, these results address the two open predictive diagnostics in Sections 4.30--4.30.1: the full-archive primary fit is not reduced to a Grasse-only artifact (Section 4.3), and the synodic term is not absorbed by the toy Keplerian basis alone. Steps 065 and 066 provide the primary rigorous evidence: an 82-parameter ephemeris-like basis attenuates the coherent carrier by $\sim$97% but leaves cross-frequency sidebands surviving at $>$95%. Step 041 complements this with controlled injections on cleaned real residuals. Steps 032 and 054 extend the logic to the linearized and toy-orbital bases. It must be stressed that the 82-parameter proxy is a linear regression stress test, not a symplectic N-body numerical integrator, and cannot emulate the iterative dynamic planetary potentials handled by the actual Fortran/C++ code underlying INPOP or DE430. A full INPOP or DE430 dynamical refit with $\eta$ free in the orbital integrator remains the definitive external confirmation, and collaboration with IMCCE and JPL is invited to perform such a refit.
 
 ### 4.32 Solar Radiation Pressure and Atmospheric Seeing Falsification
 
@@ -2250,13 +2211,13 @@ The measured Nordtvedt parameter suggests that Earth and Moon may experience dif
 
 The finding is cross-checked across the estimator hierarchy in Section 4.9 and the independent spine in Section 4.0. Powered hardware-era splits and the headline precision-weighted estimand show consistent negative $\eta$ values, with no sign reversals among the tests that retain adequate phase coverage and $N$.
 
-The extended systematic analysis (Steps 010–013) specifically addresses concerns about artifactual origins. Step 010 shows that the signal persists after controlling for temporal trends, seasonal effects, station-specific drifts, and residual magnitude. Step 011 shows the signal survives $2.0 \times$ RMS noise addition and is $3.3 \times$ above the detection threshold. Step 012 employs five independent robustness tests including subsample replication and station jackknife. Step 013 decomposes the pooled signal into station-specific contributions consistent with Section 4.10. Detailed results are presented in Section 4.19.
+The extended systematic analysis (Steps 010–013) specifically addresses concerns about artifactual origins. Step 010 shows that the signal persists after controlling for temporal trends, seasonal effects, station-specific drifts, and residual magnitude. Step 011 shows the signal survives $2.0 \times$ RMS noise addition and is $3.3 \times$ above the detection threshold. Step 012 employs five independent robustness tests including subsample replication and station jackknife. Step 013 decomposes the pooled signal into station-specific contributions consistent with Section 4.34. Detailed results are presented in Section 4.34.
 
 Frequency-Specific Null Testing (Step 015): The TEP framework predicts the Nordtvedt effect should appear at the synodic frequency (1×) and not at other frequency factors. The multi-frequency null scan tested 55 non-synodic frequencies (0.4× to 3.2×) and found zero significant detections after multiple-testing correction (maximum SNR $\approx 0.00\sigma$ at 0.60$\times$ synodic, versus $4.92\sigma$ at 1$\times$ synodic). This frequency pattern — strong signal at the predicted frequency, null results elsewhere — is expected for a phase-locked physical effect, whereas broadband systematic artifacts would typically generate spurious power across multiple frequencies.
 
 A critical vulnerability in naive robustness checks is handling unbalanced station demographics. Because Grasse holds 74% of the raw archive (73.7% of the cleaned sample) with the highest-precision data, blindly removing it leaves a pool that forcibly mixes APO (consistent negative $\eta$ at $2.77\sigma$) with Haleakala (extreme PMT noise) and McDonald2 (phase truncated). Consequently, an unweighted "Grasse-removed" sum collapses the SNR because APO's clean signal is statistically diluted by heavily artifacted 1980s data.
 
-Precision-weighted full-systematic regression ($\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, $6.94\sigma$; Step 050) is the headline cross-station estimator: every observation is retained while low-precision hardware is objectively down-weighted. The cosD-only precision-weighted diagnostic ($\eta_{\rm WLS} = -3.21 \times 10^{-4} \pm 5.12 \times 10^{-5}$, $6.27\sigma$; Step 029) shows the same sign under a simplified nuisance structure. Neither construction removes all Grasse leverage by construction; together they show that the negative phase-locked estimate is not solely an artifact of naive unweighted pooling. Outlier sweeps, resampling, cross-validation, and the Step 008 systematic-error budget (Section 4.15) are documented in Results and are not repeated here.
+Precision-weighted full-systematic regression ($\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, $6.94\sigma$; Step 050) is the headline cross-station estimator: every observation is retained while low-precision hardware is objectively down-weighted. The cosD-only precision-weighted diagnostic ($\eta_{\rm WLS} = -3.21 \times 10^{-4} \pm 5.12 \times 10^{-5}$, $6.27\sigma$; Step 029) shows the same sign under a simplified nuisance structure. Neither construction removes all Grasse leverage by construction; together they show that the negative phase-locked estimate is not solely an artifact of naive unweighted pooling. Outlier sweeps, resampling, cross-validation, and the Step 008 systematic-error budget (Section 4.33) are documented in Results and are not repeated here.
 
 ### 5.2 Consistency with Prior TEP Constraints
 
@@ -2288,11 +2249,11 @@ However, TEP dictates a dynamically scaling interaction modulated by the backgro
 
 Step 065 constructs an 82-parameter ephemeris-like basis and fits it to real INPOP19a residuals without an explicit $\cos(D)$ term. The basis condition number is very large ($\kappa \sim 10^{19}$), a known numerical risk flagged by the step's WARNING status; the defensible positive evidence is therefore the sideband-structure survival, not the absolute post-fit carrier amplitude. It must be stressed that this 82-parameter proxy is a linear regression stress test, not a symplectic N-body numerical integrator. It cannot emulate the iterative dynamic planetary potentials handled by the actual Fortran/C++ code underlying INPOP or DE430. Under this linear stress test, the coherent synodic carrier amplitude is attenuated by $\sim$97% ($\eta = -4.53 \times 10^{-4}$ to $\eta \approx -1.2 \times 10^{-5}$), yet the sideband-to-carrier power ratio survives at $\sim$197% on real INPOP residuals (and $\sim$255% on synthetic modulated TEP signals), showing that cross-frequency sideband structure is preserved. Step 066 confirms this with high-resolution Lomb-Scargle periodograms: mean sideband survival is 90.9% on real INPOP residuals and 90.7% on synthetic dynamically modulated TEP signals. Step 041 performs controlled injections onto cleaned real residuals: a static Nordtvedt injection ($\eta = -4.06 \times 10^{-4}$) is absorbed at 97.2% amplitude efficiency, while a dynamically modulated injection of identical amplitude is equally absorbed in its mean carrier (97.2%) but leaves sidebands surviving at 96.0%. The null case shows no spurious detection.
 
-In Section 4.24.6 (Step 032), the algebraic reason for this failure was derived: separating a synodic amplitude ($\cos(D)$) whose coupling constant scales with Earth's changing solar environment ($1/r_\odot$) inevitably multiplies the two harmonic frequencies ($D$ and $l'$). This forces significant power into composite periodogram sidebands at frequencies $D - l'$ and $D + l'$. The geometry of these TEP correlation sidebands is spectrally separated from the dominant Keplerian basis used in static direct-fit solvers. Even when treated as explicit free parameters in global regression, standard solvers possess no independent degrees of freedom capable of mapping the $D \pm l'$ continuous frequency space. Applying static variables to a dynamic coupling leaves the primary synodic scalar footprint in the post-fit residual outputs, consistent with Steps 032, 041, 065, and 066.
+In Section 4.33.6 (Step 032), the algebraic reason for this failure was derived: separating a synodic amplitude ($\cos(D)$) whose coupling constant scales with Earth's changing solar environment ($1/r_\odot$) inevitably multiplies the two harmonic frequencies ($D$ and $l'$). This forces significant power into composite periodogram sidebands at frequencies $D - l'$ and $D + l'$. The geometry of these TEP correlation sidebands is spectrally separated from the dominant Keplerian basis used in static direct-fit solvers. Even when treated as explicit free parameters in global regression, standard solvers possess no independent degrees of freedom capable of mapping the $D \pm l'$ continuous frequency space. Applying static variables to a dynamic coupling leaves the primary synodic scalar footprint in the post-fit residual outputs, consistent with Steps 032, 041, 065, and 066.
 
-Geophysical Quiet Space Verification: To satisfy rigorous hypothesis testing, one must ask whether an unmodeled classical perturbation (such as an oceanic tide or core-mantle boundary coupling) could accidentally produce the $D - l'$ structural power. The synodic monthly frequency minus the anomalistic yearly frequency yields a composite period of 32.13 days. In classical orbital and terrestrial geophysics, this frequency is spectrally quiet. The closest major multi-body resonance is standard Lunar Evection (31.81 days; resolved from 32.13d by $4\times$ the Rayleigh limit, Section 4.24.6), and the closest long-period ocean tide is the $Mm$ lunar monthly tide (27.55 days). Standard mechanics do not possess a continuous driving function operating at 32.13 days.
+Geophysical Quiet Space Verification: To satisfy rigorous hypothesis testing, one must ask whether an unmodeled classical perturbation (such as an oceanic tide or core-mantle boundary coupling) could accidentally produce the $D - l'$ structural power. The synodic monthly frequency minus the anomalistic yearly frequency yields a composite period of 32.13 days. In classical orbital and terrestrial geophysics, this frequency is spectrally quiet. The closest major multi-body resonance is standard Lunar Evection (31.81 days; resolved from 32.13d by $4\times$ the Rayleigh limit, Section 4.33.6), and the closest long-period ocean tide is the $Mm$ lunar monthly tide (27.55 days). Standard mechanics do not possess a continuous driving function operating at 32.13 days.
 
-Decoupling Static from Dynamic Physics. As demonstrated computationally in the Ephemeris Absorption Simulation (Section 4.23), explicitly injecting a dynamically varying TEP signal into an 82-parameter ephemeris-like basis yielded a null global static-η extraction (post-fit $\eta \approx -1.2 \times 10^{-5}$, SNR $\approx 0.1$). The post-fit residuals preserved the cross-frequency sideband power at 96.0%. Standard direct-fit bounding models inherently function as low-pass filters against dynamic TEP parameters, depositing the dynamic variance into the residuals where it is recoverable by spectral methods.
+Decoupling Static from Dynamic Physics. As demonstrated computationally in the Ephemeris Absorption Simulation (Section 4.32), explicitly injecting a dynamically varying TEP signal into an 82-parameter ephemeris-like basis yielded a null global static-η extraction (post-fit $\eta \approx -1.2 \times 10^{-5}$, SNR $\approx 0.1$). The post-fit residuals preserved the cross-frequency sideband power at 96.0%. Standard direct-fit bounding models inherently function as low-pass filters against dynamic TEP parameters, depositing the dynamic variance into the residuals where it is recoverable by spectral methods.
 
 Other alternative explanations for the observed correlation have been considered and directly tested:
 
@@ -2361,8 +2322,8 @@ Ephemeris errors: A common ephemeris error would affect all
 stations similarly and would not produce the observed sign-consistent
 synodic modulation across independent observatories with different
 hardware and geographies. The cross-ephemeris replication on DE430
-(Section 4.12) and the phase-locked differential cancellation
-(Section 4.9) exclude a common ephemeris artifact as the source of
+(Section 4.33) and the phase-locked differential cancellation
+(Section 4.33) exclude a common ephemeris artifact as the source of
 the detected signal.
 
 - 
@@ -2454,15 +2415,15 @@ all yield negative $\eta$ with no systematic latitude trend.
 
 Station-by-station analysis supports the robustness of the finding across independent observatories. Grasse shows the strongest detection (SNR = $4.97\sigma$), while APO, Matera, McDonald2, and Haleakala fall below the $3.0\sigma$ powered-detection threshold.        A formal Cochran's Q meta-analysis on cosD-only station slopes (Step 014) shows heterogeneity ($Q = 12.27$, $p = 0.015$), which is expected because per-station cosD-only fits suffer from omitted-variable bias: annual, monthly, and thermal terms alias into the cosD coefficient with amplitudes that depend on each station's temporal sampling pattern (Section 3.4.10). Controlled pooling with a common Nordtvedt parameter and station-specific systematics (Step~014; the `common_eta_station_systematics` branch in Step~050) yields $\eta = -4.32 \times 10^{-4}$ at $6.40\sigma$, with no evidence for station-specific deviations ($F = 1.19$, $p = 0.31$). The precision-weighted headline in Step~050 remains $\eta = -3.91 \times 10^{-4}$ ($6.94\sigma$). Step 057 Monte Carlo simulation (20,000 realizations) shows Haleakala's positive deviation is a 2.7σ event under TEP (family-wise rate 0.5%) and is physically explicable through its solar-maximum operation epoch (Step 023). Step 053 confirms the signal persists when Haleakala, Matera, and McDonald2 are excluded entirely: the Grasse 2010+ + APO clean subset yields $\eta = -3.36 \times 10^{-4}$ at $7.25\sigma$ (cluster-robust).
 
-Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides independent evidence consistent with the INPOP19a detection. Section 4.11 documents that DE430 exhibits baseline-dependent outlier sensitivity (36× greater correlation change than INPOP19a despite removing 20× fewer outliers), structurally expected from its shorter 4.5-year span. After appropriate outlier cleaning, the DE430 signal aligns with the INPOP19a detection, supporting the robustness of the primary finding. The canonical result therefore rests on the INPOP19a ephemeris (35.5-year baseline) with precision-weighted full-systematic regression $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$ significance ($6.78\sigma$ cluster-robust; $N = 25{,}445$). The unweighted full-systematic OLS on the same design, reported as a sensitivity upper bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at $6.17\sigma$ ($6.52\sigma$ cluster-robust). Cook's-Distance excision on the unweighted row is retained as a leverage diagnostic at $7.82\sigma$ ($8.65\sigma$ cluster-robust; $N = 23{,}837$).
+Cross-ephemeris validation on DE430 residuals (JPL; 2014–2018) provides independent evidence consistent with the INPOP19a detection. Section 4.32 documents that DE430 exhibits baseline-dependent outlier sensitivity (36× greater correlation change than INPOP19a despite removing 20× fewer outliers), structurally expected from its shorter 4.5-year span. After appropriate outlier cleaning, the DE430 signal aligns with the INPOP19a detection, supporting the robustness of the primary finding. The canonical result therefore rests on the INPOP19a ephemeris (35.5-year baseline) with precision-weighted full-systematic regression $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$ significance ($6.78\sigma$ cluster-robust; $N = 25{,}445$). The unweighted full-systematic OLS on the same design, reported as a sensitivity upper bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at $6.17\sigma$ ($6.52\sigma$ cluster-robust). Cook's-Distance excision on the unweighted row is retained as a leverage diagnostic at $7.82\sigma$ ($8.65\sigma$ cluster-robust; $N = 23{,}837$).
 
 The Haleakala Boundary: The Haleakala station yields $\eta = +3.55 \times 10^{-3}$ at observed SNR $2.45\sigma$ ($p = 0.014$, Table 1; Haleakala underpowered-station diagnostic). Per the statistical power criteria in Section 3.1.4, this station is classified as *underpowered*: with 13.8 cm RMS and $N = 737$, its expected SNR at the global $|\eta| \approx 4.5 \times 10^{-4}$ is only $0.81\sigma$, below the $3.0\sigma$ powered-detection threshold. Haleakala's opposite sign and observed SNR ($2.45\sigma$, vs $0.22\sigma$ expected at the pooled $|\eta| \approx 3.2 \times 10^{-4}$ once phase-truncation variance is accounted for) exceed the noise expectation, but the station remains underpowered for independent detection (expected SNR below the $3\sigma$ threshold). Underpowered stations lack the statistical power to independently constrain the signal and are appropriately down-weighted in precision-weighted regression, confirming the core global signal is insensitive to Haleakala's early-era noise. Quantitatively, excluding Haleakala from the pooled cosD-only estimator shifts $\eta$ by only $0.40\sigma$ (and strengthens the pooled SNR), demonstrating that the canonical detection is not driven by this station.
 
 **Robustness check — Hardware Epoch Isolation (Step 030).** To ensure the anomaly is an active observational reality independent of the historically broad $\sim 9.5$ cm variance typical of 20th-century PMT noise floors, cosD-only regressions were partitioned by detector era. Within the mature Grasse-C-SPAD block (2009–2015), $\eta = -3.87 \times 10^{-4} \pm 1.63 \times 10^{-4}$ at $2.37\sigma$; the 2015–2019 Grasse block reaches $\eta = -2.81 \times 10^{-4} \pm 3.18 \times 10^{-5}$ at $8.83\sigma$. APO on the full sample validates the negative sign at $\eta = -2.39 \times 10^{-4}$ ($2.77\sigma$ observed; concurrent-validation robustness check). As hardware precision approached physical tolerances, the signal did not dissolve; it converged to a fixed boundary.
 
-**Covariate Shift, Nuisance Transport, and Predictive Diagnostics (Sections 4.30--4.30.1).** A cross-validation critique might argue that negative predictive $R^2$ in temporal and leave-one-station-out splits falsifies the synodic carrier. The analysis treats that reading as a category error: the headline estimand is the pooled $\cos D$ coefficient under a joint nuisance design (Section~3.4.10), while temporal hold-out asks whether nuisance coefficients learned in one hardware era transport chronologically. Step~052 documents severe covariate shift (pre/post-2008 elongation $p = 4.5 \times 10^{-98}$; Matera mean $|\cos D| = 0.252$ vs APO $0.517$). Step~051 separates three layers: (i) the $\cos D$-only model remains mildly predictive on the full-archive temporal split (real $R^2_{\mathrm{pred}} \approx +0.006$); (ii) a noise-only synthetic ensemble leaves full-systematic temporal scores near zero (mean m4 $\approx +0.002 \pm 0.005$) and therefore under-represents the real collapse ($R^2_{\mathrm{pred}} \approx -0.15$); (iii) a second synthetic with era-conditioned nuisance structure reproduces strongly negative m4 temporal scores (mean $\approx -0.17 \pm 0.05$) at fixed injected $\eta$, with the real value near the 62nd percentile of that ensemble. The in-sample m6 test finds no evidence that two epoch-gated $\cos D$ amplitudes differ ($p = 0.90$). Rolling $\hat{\eta}(t)$ in Section~4.30.1 correlates with environmental predictors but is framed as a short-window exploratory projection, not as a refutation of that pooled stability result. Random $k$-fold CV ($R^2_{\mathrm{pred}} \approx +0.010$ for the full model) is a useful complement when marginal predictor distributions are preserved, not a substitute for the primary pooled estimator.
+**Covariate Shift, Nuisance Transport, and Predictive Diagnostics (Sections 4.33--4.30.1).** A cross-validation critique might argue that negative predictive $R^2$ in temporal and leave-one-station-out splits falsifies the synodic carrier. The analysis treats that reading as a category error: the headline estimand is the pooled $\cos D$ coefficient under a joint nuisance design (Section~3.4.10), while temporal hold-out asks whether nuisance coefficients learned in one hardware era transport chronologically. Step~052 documents severe covariate shift (pre/post-2008 elongation $p = 4.5 \times 10^{-98}$; Matera mean $|\cos D| = 0.252$ vs APO $0.517$). Step~051 separates three layers: (i) the $\cos D$-only model remains mildly predictive on the full-archive temporal split (real $R^2_{\mathrm{pred}} \approx +0.006$); (ii) a noise-only synthetic ensemble leaves full-systematic temporal scores near zero (mean m4 $\approx +0.002 \pm 0.005$) and therefore under-represents the real collapse ($R^2_{\mathrm{pred}} \approx -0.15$); (iii) a second synthetic with era-conditioned nuisance structure reproduces strongly negative m4 temporal scores (mean $\approx -0.17 \pm 0.05$) at fixed injected $\eta$, with the real value near the 62nd percentile of that ensemble. The in-sample m6 test finds no evidence that two epoch-gated $\cos D$ amplitudes differ ($p = 0.90$). Rolling $\hat{\eta}(t)$ in Section~4.30.1 correlates with environmental predictors but is framed as a short-window exploratory projection, not as a refutation of that pooled stability result. Random $k$-fold CV ($R^2_{\mathrm{pred}} \approx +0.010$ for the full model) is a useful complement when marginal predictor distributions are preserved, not a substitute for the primary pooled estimator.
 
-**Clean-Subset and Orbital Orthogonality (Section 4.31).** Steps 053 and 054 address the two most serious residual-analysis limitations.  Step 053 isolates Grasse (C-SPAD era) and APO — the two stations with the best precision and phase coverage.  The cluster-robust SNR rises to $7.25\sigma$ (from ~$5\sigma$ in the full sample), confirming the signal strengthens when heterogeneous stations are removed. Temporal hold-out on this subset still yields $R^2_{\mathrm{pred}} \approx -0.016$ for the full-systematic model, while the $\cos D$-only score is $\approx -8.5 \times 10^{-4}$, so most chronological extrapolation loss sits in the nuisance block rather than in rejection of a fixed carrier amplitude. Step 046 (Section 4.3) shows that equal-$N$ balance stress tests lose power below $3\sigma$ even though the full-archive primary fit remains significant. Step 054 uses a toy orbital model to demonstrate that a synodic cos(D) perturbation of the observed amplitude (7 mm for $\eta = -5.4 \times 10^{-4}$) is mathematically orthogonal to the $\{1, \cos M, \sin M\}$ basis of standard Keplerian fitting.  The perturbation survives in residuals with RMS exactly equal to the input amplitude, and the recovered $\eta$ matches the input to within $0.0001\%$. Step 050 applies the same Keplerian basis to the cleaned INPOP19a residuals and recovers $\eta = -4.09 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.22\sigma$) after partialing $\{1,\cos M,\sin M\}$; the joint full model with Keplerian terms gives $\eta = -4.54 \times 10^{-4} \pm 6.65 \times 10^{-5}$ ($6.81\sigma$). Steps 041 and 054 add synthetic absorption and toy-orbital orthogonality checks. A full INPOP or DE430 dynamical refit with $\eta$ free in the orbital integrator remains the definitive external confirmation.
+**Clean-Subset and Orbital Orthogonality (Section 4.34).** Steps 053 and 054 address the two most serious residual-analysis limitations.  Step 053 isolates Grasse (C-SPAD era) and APO — the two stations with the best precision and phase coverage.  The cluster-robust SNR rises to $7.25\sigma$ (from ~$5\sigma$ in the full sample), confirming the signal strengthens when heterogeneous stations are removed. Temporal hold-out on this subset still yields $R^2_{\mathrm{pred}} \approx -0.016$ for the full-systematic model, while the $\cos D$-only score is $\approx -8.5 \times 10^{-4}$, so most chronological extrapolation loss sits in the nuisance block rather than in rejection of a fixed carrier amplitude. Step 046 (Section 4.3) shows that equal-$N$ balance stress tests lose power below $3\sigma$ even though the full-archive primary fit remains significant. Step 054 uses a toy orbital model to demonstrate that a synodic cos(D) perturbation of the observed amplitude (7 mm for $\eta = -5.4 \times 10^{-4}$) is mathematically orthogonal to the $\{1, \cos M, \sin M\}$ basis of standard Keplerian fitting.  The perturbation survives in residuals with RMS exactly equal to the input amplitude, and the recovered $\eta$ matches the input to within $0.0001\%$. Step 050 applies the same Keplerian basis to the cleaned INPOP19a residuals and recovers $\eta = -4.09 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.22\sigma$) after partialing $\{1,\cos M,\sin M\}$; the joint full model with Keplerian terms gives $\eta = -4.54 \times 10^{-4} \pm 6.65 \times 10^{-5}$ ($6.81\sigma$). Steps 041 and 054 add synthetic absorption and toy-orbital orthogonality checks. A full INPOP or DE430 dynamical refit with $\eta$ free in the orbital integrator remains the definitive external confirmation.
 
 ### 5.6 Testable Predictions of TEP
 
@@ -2514,7 +2475,7 @@ Critically, the directional specificity was cross-validated at the level of the 
 
 **Rigorous falsification suite (Step 055).** Three specific methodological criticisms are addressed directly. (i) *Aliasing.* A simulation of 5,000 datasets with a realistic synodic signal and *no* CMB dependence was performed. Because $\cos\theta$ correlates with $\cos(D)$ at $r = 0.050$, some spurious $\cos\theta$ coefficient emerges by chance; the null distribution has standard deviation $8.8 \times 10^{-5}$ and maximum $|t| = 3.70$. The observed value $\eta_\theta = -9.76 \times 10^{-4}$ ($t = -11.03$) lies far beyond the 99.9th percentile of this null distribution ($p < 10^{-3}$), ruling out aliasing as the origin of the signal. (ii) *Multicollinearity.* Variance Inflation Factors for the four non-intercept predictors in the full joint model are at most ~1.20 (cosD: 1.017, $r_c \cdot \cos D$: 1.026, $v_r \cdot \cos D$: 1.188, $\cos\theta \cdot \cos D$: 1.200), and the condition number is $\kappa(X) = 1.78 \times 10^{2}$, well below the threshold for severe multicollinearity ($\kappa > 10^{3}$). The standard error of $\eta_\theta$ is inflated by only $1.00\times$ relative to a perfectly orthogonal predictor, demonstrating that the observed collinearity is weak and does not materially inflate uncertainties. (iii) *Permutation and orthogonalization.* When $\cos\theta$ values are permuted to break any true relationship while preserving marginal statistics, the coefficient distribution is centered at zero with 99.9th percentile $|t| = 2.75$; the observed $t = -11.03$ is again far in the tail ($p < 10^{-3}$). Gram–Schmidt orthogonalization of $\cos\theta \cdot \cos D$ against all other predictors leaves the signal entirely intact ($t = -11.03$, $p < 10^{-4}$), confirming that the effect resides in the component of $\cos\theta$ that is mathematically independent of synodic, distance, and velocity terms.
 
-*Directional specificity in the joint model.* As detailed in Section 4.24.2, a sky-scrambling Monte Carlo test on 50,000 uniform directions yields $p_F \approx 0.095$ for the Planck axis (Jeffreys interval about $[0.093, 0.098]$), while independent $90^\circ$ rotations and the $180^\circ$ antipode falsify arbitrary directional alignment relative to that axis. Correlation-matched scrambling gives $p_F \approx 0.264$. Refined nulls in the same step separate strands of the directional claim: synodic phase scrambling is decisively rejected ($p_{F,{\rm eff}} = 6 \times 10^{-4}$), whereas uniform-direction, Gram–Schmidt-orthogonalized, and local ($30^\circ$) axis-rotation nulls remain marginal to conservative ($p_{F,{\rm eff}} \approx 0.09$–$0.30$). The dual-axis fit (Step 055, H) shows galactic north's single-axis $\Delta\mathrm{AIC}$ advantage is not a separable second axis: $r(\cos\theta_{\rm CMB},\cos\theta_{\rm gal}) = 0.984$, and the Planck coefficient is absorbed when both are included ($t = 0.68$; add-CMB$|$gal $p = 0.50$). Combined with the aliasing, permutation, and orthogonalization tests above, the Planck-aligned structure is consistent with a synodically phased dipole component of the joint dynamical model; uniform sky-scrambling is reported only as a conservative bound on unique axis identity, not as a strict-threshold pass.
+*Directional specificity in the joint model.* As detailed in Section 4.33.2, a sky-scrambling Monte Carlo test on 50,000 uniform directions yields $p_F \approx 0.095$ for the Planck axis (Jeffreys interval about $[0.093, 0.098]$), while independent $90^\circ$ rotations and the $180^\circ$ antipode falsify arbitrary directional alignment relative to that axis. Correlation-matched scrambling gives $p_F \approx 0.264$. Refined nulls in the same step separate strands of the directional claim: synodic phase scrambling is decisively rejected ($p_{F,{\rm eff}} = 6 \times 10^{-4}$), whereas uniform-direction, Gram–Schmidt-orthogonalized, and local ($30^\circ$) axis-rotation nulls remain marginal to conservative ($p_{F,{\rm eff}} \approx 0.09$–$0.30$). The dual-axis fit (Step 055, H) shows galactic north's single-axis $\Delta\mathrm{AIC}$ advantage is not a separable second axis: $r(\cos\theta_{\rm CMB},\cos\theta_{\rm gal}) = 0.984$, and the Planck coefficient is absorbed when both are included ($t = 0.68$; add-CMB$|$gal $p = 0.50$). Combined with the aliasing, permutation, and orthogonalization tests above, the Planck-aligned structure is consistent with a synodically phased dipole component of the joint dynamical model; uniform sky-scrambling is reported only as a conservative bound on unique axis identity, not as a strict-threshold pass.
 
 The cross-station analysis shows Grasse dominates the raw archive (74%; 73.7% cleaned) and drives the global significance ($\Delta\eta = -2.33 \times 10^{-3}$, $9.71\sigma$; CMB-cross-station robustness check). Station-level full-joint regressions reveal a more nuanced picture: at Grasse, the "clear hierarchy" replicates with $\eta_\theta$ ($t = -13.07$) dominating over $\eta_{v_r}$ ($t = 7.52$) and $\eta_r$ ($t = 3.66$). Haleakala shows only $\eta_\theta$ significant ($t = 2.57$), with large uncertainties from $N = 666$. APO produces all three coefficients significant, but $\eta_r$ is anomalously strong ($t = -3.81$), suggesting station-specific systematics. McDonald2 has insufficient power to resolve the hierarchy. The station-to-station variation could arise from reflector-orientation differences (Apollo retroreflectors vs Lunokhod corner cubes have different angular acceptance patterns), latitude-dependent observational geometry that samples different portions of the Earth-Moon orientation phase space, or residual station-specific systematics. The fact that the two stations with the largest datasets (Grasse and McDonald2) show the same sign is encouraging, while Haleakala's opposite sign may reflect its unique observational constraints or the small sample size. Resolving this pattern requires station-level systematic modelling beyond the scope of the present analysis.
 
@@ -2522,13 +2483,13 @@ A CMB-phase annual signal test using both sin and cos harmonics (phase-independe
 
 ### 5.8 Systematic Falsification Boundary
 
-Known modeled artifact explanations are strongly constrained across multiple independent tests detailed in Section 4.18, but not eliminated in the absolute sense. In interpretative terms, the remaining external closure requirement is a dynamical ephemeris refit with TEP scalar field dynamics enabled at the integrator level, which would confirm whether the residual-channel synodic amplitude projects consistently into the orbital state evolution.
+Known modeled artifact explanations are strongly constrained across multiple independent tests detailed in Section 4.33, but not eliminated in the absolute sense. In interpretative terms, the remaining external closure requirement is a dynamical ephemeris refit with TEP scalar field dynamics enabled at the integrator level, which would confirm whether the residual-channel synodic amplitude projects consistently into the orbital state evolution.
 
 The measurement resolves any internal density profile ambiguity: the negative sign confirms that macroscopic potential scaling structurally dominates over topological soliton-radius interactions.
 
 The Observable Response Coefficient framework shows internal consistency across the author's body of work: preliminary $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular cluster pulsars (Paper 10).         The LLR Nordtvedt parameter $\eta \approx -3.91 \times 10^{-4}$ from the headline precision-weighted model serves as the Solar System observable response coefficient, exhibiting a substantially smaller magnitude consistent with the screening mechanism: Solar System environments experience stronger Temporal Shear suppression than galactic disks or globular clusters. This provides qualitative consistency across stellar dynamics and planetary ephemerides within the unified $\kappa$ framework.
 
-The coarse temporal $\chi^2/\mathrm{dof} \approx 33$ (Section 4.17) indicates bin-to-bin variance. Hardware epoch analysis (Step 030) provides the key mechanistic explanation: early-era 1980s PMT electronics possessed extremely large variance limits that collapse to $\chi^2/\text{dof} \approx 6.2$ when correctly partitioned by hardware era.
+The coarse temporal $\chi^2/\mathrm{dof} \approx 33$ (Section 4.32) indicates bin-to-bin variance. Hardware epoch analysis (Step 030) provides the key mechanistic explanation: early-era 1980s PMT electronics possessed extremely large variance limits that collapse to $\chi^2/\text{dof} \approx 6.2$ when correctly partitioned by hardware era.
 
 Physical causality, however, is demonstrated by the signal's persistent synodic phase coherence. A random artifact generated by primitive hardware would present as a randomly rotating phasor and naturally scale to zero as modern instrumentation eliminated timing jitter.
 
@@ -2544,7 +2505,7 @@ OLS is not the headline estimator. Its sensitivity to early-generation heavy-tai
 
 In their 1998 paper "Lunar laser ranging and the equivalence principle signal," Müller & Nordtvedt (1998; *Phys. Rev. D* 58, 062001) — the latter being the originator of the Nordtvedt effect itself — noted a synodic residual pattern of characteristic size ~1 cm in 28 years of LLR data (1969–1997). Their analysis, using synodic phase bin-averaging of post-fit residuals, described a signal that was "predominantly proportional to $\cos D$," but this was a qualitative characterization of the residual structure rather than a statistically significant detection of a $\cos D$ modulation.
 
-The 1998 paper attributed this residual to "modeling inadequacies" and did not identify a specific physical or systematic source. The signal was neither absorbed into the ephemeris model nor explained as instrumental artifact. The authors developed an "observation worth function" demonstrating that new-moon observations were most potent for constraining the $\cos D$ amplitude — a finding consistent with the phase-asymmetry documented in Section 4.8. They concluded that LLR observations should "preferentially be made on the new moon side of the quarter moon phase" to maximize sensitivity.
+The 1998 paper attributed this residual to "modeling inadequacies" and did not identify a specific physical or systematic source. The signal was neither absorbed into the ephemeris model nor explained as instrumental artifact. The authors developed an "observation worth function" demonstrating that new-moon observations were most potent for constraining the $\cos D$ amplitude — a finding consistent with the phase-asymmetry documented in Section 4.32. They concluded that LLR observations should "preferentially be made on the new moon side of the quarter moon phase" to maximize sensitivity.
 
 Müller & Nordtvedt (1998) lacked both the theoretical framework and the measurement precision required to characterize this residual. PMT-era electronics (pre-SPAD) imposed noise floors of ~10 cm RMS, making sub-cm signal extraction statistically challenging. No theoretical framework at the time predicted compactness-dependent suppression, leaving the residual without interpretational context. The TEP geometric suppression mechanism had not yet been proposed.
 
@@ -2580,7 +2541,7 @@ Absence of Dynamic-Coupling Frameworks: No historical paper explored TEP-suppres
 
 ### 5.10 Unification of Historically Unexplained LLR Anomalies
 
-*Scope note:* Sections 5.10–5.22 are programmatic predictions and interpretative extensions of the TEP framework. They do not add independent estimands to the pooled full-systematic synodic detection in Section 4.7; instead, they define nearby lunar and metrological observables on which the same time-field architecture can be tested. Quantitative modeling of these effects remains an open analytical target.
+*Scope note:* Sections 5.10–5.22 are programmatic predictions and interpretative extensions of the TEP framework. They do not add independent estimands to the pooled full-systematic synodic detection in Section 4.34; instead, they define nearby lunar and metrological observables on which the same time-field architecture can be tested. Quantitative modeling of these effects remains an open analytical target.
 
 The synodic Nordtvedt modulation detected in this analysis is not the only long-standing anomaly in the LLR record. Several persistent discrepancies, often attributed to modeling gaps or mundane systematics without satisfactory explanation, are discussed below as candidate qualitative readings within the TEP framework of a dynamical proper time field $\phi$ and its associated screening of Temporal Shear.
 
@@ -2723,9 +2684,9 @@ Step 064-PI extends this with explicit prediction-interval calibration on publis
 
 The 35-year Lunar Laser Ranging record provides strong evidence for a synodic Nordtvedt-like component in post-fit INPOP19a residuals with the predicted sign and high-significance persistence under full-systematic control. The primary headline estimand is precision-weighted full-systematic regression on the cleaned sample ($N = 25{,}445$): $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust). The unweighted full-systematic OLS, reported as a sensitivity upper bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$; $6.52\sigma$ cluster-robust). Cook's-Distance excision ($N = 23{,}837$) yields a consistent $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($7.82\sigma$; $8.65\sigma$ cluster-robust). The signal strengthens from $5.25\sigma$ (cosD-only) to $6.17\sigma$ (full unweighted OLS) and $6.94\sigma$ (precision-weighted). Section 4.0 consolidates the independent synodic spine; subsequent sections develop station pooling, systematics, and orthogonality without re-opening the headline claim.
 
-Mandatory external closure defines the decisive falsification arc beyond the pooled residual channel: source-level INPOP or DE430 integrator refits with $\eta$ free, together with independent range-level reductions on archived CRD normal points, must reproduce or refute the synodic amplitude extracted here. Step 056 recovers the same negative $\eta$ by linearized post-fit extraction on published INPOP19a and DE430 archives ($6.17\sigma$ and $5.04\sigma$), but the 82-parameter ephemeris-like proxy and toy Keplerian bases in Steps 032, 041, 054, 065, and 066 are linear stress tests, not symplectic N-body integrators. Only a source-level numerical refit with dynamic $\eta$ inside the IMCCE or JPL integrator can definitively close the absorption loop; collaboration is invited collaboration with IMCCE and JPL to perform such a refit.
+Mandatory external closure defines the decisive falsification arc beyond the pooled residual channel: source-level INPOP or DE430 integrator refits with $\eta$ free, together with independent range-level reductions on archived CRD normal points, must reproduce or refute the synodic amplitude extracted here. Step 056 recovers the same negative $\eta$ by linearized post-fit extraction on published INPOP19a and DE430 archives ($6.17\sigma$ and $5.04\sigma$), but the 82-parameter ephemeris-like proxy and toy Keplerian bases in Steps 032, 041, 054, 065, and 066 are linear stress tests, not symplectic N-body integrators. Only a source-level numerical refit with dynamic $\eta$ inside the IMCCE or JPL integrator can definitively close the absorption loop; collaboration with IMCCE and JPL is invited to perform such a refit.
 
-Conditioned on the primary synodic fit, joint regressions (Steps 047–048, 055) show corroborative fixed-sky directional structure when the Planck dipole axis is used as the operational predictor ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$), while heliocentric distance remains non-significant ($p = 0.171$). Uniform sky-scramble and Gram–Schmidt direction nulls remain marginal ($p_F \approx 0.095$, $p_{F,{\rm eff}} \approx 0.09$); galactic north shares a nearly collinear subspace ($r = 0.984$) rather than resolving a second independent axis. Section 4.24.2 reports the full dipole anatomy; this layer reinforces the scalar-field architecture but does not replace the synodic $\eta$ estimand.
+Conditioned on the primary synodic fit, joint regressions (Steps 047–048, 055) show corroborative fixed-sky directional structure when the Planck dipole axis is used as the operational predictor ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$), while heliocentric distance remains non-significant ($p = 0.171$). Uniform sky-scramble and Gram–Schmidt direction nulls remain marginal ($p_F \approx 0.095$, $p_{F,{\rm eff}} \approx 0.09$); galactic north shares a nearly collinear subspace ($r = 0.984$) rather than resolving a second independent axis. Section 4.33.2 reports the full dipole anatomy; this layer reinforces the scalar-field architecture but does not replace the synodic $\eta$ estimand.
 
 Station pooling with proper systematic control supports a common negative signal: a mixed model with station-specific systematics yields $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ ($6.40\sigma$; $F(4, 25,410) = 1.19$, $p = 0.31$). Full-model AR(1) GLS ($4.66\sigma$) remains consistent with the primary result after temporal autocorrelation is addressed. Frequency-domain orthogonality tests indicate why the residual channel is structurally favored for this TEP component when static Keplerian solvers assume $\eta = 0$; they do not replace integrator-level checks.
 
@@ -2733,9 +2694,9 @@ These results provide substantial empirical support for a dynamical proper time 
 
 ### 6.1 Synthesis of Results
 
-Section 4.0 and the read-order guide in Section 4 consolidate the synodic spine before station critiques, multiplicity control, and extended diagnostics (Sections 4.20–4.31, especially Section 4.15 for robustness and Section 4.3 for balance stress tests). Universal sign and pooling are assessed jointly through the common-$\eta$ mixed model ($F = 1.19$, $p = 0.31$), not through equal per-station $\sigma$ thresholds.
+Section 4.0 and the read-order guide in Section 4 consolidate the synodic spine before station critiques, multiplicity control, and extended diagnostics (Sections 4.32–4.31, especially Section 4.33 for robustness and Section 4.3 for balance stress tests). Universal sign and pooling are assessed jointly through the common-$\eta$ mixed model ($F = 1.19$, $p = 0.31$), not through equal per-station $\sigma$ thresholds.
 
-DE430 (short baseline, outlier sensitivity) is an independent cross-ephemeris strand. The Planck-axis joint layer is corroborative fixed-sky structure whose uniform sky-scramble specificity is $p_F \approx 0.095$ and whose axis is not uniquely identified against galactic north (Section 4.24.2). Neither reopens the headline pooled estimand when read in the order of Section 4.
+DE430 (short baseline, outlier sensitivity) is an independent cross-ephemeris strand. The Planck-axis joint layer is corroborative fixed-sky structure whose uniform sky-scramble specificity is $p_F \approx 0.095$ and whose axis is not uniquely identified against galactic north (Section 4.33.2). Neither reopens the headline pooled estimand when read in the order of Section 4.
 
 ### 6.2 Interpretative Framework
 
@@ -2775,6 +2736,10 @@ the input data.
 Documentation: `README.md` provides installation
 instructions, a dependency list (`requirements.txt`), and
 a quick-start guide.
+
+## Acknowledgements
+
+The Paris Observatory (IMCCE) is thanked for maintaining and distributing the INPOP19a LLR residual archive. Damen Albern is thanked for keeping time during the final reductions.
 
 ## References
 

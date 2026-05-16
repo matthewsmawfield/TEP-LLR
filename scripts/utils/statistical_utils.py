@@ -13,7 +13,7 @@ from typing import Dict
 # Import constants from llr_constants module
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR, Z_ALPHA_2
 from scripts.utils.config import get_config
-from scripts.utils.logger import print_status
+from scripts.utils.logger import print_status, get_verbose_mode
 
 TEP_CONFIG = get_config()
 
@@ -159,7 +159,6 @@ def linear_regression(y: np.ndarray, x: np.ndarray, weights: np.ndarray = None) 
     eta_err = A_err / ETA_SCALE_FACTOR
     
     # Logging
-    from scripts.utils.logger import print_status, get_verbose_mode
     if get_verbose_mode() and np.isfinite(eta):
         print_status(f"Linear Regression Complete (N={n}, DOF={res['dof']}):", "CALC")
         print_status(f"  RSS={res['rss']:.6e}, MSE={res['mse']:.6e}, χ²_red={res['chi2_red']:.3f}", "CALC")
@@ -269,7 +268,6 @@ def detect_outliers_iqr(residuals: np.ndarray, multiplier: float = 3.0) -> np.nd
     lower_bound = q25 - multiplier * iqr
     upper_bound = q75 + multiplier * iqr
 
-    from scripts.utils.logger import print_status, get_verbose_mode
     if get_verbose_mode():
         mask = (residuals < lower_bound) | (residuals > upper_bound)
         print_status(
@@ -320,7 +318,6 @@ def detect_outliers_sigma(residuals: np.ndarray, sigma_threshold: float = 5.0) -
     sigma = 1.4826 * mad
     threshold = sigma_threshold * sigma
 
-    from scripts.utils.logger import print_status, get_verbose_mode
     if get_verbose_mode():
         mask = np.abs(residuals - median) > threshold
         print_status(

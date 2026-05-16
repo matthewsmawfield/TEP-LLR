@@ -8,6 +8,7 @@ Author: TEP-LLR Analysis Pipeline
 Date: 2026-05-14
 """
 
+import json
 import sys
 from pathlib import Path
 import numpy as np
@@ -40,7 +41,6 @@ def meta_analysis_ephemerides(verbose=False):
         print_status("step_003_statistical_analysis.json not found", "ERROR")
         return None
 
-    import json
     with open(step_003_file, 'r') as f:
         step_003_results = json.load(f)
 

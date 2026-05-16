@@ -1,3 +1,4 @@
+import json
 import logging
 import sys
 from pathlib import Path
@@ -46,9 +47,6 @@ class TEPLogger:
         self.logger.exception(msg)
 
     def save_step_results(self, results: dict, project_root, step_name: str):
-        import json
-        import os
-        from pathlib import Path
         root = Path(project_root)
         out_path = root / "results" / "outputs" / f"{step_name}.json"
         out_path.parent.mkdir(parents=True, exist_ok=True)
