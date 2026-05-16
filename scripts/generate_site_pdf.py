@@ -13,6 +13,7 @@ Usage:
 
 import asyncio
 import argparse
+import shutil
 import subprocess
 import sys
 import re
@@ -108,7 +109,6 @@ def copy_pdf_to_docs(source_pdf: Path, docs_dir: Path):
     target_path = docs_dir / target_name
 
     # Copy the file
-    import shutil
     shutil.copy2(source_pdf, target_path)
 
     print(f"📄 Copied to: {target_path}")
@@ -128,7 +128,6 @@ def copy_pdf_to_root(source_pdf: Path, base_dir: Path):
     target_path = base_dir / target_name
 
     # Copy the file
-    import shutil
     shutil.copy2(source_pdf, target_path)
 
     print(f"📄 Copied to root: {target_path}")

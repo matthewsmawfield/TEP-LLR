@@ -40,7 +40,7 @@ heliocentric distance modulation (perihelion at longitude ≈ 103°) are offset
 by approximately 70° in orbital phase. This phase offset makes them
 statistically distinguishable.
 
-This step uses DE421 ephemeris via Skyfield to compute:
+This step uses DE440 ephemeris via Skyfield to compute:
   - Earth's orbital velocity vector in the Barycentric frame
   - The Earth-Moon unit vector for every observation
   - Dot products with the CMB dipole direction
@@ -184,7 +184,7 @@ def cmb_anisotropy_analysis(df, verbose=False):
     # ------------------------------------------------------------------
     # 1. Compute CMB-frame kinematics
     # ------------------------------------------------------------------
-    print_status("Computing CMB-frame projections via DE421/Skyfield...", "PROCESS")
+    print_status("Computing CMB-frame projections via DE440/Skyfield...", "PROCESS")
     cmb_data = compute_cmb_projections(jd)
 
     v_par = cmb_data["v_parallel_kms"]

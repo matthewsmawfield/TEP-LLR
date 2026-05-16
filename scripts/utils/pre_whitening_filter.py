@@ -4,6 +4,7 @@ Pre-Whitening Filter for TEP-LLR
 Removes dominant non-synodic seasonal and systematic harmonics from residuals.
 """
 import numpy as np
+from scipy import stats
 from scripts.utils.numerics import stable_lstsq
 import pandas as pd
 from typing import List
@@ -164,8 +165,6 @@ def validate_pre_whitening(df: pd.DataFrame, verbose: bool = False) -> dict:
     nuisance harmonics; a large increase would indicate the filter is creating
     artificial orthogonality.
     """
-    from scipy import stats
-
     cos_elong = np.cos(df['elongation_rad'].values)
     y_raw = df['residual_m'].values
 

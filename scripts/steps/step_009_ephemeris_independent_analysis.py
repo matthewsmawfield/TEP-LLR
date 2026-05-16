@@ -2,7 +2,7 @@
 """
 Step 009: Systematic-Corrected Residual Analysis
 
-Note: The elongation angle used here is computed from Skyfield/DE421 during
+Note: The elongation angle used here is computed from Skyfield/DE440 during
 preprocessing. This step tests TEP detection on residuals after systematic
 corrections, not with an independently-derived elongation.
 """

@@ -27,7 +27,7 @@ phase). A distance-only model and a velocity-only model make orthogonal
 predictions. A joint fit can distinguish both effects.
 
 This step computes Earth's orbital velocity vector for every LLR epoch using
-the DE421 ephemeris via Skyfield, then tests:
+the DE440 ephemeris via Skyfield, then tests:
   1. Does $\eta$ correlate with orbital speed $|v|$?
   2. Does $\eta$ correlate with radial velocity $v_r$?
   3. Joint model: $\eta = \eta_0 + \eta_r \Delta r + \eta_v v_r + \epsilon$
@@ -66,7 +66,7 @@ _CMB_UNIT = np.array([
 def compute_orbital_velocities(jd_array):
     """Compute Earth's heliocentric orbital velocity components.
 
-    Uses Skyfield with DE421 ephemeris to compute the Earth-Sun relative
+    Uses Skyfield with DE440 ephemeris to compute the Earth-Sun relative
     velocity vector at each Julian date.
 
     Parameters:
@@ -178,7 +178,7 @@ def velocity_modulation_analysis(df, verbose=False):
     # ------------------------------------------------------------------
     # 1. Compute orbital kinematics for every observation
     # ------------------------------------------------------------------
-    print_status("Computing Earth orbital velocities via DE421/Skyfield...", "PROCESS")
+    print_status("Computing Earth orbital velocities via DE440/Skyfield...", "PROCESS")
     vel_data = compute_orbital_velocities(jd)
 
     df = df.copy()

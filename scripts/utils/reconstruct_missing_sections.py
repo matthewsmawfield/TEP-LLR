@@ -4,6 +4,7 @@ Reconstruct missing Sections 4.4, 4.5, 4.6 from pipeline results and insert them
 into 4_results.html, then shift all subsequent section numbers.
 """
 
+import json
 import re
 from pathlib import Path
 
@@ -15,7 +16,6 @@ COMPONENTS_DIR = PROJECT_ROOT / "site" / "components"
 # ============================================================================
 
 def load_json(path):
-    import json
     with open(path) as f:
         return json.load(f)
 
@@ -169,8 +169,6 @@ for old, new in header_map.items():
 # Now shift inline references in 4_results.html and other files
 # Need to handle: Section 4.7, Sections 4.7–4.10, §4.7, etc.
 # We'll do a regex-based replacement for all component files
-
-import re
 
 def shift_section_numbers(text, file_name=""):
     """Shift section numbers 4.7+ -> 4.10+ in text."""
