@@ -23,6 +23,29 @@ venv/
 
 # Ephemeris binaries
 *.bsp
+*.dat
+
+# Build artifacts
+site/node_modules/
+site/dist/
+
+# Env / secrets
+.env*
+.env.local
+*.pem
+*.key
+credentials.json
+*secret*.json
+
+# Large binaries and archives
+*.tar
+*.tar.gz
+*.npz
+*.zip
+*.7z
+
+# Test cache
+.pytest_cache/
 
 # OS
 .DS_Store

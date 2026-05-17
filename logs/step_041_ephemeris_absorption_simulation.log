@@ -1,14 +1,14 @@
-[10:55:17] ═══ ═══ Step 041: Controlled Injection Absorption Test ═══
-[10:55:17]     Loaded INPOP19a residuals: N=26,207
-[10:55:17]     Native cos(D) removed: -5.893 mm (η=-4.5330e-04)
-[10:55:17]     Ephemeris-like basis: 82 parameters
-[10:55:17]     Injection amplitude: 5.08 mm (η=-3.91e-04)
-[10:55:17] >>> --- Scenario A: Static η injection ---
-[10:55:17]       Pre-fit η = -3.9088e-04; Post-fit η = -1.1364e-05; Carrier absorption = 97.1%
-[10:55:17] >>> --- Scenario B: Dynamic η (TEP) injection ---
-[10:55:17]       Pre-fit η = -3.9064e-04; Post-fit η = -1.1366e-05; Carrier absorption = 97.1%; Mean sideband survival = 96.0%
-[10:55:17] >>> --- Scenario C: Null (no injection) ---
-[10:55:17]       Pre-fit η = -2.7874e-19; Post-fit η = -7.5357e-06; Mean sideband survival = 95.4%
-[10:55:17] ✓   --- CONCLUSION ---
-[10:55:17] ✓   On real INPOP19a residuals, a static Nordtvedt injection (η=-3.91e-04) is absorbed at 97.1% efficiency by an 82-parameter ephemeris-like basis. A dynamically modulated TEP injection of the same amplitude leaves sidebands surviving at 96.0% after identical fitting. The null case shows no spurious carrier extraction. This controlled-injection test confirms that spectral orthogonality of cross-frequency sidebands—not merely parameter-count inadequacy—prevents standard ephemeris-like fitting from absorbing the TEP signal.
-[10:55:17] ✓   Saved results to results/outputs/step_041_ephemeris_absorption_simulation.json
+[19:25:46] ═══ ═══ Step 041: Controlled Injection Absorption Test ═══
+[19:25:46]     Loaded INPOP19a residuals: N=26,207
+[19:25:46]     Native cos(D) removed: -5.893 mm (η=-4.5330e-04)
+[19:25:46]     Ephemeris-like basis: 82 parameters
+[19:25:46]     Injection amplitude: 5.08 mm (η=-3.91e-04)
+[19:25:46] >>> --- Scenario A: Static η injection ---
+[19:25:46]       Pre-fit η = -3.9088e-04; Post-fit η = -1.1364e-05; Carrier absorption = 97.1%
+[19:25:46] >>> --- Scenario B: Dynamic η (TEP) injection ---
+[19:25:46]       Pre-fit η = -3.9064e-04; Post-fit η = -1.1366e-05; Carrier absorption = 97.1%; Mean sideband survival = 96.0%
+[19:25:46] >>> --- Scenario C: Null (no injection) ---
+[19:25:47]       Pre-fit η = -2.7874e-19; Post-fit η = -7.5357e-06; Mean sideband survival = 95.4%
+[19:25:47] ✓   --- CONCLUSION ---
+[19:25:47] ✓   On real INPOP19a residuals, a static Nordtvedt injection (η=-3.91e-04) is absorbed at 97.1% efficiency by an 82-parameter ephemeris-like basis. A dynamically modulated TEP injection of the same amplitude leaves sidebands surviving at 96.0% after identical fitting. The null case shows no spurious carrier extraction. This controlled-injection test confirms that spectral orthogonality of cross-frequency sidebands—not merely parameter-count inadequacy—prevents standard ephemeris-like fitting from absorbing the TEP signal.
+[19:25:47] ✓   Saved results to results/outputs/step_041_ephemeris_absorption_simulation.json

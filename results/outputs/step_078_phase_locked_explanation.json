@@ -1,0 +1,17 @@
+{
+  "step_id": "step_078",
+  "status": "PASS",
+  "headline_eta": -0.0003908842592328793,
+  "observed_differential_eta": -0.0005951823360755046,
+  "observed_differential_eta_error": 0.00010075844717913179,
+  "differential_amplitude_m": -0.014837971826116743,
+  "differential_amplitude_error_m": 0.002511920986004477,
+  "effective_delta_cosd": 1.917702154416812,
+  "expected_differential_eta_from_headline": -0.0007495995860585123,
+  "observed_minus_expected": 0.0001544172499830076,
+  "difference_in_sigma": 1.5325489257340317,
+  "n_new_moon": 393,
+  "n_full_moon": 1506,
+  "bin_imbalance_ratio": 3.83206106870229,
+  "interpretation": "The phase-locked differential uses a mean-difference estimator with effective Delta_cosD = 1.92. Projecting the headline regression amplitude onto this bin structure predicts a differential eta = -7.4960e-04, while the observed is -5.9518e-04 (difference = 1.5442e-04 = 1.53sigma). The 1.5x amplitude discrepancy is explained by the differential estimator's different weighting of the new/full moon bins (1:3.8 imbalance) and daytime/nighttime noise asymmetry."
+}

@@ -1,31 +1,31 @@
-[10:54:12] ═══ ═══ Starting Leverage Temporal Clustering analysis...
-[10:54:12]     ═══ STEP PURPOSE: Identify high-leverage points from OLS fit and bin into temporal epochs to investigate OLS vs Theil-Sen divergence
-[10:54:12]     ═══ METHOD: Cook's Distance calculation, temporal binning (5-year epochs), station distribution analysis
-[10:54:12]     ═══ PARAMETERS: Cook's D threshold=4/n, epoch bin size=5 years
-[10:54:12] >>> Starting Leverage Temporal Clustering analysis...
-[10:54:12]     ═══ DATA SUMMARY
-[10:54:12]         Dataset: N = 26,207 observations
-[10:54:12]         Data source: INPOP19a_all_stations_residuals.csv
-[10:54:12]     ═══ ANALYSIS TRACE
-[10:54:12] >>> >>> Calculating Cook's Distance for all observations
-[10:54:12] >>> >>> Identifying high-leverage points (threshold = 1.526310e-04)
-[10:54:12] >>> >>> Binning high-leverage points into 5-year epochs
-[10:54:12] >>> >>> Analyzing station distribution of high-leverage points
-[10:54:12]     ═══ RESULTS SUMMARY
-[10:54:12]         Total High-Leverage Points: 1,031
-[10:54:12]         Cook's D threshold: 1.526310e-04
-[10:54:12]         Clustered Anomalies Detected: True
-[10:54:12]         Grasse Dominated: True
-[10:54:12]     ═══ INTERPRETATION
-[10:54:12]         High-leverage points binned into 5-year epochs
-[10:54:12]         Overrepresentation factor > 1.5 indicates specific hardware era or localized anomaly
-[10:54:12]         Station distribution analysis tests for instrument-specific effects
-[10:54:12]     ═══ REPRODUCIBILITY
-[10:54:12]         Output file: results/outputs/step_025_leverage_temporal_clustering.json
-[10:54:12]         Cook's D threshold: 4/n
-[10:54:12]         Epoch bin size: 5 years
-[10:54:12]         Data source: INPOP19a_all_stations_residuals.csv
-[10:54:12]     Total High-Leverage Points: 1031
-[10:54:12]     Clustered Anomalies Detected? True
-[10:54:12] ✓   Leverage Temporal Clustering Complete.
-[10:54:12]     Saved results to results/outputs/step_025_leverage_temporal_clustering.json
+[19:24:34] ═══ ═══ Starting Leverage Temporal Clustering analysis...
+[19:24:34]     ═══ STEP PURPOSE: Identify high-leverage points from OLS fit and bin into temporal epochs to investigate OLS vs Theil-Sen divergence
+[19:24:34]     ═══ METHOD: Cook's Distance calculation, temporal binning (5-year epochs), station distribution analysis
+[19:24:34]     ═══ PARAMETERS: Cook's D threshold=4/n, epoch bin size=5 years
+[19:24:34] >>> Starting Leverage Temporal Clustering analysis...
+[19:24:34]     ═══ DATA SUMMARY
+[19:24:34]         Dataset: N = 26,207 observations
+[19:24:34]         Data source: INPOP19a_all_stations_residuals.csv
+[19:24:34]     ═══ ANALYSIS TRACE
+[19:24:34] >>> >>> Calculating Cook's Distance for all observations
+[19:24:34] >>> >>> Identifying high-leverage points (threshold = 1.526310e-04)
+[19:24:34] >>> >>> Binning high-leverage points into 5-year epochs
+[19:24:34] >>> >>> Analyzing station distribution of high-leverage points
+[19:24:34]     ═══ RESULTS SUMMARY
+[19:24:34]         Total High-Leverage Points: 1,031
+[19:24:34]         Cook's D threshold: 1.526310e-04
+[19:24:34]         Clustered Anomalies Detected: True
+[19:24:34]         Grasse Dominated: True
+[19:24:34]     ═══ INTERPRETATION
+[19:24:34]         High-leverage points binned into 5-year epochs
+[19:24:34]         Overrepresentation factor > 1.5 indicates specific hardware era or localized anomaly
+[19:24:34]         Station distribution analysis tests for instrument-specific effects
+[19:24:34]     ═══ REPRODUCIBILITY
+[19:24:34]         Output file: results/outputs/step_025_leverage_temporal_clustering.json
+[19:24:34]         Cook's D threshold: 4/n
+[19:24:34]         Epoch bin size: 5 years
+[19:24:34]         Data source: INPOP19a_all_stations_residuals.csv
+[19:24:34]     Total High-Leverage Points: 1031
+[19:24:34]     Clustered Anomalies Detected? True
+[19:24:34] ✓   Leverage Temporal Clustering Complete.
+[19:24:34]     Saved results to results/outputs/step_025_leverage_temporal_clustering.json

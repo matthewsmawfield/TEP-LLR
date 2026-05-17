@@ -1,25 +1,25 @@
-[10:55:32] ═══ Initiating Inter-Station Consistency Deep Scan...
-[10:55:32]     Comparing 5 independent instruments:
-[10:55:32]       Grasse    : η = -5.4018e-04 ± 1.0875e-04 (SNR=4.97σ)
-[10:55:32]       Haleakala : η = 3.5535e-03 ± 1.4487e-03 (SNR=2.45σ)
-[10:55:32]       McDonald2 : η = -5.0094e-04 ± 3.6058e-04 (SNR=1.39σ)
-[10:55:32]       Matera    : η = -1.8131e-05 ± 8.7066e-04 (SNR=0.02σ)
-[10:55:32]       APO       : η = -2.3984e-04 ± 8.6641e-05 (SNR=2.77σ)
-[10:55:32] 
-[10:55:32] >>> --- META-ANALYSIS SUMMARY ---
-[10:55:32]     Combined η (fixed effects): -3.5118e-04 ± 6.6335e-05
-[10:55:32]     Combined SNR:               5.29σ
-[10:55:32]     Heterogeneity Q-statistic:  12.25 (df=4)
-[10:55:32]     Heterogeneity p-value:      0.0156
-[10:55:32]     I² statistic:               67.4%
-[10:55:32] 
-[10:55:32] ⚠   RESULT: Significant heterogeneity detected between stations (p < 0.05).
-[10:55:32]     Systematic station-specific biases must be addressed in discussion.
-[10:55:32] 
-[10:55:32] >>> --- CONTROLLED POOLING (Step 050) ---
-[10:55:32]     Common-eta pooled fit: η = -4.3213e-04 ± 6.7563e-05 (6.40σ)
-[10:55:32]     F-test for station-specific η: F = 1.18, p = 0.3151
-[10:55:32]     Pooled meta-analysis (station-specific systematics): η = -4.3717e-04 ± 6.7784e-05 (6.45σ), Q = 3.59, p_het = 0.1664
-[10:55:32] ✓   RESULT: Controlled pooling supports a single common Nordtvedt parameter.
-[10:55:32] Results saved to results/outputs/step_014_inter_station_consistency.json
-[10:55:32] ✓   Consistency Analysis Complete.
+[19:26:02] ═══ Initiating Inter-Station Consistency Deep Scan...
+[19:26:02]     Comparing 5 independent instruments:
+[19:26:02]       Grasse    : η = -5.4018e-04 ± 1.0875e-04 (SNR=4.97σ)
+[19:26:02]       Haleakala : η = 3.5535e-03 ± 1.4487e-03 (SNR=2.45σ)
+[19:26:02]       McDonald2 : η = -5.0094e-04 ± 3.6058e-04 (SNR=1.39σ)
+[19:26:02]       Matera    : η = -1.8131e-05 ± 8.7066e-04 (SNR=0.02σ)
+[19:26:02]       APO       : η = -2.3984e-04 ± 8.6641e-05 (SNR=2.77σ)
+[19:26:02] 
+[19:26:02] >>> --- META-ANALYSIS SUMMARY ---
+[19:26:02]     Combined η (fixed effects): -3.5118e-04 ± 6.6335e-05
+[19:26:02]     Combined SNR:               5.29σ
+[19:26:02]     Heterogeneity Q-statistic:  12.25 (df=4)
+[19:26:02]     Heterogeneity p-value:      0.0156
+[19:26:02]     I² statistic:               67.4%
+[19:26:02] 
+[19:26:02] ⚠   RESULT: Significant heterogeneity detected between stations (p < 0.05).
+[19:26:02]     Systematic station-specific biases must be addressed in discussion.
+[19:26:02] 
+[19:26:02] >>> --- CONTROLLED POOLING (Step 050) ---
+[19:26:02]     Common-eta pooled fit: η = -4.3213e-04 ± 6.7563e-05 (6.40σ)
+[19:26:02]     F-test for station-specific η: F = 1.18, p = 0.3151
+[19:26:02]     Pooled meta-analysis (station-specific systematics): η = -4.3717e-04 ± 6.7784e-05 (6.45σ), Q = 3.59, p_het = 0.1664
+[19:26:02] ✓   RESULT: Controlled pooling supports a single common Nordtvedt parameter.
+[19:26:02] Results saved to results/outputs/step_014_inter_station_consistency.json
+[19:26:02] ✓   Consistency Analysis Complete.

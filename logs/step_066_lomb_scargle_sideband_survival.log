@@ -1,26 +1,26 @@
-[10:59:13] ═══ ═══ Step 066: Lomb-Scargle Sideband Survival Analysis ═══
-[10:59:13]     Loaded canonical 6σ-cleaned INPOP19a residuals: N=25,445
-[10:59:13] >>> Building ephemeris-like basis...
-[10:59:13]     Basis size: 82 parameters
-[10:59:13] >>> Fitted basis to real residuals.
-[10:59:13]     --- Real INPOP residuals: peak extraction ---
-[10:59:13]       D_minus_M           : pre=0.0164, post=0.0116, survival=70.7%
-[10:59:13]       D                   : pre=0.0052, post=0.0031, survival=59.6%
-[10:59:13]       D_plus_M            : pre=0.0059, post=0.0057, survival=96.6%
-[10:59:13]       D_minus_annual      : pre=0.0181, post=0.0152, survival=84.0%
-[10:59:13]       D_plus_annual       : pre=0.0099, post=0.0120, survival=121.1%
-[10:59:13]       D_minus_2annual     : pre=0.0029, post=0.0029, survival=101.3%
-[10:59:13]       D_plus_2annual      : pre=0.0104, post=0.0074, survival=71.6%
-[10:59:13]     --- Synthetic modulated TEP signal ---
-[10:59:13]       D_minus_M           : pre=0.0163, post=0.0116, survival=71.1%
-[10:59:13]       D                   : pre=0.0053, post=0.0031, survival=58.7%
-[10:59:13]       D_plus_M            : pre=0.0060, post=0.0057, survival=94.8%
-[10:59:13]       D_minus_annual      : pre=0.0180, post=0.0152, survival=84.3%
-[10:59:13]       D_plus_annual       : pre=0.0101, post=0.0120, survival=118.8%
-[10:59:13]       D_minus_2annual     : pre=0.0028, post=0.0029, survival=104.4%
-[10:59:13]       D_plus_2annual      : pre=0.0105, post=0.0074, survival=71.0%
-[10:59:13]     Real sideband mean survival: 90.9%
-[10:59:13]     Synth sideband mean survival: 90.7%
-[10:59:13] ✓   --- CONCLUSION ---
-[10:59:13] ✓   On real INPOP19a residuals, the central synodic carrier survives at 59.6% after an 82-parameter basis fit, while the mean sideband survival is 90.9%. For the synthetic dynamically modulated TEP signal, carrier survival is 58.7% and sideband mean survival is 90.7%. The sidebands (D±M, D±annual) are substantially more robust to absorption than the central carrier in this linear stress test. This spectral persistence is evidence that the residual signal carries a dynamical sideband signature. This proxy is a linear regression stress test, not a symplectic N-body integrator, and cannot emulate the iterative dynamic potentials of the actual Fortran/C++ code underlying INPOP or DE430. The definitive external confirmation remains a source-level INPOP/DE430 refit with η or the equivalent TEP parameter explicitly estimated.
-[10:59:13] ✓   Saved results to results/outputs/step_066_lomb_scargle_sideband_survival.json
+[19:29:53] ═══ ═══ Step 066: Lomb-Scargle Sideband Survival Analysis ═══
+[19:29:53]     Loaded canonical 6σ-cleaned INPOP19a residuals: N=25,445
+[19:29:53] >>> Building ephemeris-like basis...
+[19:29:53]     Basis size: 82 parameters
+[19:29:53] >>> Fitted basis to real residuals.
+[19:29:53]     --- Real INPOP residuals: peak extraction ---
+[19:29:53]       D_minus_M           : pre=0.0164, post=0.0116, survival=70.7%
+[19:29:53]       D                   : pre=0.0052, post=0.0031, survival=59.6%
+[19:29:53]       D_plus_M            : pre=0.0059, post=0.0057, survival=96.6%
+[19:29:53]       D_minus_annual      : pre=0.0181, post=0.0152, survival=84.0%
+[19:29:53]       D_plus_annual       : pre=0.0099, post=0.0120, survival=121.1%
+[19:29:53]       D_minus_2annual     : pre=0.0029, post=0.0029, survival=101.3%
+[19:29:53]       D_plus_2annual      : pre=0.0104, post=0.0074, survival=71.6%
+[19:29:53]     --- Synthetic modulated TEP signal ---
+[19:29:53]       D_minus_M           : pre=0.0163, post=0.0116, survival=71.1%
+[19:29:53]       D                   : pre=0.0053, post=0.0031, survival=58.7%
+[19:29:53]       D_plus_M            : pre=0.0060, post=0.0057, survival=94.8%
+[19:29:53]       D_minus_annual      : pre=0.0180, post=0.0152, survival=84.3%
+[19:29:53]       D_plus_annual       : pre=0.0101, post=0.0120, survival=118.8%
+[19:29:53]       D_minus_2annual     : pre=0.0028, post=0.0029, survival=104.4%
+[19:29:53]       D_plus_2annual      : pre=0.0105, post=0.0074, survival=71.0%
+[19:29:53]     Real sideband mean survival: 90.9%
+[19:29:53]     Synth sideband mean survival: 90.7%
+[19:29:53] ✓   --- CONCLUSION ---
+[19:29:53] ✓   On real INPOP19a residuals, the central synodic carrier survives at 59.6% after an 82-parameter basis fit, while the mean sideband survival is 90.9%. For the synthetic dynamically modulated TEP signal, carrier survival is 58.7% and sideband mean survival is 90.7%. The sidebands (D±M, D±annual) are substantially more robust to absorption than the central carrier in this linear stress test. This spectral persistence is evidence that the residual signal carries a dynamical sideband signature. This proxy is a linear regression stress test, not a symplectic N-body integrator, and cannot emulate the iterative dynamic potentials of the actual Fortran/C++ code underlying INPOP or DE430. The definitive external confirmation remains a source-level INPOP/DE430 refit with η or the equivalent TEP parameter explicitly estimated.
+[19:29:53] ✓   Saved results to results/outputs/step_066_lomb_scargle_sideband_survival.json

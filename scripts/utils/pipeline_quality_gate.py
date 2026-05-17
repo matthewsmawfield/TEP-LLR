@@ -63,8 +63,8 @@ def check_warning_ledger() -> bool:
 def main() -> int:
     checks = [
         run_check("Schema validation", [sys.executable, "scripts/utils/schema_validation.py"]),
-        run_check("Manuscript value/framing consistency", [sys.executable, "scripts/utils/verify_value_consistency.py"]),
         run_check("Evidence ledger generation", [sys.executable, "scripts/utils/generate_evidence_ledger.py"]),
+        run_check("Manuscript value/framing consistency", [sys.executable, "scripts/utils/verify_value_consistency.py"]),
         run_check("Python compile check", [sys.executable, "-m", "compileall", "scripts"]),
         check_warning_ledger(),
     ]

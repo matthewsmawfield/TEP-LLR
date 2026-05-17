@@ -35,24 +35,11 @@
     </p>
 
     <p>
-        The cleaned DE430 dataset exhibits complex behavior that requires careful
-        interpretation. The full dataset shows no significant correlation with
-        $\cos(D)$, while a small number of phase-clustered gross outliers can
-        dominate the correlation statistic. The primary detection therefore relies on the INPOP19a ephemeris
-        (35.5-year baseline) with precision-weighted full-systematic regression
-        $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$
-        (all $N = 25{,}445$ observations retained).
-        Because only $G=5$ stations contribute, the co-primary uncertainty
-        companion is a wild cluster bootstrap with Webb 6-point weights on the
-        unweighted full-systematic OLS design, giving a $95\%$ percentile
-        interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$; wild cluster bootstrap).
-        The unweighted full-systematic OLS on the same sample, reported as a sensitivity upper
-        bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at
-        $6.17\sigma$ ($6.52\sigma$ cluster-robust for comparison). Cook's-Distance excision on the full-systematic design
-        ($N = 23{,}837$) is retained only as a secondary leverage diagnostic ($7.82\sigma$ / $8.65\sigma$ cluster-robust).
-        A detailed analysis of the
-        DE430 outlier behavior and statistical validation is presented in
-        Section 4.33.
+        The cleaned DE430 dataset shows no significant correlation with
+        $\cos(D)$, while phase-clustered gross outliers can dominate the
+        correlation statistic. The primary detection therefore relies on the
+        INPOP19a ephemeris (35.5-year baseline); full estimator hierarchy in
+        Section 4.1. DE430 outlier behavior is detailed in Section 4.13.
     </p>
 
     <h4>3.1.3 Data Processing</h4>
@@ -119,17 +106,17 @@
     </p>
 
     <p>
-        Three stations are classified as underpowered based on expected SNR. 
-        Matera ($N = 346$) lacks sufficient sample size, with expected SNR = $1.2\sigma$. 
-        McDonald2 suffers from severe phase truncation, yielding expected SNR = $2.4\sigma$. 
-        Haleakala, which operated 1984–1990 with 13.8 cm RMS, achieves only $0.8\sigma$ 
+        Three stations are classified as underpowered based on expected SNR.
+        Matera ($N = 346$) lacks sufficient sample size, with expected SNR = $0.37\sigma$.
+        McDonald2 suffers from severe phase truncation, yielding expected SNR = $0.88\sigma$.
+        Haleakala, which operated 1984–1990 with 13.8 cm RMS, achieves only $0.22\sigma$
         expected SNR at the global $\eta$ — below the powered threshold.
     </p>
 
     <p>
         Haleakala's measured $\eta = +3.55 \times 10^{-3}$ yields an observed
         SNR of $2.45\sigma$ ($p = 0.014$; Haleakala underpowered-station diagnostic),
-        opposite in sign to the global detection. Given its underpowered status (expected SNR = $0.81\sigma$
+        opposite in sign to the global detection. Given its underpowered status (expected SNR = $0.22\sigma$
         at the global $|\eta|$, below the $3\sigma$ threshold), the station
         is down-weighted in precision-weighted regression.
     </p>
@@ -397,7 +384,7 @@
         tests. Subsample robustness implements five-category validation including
         subsample replication, station jackknife, and IPW station-balance
         regression. Station decomposition analysis decomposes the pooled fit into station-specific
-        contributions. Detailed results are presented in Section 4.34.
+        contributions. Detailed results are presented in Section 4.20.
     </p>
 
     <p>
@@ -433,7 +420,7 @@
         A synodic-only Bayesian layer (emcee; Foreman-Mackey et al. 2013) uses
         heteroskedastic Gaussian likelihood with archive $\sigma_i$ and uniform
         priors $\eta \in [-10^{-2}, +10^{-2}]$, $b \in [-0.1, +0.1]$ m. The MCMC analysis
-        runs separate chains for four documented $\eta$ priors (Table 4.8.1)
+        runs separate chains for four documented $\eta$ priors (Table 4.18.1)
         and evaluates the Savage–Dickey ratio at $\eta=0$ with multiple KDE
         bandwidths. This layer is secondary to the cluster-robust frequentist
         headline and the linearized integrator extraction.
@@ -449,7 +436,7 @@
         and significance is assessed via the false alarm probability (Scargle 1982). 
         While the residuals contain multiple periodicities from unmodeled 
         perturbations, the synodic frequency is identified as a significant 
-        spectral feature (Rank 4 in the modern C-SPAD era). Crucially, the 
+        spectral feature (Rank 4 in the modern C-SPAD era). The
         synodic frequency is identified as the absolute maximum peak in 
         the frequency-specific regression scan, confirming that the 
         detected Nordtvedt modulation is uniquely phase-locked to the 
@@ -705,7 +692,7 @@
         remaining systematic; it is addressed independently by cross-ephemeris
         consistency checks and the phase-locked differential
         analysis, which cancels all common-mode systematics by construction
-        (Section 4.33).
+        (Section 4.10).
     </p>
 
     <p>
@@ -741,7 +728,7 @@
         temporal trends, seasonal effects, station-specific time trends, and lunar
         orbital controls. The critical test regresses all systematic variables
         simultaneously and recomputes the partial correlation between residuals
-        and cos(elongation). Detailed results are presented in Section 4.34.1.
+        and cos(elongation). Detailed results are presented in Section 4.12.1.
     </p>
 
     <p>
@@ -751,7 +738,7 @@
         determine when the signal disappears), signal recovery (injecting known
         TEP signals into pure noise to verify pipeline recovery), and detection
         threshold analysis (computing the minimum detectable $\eta$ at various
-        confidence levels). Detailed results are presented in Section 4.34.2.
+        confidence levels). Detailed results are presented in Section 4.12.2.
     </p>
 
     <p>
@@ -763,14 +750,14 @@
         causes dilution in the IPW sum. The precision-weighted regression
         yields $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$,
         confirming the signal without Grasse-weight bias. Detailed results are
-        presented in Section 4.34.3.
+        presented in Section 4.20.3.
     </p>
 
     <p>
         <strong>Station Decomposition.</strong> The pooled regression is decomposed into
         station-specific $\eta$ contributions to verify that the global negative
         sign is not driven by a single observatory. Detailed results are
-        presented in Section 4.34.4.
+        presented in Section 4.20.4.
     </p>
 
     <p>
@@ -867,7 +854,7 @@
     
     <ul>
         <li>Robustness: MAD-based detection is robust against heavy-tailed distributions</li>
-        <li>Conservative threshold: $6\sigma$ corresponds to ~1 in 500 million for Gaussian distribution, with expected false positives of ~0.05 for 26,207 observations (essentially zero)</li>
+        <li>Conservative threshold: $6\sigma$ corresponds to ~1 in 500 million for Gaussian distribution, with expected false positives of ~0.05 for 26,207 observations (negligible)</li>
         <li>Data preservation: Removes only extreme outliers while preserving data integrity</li>
         <li>Statistical rationale: Converts MAD to standard deviation ($\sigma \approx 1.4826 \times$ MAD), threshold = $6 \times 1.4826 \times$ MAD $\approx 8.9 \times$ MAD</li>
         <li>Alternative evaluation: $5\sigma$ (too aggressive), $8\sigma$ (too permissive); $6\sigma$ selected as optimal balance</li>
@@ -934,8 +921,8 @@
     </p>
     
     <ul>
-        <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = $0.81\sigma$ at the global $|\eta| \approx 4.16 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
-        <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$, vs $0.81\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
+        <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = $0.22\sigma$ at the global $|\eta| \approx 4.16 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
+        <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$, vs $0.22\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
         <li>Solar cycle correlation: An investigation of whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip finds partial consistency with TEP Temporal Shear screening dynamics</li>
         <li>Quality assessment: Comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis find no evidence of systematic bias</li>
     </ul>
@@ -944,7 +931,7 @@
         A formal Monte Carlo simulation (20,000 realizations using the station's actual elongation distribution) quantifies the Haleakala fluctuation. Under the TEP model the deviation is a 2.7σ event (two-tailed <em>p</em> = 0.0063); the family-wise rate -- the probability that any of the five stations would fluctuate this far under TEP -- is 0.5%. Under the GR null the family-wise rate is 1.4%, so the Haleakala fluctuation does not discriminate between the two models and is instead statistically consistent with the tail expected for an underpowered station. The solar-cycle context provides a physical mechanism: Haleakala's 1984--1990 operation epoch coincides with solar maximum (mean solar index = 0.497), and the TEP-predicted solar-cycle modulation amplitude (1.89 × 10⁻³) is of comparable order to the observed deviation, supporting a Temporal Shear screening explanation.
     </p>
     <p>
-        Crucially, excluding Haleakala does not weaken the detection. The clean-subset analysis restricted to Grasse 2010+ and APO -- which drops Haleakala, Matera, and McDonald2 entirely -- yields η = -3.36 × 10⁻⁴ ± 4.63 × 10⁻⁵ (7.25σ cluster-robust), confirming the signal is detectable in the highest-quality data alone. The common-η mixed model with station-specific systematics gives <em>F</em>(4, 25,410) = 1.19, <em>p</em> = 0.31, showing no evidence for station-specific Nordtvedt parameters. The multi-station meta-analysis therefore confirms that the global detection is robust and not driven by any single station.
+        Excluding Haleakala does not weaken the detection. The clean-subset analysis restricted to Grasse 2010+ and APO -- which drops Haleakala, Matera, and McDonald2 entirely -- yields η = -3.36 × 10⁻⁴ ± 4.63 × 10⁻⁵ (7.25σ cluster-robust), confirming the signal is detectable in the highest-quality data alone. The common-η mixed model with station-specific systematics gives <em>F</em>(4, 25,410) = 1.19, <em>p</em> = 0.31, showing no evidence for station-specific Nordtvedt parameters. The multi-station meta-analysis therefore confirms that the global detection is robust and not driven by any single station.
     </p>
 
     <h4>3.4.24 Full Nuisance-Parameter Residual Model</h4>
@@ -1095,10 +1082,10 @@
         a temporally modulated coupling. Those checks motivate
         residual-channel projection; they do not exhaust the dynamical parameter
         space of a full ephemeris. Source-level INPOP or DE430 integrator
-        refits with $\eta$ free remain the critical external test (Section 4.34).
+        refits with $\eta$ free remain the critical external test (Section 4.14).
         Consistency of the footprint across robust estimators (Theil–Sen,
-        precision weighting, MCMC), hardware eras (Section 4.32), phase-resolved
-        analyses (Section 4.33), and the pooled hierarchy in Section 4.0 supports
+        precision weighting, MCMC), hardware eras (Section 4.12), phase-resolved
+        analyses (Section 4.18), and the pooled hierarchy in Section 4.1 supports
         treating the pattern as a coherent physical candidate rather than an
         artifact of analysing residuals instead of performing a full dynamical
         fit.

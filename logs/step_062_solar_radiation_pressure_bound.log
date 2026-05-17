@@ -1,15 +1,15 @@
-[10:54:51] ═══ === Step 062: Solar Radiation Pressure Bound ===
-[10:54:51]     Purpose: Bound local mechanical displacement of Apollo retroreflector arrays from solar radiation pressure.
-[10:54:51]     Measured eta from step_003: -3.1773e-04
-[10:54:51]     TEP signal amplitude: 4.13 mm
-[10:54:51] ═══ === Results ===
-[10:54:51]     Radiation pressure on array: 4.54 uPa
-[10:54:51]     Max force (conservative): 1.030 uN
-[10:54:51]     Elastic displacement (k=1e+06 N/m): 1.03e-09 mm
-[10:54:51]     IR re-radiation displacement: 7.39e-11 mm
-[10:54:51]     Total displacement: 1.10e-09 mm
-[10:54:51]     Ratio to TEP signal: 2.7e-10
-[10:54:51]     Can explain >10% of signal? False
-[10:54:51]     Maximum local mechanical displacement from solar radiation pressure is 1.10e-09 mm, 2.7e-10 times smaller than the 4.13 mm TEP signal.  This mechanism cannot explain the anomaly.
-[10:54:51] Saved results to results/outputs/step_062_solar_radiation_pressure_bound.json
-[10:54:51] ✓   Step 062 complete.
+[19:25:17] ═══ === Step 062: Solar Radiation Pressure Bound ===
+[19:25:17]     Purpose: Bound local mechanical displacement of Apollo retroreflector arrays from solar radiation pressure.
+[19:25:17]     Measured eta from step_003: -3.1773e-04
+[19:25:17]     TEP signal amplitude: 4.13 mm
+[19:25:17] ═══ === Results ===
+[19:25:17]     Radiation pressure on array: 4.54 uPa
+[19:25:17]     Max force (conservative): 1.030 uN
+[19:25:17]     Elastic displacement (k=1e+06 N/m): 1.03e-09 mm
+[19:25:17]     IR re-radiation displacement: 7.39e-11 mm
+[19:25:17]     Total displacement: 1.10e-09 mm
+[19:25:17]     Ratio to TEP signal: 2.7e-10
+[19:25:17]     Can explain >10% of signal? False
+[19:25:17]     Maximum local mechanical displacement from solar radiation pressure is 1.10e-09 mm, 2.7e-10 times smaller than the 4.13 mm TEP signal.  This mechanism cannot explain the anomaly.
+[19:25:17] Saved results to results/outputs/step_062_solar_radiation_pressure_bound.json
+[19:25:17] ✓   Step 062 complete.

@@ -1,10 +1,10 @@
-[10:57:46] ═══ ═══ Step 056: Dynamical Integrator η Refit ═══
-[10:57:46]     INPOP19a cleaned sample: N=25,445
-[10:57:46]     DE430 cleaned sample: N=4,560
-[10:57:46]     Heliocentric modulation uses de440.bsp
-[10:57:46]     Heliocentric modulation uses de440.bsp
-[10:57:46]     INPOP linearized integrator η = -4.0612e-04 ± 6.5778e-05 (6.17σ)
-[10:57:46]     DE430 linearized integrator η = -5.9770e-04 ± 1.1851e-04 (5.04σ)
-[10:57:46]     Cross-ephemeris Δη = 1.9158e-04 ± 1.3554e-04 (1.41σ)
-[10:57:46]     Second-order residual neglected at 2.1e-06 m, four orders of magnitude below the 5.3e-03 m signal.
-[10:57:46] ✓   Saved results to results/outputs/step_056_dynamical_integrator_eta_refit.json
+[19:28:22] ═══ ═══ Step 056: Dynamical Integrator η Refit ═══
+[19:28:22]     INPOP19a cleaned sample: N=25,445
+[19:28:22]     DE430 cleaned sample: N=4,560
+[19:28:22]     Heliocentric modulation uses de440.bsp
+[19:28:22]     Heliocentric modulation uses de440.bsp
+[19:28:22]     INPOP linearized integrator η = -4.0612e-04 ± 6.5778e-05 (6.17σ)
+[19:28:22]     DE430 linearized integrator η = -5.9770e-04 ± 1.1851e-04 (5.04σ)
+[19:28:22]     Cross-ephemeris Δη = 1.9158e-04 ± 1.3554e-04 (1.41σ)
+[19:28:22]     Second-order residual neglected at 2.1e-06 m, four orders of magnitude below the 5.3e-03 m signal.
+[19:28:22] ✓   Saved results to results/outputs/step_056_dynamical_integrator_eta_refit.json

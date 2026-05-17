@@ -13,17 +13,13 @@
 
 ## Abstract
 
-The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field $\phi$ that couples universally to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$, with $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. The coupling strength is density-dependent through a screening of Temporal Shear governed by Temporal Topology, in which high ambient density in deep potential wells suppresses the local field gradient. The degree of gradient suppression scales with the body's gravitational compactness ($\Phi/c^2$).
+The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field $\phi$ that couples universally to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$. In deep gravitational potential wells, high ambient density suppresses the local gradient of this field — a mechanism called Temporal Shear screening — with the degree of suppression scaling with a body's gravitational compactness $\Phi/c^2$. Because Earth and Moon have different compactness and interior shielding profiles, TEP motivates a compactness-dependent Strong Equivalence Principle response that would appear in Lunar Laser Ranging as a synodic Earth-Moon range modulation $\delta r = 13\eta\cos D$, where $D$ is the Moon-Sun elongation angle and $\eta$ is the Nordtvedt parameter. The expected residual-channel amplitude is at the millimetre level for $\eta \sim 10^{-4}$.
 
-TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent suppression. Bodies with different gravitational potentials acquire different effective couplings to $\phi$, which may cause them to fall at different rates in an external gravitational field. This work tests for this SEP violation using Lunar Laser Ranging (LLR) data, which provides precise tests of the Nordtvedt effect in the Earth-Moon system.
+This work analyses 26,207 raw Lunar Laser Ranging O–C residuals from the public INPOP19a ephemeris archives (Paris Observatory, Geoazur), comprising $N = 25{,}445$ measurements from five international stations (1984–2019) after standard $6\sigma$ MAD outlier cleaning. The primary estimand is a precision-weighted synodic regression on the post-fit residual channel, with inverse station-variance weighting and a full systematic model that includes annual, monthly, and station-specific regressors.
 
-This analysis uses 26,207 raw LLR O-C residuals from five international laser ranging stations (APO, Grasse, Matera, McDonald2, Haleakala) spanning 35 years of measurements (1984–2019), with 25,445 retained after standard $6\sigma$ MAD outlier cleaning. The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). The analysis searches for the predicted TEP Nordtvedt signal: a synodic-phase-dependent modulation of the Earth-Moon range given by $\delta r = 13 \eta \cos(D)$, where $\eta$ is the Nordtvedt parameter and $D$ is the Moon-Sun elongation angle.
+The primary precision-weighted residual-channel estimate is $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust). The amplitude stabilises in the band $-3.2$ to $-4.1 \times 10^{-4}$ across the estimator hierarchy, from cosD-only ($5.25\sigma$) through full-systematic OLS ($6.17\sigma$) to precision-weighted ($6.94\sigma$). Robustness checks — common-$\eta$ mixed model, leave-one-station-out meta-analysis, wild cluster bootstrap, phase-locked differential, cross-ephemeris validation on DE430, parametric GR-null bootstrap, and a frequency null scan — all support residual-channel survival of the synodic component (Section 4). Within the standard Parametrized Post-Newtonian framework, the measured Nordtvedt parameter implies $\beta = 0.999902 \pm 1.07 \times 10^{-5}$ from the joint $(\beta, \gamma)$ contour, placing General Relativity ($\beta = \gamma = 1$) at $\Delta\chi^2 = 48.2$, outside the 99% confidence contour. A full-sky directional scan on the residual channel (2,664 uniformly spaced directions, 5° grid) places the Planck CMB dipole axis at rank 226/2664 (top 8.5%); a scrambled-sky null with $n = 1{,}000$ Monte Carlo realizations yields a look-elsewhere-corrected $p < 0.001$.
 
-Analysis of the full 35-year dataset detects a synodic modulation correlated with $\cos(D)$. The headline estimand is a precision-weighted full-systematic regression controlling for annual, monthly, and thermal $\cos(2D)$ aliases: $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$ ($6.78\sigma$ cluster-robust). The unweighted full-systematic OLS sensitivity bound is $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$ / $6.52\sigma$ cluster-robust). A Cook's-Distance leverage diagnostic returns a consistent $\eta = -3.87 \times 10^{-4}$ ($7.82\sigma$ / $8.65\sigma$ cluster-robust), confirming the detection is not driven by high-leverage outliers. The signal strengthens as more systematics are controlled and is stable across mixed-model and station-specific specifications.
-
-Independent confirmation comes from a phase-locked new/full-moon differential ($\eta = -5.95 \times 10^{-4}$, $5.91\sigma$) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component.
-
-In the TEP framework, differential screening of Temporal Shear between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven Temporal Shear suppression dominating in the Earth-Moon system. Source-level INPOP or DE430 integrator refits with $\eta$ free remain the definitive external confirmation test.
+The result is therefore framed as a high-significance residual-channel candidate with a TEP interpretation, not as a completed replacement for direct-fit LLR bounds. Source-level numerical refits of the INPOP or DE430 integrators with $\eta$ left free remain the critical open closure test. Ephemeris-absorption stress tests bound the residual-channel survival amplitude but do not replace a full dynamical integrator-level confirmation.
 
 Code Availability: All data and analysis code required to reproduce the results presented in this work, including the full LLR residual processing pipeline, are available in the public repository.
 
@@ -80,18 +76,16 @@ TEP-LLR/
 │   │   ├── step_002_de430_preprocessing.py     # DE430 ephemeris processing
 │   │   ├── step_003_statistical_analysis.py    # Basic TEP detection analysis
 │   │   ├── step_004_detection_analysis_advanced.py  # Advanced analysis (M4 Pro optimized)
-│   │   ├── ... (74 canonical steps: step_000 through step_073, including 006b and 046b)
+│   │   ├── ... (82 canonical steps: step_000 through step_076, including 006b and 046b)
 │   │   └── run_all_steps.py                     # Run complete pipeline
 │   └── utils/               # Shared utilities
-│       ├── crd_parser.py                          # CRD format parser
 │       ├── llr_constants.py                       # Physical constants
 │       ├── parse_de430.py                         # DE430 parser
-│       ├── parse_inpop_mini.py                   # INPOP parser
+│       ├── parse_inpop_mini.py                    # INPOP parser
 │       ├── logger.py                              # Logging utilities
 │       ├── pipeline_runner.py                     # Pipeline execution
 │       ├── pipeline_quality_gate.py               # Reviewer-facing audit gate
 │       ├── generate_evidence_ledger.py            # Evidence summary artifact
-│       ├── residual_computation.py                # Residual calculations
 │       ├── schema_validation.py                   # Output schema checks
 │       ├── statistical_utils.py                   # Statistical utilities
 │       └── verify_value_consistency.py            # Manuscript value audit

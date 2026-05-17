@@ -1,7 +1,7 @@
 {
     "step_id": "step_035",
     "description": "Quantitative comparison of TEP detection to M\u00fcller & Nordtvedt (1998)",
-    "timestamp": "2026-05-17T10:54:48.945654",
+    "timestamp": "2026-05-17T19:25:15.079626",
     "muller_nordtvedt_1998": {
         "reported_amplitude_cm": 1.0,
         "functional_form": "predominately proportional to cos(D)",

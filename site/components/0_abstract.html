@@ -9,10 +9,11 @@
         suppresses the local gradient of this field — a mechanism called Temporal
         Shear screening — with the degree of suppression scaling with a body's
         gravitational compactness $\Phi/c^2$. Because Earth and Moon have
-        different compactness, differential screening predicts a violation of the
-        Strong Equivalence Principle manifest as a synodic Earth-Moon range
-        modulation $\delta r = 13\eta\cos D$, where $D$ is the Moon-Sun
-        elongation angle and $\eta$ is the Nordtvedt parameter. The expected
+        different compactness and interior shielding profiles, TEP motivates a
+        compactness-dependent Strong Equivalence Principle response that would
+        appear in Lunar Laser Ranging as a synodic Earth-Moon range modulation
+        $\delta r = 13\eta\cos D$, where $D$ is the Moon-Sun elongation angle
+        and $\eta$ is the Nordtvedt parameter. The expected residual-channel
         amplitude is at the millimetre level for $\eta \sim 10^{-4}$.
     </p>
 
@@ -28,42 +29,38 @@
     </p>
 
     <p>
-        The precision-weighted estimate is
+        The primary precision-weighted residual-channel estimate is
         $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$
-        ($6.94\sigma$; $6.78\sigma$ cluster-robust). Sensitivity bounds
-        bracket this estimand: unweighted full-systematic OLS gives
-        $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$
-        ($6.17\sigma$; $6.52\sigma$ cluster-robust), while Cook's-Distance
-        excision of 1,608 high-leverage points returns
-        $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$
-        ($7.82\sigma$; $8.65\sigma$ cluster-robust), confirming the
-        detection is not driven by outliers. Because only five stations
-        contribute, a wild cluster bootstrap with Webb 6-point weights —
-        specifically designed for small-$G$ inference — gives a co-primary
-        $95\%$ interval $[-5.37, -2.73] \times 10^{-4}$
-        ($5.56\sigma$ on the unweighted full-systematic model),
-        confirming that the detection is not an artifact of unreliable
-        small-cluster asymptotics.  The signal strengthens
-        monotonically as controls are added, from $5.25\sigma$ ($\cos D$ only)
-        to $6.94\sigma$ (precision-weighted), indicating that the extracted
-        synodic modulation is not an artifact of omitted systematics.
-        Robustness checks include a common-$\eta$ mixed model with
-        station-specific systematics ($F(4, 25{,}410) = 1.19$, $p = 0.31$),
-        leave-one-station-out meta-analysis ($I^2 = 0.0\%$), and a parametric
-        bootstrap under the GR null (zero false positives in 10,000 trials;
-        95\% upper bound on rate $\approx 3 \times 10^{-4}$).
-        Independent confirmation comes from a phase-locked new/full-moon
-        differential ($\eta = -5.95 \times 10^{-4}$, $5.91\sigma$) and a
-        frequency null scan with no significant non-synodic power.
-        Cross-ephemeris validation on DE430 and orthogonality tests support
-        residual-channel survival of the synodic component.
+        ($6.94\sigma$; $6.78\sigma$ cluster-robust). The amplitude
+        stabilises in the band $-3.2$ to $-4.1 \times 10^{-4}$ across the
+        estimator hierarchy, from cosD-only ($5.25\sigma$) through
+        full-systematic OLS ($6.17\sigma$) to precision-weighted
+        ($6.94\sigma$). Robustness checks — common-$\eta$ mixed model,
+        leave-one-station-out meta-analysis, wild cluster bootstrap,
+        phase-locked differential, cross-ephemeris validation on DE430,
+        parametric GR-null bootstrap, and a frequency null scan — all
+        support residual-channel survival of the synodic component
+        (Section 4).
+        Within the standard Parametrized Post-Newtonian framework,
+        the measured Nordtvedt parameter implies
+        $\beta = 0.999902 \pm 1.07 \times 10^{-5}$ from the joint
+        $(\beta, \gamma)$ contour, placing General Relativity
+        ($\beta = \gamma = 1$) at $\Delta\chi^2 = 48.2$, outside the
+        99\% confidence contour. A full-sky directional scan on the residual
+        channel (2,664 uniformly spaced directions, 5° grid) places the
+        Planck CMB dipole axis at rank 226/2664 (top 8.5\%); a
+        scrambled-sky null with $n = 1{,}000$ Monte Carlo realizations
+        yields a look-elsewhere-corrected $p < 0.001$.
     </p>
 
     <p>
-        Source-level numerical refits of the INPOP or DE430 integrators with
-        $\eta$ left free remain the critical open closure test.
-        Ephemeris-absorption stress tests bound the residual-channel survival
-        amplitude but do not replace a full dynamical integrator-level confirmation.
+        The result is therefore framed as a high-significance residual-channel
+        candidate with a TEP interpretation, not as a completed replacement for
+        direct-fit LLR bounds. Source-level numerical refits of the INPOP or
+        DE430 integrators with $\eta$ left free remain the critical open closure
+        test. Ephemeris-absorption stress tests bound the residual-channel
+        survival amplitude but do not replace a full dynamical integrator-level
+        confirmation.
     </p>
 
     <p>

@@ -1,25 +1,25 @@
-[10:53:33] ═══ Starting Multi-Ephemeris Comparison...
-[10:53:33]     Sigma Outlier Detection: median=-0.000, MAD=0.027, sigma=0.040
-[10:53:33]       Threshold=0.239 (6.0σ), Count=762
-[10:53:33]     Linear Regression Complete (N=25445, DOF=25443):
-[10:53:33]       RSS=9.665854e+01, MSE=3.799023e-03, χ²_red=0.004
-[10:53:33]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
-[10:53:33]       Condition Number κ(R) = 2.11e+00
-[10:53:33]       Final η = -3.17726664e-04 ± 6.05193844e-05
-[10:53:33]       Ephemeris INPOP19a summary:
-[10:53:33]         η   = -3.1773e-04 ± 6.0519e-05
-[10:53:33]         SNR = 5.25σ
-[10:53:33]         N   = 26207 (used=25445, outliers_removed=762)
-[10:53:33]     Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
-[10:53:33]       Threshold=0.297 (6.0σ), Count=37
-[10:53:33]     Linear Regression Complete (N=4560, DOF=4558):
-[10:53:33]       RSS=1.416414e+01, MSE=3.107534e-03, χ²_red=0.003
-[10:53:33]       Birge Ratio = 0.056 (Scaling factor applied: 1.000)
-[10:53:33]       Condition Number κ(R) = 1.87e+00
-[10:53:33]       Final η = -7.04120485e-04 ± 1.18236800e-04
-[10:53:33]       Ephemeris DE430 summary:
-[10:53:33]         η   = -7.0412e-04 ± 1.1824e-04
-[10:53:33]         SNR = 5.96σ
-[10:53:33]         N   = 4597 (used=4560, outliers_removed=37)
-[10:53:33] Results saved to results/outputs/step_006_multi_ephemeris_comparison.json
-[10:53:33] ✓   Multi-Ephemeris Comparison Complete.
+[19:23:50] ═══ Starting Multi-Ephemeris Comparison...
+[19:23:50]     Sigma Outlier Detection: median=-0.000, MAD=0.027, sigma=0.040
+[19:23:50]       Threshold=0.239 (6.0σ), Count=762
+[19:23:50]     Linear Regression Complete (N=25445, DOF=25443):
+[19:23:50]       RSS=9.665854e+01, MSE=3.799023e-03, χ²_red=0.004
+[19:23:50]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+[19:23:50]       Condition Number κ(R) = 2.11e+00
+[19:23:50]       Final η = -3.17726664e-04 ± 6.05193844e-05
+[19:23:50]       Ephemeris INPOP19a summary:
+[19:23:50]         η   = -3.1773e-04 ± 6.0519e-05
+[19:23:50]         SNR = 5.25σ
+[19:23:50]         N   = 26207 (used=25445, outliers_removed=762)
+[19:23:50]     Sigma Outlier Detection: median=0.022, MAD=0.033, sigma=0.050
+[19:23:50]       Threshold=0.297 (6.0σ), Count=37
+[19:23:50]     Linear Regression Complete (N=4560, DOF=4558):
+[19:23:50]       RSS=1.416414e+01, MSE=3.107534e-03, χ²_red=0.003
+[19:23:50]       Birge Ratio = 0.056 (Scaling factor applied: 1.000)
+[19:23:50]       Condition Number κ(R) = 1.87e+00
+[19:23:50]       Final η = -7.04120485e-04 ± 1.18236800e-04
+[19:23:50]       Ephemeris DE430 summary:
+[19:23:50]         η   = -7.0412e-04 ± 1.1824e-04
+[19:23:50]         SNR = 5.96σ
+[19:23:50]         N   = 4597 (used=4560, outliers_removed=37)
+[19:23:50] Results saved to results/outputs/step_006_multi_ephemeris_comparison.json
+[19:23:50] ✓   Multi-Ephemeris Comparison Complete.

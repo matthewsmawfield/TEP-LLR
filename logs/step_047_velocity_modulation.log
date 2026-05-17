@@ -1,48 +1,48 @@
-[10:55:33] ═══ ═══ Step 047: Orbital Velocity Modulation of Temporal Shear ═══
-[10:55:33] >>> Computing Earth orbital velocities via DE440/Skyfield...
-[10:55:33]     Orbital speed range: 29.279 – 30.294 km/s
-[10:55:33]     Radial velocity range: -0.509 – 0.510 km/s
-[10:55:33]     Heliocentric distance range: 0.98322 – 1.01676 AU
-[10:55:33]     Correlation r(distance, v_r) = -0.0868 (quadrature prediction: ~0)
-[10:55:33]     Cleaned dataset: 25,445 observations (762 outliers removed)
-[10:55:33] ═══ ═══ MODEL A: Distance-only modulation ═══
-[10:55:33]     Deep perihelion: η = -2.8082e-04 ± 1.9181e-04 (1.46σ)
-[10:55:33]     Deep aphelion:    η = 7.1236e-05 ± 1.5734e-04 (0.45σ)
-[10:55:33]     Δη (peri - aph) = -3.5206e-04 ± 2.4809e-04 (1.42σ)
-[10:55:33] ═══ ═══ MODEL B: Velocity-only modulation ═══
-[10:55:33]     Fast recession (v_r > 0.461 km/s): η = 2.8540e-04 ± 1.2807e-04 (2.23σ)
-[10:55:33]     Fast approach (v_r < -0.432 km/s):   η = -6.3382e-06 ± 1.6167e-04 (0.04σ)
-[10:55:33]     Δη (away - in) = 2.9174e-04 ± 2.0626e-04 (1.41σ)
-[10:55:33] ═══ ═══ MODEL C: Total speed modulation ═══
-[10:55:33]     High speed (|v| > 30.222 km/s): η = -2.1005e-04 ± 1.9798e-04 (1.06σ)
-[10:55:33]     Low speed (|v| < 29.366 km/s):  η = 9.9056e-05 ± 1.6254e-04 (0.61σ)
-[10:55:33]     Δη (fast - slow) = -3.0911e-04 ± 2.5615e-04 (1.21σ)
-[10:55:33] ═══ ═══ MODEL D: Joint distance + radial velocity ═══
-[10:55:33]     Joint model: η(r, v_r) = -3.2434e-04 + 1.2406e-02·Δr + 3.8350e-04·Δv_r
-[10:55:33]       η_r (distance coeff):   1.2406e-02 ± 5.1853e-03 (t=2.39, p=0.0167)
-[10:55:33]       η_vr (velocity coeff):  3.8350e-04 ± 1.5689e-04 (t=2.44, p=0.0145)
-[10:55:33]       AIC simple=-141803.3, vel-only=-141806.1, joint=-141809.8
-[10:55:33]       BIC simple=-141787.0, vel-only=-141781.7, joint=-141777.3
-[10:55:33]       ΔAIC(vel-only vs simple) = -2.8
-[10:55:33]       ΔAIC(joint vs simple) = -6.6
-[10:55:33] ✓   Joint model preferred over distance-only (ΔAIC < -2)
-[10:55:33] ═══ ═══ MODEL E: CMB-controlled joint fit ═══
-[10:55:33]     CMB-controlled: η(r, v_r, θ) = -2.5358e-04 + 7.1352e-03·Δr + 1.1030e-03·Δv_r + -9.7721e-04·cos(θ)
-[10:55:33]       η_r (distance):   7.1352e-03 ± 5.1951e-03 (t=1.37, p=0.1696)
-[10:55:33]       η_vr (velocity):  1.1030e-03 ± 1.6958e-04 (t=6.50, p=7.9470e-11)
-[10:55:33]       η_θ (CMB orient): -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000e+00)
-[10:55:33]       AIC joint=-141809.8, CMB-ctrl=-141929.1
-[10:55:33] ═══ ═══ Binned radial-velocity analysis ═══
-[10:55:33]     Binned trend: dη/dv_r = 1.2564e-03 ± 5.8839e-04 (t=2.14, p=0.0653)
-[10:55:33] ═══ ═══ Spectral sideband test (velocity-modulated) ═══
-[10:55:33]       QI_peri_away: η = 2.3758e-04 ± 1.2756e-04 (1.86σ, N=6987)
-[10:55:33]       QII_post_peri: η = 1.0951e-04 ± 1.1707e-04 (0.94σ, N=5614)
-[10:55:33]       QIII_aph_in: η = -3.9864e-04 ± 9.4112e-05 (4.24σ, N=7139)
-[10:55:33]       QIV_pre_peri: η = -1.0707e-03 ± 1.5380e-04 (6.96σ, N=5705)
-[10:55:33] ═══ ═══ TEP dynamical prediction test ═══
-[10:55:33]     High dynamical shear (|v_r|/r > 0.482): η = 2.0539e-04 ± 1.5035e-04
-[10:55:33]     Low dynamical shear (|v_r|/r < 0.149):  η = -3.3639e-04 ± 1.8762e-04
-[10:55:33]     Δη = 5.4178e-04 ± 2.4043e-04 (2.25σ)
-[10:55:33] ✓   RESULT: Significant velocity-dependent modulation detected with CMB orientation controlled. TEP temporal topology is dynamical and cosmologically oriented.
-[10:55:33] Results saved to results/outputs/step_047_velocity_modulation.json
-[10:55:33] ✓   Orbital Velocity Modulation analysis complete.
+[19:26:03] ═══ ═══ Step 047: Orbital Velocity Modulation of Temporal Shear ═══
+[19:26:03] >>> Computing Earth orbital velocities via DE440/Skyfield...
+[19:26:03]     Orbital speed range: 29.279 – 30.294 km/s
+[19:26:03]     Radial velocity range: -0.509 – 0.510 km/s
+[19:26:03]     Heliocentric distance range: 0.98322 – 1.01676 AU
+[19:26:03]     Correlation r(distance, v_r) = -0.0868 (quadrature prediction: ~0)
+[19:26:03]     Cleaned dataset: 25,445 observations (762 outliers removed)
+[19:26:03] ═══ ═══ MODEL A: Distance-only modulation ═══
+[19:26:03]     Deep perihelion: η = -2.8082e-04 ± 1.9181e-04 (1.46σ)
+[19:26:03]     Deep aphelion:    η = 7.1236e-05 ± 1.5734e-04 (0.45σ)
+[19:26:03]     Δη (peri - aph) = -3.5206e-04 ± 2.4809e-04 (1.42σ)
+[19:26:03] ═══ ═══ MODEL B: Velocity-only modulation ═══
+[19:26:03]     Fast recession (v_r > 0.461 km/s): η = 2.8540e-04 ± 1.2807e-04 (2.23σ)
+[19:26:03]     Fast approach (v_r < -0.432 km/s):   η = -6.3382e-06 ± 1.6167e-04 (0.04σ)
+[19:26:03]     Δη (away - in) = 2.9174e-04 ± 2.0626e-04 (1.41σ)
+[19:26:03] ═══ ═══ MODEL C: Total speed modulation ═══
+[19:26:03]     High speed (|v| > 30.222 km/s): η = -2.1005e-04 ± 1.9798e-04 (1.06σ)
+[19:26:03]     Low speed (|v| < 29.366 km/s):  η = 9.9056e-05 ± 1.6254e-04 (0.61σ)
+[19:26:03]     Δη (fast - slow) = -3.0911e-04 ± 2.5615e-04 (1.21σ)
+[19:26:03] ═══ ═══ MODEL D: Joint distance + radial velocity ═══
+[19:26:03]     Joint model: η(r, v_r) = -3.2434e-04 + 1.2406e-02·Δr + 3.8350e-04·Δv_r
+[19:26:03]       η_r (distance coeff):   1.2406e-02 ± 5.1853e-03 (t=2.39, p=0.0167)
+[19:26:03]       η_vr (velocity coeff):  3.8350e-04 ± 1.5689e-04 (t=2.44, p=0.0145)
+[19:26:03]       AIC simple=-141803.3, vel-only=-141806.1, joint=-141809.8
+[19:26:03]       BIC simple=-141787.0, vel-only=-141781.7, joint=-141777.3
+[19:26:03]       ΔAIC(vel-only vs simple) = -2.8
+[19:26:03]       ΔAIC(joint vs simple) = -6.6
+[19:26:03] ✓   Joint model preferred over distance-only (ΔAIC < -2)
+[19:26:03] ═══ ═══ MODEL E: CMB-controlled joint fit ═══
+[19:26:03]     CMB-controlled: η(r, v_r, θ) = -2.5358e-04 + 7.1352e-03·Δr + 1.1030e-03·Δv_r + -9.7721e-04·cos(θ)
+[19:26:03]       η_r (distance):   7.1352e-03 ± 5.1951e-03 (t=1.37, p=0.1696)
+[19:26:03]       η_vr (velocity):  1.1030e-03 ± 1.6958e-04 (t=6.50, p=7.9470e-11)
+[19:26:03]       η_θ (CMB orient): -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000e+00)
+[19:26:03]       AIC joint=-141809.8, CMB-ctrl=-141929.1
+[19:26:03] ═══ ═══ Binned radial-velocity analysis ═══
+[19:26:03]     Binned trend: dη/dv_r = 1.2564e-03 ± 5.8839e-04 (t=2.14, p=0.0653)
+[19:26:03] ═══ ═══ Spectral sideband test (velocity-modulated) ═══
+[19:26:03]       QI_peri_away: η = 2.3758e-04 ± 1.2756e-04 (1.86σ, N=6987)
+[19:26:03]       QII_post_peri: η = 1.0951e-04 ± 1.1707e-04 (0.94σ, N=5614)
+[19:26:03]       QIII_aph_in: η = -3.9864e-04 ± 9.4112e-05 (4.24σ, N=7139)
+[19:26:03]       QIV_pre_peri: η = -1.0707e-03 ± 1.5380e-04 (6.96σ, N=5705)
+[19:26:03] ═══ ═══ TEP dynamical prediction test ═══
+[19:26:03]     High dynamical shear (|v_r|/r > 0.482): η = 2.0539e-04 ± 1.5035e-04
+[19:26:03]     Low dynamical shear (|v_r|/r < 0.149):  η = -3.3639e-04 ± 1.8762e-04
+[19:26:03]     Δη = 5.4178e-04 ± 2.4043e-04 (2.25σ)
+[19:26:03] ✓   RESULT: Significant velocity-dependent modulation detected with CMB orientation controlled. TEP temporal topology is dynamical and cosmologically oriented.
+[19:26:03] Results saved to results/outputs/step_047_velocity_modulation.json
+[19:26:03] ✓   Orbital Velocity Modulation analysis complete.

@@ -1,34 +1,34 @@
-[10:53:58] ═══ ═══ Starting Step 020: Temporal Amplitude Evolution Analysis...
-[10:53:58]     ═══ STEP PURPOSE: Investigate whether TEP signal amplitude varies over time (secular trends, instrumental changes)
-[10:53:58]     ═══ METHOD: Sliding window correlation analysis, secular trend testing, instrumental timeline correlation
-[10:53:58]     ═══ PARAMETERS: Window size=5 years, step size=2 years, station window=7 years
-[10:53:58] Step 020: Temporal Amplitude Evolution Analysis
-[10:53:58]     ═══ DATA SUMMARY
-[10:53:58]         Dataset: N = 26,207 observations
-[10:53:58]         Data source: INPOP19a_all_stations_residuals.csv
-[10:53:58]     ═══ ANALYSIS TRACE
-[10:53:58] >>> >>> Running sliding window analysis
-[10:53:58] Running sliding window analysis...
-[10:53:58] >>> >>> Testing for secular trends
-[10:53:58] Testing for secular trends...
-[10:53:58] >>> >>> Correlating with instrumental timeline
-[10:53:58] Correlating with instrumental timeline...
-[10:53:58] >>> >>> Station-specific temporal analysis (Grasse, APO)
-[10:53:58] Station-specific temporal analysis...
-[10:53:58]     ═══ RESULTS SUMMARY
-[10:53:58]         Windows analyzed: 16
-[10:53:58]         Significant windows: 7
-[10:53:58]         Amplitude trend significant: False
-[10:53:58]         Consistency assessment: amplitude_varies_significantly
-[10:53:58]     ═══ INTERPRETATION
-[10:53:58]         Trend interpretation: amplitude_varies_instrumental
-[10:53:58]         Physical variation likely: False
-[10:53:58]         Systematic drift likely: True
-[10:53:58]     ═══ REPRODUCIBILITY
-[10:53:58]         Output file: results/outputs/step_020_temporal_amplitude.json
-[10:53:58]         Window size: 5 years
-[10:53:58]         Step size: 2 years
-[10:53:58] Results saved to results/outputs/step_020_temporal_amplitude.json
-[10:53:58] Windows analyzed: 16
-[10:53:58] Significant windows: 7
-[10:53:58] Trend interpretation: amplitude_varies_instrumental
+[19:24:20] ═══ ═══ Starting Step 020: Temporal Amplitude Evolution Analysis...
+[19:24:20]     ═══ STEP PURPOSE: Investigate whether TEP signal amplitude varies over time (secular trends, instrumental changes)
+[19:24:20]     ═══ METHOD: Sliding window correlation analysis, secular trend testing, instrumental timeline correlation
+[19:24:20]     ═══ PARAMETERS: Window size=5 years, step size=2 years, station window=7 years
+[19:24:20] Step 020: Temporal Amplitude Evolution Analysis
+[19:24:20]     ═══ DATA SUMMARY
+[19:24:20]         Dataset: N = 26,207 observations
+[19:24:20]         Data source: INPOP19a_all_stations_residuals.csv
+[19:24:20]     ═══ ANALYSIS TRACE
+[19:24:20] >>> >>> Running sliding window analysis
+[19:24:20] Running sliding window analysis...
+[19:24:20] >>> >>> Testing for secular trends
+[19:24:20] Testing for secular trends...
+[19:24:20] >>> >>> Correlating with instrumental timeline
+[19:24:20] Correlating with instrumental timeline...
+[19:24:20] >>> >>> Station-specific temporal analysis (Grasse, APO)
+[19:24:20] Station-specific temporal analysis...
+[19:24:20]     ═══ RESULTS SUMMARY
+[19:24:20]         Windows analyzed: 16
+[19:24:20]         Significant windows: 7
+[19:24:20]         Amplitude trend significant: False
+[19:24:20]         Consistency assessment: amplitude_varies_significantly
+[19:24:20]     ═══ INTERPRETATION
+[19:24:20]         Trend interpretation: amplitude_varies_instrumental
+[19:24:20]         Physical variation likely: False
+[19:24:20]         Systematic drift likely: True
+[19:24:20]     ═══ REPRODUCIBILITY
+[19:24:20]         Output file: results/outputs/step_020_temporal_amplitude.json
+[19:24:20]         Window size: 5 years
+[19:24:20]         Step size: 2 years
+[19:24:20] Results saved to results/outputs/step_020_temporal_amplitude.json
+[19:24:20] Windows analyzed: 16
+[19:24:20] Significant windows: 7
+[19:24:20] Trend interpretation: amplitude_varies_instrumental

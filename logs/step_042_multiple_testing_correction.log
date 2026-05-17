@@ -1,9 +1,9 @@
-[10:55:18] ═══ Step 042: Formal Multiple Testing Correction
-[10:55:20]     Collected 51 significance tests from the analysis pipeline
-[10:55:20] ✓   
-The pipeline collected 51 significance measures. Of these, 4 are independent hypotheses and 47 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The headline precision-weighted full-systematic detection (6.94σ) is the primary analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
-[10:55:20]     
+[19:25:47] ═══ Step 042: Formal Multiple Testing Correction
+[19:25:49]     Collected 20 significance tests from the analysis pipeline
+[19:25:49] ✓   
+The pipeline collected 20 significance measures. Of these, 4 are independent hypotheses and 16 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The headline precision-weighted full-systematic detection (6.94σ) is the primary analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
+[19:25:49]     
 ======================================================================
-[10:55:20] ✓   Step 042 completed successfully
-[10:55:20]     ======================================================================
-[10:55:20] Results saved to results/outputs/step_042_multiple_testing_correction.json
+[19:25:49] ✓   Step 042 completed successfully
+[19:25:49]     ======================================================================
+[19:25:49] Results saved to results/outputs/step_042_multiple_testing_correction.json

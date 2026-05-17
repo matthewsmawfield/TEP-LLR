@@ -488,6 +488,15 @@ def main() -> None:
         #        modulation for every axis, and compares the Planck dipole to
         #        a scrambled-sky null distribution.  Addresses cherry-picking.
         "step_076_sky_scan_directional.py",
+        # 077 — Formal GP vs cosD model comparison on held-out data.
+        #        5-fold CV predictive log-likelihood comparison between
+        #        synodic cosD-only, GP-only, and joint cosD+GP models.
+        #        Adjudicates the adversarial GP absorption result.
+        "step_077_gp_formal_model_comparison.py",
+        # 078 — Quantitative explanation of phase-locked vs headline amplitude
+        #        discrepancy. Projects the headline regression onto the
+        #        differential bin structure to show expected vs observed.
+        "step_078_phase_locked_explanation.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

@@ -23,54 +23,28 @@
  Because only $G=5$ stations contribute, the co-primary uncertainty
  companion is a wild cluster bootstrap with Webb 6-point weights on the
  unweighted full-systematic OLS design, giving a $95\%$ percentile
- interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$; .
+ interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$).
  The unweighted full-systematic OLS on the same design, reported as a sensitivity
  upper bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$
  ($6.17\sigma$; $6.52\sigma$ cluster-robust for comparison). Cook's-Distance excision on that
  unweighted row ($N = 23{,}837$) returns $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$
  ($7.82\sigma$; $8.65\sigma$ cluster-robust) as a secondary leverage diagnostic.
  Numerical consolidation of the synodic spine, station pooling, and
- extended diagnostics appears in Section 4 (read order in Section 4.0).
+ extended diagnostics appears in Section 4 (read order in Section 4.1).
  </p>
 
  <p>
  Complementary to that headline estimand, a joint dynamical regression
  layer in the same residual channel tests whether additional structure
  survives after synodic, heliocentric, and CMB-orientation terms are fit
- together (the heliocentric radial velocity and CMB dipole orientation analyses, 055). Orientation remains significant
+ together. Orientation remains significant
  ($t = -11.03$) after heliocentric controls, improving the best purely
- heliocentric model by $\Delta\text{AIC} = -119.2$. the falsification testing
- robustness testing excludes aliasing, multicollinearity, and permutation
+ heliocentric model by $\Delta\text{AIC} = -119.2$. Falsification testing excludes aliasing, multicollinearity, and permutation
  artifacts for the orientation term, while the joint-model directional
  anatomy battery passes. The uniform sky-scramble strand remains marginal
  ($p_F \approx 0.096$ on 100,000 uniform directions; Jeffreys 95% interval on
  $p_F$ about $[0.094, 0.097]$) and is therefore reported as conservative
  directional specificity rather than as an independent strict-threshold pass.
- A composite specificity score combining aliasing, permutation, phase-null,
- orthogonalization, and directional-anatomy tests via Stouffer's Z method
- yields $Z = 1.45$ ($p = 0.074$), quantifying the combined evidence across
- independent test geometries. Correlation-matched scrambling is substantially
- less specific ($p_F \approx 0.266$). By contrast, a synodic phase null that
- circularly shifts the CMB $\cos\theta$ series while preserving its marginal
- distribution rejects chance alignment ($p_{F,{\rm eff}} = 6 \times 10^{-4}$
- on 5,000 shifts; median scrambled $F_{\rm eff} \approx 1.6$ versus
- $F_{\rm eff}^{\rm CMB} \approx 50$). Gram–Schmidt orthogonalized
- direction scrambling remains marginal ($p_{F,{\rm eff}} \approx 0.090$),
- and a $30^\circ$ local rotation cone about the Planck axis is less
- specific still ($p_{F,{\rm eff}} \approx 0.30$). the falsification testing (G2) shows galactic north attains slightly larger $\Delta\mathrm{AIC}$
- in single-axis fits, but the dual-axis test (H) finds
- $r(\cos\theta_{\rm CMB}, \cos\theta_{\rm gal}) = 0.984$: when both are fit
- together, only the galactic coefficient remains marginally significant
- ($t = -2.63$) and the Planck term is absorbed ($t = 0.68$; add-CMB$|$gal
- $p = 0.50$). The orientation signal is therefore one shared subspace, not two
- independent axes.
- Anti-dipole antisymmetry and joint-model direction rotations
- are consistent with dipole geometry about the chosen operational axis, while sky-scrambling
- Monte Carlo places the Planck axis near the $\sim 90.2\%$ quantile of the
- uniform null as the conservative bound. These joint-model results are strong
- corroborative dynamical evidence for fixed-sky directional structure on the
- same residual channel; they do not replace or numerically supersede the primary pooled $\eta$
- estimand.
  </p>
 
  <p>
@@ -83,7 +57,7 @@
 
  <p>
  The finding is cross-checked across the estimator hierarchy in Section
- 4.21 and the independent spine in Section 4.0. Powered hardware-era
+ 4.21 and the independent spine in Section 4.1. Powered hardware-era
  splits and the headline precision-weighted estimand show consistent negative
  $\eta$ values, with no sign reversals among the tests that retain
  adequate phase coverage and $N$.
@@ -98,8 +72,8 @@
  the detection threshold. Subsample robustness testing employs five independent robustness
  tests including subsample replication and station jackknife. Station decomposition
  decomposes the pooled signal into station-specific contributions
- consistent with Section 4.34. Detailed results are presented in
- Section 4.34.
+ consistent with Section 4.20. Detailed results are presented in
+ Section 4.20.
  </p>
 
  <p>
@@ -128,15 +102,15 @@
 
  <p>
  Precision-weighted full-systematic regression
- ($\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, $6.94\sigma$; the precision-weighted regression)
+ ($\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, $6.94\sigma$)
  is the headline cross-station estimator: every observation is retained while
  low-precision hardware is objectively down-weighted. The cosD-only
- precision-weighted diagnostic ($\eta_{\rm WLS} = -3.21 \times 10^{-4} \pm 5.12 \times 10^{-5}$, $6.27\sigma$; the station power analysis)
+ precision-weighted diagnostic ($\eta_{\rm WLS} = -3.21 \times 10^{-4} \pm 5.12 \times 10^{-5}$, $6.27\sigma$)
  shows the same sign under a simplified nuisance structure. Neither construction
  removes all Grasse leverage by construction; together they show that the negative
  phase-locked estimate is not solely an artifact of naive unweighted pooling.
  Outlier sweeps, resampling, cross-validation, and the
- systematic-error budget (Section 4.33) are documented in Results and are
+ systematic-error budget (Section 4.28) are documented in Results and are
  not repeated here.
  </p>
 
@@ -217,30 +191,12 @@
  leaves cosD intact at $5.50\sigma$, confirming the elongation dimension
  is where the GP overfits. Era$\times$station$\times$lunation cells
  ($N \geq 80$) show sign consistency in 13/26 fitted partitions
- (multiplicity control multiplicity as sensitivity). A simple Grasse-specific
+ (multiplicity-controlled sensitivity). A simple Grasse-specific
  differential $\cos(D)$ systematic is disfavored by interaction and
  partition tests, and equal-weighted as well as balanced-station-N
  reweightings preserve the negative sign (though both are underpowered
  by construction), while retaining bounded station-leverage risk. TEP provides a concrete scalar-tensor framework that
  explains the observed signal.
- </p>
-
- <p>
- TEP is favored over the standard General Relativity framework based on
- the following evidence: (1) The residual analysis extracts a statistically
- robust synodic modulation at $6.94\sigma$ from the precision-weighted
- full-systematic INPOP19a headline model, with a wild cluster bootstrap
- $95\%$ interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$) confirming
- the detection survives correction for small-$G$ unreliability, and with
- consistent Cook's-leverage diagnostics at higher SNR on an excised row;
- (2) The signal exhibits the precise functional form predicted by TEP
- ($\cos(D)$ modulation) with the correct sign; (3) The heliocentric gradient
- dependence (perihelion enhancement) is compatible with the qualitative form of TEP's scalar field prediction,
- inconsistent with static GR-based explanations. GR requires $\eta = 0$;
- the residual data indicate a non-zero Nordtvedt parameter consistent with
- TEP's modified gravity framework. A full dynamical ephemeris refit
- incorporating TEP's scalar field dynamics is the natural next external
- confirmation.
  </p>
 
  <p>
@@ -313,7 +269,7 @@
  </p>
 
  <p>
- In Section 4.33.6, the algebraic reason for this failure was
+ In Section 4.12.6, the algebraic reason for this failure was
  derived: separating a synodic amplitude ($\cos(D)$) whose coupling
  constant scales with Earth's changing solar environment ($1/r_\odot$)
  inevitably multiplies the two harmonic frequencies ($D$ and $l'$). This
@@ -409,7 +365,7 @@
  heating could produce the observed signal. A formal parameter sweep
  (420 combinations of thermal conductivity 0.1–5.0 W/m·K and dust
  coverage 0–100%) found that the maximum thermal expansion achievable
- is 1.35 mm, compared to the observed 4.24 mm signal—a 3.1× mismatch.
+ is 1.35 mm, compared to the observed 4.10 mm signal—a 3.1× mismatch.
  Even in the best-case scenario (thermal conductivity = 0.01 W/m·K,
  dust coverage = 100%, $\Delta T = 500$ K), thermal expansion reaches only
  2.24 mm, still 1.8× below the observed signal. The model is
@@ -467,7 +423,7 @@
  <strong>Matched-Window Ephemeris Consistency:</strong>
  The concern that ephemeris scatter ($\pm 2.73 \times 10^{-4}$) is inflated by
  comparing mismatched time spans (INPOP19a: 35.5 years vs DE430:
- 4.16 years) is addressed by restricting INPOP19a to the DE430
+ 4.6 years) is addressed by restricting INPOP19a to the DE430
  window (2014–2018). On the matched window, cosD-only fits give
  INPOP19a $\eta = -3.62 \times 10^{-4} \pm 3.60 \times 10^{-5}$
  ($10.0\sigma$; matched-window robustness check) and DE430
@@ -542,25 +498,16 @@
  (cluster-robust).
  </p>
  <p>
- Cross-ephemeris validation on DE430 residuals provides
- independent evidence consistent with the INPOP19a signal. Section 4.32
- documents that DE430 exhibits baseline-dependent outlier sensitivity
- (36× greater correlation change than INPOP19a despite removing 20× fewer outliers),
- structurally expected from its shorter 4.16-year span. After
- appropriate outlier cleaning, the DE430 signal aligns with the INPOP19a
- signal, supporting the robustness of the primary finding. The canonical
- result therefore rests on the INPOP19a ephemeris (35.5-year baseline) with
- precision-weighted full-systematic regression
- $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at
- $6.94\sigma$ ($N = 25{,}445$).
- Because only $G=5$ stations contribute, the co-primary uncertainty
- companion is a wild cluster bootstrap with Webb 6-point weights, giving
- a $95\%$ percentile interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$).
- The unweighted full-systematic OLS on the same design, reported as a sensitivity upper
- bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at
- $6.17\sigma$ ($6.52\sigma$ cluster-robust for comparison). Cook's-Distance excision on the
- unweighted row is retained as a leverage diagnostic at $7.82\sigma$ ($8.65\sigma$ cluster-robust; $N = 23{,}837$).
- </p>
+Cross-ephemeris validation on DE430 residuals provides
+independent evidence consistent with the INPOP19a signal. Section 4.13
+documents that DE430 exhibits baseline-dependent outlier sensitivity
+(36× greater correlation change than INPOP19a despite removing 20× fewer outliers),
+structurally expected from its shorter 4.6-year span. After
+appropriate outlier cleaning, the DE430 signal aligns with the INPOP19a
+signal, supporting the robustness of the primary finding. The canonical
+result therefore rests on the INPOP19a ephemeris (35.5-year baseline);
+full estimator hierarchy in Section 4.1.
+</p>
  <p>
  The Haleakala Boundary: The Haleakala station yields $\eta = +3.55
  \times 10^{-3}$ at observed SNR $2.45\sigma$ ($p = 0.014$, Table 1;
@@ -568,7 +515,7 @@
  statistical power criteria, this station is classified
  as <em>underpowered</em>: with 13.8 cm RMS and $N = 737$, its expected
  SNR at the global $|\eta| \approx 4.16 \times 10^{-4}$ is only
- $0.81\sigma$, below the $3.0\sigma$ powered-detection threshold.
+$0.22\sigma$, below the $3.0\sigma$ powered-detection threshold.
  Haleakala's opposite sign and observed SNR ($2.45\sigma$, vs $0.22\sigma$ expected at the pooled $|\eta| \approx 3.2 \times 10^{-4}$ once phase-truncation variance is accounted for) exceed the noise expectation, but the station remains underpowered for independent extraction (expected SNR below the $3\sigma$ threshold).
  Underpowered stations lack the statistical power to independently
  constrain the signal and are appropriately down-weighted in
@@ -622,16 +569,16 @@
  <p>
  <strong>Clean-Subset and Orbital Orthogonality.</strong>
 The clean-subset and toy Keplerian analyses address the two most serious residual-analysis
- limitations. the clean-subset analysis isolates Grasse (C-SPAD era) and APO — the
+ limitations. The clean-subset analysis isolates Grasse (C-SPAD era) and APO — the
  two stations with the best precision and phase coverage. The cluster-robust
  SNR rises to $7.25\sigma$ (from ~$5\sigma$ in the full sample), confirming
  the signal strengthens when heterogeneous stations are removed. Temporal
  hold-out on this subset still yields $R^2_{\mathrm{pred}} \approx -0.016$ for the
  full-systematic model, while the $\cos D$-only score is $\approx -8.5 \times 10^{-4}$,
  so most chronological extrapolation loss sits in the nuisance block rather than in
- rejection of a fixed carrier amplitude. the station-balance analysis shows that equal-$N$ balance stress
+ rejection of a fixed carrier amplitude. The station-balance analysis shows that equal-$N$ balance stress
  tests lose power below $3\sigma$ even though the full-archive primary
- fit remains significant. the toy Keplerian model uses a toy
+ fit remains significant. The toy Keplerian model uses a toy
  orbital model to demonstrate that a synodic cos(D) perturbation of the observed
  amplitude (7 mm for $\eta = -5.4 \times 10^{-4}$) is mathematically
  orthogonal to the $\{1, \cos M, \sin M\}$ basis of standard Keplerian
@@ -1010,17 +957,15 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  OLS is not the headline estimator. Its sensitivity to early-generation
  heavy-tailed variance is well understood. While applying a formal Cook's
  Distance excision pipeline on the cosD-only design repairs the linear
- model ($\eta \approx -3.31 \times 10^{-4}$, $5.65\sigma$; the Cook leverage excision
- cosD-only Cook's diagnostic), the headline inference does not depend on
+ model ($\eta \approx -3.31 \times 10^{-4}$, $5.65\sigma$; Cook's-Distance excision), the headline inference does not depend on
  row deletion: precision-weighted full-systematic regression
  gives $\eta = -3.91 \times 10^{-4}$ ($6.94\sigma$) on all
- $N = 25{,}445$ cleaned shots. CosD-only precision weighting (the station power analysis;
- $\eta_{\rm WLS} = -3.21 \times 10^{-4}$, $6.27\sigma$) and Student-t
- MCMC provide complementary robustness checks, together with
+ $N = 25{,}445$ cleaned shots. CosD-only precision weighting ($\eta_{\rm WLS} = -3.21 \times 10^{-4}$, $6.27\sigma$) and Student-t
+MCMC provide complementary robustness checks, together with
  hardware-controlled epoch partitions and the full-systematic Cook's
  leverage diagnostic on the unweighted row
  ($\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$, $7.82\sigma$;
- the precision-weighted regression / the canonical estimator hierarchy bracket).
+bracketing the headline).
  </p>
 
  <h3>5.9 Historical Precedent: The 1998 Synodic Residual</h3>
@@ -1164,7 +1109,7 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  "observation worth function" recommended new-moon observations but did
  not correct for McDonald2's severe phase truncation (mean $\cos D =
  -0.326$; only 3% of
- observations near full moon). TEP Resolution: the station power analysis
+ observations near full moon). TEP Resolution: The station power analysis
  precision-weighted regression and IPW validation explicitly down-weight
  phase-truncated stations; modern C-SPAD era achieves uniform sub-cm
  precision across all synodic phases.
@@ -1222,7 +1167,7 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  <em>Scope note:</em> Sections 5.10–5.22 are programmatic predictions
  and interpretative extensions of the TEP framework. They do not add
  independent estimands to the pooled full-systematic synodic signal
- in Section 4.34; instead, they define nearby lunar and metrological
+ in Section 4.14; instead, they define nearby lunar and metrological
  observables on which the same time-field architecture can be tested.
  Quantitative modeling of these effects remains an open analytical target.
  </p>
@@ -1243,7 +1188,7 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  LLRE, is anomalously high compared to the long-term average of ~1.7
  cm/yr inferred from tidal rhythmites over 2–3 Gyr (Riofrio 2012;
  *Planetary Science* 2012). At the current rate, the Moon would have
- coincided with Earth < 2 Gyr ago, conflicting with the accepted ~4.16 Gyr
+ coincided with Earth < 2 Gyr ago, conflicting with the accepted ~4.6 Gyr
  age. Historical literature attributes this 30% discrepancy to North
  Atlantic tidal resonances, though papers explicitly note "significance
  for cosmology and the speed of light"—a connection that was never
@@ -1266,7 +1211,7 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  <p>
  A long-standing puzzle in Earth-Moon evolution is that present-day tidal
  dissipation rates, if extrapolated linearly to the past, imply a lunar
- age of ~1.5 Gyr rather than the accepted ~4.16 Gyr (*Geology* 2016;
+ age of ~1.5 Gyr rather than the accepted ~4.6 Gyr (*Geology* 2016;
  Hansen 1982). The standard resolution—that tidal dissipation was
  significantly weaker in Earth's past—lacks a physical mechanism
  explaining why or how this would occur.
@@ -1380,7 +1325,7 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  </p>
 
  <p>
- However, the quantitative mismatch is stark: the the core density simulation analysis
+ However, the quantitative mismatch is stark: the core density simulation analysis
  indicates that worst-case thermal expansion of the Apollo housing is ~1
  mm—an order of magnitude too small to explain a 100-fold signal
  collapse. TEP offers a more fundamental resolution: the Earth's shadow
@@ -1561,7 +1506,7 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  Bayesian model comparison on the synodic-only channel is documented but
  not elevated above the frequentist hierarchy. the Bayesian MCMC analysis tabulates
  Savage–Dickey ratios under four uniform $\eta$ priors and four KDE
- bandwidths (Table 4.8.1); the reference-prior Scott estimate is
+ bandwidths (Table 4.18.1); the reference-prior Scott estimate is
  $\mathcal{B}_{\rm SD} \sim 10^{5}$, but the same posterior spans
  $0.12$–$2.9 \times 10^{5}$ in $\mathcal{B}_{\rm SD}$ depending on
  bandwidth alone. the wild cluster bootstrap supplies bandwidth-free cross-checks:

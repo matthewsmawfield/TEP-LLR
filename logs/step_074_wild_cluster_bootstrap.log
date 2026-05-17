@@ -1,17 +1,17 @@
-[10:59:54] ═══ ═══ Step 073: Wild Cluster Bootstrap (small-G robustness) ═══
-[10:59:54]     Dataset: N=25,445 (removed 762 outliers)
-[10:59:54]       η (OLS)            = -4.0612e-04 ± 6.5778e-05 (6.17σ)
-[10:59:54]       η (cluster-robust) = -4.0612e-04 ± 6.2246e-05 (6.52σ)  G=5
-[10:59:54]     --- Wild cluster bootstrap (Webb 6-point) ---
-[11:00:10]       η = -4.0612e-04 ± 7.3049e-05 (5.56σ wild bootstrap)
-[11:00:10]       95% CI: [-5.3698e-04, -2.7305e-04] (p = 0.0000)
-[11:00:26]       η = -4.0612e-04 ± 6.1350e-05 (6.62σ Rademacher)
-[11:00:26]     --- Station-era block bootstrap ---
-[11:00:36]       η = -4.0612e-04 ± 2.8908e-04 (1.40σ, 10 blocks)
-[11:00:36]       95% CI: [-1.2878e-03, -8.5082e-05]
-[11:00:36]     --- Small-G diagnostic ---
-[11:00:36]       wild_SE / cluster_SE  = 1.174
-[11:00:36]       era_SE / cluster_SE   = 4.644
-[11:00:36]       Wild bootstrap standard error exceeds analytical cluster-robust; the headline cluster-robust significance may be anti-conservative.
-[11:00:36] Results saved to results/outputs/step_074_wild_cluster_bootstrap.json
-[11:00:36] ✓   Step 074 complete.
+[19:30:35] ═══ ═══ Step 073: Wild Cluster Bootstrap (small-G robustness) ═══
+[19:30:35]     Dataset: N=25,445 (removed 762 outliers)
+[19:30:35]       η (OLS)            = -4.0612e-04 ± 6.5778e-05 (6.17σ)
+[19:30:35]       η (cluster-robust) = -4.0612e-04 ± 6.2246e-05 (6.52σ)  G=5
+[19:30:35]     --- Wild cluster bootstrap (Webb 6-point) ---
+[19:30:53]       η = -4.0612e-04 ± 7.3049e-05 (5.56σ wild bootstrap)
+[19:30:53]       95% CI: [-5.3698e-04, -2.7305e-04] (p = 0.0000)
+[19:31:09]       η = -4.0612e-04 ± 6.1350e-05 (6.62σ Rademacher)
+[19:31:09]     --- Station-era block bootstrap ---
+[19:31:19]       η = -4.0612e-04 ± 2.8908e-04 (1.40σ, 10 blocks)
+[19:31:19]       95% CI: [-1.2878e-03, -8.5082e-05]
+[19:31:19]     --- Small-G diagnostic ---
+[19:31:19]       wild_SE / cluster_SE  = 1.174
+[19:31:19]       era_SE / cluster_SE   = 4.644
+[19:31:19]       Wild bootstrap standard error exceeds analytical cluster-robust; the headline cluster-robust significance may be anti-conservative.
+[19:31:19] Results saved to results/outputs/step_074_wild_cluster_bootstrap.json
+[19:31:19] ✓   Step 074 complete.

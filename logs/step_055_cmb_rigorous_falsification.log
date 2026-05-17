@@ -1,58 +1,58 @@
-[10:55:34] ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
-[10:55:34] >>> Computing CMB-frame kinematics...
-[10:55:34]     r(cosD, cosθ) = 0.0499
-[10:55:34]     Cleaned dataset: 25,445 observations
-[10:55:34] ═══ ═══ A. Aliasing Simulation Falsification ═══
-[10:55:41]     Simulated η_θ (no CMB): mean=-7.5735e-07, std=8.8080e-05, max|η|=3.2360e-04
-[10:55:41]     Simulated t (no CMB): mean=-0.01, std=0.99, max|t|=3.66
-[10:55:41]     Observed: η_θ = -9.7721e-04, t = -11.02
-[10:55:41]     Aliasing p-value (coefficient): 0.0000
-[10:55:41]     Aliasing p-value (t-statistic): 0.0000
-[10:55:41] ═══ ═══ B. Multicollinearity Diagnostic Suite ═══
-[10:55:41]     VIF(cosD) = 1.017
-[10:55:41]     VIF(r_c·cosD) = 1.026
-[10:55:41]     VIF(vr_c·cosD) = 1.189
-[10:55:41]     VIF(cosθ_c·cosD) = 1.201
-[10:55:41]     Condition number κ(X) = 1.78e+02
-[10:55:41]     Condition number κ(XᵀX) = 3.18e+04
-[10:55:41]     SE(cosθ) actual = 8.8659e-05; SE if orthogonal = 8.8659e-05; inflation = 1.00x
-[10:55:41] ═══ ═══ C. Permutation Test for cosθ ═══
-[10:55:42]     Permuted η_θ: mean=6.6079e-07, std=8.2560e-05, 99.9th %ile |η|=2.6145e-04
-[10:55:42]     Permuted t: mean=0.01, std=0.99, 99.9th %ile |t|=3.11
-[10:55:42]     Permutation p (coefficient) = 0.0000
-[10:55:42]     Permutation p (t-statistic) = 0.0000
-[10:55:42] ═══ ═══ D. Random-axis Monte Carlo (any fixed sky axis) ═══
-[10:55:42]     Base residual AR(1) ρ = 0.4161; n_eff = 10491.1
-[10:57:24]     Base model AIC = -141809.8; True CMB ΔAIC = 119.2
-[10:57:24]     Random-axis null (n=100000): ΔAIC median = 61.9, 99th %ile = 130.3, max = 137.7
-[10:57:24]     Planck ΔAIC = 119.2; p(any axis ΔAIC ≥ Planck) = 0.0956
-[10:57:24]     Uniform scramble F: median = 64.01, 99th %ile = 132.66
-[10:57:24]     True CMB F = 121.49; p(random F ≥ true) = 0.0956
-[10:57:24]     Eff-sample-size F: true = 50.08; p(random F_eff ≥ true) = 0.0956
-[10:57:24]     Correlation-matched scramble: 18208 directions (|r(cosD, cosθ)| within 0.020 of 0.0499)
-[10:57:24]       p_matched(ΔAIC) = 0.2664, p_matched(F) = 0.2664, p_matched(F_eff) = 0.2664
-[10:57:24] ═══ ═══ D3–D5. Refined directional null tests ═══
-[10:57:45]     Phase null: p_F_eff = 0.0006 (median F_eff = 1.64)
-[10:57:45]     Rotation global: p_F_eff = 0.0964
-[10:57:45]     Rotation local (30°): p_F_eff = 0.2994
-[10:57:45]     GS orthogonal scramble: p_F_eff = 0.0902 (true F_eff = 50.08)
-[10:57:45] ═══ ═══ E. Gram–Schmidt Orthogonalization ═══
-[10:57:45]     Orthogonality residuals (dot products): ['-1.41e-11', '-4.27e-15', '5.37e-13', '3.11e-11']
-[10:57:45]     Orthogonalized η_θ = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000e+00)
-[10:57:45] ═══ ═══ F. Joint-model directional anatomy ═══
-[10:57:45]     ΔAIC(true vs perp1) = 116.4; ΔAIC(true vs perp2) = 94.5; ΔAIC(true vs antipode) = 0.0
-[10:57:45]     |η_θ|/σ: true=11.02, perp1=2.20, perp2=5.17, antipode=11.02
-[10:57:45] ═══ ═══ G1. Year-block jackknife ═══
-[10:57:45]     Jackknife: 36 yearly excisions; median |t| on η_θ = 10.83; same sign as full sample: True
-[10:57:45] ═══ ═══ G2. Alternative fixed celestial axes ═══
-[10:57:45]     Angles: CMB–mean orbit normal = 101.33°, CMB–ecliptic pole = 101.33°
-[10:57:45] ═══ ═══ H. Dual-axis simultaneous fit (CMB + galactic) ═══
-[10:57:45]     r(cosθ_CMB, cosθ_gal) = 0.9844; axis separation = 41.9°
-[10:57:45]     AIC: base=-141809.8; CMB-only=-141929.1 (Δ=119.2); gal-only=-141935.5 (Δ=125.7); dual=-141934.0 (Δ=124.1)
-[10:57:45]     Dual model: η_CMB t=0.68, η_gal t=-2.63; add gal|CMB p=8.6441e-03; add CMB|gal p=4.9523e-01
-[10:57:45] ═══ ═══ I. TEP η_θ prediction coverage (Step 033) ═══
-[10:57:45]     Fitted η_θ = -9.7721e-04 (predicted center -3.1773e-04; band [-1e-03, -1e-04]; within band = True)
-[10:57:45]     z vs predicted center = -6.14; ratio fitted/predicted = 3.08
-[10:57:45] ✓   RESULT: 4/5 falsification tests passed. Composite directional p=7.37e-02 (Z=1.45).
-[10:57:45] Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
-[10:57:45] ✓   CMB Falsification analysis complete.
+[19:26:04] ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
+[19:26:04] >>> Computing CMB-frame kinematics...
+[19:26:05]     r(cosD, cosθ) = 0.0499
+[19:26:05]     Cleaned dataset: 25,445 observations
+[19:26:05] ═══ ═══ A. Aliasing Simulation Falsification ═══
+[19:26:11]     Simulated η_θ (no CMB): mean=-7.5735e-07, std=8.8080e-05, max|η|=3.2360e-04
+[19:26:11]     Simulated t (no CMB): mean=-0.01, std=0.99, max|t|=3.66
+[19:26:11]     Observed: η_θ = -9.7721e-04, t = -11.02
+[19:26:11]     Aliasing p-value (coefficient): 0.0000
+[19:26:11]     Aliasing p-value (t-statistic): 0.0000
+[19:26:11] ═══ ═══ B. Multicollinearity Diagnostic Suite ═══
+[19:26:11]     VIF(cosD) = 1.017
+[19:26:11]     VIF(r_c·cosD) = 1.026
+[19:26:11]     VIF(vr_c·cosD) = 1.189
+[19:26:11]     VIF(cosθ_c·cosD) = 1.201
+[19:26:11]     Condition number κ(X) = 1.78e+02
+[19:26:11]     Condition number κ(XᵀX) = 3.18e+04
+[19:26:11]     SE(cosθ) actual = 8.8659e-05; SE if orthogonal = 8.8659e-05; inflation = 1.00x
+[19:26:11] ═══ ═══ C. Permutation Test for cosθ ═══
+[19:26:12]     Permuted η_θ: mean=6.6079e-07, std=8.2560e-05, 99.9th %ile |η|=2.6145e-04
+[19:26:12]     Permuted t: mean=0.01, std=0.99, 99.9th %ile |t|=3.11
+[19:26:12]     Permutation p (coefficient) = 0.0000
+[19:26:12]     Permutation p (t-statistic) = 0.0000
+[19:26:12] ═══ ═══ D. Random-axis Monte Carlo (any fixed sky axis) ═══
+[19:26:12]     Base residual AR(1) ρ = 0.4161; n_eff = 10491.1
+[19:27:58]     Base model AIC = -141809.8; True CMB ΔAIC = 119.2
+[19:27:58]     Random-axis null (n=100000): ΔAIC median = 61.9, 99th %ile = 130.3, max = 137.7
+[19:27:58]     Planck ΔAIC = 119.2; p(any axis ΔAIC ≥ Planck) = 0.0956
+[19:27:58]     Uniform scramble F: median = 64.01, 99th %ile = 132.66
+[19:27:58]     True CMB F = 121.49; p(random F ≥ true) = 0.0956
+[19:27:58]     Eff-sample-size F: true = 50.08; p(random F_eff ≥ true) = 0.0956
+[19:27:58]     Correlation-matched scramble: 18208 directions (|r(cosD, cosθ)| within 0.020 of 0.0499)
+[19:27:58]       p_matched(ΔAIC) = 0.2664, p_matched(F) = 0.2664, p_matched(F_eff) = 0.2664
+[19:27:58] ═══ ═══ D3–D5. Refined directional null tests ═══
+[19:28:21]     Phase null: p_F_eff = 0.0006 (median F_eff = 1.64)
+[19:28:21]     Rotation global: p_F_eff = 0.0964
+[19:28:21]     Rotation local (30°): p_F_eff = 0.2994
+[19:28:21]     GS orthogonal scramble: p_F_eff = 0.0902 (true F_eff = 50.08)
+[19:28:21] ═══ ═══ E. Gram–Schmidt Orthogonalization ═══
+[19:28:21]     Orthogonality residuals (dot products): ['-1.41e-11', '-4.27e-15', '5.37e-13', '3.11e-11']
+[19:28:21]     Orthogonalized η_θ = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000e+00)
+[19:28:21] ═══ ═══ F. Joint-model directional anatomy ═══
+[19:28:21]     ΔAIC(true vs perp1) = 116.4; ΔAIC(true vs perp2) = 94.5; ΔAIC(true vs antipode) = 0.0
+[19:28:21]     |η_θ|/σ: true=11.02, perp1=2.20, perp2=5.17, antipode=11.02
+[19:28:21] ═══ ═══ G1. Year-block jackknife ═══
+[19:28:21]     Jackknife: 36 yearly excisions; median |t| on η_θ = 10.83; same sign as full sample: True
+[19:28:21] ═══ ═══ G2. Alternative fixed celestial axes ═══
+[19:28:21]     Angles: CMB–mean orbit normal = 101.33°, CMB–ecliptic pole = 101.33°
+[19:28:21] ═══ ═══ H. Dual-axis simultaneous fit (CMB + galactic) ═══
+[19:28:21]     r(cosθ_CMB, cosθ_gal) = 0.9844; axis separation = 41.9°
+[19:28:21]     AIC: base=-141809.8; CMB-only=-141929.1 (Δ=119.2); gal-only=-141935.5 (Δ=125.7); dual=-141934.0 (Δ=124.1)
+[19:28:21]     Dual model: η_CMB t=0.68, η_gal t=-2.63; add gal|CMB p=8.6441e-03; add CMB|gal p=4.9523e-01
+[19:28:21] ═══ ═══ I. TEP η_θ prediction coverage (Step 033) ═══
+[19:28:21]     Fitted η_θ = -9.7721e-04 (predicted center -3.1773e-04; band [-1e-03, -1e-04]; within band = True)
+[19:28:21]     z vs predicted center = -6.14; ratio fitted/predicted = 3.08
+[19:28:21] ✓   RESULT: 4/5 falsification tests passed. Composite directional p=7.37e-02 (Z=1.45).
+[19:28:21] Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
+[19:28:21] ✓   CMB Falsification analysis complete.

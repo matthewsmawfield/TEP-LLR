@@ -18,12 +18,12 @@
     "tier": "top_10_percent"
   },
   "look_elsewhere_correction": {
-    "n_scrambled_realizations": 200,
-    "p_any_axis_exceeds_observed": 0.004975124378109453,
-    "p_planck_axis_exceeds_observed": 0.004975124378109453,
-    "null_median_max_delta_aic": 0.24388521515471617,
-    "null_95th_percentile": 4.912203616219818,
-    "null_99th_percentile": 8.875474893542606
+    "n_scrambled_realizations": 1000,
+    "p_any_axis_exceeds_observed": 0.000999000999000999,
+    "p_planck_axis_exceeds_observed": 0.000999000999000999,
+    "null_median_max_delta_aic": 0.11752772866449934,
+    "null_95th_percentile": 4.928645451568889,
+    "null_99th_percentile": 8.310630389178966
   },
   "real_data_delta_aic_percentiles": {
     "50": 33.62024868259959,
@@ -31,5 +31,5 @@
     "95": 90.35860113496328,
     "99": 99.66647881755628
   },
-  "interpretation": "Across 2664 uniformly spaced sky directions, the maximum \u0394AIC is 106.48. Under the scrambled-sky null (n=200), the look-elsewhere-corrected p-value for ANY axis is 0.0050. The Planck dipole ranks 226/2664 (top 8.5%) with p=0.0050. The directional signal survives look-elsewhere correction."
+  "interpretation": "Across 2664 uniformly spaced sky directions, the maximum \u0394AIC is 106.48. Under the scrambled-sky null (n=1000), the look-elsewhere-corrected p-value for ANY axis is 0.0010. The Planck dipole ranks 226/2664 (top 8.5%) with p=0.0010. The directional signal survives look-elsewhere correction."
 }

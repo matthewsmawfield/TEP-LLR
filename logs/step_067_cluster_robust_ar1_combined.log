@@ -1,15 +1,15 @@
-[10:59:14] ═══ ═══ Step 067: Cluster-Robust + AR(1) Combined SEs ═══
-[10:59:14]     Dataset: N=25,445 (removed 762 outliers)
-[10:59:14]     --- Full systematic model with cluster-robust + AR(1) ---
-[10:59:14]       ρ = 0.4115, DW = 1.177
-[10:59:14]       η (AR(1)-GLS OLS SE)  = -4.4517e-04 ± 9.7144e-05 (4.58σ)
-[10:59:14]       η (cluster-robust)    = -4.4517e-04 ± 9.8651e-05 (4.51σ)
-[10:59:14]       Effective N (AR(1))   = 10608
-[10:59:14]     --- Pure cluster-robust (no AR(1)) for comparison ---
-[10:59:14]       η (cluster-robust only) = -4.0612e-04 ± 6.2246e-05 (6.52σ)
-[10:59:14]     --- Pure AR(1) GLS (no clustering) for comparison ---
-[10:59:14]       η (AR(1) GLS only) = -4.4517e-04 ± 9.7144e-05 (4.58σ)
-[10:59:14]     --- cosD-only model with cluster-robust + AR(1) ---
-[10:59:14]       η = -3.2648e-04 ± 9.4786e-05 (3.44σ)
-[10:59:14] Results saved to results/outputs/step_067_cluster_robust_ar1_combined.json
-[10:59:14] ✓   Step 067 complete.
+[19:29:54] ═══ ═══ Step 067: Cluster-Robust + AR(1) Combined SEs ═══
+[19:29:54]     Dataset: N=25,445 (removed 762 outliers)
+[19:29:54]     --- Full systematic model with cluster-robust + AR(1) ---
+[19:29:54]       ρ = 0.4115, DW = 1.177
+[19:29:54]       η (AR(1)-GLS OLS SE)  = -4.4517e-04 ± 9.7144e-05 (4.58σ)
+[19:29:54]       η (cluster-robust)    = -4.4517e-04 ± 9.8651e-05 (4.51σ)
+[19:29:54]       Effective N (AR(1))   = 10608
+[19:29:54]     --- Pure cluster-robust (no AR(1)) for comparison ---
+[19:29:54]       η (cluster-robust only) = -4.0612e-04 ± 6.2246e-05 (6.52σ)
+[19:29:54]     --- Pure AR(1) GLS (no clustering) for comparison ---
+[19:29:54]       η (AR(1) GLS only) = -4.4517e-04 ± 9.7144e-05 (4.58σ)
+[19:29:54]     --- cosD-only model with cluster-robust + AR(1) ---
+[19:29:54]       η = -3.2648e-04 ± 9.4786e-05 (3.44σ)
+[19:29:54] Results saved to results/outputs/step_067_cluster_robust_ar1_combined.json
+[19:29:54] ✓   Step 067 complete.

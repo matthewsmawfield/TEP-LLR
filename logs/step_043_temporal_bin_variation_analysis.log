@@ -1,242 +1,242 @@
-[10:55:20] ═══ Step 043: Quantitative Temporal Bin Variation Analysis
-[10:55:20]     Loaded 26207 observations from INPOP19a residuals
-[10:55:20] >>> Analysis with 5 temporal bins
-[10:55:20]     Linear Regression Complete (N=3592, DOF=3590):
-[10:55:20]       RSS=1.705285e+02, MSE=4.750098e-02, χ²_red=0.048
-[10:55:20]       Birge Ratio = 0.218 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.51e+00
-[10:55:20]       Final η = 9.72167274e-05 ± 6.65763008e-04
-[10:55:20]       Bin 0: years 1984.3-1991.3, N=3592, η=9.72e-05 ± 6.66e-04, SNR=0.15σ
-[10:55:20]     Linear Regression Complete (N=5287, DOF=5285):
-[10:55:20]       RSS=3.537653e+01, MSE=6.693762e-03, χ²_red=0.007
-[10:55:20]       Birge Ratio = 0.082 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.70e+00
-[10:55:20]       Final η = -1.39882755e-03 ± 2.16497307e-04
-[10:55:20]       Bin 1: years 1991.4-1998.5, N=5287, η=-1.40e-03 ± 2.16e-04, SNR=6.46σ
-[10:55:20]     Linear Regression Complete (N=4005, DOF=4003):
-[10:55:20]       RSS=1.538071e+01, MSE=3.842297e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.68e+00
-[10:55:20]       Final η = -5.14747560e-04 ± 1.86230701e-04
-[10:55:20]       Bin 2: years 1998.5-2005.5, N=4005, η=-5.15e-04 ± 1.86e-04, SNR=2.76σ
-[10:55:20]     Linear Regression Complete (N=2210, DOF=2208):
-[10:55:20]       RSS=5.770101e+00, MSE=2.613270e-03, χ²_red=0.003
-[10:55:20]       Birge Ratio = 0.051 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.17e+00
-[10:55:20]       Final η = -2.40676986e-06 ± 1.71464179e-04
-[10:55:20]       Bin 3: years 2005.6-2012.7, N=2210, η=-2.41e-06 ± 1.71e-04, SNR=0.01σ
-[10:55:20]     Linear Regression Complete (N=11113, DOF=11111):
-[10:55:20]       RSS=7.043564e+00, MSE=6.339271e-04, χ²_red=0.001
-[10:55:20]       Birge Ratio = 0.025 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 1.82e+00
-[10:55:20]       Final η = -3.25735078e-04 ± 3.31982553e-05
-[10:55:20]       Bin 4: years 2012.7-2019.8, N=11113, η=-3.26e-04 ± 3.32e-05, SNR=9.81σ
-[10:55:20]     Weighted η: -3.42e-04 ± 3.17e-05
-[10:55:20]     χ²/dof: 7.32 (p=6.83e-06)
-[10:55:20]     Trend test: SNR=0.26σ (p=7.98e-01)
-[10:55:20]     Sign consistency: 4/5 negative (p=9.69e-01)
-[10:55:20]     Variance ratio: 3.19 (observed/expected)
-[10:55:20] >>> Analysis with 10 temporal bins
-[10:55:20]     Linear Regression Complete (N=1598, DOF=1596):
-[10:55:20]       RSS=1.333913e+02, MSE=8.357852e-02, χ²_red=0.084
-[10:55:20]       Birge Ratio = 0.289 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.57e+00
-[10:55:20]       Final η = -1.66106611e-03 ± 1.36170753e-03
-[10:55:20]       Bin 0: years 1984.3-1987.8, N=1598, η=-1.66e-03 ± 1.36e-03, SNR=1.22σ
-[10:55:20]     Linear Regression Complete (N=1994, DOF=1992):
-[10:55:20]       RSS=3.676678e+01, MSE=1.845722e-02, χ²_red=0.018
-[10:55:20]       Birge Ratio = 0.136 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.47e+00
-[10:55:20]       Final η = 1.33030260e-03 ± 5.45449431e-04
-[10:55:20]       Bin 1: years 1987.8-1991.3, N=1994, η=1.33e-03 ± 5.45e-04, SNR=2.44σ
-[10:55:20]     Linear Regression Complete (N=2027, DOF=2025):
-[10:55:20]       RSS=1.731341e+01, MSE=8.549833e-03, χ²_red=0.009
-[10:55:20]       Birge Ratio = 0.092 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.56e+00
-[10:55:20]       Final η = -2.52835085e-03 ± 3.82227632e-04
-[10:55:20]       Bin 2: years 1991.4-1994.9, N=2027, η=-2.53e-03 ± 3.82e-04, SNR=6.61σ
-[10:55:20]     Linear Regression Complete (N=3260, DOF=3258):
-[10:55:20]       RSS=1.758775e+01, MSE=5.398328e-03, χ²_red=0.005
-[10:55:20]       Birge Ratio = 0.073 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.80e+00
-[10:55:20]       Final η = -7.95320855e-04 ± 2.54065368e-04
-[10:55:20]       Bin 3: years 1994.9-1998.5, N=3260, η=-7.95e-04 ± 2.54e-04, SNR=3.13σ
-[10:55:20]     Linear Regression Complete (N=2695, DOF=2693):
-[10:55:20]       RSS=1.057220e+01, MSE=3.925806e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.063 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.65e+00
-[10:55:20]       Final η = -2.39196896e-04 ± 2.24018726e-04
-[10:55:20]       Bin 4: years 1998.5-2002.0, N=2695, η=-2.39e-04 ± 2.24e-04, SNR=1.07σ
-[10:55:20]     Linear Regression Complete (N=1310, DOF=1308):
-[10:55:20]       RSS=4.732791e+00, MSE=3.618342e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.060 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.79e+00
-[10:55:20]       Final η = -1.33244325e-03 ± 3.35723121e-04
-[10:55:20]       Bin 5: years 2002.0-2005.5, N=1310, η=-1.33e-03 ± 3.36e-04, SNR=3.97σ
-[10:55:20]     Linear Regression Complete (N=814, DOF=812):
-[10:55:20]       RSS=2.855583e+00, MSE=3.516728e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.059 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.34e+00
-[10:55:20]       Final η = -2.24442387e-04 ± 3.45840721e-04
-[10:55:20]       Bin 6: years 2005.6-2009.1, N=814, η=-2.24e-04 ± 3.46e-04, SNR=0.65σ
-[10:55:20]     Linear Regression Complete (N=1396, DOF=1394):
-[10:55:20]       RSS=2.899433e+00, MSE=2.079938e-03, χ²_red=0.002
-[10:55:20]       Birge Ratio = 0.046 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.09e+00
-[10:55:20]       Final η = 7.25395196e-05 ± 1.87513347e-04
-[10:55:20]       Bin 7: years 2009.1-2012.7, N=1396, η=7.25e-05 ± 1.88e-04, SNR=0.39σ
-[10:55:20]     Linear Regression Complete (N=3556, DOF=3554):
-[10:55:20]       RSS=2.629849e+00, MSE=7.399688e-04, χ²_red=0.001
-[10:55:20]       Birge Ratio = 0.027 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.13e+00
-[10:55:20]       Final η = -7.51265386e-04 ± 7.26223043e-05
-[10:55:20]       Bin 8: years 2012.7-2016.2, N=3556, η=-7.51e-04 ± 7.26e-05, SNR=10.34σ
-[10:55:20]     Linear Regression Complete (N=7557, DOF=7555):
-[10:55:20]       RSS=4.378823e+00, MSE=5.795927e-04, χ²_red=0.001
-[10:55:20]       Birge Ratio = 0.024 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 1.73e+00
-[10:55:20]       Final η = -1.81204036e-04 ± 3.68286495e-05
-[10:55:20]       Bin 9: years 2016.2-2019.8, N=7557, η=-1.81e-04 ± 3.68e-05, SNR=4.92σ
-[10:55:20]     Weighted η: -3.13e-04 ± 3.13e-05
-[10:55:20]     χ²/dof: 12.23 (p=0.00e+00)
-[10:55:20]     Trend test: SNR=0.62σ (p=5.34e-01)
-[10:55:20]     Sign consistency: 8/10 negative (p=9.89e-01)
-[10:55:20]     Variance ratio: 4.16 (observed/expected)
-[10:55:20] >>> Analysis with 20 temporal bins
-[10:55:20]     Linear Regression Complete (N=1220, DOF=1218):
-[10:55:20]       RSS=1.085231e+02, MSE=8.909942e-02, χ²_red=0.089
-[10:55:20]       Birge Ratio = 0.298 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.52e+00
-[10:55:20]       Final η = -5.63969382e-03 ± 1.57257973e-03
-[10:55:20]       Bin 0: years 1984.3-1986.0, N=1220, η=-5.64e-03 ± 1.57e-03, SNR=3.59σ
-[10:55:20]     Linear Regression Complete (N=378, DOF=376):
-[10:55:20]       RSS=2.147941e+01, MSE=5.712608e-02, χ²_red=0.057
-[10:55:20]       Birge Ratio = 0.239 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.77e+00
-[10:55:20]       Final η = 1.37181731e-02 ± 2.51762714e-03
-[10:55:20]       Bin 1: years 1986.0-1987.8, N=378, η=1.37e-02 ± 2.52e-03, SNR=5.45σ
-[10:55:20]     Linear Regression Complete (N=768, DOF=766):
-[10:55:20]       RSS=1.942003e+01, MSE=2.535252e-02, χ²_red=0.025
-[10:55:20]       Birge Ratio = 0.159 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.40e+00
-[10:55:20]       Final η = -6.20712990e-04 ± 1.03629591e-03
-[10:55:20]       Bin 2: years 1987.8-1989.5, N=768, η=-6.21e-04 ± 1.04e-03, SNR=0.60σ
-[10:55:20]     Linear Regression Complete (N=1226, DOF=1224):
-[10:55:20]       RSS=1.675710e+01, MSE=1.369044e-02, χ²_red=0.014
-[10:55:20]       Birge Ratio = 0.117 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.60e+00
-[10:55:20]       Final η = 3.25981660e-03 ± 6.10488411e-04
-[10:55:20]       Bin 3: years 1989.6-1991.3, N=1226, η=3.26e-03 ± 6.10e-04, SNR=5.34σ
-[10:55:20]     Linear Regression Complete (N=953, DOF=951):
-[10:55:20]       RSS=1.014434e+01, MSE=1.066702e-02, χ²_red=0.011
-[10:55:20]       Birge Ratio = 0.103 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.53e+00
-[10:55:20]       Final η = -5.07674974e-03 ± 6.22363807e-04
-[10:55:20]       Bin 4: years 1991.4-1993.1, N=953, η=-5.08e-03 ± 6.22e-04, SNR=8.16σ
-[10:55:20]     Linear Regression Complete (N=1074, DOF=1072):
-[10:55:20]       RSS=6.399113e+00, MSE=5.969321e-03, χ²_red=0.006
-[10:55:20]       Birge Ratio = 0.077 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.60e+00
-[10:55:20]       Final η = -5.33442002e-04 ± 4.40092263e-04
-[10:55:20]       Bin 5: years 1993.2-1994.9, N=1074, η=-5.33e-04 ± 4.40e-04, SNR=1.21σ
-[10:55:20]     Linear Regression Complete (N=1645, DOF=1643):
-[10:55:20]       RSS=6.357076e+00, MSE=3.869188e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.96e+00
-[10:55:20]       Final η = -4.27818286e-05 ± 3.21236528e-04
-[10:55:20]       Bin 6: years 1994.9-1996.7, N=1645, η=-4.28e-05 ± 3.21e-04, SNR=0.13σ
-[10:55:20]     Linear Regression Complete (N=1615, DOF=1613):
-[10:55:20]       RSS=1.037322e+01, MSE=6.431011e-03, χ²_red=0.006
-[10:55:20]       Birge Ratio = 0.080 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.66e+00
-[10:55:20]       Final η = -1.42273699e-03 ± 3.73353672e-04
-[10:55:20]       Bin 7: years 1996.7-1998.5, N=1615, η=-1.42e-03 ± 3.73e-04, SNR=3.81σ
-[10:55:20]     Linear Regression Complete (N=1603, DOF=1601):
-[10:55:20]       RSS=5.789553e+00, MSE=3.616211e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.060 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.61e+00
-[10:55:20]       Final η = -2.78688471e-04 ± 2.72499240e-04
-[10:55:20]       Bin 8: years 1998.5-2000.2, N=1603, η=-2.79e-04 ± 2.72e-04, SNR=1.02σ
-[10:55:20]     Linear Regression Complete (N=1092, DOF=1090):
-[10:55:20]       RSS=4.684410e+00, MSE=4.297624e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.066 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.72e+00
-[10:55:20]       Final η = -8.52749772e-05 ± 3.81953163e-04
-[10:55:20]       Bin 9: years 2000.3-2002.0, N=1092, η=-8.53e-05 ± 3.82e-04, SNR=0.22σ
-[10:55:20]     Linear Regression Complete (N=432, DOF=430):
-[10:55:20]       RSS=1.748256e+00, MSE=4.065712e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.064 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 3.11e+00
-[10:55:20]       Final η = -2.06620111e-03 ± 6.88102698e-04
-[10:55:20]       Bin 10: years 2002.0-2003.8, N=432, η=-2.07e-03 ± 6.88e-04, SNR=3.00σ
-[10:55:20]     Linear Regression Complete (N=878, DOF=876):
-[10:55:20]       RSS=2.950624e+00, MSE=3.368293e-03, χ²_red=0.003
-[10:55:20]       Birge Ratio = 0.058 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.67e+00
-[10:55:20]       Final η = -1.09044084e-03 ± 3.78568419e-04
-[10:55:20]       Bin 11: years 2003.9-2005.5, N=878, η=-1.09e-03 ± 3.79e-04, SNR=2.88σ
-[10:55:20]     Linear Regression Complete (N=265, DOF=263):
-[10:55:20]       RSS=1.084762e+00, MSE=4.124571e-03, χ²_red=0.004
-[10:55:20]       Birge Ratio = 0.064 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.52e+00
-[10:55:20]       Final η = 4.62224084e-04 ± 7.06543534e-04
-[10:55:20]       Bin 12: years 2005.6-2007.3, N=265, η=4.62e-04 ± 7.07e-04, SNR=0.65σ
-[10:55:20]     Linear Regression Complete (N=549, DOF=547):
-[10:55:20]       RSS=1.678260e+00, MSE=3.068116e-03, χ²_red=0.003
-[10:55:20]       Birge Ratio = 0.055 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.26e+00
-[10:55:20]       Final η = -5.07823700e-04 ± 3.80970773e-04
-[10:55:20]       Bin 13: years 2007.4-2009.1, N=549, η=-5.08e-04 ± 3.81e-04, SNR=1.33σ
-[10:55:20]     Linear Regression Complete (N=491, DOF=489):
-[10:55:20]       RSS=1.070986e+00, MSE=2.190155e-03, χ²_red=0.002
-[10:55:20]       Birge Ratio = 0.047 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.36e+00
-[10:55:20]       Final η = 2.35248497e-04 ± 3.57326455e-04
-[10:55:20]       Bin 14: years 2009.1-2010.9, N=491, η=2.35e-04 ± 3.57e-04, SNR=0.66σ
-[10:55:20]     Linear Regression Complete (N=905, DOF=903):
-[10:55:20]       RSS=1.808458e+00, MSE=2.002722e-03, χ²_red=0.002
-[10:55:20]       Birge Ratio = 0.045 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 1.99e+00
-[10:55:20]       Final η = 6.11847715e-05 ± 2.19081716e-04
-[10:55:20]       Bin 15: years 2010.9-2012.7, N=905, η=6.12e-05 ± 2.19e-04, SNR=0.28σ
-[10:55:20]     Linear Regression Complete (N=1285, DOF=1283):
-[10:55:20]       RSS=1.290251e+00, MSE=1.005652e-03, χ²_red=0.001
-[10:55:20]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.26e+00
-[10:55:20]       Final η = -7.44629567e-04 ± 1.48968555e-04
-[10:55:20]       Bin 16: years 2012.7-2014.4, N=1285, η=-7.45e-04 ± 1.49e-04, SNR=5.00σ
-[10:55:20]     Linear Regression Complete (N=2271, DOF=2269):
-[10:55:20]       RSS=1.335443e+00, MSE=5.885602e-04, χ²_red=0.001
-[10:55:20]       Birge Ratio = 0.024 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 2.07e+00
-[10:55:20]       Final η = -7.58672947e-04 ± 7.87316971e-05
-[10:55:20]       Bin 17: years 2014.5-2016.2, N=2271, η=-7.59e-04 ± 7.87e-05, SNR=9.64σ
-[10:55:20]     Linear Regression Complete (N=2131, DOF=2129):
-[10:55:20]       RSS=1.145036e+00, MSE=5.378280e-04, χ²_red=0.001
-[10:55:20]       Birge Ratio = 0.023 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 1.81e+00
-[10:55:20]       Final η = 1.25754443e-04 ± 6.98022220e-05
-[10:55:20]       Bin 18: years 2016.2-2018.0, N=2131, η=1.26e-04 ± 6.98e-05, SNR=1.80σ
-[10:55:20]     Linear Regression Complete (N=5426, DOF=5424):
-[10:55:20]       RSS=3.215659e+00, MSE=5.928576e-04, χ²_red=0.001
-[10:55:20]       Birge Ratio = 0.024 (Scaling factor applied: 1.000)
-[10:55:20]       Condition Number κ(R) = 1.70e+00
-[10:55:20]       Final η = -2.85041269e-04 ± 4.32661881e-05
-[10:55:20]       Bin 19: years 2018.0-2019.8, N=5426, η=-2.85e-04 ± 4.33e-05, SNR=6.59σ
-[10:55:20]     Weighted η: -3.04e-04 ± 3.10e-05
-[10:55:20]     χ²/dof: 12.81 (p=0.00e+00)
-[10:55:20]     Trend test: SNR=0.60σ (p=5.47e-01)
-[10:55:20]     Sign consistency: 14/20 negative (p=9.79e-01)
-[10:55:20]     Variance ratio: 21.95 (observed/expected)
-[10:55:20] ═══ INTERPRETATION:
-[10:55:20]     The χ²/dof ratio of 12.23 indicates significant temporal variation beyond statistical expectation. This could be due to:
+[19:25:50] ═══ Step 043: Quantitative Temporal Bin Variation Analysis
+[19:25:50]     Loaded 26207 observations from INPOP19a residuals
+[19:25:50] >>> Analysis with 5 temporal bins
+[19:25:50]     Linear Regression Complete (N=3592, DOF=3590):
+[19:25:50]       RSS=1.705285e+02, MSE=4.750098e-02, χ²_red=0.048
+[19:25:50]       Birge Ratio = 0.218 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.51e+00
+[19:25:50]       Final η = 9.72167274e-05 ± 6.65763008e-04
+[19:25:50]       Bin 0: years 1984.3-1991.3, N=3592, η=9.72e-05 ± 6.66e-04, SNR=0.15σ
+[19:25:50]     Linear Regression Complete (N=5287, DOF=5285):
+[19:25:50]       RSS=3.537653e+01, MSE=6.693762e-03, χ²_red=0.007
+[19:25:50]       Birge Ratio = 0.082 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.70e+00
+[19:25:50]       Final η = -1.39882755e-03 ± 2.16497307e-04
+[19:25:50]       Bin 1: years 1991.4-1998.5, N=5287, η=-1.40e-03 ± 2.16e-04, SNR=6.46σ
+[19:25:50]     Linear Regression Complete (N=4005, DOF=4003):
+[19:25:50]       RSS=1.538071e+01, MSE=3.842297e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.68e+00
+[19:25:50]       Final η = -5.14747560e-04 ± 1.86230701e-04
+[19:25:50]       Bin 2: years 1998.5-2005.5, N=4005, η=-5.15e-04 ± 1.86e-04, SNR=2.76σ
+[19:25:50]     Linear Regression Complete (N=2210, DOF=2208):
+[19:25:50]       RSS=5.770101e+00, MSE=2.613270e-03, χ²_red=0.003
+[19:25:50]       Birge Ratio = 0.051 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.17e+00
+[19:25:50]       Final η = -2.40676986e-06 ± 1.71464179e-04
+[19:25:50]       Bin 3: years 2005.6-2012.7, N=2210, η=-2.41e-06 ± 1.71e-04, SNR=0.01σ
+[19:25:50]     Linear Regression Complete (N=11113, DOF=11111):
+[19:25:50]       RSS=7.043564e+00, MSE=6.339271e-04, χ²_red=0.001
+[19:25:50]       Birge Ratio = 0.025 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 1.82e+00
+[19:25:50]       Final η = -3.25735078e-04 ± 3.31982553e-05
+[19:25:50]       Bin 4: years 2012.7-2019.8, N=11113, η=-3.26e-04 ± 3.32e-05, SNR=9.81σ
+[19:25:50]     Weighted η: -3.42e-04 ± 3.17e-05
+[19:25:50]     χ²/dof: 7.32 (p=6.83e-06)
+[19:25:50]     Trend test: SNR=0.26σ (p=7.98e-01)
+[19:25:50]     Sign consistency: 4/5 negative (p=9.69e-01)
+[19:25:50]     Variance ratio: 3.19 (observed/expected)
+[19:25:50] >>> Analysis with 10 temporal bins
+[19:25:50]     Linear Regression Complete (N=1598, DOF=1596):
+[19:25:50]       RSS=1.333913e+02, MSE=8.357852e-02, χ²_red=0.084
+[19:25:50]       Birge Ratio = 0.289 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.57e+00
+[19:25:50]       Final η = -1.66106611e-03 ± 1.36170753e-03
+[19:25:50]       Bin 0: years 1984.3-1987.8, N=1598, η=-1.66e-03 ± 1.36e-03, SNR=1.22σ
+[19:25:50]     Linear Regression Complete (N=1994, DOF=1992):
+[19:25:50]       RSS=3.676678e+01, MSE=1.845722e-02, χ²_red=0.018
+[19:25:50]       Birge Ratio = 0.136 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.47e+00
+[19:25:50]       Final η = 1.33030260e-03 ± 5.45449431e-04
+[19:25:50]       Bin 1: years 1987.8-1991.3, N=1994, η=1.33e-03 ± 5.45e-04, SNR=2.44σ
+[19:25:50]     Linear Regression Complete (N=2027, DOF=2025):
+[19:25:50]       RSS=1.731341e+01, MSE=8.549833e-03, χ²_red=0.009
+[19:25:50]       Birge Ratio = 0.092 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.56e+00
+[19:25:50]       Final η = -2.52835085e-03 ± 3.82227632e-04
+[19:25:50]       Bin 2: years 1991.4-1994.9, N=2027, η=-2.53e-03 ± 3.82e-04, SNR=6.61σ
+[19:25:50]     Linear Regression Complete (N=3260, DOF=3258):
+[19:25:50]       RSS=1.758775e+01, MSE=5.398328e-03, χ²_red=0.005
+[19:25:50]       Birge Ratio = 0.073 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.80e+00
+[19:25:50]       Final η = -7.95320855e-04 ± 2.54065368e-04
+[19:25:50]       Bin 3: years 1994.9-1998.5, N=3260, η=-7.95e-04 ± 2.54e-04, SNR=3.13σ
+[19:25:50]     Linear Regression Complete (N=2695, DOF=2693):
+[19:25:50]       RSS=1.057220e+01, MSE=3.925806e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.063 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.65e+00
+[19:25:50]       Final η = -2.39196896e-04 ± 2.24018726e-04
+[19:25:50]       Bin 4: years 1998.5-2002.0, N=2695, η=-2.39e-04 ± 2.24e-04, SNR=1.07σ
+[19:25:50]     Linear Regression Complete (N=1310, DOF=1308):
+[19:25:50]       RSS=4.732791e+00, MSE=3.618342e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.060 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.79e+00
+[19:25:50]       Final η = -1.33244325e-03 ± 3.35723121e-04
+[19:25:50]       Bin 5: years 2002.0-2005.5, N=1310, η=-1.33e-03 ± 3.36e-04, SNR=3.97σ
+[19:25:50]     Linear Regression Complete (N=814, DOF=812):
+[19:25:50]       RSS=2.855583e+00, MSE=3.516728e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.059 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.34e+00
+[19:25:50]       Final η = -2.24442387e-04 ± 3.45840721e-04
+[19:25:50]       Bin 6: years 2005.6-2009.1, N=814, η=-2.24e-04 ± 3.46e-04, SNR=0.65σ
+[19:25:50]     Linear Regression Complete (N=1396, DOF=1394):
+[19:25:50]       RSS=2.899433e+00, MSE=2.079938e-03, χ²_red=0.002
+[19:25:50]       Birge Ratio = 0.046 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.09e+00
+[19:25:50]       Final η = 7.25395196e-05 ± 1.87513347e-04
+[19:25:50]       Bin 7: years 2009.1-2012.7, N=1396, η=7.25e-05 ± 1.88e-04, SNR=0.39σ
+[19:25:50]     Linear Regression Complete (N=3556, DOF=3554):
+[19:25:50]       RSS=2.629849e+00, MSE=7.399688e-04, χ²_red=0.001
+[19:25:50]       Birge Ratio = 0.027 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.13e+00
+[19:25:50]       Final η = -7.51265386e-04 ± 7.26223043e-05
+[19:25:50]       Bin 8: years 2012.7-2016.2, N=3556, η=-7.51e-04 ± 7.26e-05, SNR=10.34σ
+[19:25:50]     Linear Regression Complete (N=7557, DOF=7555):
+[19:25:50]       RSS=4.378823e+00, MSE=5.795927e-04, χ²_red=0.001
+[19:25:50]       Birge Ratio = 0.024 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 1.73e+00
+[19:25:50]       Final η = -1.81204036e-04 ± 3.68286495e-05
+[19:25:50]       Bin 9: years 2016.2-2019.8, N=7557, η=-1.81e-04 ± 3.68e-05, SNR=4.92σ
+[19:25:50]     Weighted η: -3.13e-04 ± 3.13e-05
+[19:25:50]     χ²/dof: 12.23 (p=0.00e+00)
+[19:25:50]     Trend test: SNR=0.62σ (p=5.34e-01)
+[19:25:50]     Sign consistency: 8/10 negative (p=9.89e-01)
+[19:25:50]     Variance ratio: 4.16 (observed/expected)
+[19:25:50] >>> Analysis with 20 temporal bins
+[19:25:50]     Linear Regression Complete (N=1220, DOF=1218):
+[19:25:50]       RSS=1.085231e+02, MSE=8.909942e-02, χ²_red=0.089
+[19:25:50]       Birge Ratio = 0.298 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.52e+00
+[19:25:50]       Final η = -5.63969382e-03 ± 1.57257973e-03
+[19:25:50]       Bin 0: years 1984.3-1986.0, N=1220, η=-5.64e-03 ± 1.57e-03, SNR=3.59σ
+[19:25:50]     Linear Regression Complete (N=378, DOF=376):
+[19:25:50]       RSS=2.147941e+01, MSE=5.712608e-02, χ²_red=0.057
+[19:25:50]       Birge Ratio = 0.239 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.77e+00
+[19:25:50]       Final η = 1.37181731e-02 ± 2.51762714e-03
+[19:25:50]       Bin 1: years 1986.0-1987.8, N=378, η=1.37e-02 ± 2.52e-03, SNR=5.45σ
+[19:25:50]     Linear Regression Complete (N=768, DOF=766):
+[19:25:50]       RSS=1.942003e+01, MSE=2.535252e-02, χ²_red=0.025
+[19:25:50]       Birge Ratio = 0.159 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.40e+00
+[19:25:50]       Final η = -6.20712990e-04 ± 1.03629591e-03
+[19:25:50]       Bin 2: years 1987.8-1989.5, N=768, η=-6.21e-04 ± 1.04e-03, SNR=0.60σ
+[19:25:50]     Linear Regression Complete (N=1226, DOF=1224):
+[19:25:50]       RSS=1.675710e+01, MSE=1.369044e-02, χ²_red=0.014
+[19:25:50]       Birge Ratio = 0.117 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.60e+00
+[19:25:50]       Final η = 3.25981660e-03 ± 6.10488411e-04
+[19:25:50]       Bin 3: years 1989.6-1991.3, N=1226, η=3.26e-03 ± 6.10e-04, SNR=5.34σ
+[19:25:50]     Linear Regression Complete (N=953, DOF=951):
+[19:25:50]       RSS=1.014434e+01, MSE=1.066702e-02, χ²_red=0.011
+[19:25:50]       Birge Ratio = 0.103 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.53e+00
+[19:25:50]       Final η = -5.07674974e-03 ± 6.22363807e-04
+[19:25:50]       Bin 4: years 1991.4-1993.1, N=953, η=-5.08e-03 ± 6.22e-04, SNR=8.16σ
+[19:25:50]     Linear Regression Complete (N=1074, DOF=1072):
+[19:25:50]       RSS=6.399113e+00, MSE=5.969321e-03, χ²_red=0.006
+[19:25:50]       Birge Ratio = 0.077 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.60e+00
+[19:25:50]       Final η = -5.33442002e-04 ± 4.40092263e-04
+[19:25:50]       Bin 5: years 1993.2-1994.9, N=1074, η=-5.33e-04 ± 4.40e-04, SNR=1.21σ
+[19:25:50]     Linear Regression Complete (N=1645, DOF=1643):
+[19:25:50]       RSS=6.357076e+00, MSE=3.869188e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.96e+00
+[19:25:50]       Final η = -4.27818286e-05 ± 3.21236528e-04
+[19:25:50]       Bin 6: years 1994.9-1996.7, N=1645, η=-4.28e-05 ± 3.21e-04, SNR=0.13σ
+[19:25:50]     Linear Regression Complete (N=1615, DOF=1613):
+[19:25:50]       RSS=1.037322e+01, MSE=6.431011e-03, χ²_red=0.006
+[19:25:50]       Birge Ratio = 0.080 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.66e+00
+[19:25:50]       Final η = -1.42273699e-03 ± 3.73353672e-04
+[19:25:50]       Bin 7: years 1996.7-1998.5, N=1615, η=-1.42e-03 ± 3.73e-04, SNR=3.81σ
+[19:25:50]     Linear Regression Complete (N=1603, DOF=1601):
+[19:25:50]       RSS=5.789553e+00, MSE=3.616211e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.060 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.61e+00
+[19:25:50]       Final η = -2.78688471e-04 ± 2.72499240e-04
+[19:25:50]       Bin 8: years 1998.5-2000.2, N=1603, η=-2.79e-04 ± 2.72e-04, SNR=1.02σ
+[19:25:50]     Linear Regression Complete (N=1092, DOF=1090):
+[19:25:50]       RSS=4.684410e+00, MSE=4.297624e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.066 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.72e+00
+[19:25:50]       Final η = -8.52749772e-05 ± 3.81953163e-04
+[19:25:50]       Bin 9: years 2000.3-2002.0, N=1092, η=-8.53e-05 ± 3.82e-04, SNR=0.22σ
+[19:25:50]     Linear Regression Complete (N=432, DOF=430):
+[19:25:50]       RSS=1.748256e+00, MSE=4.065712e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.064 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 3.11e+00
+[19:25:50]       Final η = -2.06620111e-03 ± 6.88102698e-04
+[19:25:50]       Bin 10: years 2002.0-2003.8, N=432, η=-2.07e-03 ± 6.88e-04, SNR=3.00σ
+[19:25:50]     Linear Regression Complete (N=878, DOF=876):
+[19:25:50]       RSS=2.950624e+00, MSE=3.368293e-03, χ²_red=0.003
+[19:25:50]       Birge Ratio = 0.058 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.67e+00
+[19:25:50]       Final η = -1.09044084e-03 ± 3.78568419e-04
+[19:25:50]       Bin 11: years 2003.9-2005.5, N=878, η=-1.09e-03 ± 3.79e-04, SNR=2.88σ
+[19:25:50]     Linear Regression Complete (N=265, DOF=263):
+[19:25:50]       RSS=1.084762e+00, MSE=4.124571e-03, χ²_red=0.004
+[19:25:50]       Birge Ratio = 0.064 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.52e+00
+[19:25:50]       Final η = 4.62224084e-04 ± 7.06543534e-04
+[19:25:50]       Bin 12: years 2005.6-2007.3, N=265, η=4.62e-04 ± 7.07e-04, SNR=0.65σ
+[19:25:50]     Linear Regression Complete (N=549, DOF=547):
+[19:25:50]       RSS=1.678260e+00, MSE=3.068116e-03, χ²_red=0.003
+[19:25:50]       Birge Ratio = 0.055 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.26e+00
+[19:25:50]       Final η = -5.07823700e-04 ± 3.80970773e-04
+[19:25:50]       Bin 13: years 2007.4-2009.1, N=549, η=-5.08e-04 ± 3.81e-04, SNR=1.33σ
+[19:25:50]     Linear Regression Complete (N=491, DOF=489):
+[19:25:50]       RSS=1.070986e+00, MSE=2.190155e-03, χ²_red=0.002
+[19:25:50]       Birge Ratio = 0.047 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.36e+00
+[19:25:50]       Final η = 2.35248497e-04 ± 3.57326455e-04
+[19:25:50]       Bin 14: years 2009.1-2010.9, N=491, η=2.35e-04 ± 3.57e-04, SNR=0.66σ
+[19:25:50]     Linear Regression Complete (N=905, DOF=903):
+[19:25:50]       RSS=1.808458e+00, MSE=2.002722e-03, χ²_red=0.002
+[19:25:50]       Birge Ratio = 0.045 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 1.99e+00
+[19:25:50]       Final η = 6.11847715e-05 ± 2.19081716e-04
+[19:25:50]       Bin 15: years 2010.9-2012.7, N=905, η=6.12e-05 ± 2.19e-04, SNR=0.28σ
+[19:25:50]     Linear Regression Complete (N=1285, DOF=1283):
+[19:25:50]       RSS=1.290251e+00, MSE=1.005652e-03, χ²_red=0.001
+[19:25:50]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.26e+00
+[19:25:50]       Final η = -7.44629567e-04 ± 1.48968555e-04
+[19:25:50]       Bin 16: years 2012.7-2014.4, N=1285, η=-7.45e-04 ± 1.49e-04, SNR=5.00σ
+[19:25:50]     Linear Regression Complete (N=2271, DOF=2269):
+[19:25:50]       RSS=1.335443e+00, MSE=5.885602e-04, χ²_red=0.001
+[19:25:50]       Birge Ratio = 0.024 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 2.07e+00
+[19:25:50]       Final η = -7.58672947e-04 ± 7.87316971e-05
+[19:25:50]       Bin 17: years 2014.5-2016.2, N=2271, η=-7.59e-04 ± 7.87e-05, SNR=9.64σ
+[19:25:50]     Linear Regression Complete (N=2131, DOF=2129):
+[19:25:50]       RSS=1.145036e+00, MSE=5.378280e-04, χ²_red=0.001
+[19:25:50]       Birge Ratio = 0.023 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 1.81e+00
+[19:25:50]       Final η = 1.25754443e-04 ± 6.98022220e-05
+[19:25:50]       Bin 18: years 2016.2-2018.0, N=2131, η=1.26e-04 ± 6.98e-05, SNR=1.80σ
+[19:25:50]     Linear Regression Complete (N=5426, DOF=5424):
+[19:25:50]       RSS=3.215659e+00, MSE=5.928576e-04, χ²_red=0.001
+[19:25:50]       Birge Ratio = 0.024 (Scaling factor applied: 1.000)
+[19:25:50]       Condition Number κ(R) = 1.70e+00
+[19:25:50]       Final η = -2.85041269e-04 ± 4.32661881e-05
+[19:25:50]       Bin 19: years 2018.0-2019.8, N=5426, η=-2.85e-04 ± 4.33e-05, SNR=6.59σ
+[19:25:50]     Weighted η: -3.04e-04 ± 3.10e-05
+[19:25:50]     χ²/dof: 12.81 (p=0.00e+00)
+[19:25:50]     Trend test: SNR=0.60σ (p=5.47e-01)
+[19:25:50]     Sign consistency: 14/20 negative (p=9.79e-01)
+[19:25:50]     Variance ratio: 21.95 (observed/expected)
+[19:25:50] ═══ INTERPRETATION:
+[19:25:50]     The χ²/dof ratio of 12.23 indicates significant temporal variation beyond statistical expectation. This could be due to:
   1. Hardware epoch effects (different instruments over time)
   2. Real temporal variation in the physical signal
   3. Unmodeled systematic effects varying with time
-[10:55:20]     Sign consistency: 8/10 bins show negative η
-[10:55:20]     This is consistent with chance (p=9.89e-01)
-[10:55:20]     Temporal trend: dη/dy = 2.11e-05 ± 3.39e-05 yr⁻¹
-[10:55:20]     No significant temporal trend (p=5.34e-01)
-[10:55:20] ═══ FINAL ASSESSMENT:
-[10:55:20] Results saved to results/outputs/step_043_temporal_bin_variation.json
-[10:55:20] ✓   Step 043 completed successfully
+[19:25:50]     Sign consistency: 8/10 bins show negative η
+[19:25:50]     This is consistent with chance (p=9.89e-01)
+[19:25:50]     Temporal trend: dη/dy = 2.11e-05 ± 3.39e-05 yr⁻¹
+[19:25:50]     No significant temporal trend (p=5.34e-01)
+[19:25:50] ═══ FINAL ASSESSMENT:
+[19:25:50] Results saved to results/outputs/step_043_temporal_bin_variation.json
+[19:25:50] ✓   Step 043 completed successfully

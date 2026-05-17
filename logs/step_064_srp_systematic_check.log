@@ -1,38 +1,38 @@
-[10:54:52]     ======================================================================
-[10:54:52] ═══ STEP 064: SOLAR RADIATION PRESSURE SYSTEMATIC CHECK
-[10:54:52]     ======================================================================
-[10:54:52]     Outlier cleaning: 762/26207 removed (6σ)
-[10:54:52]     Clean dataset: N = 25,445
-[10:54:54] 
-[10:54:54] >>> TEST 1: COLLINEARITY DIAGNOSTIC
-[10:54:54]       Pearson r(cosD, SRP_proxy) = 0.999723
-[10:54:54]       VIF(SRP_proxy) = 1807.72
-[10:54:54] ⚠     WARNING: VIF > 10 indicates severe multicollinearity; joint OLS decomposition is unreliable.
-[10:54:54] 
-[10:54:54] >>> TEST 2: DETRENDED-RESIDUAL SRP CORRELATION
-[10:54:54]       After removing best-fit TEP cos(D) signal (eta = -3.1779e-04)
-[10:54:54]       r(detrended, SRP_proxy) = -3.221644e-04
-[10:54:54]       p-value = 9.5902e-01
-[10:54:54]       SNR = 0.05σ
-[10:54:54]       RESULT: No significant correlation with SRP proxy after TEP detrending. SRP does not explain residual variance beyond the TEP cos(D) term.
-[10:54:54] 
-[10:54:54] >>> TEST 3: SRP SCALING TEST (central)
-[10:54:54]       Bins: 10 (N per bin: 1661–5155)
-[10:54:54]       Fit: eta(r) = C + M / r^2
-[10:54:54]       C = 6.0011e-03 ± 2.7947e-03  (t = 2.15, p = 0.064)
-[10:54:54]       M = -6.3247e-03 ± 2.8079e-03  (t = -2.25, p = 0.054)
-[10:54:54]       χ²_red = 4.83
-[10:54:54]       Expected M for pure SRP = -3.1776e-04
-[10:54:54] ⚠     The 1/r² slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.
-[10:54:54] 
-[10:54:54] >>> TEST 4: PERIHELION–APHELION DIFFERENTIAL
-[10:54:54]       Perihelion η = -2.8102e-04 ± 1.9181e-04 (N=3817)
-[10:54:54]       Aphelion   η = 5.9407e-05 ± 1.5747e-04 (N=3819)
-[10:54:54]       Δη = -3.4043e-04 ± 2.4817e-04  (SNR = 1.37σ)
-[10:54:54]       SRP-predicted Δη ≈ -1.5803e-05
-[10:54:54] 
-[10:54:54] ═══ OVERALL SUMMARY
-[10:54:54]       SRP test outcome: NO_SRP_SIGNATURE
-[10:54:54]       All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r² scaling in the residuals, rules out SRP as the dominant source of the detected signal.
-[10:54:54]     ======================================================================
-[10:54:54] Results saved to results/outputs/step_064_srp_systematic_check.json
+[19:25:19]     ======================================================================
+[19:25:19] ═══ STEP 064: SOLAR RADIATION PRESSURE SYSTEMATIC CHECK
+[19:25:19]     ======================================================================
+[19:25:19]     Outlier cleaning: 762/26207 removed (6σ)
+[19:25:19]     Clean dataset: N = 25,445
+[19:25:21] 
+[19:25:21] >>> TEST 1: COLLINEARITY DIAGNOSTIC
+[19:25:21]       Pearson r(cosD, SRP_proxy) = 0.999723
+[19:25:21]       VIF(SRP_proxy) = 1807.72
+[19:25:21] ⚠     WARNING: VIF > 10 indicates severe multicollinearity; joint OLS decomposition is unreliable.
+[19:25:21] 
+[19:25:21] >>> TEST 2: DETRENDED-RESIDUAL SRP CORRELATION
+[19:25:21]       After removing best-fit TEP cos(D) signal (eta = -3.1779e-04)
+[19:25:21]       r(detrended, SRP_proxy) = -3.221644e-04
+[19:25:21]       p-value = 9.5902e-01
+[19:25:21]       SNR = 0.05σ
+[19:25:21]       RESULT: No significant correlation with SRP proxy after TEP detrending. SRP does not explain residual variance beyond the TEP cos(D) term.
+[19:25:21] 
+[19:25:21] >>> TEST 3: SRP SCALING TEST (central)
+[19:25:21]       Bins: 10 (N per bin: 1661–5155)
+[19:25:21]       Fit: eta(r) = C + M / r^2
+[19:25:21]       C = 6.0011e-03 ± 2.7947e-03  (t = 2.15, p = 0.064)
+[19:25:21]       M = -6.3247e-03 ± 2.8079e-03  (t = -2.25, p = 0.054)
+[19:25:21]       χ²_red = 4.83
+[19:25:21]       Expected M for pure SRP = -3.1776e-04
+[19:25:21] ⚠     The 1/r² slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.
+[19:25:21] 
+[19:25:21] >>> TEST 4: PERIHELION–APHELION DIFFERENTIAL
+[19:25:21]       Perihelion η = -2.8102e-04 ± 1.9181e-04 (N=3817)
+[19:25:21]       Aphelion   η = 5.9407e-05 ± 1.5747e-04 (N=3819)
+[19:25:21]       Δη = -3.4043e-04 ± 2.4817e-04  (SNR = 1.37σ)
+[19:25:21]       SRP-predicted Δη ≈ -1.5803e-05
+[19:25:21] 
+[19:25:21] ═══ OVERALL SUMMARY
+[19:25:21]       SRP test outcome: NO_SRP_SIGNATURE
+[19:25:21]       All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r² scaling in the residuals, rules out SRP as the dominant source of the detected signal.
+[19:25:21]     ======================================================================
+[19:25:21] Results saved to results/outputs/step_064_srp_systematic_check.json

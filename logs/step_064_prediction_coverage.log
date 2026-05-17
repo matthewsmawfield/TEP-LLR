@@ -1,20 +1,20 @@
-[10:59:05]     ============================================================
-[10:59:05]     UNCERTAINTY CALIBRATION (Step 064-PI)
-[10:59:05]     ============================================================
-[10:59:05]     Full dataset: 26207; 6σ retained: 25445
-[10:59:05]     
+[19:29:45]     ============================================================
+[19:29:45]     UNCERTAINTY CALIBRATION (Step 064-PI)
+[19:29:45]     ============================================================
+[19:29:45]     Full dataset: 26207; 6σ retained: 25445
+[19:29:45]     
 --- Prediction-interval coverage ---
-[10:59:05]       wls_published_sigma: 68% nominal → 0.859 observed (χ²_red=0.477)
-[10:59:05]       ols_homoskedastic: 68% nominal → 0.022 observed (χ²_red=1.000)
-[10:59:05]       cluster_robust_scaled: 68% nominal → 0.846 observed (χ²_red=0.477)
-[10:59:05]       cluster_ar1_scaled: 68% nominal → 0.863 observed (χ²_red=0.477)
-[10:59:05]       σ calibration scale for 68% nominal PI coverage: c = 0.514
-[10:59:05]     
+[19:29:45]       wls_published_sigma: 68% nominal → 0.859 observed (χ²_red=0.477)
+[19:29:45]       ols_homoskedastic: 68% nominal → 0.022 observed (χ²_red=1.000)
+[19:29:45]       cluster_robust_scaled: 68% nominal → 0.846 observed (χ²_red=0.477)
+[19:29:45]       cluster_ar1_scaled: 68% nominal → 0.863 observed (χ²_red=0.477)
+[19:29:45]       σ calibration scale for 68% nominal PI coverage: c = 0.514
+[19:29:45]     
 --- Headline η intervals ---
-[10:59:11]       η (WLS) = -3.9088e-04 ± 5.6283e-05 (6.94σ)
-[10:59:11]       η bootstrap SNR = 1.65σ (95% CI [-5.4407e-04, 5.1992e-05])
-[10:59:11]       η LOSO conformal 95%: [-7.3295e-04, -4.8823e-05] (SNR = 1.14σ vs half-width)
-[10:59:11]     
+[19:29:51]       η (WLS) = -3.9088e-04 ± 5.6283e-05 (6.94σ)
+[19:29:51]       η bootstrap SNR = 1.65σ (95% CI [-5.4407e-04, 5.1992e-05])
+[19:29:51]       η LOSO conformal 95%: [-7.3295e-04, -4.8823e-05] (SNR = 1.14σ vs half-width)
+[19:29:51]     
 Interpretation: Prediction intervals are conservative (observed coverage exceeds nominal at 68–95%). Published σ and/or the pooled regression variance scale are larger than residual scatter after the full-systematic fit (χ²_red < 1). Headline formal σ-based significance is therefore not inflated by underestimated errors; station-block bootstrap and LOSO conformal intervals provide σ-free significance brackets alongside WLS and cluster-robust paths.
-[10:59:11] Results saved to results/outputs/step_064_prediction_coverage.json
-[10:59:11] ✓   ✓   Uncertainty calibration complete.
+[19:29:51] Results saved to results/outputs/step_064_prediction_coverage.json
+[19:29:51] ✓   ✓   Uncertainty calibration complete.

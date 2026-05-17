@@ -1,34 +1,35 @@
 cff-version: 1.2.0
-title: "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect"
-message: "If you use this software, please cite it as below."
+message: "If you use this work, please cite it as below."
 type: article
 authors:
   - family-names: "Smawfield"
     given-names: "Matthew Lukin"
     orcid: "https://orcid.org/0009-0003-8219-3159"
-abstract: >
-  The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent suppression. This work tests for SEP violation using Lunar Laser Ranging data, analysing 26,207 O-C residuals from five international stations spanning 35 years (1984-2019), with 25,445 retained after 6-sigma-equivalent (MAD-based) cleaning.
-
-  The headline estimand is precision-weighted full-systematic regression on the cleaned sample: eta = -3.91 × 10^-4 ± 5.63 × 10^-5 at 6.94 sigma (6.78 sigma cluster-robust; all N = 25,445 shots retained). Step 064-PI gives prediction-interval coverage 86% at 68% nominal and 98% at 95% (chi^2_red = 0.48 on published sigma), so formal errors are conservative rather than underestimated. Unweighted full-systematic OLS on the same design, reported as a sensitivity upper bound, gives eta = -4.06 × 10^-4 ± 6.58 × 10^-5 at 6.17 sigma (6.52 sigma cluster-robust). Cook's-Distance excision on the unweighted full-systematic row (N = 23,837) returns eta = -3.87 × 10^-4 ± 4.95 × 10^-5 at 7.82 sigma (8.65 sigma cluster-robust) as a secondary leverage diagnostic. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component. The observed negative sign establishes that gravitational potential suppression (TSS) dominates in the Earth-Moon system, providing a candidate physical explanation for the unexplained ~1 cm synodic residual documented by Müller & Nordtvedt (1998).
-version: v0.1 (Lucknow)
+title: "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect"
+abstract: "The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent suppression. This work tests for SEP violation using Lunar Laser Ranging data, analysing 26,207 O-C residuals from five international stations spanning 35 years (1984-2019), with 25,445 retained after 6-sigma-equivalent (MAD-based) cleaning. The headline estimand is precision-weighted full-systematic regression on the cleaned sample: eta = -3.91 × 10^-4 ± 5.63 × 10^-5 at 6.94 sigma (6.78 sigma cluster-robust; all N = 25,445 shots retained). Unweighted full-systematic OLS on the same design, reported as a sensitivity upper bound, gives eta = -4.06 × 10^-4 ± 6.58 × 10^-5 at 6.17 sigma (6.52 sigma cluster-robust). Cook's-Distance excision on the unweighted full-systematic row (N = 23,837) returns eta = -3.87 × 10^-4 ± 4.95 × 10^-5 at 7.82 sigma (8.65 sigma cluster-robust) as a secondary leverage diagnostic. A common-eta mixed model yields eta = -4.31 × 10^-4 ± 6.74 × 10^-5 at 6.40 sigma. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component. The observed negative sign establishes that gravitational potential suppression (TSS) dominates in the Earth-Moon system, providing a candidate physical explanation for the unexplained ~1 cm synodic residual documented by Müller & Nordtvedt (1998)."
+version: "v0.1 (Lucknow)"
 date-released: 2026-05-17
+doi: 10.5281/zenodo.19446029
+url: "https://github.com/matthewsmawfield/TEP-LLR"
 license: CC-BY-4.0
 keywords:
-  - temporal equivalence principle
-  - lunar laser ranging
+  - Gravitation
+  - Lunar Laser Ranging
   - LLR
   - equivalence principle
   - Nordtvedt effect
   - post-Newtonian
   - scalar-tensor gravity
   - strong equivalence principle
-repository-code: "https://github.com/matthewsmawfield/TEP-LLR"
-url: "https://github.com/matthewsmawfield/TEP-LLR"
-doi: 10.5281/zenodo.19446029
+  - Temporal Equivalence Principle
+  - TEP
+  - lunar ephemeris
+  - INPOP
+  - Earth-Moon system
 
 preferred-citation:
   type: article
-  title: "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect (Lucknow v0.1)"
+  title: "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect"
   authors:
     - family-names: Smawfield
       given-names: Matthew Lukin
@@ -40,5 +41,5 @@ preferred-citation:
   - type: doi
     value: 10.5281/zenodo.19446029
     description: Pre-print DOI
-    url: "https://doi.org/10.5281/zenodo.19446029"
-  notes: "Preprint"
+  url: "https://doi.org/10.5281/zenodo.19446029"
+  notes: "Preprint v0.1 (Lucknow)"

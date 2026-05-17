@@ -1,62 +1,62 @@
-[10:58:14] ═══ Starting Step 059: Grasse-Specific Systematic Sufficiency Analysis
-[10:58:14]     Loaded data: 26,207 observations
-[10:58:14]     Canonical 6σ-cleaned sample: 25,445 observations (762 outliers removed)
-[10:58:14]       Grasse: 18,742 / 25,445 = 73.7%
-[10:58:14]       Grasse: 18,742 (73.7%)
-[10:58:14]       Haleakala: 666 (2.6%)
-[10:58:14]       McDonald2: 3,097 (12.2%)
-[10:58:14]       Matera: 345 (1.4%)
-[10:58:14]       APO: 2,595 (10.2%)
-[10:58:14] 
-[10:58:14] >>> >>> Running partition test (Grasse / Non-Grasse / Pooled)
-[10:58:14] ═══ ═══ PARTITION TEST RESULTS
-[10:58:14]       grasse: eta=-4.576e-04 +/- 6.724e-05, SNR=6.81, N_used=18,612
-[10:58:14]       non_grasse: eta=-1.648e-04 +/- 1.799e-04, SNR=0.92, N_used=6,703
-[10:58:14]       pooled: eta=-3.976e-04 +/- 6.480e-05, SNR=6.14, N_used=25,384
-[10:58:14] 
-[10:58:14] >>> >>> Computing required systematic amplitude
-[10:58:14] ═══ ═══ REQUIRED SYSTEMATIC AMPLITUDE
-[10:58:14]       Pooled eta = -3.976e-04
-[10:58:14]       Grasse fraction = 0.737
-[10:58:14]       Required Grasse-only systematic = 0.70 cm
-[10:58:14]       Known ephemeris systematic = 0.355 cm (eta_equiv=2.732e-04)
-[10:58:14]       Known atmospheric systematic = 0.080 cm (eta_equiv=-6.153e-05)
-[10:58:14]       Known instrumental systematic = 0.010 cm (eta_equiv=7.519e-06)
-[10:58:14]       Known tidal systematic = 0.009 cm (eta_equiv=-7.014e-06)
-[10:58:14]       Known thermal systematic = 0.056 cm (eta_equiv=-4.278e-05)
-[10:58:14] 
-[10:58:14] ═══ ═══ RATIO: REQUIRED / KNOWN SYSTEMATIC
-[10:58:14]       ephemeris: 2.0x
-[10:58:14]       atmospheric: 8.8x
-[10:58:14]       instrumental: 71.8x
-[10:58:14]       tidal: 77.0x
-[10:58:14]       thermal: 12.6x
-[10:58:14] 
-[10:58:14] >>> >>> Running Grasse x cos(D) interaction test
-[10:58:14] ═══ ═══ INTERACTION TEST RESULTS
-[10:58:14]       Base eta (non-Grasse) = -3.556e-04
-[10:58:14]       Grasse interaction = -5.428e-05
-[10:58:14]       t-statistic = -0.42
-[10:58:14]       p-value = 0.6757
-[10:58:14] 
-[10:58:14] >>> >>> Running Monte Carlo station dominance test
-[10:58:20] ═══ ═══ MONTE CARLO STATION DOMINANCE
-[10:58:20]       Grasse SNR = 6.81
-[10:58:20]       Random station mean SNR = 1.96
-[10:58:20]       Random station 95th pct = 6.81
-[10:58:20]       p(Grasse > random) = 1.000
-[10:58:20]       Percentile = 100.0%
-[10:58:20] 
-[10:58:20] >>> >>> Grasse-conditioned estimands (full-systematic + cluster-robust)
-[10:58:20] ═══ ═══ GRASSE-CONDITIONED ESTIMANDS
-[10:58:20]       non_grasse_direct: eta=-1.648e-04 +/- 1.577e-04 (1.04sigma), N=6703
-[10:58:20]       common_eta_station_systematics: eta=-4.321e-04 +/- 6.354e-05 (6.80sigma), N=25445
-[10:58:20]       pooled_grasse_cosd_interaction: eta=-3.714e-04 +/- 1.342e-04 (2.77sigma), N=25445
-[10:58:20]       pooled_reference: eta=-4.061e-04 +/- 6.225e-05 (6.52sigma), N=25445
-[10:58:20] 
-[10:58:20] >>> >>> Equal-weighted station meta-analysis
-[10:58:20]       Equal-weighted η=-1.214e-04 ± 2.605e-04 (0.47σ), N_stations=4
-[10:58:20] >>> >>> Balanced-station-N reweighted pooled analysis
-[10:58:20]       Balanced η=-1.474e-04 ± 3.699e-04 (0.40σ), N=1725
-[10:58:20] Results saved to results/outputs/step_059_grasse_systematic_sufficiency.json
-[10:58:20] ✓   Grasse Systematic Sufficiency Analysis Complete.
+[19:28:51] ═══ Starting Step 059: Grasse-Specific Systematic Sufficiency Analysis
+[19:28:51]     Loaded data: 26,207 observations
+[19:28:51]     Canonical 6σ-cleaned sample: 25,445 observations (762 outliers removed)
+[19:28:51]       Grasse: 18,742 / 25,445 = 73.7%
+[19:28:51]       Grasse: 18,742 (73.7%)
+[19:28:51]       Haleakala: 666 (2.6%)
+[19:28:51]       McDonald2: 3,097 (12.2%)
+[19:28:51]       Matera: 345 (1.4%)
+[19:28:51]       APO: 2,595 (10.2%)
+[19:28:51] 
+[19:28:51] >>> >>> Running partition test (Grasse / Non-Grasse / Pooled)
+[19:28:51] ═══ ═══ PARTITION TEST RESULTS
+[19:28:51]       grasse: eta=-4.576e-04 +/- 6.724e-05, SNR=6.81, N_used=18,612
+[19:28:51]       non_grasse: eta=-1.648e-04 +/- 1.799e-04, SNR=0.92, N_used=6,703
+[19:28:51]       pooled: eta=-3.976e-04 +/- 6.480e-05, SNR=6.14, N_used=25,384
+[19:28:51] 
+[19:28:51] >>> >>> Computing required systematic amplitude
+[19:28:51] ═══ ═══ REQUIRED SYSTEMATIC AMPLITUDE
+[19:28:51]       Pooled eta = -3.976e-04
+[19:28:51]       Grasse fraction = 0.737
+[19:28:51]       Required Grasse-only systematic = 0.70 cm
+[19:28:51]       Known ephemeris systematic = 0.355 cm (eta_equiv=2.732e-04)
+[19:28:51]       Known atmospheric systematic = 0.080 cm (eta_equiv=-6.153e-05)
+[19:28:51]       Known instrumental systematic = 0.010 cm (eta_equiv=7.519e-06)
+[19:28:51]       Known tidal systematic = 0.009 cm (eta_equiv=-7.014e-06)
+[19:28:51]       Known thermal systematic = 0.056 cm (eta_equiv=-4.278e-05)
+[19:28:51] 
+[19:28:51] ═══ ═══ RATIO: REQUIRED / KNOWN SYSTEMATIC
+[19:28:51]       ephemeris: 2.0x
+[19:28:51]       atmospheric: 8.8x
+[19:28:51]       instrumental: 71.8x
+[19:28:51]       tidal: 77.0x
+[19:28:51]       thermal: 12.6x
+[19:28:51] 
+[19:28:51] >>> >>> Running Grasse x cos(D) interaction test
+[19:28:51] ═══ ═══ INTERACTION TEST RESULTS
+[19:28:51]       Base eta (non-Grasse) = -3.556e-04
+[19:28:51]       Grasse interaction = -5.428e-05
+[19:28:51]       t-statistic = -0.42
+[19:28:51]       p-value = 0.6757
+[19:28:51] 
+[19:28:51] >>> >>> Running Monte Carlo station dominance test
+[19:28:58] ═══ ═══ MONTE CARLO STATION DOMINANCE
+[19:28:58]       Grasse SNR = 6.81
+[19:28:58]       Random station mean SNR = 1.96
+[19:28:58]       Random station 95th pct = 6.81
+[19:28:58]       p(Grasse > random) = 1.000
+[19:28:58]       Percentile = 100.0%
+[19:28:58] 
+[19:28:58] >>> >>> Grasse-conditioned estimands (full-systematic + cluster-robust)
+[19:28:58] ═══ ═══ GRASSE-CONDITIONED ESTIMANDS
+[19:28:58]       non_grasse_direct: eta=-1.648e-04 +/- 1.577e-04 (1.04sigma), N=6703
+[19:28:58]       common_eta_station_systematics: eta=-4.321e-04 +/- 6.354e-05 (6.80sigma), N=25445
+[19:28:58]       pooled_grasse_cosd_interaction: eta=-3.714e-04 +/- 1.342e-04 (2.77sigma), N=25445
+[19:28:58]       pooled_reference: eta=-4.061e-04 +/- 6.225e-05 (6.52sigma), N=25445
+[19:28:58] 
+[19:28:58] >>> >>> Equal-weighted station meta-analysis
+[19:28:58]       Equal-weighted η=-1.214e-04 ± 2.605e-04 (0.47σ), N_stations=4
+[19:28:58] >>> >>> Balanced-station-N reweighted pooled analysis
+[19:28:58]       Balanced η=-1.474e-04 ± 3.699e-04 (0.40σ), N=1725
+[19:28:58] Results saved to results/outputs/step_059_grasse_systematic_sufficiency.json
+[19:28:58] ✓   Grasse Systematic Sufficiency Analysis Complete.

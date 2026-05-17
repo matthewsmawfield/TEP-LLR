@@ -1,15 +1,15 @@
-[10:54:13] Computing Solar Altitude for 26,000+ observations... (Vectorized for M4 Pro)
-[10:54:15] DAY / NIGHT THERMAL FALSE POSITIVE INVESTIGATION
-[10:54:15] 
+[19:24:36] Computing Solar Altitude for 26,000+ observations... (Vectorized for M4 Pro)
+[19:24:37] DAY / NIGHT THERMAL FALSE POSITIVE INVESTIGATION
+[19:24:37] 
   Station     N  Day_Ranged_Percent  Day_Minus_Night_Bias_mm  Spurious_Eta  Original_Eta  Cleaned_Eta_After_Solar_Modeling  Cleaned_P_Val
    Grasse 19390           44.321815                -3.138390     -0.000241     -0.000540                         -0.000506       0.000006
 Haleakala   737           33.378562                41.637844      0.003203      0.003554                          0.003103       0.031702
 McDonald2  3139           42.179038               -16.557208     -0.001274     -0.000501                         -0.000319       0.376619
    Matera   346           21.676301               -28.043038     -0.002157     -0.000018                          0.000727       0.410232
       APO  2595           45.741811                 6.545285      0.000503     -0.000240                         -0.000310       0.000392
-[10:54:15] GLOBAL ANALYSIS:
-[10:54:15] Original Global Eta: -0.00045329831715336453
-[10:54:15] Solar Altitude Parameter: -3.442668494997082e-05 p-val: 0.2811759882287508
-[10:54:15] Cleaned Global Eta (Controlling for Sun Altitude/Thermal): -0.00041910174885345273
-[10:54:15] Cleaned Global P-Value for Cos(Elongation): 7.746880592129912e-06
-[10:54:15] Results saved to results/outputs/step_027_day_night_thermal_bias.json
+[19:24:37] GLOBAL ANALYSIS:
+[19:24:37] Original Global Eta: -0.00045329831715336453
+[19:24:37] Solar Altitude Parameter: -3.442668494997082e-05 p-val: 0.2811759882287508
+[19:24:37] Cleaned Global Eta (Controlling for Sun Altitude/Thermal): -0.00041910174885345273
+[19:24:37] Cleaned Global P-Value for Cos(Elongation): 7.746880592129912e-06
+[19:24:37] Results saved to results/outputs/step_027_day_night_thermal_bias.json

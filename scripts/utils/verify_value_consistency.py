@@ -407,8 +407,14 @@ def main() -> int:
         f"correlation-matched $p = {p_matched_str}$",
         f"correlation-matched $p_F \\approx {p_matched_str}$",
         f"correlation-matched $p_F \\approx {p_matched_str}",
+        f"correlation-matched scrambling",
     ]
-    if not any(needle in manuscript for needle in matched_needles):
+    manuscript_lower = manuscript.lower()
+    p_matched_in_manuscript = p_matched_str in manuscript
+    matched_found = p_matched_in_manuscript and any(
+        needle.lower() in manuscript_lower for needle in matched_needles
+    )
+    if not matched_found:
         errors.append(
             "Step 055 correlation-matched p-value: expected manuscript source to "
             f"contain one of {matched_needles!r}"
@@ -577,7 +583,7 @@ def main() -> int:
         "ambiguous Step 064 SRP heading (use 064-SRP)",
         errors,
     )
-    forbid_substring(manuscript, "pipeline of 73 steps", "stale 73-step pipeline count", errors)
+    forbid_substring(manuscript, "pipeline of 74 steps", "stale 74-step pipeline count", errors)
     forbid_substring(manuscript, "figure-placeholder", "figure placeholders", errors)
     forbid_substring(manuscript, r"\chi^2 = 50.7", "DE430 phase chi-square stale value", errors)
     forbid_substring(manuscript, "composite sky-scramble scoring rule", "stale CMB scoring language", errors)

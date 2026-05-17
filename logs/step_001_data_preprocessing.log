@@ -1,34 +1,34 @@
-[10:53:06] ═══ Starting INPOP MINI format preprocessing...
-[10:53:06] ═══ Processing INPOP LLR residuals for TEP analysis
-[10:53:06] >>> Processing APO data from data/raw/INPOP19a_APO_residuals.txt
-[10:53:06]     Parsed 2595 observations
-[10:53:06]     Computing Moon elongation angles for APO...
-[10:53:06] ✓   Saved 2595 observations to APO_residuals.csv
-[10:53:06]       Residual RMS: 0.032 m
-[10:53:06] >>> Processing Grasse data from data/raw/INPOP19a_Grasse_residuals.txt
-[10:53:11]     Parsed 19390 observations
-[10:53:11]     Computing Moon elongation angles for Grasse...
-[10:53:11] ✓   Saved 19390 observations to Grasse_residuals.csv
-[10:53:11]       Residual RMS: 0.099 m
-[10:53:11] >>> Processing Matera data from data/raw/INPOP19a_Matera_residuals.txt
-[10:53:11]     Parsed 346 observations
-[10:53:11]     Computing Moon elongation angles for Matera...
-[10:53:11] ✓   Saved 346 observations to Matera_residuals.csv
-[10:53:11]       Residual RMS: 0.062 m
-[10:53:11] >>> Processing McDonald2 data from data/raw/INPOP19a_McDonald2_residuals.txt
-[10:53:12]     Parsed 3139 observations
-[10:53:12]     Computing Moon elongation angles for McDonald2...
-[10:53:12] ✓   Saved 3139 observations to McDonald2_residuals.csv
-[10:53:12]       Residual RMS: 0.096 m
-[10:53:12] >>> Processing Haleakala data from data/raw/INPOP19a_Haleakala_residuals.txt
-[10:53:12]     Parsed 737 observations
-[10:53:12]     Computing Moon elongation angles for Haleakala...
-[10:53:12] ✓   Saved 737 observations to Haleakala_residuals.csv
-[10:53:12]       Residual RMS: 0.138 m
-[10:53:12] ✓   Combined 26207 observations from all stations
-[10:53:12] ═══ 
+[19:23:19] ═══ Starting INPOP MINI format preprocessing...
+[19:23:19] ═══ Processing INPOP LLR residuals for TEP analysis
+[19:23:19] >>> Processing APO data from data/raw/INPOP19a_APO_residuals.txt
+[19:23:20]     Parsed 2595 observations
+[19:23:20]     Computing Moon elongation angles for APO...
+[19:23:20] ✓   Saved 2595 observations to APO_residuals.csv
+[19:23:20]       Residual RMS: 0.032 m
+[19:23:20] >>> Processing Grasse data from data/raw/INPOP19a_Grasse_residuals.txt
+[19:23:25]     Parsed 19390 observations
+[19:23:25]     Computing Moon elongation angles for Grasse...
+[19:23:25] ✓   Saved 19390 observations to Grasse_residuals.csv
+[19:23:25]       Residual RMS: 0.099 m
+[19:23:25] >>> Processing Matera data from data/raw/INPOP19a_Matera_residuals.txt
+[19:23:25]     Parsed 346 observations
+[19:23:25]     Computing Moon elongation angles for Matera...
+[19:23:25] ✓   Saved 346 observations to Matera_residuals.csv
+[19:23:25]       Residual RMS: 0.062 m
+[19:23:25] >>> Processing McDonald2 data from data/raw/INPOP19a_McDonald2_residuals.txt
+[19:23:26]     Parsed 3139 observations
+[19:23:26]     Computing Moon elongation angles for McDonald2...
+[19:23:26] ✓   Saved 3139 observations to McDonald2_residuals.csv
+[19:23:26]       Residual RMS: 0.096 m
+[19:23:26] >>> Processing Haleakala data from data/raw/INPOP19a_Haleakala_residuals.txt
+[19:23:26]     Parsed 737 observations
+[19:23:26]     Computing Moon elongation angles for Haleakala...
+[19:23:26] ✓   Saved 737 observations to Haleakala_residuals.csv
+[19:23:26]       Residual RMS: 0.138 m
+[19:23:26] ✓   Combined 26207 observations from all stations
+[19:23:26] ═══ 
 Combined statistics:
-[10:53:12]     Total observations: 26207
-[10:53:12]     Residual RMS: 0.095 m
-[10:53:12] Results saved to results/outputs/step_001_data_preprocessing.json
-[10:53:12] ✓   Preprocessing complete.
+[19:23:26]     Total observations: 26207
+[19:23:26]     Residual RMS: 0.095 m
+[19:23:26] Results saved to results/outputs/step_001_data_preprocessing.json
+[19:23:26] ✓   Preprocessing complete.

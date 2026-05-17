@@ -1,17 +1,17 @@
-[10:59:14] ═══ ═══ Step 068: Weighted Robust M-Estimator ═══
-[10:59:14]     Dataset: N=25,445
-[10:59:14]       Station APO: RMS=0.0316 m, N=2595
-[10:59:14]       Station Grasse: RMS=0.0590 m, N=18742
-[10:59:14]       Station Haleakala: RMS=0.1062 m, N=666
-[10:59:14]       Station Matera: RMS=0.0589 m, N=345
-[10:59:14]       Station McDonald2: RMS=0.0807 m, N=3097
-[10:59:14]     --- Full systematic: weighted robust M-estimator ---
-[10:59:14]       Converged: True in 11 iterations
-[10:59:14]       Final MAD: 3.7450e-02 m
-[10:59:14]       Fraction heavily downweighted: 0.122
-[10:59:14]       η (M-estimator OLS SE)    = -3.6442e-04 ± 3.5556e-05 (10.25σ)
-[10:59:14]       η (M-estimator cluster SE) = -3.6442e-04 ± 3.9820e-05 (9.15σ)
-[10:59:14]     --- Theil-Sen ( Step 004 style) on same data ---
-[10:59:15]       η (Theil-Sen) = -3.4974e-04 ± 1.1202e-04 (3.12σ)
-[10:59:15] Results saved to results/outputs/step_068_weighted_robust_regression.json
-[10:59:15] ✓   Step 068 complete.
+[19:29:55] ═══ ═══ Step 068: Weighted Robust M-Estimator ═══
+[19:29:55]     Dataset: N=25,445
+[19:29:55]       Station APO: RMS=0.0316 m, N=2595
+[19:29:55]       Station Grasse: RMS=0.0590 m, N=18742
+[19:29:55]       Station Haleakala: RMS=0.1062 m, N=666
+[19:29:55]       Station Matera: RMS=0.0589 m, N=345
+[19:29:55]       Station McDonald2: RMS=0.0807 m, N=3097
+[19:29:55]     --- Full systematic: weighted robust M-estimator ---
+[19:29:55]       Converged: True in 11 iterations
+[19:29:55]       Final MAD: 3.7450e-02 m
+[19:29:55]       Fraction heavily downweighted: 0.122
+[19:29:55]       η (M-estimator OLS SE)    = -3.6442e-04 ± 3.5556e-05 (10.25σ)
+[19:29:55]       η (M-estimator cluster SE) = -3.6442e-04 ± 3.9820e-05 (9.15σ)
+[19:29:55]     --- Theil-Sen ( Step 004 style) on same data ---
+[19:29:55]       η (Theil-Sen) = -3.4974e-04 ± 1.1202e-04 (3.12σ)
+[19:29:55] Results saved to results/outputs/step_068_weighted_robust_regression.json
+[19:29:55] ✓   Step 068 complete.

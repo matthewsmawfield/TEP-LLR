@@ -3,5 +3,7 @@
   "codename": "Lucknow",
   "date": "2026-05-17",
   "author": "Matthew Lukin Smawfield",
-  "description": "Lunar Laser Ranging Tests of TEP"
+  "description": "Lunar Laser Ranging Tests of TEP",
+  "doi": "10.5281/zenodo.19446029",
+  "status": "Preprint"
 }

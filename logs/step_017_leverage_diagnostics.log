@@ -1,41 +1,41 @@
-[10:53:52] ═══ ═══ Starting Step 017: Leverage Diagnostics Investigation...
-[10:53:52]     ═══ STEP PURPOSE: Investigate OLS/Theil-Sen factor-of-2 discrepancy and leverage influence on TEP detection
-[10:53:52]     ═══ METHOD: High-leverage point phase mapping, phased leverage removal, Cook's D excision, bootstrap influence analysis
-[10:53:52]     ═══ PARAMETERS: Cook's D threshold=4/n, Theil-Sen sample size=10000, bootstrap samples=500
-[10:53:52] Step 017: Leverage Diagnostics Investigation
-[10:53:52]     ═══ DATA SUMMARY
-[10:53:52]         Dataset: N = 26,207 observations
-[10:53:52]         Data source: INPOP19a_all_stations_residuals.csv
-[10:53:52]         Mean leverage: 7.631549e-05
-[10:53:52]         High-leverage threshold: 1.526310e-04
-[10:53:52]         High-leverage points: 1,432 (5.5%)
-[10:53:52]     ═══ ANALYSIS TRACE
-[10:53:52] >>> >>> Analyzing high-leverage point distribution across elongation phases
-[10:53:52]         Distribution pattern: distributed
-[10:53:52] High-leverage distribution: distributed
-[10:53:52] >>> >>> Testing signal persistence with phased leverage removal
-[10:53:52] >>> >>> Running bootstrap leverage influence analysis
-[10:53:52] Running bootstrap leverage analysis...
-[10:53:54] >>> >>> Executing formal Cook's D leverage excision
-[10:53:54] Executing Formal Cook's D Leverage Excision...
-[10:53:54]         Excised η (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
-[10:53:54] Excised ETA (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
-[10:53:54]     ═══ RESULTS SUMMARY
-[10:53:54]         Full sample η (OLS): -4.533e-04
-[10:53:54]         Full sample η (Theil-Sen): -2.938e-04
-[10:53:54]         OLS/Theil-Sen ratio: 1.54x
-[10:53:54]         Excised η (Cook's D): -3.305e-04 ± 5.847e-05
-[10:53:54]         Excised SNR: 5.65σ
-[10:53:54]         Points removed: 1,031 (3.9%)
-[10:53:54]     ═══ INTERPRETATION
-[10:53:54]         Leverage influence assessment: high
-[10:53:54]         Cook's D excision provides robust η estimate while maintaining high SNR
-[10:53:54]         Recommended for manuscript: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
-[10:53:54]     ═══ REPRODUCIBILITY
-[10:53:54]         Output file: results/outputs/step_017_leverage_diagnostics.json
-[10:53:54]         Cook's D threshold: 4/n
-[10:53:54]         Theil-Sen sample size: 10000
-[10:53:54]         Bootstrap samples: 1000
-[10:53:54] Results saved to results/outputs/step_017_leverage_diagnostics.json
-[10:53:54] Recommended reporting: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
-[10:53:54] ✓   Recommended reporting: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
+[19:24:12] ═══ ═══ Starting Step 017: Leverage Diagnostics Investigation...
+[19:24:12]     ═══ STEP PURPOSE: Investigate OLS/Theil-Sen factor-of-2 discrepancy and leverage influence on TEP detection
+[19:24:12]     ═══ METHOD: High-leverage point phase mapping, phased leverage removal, Cook's D excision, bootstrap influence analysis
+[19:24:12]     ═══ PARAMETERS: Cook's D threshold=4/n, Theil-Sen sample size=10000, bootstrap samples=500
+[19:24:12] Step 017: Leverage Diagnostics Investigation
+[19:24:12]     ═══ DATA SUMMARY
+[19:24:12]         Dataset: N = 26,207 observations
+[19:24:12]         Data source: INPOP19a_all_stations_residuals.csv
+[19:24:12]         Mean leverage: 7.631549e-05
+[19:24:12]         High-leverage threshold: 1.526310e-04
+[19:24:12]         High-leverage points: 1,432 (5.5%)
+[19:24:12]     ═══ ANALYSIS TRACE
+[19:24:12] >>> >>> Analyzing high-leverage point distribution across elongation phases
+[19:24:12]         Distribution pattern: distributed
+[19:24:12] High-leverage distribution: distributed
+[19:24:12] >>> >>> Testing signal persistence with phased leverage removal
+[19:24:12] >>> >>> Running bootstrap leverage influence analysis
+[19:24:12] Running bootstrap leverage analysis...
+[19:24:15] >>> >>> Executing formal Cook's D leverage excision
+[19:24:15] Executing Formal Cook's D Leverage Excision...
+[19:24:15]         Excised η (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
+[19:24:15] Excised ETA (OLS): -3.305e-04 ± 5.847e-05 (SNR: 5.65σ)
+[19:24:15]     ═══ RESULTS SUMMARY
+[19:24:15]         Full sample η (OLS): -4.533e-04
+[19:24:15]         Full sample η (Theil-Sen): -2.938e-04
+[19:24:15]         OLS/Theil-Sen ratio: 1.54x
+[19:24:15]         Excised η (Cook's D): -3.305e-04 ± 5.847e-05
+[19:24:15]         Excised SNR: 5.65σ
+[19:24:15]         Points removed: 1,031 (3.9%)
+[19:24:15]     ═══ INTERPRETATION
+[19:24:15]         Leverage influence assessment: high
+[19:24:15]         Cook's D excision provides robust η estimate while maintaining high SNR
+[19:24:15]         Recommended for manuscript: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
+[19:24:15]     ═══ REPRODUCIBILITY
+[19:24:15]         Output file: results/outputs/step_017_leverage_diagnostics.json
+[19:24:15]         Cook's D threshold: 4/n
+[19:24:15]         Theil-Sen sample size: 10000
+[19:24:15]         Bootstrap samples: 1000
+[19:24:15] Results saved to results/outputs/step_017_leverage_diagnostics.json
+[19:24:15] Recommended reporting: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.
+[19:24:15] ✓   Recommended reporting: CosD-only Cook's-D leverage excision (Step 017): η = -3.31e-04 ± 5.85e-05 (5.65σ). Headline inference uses precision-weighted full-systematic regression (Step 050); treat this cosD-only excision as a secondary leverage diagnostic, not the primary headline.

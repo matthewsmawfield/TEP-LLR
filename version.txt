@@ -1,8 +1,6 @@
 v0.1 (Lucknow) - Initial release of TEP-LLR manuscript
 
-- Complete 60-step analysis pipeline for LLR data
-- Manuscript sections: Abstract, Introduction, Theory, Methodology, Results, Discussion, Conclusion, References, Reproducibility
-- Primary detection: Cook's-Distance-excised full-systematic OLS at 7.82σ (8.65σ cluster-robust)
+- 82-step LLR analysis pipeline
+- Primary detection: 7.82σ (Cook's-Distance-excised OLS)
 - Cross-ephemeris validation (INPOP19a, DE430)
-- Station pooling and hardware-epoch consistency tests
-- Phase-locked new/full-moon differential confirmation at 5.99σ
+- Phase-locked new/full-moon confirmation at 5.99σ

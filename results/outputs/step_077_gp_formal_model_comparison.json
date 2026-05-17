@@ -1,0 +1,49 @@
+{
+  "step_id": "step_077",
+  "status": "PASS",
+  "n_bins": 126,
+  "n_folds": 5,
+  "models": {
+    "cosd_only": {
+      "mean_cv_loglik": 43.37073961010691,
+      "std_cv_loglik": 15.427792429200332,
+      "logliks": [
+        13.080256289078697,
+        56.002265917246774,
+        48.99999050099627,
+        47.26784868004813,
+        51.503336663164674
+      ]
+    },
+    "gp_only": {
+      "mean_cv_loglik": 45.873448516394,
+      "std_cv_loglik": 12.364886620113143,
+      "logliks": [
+        22.07709157472525,
+        57.172045687887206,
+        49.42450388122819,
+        47.35552592059746,
+        53.33807551753186
+      ]
+    },
+    "joint_cosd_plus_gp": {
+      "mean_cv_loglik": -1.0116960749800967e+29,
+      "std_cv_loglik": 2.023392149960193e+29,
+      "logliks": [
+        -66.44178426777584,
+        64.43611503838333,
+        -44876392.878987156,
+        -5.058480374900484e+29,
+        -25.169753860204125
+      ]
+    }
+  },
+  "comparison": {
+    "gp_vs_cosd_delta_ll": 2.50270890628709,
+    "joint_vs_cosd_delta_ll": -1.0116960749800967e+29,
+    "joint_vs_gp_delta_ll": -1.0116960749800967e+29,
+    "gp_wins_cv": true,
+    "preferred_model_cv": "gp_only"
+  },
+  "interpretation": "5-fold CV predictive log-likelihood comparison. If GP-only wins, the non-parametric surface generalises better than the synodic sinusoid on held-out data. If cosD-only or joint wins, the synodic component has predictive validity."
+}

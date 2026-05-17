@@ -1,5 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
+type: article
 authors:
   - family-names: "Smawfield"
     given-names: "Matthew Lukin"
@@ -25,3 +26,20 @@ keywords:
   - lunar ephemeris
   - INPOP
   - Earth-Moon system
+
+preferred-citation:
+  type: article
+  title: "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect"
+  authors:
+    - family-names: Smawfield
+      given-names: Matthew Lukin
+      orcid: "https://orcid.org/0009-0003-8219-3159"
+  year: 2026
+  journal: Zenodo
+  doi: 10.5281/zenodo.19446029
+  identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19446029
+    description: Pre-print DOI
+  url: "https://doi.org/10.5281/zenodo.19446029"
+  notes: "Preprint v0.1 (Lucknow)"

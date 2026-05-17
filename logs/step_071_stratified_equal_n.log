@@ -1,18 +1,18 @@
-[10:59:17] ═══ ═══ Step 071: Stratified Equal-N Test ═══
-[10:59:17]     Cleaned dataset: N=25,445
-[10:59:17]     Full archive (reference): η = -4.061e-04 ± 6.225e-05 (6.52σ)
-[10:59:17]       25 unique combined bins
-[10:59:17]     Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
-[10:59:17]     --- TEST 1: Random equal-N (reproduce Step 046) ---
-[10:59:17]       Random equal-N: η = -1.053e-04 ± 3.670e-04 (0.29σ), N=1725
-[10:59:17]     --- TEST 2: Stratified equal-N by environmental bins ---
-[10:59:17]       Stratified equal-N: η = -2.726e-04 ± 3.655e-04 (0.75σ), N=1389
-[10:59:17]     --- TEST 3: Bootstrap over stratified draws (200 iterations) ---
-[10:59:21]       Bootstrap mean η = -2.791e-04 ± 2.475e-04
-[10:59:21]       95% CI = [-7.500e-04, 2.336e-04]
-[10:59:21]       Mean SNR = 0.83σ
-[10:59:21]     --- STABILITY vs full archive ---
-[10:59:21]       Sign retained (all subsamples): True
-[10:59:21]       Stratified SNR / random SNR = 2.60
-[10:59:21] Results saved to results/outputs/step_071_stratified_equal_n.json
-[10:59:21] ✓   Step 071 complete.
+[19:29:57] ═══ ═══ Step 071: Stratified Equal-N Test ═══
+[19:29:57]     Cleaned dataset: N=25,445
+[19:29:57]     Full archive (reference): η = -4.061e-04 ± 6.225e-05 (6.52σ)
+[19:29:57]       25 unique combined bins
+[19:29:57]     Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+[19:29:57]     --- TEST 1: Random equal-N (reproduce Step 046) ---
+[19:29:57]       Random equal-N: η = -1.053e-04 ± 3.670e-04 (0.29σ), N=1725
+[19:29:57]     --- TEST 2: Stratified equal-N by environmental bins ---
+[19:29:57]       Stratified equal-N: η = -2.726e-04 ± 3.655e-04 (0.75σ), N=1389
+[19:29:57]     --- TEST 3: Bootstrap over stratified draws (200 iterations) ---
+[19:30:01]       Bootstrap mean η = -2.791e-04 ± 2.475e-04
+[19:30:01]       95% CI = [-7.500e-04, 2.336e-04]
+[19:30:01]       Mean SNR = 0.83σ
+[19:30:01]     --- STABILITY vs full archive ---
+[19:30:01]       Sign retained (all subsamples): True
+[19:30:01]       Stratified SNR / random SNR = 2.60
+[19:30:01] Results saved to results/outputs/step_071_stratified_equal_n.json
+[19:30:01] ✓   Step 071 complete.
