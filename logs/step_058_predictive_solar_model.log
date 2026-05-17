@@ -1,0 +1,11 @@
+[10:58:08] ═══ ═══ Step 058: Predictive Solar-Cycle Model ═══
+[10:58:08]     Cleaned dataset: N=25,445
+[10:58:08] >>> Fitting solar model excluding Haleakala: N=24,779
+[10:58:08]     Global solar model: η₀ = -2.3990e-04 ± 7.7752e-05, A = -4.2006e-04 ± 2.0425e-04
+[10:58:08]     Haleakala prediction: η_pred = -4.4855e-04 ± 7.8215e-05 | η_obs = 2.5708e-03 | z = 2.59σ | p = 0.0097
+[10:58:08] >>> >>> Leave-one-station-out cross-prediction (all stations)
+[10:58:08]     Haleakala rank by |z|: 1/5 (top 20.0% most deviant)
+[10:58:08] >>> >>> Monte Carlo: solar model vs constant η
+[10:58:08]     ΔRSS = 0.015 m² | F = 3.83 | p = 0.0505
+[10:58:13]     Permutation test p-value: 0.0372 (3.7%)
+[10:58:13] ✓   Saved results to results/outputs/step_058_predictive_solar_model.json

@@ -30,8 +30,11 @@
     "error_budget": {
         "ephemeris_modeling": {
             "source": "Ephemeris modeling (cross-ephemeris scatter)",
+            "raw_amplitude_cm": 0.25,
             "magnitude_cm": 0.25,
-            "description": "Uncertainty in lunar and planetary ephemeris fitting, derived from scatter of eta across INPOP19a and DE430",
+            "projected_bias_cm": 0.25,
+            "projection_ratio": 1.0,
+            "description": "Uncertainty in lunar and planetary ephemeris fitting, derived from scatter of eta across INPOP19a and DE430. For ephemeris, raw amplitude equals projected bias because ephemeris differences directly affect the cos(D) slope.",
             "reference": "Data-driven from 2 ephemerides (step_006_multi_ephemeris_comparison)",
             "method": "std(eta_ephem) * 13.0 * 100",
             "data_driven": true,
@@ -40,7 +43,10 @@
         },
         "atmospheric_delay": {
             "source": "Atmospheric delay modeling",
+            "raw_amplitude_cm": 0.95,
             "magnitude_cm": 0.08,
+            "projected_bias_cm": 0.08,
+            "projection_ratio": 0.0838,
             "description": "Tropospheric delay correction uncertainties: seasonal model projected onto cos(elongation). Only correlated component counts.",
             "reference": "Data-driven from monthly mean residual variation, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(monthly_model, cos_elong) * 100",
@@ -50,7 +56,10 @@
         },
         "instrumental": {
             "source": "Instrumental systematic",
+            "raw_amplitude_cm": 0.03,
             "magnitude_cm": 0.01,
+            "projected_bias_cm": 0.01,
+            "projection_ratio": 0.2385,
             "description": "Detector calibration and timing electronics: station-bias model projected onto cos(elongation).",
             "reference": "Data-driven from powered-station mean residual variation, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(station_bias_model, cos_elong) * 100",
@@ -60,7 +69,10 @@
         },
         "tidal_modeling": {
             "source": "Tidal modeling",
+            "raw_amplitude_cm": 0.01,
             "magnitude_cm": 0.01,
+            "projected_bias_cm": 0.01,
+            "projection_ratio": 0.7312,
             "description": "Solid Earth and ocean tide model uncertainties: cos(2*elongation) harmonic projected onto cos(elongation). Orthogonal component excluded.",
             "reference": "Data-driven from 2nd-synodic-harmonic residual amplitude, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(tidal_model, cos_elong) * 100",
@@ -70,7 +82,10 @@
         },
         "thermal_expansion": {
             "source": "Thermal expansion",
+            "raw_amplitude_cm": 0.38,
             "magnitude_cm": 0.06,
+            "projected_bias_cm": 0.06,
+            "projection_ratio": 0.1483,
             "description": "Telescope and retroreflector thermal expansion: diurnal model projected onto cos(elongation). Orthogonal component excluded.",
             "reference": "Data-driven from diurnal residual variation, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(diurnal_model, cos_elong) * 100",
@@ -80,7 +95,10 @@
         },
         "unexplained": {
             "source": "Unexplained residual variance",
+            "raw_amplitude_cm": 0.0,
             "magnitude_cm": 0.0,
+            "projected_bias_cm": 0.0,
+            "projection_ratio": 0.0,
             "description": "Residual variance not accounted for by known systematics",
             "percentage": 0.0,
             "variance_contribution": 0.0,

@@ -1,12 +1,12 @@
 ╔════════════════════════════════════════════════════════════════════╗
 ║  TEP-LLR: Full Canonical                                              ║
-║  Steps: 74                                                            ║
-║  Started: 2026-05-15 13:25:40                                         ║
+║  Steps: 78                                                            ║
+║  Started: 2026-05-16 21:19:21                                         ║
 ╚════════════════════════════════════════════════════════════════════╝
 
 
 ──────────────────────────────────────────────────────────────────────
- [  1/74]  Full Canonical: step_000_llr_data_ingestion.py
+ [  1/78]  Full Canonical: step_000_llr_data_ingestion.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting data integrity check...
@@ -31,7 +31,7 @@ Results saved to results/outputs/step_000_llr_data_ingestion.json
 ✓  PASS  step_000_llr_data_ingestion.py  (0.2s)
 
 ──────────────────────────────────────────────────────────────────────
- [  2/74]  Full Canonical: step_001_data_preprocessing.py
+ [  2/78]  Full Canonical: step_001_data_preprocessing.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting INPOP MINI format preprocessing...
@@ -69,10 +69,10 @@ Combined statistics:
 Results saved to results/outputs/step_001_data_preprocessing.json
 ✓   Preprocessing complete.
 
-✓  PASS  step_001_data_preprocessing.py  (7.2s)
+✓  PASS  step_001_data_preprocessing.py  (8.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [  3/74]  Full Canonical: step_002_de430_preprocessing.py
+ [  3/78]  Full Canonical: step_002_de430_preprocessing.py
 ──────────────────────────────────────────────────────────────────────
 
 >>> Processing DE430 data from DE430_2014-2018_residuals.dat
@@ -88,10 +88,10 @@ Results saved to results/outputs/step_001_data_preprocessing.json
 ✓   DE430 Preprocessing Complete: 4597 observations
 Results saved to results/outputs/step_002_de430_preprocessing.json
 
-✓  PASS  step_002_de430_preprocessing.py  (0.7s)
+✓  PASS  step_002_de430_preprocessing.py  (0.9s)
 
 ──────────────────────────────────────────────────────────────────────
- [  4/74]  Full Canonical: step_003_statistical_analysis.py
+ [  4/78]  Full Canonical: step_003_statistical_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 003: Statistical Analysis...
@@ -155,10 +155,10 @@ Results saved to results/outputs/step_002_de430_preprocessing.json
 Results saved to results/outputs/step_003_statistical_analysis.json
 ✓   Statistical Analysis Complete. SNR = 4.4σ
 
-✓  PASS  step_003_statistical_analysis.py  (16.2s)
+✓  PASS  step_003_statistical_analysis.py  (18.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [  5/74]  Full Canonical: step_004_detection_analysis_advanced.py
+ [  5/78]  Full Canonical: step_004_detection_analysis_advanced.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 004: Advanced TEP Detection Analysis...
@@ -192,10 +192,10 @@ Results saved to results/outputs/step_003_statistical_analysis.json
 ✓   Results saved to step_004_detection_analysis_advanced.json
     Bootstrap r=-0.0304 [-0.0412, -0.0197]
 
-✓  PASS  step_004_detection_analysis_advanced.py  (4.2s)
+✓  PASS  step_004_detection_analysis_advanced.py  (5.1s)
 
 ──────────────────────────────────────────────────────────────────────
- [  6/74]  Full Canonical: step_005_temporal_drift_analysis.py
+ [  6/78]  Full Canonical: step_005_temporal_drift_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Temporal Drift Analysis...
@@ -247,7 +247,7 @@ Results saved to results/outputs/step_005_temporal_drift_analysis.json
 ✓  PASS  step_005_temporal_drift_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [  7/74]  Full Canonical: step_006_multi_ephemeris_comparison.py
+ [  7/78]  Full Canonical: step_006_multi_ephemeris_comparison.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Multi-Ephemeris Comparison...
@@ -279,17 +279,17 @@ Results saved to results/outputs/step_006_multi_ephemeris_comparison.json
 ✓  PASS  step_006_multi_ephemeris_comparison.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [  8/74]  Full Canonical: step_006b_de430_outlier_robustness.py
+ [  8/78]  Full Canonical: step_006b_de430_outlier_robustness.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Step 006b: DE430 Outlier Robustness Analysis
 Results saved to results/outputs/step_006b_de430_outlier_robustness.json
 ✓   Step 006b complete.
 
-✓  PASS  step_006b_de430_outlier_robustness.py  (2.4s)
+✓  PASS  step_006b_de430_outlier_robustness.py  (2.5s)
 
 ──────────────────────────────────────────────────────────────────────
- [  9/74]  Full Canonical: step_007_meta_analysis.py
+ [  9/78]  Full Canonical: step_007_meta_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Meta-Analysis of INPOP19a and DE430 Results
@@ -314,7 +314,7 @@ Results saved to results/outputs/step_007_meta_analysis.json
 ✓  PASS  step_007_meta_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 10/74]  Full Canonical: step_008_systematic_error_analysis.py
+ [ 10/78]  Full Canonical: step_008_systematic_error_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Systematic Error Analysis...
@@ -372,7 +372,7 @@ Results saved to results/outputs/step_008_systematic_error_analysis.json
 ✓  PASS  step_008_systematic_error_analysis.py  (0.3s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 11/74]  Full Canonical: step_009_ephemeris_independent_analysis.py
+ [ 11/78]  Full Canonical: step_009_ephemeris_independent_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Ephemeris-Independent Analysis...
@@ -407,7 +407,7 @@ Results saved to results/outputs/step_009_ephemeris_independent_analysis.json
 ✓  PASS  step_009_ephemeris_independent_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 12/74]  Full Canonical: step_010_systematic_control_analysis.py
+ [ 12/78]  Full Canonical: step_010_systematic_control_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Systematic Control Analysis...
@@ -441,10 +441,10 @@ Results saved to results/outputs/step_009_ephemeris_independent_analysis.json
 Results saved to results/outputs/step_010_systematic_control_analysis.json
 ✓   Control Analysis Complete.
 
-✓  PASS  step_010_systematic_control_analysis.py  (0.7s)
+✓  PASS  step_010_systematic_control_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 13/74]  Full Canonical: step_011_noise_signal_injection.py
+ [ 13/78]  Full Canonical: step_011_noise_signal_injection.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Noise/Signal Injection Tests...
@@ -490,10 +490,10 @@ Results saved to results/outputs/step_010_systematic_control_analysis.json
 Results saved to results/outputs/step_011_noise_signal_injection.json
 ✓   Injection Tests Complete.
 
-✓  PASS  step_011_noise_signal_injection.py  (0.7s)
+✓  PASS  step_011_noise_signal_injection.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 14/74]  Full Canonical: step_012_subsample_robustness.py
+ [ 14/78]  Full Canonical: step_012_subsample_robustness.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Subsample Robustness Test...
@@ -619,7 +619,7 @@ Results saved to results/outputs/step_012_station_dominance.json
 ✓  PASS  step_012_subsample_robustness.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 15/74]  Full Canonical: step_013_station_decomposition.py
+ [ 15/78]  Full Canonical: step_013_station_decomposition.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Station Decomposition Analysis...
@@ -654,10 +654,11 @@ Results saved to results/outputs/step_013_station_decomposition.json
 ✓  PASS  step_013_station_decomposition.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 16/74]  Full Canonical: step_015_null_tests.py
+ [ 16/78]  Full Canonical: step_015_null_tests.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Null Tests...
+    Identifying top 5 harmonics (excluding synodic)...
     Spectral analysis complete (N_scan=400):
       Peak 1: f=2.3970 * synodic, SNR=3.59
       Peak 2: f=2.3872 * synodic, SNR=3.59
@@ -955,7 +956,7 @@ Results saved to results/outputs/step_015_null_tests.json
 ✓  PASS  step_015_null_tests.py  (1.0s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 17/74]  Full Canonical: step_016_bayesian_analysis.py
+ [ 17/78]  Full Canonical: step_016_bayesian_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Bayesian MCMC Analysis...
@@ -971,13 +972,13 @@ Results saved to results/outputs/step_015_null_tests.json
     [DATA] cos(elongation) std:  0.491130
     Running synodic MCMC: reference 5000 steps; sensitivity priors 2500 steps each
     MCMC [uniform_reference]: η∈[-0.01, 0.01], 32 walkers × 5000 steps
-  0%|          | 0/5000 [00:00<?, ?it/s]  2%|▏         | 100/5000 [00:00<00:04, 991.75it/s]  4%|▍         | 206/5000 [00:00<00:04, 1026.19it/s]  6%|▋         | 316/5000 [00:00<00:04, 1057.77it/s]  8%|▊         | 422/5000 [00:00<00:04, 1053.39it/s] 11%|█         | 528/5000 [00:00<00:04, 1008.79it/s] 13%|█▎        | 631/5000 [00:00<00:04, 1014.76it/s] 15%|█▍        | 733/5000 [00:00<00:04, 1013.45it/s] 17%|█▋        | 835/5000 [00:00<00:04, 1003.08it/s] 19%|█▊        | 936/5000 [00:00<00:04, 952.63it/s]  21%|██        | 1032/5000 [00:01<00:04, 937.01it/s] 23%|██▎       | 1133/5000 [00:01<00:04, 957.52it/s] 25%|██▍       | 1234/5000 [00:01<00:03, 969.76it/s] 27%|██▋       | 1333/5000 [00:01<00:03, 973.96it/s] 29%|██▉       | 1440/5000 [00:01<00:03, 1000.12it/s] 31%|███       | 1548/5000 [00:01<00:03, 1023.39it/s] 33%|███▎      | 1656/5000 [00:01<00:03, 1038.40it/s] 35%|███▌      | 1766/5000 [00:01<00:03, 1054.42it/s] 38%|███▊      | 1875/5000 [00:01<00:02, 1062.69it/s] 40%|███▉      | 1982/5000 [00:01<00:02, 1062.97it/s] 42%|████▏     | 2089/5000 [00:02<00:03, 930.07it/s]  44%|████▍     | 2193/5000 [00:02<00:02, 957.69it/s] 46%|████▌     | 2297/5000 [00:02<00:02, 980.23it/s] 48%|████▊     | 2403/5000 [00:02<00:02, 1002.22it/s] 50%|█████     | 2515/5000 [00:02<00:02, 1033.75it/s] 52%|█████▏    | 2622/5000 [00:02<00:02, 1044.16it/s] 55%|█████▍    | 2728/5000 [00:02<00:02, 1047.26it/s] 57%|█████▋    | 2834/5000 [00:02<00:02, 1046.72it/s] 59%|█████▉    | 2944/5000 [00:02<00:01, 1059.89it/s] 61%|██████    | 3055/5000 [00:03<00:01, 1072.14it/s] 63%|██████▎   | 3163/5000 [00:03<00:01, 1070.78it/s] 65%|██████▌   | 3271/5000 [00:03<00:01, 1045.44it/s] 68%|██████▊   | 3376/5000 [00:03<00:01, 1022.99it/s] 70%|██████▉   | 3479/5000 [00:03<00:01, 1000.27it/s] 72%|███████▏  | 3588/5000 [00:03<00:01, 1025.44it/s] 74%|███████▍  | 3691/5000 [00:03<00:01, 1006.05it/s] 76%|███████▌  | 3792/5000 [00:03<00:01, 983.69it/s]  78%|███████▊  | 3891/5000 [00:03<00:01, 977.43it/s] 80%|███████▉  | 3992/5000 [00:03<00:01, 985.06it/s] 82%|████████▏ | 4091/5000 [00:04<00:00, 964.72it/s] 84%|████████▍ | 4196/5000 [00:04<00:00, 987.23it/s] 86%|████████▌ | 4295/5000 [00:04<00:00, 987.98it/s] 88%|████████▊ | 4402/5000 [00:04<00:00, 1010.08it/s] 90%|█████████ | 4504/5000 [00:04<00:00, 1005.25it/s] 92%|█████████▏| 4605/5000 [00:04<00:00, 1005.32it/s] 94%|█████████▍| 4706/5000 [00:04<00:00, 1006.63it/s] 96%|█████████▌| 4807/5000 [00:04<00:00, 1005.56it/s] 98%|█████████▊| 4912/5000 [00:04<00:00, 1018.46it/s]100%|██████████| 5000/5000 [00:04<00:00, 1010.76it/s]
+  0%|          | 0/5000 [00:00<?, ?it/s]  2%|▏         | 100/5000 [00:00<00:04, 994.76it/s]  4%|▍         | 200/5000 [00:00<00:05, 929.74it/s]  6%|▌         | 301/5000 [00:00<00:04, 962.34it/s]  8%|▊         | 398/5000 [00:00<00:04, 952.43it/s] 10%|▉         | 495/5000 [00:00<00:04, 956.42it/s] 12%|█▏        | 598/5000 [00:00<00:04, 978.93it/s] 14%|█▍        | 696/5000 [00:00<00:04, 970.70it/s] 16%|█▌        | 805/5000 [00:00<00:04, 1007.29it/s] 18%|█▊        | 913/5000 [00:00<00:03, 1026.86it/s] 20%|██        | 1022/5000 [00:01<00:03, 1044.07it/s] 23%|██▎       | 1130/5000 [00:01<00:03, 1052.60it/s] 25%|██▍       | 1239/5000 [00:01<00:03, 1062.42it/s] 27%|██▋       | 1346/5000 [00:01<00:03, 1062.36it/s] 29%|██▉       | 1456/5000 [00:01<00:03, 1071.11it/s] 31%|███▏      | 1566/5000 [00:01<00:03, 1078.89it/s] 33%|███▎      | 1674/5000 [00:01<00:03, 1041.02it/s] 36%|███▌      | 1779/5000 [00:01<00:03, 1025.21it/s] 38%|███▊      | 1888/5000 [00:01<00:02, 1043.71it/s] 40%|███▉      | 1993/5000 [00:01<00:02, 1035.01it/s] 42%|████▏     | 2097/5000 [00:02<00:02, 1030.95it/s] 44%|████▍     | 2204/5000 [00:02<00:02, 1040.39it/s] 46%|████▌     | 2312/5000 [00:02<00:02, 1050.62it/s] 48%|████▊     | 2423/5000 [00:02<00:02, 1065.88it/s] 51%|█████     | 2530/5000 [00:02<00:02, 1045.96it/s] 53%|█████▎    | 2635/5000 [00:02<00:02, 1032.59it/s] 55%|█████▍    | 2739/5000 [00:02<00:02, 1025.77it/s] 57%|█████▋    | 2842/5000 [00:02<00:02, 1020.23it/s] 59%|█████▉    | 2946/5000 [00:02<00:02, 1023.24it/s] 61%|██████    | 3052/5000 [00:02<00:01, 1031.21it/s] 63%|██████▎   | 3156/5000 [00:03<00:01, 999.34it/s]  65%|██████▌   | 3257/5000 [00:03<00:02, 849.58it/s] 67%|██████▋   | 3346/5000 [00:03<00:01, 848.09it/s] 69%|██████▉   | 3454/5000 [00:03<00:01, 909.98it/s] 71%|███████   | 3548/5000 [00:03<00:01, 871.07it/s] 73%|███████▎  | 3650/5000 [00:03<00:01, 910.64it/s] 75%|███████▍  | 3748/5000 [00:03<00:01, 927.83it/s] 77%|███████▋  | 3848/5000 [00:03<00:01, 947.94it/s] 79%|███████▉  | 3944/5000 [00:03<00:01, 917.02it/s] 81%|████████  | 4037/5000 [00:04<00:01, 896.88it/s] 83%|████████▎ | 4128/5000 [00:04<00:00, 874.66it/s] 84%|████████▍ | 4216/5000 [00:04<00:00, 851.35it/s] 86%|████████▌ | 4302/5000 [00:04<00:00, 817.82it/s] 88%|████████▊ | 4408/5000 [00:04<00:00, 884.34it/s] 90%|████████▉ | 4498/5000 [00:04<00:00, 822.58it/s] 92%|█████████▏| 4582/5000 [00:04<00:00, 814.07it/s] 93%|█████████▎| 4665/5000 [00:04<00:00, 788.28it/s] 95%|█████████▌| 4751/5000 [00:04<00:00, 807.36it/s] 97%|█████████▋| 4849/5000 [00:05<00:00, 854.10it/s] 99%|█████████▉| 4947/5000 [00:05<00:00, 886.40it/s]100%|██████████| 5000/5000 [00:05<00:00, 951.50it/s]
     MCMC [uniform_tight]: η∈[-0.001, 0.001], 32 walkers × 2500 steps
-  0%|          | 0/2500 [00:00<?, ?it/s]  4%|▍         | 106/2500 [00:00<00:02, 1050.99it/s]  8%|▊         | 212/2500 [00:00<00:02, 1021.40it/s] 13%|█▎        | 315/2500 [00:00<00:02, 989.00it/s]  17%|█▋        | 415/2500 [00:00<00:02, 983.92it/s] 21%|██        | 518/2500 [00:00<00:01, 998.47it/s] 25%|██▌       | 626/2500 [00:00<00:01, 1021.11it/s] 29%|██▉       | 730/2500 [00:00<00:01, 1026.92it/s] 33%|███▎      | 837/2500 [00:00<00:01, 1038.86it/s] 38%|███▊      | 942/2500 [00:00<00:01, 1039.96it/s] 42%|████▏     | 1047/2500 [00:01<00:01, 1022.13it/s] 46%|████▌     | 1150/2500 [00:01<00:01, 980.89it/s]  50%|█████     | 1253/2500 [00:01<00:01, 994.06it/s] 54%|█████▍    | 1360/2500 [00:01<00:01, 1010.82it/s] 59%|█████▊    | 1466/2500 [00:01<00:01, 1023.64it/s] 63%|██████▎   | 1577/2500 [00:01<00:00, 1049.01it/s] 67%|██████▋   | 1683/2500 [00:01<00:00, 1029.55it/s] 71%|███████▏  | 1787/2500 [00:01<00:00, 925.52it/s]  75%|███████▌  | 1886/2500 [00:01<00:00, 940.67it/s] 79%|███████▉  | 1982/2500 [00:01<00:00, 942.77it/s] 83%|████████▎ | 2078/2500 [00:02<00:00, 907.38it/s] 87%|████████▋ | 2179/2500 [00:02<00:00, 934.22it/s] 91%|█████████ | 2274/2500 [00:02<00:00, 904.39it/s] 95%|█████████▍| 2366/2500 [00:02<00:00, 871.23it/s] 98%|█████████▊| 2457/2500 [00:02<00:00, 881.78it/s]100%|██████████| 2500/2500 [00:02<00:00, 962.18it/s]
+  0%|          | 0/2500 [00:00<?, ?it/s]  2%|▏         | 59/2500 [00:00<00:04, 584.30it/s]  5%|▍         | 122/2500 [00:00<00:03, 607.95it/s]  7%|▋         | 184/2500 [00:00<00:03, 612.53it/s] 10%|█         | 260/2500 [00:00<00:03, 670.03it/s] 13%|█▎        | 330/2500 [00:00<00:03, 678.36it/s] 16%|█▌        | 398/2500 [00:00<00:03, 642.88it/s] 19%|█▊        | 467/2500 [00:00<00:03, 657.66it/s] 21%|██▏       | 534/2500 [00:00<00:03, 615.71it/s] 24%|██▍       | 597/2500 [00:00<00:03, 602.86it/s] 26%|██▋       | 662/2500 [00:01<00:02, 615.45it/s] 29%|██▉       | 724/2500 [00:01<00:03, 558.37it/s] 31%|███▏      | 782/2500 [00:01<00:03, 561.82it/s] 35%|███▍      | 870/2500 [00:01<00:02, 650.40it/s] 39%|███▊      | 967/2500 [00:01<00:02, 740.94it/s] 43%|████▎     | 1065/2500 [00:01<00:01, 808.57it/s] 47%|████▋     | 1167/2500 [00:01<00:01, 868.79it/s] 51%|█████     | 1274/2500 [00:01<00:01, 926.97it/s] 55%|█████▌    | 1380/2500 [00:01<00:01, 964.10it/s] 59%|█████▉    | 1487/2500 [00:01<00:01, 994.80it/s] 64%|██████▍   | 1594/2500 [00:02<00:00, 1015.52it/s] 68%|██████▊   | 1701/2500 [00:02<00:00, 1030.03it/s] 72%|███████▏  | 1807/2500 [00:02<00:00, 1038.35it/s] 76%|███████▋  | 1912/2500 [00:02<00:00, 1041.51it/s] 81%|████████  | 2017/2500 [00:02<00:00, 1040.82it/s] 85%|████████▍ | 2124/2500 [00:02<00:00, 1049.52it/s] 89%|████████▉ | 2235/2500 [00:02<00:00, 1065.29it/s] 94%|█████████▍| 2345/2500 [00:02<00:00, 1073.51it/s] 98%|█████████▊| 2454/2500 [00:02<00:00, 1076.02it/s]100%|██████████| 2500/2500 [00:02<00:00, 849.86it/s] 
     MCMC [uniform_wide]: η∈[-0.1, 0.1], 32 walkers × 2500 steps
-  0%|          | 0/2500 [00:00<?, ?it/s]  4%|▍         | 102/2500 [00:00<00:02, 1019.55it/s]  8%|▊         | 204/2500 [00:00<00:02, 971.33it/s]  12%|█▏        | 307/2500 [00:00<00:02, 996.68it/s] 16%|█▋        | 407/2500 [00:00<00:02, 983.93it/s] 20%|██        | 506/2500 [00:00<00:02, 949.37it/s] 24%|██▍       | 602/2500 [00:00<00:01, 952.06it/s] 28%|██▊       | 698/2500 [00:00<00:01, 946.50it/s] 32%|███▏      | 796/2500 [00:00<00:01, 955.88it/s] 36%|███▌      | 892/2500 [00:00<00:01, 933.35it/s] 39%|███▉      | 986/2500 [00:01<00:01, 929.08it/s] 43%|████▎     | 1081/2500 [00:01<00:01, 933.42it/s] 47%|████▋     | 1175/2500 [00:01<00:01, 914.11it/s] 51%|█████     | 1267/2500 [00:01<00:01, 897.09it/s] 54%|█████▍    | 1361/2500 [00:01<00:01, 908.06it/s] 58%|█████▊    | 1458/2500 [00:01<00:01, 923.88it/s] 62%|██████▏   | 1556/2500 [00:01<00:01, 939.62it/s] 66%|██████▌   | 1655/2500 [00:01<00:00, 953.41it/s] 70%|███████   | 1751/2500 [00:01<00:00, 950.17it/s] 74%|███████▍  | 1847/2500 [00:01<00:00, 948.91it/s] 78%|███████▊  | 1942/2500 [00:02<00:00, 947.05it/s] 81%|████████▏ | 2037/2500 [00:02<00:00, 912.73it/s] 85%|████████▌ | 2130/2500 [00:02<00:00, 916.84it/s] 89%|████████▉ | 2222/2500 [00:02<00:00, 902.77it/s] 93%|█████████▎| 2327/2500 [00:02<00:00, 945.68it/s] 97%|█████████▋| 2430/2500 [00:02<00:00, 968.27it/s]100%|██████████| 2500/2500 [00:02<00:00, 945.40it/s]
+  0%|          | 0/2500 [00:00<?, ?it/s]  4%|▍         | 110/2500 [00:00<00:02, 1091.72it/s]  9%|▉         | 220/2500 [00:00<00:02, 1090.62it/s] 13%|█▎        | 330/2500 [00:00<00:01, 1087.02it/s] 18%|█▊        | 439/2500 [00:00<00:01, 1077.43it/s] 22%|██▏       | 547/2500 [00:00<00:01, 1068.04it/s] 26%|██▌       | 654/2500 [00:00<00:01, 1065.24it/s] 31%|███       | 763/2500 [00:00<00:01, 1072.34it/s] 35%|███▍      | 871/2500 [00:00<00:01, 1067.59it/s] 39%|███▉      | 981/2500 [00:00<00:01, 1074.62it/s] 44%|████▎     | 1091/2500 [00:01<00:01, 1081.90it/s] 48%|████▊     | 1201/2500 [00:01<00:01, 1086.07it/s] 52%|█████▏    | 1311/2500 [00:01<00:01, 1087.68it/s] 57%|█████▋    | 1420/2500 [00:01<00:01, 1072.31it/s] 61%|██████    | 1530/2500 [00:01<00:00, 1077.70it/s] 66%|██████▌   | 1638/2500 [00:01<00:00, 1061.32it/s] 70%|██████▉   | 1746/2500 [00:01<00:00, 1064.47it/s] 74%|███████▍  | 1856/2500 [00:01<00:00, 1072.46it/s] 79%|███████▊  | 1964/2500 [00:01<00:00, 1052.57it/s] 83%|████████▎ | 2070/2500 [00:01<00:00, 918.50it/s]  87%|████████▋ | 2165/2500 [00:02<00:00, 828.11it/s] 90%|█████████ | 2252/2500 [00:02<00:00, 799.89it/s] 93%|█████████▎| 2335/2500 [00:02<00:00, 777.49it/s] 97%|█████████▋| 2415/2500 [00:02<00:00, 759.36it/s]100%|█████████▉| 2492/2500 [00:02<00:00, 722.10it/s]100%|██████████| 2500/2500 [00:02<00:00, 958.49it/s]
     MCMC [uniform_half_cent]: η∈[-0.0005, 0.0005], 32 walkers × 2500 steps
-  0%|          | 0/2500 [00:00<?, ?it/s]  4%|▎         | 89/2500 [00:00<00:02, 884.31it/s]  7%|▋         | 187/2500 [00:00<00:02, 933.46it/s] 11%|█         | 281/2500 [00:00<00:02, 900.82it/s] 15%|█▍        | 372/2500 [00:00<00:02, 856.82it/s] 18%|█▊        | 458/2500 [00:00<00:02, 852.27it/s] 22%|██▏       | 551/2500 [00:00<00:02, 875.56it/s] 26%|██▌       | 639/2500 [00:00<00:02, 848.35it/s] 29%|██▉       | 730/2500 [00:00<00:02, 865.26it/s] 33%|███▎      | 817/2500 [00:00<00:02, 839.01it/s] 36%|███▋      | 908/2500 [00:01<00:01, 858.32it/s] 40%|███▉      | 995/2500 [00:01<00:01, 852.37it/s] 43%|████▎     | 1086/2500 [00:01<00:01, 868.99it/s] 47%|████▋     | 1185/2500 [00:01<00:01, 902.92it/s] 51%|█████▏    | 1282/2500 [00:01<00:01, 922.17it/s] 55%|█████▌    | 1375/2500 [00:01<00:01, 917.54it/s] 59%|█████▊    | 1467/2500 [00:01<00:01, 897.66it/s] 62%|██████▏   | 1557/2500 [00:01<00:01, 892.24it/s] 66%|██████▋   | 1662/2500 [00:01<00:00, 937.32it/s] 70%|███████   | 1756/2500 [00:01<00:00, 935.04it/s] 74%|███████▍  | 1850/2500 [00:02<00:00, 812.78it/s] 77%|███████▋  | 1935/2500 [00:02<00:00, 815.34it/s] 81%|████████  | 2026/2500 [00:02<00:00, 839.78it/s] 85%|████████▍ | 2120/2500 [00:02<00:00, 866.70it/s] 88%|████████▊ | 2208/2500 [00:02<00:00, 865.71it/s] 92%|█████████▏| 2303/2500 [00:02<00:00, 888.02it/s] 96%|█████████▌| 2393/2500 [00:02<00:00, 888.08it/s]100%|█████████▉| 2489/2500 [00:02<00:00, 907.42it/s]100%|██████████| 2500/2500 [00:02<00:00, 879.72it/s]
+  0%|          | 0/2500 [00:00<?, ?it/s]  3%|▎         | 71/2500 [00:00<00:03, 703.12it/s]  6%|▌         | 151/2500 [00:00<00:03, 754.81it/s]  9%|▉         | 231/2500 [00:00<00:02, 771.39it/s] 12%|█▏        | 309/2500 [00:00<00:02, 756.62it/s] 16%|█▌        | 397/2500 [00:00<00:02, 796.95it/s] 20%|█▉        | 498/2500 [00:00<00:02, 866.45it/s] 23%|██▎       | 585/2500 [00:00<00:02, 824.63it/s] 27%|██▋       | 686/2500 [00:00<00:02, 880.23it/s] 31%|███▏      | 787/2500 [00:00<00:01, 916.29it/s] 35%|███▌      | 880/2500 [00:01<00:01, 858.71it/s] 39%|███▊      | 967/2500 [00:01<00:01, 814.81it/s] 42%|████▏     | 1062/2500 [00:01<00:01, 852.35it/s] 46%|████▌     | 1149/2500 [00:01<00:01, 806.62it/s] 49%|████▉     | 1231/2500 [00:01<00:01, 784.77it/s] 53%|█████▎    | 1318/2500 [00:01<00:01, 808.23it/s] 56%|█████▌    | 1404/2500 [00:01<00:01, 822.45it/s] 59%|█████▉    | 1487/2500 [00:01<00:01, 787.78it/s] 63%|██████▎   | 1567/2500 [00:01<00:01, 756.92it/s] 67%|██████▋   | 1668/2500 [00:02<00:01, 826.62it/s] 71%|███████   | 1774/2500 [00:02<00:00, 892.83it/s] 75%|███████▍  | 1874/2500 [00:02<00:00, 922.95it/s] 79%|███████▊  | 1968/2500 [00:02<00:00, 919.63it/s] 82%|████████▏ | 2061/2500 [00:02<00:00, 912.86it/s] 87%|████████▋ | 2171/2500 [00:02<00:00, 965.96it/s] 91%|█████████ | 2268/2500 [00:02<00:00, 964.08it/s] 95%|█████████▍| 2365/2500 [00:02<00:00, 951.61it/s] 98%|█████████▊| 2461/2500 [00:02<00:00, 922.23it/s]100%|██████████| 2500/2500 [00:02<00:00, 860.08it/s]
 
 >>> POSTERIOR ANALYSIS
       [CALC] Effective samples: 6400
@@ -1035,10 +1036,10 @@ Results saved to results/outputs/step_015_null_tests.json
 Results saved to results/outputs/step_016_bayesian_analysis.json
 ✓   Bayesian Analysis Complete.
 
-✓  PASS  step_016_bayesian_analysis.py  (13.8s)
+✓  PASS  step_016_bayesian_analysis.py  (14.5s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 18/74]  Full Canonical: step_017_leverage_diagnostics.py
+ [ 18/78]  Full Canonical: step_017_leverage_diagnostics.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 017: Leverage Diagnostics Investigation...
@@ -1086,7 +1087,7 @@ Recommended reporting: CosD-only Cook's-D leverage excision (Step 017): η = -3.
 ✓  PASS  step_017_leverage_diagnostics.py  (2.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 19/74]  Full Canonical: step_018_station_quality.py
+ [ 19/78]  Full Canonical: step_018_station_quality.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 018: Station Quality Diagnostics...
@@ -1126,10 +1127,10 @@ Haleakala n_obs: 737
 Haleakala likely causes: ['small_sample']
 Results saved to results/outputs/step_018_station_quality.json
 
-✓  PASS  step_018_station_quality.py  (0.3s)
+✓  PASS  step_018_station_quality.py  (0.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 20/74]  Full Canonical: step_019_systematic_monte_carlo.py
+ [ 20/78]  Full Canonical: step_019_systematic_monte_carlo.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 019: Systematic Error Monte Carlo Propagation...
@@ -1174,10 +1175,10 @@ Total uncertainty: ±2.18e-04
 Signal/Total ratio: 2.1
 Dominant source: SYSTEMATIC
 
-✓  PASS  step_019_systematic_monte_carlo.py  (3.0s)
+✓  PASS  step_019_systematic_monte_carlo.py  (3.1s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 21/74]  Full Canonical: step_020_temporal_amplitude.py
+ [ 21/78]  Full Canonical: step_020_temporal_amplitude.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 020: Temporal Amplitude Evolution Analysis...
@@ -1215,10 +1216,10 @@ Windows analyzed: 16
 Significant windows: 7
 Trend interpretation: amplitude_varies_instrumental
 
-✓  PASS  step_020_temporal_amplitude.py  (0.6s)
+✓  PASS  step_020_temporal_amplitude.py  (0.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 22/74]  Full Canonical: step_021_ipw_validation.py
+ [ 22/78]  Full Canonical: step_021_ipw_validation.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 021: IPW Criteria Monte Carlo Validation...
@@ -1258,7 +1259,7 @@ Same sign consistency: 98.2%
 ✓  PASS  step_021_ipw_validation.py  (5.3s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 23/74]  Full Canonical: step_022_environmental_modulation.py
+ [ 23/78]  Full Canonical: step_022_environmental_modulation.py
 ──────────────────────────────────────────────────────────────────────
 
     Computing Earth-Sun distances via Skyfield...
@@ -1284,10 +1285,10 @@ Same sign consistency: 98.2%
 Results saved to results/outputs/step_022_environmental_modulation.json
 ✓   Environmental Modulation Tests Complete.
 
-✓  PASS  step_022_environmental_modulation.py  (0.7s)
+✓  PASS  step_022_environmental_modulation.py  (0.8s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 24/74]  Full Canonical: step_023_solar_cycle_correlation.py
+ [ 24/78]  Full Canonical: step_023_solar_cycle_correlation.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 023: Solar Cycle Correlation & Haleakala Station Anomaly...
@@ -1325,10 +1326,10 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 Results saved to results/outputs/step_023_solar_cycle_correlation.json
 ✓   Solar Cycle Correlation Complete.
 
-✓  PASS  step_023_solar_cycle_correlation.py  (8.3s)
+✓  PASS  step_023_solar_cycle_correlation.py  (8.5s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 25/74]  Full Canonical: step_024_thermal_array_modeling.py
+ [ 25/78]  Full Canonical: step_024_thermal_array_modeling.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Thermal Array Modeling...
@@ -1368,7 +1369,7 @@ Computed TEP amplitude: 4.13 mm
 ✓  PASS  step_024_thermal_array_modeling.py  (0.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 26/74]  Full Canonical: step_025_leverage_temporal_clustering.py
+ [ 26/78]  Full Canonical: step_025_leverage_temporal_clustering.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Leverage Temporal Clustering analysis...
@@ -1406,7 +1407,7 @@ Computed TEP amplitude: 4.13 mm
 ✓  PASS  step_025_leverage_temporal_clustering.py  (0.3s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 27/74]  Full Canonical: step_026_tep_core_density_simulation.py
+ [ 27/78]  Full Canonical: step_026_tep_core_density_simulation.py
 ──────────────────────────────────────────────────────────────────────
 
 >>> Starting TEP Core Density Simulation...
@@ -1424,10 +1425,10 @@ Calculating Earth and Moon shielding factors from density profiles...
 ✓   TEP Core Density Simulation Complete.
     Saved results to results/outputs/step_026_tep_core_density_simulation.json
 
-✓  PASS  step_026_tep_core_density_simulation.py  (0.3s)
+✓  PASS  step_026_tep_core_density_simulation.py  (0.5s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 28/74]  Full Canonical: step_027_day_night_thermal_bias.py
+ [ 28/78]  Full Canonical: step_027_day_night_thermal_bias.py
 ──────────────────────────────────────────────────────────────────────
 
 Computing Solar Altitude for 26,000+ observations... (Vectorized for M4 Pro)
@@ -1446,10 +1447,10 @@ Cleaned Global Eta (Controlling for Sun Altitude/Thermal): -0.000419101748853452
 Cleaned Global P-Value for Cos(Elongation): 7.746880592129912e-06
 Results saved to results/outputs/step_027_day_night_thermal_bias.json
 
-✓  PASS  step_027_day_night_thermal_bias.py  (2.3s)
+✓  PASS  step_027_day_night_thermal_bias.py  (2.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 29/74]  Full Canonical: step_028_geometric_elongation.py
+ [ 29/78]  Full Canonical: step_028_geometric_elongation.py
 ──────────────────────────────────────────────────────────────────────
 
 Computing True Geometric Vectors from Astropy (J2000 Ephemeris)... (Vectorized for M4 Pro)
@@ -1471,10 +1472,10 @@ Partial Regression (Competing predictors):
 CONCLUSION: After geometric recomputation, cos(D_mean) and cos(D_true) are nearly collinear. The two-predictor partial regression is ill-conditioned and cannot adjudicate dominance. The defensible result is that both single-predictor fits yield the same negative η at essentially identical significance, rejecting the hypothesis that the detection is an artefact of a mean-phase proxy.
 Results saved to results/outputs/step_028_geometric_elongation.json
 
-✓  PASS  step_028_geometric_elongation.py  (3.6s)
+✓  PASS  step_028_geometric_elongation.py  (4.1s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 30/74]  Full Canonical: step_029_station_power_analysis.py
+ [ 30/78]  Full Canonical: step_029_station_power_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Step 029: Station Power & Grasse Dominance Assessment...
@@ -1501,10 +1502,10 @@ Results saved to results/outputs/step_028_geometric_elongation.json
 ✓   Results saved to results/outputs/step_029_station_power_analysis.json
     Status: QUALIFIED (pipeline PASS)
 
-✓  PASS  step_029_station_power_analysis.py  (15.5s)
+✓  PASS  step_029_station_power_analysis.py  (16.1s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 31/74]  Full Canonical: step_030_hardware_epoch_analysis.py
+ [ 31/78]  Full Canonical: step_030_hardware_epoch_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Step 030: Hardware Epoch Consistency Analysis...
@@ -1535,10 +1536,10 @@ Results saved to results/outputs/step_028_geometric_elongation.json
 ✓   Results saved to results/outputs/step_030_hardware_epoch_analysis.json
 ✓   Temporal chi2 status: EXCESS_VARIANCE_BUT_SIGN_CONSISTENT
 
-✓  PASS  step_030_hardware_epoch_analysis.py  (0.7s)
+✓  PASS  step_030_hardware_epoch_analysis.py  (1.0s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 32/74]  Full Canonical: step_031_lomb_scargle_orbital_dynamics.py
+ [ 32/78]  Full Canonical: step_031_lomb_scargle_orbital_dynamics.py
 ──────────────────────────────────────────────────────────────────────
 
 Starting Lomb-Scargle Orbital Mapping...
@@ -1556,10 +1557,10 @@ Mapping top 10 spectral peaks to Delaunay harmonics:
 [10] Period: 31.69d | Power: 0.0062 | Match: 1D + -1l + -1l' + 1F (Complex Harmonic) | Err: 2.18e-05 cyc/d
 Results saved to results/outputs/step_031_lomb_scargle_orbital_dynamics.json
 
-✓  PASS  step_031_lomb_scargle_orbital_dynamics.py  (10.0s)
+✓  PASS  step_031_lomb_scargle_orbital_dynamics.py  (12.0s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 33/74]  Full Canonical: step_032_ephemeris_orthogonality_proof.py
+ [ 33/78]  Full Canonical: step_032_ephemeris_orthogonality_proof.py
 ──────────────────────────────────────────────────────────────────────
 
     Initiating Ephemeris Orthogonality Spectral Analysis (v2)...
@@ -1593,10 +1594,10 @@ Results saved to results/outputs/step_031_lomb_scargle_orbital_dynamics.json
 Results saved to results/outputs/step_032_ephemeris_orthogonality_proof.json
 ✓   Ephemeris Orthogonality test compiled cleanly.
 
-✓  PASS  step_032_ephemeris_orthogonality_proof.py  (1.1s)
+✓  PASS  step_032_ephemeris_orthogonality_proof.py  (1.5s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 34/74]  Full Canonical: step_033_quantitative_eta_prediction.py
+ [ 34/78]  Full Canonical: step_033_quantitative_eta_prediction.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Computing Quantitative η Prediction from TEP...
@@ -1642,7 +1643,7 @@ Results saved to results/outputs/step_033_quantitative_eta_prediction.json
 ✓  PASS  step_033_quantitative_eta_prediction.py  (0.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 35/74]  Full Canonical: step_034_static_dynamic_absorption.py
+ [ 35/78]  Full Canonical: step_034_static_dynamic_absorption.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Initializing Static vs Dynamic Absorption Test...
@@ -1664,10 +1665,10 @@ Results saved to results/outputs/step_033_quantitative_eta_prediction.json
 Results saved to results/outputs/step_034_static_dynamic_absorption.json
 ✓   Static vs Dynamic Absorption Test Complete.
 
-✓  PASS  step_034_static_dynamic_absorption.py  (0.3s)
+✓  PASS  step_034_static_dynamic_absorption.py  (0.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 36/74]  Full Canonical: step_035_historical_comparison.py
+ [ 36/78]  Full Canonical: step_035_historical_comparison.py
 ──────────────────────────────────────────────────────────────────────
 
     Step 035: Historical Comparison Analysis
@@ -1691,7 +1692,7 @@ Assessment: TEP provides theoretical framework for previously unexplained signal
 ✓  PASS  step_035_historical_comparison.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 37/74]  Full Canonical: step_036_full_moon_deficit_analysis.py
+ [ 37/78]  Full Canonical: step_036_full_moon_deficit_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
     Step 038: Full-Moon Deficit Analysis
@@ -1713,7 +1714,7 @@ Assessment: TEP provides theoretical framework for previously unexplained signal
 ✓  PASS  step_036_full_moon_deficit_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 38/74]  Full Canonical: step_037_lunar_recession_analysis.py
+ [ 38/78]  Full Canonical: step_037_lunar_recession_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
     Step 037: Lunar Recession Analysis
@@ -1736,7 +1737,7 @@ Assessment: TEP provides theoretical framework for previously unexplained signal
 ✓  PASS  step_037_lunar_recession_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 39/74]  Full Canonical: step_038_tidal_resonance_analysis.py
+ [ 39/78]  Full Canonical: step_038_tidal_resonance_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
     Step 038: Tidal Resonance Analysis
@@ -1768,7 +1769,7 @@ Verdict: TEP provides superior explanation
 ✓  PASS  step_038_tidal_resonance_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 40/74]  Full Canonical: step_039_dust_sensitivity_analysis.py
+ [ 40/78]  Full Canonical: step_039_dust_sensitivity_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
     Step 039: Dust Model Sensitivity Analysis
@@ -1803,7 +1804,7 @@ Verdict: Dust attribution unreliable; TEP superior
 ✓  PASS  step_039_dust_sensitivity_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 41/74]  Full Canonical: step_062_solar_radiation_pressure_bound.py
+ [ 41/78]  Full Canonical: step_062_solar_radiation_pressure_bound.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ === Step 062: Solar Radiation Pressure Bound ===
@@ -1822,10 +1823,10 @@ Verdict: Dust attribution unreliable; TEP superior
 Saved results to results/outputs/step_062_solar_radiation_pressure_bound.json
 ✓   Step 062 complete.
 
-✓  PASS  step_062_solar_radiation_pressure_bound.py  (0.3s)
+✓  PASS  step_062_solar_radiation_pressure_bound.py  (0.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 42/74]  Full Canonical: step_063_atmospheric_seeing_analysis.py
+ [ 42/78]  Full Canonical: step_063_atmospheric_seeing_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ === Step 063: Atmospheric Seeing Analysis ===
@@ -1847,10 +1848,10 @@ Saved results to results/outputs/step_062_solar_radiation_pressure_bound.json
 Saved results to results/outputs/step_063_atmospheric_seeing_analysis.json
 ✓   Step 063 complete.
 
-✓  PASS  step_063_atmospheric_seeing_analysis.py  (0.3s)
+✓  PASS  step_063_atmospheric_seeing_analysis.py  (0.4s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 43/74]  Full Canonical: step_064_srp_systematic_check.py
+ [ 43/78]  Full Canonical: step_064_srp_systematic_check.py
 ──────────────────────────────────────────────────────────────────────
 
     ======================================================================
@@ -1894,10 +1895,10 @@ Saved results to results/outputs/step_063_atmospheric_seeing_analysis.json
     ======================================================================
 Results saved to results/outputs/step_064_srp_systematic_check.json
 
-✓  PASS  step_064_srp_systematic_check.py  (3.1s)
+✓  PASS  step_064_srp_systematic_check.py  (3.3s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 44/74]  Full Canonical: step_049_eop_systematic_analysis.py
+ [ 44/78]  Full Canonical: step_049_eop_systematic_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting EOP Systematic Analysis (Step 049)...
@@ -1932,10 +1933,10 @@ Results saved to results/outputs/step_064_srp_systematic_check.json
 ✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_049_eop_systematic_analysis.json
 Results saved to results/outputs/step_049_eop_systematic_analysis.json
 
-✓  PASS  step_049_eop_systematic_analysis.py  (1.8s)
+✓  PASS  step_049_eop_systematic_analysis.py  (1.9s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 45/74]  Full Canonical: step_050_corrected_tep_analysis.py
+ [ 45/78]  Full Canonical: step_050_corrected_tep_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 050: Corrected TEP Analysis ═══
@@ -2018,10 +2019,368 @@ Results saved to results/outputs/step_049_eop_systematic_analysis.json
     Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_050_corrected_tep_analysis.json
 ═══ ═══ Step 050 Complete ═══
 
-✓  PASS  step_050_corrected_tep_analysis.py  (6.6s)
+✓  PASS  step_050_corrected_tep_analysis.py  (6.8s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 46/74]  Full Canonical: step_040_unified_results_table.py
+ [ 46/78]  Full Canonical: step_051_cross_validation_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Step 051: Rigorous Cross-Validation & Epoch-Dependence ═══
+    Dataset: N=25,445 (removed 762 outliers)
+    --- Temporal Hold-Out Cross-Validation ---
+      Split: 1990s/2000s (JD 2453000)
+        Null (mean only)                            R²_pred=-0.002  RMSE=0.0331  eta_train=[]
+        cosD only                                   R²_pred=+0.001  RMSE=0.0331  eta_train=[cosD=-3.257e-04]
+        cosD + annual                               R²_pred=+0.020  RMSE=0.0327  eta_train=[cosD=-2.542e-04]
+        cosD + annual + monthly                     R²_pred=-0.098  RMSE=0.0347  eta_train=[cosD=-3.603e-04]
+        Full pooled systematics                     R²_pred=-0.190  RMSE=0.0361  eta_train=[cosD=-1.078e-03]
+        Full station-specific systematics           R²_pred=-0.156  RMSE=0.0356  eta_train=[cosD_common=-8.783e-04]
+        Linear drift η(t)                           R²_pred=-0.238  RMSE=0.0368  eta_train=[cosD=5.522e-05]
+      Split: pre-2000/post-2000 (JD 2454000)
+        Null (mean only)                            R²_pred=-0.000  RMSE=0.0300  eta_train=[]
+        cosD only                                   R²_pred=+0.005  RMSE=0.0299  eta_train=[cosD=-3.528e-04]
+        cosD + annual                               R²_pred=+0.026  RMSE=0.0296  eta_train=[cosD=-2.639e-04]
+        cosD + annual + monthly                     R²_pred=-0.047  RMSE=0.0307  eta_train=[cosD=-3.499e-04]
+        Full pooled systematics                     R²_pred=-0.144  RMSE=0.0320  eta_train=[cosD=-1.031e-03]
+        Full station-specific systematics           R²_pred=-0.383  RMSE=0.0352  eta_train=[cosD_common=-8.472e-04]
+        Linear drift η(t)                           R²_pred=-0.171  RMSE=0.0324  eta_train=[cosD=1.171e-04]
+      Split: pre-2008/post-2008 (step_050) (JD 2454600)
+        Null (mean only)                            R²_pred=-0.000  RMSE=0.0286  eta_train=[]
+        cosD only                                   R²_pred=+0.006  RMSE=0.0285  eta_train=[cosD=-3.410e-04]
+        cosD + annual                               R²_pred=+0.028  RMSE=0.0282  eta_train=[cosD=-2.598e-04]
+        cosD + annual + monthly                     R²_pred=-0.054  RMSE=0.0293  eta_train=[cosD=-3.423e-04]
+        Full pooled systematics                     R²_pred=-0.153  RMSE=0.0307  eta_train=[cosD=-9.949e-04]
+        Full station-specific systematics           R²_pred=-0.157  RMSE=0.0307  eta_train=[cosD_common=-8.011e-04]
+        Linear drift η(t)                           R²_pred=-0.174  RMSE=0.0310  eta_train=[cosD=3.042e-05]
+      Split: pre-2010/post-2010 (JD 2455000)
+        Null (mean only)                            R²_pred=-0.001  RMSE=0.0279  eta_train=[]
+        cosD only                                   R²_pred=+0.006  RMSE=0.0278  eta_train=[cosD=-3.355e-04]
+        cosD + annual                               R²_pred=+0.030  RMSE=0.0274  eta_train=[cosD=-2.567e-04]
+        cosD + annual + monthly                     R²_pred=-0.054  RMSE=0.0286  eta_train=[cosD=-3.335e-04]
+        Full pooled systematics                     R²_pred=-0.142  RMSE=0.0298  eta_train=[cosD=-9.480e-04]
+        Full station-specific systematics           R²_pred=-0.149  RMSE=0.0299  eta_train=[cosD_common=-7.829e-04]
+        Linear drift η(t)                           R²_pred=-0.160  RMSE=0.0300  eta_train=[cosD=4.254e-06]
+      Split: pre-2013/post-2013 (JD 2456000)
+        Null (mean only)                            R²_pred=-0.005  RMSE=0.0258  eta_train=[]
+        cosD only                                   R²_pred=+0.006  RMSE=0.0257  eta_train=[cosD=-3.082e-04]
+        cosD + annual                               R²_pred=+0.032  RMSE=0.0254  eta_train=[cosD=-2.434e-04]
+        cosD + annual + monthly                     R²_pred=-0.032  RMSE=0.0262  eta_train=[cosD=-3.293e-04]
+        Full pooled systematics                     R²_pred=-0.112  RMSE=0.0272  eta_train=[cosD=-8.638e-04]
+        Full station-specific systematics           R²_pred=-0.124  RMSE=0.0273  eta_train=[cosD_common=-5.279e-04]
+        Linear drift η(t)                           R²_pred=-0.120  RMSE=0.0273  eta_train=[cosD=-8.836e-05]
+      Split: pre-2015/post-2015 (JD 2457000)
+        Null (mean only)                            R²_pred=-0.007  RMSE=0.0244  eta_train=[]
+        cosD only                                   R²_pred=+0.005  RMSE=0.0242  eta_train=[cosD=-3.069e-04]
+        cosD + annual                               R²_pred=+0.039  RMSE=0.0238  eta_train=[cosD=-2.572e-04]
+        cosD + annual + monthly                     R²_pred=-0.040  RMSE=0.0248  eta_train=[cosD=-3.549e-04]
+        Full pooled systematics                     R²_pred=-0.113  RMSE=0.0256  eta_train=[cosD=-7.916e-04]
+        Full station-specific systematics           R²_pred=-0.207  RMSE=0.0267  eta_train=[cosD_common=-5.208e-04]
+        Linear drift η(t)                           R²_pred=-0.110  RMSE=0.0256  eta_train=[cosD=-1.897e-04]
+    --- Random 5-Fold Cross-Validation ---
+      Null (mean only)                            R²=-0.000 ± 0.000  RMSE=0.0617  MAE=0.0420
+      cosD only                                   R²=+0.001 ± 0.001  RMSE=0.0616  MAE=0.0420
+      cosD + annual                               R²=+0.007 ± 0.001  RMSE=0.0615  MAE=0.0418
+      cosD + annual + monthly                     R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+      Full pooled systematics                     R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+      Full station-specific systematics           R²=+0.012 ± 0.001  RMSE=0.0613  MAE=0.0418
+      Epoch-dependent η (pre/post)                R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+      Linear drift η(t)                           R²=+0.009 ± 0.002  RMSE=0.0614  MAE=0.0418
+    --- Leave-One-Station-Out Cross-Validation ---
+      cosD only                                   mean R²_pred=-0.001
+        held-out Grasse    : R²_pred=+0.000  N_test=18742
+        held-out APO       : R²_pred=+0.001  N_test=2595
+        held-out McDonald2 : R²_pred=-0.000  N_test=3097
+        held-out Matera    : R²_pred=-0.002  N_test=345
+        held-out Haleakala : R²_pred=-0.002  N_test=666
+      Full pooled systematics                     mean R²_pred=-0.002
+        held-out Grasse    : R²_pred=+0.004  N_test=18742
+        held-out APO       : R²_pred=-0.018  N_test=2595
+        held-out McDonald2 : R²_pred=-0.001  N_test=3097
+        held-out Matera    : R²_pred=+0.006  N_test=345
+        held-out Haleakala : R²_pred=-0.000  N_test=666
+      Full station-specific systematics           mean R²_pred=-0.001
+        held-out Grasse    : R²_pred=+0.001  N_test=18742
+        held-out APO       : R²_pred=-0.000  N_test=2595
+        held-out McDonald2 : R²_pred=-0.001  N_test=3097
+        held-out Matera    : R²_pred=-0.004  N_test=345
+        held-out Haleakala : R²_pred=-0.004  N_test=666
+    --- In-Sample Model Comparison (AIC / BIC) ---
+      Null (mean only)                            AIC=-141777.7  BIC=-141769.6  k=  1  RSS=96.763
+      cosD only                                   AIC=-141803.3  BIC=-141787.0  k=  2  RSS=96.659
+        cosD           : η=-3.177e-04 ± 6.052e-05 (5.25σ)
+      cosD + annual                               AIC=-141951.5  BIC=-141918.9  k=  4  RSS=96.082
+        cosD           : η=-2.689e-04 ± 6.053e-05 (4.44σ)
+      cosD + annual + monthly                     AIC=-142014.0  BIC=-141965.2  k=  6  RSS=95.831
+        cosD           : η=-3.095e-04 ± 6.131e-05 (5.05σ)
+      Full pooled systematics                     AIC=-142028.4  BIC=-141971.4  k=  7  RSS=95.769
+        cosD           : η=-4.061e-04 ± 6.578e-05 (6.17σ)
+      Full station-specific systematics           AIC=-142129.6  BIC=-141877.1  k= 31  RSS=95.210
+        cosD_common    : η=-4.321e-04 ± 6.756e-05 (6.40σ)
+      Epoch-dependent η (pre/post)                AIC=-142026.4  BIC=-141961.3  k=  8  RSS=95.769
+        cosD_pre       : η=-4.157e-04 ± 9.954e-05 (4.18σ)
+        cosD_post      : η=-4.004e-04 ± 7.950e-05 (5.04σ)
+      Linear drift η(t)                           AIC=-142027.7  BIC=-141962.6  k=  8  RSS=95.765
+        cosD           : η=-2.531e-04 ± 1.502e-04 (1.69σ)
+    --- Honest Assessment ---
+      Step 050 predictive R² (pre-2008 → post-2008) = -0.153
+      Interpretation: the model trained on pre-2008 data predicts post-2008
+      residuals worse than simply predicting the mean in this temporal split.
+      This split is therefore a covariate-shift diagnostic; coefficient
+      stability is assessed separately by the in-sample epoch test below.
+      Best predictive model at 2008 split: cosD + annual (R² = +0.028)
+      Pooled systematics R² = -0.153; Station-specific R² = -0.157
+      → Station-specific systematics do NOT improve prediction.
+      Epoch-dependence test (in-sample m6):
+        η_pre=-4.157e-04, η_post=-4.004e-04, ratio=0.96
+        Test η_pre = η_post: |Δη|=1.526e-05, SE_diff=1.274e-04, z=0.12, p=0.9046
+        → Cannot reject equality at 5% level (ratio 0.96).
+    --- Diagnostics: Why does prediction fail? ---
+      Station coverage pre/post 2008:
+        Grasse      : pre= 8736 (68.7%)  post=10006 (78.6%)
+        APO         : pre=  365 ( 2.9%)  post= 2230 (17.5%)
+        McDonald2   : pre= 2934 (23.1%)  post=  163 ( 1.3%)
+        Matera      : pre=    6 ( 0.0%)  post=  339 ( 2.7%)
+        Haleakala   : pre=  666 ( 5.2%)  post=    0 ( 0.0%)
+      Elongation distribution by station & epoch:
+        Grasse      : pre  μ=1.823 σ=0.471  range=[0.472, 3.135]  |  post μ=1.637 σ=0.657  range=[0.166, 3.135]
+        APO         : pre  μ=1.856 σ=0.544  range=[0.747, 3.053]  |  post μ=1.872 σ=0.690  range=[0.575, 3.137]
+        McDonald2   : pre  μ=1.924 σ=0.412  range=[0.700, 3.115]  |  post μ=1.809 σ=0.349  range=[0.836, 2.545]
+        Matera      : pre  μ=2.056 σ=0.155  range=[1.986, 2.372]  |  post μ=1.590 σ=0.301  range=[1.068, 2.232]
+        Haleakala   : pre  μ=1.944 σ=0.308  range=[1.143, 2.812]  |  post μ=N/A σ=N/A  range=[N/A, N/A]
+      Per-station cosD coefficient (m1, full dataset):
+        Grasse      : η=-3.782e-04 ± 6.595e-05 (5.73σ)  N=18742
+        APO         : η=-2.398e-04 ± 8.664e-05 (2.77σ)  N=2595
+        McDonald2   : η=-8.793e-05 ± 3.064e-04 (0.29σ)  N=3097
+        Matera      : η=+3.846e-04 ± 8.302e-04 (0.46σ)  N=345
+        Haleakala   : η=+2.571e-03 ± 1.165e-03 (2.21σ)  N=666
+      Rolling-window η (2-year bins, m2 model):
+        1985.3: η=-1.112e-04 ± 8.371e-04 (0.13σ)  N=787
+        1986.3: η=+1.731e-03 ± 9.033e-04 (1.92σ)  N=663
+        1987.3: η=+4.371e-03 ± 1.062e-03 (4.12σ)  N=414
+        1988.3: η=+1.104e-03 ± 6.828e-04 (1.62σ)  N=743
+        1989.3: η=+3.852e-04 ± 5.929e-04 (0.65σ)  N=1128
+        1990.3: η=+1.434e-03 ± 5.348e-04 (2.68σ)  N=1211
+        1991.3: η=-3.109e-05 ± 5.676e-04 (0.05σ)  N=913
+        1992.3: η=-3.165e-03 ± 5.431e-04 (5.83σ)  N=1001
+        1993.3: η=-1.858e-03 ± 4.437e-04 (4.19σ)  N=1333
+        1994.3: η=-1.604e-03 ± 3.655e-04 (4.39σ)  N=1399
+        1995.3: η=-3.058e-04 ± 3.536e-04 (0.86σ)  N=1555
+        1996.3: η=-8.818e-04 ± 3.182e-04 (2.77σ)  N=2102
+        1997.3: η=-7.560e-04 ± 3.221e-04 (2.35σ)  N=1874
+        1998.3: η=-3.587e-04 ± 2.918e-04 (1.23σ)  N=1492
+        1999.3: η=-6.933e-04 ± 2.636e-04 (2.63σ)  N=1726
+        2000.3: η=-1.058e-03 ± 2.609e-04 (4.05σ)  N=1638
+        2001.3: η=-1.658e-03 ± 3.714e-04 (4.46σ)  N=1152
+        2002.3: η=-3.028e-03 ± 6.086e-04 (4.98σ)  N=639
+        2003.3: η=-2.144e-03 ± 5.152e-04 (4.16σ)  N=586
+        2004.3: η=+1.689e-04 ± 3.895e-04 (0.43σ)  N=875
+        2005.3: η=+7.452e-04 ± 4.690e-04 (1.59σ)  N=718
+        2006.3: η=-1.357e-03 ± 5.881e-04 (2.31σ)  N=375
+        2007.3: η=-2.145e-04 ± 4.349e-04 (0.49σ)  N=459
+        2008.3: η=-3.455e-04 ± 3.673e-04 (0.94σ)  N=585
+        2009.3: η=-7.569e-05 ± 3.143e-04 (0.24σ)  N=573
+        2010.3: η=+3.366e-04 ± 2.663e-04 (1.26σ)  N=696
+        2011.2: η=-1.128e-04 ± 2.359e-04 (0.48σ)  N=899
+        2012.2: η=-6.264e-04 ± 1.822e-04 (3.44σ)  N=1169
+        2013.2: η=-5.705e-04 ± 1.599e-04 (3.57σ)  N=1345
+        2014.2: η=-3.105e-04 ± 1.329e-04 (2.34σ)  N=1391
+        2015.2: η=-5.989e-04 ± 7.503e-05 (7.98σ)  N=2459
+        2016.2: η=-4.357e-04 ± 6.518e-05 (6.68σ)  N=2596
+        2017.2: η=+9.086e-05 ± 5.977e-05 (1.52σ)  N=3272
+        2018.2: η=-2.436e-04 ± 4.194e-05 (5.81σ)  N=5887
+      Residual variance by station & epoch (after m2):
+        Grasse      : pre_var=0.006791  post_var=0.000530
+        APO         : pre_var=0.000659  post_var=0.001042
+        McDonald2   : pre_var=0.006430  post_var=0.007885
+        Matera      : pre_var=0.000812  post_var=0.003416
+        Haleakala   : pre_var=0.011355  post_var=N/A
+      Lag-1 autocorrelation of residuals (after m2), per station:
+        Grasse      : ACF(1)=+0.445  (N_pairs=18733)
+        APO         : ACF(1)=+0.372  (N_pairs=2594)
+        McDonald2   : ACF(1)=+0.333  (N_pairs=3088)
+        Matera      : ACF(1)=+0.628  (N_pairs=335)
+        Haleakala   : ACF(1)=+0.510  (N_pairs=661)
+      Station-mix sensitivity (reweighted η):
+        η range across mixes: [-5.110e-04, +6.753e-04] = 1.186e-03
+        Corr(Grasse_prop, η) = -0.208
+        → η is NOT strongly correlated with station mix composition.
+      Grasse-only temporal stability:
+        Grasse total: N=18742
+        pre-2008/post-2008: η_pre=-3.532e-04 ± 1.618e-04  η_post=-2.741e-04 ± 3.224e-05  |Δη|=7.912e-05  p=0.6316  R²_pred=+0.017
+      Grasse-only rolling η (2-year bins, m2):
+        1985.3: η=+3.092e-04 ± 9.157e-04 (0.34σ)  N=613
+        1986.3: η=+2.862e-03 ± 1.030e-03 (2.78σ)  N=432
+        1987.3: η=+3.971e-03 ± 1.669e-03 (2.38σ)  N=174
+        1988.3: η=+2.200e-03 ± 8.598e-04 (2.56σ)  N=431
+        1989.3: η=+8.855e-04 ± 6.597e-04 (1.34σ)  N=792
+        1990.3: η=+1.309e-03 ± 5.833e-04 (2.24σ)  N=949
+        1991.3: η=-3.481e-05 ± 5.846e-04 (0.06σ)  N=776
+        1992.3: η=-3.180e-03 ± 5.472e-04 (5.81σ)  N=881
+        1993.3: η=-1.987e-03 ± 4.623e-04 (4.30σ)  N=1113
+        1994.3: η=-1.349e-03 ± 4.098e-04 (3.29σ)  N=969
+        1995.3: η=-1.797e-03 ± 4.051e-04 (4.43σ)  N=842
+        1996.3: η=-8.573e-04 ± 4.084e-04 (2.10σ)  N=1240
+        1997.3: η=-1.041e-05 ± 3.963e-04 (0.03σ)  N=1157
+        1998.3: η=-1.106e-03 ± 3.149e-04 (3.51σ)  N=786
+        1999.3: η=-1.000e-03 ± 2.493e-04 (4.01σ)  N=1209
+        2000.3: η=-1.215e-03 ± 2.603e-04 (4.67σ)  N=1448
+        2001.3: η=-1.182e-03 ± 3.651e-04 (3.24σ)  N=974
+        2002.3: η=-2.170e-03 ± 6.329e-04 (3.43σ)  N=464
+        2003.3: η=-1.534e-03 ± 4.982e-04 (3.08σ)  N=470
+        2004.3: η=+7.146e-04 ± 3.796e-04 (1.88σ)  N=810
+        2005.3: η=+1.150e-03 ± 4.230e-04 (2.72σ)  N=616
+        2006.3: η=-3.544e-03 ± 9.818e-04 (3.61σ)  N=107
+        2011.2: η=-4.057e-04 ± 5.490e-04 (0.74σ)  N=174
+        2012.2: η=-9.114e-04 ± 2.775e-04 (3.28σ)  N=524
+        2013.2: η=-6.749e-04 ± 2.282e-04 (2.96σ)  N=832
+        2014.2: η=-2.603e-04 ± 1.967e-04 (1.32σ)  N=938
+        2015.2: η=-6.368e-04 ± 8.789e-05 (7.25σ)  N=1857
+        2016.2: η=-3.273e-04 ± 7.197e-05 (4.55σ)  N=2101
+        2017.2: η=+9.636e-05 ± 5.923e-05 (1.63σ)  N=3064
+        2018.2: η=-2.732e-04 ± 3.696e-05 (7.39σ)  N=5608
+      Fine-grained epoch analysis (2-year bins, SNR>=1.0σ):
+        11/16 epochs powered (SNR>=1.0σ)
+        Of powered epochs: 7/11 show negative η
+        P(all negative by chance) = 0.0078
+        → POSITIVE epochs at years: [1987.2662684214642, 1989.2648994960707, 2005.2539480929222, 2017.2457345405608]
+        → Sign is NOT consistent across fine-grained epochs.
+    --- Synthetic Injection Test ---
+      Inject a known cos(D) signal into noise matched to the real data, then run identical CV analyses.  This tests two distinct claims: (i) the cosD-only signal generalizes across epochs, and (ii) the full-systematic model's predictive failure on real data is caused by epoch-dependent nuisance structure rather than signal absence.
+      Injected η = -3.909e-04
+      Temporal hold-out (m1):  synth=+0.008 ± 0.003  real=+0.006
+      Temporal hold-out (m4):  synth=+0.002 ± 0.005  real=-0.153
+      Random 5-fold (m1):      synth=+0.001 ± 0.001  real=+0.001
+      Random 5-fold (m4):      synth=+0.001 ± 0.001  real=+0.009
+      LOSO (m1):               synth=+0.001 ± 0.002  real=-0.001
+      LOSO (m4):               synth=+0.000 ± 0.002  real=-0.002
+      Era-varying nuisance temporal (m1): synth=-0.026 ± 0.017
+      Era-varying nuisance temporal (m4): synth=-0.169 ± 0.045
+      Temporal m1: real at 14.0th percentile of synth. Consistent.
+      Temporal m4: real at 0.0th percentile of synth. Marginal / inconsistent.
+      Temporal m4 (era-varying nuisance synth): real at 62.0th percentile of synth. Consistent.
+      Random-kfold m1: real at 6.0th percentile of synth. Marginal / inconsistent.
+      Random-kfold m4: real at 100.0th percentile of synth. Marginal / inconsistent.
+      LOSO m1: real at 6.0th percentile of synth. Marginal / inconsistent.
+      LOSO m4: real at 6.0th percentile of synth. Marginal / inconsistent.
+      Ephemeris comparison (INPOP19a vs DE430):
+        INPOP19a (2014-2018): η=-2.246e-04 ± 3.533e-05  N=9012
+        DE430    (2014-2018): η=+6.699e-05 ± 5.611e-04  N=4597
+        |Δη|=2.916e-04  z=0.52  p=0.6040
+        → No significant ephemeris dependence (p=0.604).
+    Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_051_cross_validation_analysis.json
+═══ ═══ Step 051 Complete ═══
+
+✓  PASS  step_051_cross_validation_analysis.py  (10.8s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 47/78]  Full Canonical: step_052_station_distribution_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ Step 052: Station Sample and Distribution Analysis
+    Loaded 26207 observations from 5 stations
+>>> Analyzing per-station coverage...
+>>> Analyzing temporal epochs...
+>>> Analyzing covariate shift (pre/post 2008)...
+>>> Analyzing leave-one-station-out covariate shift...
+>>> Computing per-station cosD-only regression...
+✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_052_station_distribution_analysis.json
+═══ 
+=== Station Coverage Summary ===
+    Grasse: n=19390, years=1984.3-2019.8, RMS=0.099m, mean|cosD|=0.439
+    Haleakala: n=737, years=1984.9-1990.7, RMS=0.138m, mean|cosD|=0.355
+    McDonald2: n=3139, years=1988.2-2013.9, RMS=0.096m, mean|cosD|=0.410
+    Matera: n=346, years=2003.1-2019.2, RMS=0.062m, mean|cosD|=0.251
+    APO: n=2595, years=2006.3-2016.9, RMS=0.032m, mean|cosD|=0.516
+═══ 
+=== Temporal Epoch Composition ===
+    pre_1990: n=2659, dominant=Grasse, mean|cosD|=0.376
+    1990_2000: n=7533, dominant=Grasse, mean|cosD|=0.416
+    2000_2010: n=3716, dominant=Grasse, mean|cosD|=0.406
+    post_2010: n=12299, dominant=Grasse, mean|cosD|=0.474
+═══ 
+=== Covariate Shift (pre/post 2008) ===
+    Pre: n=13466, mean|cosD|=0.405
+    Post: n=12741, mean|cosD|=0.473
+    KS test elongation: D=0.2010, p=1.94e-232
+    KS test cosD: D=0.2010, p=1.94e-232
+═══ 
+=== Leave-One-Station-Out Shift ===
+    Hold out Grasse: train n=6817, test n=19390, train|cosD|=0.436, test|cosD|=0.439, KS_D=0.1512
+    Hold out Haleakala: train n=25470, test n=737, train|cosD|=0.440, test|cosD|=0.355, KS_D=0.2894
+    Hold out McDonald2: train n=23068, test n=3139, train|cosD|=0.442, test|cosD|=0.410, KS_D=0.1973
+    Hold out Matera: train n=25861, test n=346, train|cosD|=0.440, test|cosD|=0.251, KS_D=0.2812
+    Hold out APO: train n=23612, test n=2595, train|cosD|=0.429, test|cosD|=0.516, KS_D=0.1248
+═══ 
+=== Per-Station cosD Regression ===
+    Grasse: eta=-5.402e-04 +/- 1.087e-04, SNR=4.97sigma, n=19390
+    Haleakala: eta=3.554e-03 +/- 1.447e-03, SNR=2.46sigma, n=737
+    McDonald2: eta=-5.009e-04 +/- 3.605e-04, SNR=1.39sigma, n=3139
+    Matera: eta=-1.813e-05 +/- 8.681e-04, SNR=0.02sigma, n=346
+    APO: eta=-2.398e-04 +/- 8.661e-05, SNR=2.77sigma, n=2595
+
+✓  PASS  step_052_station_distribution_analysis.py  (0.7s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 48/78]  Full Canonical: step_053_clean_subset_analysis.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Step 053: Clean Subset High-SNR Analysis ═══
+    Clean subset: Grasse 2010+ (N=9981) + APO (N=2595) = 12576
+    Removed 0 outliers, N=12576
+    --- Model 1: cosD only ---
+      η = -3.0557e-04 ± 3.1178e-05 (9.80σ)
+    --- Model 4: cosD + cos(2D) + annual + monthly (full) ---
+      η = -3.3597e-04 ± 3.3021e-05 (10.17σ)
+    --- Model 4: cluster-robust SEs ---
+      η = -3.3597e-04 ± 4.6312e-05 (7.25σ, cluster-robust, 2 clusters)
+    --- Model 4: station block bootstrap ---
+      Station block bootstrap: η = -2.7417e-04 ± 1.2096e-04 (2.27σ), 95% CI [-3.9433e-04, 1.1990e-05], P(η<0) = 0.9650
+    --- Temporal CV (pre-2013 / post-2013) ---
+      Train: 2112, Test: 10464
+      R²_pred = -0.0164, RMSE = 0.0235
+      cos(D)-only temporal hold-out: R²_pred = -0.0009, η_train = -7.5581e-05
+      Nuisance transportability (|Δ|/SE) on clean subset, pre- vs post-2013 separate fits:
+        cos2D: z=3.43, p=0.0006107
+        sin_y: z=0.21, p=0.8323
+        cos_y: z=1.96, p=0.04971
+        sin_m: z=1.57, p=0.1166
+        cos_m: z=0.80, p=0.4262
+      Grasse era split: η_pre=-6.0193e-04±3.36e-04, η_post=-3.4790e-04±3.40e-05, p(η_pre=η_post)=0.452
+    --- Per-station cosD-only within clean subset ---
+      Grasse: η = -3.0522e-04 ± 3.2605e-05 (9.36σ), N=9981
+      APO: η = -2.3984e-04 ± 8.6641e-05 (2.77σ), N=2595
+    Saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_053_clean_subset_analysis.json
+
+✓  PASS  step_053_clean_subset_analysis.py  (3.0s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 49/78]  Full Canonical: step_054_toy_orbital_tep_perturbation.py
+──────────────────────────────────────────────────────────────────────
+
+═══ ═══ Step 054: Toy Orbital TEP Perturbation Model ═══
+    Simulation: 50000 points over 10.0 years
+    Input η = -5.40e-04
+    Perturbation amplitude: 7.02 mm
+>>> Fitting standard orbital-element basis...
+      Fit: a = 384400.0 km, e = 0.00000
+      Residual RMS: 4.97 mm
+>>> Regressing residuals on cos(D)...
+      Recovered η = -5.4000e-04 ± 2.7857e-09 (193847.79σ)
+      Input η     = -5.4000e-04
+      Recovery bias: -0.0%
+    --- Sweep over η values ---
+      η_in = -1.00e-03: recovered = -1.0000e-03, amp = 13.0 mm, RMS = 9.19 mm
+      η_in = -5.00e-04: recovered = -5.0000e-04, amp = 6.5 mm, RMS = 4.60 mm
+      η_in = -3.00e-04: recovered = -3.0000e-04, amp = 3.9 mm, RMS = 2.76 mm
+      η_in = -1.00e-04: recovered = -1.0000e-04, amp = 1.3 mm, RMS = 0.92 mm
+      η_in = -5.00e-05: recovered = -5.0000e-05, amp = 0.7 mm, RMS = 0.46 mm
+      η_in = -1.00e-05: recovered = -1.0000e-05, amp = 0.1 mm, RMS = 0.09 mm
+    Saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_054_toy_orbital_tep_perturbation.json
+
+✓  PASS  step_054_toy_orbital_tep_perturbation.py  (0.2s)
+
+──────────────────────────────────────────────────────────────────────
+ [ 50/78]  Full Canonical: step_040_unified_results_table.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Step 040: Unified Results Table with Consistent Statistical Measures
@@ -2067,7 +2426,7 @@ SUMMARY OF KEY CORRECTIONS:
 ✓  PASS  step_040_unified_results_table.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 47/74]  Full Canonical: step_041_ephemeris_absorption_simulation.py
+ [ 51/78]  Full Canonical: step_041_ephemeris_absorption_simulation.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 041: Controlled Injection Absorption Test ═══
@@ -2088,11 +2447,11 @@ SUMMARY OF KEY CORRECTIONS:
 ✓  PASS  step_041_ephemeris_absorption_simulation.py  (1.1s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 48/74]  Full Canonical: step_042_multiple_testing_correction.py
+ [ 52/78]  Full Canonical: step_042_multiple_testing_correction.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Step 042: Formal Multiple Testing Correction
-    Collected 51 significance tests from the analysis pipeline
+    Collected 20 significance tests from the analysis pipeline
 
 ======================================================================
 MULTIPLE TESTING CORRECTION RESULTS
@@ -2121,46 +2480,15 @@ Theil-Sen robust regression                        (sensitivity)    1.36σ      
 Systematic control (temporal trend)                (sensitivity)    4.47σ      —          —         
 Systematic control (seasonal effects)              (sensitivity)    5.63σ      —          —         
 Non-physical frequency control (factor=1.23)       (sensitivity)    0.00σ      —          —         
-Grid pre_1990 / Grasse / lunation Q0               (sensitivity)    0.41σ      —          —         
-Grid pre_1990 / Grasse / lunation Q1               (sensitivity)    0.27σ      —          —         
-Grid pre_1990 / Grasse / lunation Q2               (sensitivity)    0.20σ      —          —         
-Grid pre_1990 / Grasse / lunation Q3               (sensitivity)    2.95σ      —          —         
-Grid pre_1990 / Haleakala / lunation Q0            (sensitivity)    1.81σ      —          —         
-Grid pre_1990 / Haleakala / lunation Q2            (sensitivity)    3.19σ      —          —         
-Grid pre_1990 / Haleakala / lunation Q3            (sensitivity)    1.15σ      —          —         
-Grid era_1990s / Grasse / lunation Q0              (sensitivity)    3.91σ      —          —         
-Grid era_1990s / Grasse / lunation Q1              (sensitivity)    1.39σ      —          —         
-Grid era_1990s / Grasse / lunation Q2              (sensitivity)    0.22σ      —          —         
-Grid era_1990s / Grasse / lunation Q3              (sensitivity)    3.40σ      —          —         
-Grid era_1990s / McDonald2 / lunation Q0           (sensitivity)    0.50σ      —          —         
-Grid era_1990s / McDonald2 / lunation Q2           (sensitivity)    2.66σ      —          —         
-Grid era_1990s / McDonald2 / lunation Q3           (sensitivity)    1.06σ      —          —         
-Grid post_2000 / APO / lunation Q0                 (sensitivity)    0.36σ      —          —         
-Grid post_2000 / APO / lunation Q1                 (sensitivity)    0.32σ      —          —         
-Grid post_2000 / APO / lunation Q2                 (sensitivity)    4.13σ      —          —         
-Grid post_2000 / APO / lunation Q3                 (sensitivity)    0.08σ      —          —         
-Grid post_2000 / Grasse / lunation Q0              (sensitivity)    9.42σ      —          —         
-Grid post_2000 / Grasse / lunation Q1              (sensitivity)    3.61σ      —          —         
-Grid post_2000 / Grasse / lunation Q2              (sensitivity)    0.25σ      —          —         
-Grid post_2000 / Grasse / lunation Q3              (sensitivity)    0.12σ      —          —         
-Grid post_2000 / Matera / lunation Q0              (sensitivity)    1.23σ      —          —         
-Grid post_2000 / McDonald2 / lunation Q0           (sensitivity)    0.60σ      —          —         
-Grid post_2000 / McDonald2 / lunation Q2           (sensitivity)    0.71σ      —          —         
-Grid post_2000 / McDonald2 / lunation Q3           (sensitivity)    3.26σ      —          —         
-Blind 20% year hold-out (inverse-variance combined) (sensitivity)    14.27σ     —          —         
-Step 061 pooled interaction grid (full systematic, all data) (sensitivity)    1.46σ      —          —         
-Step 061 era-pooled full systematic (pre_1990)     (sensitivity)    0.25σ      —          —         
-Step 061 era-pooled full systematic (era_1990s)    (sensitivity)    6.22σ      —          —         
-Step 061 era-pooled full systematic (post_2000)    (sensitivity)    8.88σ      —          —         
 Grasse internal split (first half)                 (sensitivity)    3.22σ      —          —         
 Grasse internal split (second half)                (sensitivity)    9.28σ      —          —         
 
 ======================================================================
 SUMMARY
 ======================================================================
-Total tests collected: 51
+Total tests collected: 20
   Independent hypotheses:  4
-  Sensitivity analyses:    47
+  Sensitivity analyses:    16
 Bonferroni rejected (independent only): 4/4
 Benjamini-Hochberg rejected (independent only): 4/4
 
@@ -2170,7 +2498,7 @@ Primary detection (precision-weighted full-systematic, Step 050):
   BH: 6.75σ (p=1.51e-11)
   Significant after correction: True
 ✓   
-The pipeline collected 51 significance measures. Of these, 4 are independent hypotheses and 47 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The headline precision-weighted full-systematic detection (6.94σ) is the primary analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
+The pipeline collected 20 significance measures. Of these, 4 are independent hypotheses and 16 are sensitivity analyses (same hypothesis, different estimator). Multiple-testing correction is applied only to the independent hypotheses. The headline precision-weighted full-systematic detection (6.94σ) is the primary analysis on the full INPOP19a dataset. Sensitivity analyses (bootstrap, permutation, Theil-Sen, leverage excision, station splits) validate robustness but do not constitute additional independent hypothesis tests. Correcting only independent hypotheses, the primary detection remains significant.
     
 ======================================================================
 ✓   Step 042 completed successfully
@@ -2180,7 +2508,7 @@ Results saved to results/outputs/step_042_multiple_testing_correction.json
 ✓  PASS  step_042_multiple_testing_correction.py  (2.5s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 49/74]  Full Canonical: step_043_temporal_bin_variation_analysis.py
+ [ 53/78]  Full Canonical: step_043_temporal_bin_variation_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Step 043: Quantitative Temporal Bin Variation Analysis
@@ -2431,7 +2759,7 @@ Results saved to results/outputs/step_043_temporal_bin_variation.json
 ✓  PASS  step_043_temporal_bin_variation_analysis.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 50/74]  Full Canonical: step_044_systematic_projection_analysis.py
+ [ 54/78]  Full Canonical: step_044_systematic_projection_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Systematic Projection Analysis...
@@ -2475,7 +2803,7 @@ Results saved to results/outputs/step_044_systematic_projection_analysis.json
 ✓  PASS  step_044_systematic_projection_analysis.py  (1.2s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 51/74]  Full Canonical: step_045_independent_validation.py
+ [ 55/78]  Full Canonical: step_045_independent_validation.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Independent Validation...
@@ -2626,7 +2954,7 @@ Results saved to results/outputs/step_045_independent_validation.json
 ✓  PASS  step_045_independent_validation.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 52/74]  Full Canonical: step_046_station_balanced_tep.py
+ [ 56/78]  Full Canonical: step_046_station_balanced_tep.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Step 046: Station-Balanced TEP Analysis...
@@ -2671,10 +2999,10 @@ Results saved to results/outputs/step_045_independent_validation.json
 Results saved to results/outputs/step_046_station_balanced_tep.json
 ✓   Station-Balanced Analysis Complete.
 
-✓  PASS  step_046_station_balanced_tep.py  (2.3s)
+✓  PASS  step_046_station_balanced_tep.py  (2.2s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 53/74]  Full Canonical: step_046b_equal_n_injection_simulation.py
+ [ 57/78]  Full Canonical: step_046b_equal_n_injection_simulation.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Step 046b: Equal-N Injection Simulation
@@ -2708,10 +3036,10 @@ Results saved to results/outputs/step_046_station_balanced_tep.json
 Results saved to results/outputs/step_046b_equal_n_injection_simulation.json
 ✓   Equal-N Injection Simulation Complete.
 
-✓  PASS  step_046b_equal_n_injection_simulation.py  (8.7s)
+✓  PASS  step_046b_equal_n_injection_simulation.py  (8.0s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 54/74]  Full Canonical: step_014_inter_station_consistency.py
+ [ 58/78]  Full Canonical: step_014_inter_station_consistency.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Initiating Inter-Station Consistency Deep Scan...
@@ -2743,11 +3071,11 @@ Results saved to results/outputs/step_014_inter_station_consistency.json
 ✓  PASS  step_014_inter_station_consistency.py  (0.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 55/74]  Full Canonical: step_047_velocity_modulation.py
+ [ 59/78]  Full Canonical: step_047_velocity_modulation.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 047: Orbital Velocity Modulation of Temporal Shear ═══
->>> Computing Earth orbital velocities via DE421/Skyfield...
+>>> Computing Earth orbital velocities via DE440/Skyfield...
     Orbital speed range: 29.279 – 30.294 km/s
     Radial velocity range: -0.509 – 0.510 km/s
     Heliocentric distance range: 0.98322 – 1.01676 AU
@@ -2798,11 +3126,11 @@ Results saved to results/outputs/step_047_velocity_modulation.json
 ✓  PASS  step_047_velocity_modulation.py  (0.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 56/74]  Full Canonical: step_048_cmb_anisotropy.py
+ [ 60/78]  Full Canonical: step_048_cmb_anisotropy.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 048: CMB Dipole Anisotropy Test ═══
->>> Computing CMB-frame projections via DE421/Skyfield...
+>>> Computing CMB-frame projections via DE440/Skyfield...
     v_parallel range: -28.758 – 29.670 km/s
     v_perp range: 5.757 – 29.977 km/s
     cos(θ_EM-CMB) range: -0.9943 – 0.9943
@@ -2885,7 +3213,7 @@ Results saved to results/outputs/step_048_cmb_anisotropy.json
 ✓  PASS  step_048_cmb_anisotropy.py  (0.9s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 57/74]  Full Canonical: step_055_cmb_rigorous_falsification.py
+ [ 61/78]  Full Canonical: step_055_cmb_rigorous_falsification.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 055: CMB Anisotropy Rigorous Falsification ═══
@@ -2914,13 +3242,13 @@ Results saved to results/outputs/step_048_cmb_anisotropy.json
 ═══ ═══ D. Random-axis Monte Carlo (any fixed sky axis) ═══
     Base residual AR(1) ρ = 0.4161; n_eff = 10491.1
     Base model AIC = -141809.8; True CMB ΔAIC = 119.2
-    Random-axis null (n=50000): ΔAIC median = 61.2, 99th %ile = 130.5, max = 137.7
-    Planck ΔAIC = 119.2; p(any axis ΔAIC ≥ Planck) = 0.0954
-    Uniform scramble F: median = 63.22, 99th %ile = 132.86
-    True CMB F = 121.49; p(random F ≥ true) = 0.0954
-    Eff-sample-size F: true = 50.08; p(random F_eff ≥ true) = 0.0954
-    Correlation-matched scramble: 9032 directions (|r(cosD, cosθ)| within 0.020 of 0.0499)
-      p_matched(ΔAIC) = 0.2643, p_matched(F) = 0.2643, p_matched(F_eff) = 0.2643
+    Random-axis null (n=100000): ΔAIC median = 61.9, 99th %ile = 130.3, max = 137.7
+    Planck ΔAIC = 119.2; p(any axis ΔAIC ≥ Planck) = 0.0956
+    Uniform scramble F: median = 64.01, 99th %ile = 132.66
+    True CMB F = 121.49; p(random F ≥ true) = 0.0956
+    Eff-sample-size F: true = 50.08; p(random F_eff ≥ true) = 0.0956
+    Correlation-matched scramble: 18208 directions (|r(cosD, cosθ)| within 0.020 of 0.0499)
+      p_matched(ΔAIC) = 0.2664, p_matched(F) = 0.2664, p_matched(F_eff) = 0.2664
 ═══ ═══ D3–D5. Refined directional null tests ═══
     Phase null: p_F_eff = 0.0006 (median F_eff = 1.64)
     Rotation global: p_F_eff = 0.0964
@@ -2943,14 +3271,14 @@ Results saved to results/outputs/step_048_cmb_anisotropy.json
 ═══ ═══ I. TEP η_θ prediction coverage (Step 033) ═══
     Fitted η_θ = -9.7721e-04 (predicted center -3.1773e-04; band [-1e-03, -1e-04]; within band = True)
     z vs predicted center = -6.14; ratio fitted/predicted = 3.08
-✓   RESULT: 4/5 falsification tests passed. Directional residual component is supported with caveats.
+✓   RESULT: 4/5 falsification tests passed. Composite directional p=1.00e+00 (Z=-inf).
 Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
 ✓   CMB Falsification analysis complete.
 
-✓  PASS  step_055_cmb_rigorous_falsification.py  (1m29s)
+✓  PASS  step_055_cmb_rigorous_falsification.py  (2m15s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 58/74]  Full Canonical: step_056_dynamical_integrator_eta_refit.py
+ [ 62/78]  Full Canonical: step_056_dynamical_integrator_eta_refit.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 056: Dynamical Integrator η Refit ═══
@@ -2966,7 +3294,7 @@ Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
 ✓  PASS  step_056_dynamical_integrator_eta_refit.py  (0.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 59/74]  Full Canonical: step_057_haleakala_null_fluctuation.py
+ [ 63/78]  Full Canonical: step_057_haleakala_null_fluctuation.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Starting Step 057: Haleakala Null-Fluctuation Simulation
@@ -2974,11 +3302,11 @@ Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
     ═══ METHOD: Monte Carlo using actual Haleakala elongation distribution, N=20000 realizations
         Haleakala raw: N = 737, after 6σ cleaning: N = 737 (removed 0)
 >>> >>> Simulation (a): Under TEP model (eta_true = -4.061e-04)
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_057_haleakala_null_fluctuation.py:86: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_057_haleakala_null_fluctuation.py:87: RuntimeWarning: divide by zero encountered in matmul
   coeffs = XtX_inv @ (X.T @ residuals_matrix)
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_057_haleakala_null_fluctuation.py:86: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_057_haleakala_null_fluctuation.py:87: RuntimeWarning: overflow encountered in matmul
   coeffs = XtX_inv @ (X.T @ residuals_matrix)
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_057_haleakala_null_fluctuation.py:86: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_057_haleakala_null_fluctuation.py:87: RuntimeWarning: invalid value encountered in matmul
   coeffs = XtX_inv @ (X.T @ residuals_matrix)
         Simulated eta mean:   -4.063e-04
         Simulated eta std:    1.459e-03
@@ -3008,10 +3336,10 @@ Results saved to results/outputs/step_055_cmb_rigorous_falsification.json
 Results saved to results/outputs/step_057_haleakala_null_fluctuation.json
 ✓   Haleakala Null-Fluctuation Simulation Complete.
 
-✓  PASS  step_057_haleakala_null_fluctuation.py  (22.6s)
+✓  PASS  step_057_haleakala_null_fluctuation.py  (21.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 60/74]  Full Canonical: step_059_grasse_systematic_sufficiency.py
+ [ 64/78]  Full Canonical: step_059_grasse_systematic_sufficiency.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Step 059: Grasse-Specific Systematic Sufficiency Analysis
@@ -3064,11 +3392,11 @@ Results saved to results/outputs/step_057_haleakala_null_fluctuation.json
       Percentile = 100.0%
 
 >>> >>> Grasse-conditioned estimands (full-systematic + cluster-robust)
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:212: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:215: RuntimeWarning: divide by zero encountered in matmul
   XtX = X.T @ X
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:212: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:215: RuntimeWarning: overflow encountered in matmul
   XtX = X.T @ X
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:212: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:215: RuntimeWarning: invalid value encountered in matmul
   XtX = X.T @ X
 /Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/linalg.py:2030: RuntimeWarning: divide by zero encountered in matmul
   res = matmul(transpose(vt), multiply(s[..., newaxis], transpose(u)))
@@ -3076,30 +3404,35 @@ Results saved to results/outputs/step_057_haleakala_null_fluctuation.json
   res = matmul(transpose(vt), multiply(s[..., newaxis], transpose(u)))
 /Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/linalg.py:2030: RuntimeWarning: invalid value encountered in matmul
   res = matmul(transpose(vt), multiply(s[..., newaxis], transpose(u)))
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:226: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:229: RuntimeWarning: divide by zero encountered in matmul
   meat += Xg_ug.T @ Xg_ug
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:226: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:229: RuntimeWarning: overflow encountered in matmul
   meat += Xg_ug.T @ Xg_ug
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:226: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:229: RuntimeWarning: invalid value encountered in matmul
   meat += Xg_ug.T @ Xg_ug
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:228: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:231: RuntimeWarning: divide by zero encountered in matmul
   cov_cluster = XtX_inv @ meat @ XtX_inv
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:228: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:231: RuntimeWarning: overflow encountered in matmul
   cov_cluster = XtX_inv @ meat @ XtX_inv
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:228: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/utils/statistical_utils.py:231: RuntimeWarning: invalid value encountered in matmul
   cov_cluster = XtX_inv @ meat @ XtX_inv
 ═══ ═══ GRASSE-CONDITIONED ESTIMANDS
       non_grasse_direct: eta=-1.648e-04 +/- 1.577e-04 (1.04sigma), N=6703
       common_eta_station_systematics: eta=-4.321e-04 +/- 6.354e-05 (6.80sigma), N=25445
       pooled_grasse_cosd_interaction: eta=-3.714e-04 +/- 1.342e-04 (2.77sigma), N=25445
       pooled_reference: eta=-4.061e-04 +/- 6.225e-05 (6.52sigma), N=25445
+
+>>> >>> Equal-weighted station meta-analysis
+      Equal-weighted η=-1.214e-04 ± 2.605e-04 (0.47σ), N_stations=4
+>>> >>> Balanced-station-N reweighted pooled analysis
+      Balanced η=-1.474e-04 ± 3.699e-04 (0.40σ), N=1725
 Results saved to results/outputs/step_059_grasse_systematic_sufficiency.json
 ✓   Grasse Systematic Sufficiency Analysis Complete.
 
-✓  PASS  step_059_grasse_systematic_sufficiency.py  (7.6s)
+✓  PASS  step_059_grasse_systematic_sufficiency.py  (7.5s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 61/74]  Full Canonical: step_060_gaussian_process_extraction.py
+ [ 65/78]  Full Canonical: step_060_gaussian_process_extraction.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Step 060: Gaussian Process Non-Parametric Extraction
@@ -3137,10 +3470,10 @@ Results saved to results/outputs/step_059_grasse_systematic_sufficiency.json
 Results saved to results/outputs/step_060_gaussian_process_extraction.json
 ✓   Gaussian Process Extraction Complete.
 
-✓  PASS  step_060_gaussian_process_extraction.py  (0.9s)
+✓  PASS  step_060_gaussian_process_extraction.py  (1.0s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 62/74]  Full Canonical: step_061_systematic_sensitivity_analysis.py
+ [ 66/78]  Full Canonical: step_061_systematic_sensitivity_analysis.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ Starting Step 061: Systematic Amplitude Sensitivity Analysis
@@ -3158,8 +3491,12 @@ Results saved to results/outputs/step_060_gaussian_process_extraction.json
 >>> >>> Adversarial PCA nuisance search...
       cosD survives all PCs: True, joint eta=-2.927e-04
 >>> >>> Adversarial 2D GP (elongation x time bins)...
-/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/sklearn/gaussian_process/kernels.py:440: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k1__constant_value is close to the specified lower bound 0.01. Decreasing the bound and calling fit again may find a better value.
-  warnings.warn(
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/sklearn/gaussian_process/_gpr.py:444: RuntimeWarning: divide by zero encountered in matmul
+  y_mean = K_trans @ self.alpha_
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/sklearn/gaussian_process/_gpr.py:444: RuntimeWarning: overflow encountered in matmul
+  y_mean = K_trans @ self.alpha_
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/sklearn/gaussian_process/_gpr.py:444: RuntimeWarning: invalid value encountered in matmul
+  y_mean = K_trans @ self.alpha_
 /Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/sklearn/gaussian_process/_gpr.py:444: RuntimeWarning: divide by zero encountered in matmul
   y_mean = K_trans @ self.alpha_
 /Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/sklearn/gaussian_process/_gpr.py:444: RuntimeWarning: overflow encountered in matmul
@@ -3167,6 +3504,9 @@ Results saved to results/outputs/step_060_gaussian_process_extraction.json
 /Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/sklearn/gaussian_process/_gpr.py:444: RuntimeWarning: invalid value encountered in matmul
   y_mean = K_trans @ self.alpha_
       cosD survives GP subtraction: False, eta after GP=5.347e-05
+      CV-GP: cosD survives=False, eta after CV-GP=2.453e-05 (overfit_ratio=1.42)
+      AIC: cosD-only=-141803.3, GP-only=-143253.3, preferred=gp_only
+      Time-only GP: cosD survives=True, eta after time-GP=-3.261e-04
 >>> >>> Era x station x lunation interaction grid...
       Fitted 26/60 cells; 13 negative, 9 significant
 >>> >>> Blind 20% year hold-out...
@@ -3174,10 +3514,10 @@ Results saved to results/outputs/step_060_gaussian_process_extraction.json
 Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
 ✓   Systematic Sensitivity Analysis Complete.
 
-✓  PASS  step_061_systematic_sensitivity_analysis.py  (28.3s)
+✓  PASS  step_061_systematic_sensitivity_analysis.py  (28.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 63/74]  Full Canonical: step_062_false_positive_simulation.py
+ [ 67/78]  Full Canonical: step_062_false_positive_simulation.py
 ──────────────────────────────────────────────────────────────────────
 
     ============================================================
@@ -3187,59 +3527,59 @@ Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
     Observed η = -4.061155e-04 ± 6.577800e-05 (SNR = 6.17σ)
     Null-residual AR(1): ρ = 0.4126, σε = 0.0559 m
 >>> Running 10,000 simulations (vectorized AR + QR batch)...
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:171: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:176: RuntimeWarning: divide by zero encountered in matmul
   y0 = (X_null @ coeffs_null).astype(np.float64, copy=False)
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:171: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:176: RuntimeWarning: overflow encountered in matmul
   y0 = (X_null @ coeffs_null).astype(np.float64, copy=False)
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:171: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:176: RuntimeWarning: invalid value encountered in matmul
   y0 = (X_null @ coeffs_null).astype(np.float64, copy=False)
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: divide by zero encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: divide by zero encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: overflow encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: overflow encountered in matmul
   qty = q.T @ y_matrix
-/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:114: RuntimeWarning: invalid value encountered in matmul
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_062_false_positive_simulation.py:119: RuntimeWarning: invalid value encountered in matmul
   qty = q.T @ y_matrix
 
 ═══ RESULTS
@@ -3257,10 +3597,10 @@ Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
 Results saved to results/outputs/step_062_false_positive_simulation.json
 ✓   False-Positive Simulation Complete.
 
-✓  PASS  step_062_false_positive_simulation.py  (3.1s)
+✓  PASS  step_062_false_positive_simulation.py  (3.3s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 64/74]  Full Canonical: step_063_outlier_sensitivity.py
+ [ 68/78]  Full Canonical: step_063_outlier_sensitivity.py
 ──────────────────────────────────────────────────────────────────────
 
     ============================================================
@@ -3297,7 +3637,7 @@ Results saved to results/outputs/step_063_outlier_sensitivity.json
 ✓  PASS  step_063_outlier_sensitivity.py  (11.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 65/74]  Full Canonical: step_064_prediction_coverage.py
+ [ 69/78]  Full Canonical: step_064_prediction_coverage.py
 ──────────────────────────────────────────────────────────────────────
 
     ============================================================
@@ -3324,7 +3664,7 @@ Results saved to results/outputs/step_064_prediction_coverage.json
 ✓  PASS  step_064_prediction_coverage.py  (6.6s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 66/74]  Full Canonical: step_065_high_dimensional_absorption_test.py
+ [ 70/78]  Full Canonical: step_065_high_dimensional_absorption_test.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 065: High-Dimensional Ephemeris-Like Basis Absorption Test ═══
@@ -3365,7 +3705,7 @@ Results saved to results/outputs/step_064_prediction_coverage.json
 ✓  PASS  step_065_high_dimensional_absorption_test.py  (0.8s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 67/74]  Full Canonical: step_066_lomb_scargle_sideband_survival.py
+ [ 71/78]  Full Canonical: step_066_lomb_scargle_sideband_survival.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 066: Lomb-Scargle Sideband Survival Analysis ═══
@@ -3398,7 +3738,7 @@ Results saved to results/outputs/step_064_prediction_coverage.json
 ✓  PASS  step_066_lomb_scargle_sideband_survival.py  (1.0s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 68/74]  Full Canonical: step_067_cluster_robust_ar1_combined.py
+ [ 72/78]  Full Canonical: step_067_cluster_robust_ar1_combined.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 067: Cluster-Robust + AR(1) Combined SEs ═══
@@ -3420,7 +3760,7 @@ Results saved to results/outputs/step_067_cluster_robust_ar1_combined.json
 ✓  PASS  step_067_cluster_robust_ar1_combined.py  (0.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 69/74]  Full Canonical: step_068_weighted_robust_regression.py
+ [ 73/78]  Full Canonical: step_068_weighted_robust_regression.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 068: Weighted Robust M-Estimator ═══
@@ -3450,7 +3790,7 @@ Results saved to results/outputs/step_068_weighted_robust_regression.json
 ✓  PASS  step_068_weighted_robust_regression.py  (1.0s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 70/74]  Full Canonical: step_069_rolling_eta_environmental.py
+ [ 74/78]  Full Canonical: step_069_rolling_eta_environmental.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 069: Rolling η(t) vs Environmental Predictors ═══
@@ -3485,7 +3825,7 @@ Results saved to results/outputs/step_069_rolling_eta_environmental.json
 ✓  PASS  step_069_rolling_eta_environmental.py  (0.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 71/74]  Full Canonical: step_070_de430_full_environmental.py
+ [ 75/78]  Full Canonical: step_070_de430_full_environmental.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 070: DE430 Full Environmental Model (Raw) ═══
@@ -3517,7 +3857,7 @@ Results saved to results/outputs/step_070_de430_full_environmental.json
 ✓  PASS  step_070_de430_full_environmental.py  (0.7s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 72/74]  Full Canonical: step_071_stratified_equal_n.py
+ [ 76/78]  Full Canonical: step_071_stratified_equal_n.py
 ──────────────────────────────────────────────────────────────────────
 
 ═══ ═══ Step 071: Stratified Equal-N Test ═══
@@ -3539,10 +3879,10 @@ Results saved to results/outputs/step_070_de430_full_environmental.json
 Results saved to results/outputs/step_071_stratified_equal_n.json
 ✓   Step 071 complete.
 
-✓  PASS  step_071_stratified_equal_n.py  (4.9s)
+✓  PASS  step_071_stratified_equal_n.py  (4.8s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 73/74]  Full Canonical: step_072_leave_one_station_out_meta.py
+ [ 77/78]  Full Canonical: step_072_leave_one_station_out_meta.py
 ──────────────────────────────────────────────────────────────────────
 
     ============================================================
@@ -3577,10 +3917,10 @@ Results saved to results/outputs/step_072_leave_one_station_out_meta.json
 ✓   
 ✓   Leave-One-Station-Out Meta-Analysis Complete.
 
-✓  PASS  step_072_leave_one_station_out_meta.py  (1.0s)
+✓  PASS  step_072_leave_one_station_out_meta.py  (1.1s)
 
 ──────────────────────────────────────────────────────────────────────
- [ 74/74]  Full Canonical: step_073_laplace_bayes_factor.py
+ [ 78/78]  Full Canonical: step_073_laplace_bayes_factor.py
 ──────────────────────────────────────────────────────────────────────
 
     BAYESIAN EVIDENCE CROSS-CHECKS (Step 073)
@@ -3592,74 +3932,78 @@ Results saved to results/outputs/step_072_leave_one_station_out_meta.json
 Results saved to results/outputs/step_073_laplace_bayes_factor.json
 ✓   ✓ Complete
 
-✓  PASS  step_073_laplace_bayes_factor.py  (29.4s)
+✓  PASS  step_073_laplace_bayes_factor.py  (31.5s)
 
 ╔════════════════════════════════════════════════════════════════════╗
 ║  Full Canonical — COMPLETE                              ║
 ╠════════════════════════════════════════════════════════════════════╣
 ║  ✓ step_000_llr_data_ingestion.py                        PASS       0.2s  ║
-║  ✓ step_001_data_preprocessing.py                        PASS       7.2s  ║
-║  ✓ step_002_de430_preprocessing.py                       PASS       0.7s  ║
-║  ✓ step_003_statistical_analysis.py                      PASS      16.2s  ║
-║  ✓ step_004_detection_analysis_advanced.py               PASS       4.2s  ║
+║  ✓ step_001_data_preprocessing.py                        PASS       8.4s  ║
+║  ✓ step_002_de430_preprocessing.py                       PASS       0.9s  ║
+║  ✓ step_003_statistical_analysis.py                      PASS      18.7s  ║
+║  ✓ step_004_detection_analysis_advanced.py               PASS       5.2s  ║
 ║  ✓ step_005_temporal_drift_analysis.py                   PASS       0.6s  ║
 ║  ✓ step_006_multi_ephemeris_comparison.py                PASS       0.6s  ║
-║  ✓ step_006b_de430_outlier_robustness.py                 PASS       2.4s  ║
+║  ✓ step_006b_de430_outlier_robustness.py                 PASS       2.5s  ║
 ║  ✓ step_007_meta_analysis.py                             PASS       0.6s  ║
 ║  ✓ step_008_systematic_error_analysis.py                 PASS       0.3s  ║
 ║  ✓ step_009_ephemeris_independent_analysis.py            PASS       0.6s  ║
-║  ✓ step_010_systematic_control_analysis.py               PASS       0.7s  ║
-║  ✓ step_011_noise_signal_injection.py                    PASS       0.7s  ║
+║  ✓ step_010_systematic_control_analysis.py               PASS       0.6s  ║
+║  ✓ step_011_noise_signal_injection.py                    PASS       0.6s  ║
 ║  ✓ step_012_subsample_robustness.py                      PASS       0.7s  ║
 ║  ✓ step_013_station_decomposition.py                     PASS       0.6s  ║
 ║  ✓ step_015_null_tests.py                                PASS       1.0s  ║
-║  ✓ step_016_bayesian_analysis.py                         PASS      13.8s  ║
+║  ✓ step_016_bayesian_analysis.py                         PASS      14.5s  ║
 ║  ✓ step_017_leverage_diagnostics.py                      PASS       2.4s  ║
-║  ✓ step_018_station_quality.py                           PASS       0.3s  ║
-║  ✓ step_019_systematic_monte_carlo.py                    PASS       3.0s  ║
-║  ✓ step_020_temporal_amplitude.py                        PASS       0.6s  ║
+║  ✓ step_018_station_quality.py                           PASS       0.4s  ║
+║  ✓ step_019_systematic_monte_carlo.py                    PASS       3.1s  ║
+║  ✓ step_020_temporal_amplitude.py                        PASS       0.7s  ║
 ║  ✓ step_021_ipw_validation.py                            PASS       5.3s  ║
-║  ✓ step_022_environmental_modulation.py                  PASS       0.7s  ║
-║  ✓ step_023_solar_cycle_correlation.py                   PASS       8.3s  ║
+║  ✓ step_022_environmental_modulation.py                  PASS       0.8s  ║
+║  ✓ step_023_solar_cycle_correlation.py                   PASS       8.5s  ║
 ║  ✓ step_024_thermal_array_modeling.py                    PASS       0.4s  ║
 ║  ✓ step_025_leverage_temporal_clustering.py              PASS       0.3s  ║
-║  ✓ step_026_tep_core_density_simulation.py               PASS       0.3s  ║
-║  ✓ step_027_day_night_thermal_bias.py                    PASS       2.3s  ║
-║  ✓ step_028_geometric_elongation.py                      PASS       3.6s  ║
-║  ✓ step_029_station_power_analysis.py                    PASS      15.5s  ║
-║  ✓ step_030_hardware_epoch_analysis.py                   PASS       0.7s  ║
-║  ✓ step_031_lomb_scargle_orbital_dynamics.py             PASS      10.0s  ║
-║  ✓ step_032_ephemeris_orthogonality_proof.py             PASS       1.1s  ║
+║  ✓ step_026_tep_core_density_simulation.py               PASS       0.5s  ║
+║  ✓ step_027_day_night_thermal_bias.py                    PASS       2.6s  ║
+║  ✓ step_028_geometric_elongation.py                      PASS       4.1s  ║
+║  ✓ step_029_station_power_analysis.py                    PASS      16.1s  ║
+║  ✓ step_030_hardware_epoch_analysis.py                   PASS       1.0s  ║
+║  ✓ step_031_lomb_scargle_orbital_dynamics.py             PASS      12.0s  ║
+║  ✓ step_032_ephemeris_orthogonality_proof.py             PASS       1.5s  ║
 ║  ✓ step_033_quantitative_eta_prediction.py               PASS       0.4s  ║
-║  ✓ step_034_static_dynamic_absorption.py                 PASS       0.3s  ║
+║  ✓ step_034_static_dynamic_absorption.py                 PASS       0.4s  ║
 ║  ✓ step_035_historical_comparison.py                     PASS       0.6s  ║
 ║  ✓ step_036_full_moon_deficit_analysis.py                PASS       0.6s  ║
-║  ✓ step_037_lunar_recession_analysis.py                  PASS       0.6s  ║
+║  ✓ step_037_lunar_recession_analysis.py                  PASS       0.7s  ║
 ║  ✓ step_038_tidal_resonance_analysis.py                  PASS       0.6s  ║
 ║  ✓ step_039_dust_sensitivity_analysis.py                 PASS       0.6s  ║
-║  ✓ step_062_solar_radiation_pressure_bound.py            PASS       0.3s  ║
-║  ✓ step_063_atmospheric_seeing_analysis.py               PASS       0.3s  ║
-║  ✓ step_064_srp_systematic_check.py                      PASS       3.1s  ║
-║  ✓ step_049_eop_systematic_analysis.py                   PASS       1.8s  ║
-║  ✓ step_050_corrected_tep_analysis.py                    PASS       6.6s  ║
+║  ✓ step_062_solar_radiation_pressure_bound.py            PASS       0.4s  ║
+║  ✓ step_063_atmospheric_seeing_analysis.py               PASS       0.4s  ║
+║  ✓ step_064_srp_systematic_check.py                      PASS       3.3s  ║
+║  ✓ step_049_eop_systematic_analysis.py                   PASS       1.9s  ║
+║  ✓ step_050_corrected_tep_analysis.py                    PASS       6.8s  ║
+║  ✓ step_051_cross_validation_analysis.py                 PASS      10.8s  ║
+║  ✓ step_052_station_distribution_analysis.py             PASS       0.7s  ║
+║  ✓ step_053_clean_subset_analysis.py                     PASS       3.0s  ║
+║  ✓ step_054_toy_orbital_tep_perturbation.py              PASS       0.2s  ║
 ║  ✓ step_040_unified_results_table.py                     PASS       0.6s  ║
 ║  ✓ step_041_ephemeris_absorption_simulation.py           PASS       1.1s  ║
 ║  ✓ step_042_multiple_testing_correction.py               PASS       2.5s  ║
 ║  ✓ step_043_temporal_bin_variation_analysis.py           PASS       0.6s  ║
 ║  ✓ step_044_systematic_projection_analysis.py            PASS       1.2s  ║
-║  ✓ step_045_independent_validation.py                    PASS       0.6s  ║
-║  ✓ step_046_station_balanced_tep.py                      PASS       2.3s  ║
-║  ✓ step_046b_equal_n_injection_simulation.py             PASS       8.7s  ║
+║  ✓ step_045_independent_validation.py                    PASS       0.7s  ║
+║  ✓ step_046_station_balanced_tep.py                      PASS       2.2s  ║
+║  ✓ step_046b_equal_n_injection_simulation.py             PASS       8.0s  ║
 ║  ✓ step_014_inter_station_consistency.py                 PASS       0.6s  ║
 ║  ✓ step_047_velocity_modulation.py                       PASS       0.7s  ║
 ║  ✓ step_048_cmb_anisotropy.py                            PASS       0.9s  ║
-║  ✓ step_055_cmb_rigorous_falsification.py                PASS      1m29s  ║
+║  ✓ step_055_cmb_rigorous_falsification.py                PASS      2m15s  ║
 ║  ✓ step_056_dynamical_integrator_eta_refit.py            PASS       0.7s  ║
-║  ✓ step_057_haleakala_null_fluctuation.py                PASS      22.6s  ║
-║  ✓ step_059_grasse_systematic_sufficiency.py             PASS       7.6s  ║
-║  ✓ step_060_gaussian_process_extraction.py               PASS       0.9s  ║
-║  ✓ step_061_systematic_sensitivity_analysis.py           PASS      28.3s  ║
-║  ✓ step_062_false_positive_simulation.py                 PASS       3.1s  ║
+║  ✓ step_057_haleakala_null_fluctuation.py                PASS      21.7s  ║
+║  ✓ step_059_grasse_systematic_sufficiency.py             PASS       7.5s  ║
+║  ✓ step_060_gaussian_process_extraction.py               PASS       1.0s  ║
+║  ✓ step_061_systematic_sensitivity_analysis.py           PASS      28.6s  ║
+║  ✓ step_062_false_positive_simulation.py                 PASS       3.3s  ║
 ║  ✓ step_063_outlier_sensitivity.py                       PASS      11.7s  ║
 ║  ✓ step_064_prediction_coverage.py                       PASS       6.6s  ║
 ║  ✓ step_065_high_dimensional_absorption_test.py          PASS       0.8s  ║
@@ -3668,10 +4012,10 @@ Results saved to results/outputs/step_073_laplace_bayes_factor.json
 ║  ✓ step_068_weighted_robust_regression.py                PASS       1.0s  ║
 ║  ✓ step_069_rolling_eta_environmental.py                 PASS       0.7s  ║
 ║  ✓ step_070_de430_full_environmental.py                  PASS       0.7s  ║
-║  ✓ step_071_stratified_equal_n.py                        PASS       4.9s  ║
-║  ✓ step_072_leave_one_station_out_meta.py                PASS       1.0s  ║
-║  ✓ step_073_laplace_bayes_factor.py                      PASS      29.4s  ║
+║  ✓ step_071_stratified_equal_n.py                        PASS       4.8s  ║
+║  ✓ step_072_leave_one_station_out_meta.py                PASS       1.1s  ║
+║  ✓ step_073_laplace_bayes_factor.py                      PASS      31.6s  ║
 ╠════════════════════════════════════════════════════════════════════╣
-║  PASS 74/74 (100%)   WARNING: 0   FAIL: 0   Total: 5m52s                                  ║
-║  AUDIT: results/audits/RESEARCH_AUDIT_20260515_133133.json          ║
+║  PASS 78/78 (100%)   WARNING: 0   FAIL: 0   Total: 7m05s                                  ║
+║  AUDIT: results/audits/RESEARCH_AUDIT_20260516_212626.json          ║
 ╚════════════════════════════════════════════════════════════════════╝

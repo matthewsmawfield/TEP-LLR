@@ -139,36 +139,36 @@
         "mcmc_runs_by_prior": {
             "uniform_reference": {
                 "n_steps": 5000,
-                "gelman_rubin_eta": 0.9991987473628989,
-                "gelman_rubin_b": 1.0022846685989935,
+                "gelman_rubin_eta": 1.004001636444657,
+                "gelman_rubin_b": 1.0038526414905917,
                 "mean_acceptance_fraction": 0.71713125,
                 "n_posterior_samples": 6400
             },
             "uniform_tight": {
                 "n_steps": 2500,
-                "gelman_rubin_eta": 1.0011651674320383,
-                "gelman_rubin_b": 1.0048271703949125,
+                "gelman_rubin_eta": 1.00860041489281,
+                "gelman_rubin_b": 1.005506490906722,
                 "mean_acceptance_fraction": 0.7174625000000001,
                 "n_posterior_samples": 2400
             },
             "uniform_wide": {
                 "n_steps": 2500,
-                "gelman_rubin_eta": 1.0011651674320383,
-                "gelman_rubin_b": 1.0048271703949125,
+                "gelman_rubin_eta": 1.00860041489281,
+                "gelman_rubin_b": 1.005506490906722,
                 "mean_acceptance_fraction": 0.7174625000000001,
                 "n_posterior_samples": 2400
             },
             "uniform_half_cent": {
                 "n_steps": 2500,
-                "gelman_rubin_eta": 1.0029828397269445,
-                "gelman_rubin_b": 1.0042508978008535,
+                "gelman_rubin_eta": 1.0038479638999027,
+                "gelman_rubin_b": 1.004615446007649,
                 "mean_acceptance_fraction": 0.7176374999999999,
                 "n_posterior_samples": 2400
             }
         },
         "n_samples": 6400,
-        "gelman_rubin_eta": 0.9991987473628989,
-        "gelman_rubin_b": 1.0022846685989935,
+        "gelman_rubin_eta": 1.004001636444657,
+        "gelman_rubin_b": 1.0038526414905917,
         "mean_acceptance_fraction": 0.71713125,
         "outlier_cleaning": {
             "method": "6\u03c3-equivalent (MAD-based; detect_outliers_sigma)",

@@ -220,6 +220,53 @@ def monte_carlo_station_dominance(df, n_mc=5000, seed=59):
     }
 
 
+def equal_weighted_station_meta_analysis(df):
+    """Fit cosD-only eta per station with equal weighting (not precision-weighted)."""
+    station_etas = []
+    station_errs = []
+    for s in df['station'].unique():
+        sub = df[df['station'] == s]
+        if len(sub) < 30:
+            continue
+        fit = fit_full_systematic_eta(sub)
+        if fit and fit['snr'] >= 0.5:
+            station_etas.append(fit['eta'])
+            station_errs.append(fit['eta_err'])
+    if not station_etas:
+        return None
+    # Equal-weighted mean (inverse-variance would weight Grasse)
+    eq_mean = float(np.mean(station_etas))
+    eq_se = float(np.std(station_etas, ddof=1) / np.sqrt(len(station_etas)))
+    return {
+        'equal_weighted_eta': eq_mean,
+        'equal_weighted_se': eq_se,
+        'equal_weighted_snr': float(abs(eq_mean) / max(eq_se, 1e-20)),
+        'n_stations_included': len(station_etas),
+        'station_etas': station_etas,
+    }
+
+
+def reweighted_pool_analysis(df):
+    """Down-weight Grasse to match smallest station, recompute pooled eta."""
+    min_n = df.groupby('station').size().min()
+    rw = []
+    for s in df['station'].unique():
+        sub = df[df['station'] == s]
+        if len(sub) <= min_n:
+            rw.append(sub)
+        else:
+            rw.append(sub.sample(n=int(min_n), random_state=42))
+    df_rw = pd.concat(rw, ignore_index=True)
+    fit = fit_full_systematic_eta(df_rw)
+    return {
+        'reweighted_eta': fit['eta'] if fit else None,
+        'reweighted_se': fit['eta_err'] if fit else None,
+        'reweighted_snr': fit['snr'] if fit else None,
+        'min_n_per_station': int(min_n),
+        'total_n_reweighted': len(df_rw),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Step 059: Grasse Systematic Sufficiency")
     args = parser.parse_args()
@@ -385,6 +432,27 @@ def main():
         ),
     }
 
+    # --- Equal-weighted meta-analysis ---
+    print_status("", "INFO")
+    print_status(">>> Equal-weighted station meta-analysis", "PROCESS")
+    eq_meta = equal_weighted_station_meta_analysis(df)
+    if eq_meta:
+        print_status(
+            f"  Equal-weighted η={eq_meta['equal_weighted_eta']:.3e} ± {eq_meta['equal_weighted_se']:.3e} "
+            f"({eq_meta['equal_weighted_snr']:.2f}σ), N_stations={eq_meta['n_stations_included']}",
+            "CALC"
+        )
+
+    # --- Down-weighted (balanced-N) pooled analysis ---
+    print_status(">>> Balanced-station-N reweighted pooled analysis", "PROCESS")
+    rw_pool = reweighted_pool_analysis(df)
+    if rw_pool and rw_pool['reweighted_eta'] is not None:
+        print_status(
+            f"  Balanced η={rw_pool['reweighted_eta']:.3e} ± {rw_pool['reweighted_se']:.3e} "
+            f"({rw_pool['reweighted_snr']:.2f}σ), N={rw_pool['total_n_reweighted']}",
+            "CALC"
+        )
+
     # --- Construct output ---
     largest_known_cm = max(abs(v['amplitude_cm']) for v in known_systematics.values()) if known_systematics else 1.0
     grasse_leverage_flag = bool(grasse_fraction > 0.70 and partition['non_grasse']['snr'] < 2.0)
@@ -409,6 +477,8 @@ def main():
         },
         "known_systematics_comparison": known_systematics,
         "interaction_test": interact,
+        "equal_weighted_meta_analysis": eq_meta if eq_meta else {},
+        "balanced_station_reweighted_pooled": rw_pool if rw_pool else {},
         "grasse_conditioned_estimand": grasse_conditioned,
         "monte_carlo_station_dominance": mc_result if mc_result else {},
         "risk_flags": {

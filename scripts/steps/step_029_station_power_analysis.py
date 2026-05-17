@@ -37,7 +37,7 @@ import numpy as np
 from scripts.utils.numerics import stable_lstsq, suppress_scipy_array_api_matmul_runtime_warning
 import pandas as pd
 from scipy import stats
-from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression, require_step003_eta_ols
+from scripts.utils.statistical_utils import detect_outliers_sigma, linear_regression, huber_regression, require_step003_eta_ols
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
@@ -78,6 +78,17 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
         reg = linear_regression(residuals, cos_elong)
         snr_obs = float(abs(reg['eta']) / reg['eta_error']) if reg['eta_error'] > 0 else 0.0
 
+        # Huber-weighted robust fit for outlier sensitivity diagnostic
+        X_station = np.column_stack([cos_elong, np.ones(len(cos_elong))])
+        reg_huber = huber_regression(residuals, X_station, scale_errors_by_birge=True)
+        eta_huber = float(reg_huber['coefficients'][0] / ETA_SCALE_FACTOR)
+        eta_huber_err = float(reg_huber['errors'][0] / ETA_SCALE_FACTOR)
+        snr_huber = abs(eta_huber) / eta_huber_err if eta_huber_err > 0 else 0.0
+        eta_shift_sigma = (
+            abs(reg['eta'] - eta_huber) / reg['eta_error']
+            if reg['eta_error'] > 0 else 0.0
+        )
+
         # Expected SNR given the global eta
         # Use the correct slope-to-correlation mapping for y = A x + ε:
         # se(A) ≈ rms / sqrt(n * Var(x)), so SNR_expected ≈ |A| * sqrt(n * Var(x)) / rms.
@@ -112,6 +123,11 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
             'eta_obs': float(reg['eta']),
             'eta_err_obs': float(reg['eta_error']),
             'snr_observed': round(snr_obs, 2),
+            'eta_huber': float(eta_huber),
+            'eta_huber_err': float(eta_huber_err),
+            'snr_huber': round(float(snr_huber), 2),
+            'eta_shift_ols_to_huber_sigma': round(float(eta_shift_sigma), 2),
+            'n_downweighted_huber': int(reg_huber.get('n_downweighted', 0)),
             'snr_expected_at_global_eta': round(snr_expected, 2),
             'snr_expected_at_station_eta': round(snr_expected_at_station_eta, 2),
             'cosd_variance': round(var_x, 4) if np.isfinite(var_x) else None,
@@ -130,6 +146,11 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
                 f"  {station:12s}: N={n:6d} | "
                 f"SNR_obs={snr_obs:5.2f}σ | "
                 f"SNR_expected={snr_expected:5.2f}σ | {verdict}", "CALC")
+            if reg_huber.get('n_downweighted', 0) > 0:
+                print_status(
+                    f"    → Huber: η={eta_huber:.3e} ± {eta_huber_err:.3e} "
+                    f"(SNR={snr_huber:.2f}σ, downweighted={reg_huber['n_downweighted']}, "
+                    f"shift={eta_shift_sigma:.2f}σ)", "CALC")
 
     # Summary check: do unpowered stations fail at the expected rate?
     expected_powered_rows = [r for r in result_rows if r['powered_at_3sigma_expected']]
@@ -767,6 +788,7 @@ def run_station_power_analysis(verbose: bool = False) -> dict:
         'precision_weighted_snr': pwr['snr'],
         'grasse_both_halves_negative': grasse_split['both_negative_eta'],
         'cross_station_r': cross_val['prediction_r'],
+        'cross_station_p': cross_val['prediction_p'],
         'overall_verdict': overall_verdict,
         'core_support': bool(core_support),
         'qualified_by_leverage': qualified_by_leverage,

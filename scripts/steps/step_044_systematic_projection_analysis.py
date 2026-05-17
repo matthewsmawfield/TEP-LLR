@@ -159,16 +159,20 @@ def run_systematic_projection_analysis(df, verbose=False):
     month_map = df_temp.set_index('month')['detrended'].index.map(monthly_means)
     # Actually, we need the systematic component = monthly_mean for each obs
     df_temp['monthly_sys'] = df_temp['month'].map(monthly_means)
+    atmos_sys = df_temp['monthly_sys'].values
+    atmos_raw_rms = float(np.std(atmos_sys))
     atmos_bias_A, atmos_bias_eta, atmos_r, atmos_p = compute_systematic_projection(
-        residuals, cos_elong, df_temp['monthly_sys'].values)
+        residuals, cos_elong, atmos_sys)
 
     # ------------------------------------------------------------------
     # 3. Instrumental systematic: station mean differences
     # ------------------------------------------------------------------
     station_means = df_temp.groupby('station')['detrended'].mean()
     df_temp['station_sys'] = df_temp['station'].map(station_means)
+    inst_sys = df_temp['station_sys'].values
+    inst_raw_rms = float(np.std(inst_sys))
     inst_bias_A, inst_bias_eta, inst_r, inst_p = compute_systematic_projection(
-        residuals, cos_elong, df_temp['station_sys'].values)
+        residuals, cos_elong, inst_sys)
 
     # ------------------------------------------------------------------
     # 4. Tidal systematic: cos(2*elongation) harmonic
@@ -177,6 +181,7 @@ def run_systematic_projection_analysis(df, verbose=False):
     X_tidal = np.column_stack([cos_2elong, np.ones(n)])
     tidal_coeffs, _, _, _ = stable_lstsq(X_tidal, residuals)
     tidal_sys = tidal_coeffs[0] * cos_2elong
+    tidal_raw_rms = float(np.std(tidal_sys))
     tidal_bias_A, tidal_bias_eta, tidal_r, tidal_p = compute_systematic_projection(
         residuals, cos_elong, tidal_sys)
 
@@ -190,6 +195,7 @@ def run_systematic_projection_analysis(df, verbose=False):
                                   np.ones(n)])
     thermal_coeffs, _, _, _ = stable_lstsq(X_thermal, detrended)
     thermal_sys = thermal_coeffs[0] * np.cos(omega * hour_frac) + thermal_coeffs[1] * np.sin(omega * hour_frac)
+    thermal_raw_rms = float(np.std(thermal_sys))
     thermal_bias_A, thermal_bias_eta, thermal_r, thermal_p = compute_systematic_projection(
         residuals, cos_elong, thermal_sys)
 
@@ -199,7 +205,9 @@ def run_systematic_projection_analysis(df, verbose=False):
     projections = {
         "ephemeris": {
             "source": "Cross-ephemeris residual difference (INPOP19a − DE430)",
+            "raw_rms_m": float(ephem_bias_A),
             "bias_A_m": float(ephem_bias_A),
+            "projection_efficiency": 1.0,
             "bias_eta": float(ephem_bias_eta),
             "r_cos_elong": float(ephem_r),
             "p_value": float(ephem_p),
@@ -208,7 +216,9 @@ def run_systematic_projection_analysis(df, verbose=False):
         },
         "atmospheric": {
             "source": "Monthly mean variation (seasonal tropospheric delay)",
+            "raw_rms_m": float(atmos_raw_rms),
             "bias_A_m": float(atmos_bias_A),
+            "projection_efficiency": float(abs(atmos_bias_A) / atmos_raw_rms) if atmos_raw_rms > 0 else 0.0,
             "bias_eta": float(atmos_bias_eta),
             "r_cos_elong": float(atmos_r),
             "p_value": float(atmos_p),
@@ -217,7 +227,9 @@ def run_systematic_projection_analysis(df, verbose=False):
         },
         "instrumental": {
             "source": "Station-to-station mean differences (hardware calibration)",
+            "raw_rms_m": float(inst_raw_rms),
             "bias_A_m": float(inst_bias_A),
+            "projection_efficiency": float(abs(inst_bias_A) / inst_raw_rms) if inst_raw_rms > 0 else 0.0,
             "bias_eta": float(inst_bias_eta),
             "r_cos_elong": float(inst_r),
             "p_value": float(inst_p),
@@ -226,7 +238,9 @@ def run_systematic_projection_analysis(df, verbose=False):
         },
         "tidal": {
             "source": "cos(2*elongation) harmonic (solid Earth / ocean tides)",
+            "raw_rms_m": float(tidal_raw_rms),
             "bias_A_m": float(tidal_bias_A),
+            "projection_efficiency": float(abs(tidal_bias_A) / tidal_raw_rms) if tidal_raw_rms > 0 else 0.0,
             "bias_eta": float(tidal_bias_eta),
             "r_cos_elong": float(tidal_r),
             "p_value": float(tidal_p),
@@ -235,7 +249,9 @@ def run_systematic_projection_analysis(df, verbose=False):
         },
         "thermal": {
             "source": "Diurnal (24-hr) sinusoidal amplitude (thermal expansion)",
+            "raw_rms_m": float(thermal_raw_rms),
             "bias_A_m": float(thermal_bias_A),
+            "projection_efficiency": float(abs(thermal_bias_A) / thermal_raw_rms) if thermal_raw_rms > 0 else 0.0,
             "bias_eta": float(thermal_bias_eta),
             "r_cos_elong": float(thermal_r),
             "p_value": float(thermal_p),

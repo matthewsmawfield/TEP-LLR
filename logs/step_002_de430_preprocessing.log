@@ -1,12 +1,12 @@
-[13:25:48] >>> Processing DE430 data from DE430_2014-2018_residuals.dat
-[13:25:48]     Parsed 4597 observations from DE430_2014-2018_residuals.dat
-[13:25:48]     Parsed 4597 observations
-[13:25:48]     Computing Moon-Sun elongation angles...
-[13:25:48]     Cleaning data...
-[13:25:48]     Cleaned dataset: 4597 observations (removed 0)
-[13:25:48]     Residual stats for DE430:
-[13:25:48]       Mean: 1.228713e-02 m
-[13:25:48]       Std:  2.662568e-01 m
-[13:25:48]       RMS:  2.665112e-01 m
-[13:25:48] ✓   DE430 Preprocessing Complete: 4597 observations
-[13:25:48] Results saved to results/outputs/step_002_de430_preprocessing.json
+[10:53:12] >>> Processing DE430 data from DE430_2014-2018_residuals.dat
+[10:53:12]     Parsed 4597 observations from DE430_2014-2018_residuals.dat
+[10:53:12]     Parsed 4597 observations
+[10:53:12]     Computing Moon-Sun elongation angles...
+[10:53:13]     Cleaning data...
+[10:53:13]     Cleaned dataset: 4597 observations (removed 0)
+[10:53:13]     Residual stats for DE430:
+[10:53:13]       Mean: 1.228713e-02 m
+[10:53:13]       Std:  2.662568e-01 m
+[10:53:13]       RMS:  2.665112e-01 m
+[10:53:13] ✓   DE430 Preprocessing Complete: 4597 observations
+[10:53:13] Results saved to results/outputs/step_002_de430_preprocessing.json

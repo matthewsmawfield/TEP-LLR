@@ -1,0 +1,51 @@
+{
+  "step_id": "step_075",
+  "status": "PASS",
+  "eta_headline": -0.0003908842592328793,
+  "eta_headline_error": 5.628330931172215e-05,
+  "gr_null_test": {
+    "gr_eta_expected": 0.0,
+    "eta_measured": -0.0003908842592328793,
+    "eta_error": 5.628330931172215e-05,
+    "z_score_vs_gr": 6.944940942757778,
+    "p_value_two_tailed": 3.786082558576709e-12,
+    "gr_rejected_at_5sigma": true,
+    "gr_rejected_at_3sigma": true,
+    "conclusion": "Measured \u03b7 = -3.9088e-04 \u00b1 5.6283e-05 deviates from GR (\u03b7=0) at 6.94\u03c3 (p = 3.79e-12). GR is rejected at 5\u03c3."
+  },
+  "beta_given_gamma_test": {
+    "beta_implied": 0.9999022789351918,
+    "beta_error": 1.5200351367400585e-05,
+    "gamma_assumed": 1.0,
+    "gamma_error": 2.3e-05,
+    "z_score_vs_beta_1": 6.428868810084665,
+    "p_value_two_tailed": 1.2855694286884045e-10,
+    "beta_1_rejected_at_5sigma": true,
+    "beta_1_rejected_at_3sigma": true,
+    "conclusion": "Given \u03b3 = 1.000000 \u00b1 2.30e-05 (Cassini), the LLR \u03b7 implies \u03b2 = 0.999902 \u00b1 0.000015. This deviates from GR (\u03b2=1) at 6.43\u03c3 (p = 1.29e-10)."
+  },
+  "joint_beta_gamma_contour": {
+    "beta_best_fit": 0.9999022789351918,
+    "beta_error_joint": 1.0748271528307164e-05,
+    "gamma_best_fit": 1.0,
+    "gamma_error_joint": 1.6263455967290594e-05,
+    "chi2_min": 0.0,
+    "grid_chi2_min_sanity_check": 0.11947773638736695,
+    "gr_chi2": 48.232204698393296,
+    "gr_inside_68_percent": false,
+    "gr_inside_95_percent": false,
+    "gr_inside_99_percent": false,
+    "conclusion": "Joint (\u03b2,\u03b3) best fit: \u03b2=0.999902 \u00b1 1.07e-05, \u03b3=1.000000 \u00b1 1.63e-05. GR (\u03b2=\u03b3=1) has \u0394chi\u00b2=48.2. GR is outside 99% contour \u2014 rejected at >3\u03c3."
+  },
+  "ppn_parameter_constraints": {
+    "gamma_cassini": 1.0,
+    "gamma_cassini_error": 2.3e-05,
+    "alpha_1": 0.0,
+    "alpha_2": 0.0,
+    "xi": 0.0,
+    "zeta_1": 0.0,
+    "zeta_2": 0.0,
+    "constraint_source": "Cassini 2003 (Bertotti et al.), LLR Nordtvedt"
+  },
+  "interpretation": "This step tests whether the LLR signal requires modified gravity in the standard PPN framework, completely independent of TEP. The measured \u03b7 = -3.909e-04 \u00b1 5.628e-05 yields a PPN-interpreted \u03b2 = 0.99990 \u00b1 0.00002. If \u03b2 deviates from 1, scalar-tensor theories are implicated regardless of whether the underlying mechanism is TEP or another framework."
+}

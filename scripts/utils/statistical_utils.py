@@ -182,6 +182,123 @@ def linear_regression(y: np.ndarray, x: np.ndarray, weights: np.ndarray = None) 
         'regression_metrics': res
     }
 
+def huber_regression(y: np.ndarray, X: np.ndarray, weights: np.ndarray = None,
+                     max_iter: int = 50, tol: float = 1e-6, c: float = 1.345,
+                     scale_errors_by_birge: bool = True) -> Dict:
+    """
+    Iteratively reweighted least-squares with Huber psi-function weights.
+
+    The Huber estimator downweights observations with large standardized
+    residuals while retaining 95% asymptotic efficiency at the Gaussian.
+    This makes it ideal for station-level fits where a small number of
+    outliers (early-era Nd:glass systematics, thermal events) can dominate
+    the OLS slope.
+
+    Parameters
+    ----------
+    y : np.ndarray, shape (n,)
+        Dependent variable (residuals) [m]
+    X : np.ndarray, shape (n, k)
+        Design matrix (including intercept column if needed)
+    weights : np.ndarray, shape (n,), optional
+        Prior observation weights (1/sigma^2). If None, uniform.
+    max_iter : int, default 50
+        Maximum IRLS iterations.
+    tol : float, default 1e-6
+        Convergence tolerance on coefficient change (L2 norm).
+    c : float, default 1.345
+        Huber tuning constant (1.345 gives 95% efficiency for Gaussian).
+    scale_errors_by_birge : bool, default True
+        If True, scales formal errors by the Birge Ratio.
+
+    Returns
+    -------
+    Dict with the same keys as robust_regression, plus:
+        - n_iter: number of IRLS iterations performed
+        - huber_weights: final Huber weight vector
+        - n_downweighted: number of observations with weight < 1.0
+    """
+    y = np.asarray(y, dtype=float)
+    X = np.asarray(X, dtype=float)
+    n, k = X.shape
+
+    if n <= k:
+        return {
+            'coefficients': np.full(k, np.nan),
+            'errors': np.full(k, np.nan),
+            'chi2_red': np.nan,
+            'birge_ratio': np.nan,
+            'condition_number': np.nan,
+            'n_iter': 0,
+            'huber_weights': np.ones(n),
+            'n_downweighted': 0,
+        }
+
+    # Start with prior weights (or uniform)
+    if weights is None:
+        prior_w = np.ones(n)
+    else:
+        prior_w = np.asarray(weights, dtype=float)
+
+    # Initial unweighted QR fit
+    current_w = prior_w.copy()
+    beta_prev = robust_regression(y, X, weights=current_w, scale_errors_by_birge=False)['coefficients']
+
+    for iteration in range(max_iter):
+        # Compute residuals from current fit
+        with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+            resid = y - X @ beta_prev
+        # Robust scale estimate: MAD × 1.4826
+        mad = np.median(np.abs(resid - np.median(resid)))
+        s = 1.4826 * mad if mad > 0 else np.std(resid)
+        if s == 0:
+            s = 1.0
+
+        # Standardized residuals
+        r_std = resid / s
+        abs_r = np.abs(r_std)
+
+        # Huber weights
+        huber_w = np.ones(n)
+        mask = abs_r > c
+        huber_w[mask] = c / abs_r[mask]
+
+        # Combined weights: prior × Huber
+        combined_w = prior_w * huber_w
+
+        # Re-fit
+        fit = robust_regression(y, X, weights=combined_w, scale_errors_by_birge=False)
+        beta_new = fit['coefficients']
+
+        # Convergence check
+        delta = np.linalg.norm(beta_new - beta_prev)
+        beta_prev = beta_new
+        current_w = combined_w
+
+        if delta < tol:
+            break
+
+    # Final fit with requested Birge scaling on the Huber-weighted residuals
+    final_fit = robust_regression(y, X, weights=current_w, scale_errors_by_birge=scale_errors_by_birge)
+    n_downweighted = int(np.sum(huber_w < 1.0))
+
+    return {
+        'coefficients': final_fit['coefficients'],
+        'errors': final_fit['errors'],
+        'chi2_red': final_fit['chi2_red'],
+        'birge_ratio': final_fit['birge_ratio'],
+        'condition_number': final_fit['condition_number'],
+        'n_obs': n,
+        'dof': final_fit['dof'],
+        'rss': final_fit['rss'],
+        'mse': final_fit['mse'],
+        'cov': final_fit['cov'],
+        'n_iter': iteration + 1,
+        'huber_weights': huber_w,
+        'n_downweighted': n_downweighted,
+    }
+
+
 def cluster_robust_variance(X: np.ndarray, residuals: np.ndarray,
                           cluster_ids: np.ndarray,
                           small_sample_correction: bool = True) -> Dict:
@@ -724,6 +841,225 @@ def steiger_z_test(r1: float, r2: float, n: int, r12: float = None) -> Dict:
         'n': n,
         'se_diff': float(se_diff),
         'method': "Steiger's Z-test for dependent correlations"
+    }
+
+
+def wild_cluster_bootstrap(
+    y: np.ndarray,
+    X: np.ndarray,
+    cluster_ids: np.ndarray,
+    n_bootstrap: int = 10000,
+    weight_scheme: str = "webb",
+    seed: int = 42,
+    target_idx: int = 0,
+    scale_factor: float = 1.0,
+) -> dict:
+    """
+    Wild cluster bootstrap for small-G inference (Cameron, Gelbach & Miller 2008).
+
+    Designed specifically for situations with few clusters (G ≈ 5–20) where
+    analytical cluster-robust standard errors are unreliable even with
+    finite-cluster corrections.
+
+    Algorithm:
+    1. Fit OLS on original data, obtain β_hat and residuals u_hat.
+    2. For each bootstrap draw b = 1..B:
+       a. Draw cluster-level weights w_g from a mean-zero, unit-variance
+          distribution (Rademacher or Webb 6-point).
+       b. Form wild residuals: u*_i = w_g(i) · u_hat_i.
+       c. Compute y* = X β_hat + u*.
+       d. Refit OLS on (y*, X) and record β*_target.
+    3. Build percentile confidence intervals and a two-tailed p-value for
+       H0: β_target = 0 using the symmetric bootstrap t-statistic.
+
+    Parameters
+    ----------
+    y : np.ndarray, shape (n,)
+        Response vector.
+    X : np.ndarray, shape (n, k)
+        Design matrix.
+    cluster_ids : np.ndarray, shape (n,)
+        Cluster identifier for each observation.
+    n_bootstrap : int, default 10000
+        Number of bootstrap draws.
+    weight_scheme : {"rademacher", "webb"}, default "webb"
+        Rademacher: w_g ∈ {-1, +1} with probability 1/2 each.
+        Webb: 6-point distribution {-√3, -1, -1/√3, 1/√3, 1, +√3}
+        with probability 1/6 each.  Webb is recommended for very small G
+        (G < 10) because it provides better higher-moment approximation
+        (Cameron & Miller 2015).
+    seed : int, default 42
+        Random seed for reproducibility.
+    target_idx : int, default 0
+        Index of the coefficient of interest in β.
+    scale_factor : float, default 1.0
+        Optional scaling applied to the bootstrapped coefficient (e.g.
+        ETA_SCALE_FACTOR for converting slope to η).
+
+    Returns
+    -------
+    dict with keys:
+        - beta_hat: original coefficient
+        - se_bootstrap: bootstrap standard error
+        - ci_lower_95, ci_upper_95: 95% percentile CI
+        - ci_lower_99, ci_upper_99: 99% percentile CI
+        - p_value_two_tailed: symmetric bootstrap p-value
+        - snr_bootstrap: |beta_hat| / se_bootstrap
+        - n_clusters: number of clusters
+        - n_bootstrap: draws performed
+        - weight_scheme: scheme used
+        - beta_bootstrap: array of all B bootstrap draws (for diagnostics)
+    """
+    rng = np.random.default_rng(seed)
+    n, k = X.shape
+    unique_clusters = np.unique(cluster_ids)
+    G = int(len(unique_clusters))
+
+    # Step 1: OLS on original data
+    reg = robust_regression(y, X, weights=None, scale_errors_by_birge=False)
+    beta_hat = reg["coefficients"]
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        u_hat = y - X @ beta_hat
+
+    # Weight distributions
+    if weight_scheme == "rademacher":
+        weight_values = np.array([-1.0, 1.0])
+        weight_probs = np.array([0.5, 0.5])
+    elif weight_scheme == "webb":
+        sqrt3 = np.sqrt(3.0)
+        weight_values = np.array([-sqrt3, -1.0, -1.0 / sqrt3,
+                                   1.0 / sqrt3, 1.0, sqrt3])
+        weight_probs = np.full(6, 1.0 / 6.0)
+    else:
+        raise ValueError(f"weight_scheme must be 'rademacher' or 'webb', got {weight_scheme}")
+
+    # Pre-compute cluster masks for speed
+    cluster_masks = {g: (cluster_ids == g) for g in unique_clusters}
+
+    beta_boot = np.empty(n_bootstrap, dtype=float)
+
+    for b in range(n_bootstrap):
+        # Draw cluster weights
+        w = rng.choice(weight_values, size=G, p=weight_probs)
+        w_map = {g: w_i for g, w_i in zip(unique_clusters, w)}
+
+        # Form wild residuals
+        u_star = np.empty(n, dtype=float)
+        for g in unique_clusters:
+            mask = cluster_masks[g]
+            u_star[mask] = w_map[g] * u_hat[mask]
+
+        # Compute y*
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            y_star = X @ beta_hat + u_star
+
+        # Refit OLS
+        reg_b = robust_regression(y_star, X, weights=None, scale_errors_by_birge=False)
+        beta_boot[b] = reg_b["coefficients"][target_idx]
+
+    beta_hat_target = beta_hat[target_idx]
+    se_boot = float(np.std(beta_boot, ddof=1))
+    mean_boot = float(np.mean(beta_boot))
+
+    # Percentile CIs
+    ci95_lo = float(np.percentile(beta_boot, 2.5))
+    ci95_hi = float(np.percentile(beta_boot, 97.5))
+    ci99_lo = float(np.percentile(beta_boot, 0.5))
+    ci99_hi = float(np.percentile(beta_boot, 99.5))
+
+    # Symmetric two-tailed p-value under H0: center bootstrap at zero
+    # (unrestricted wild bootstrap distribution is centered at beta_hat)
+    centered = beta_boot - beta_hat_target
+    p_two = float(np.mean(np.abs(centered) >= abs(beta_hat_target)))
+
+    # Scale to user unit (e.g. η)
+    beta_scaled = float(beta_hat_target / scale_factor)
+    se_scaled = float(se_boot / scale_factor)
+
+    return {
+        "beta_hat": float(beta_hat_target),
+        "se_bootstrap": se_boot,
+        "ci_95_lower": ci95_lo,
+        "ci_95_upper": ci95_hi,
+        "ci_99_lower": ci99_lo,
+        "ci_99_upper": ci99_hi,
+        "p_value_two_tailed": p_two,
+        "snr_bootstrap": float(abs(beta_hat_target) / max(se_boot, 1e-20)),
+        "n_clusters": G,
+        "n_bootstrap": n_bootstrap,
+        "weight_scheme": weight_scheme,
+        "beta_bootstrap": beta_boot.tolist(),
+        "scaled": {
+            "beta": beta_scaled,
+            "se": se_scaled,
+            "snr": float(abs(beta_scaled) / max(se_scaled, 1e-20)),
+            "ci_95_lower": float(ci95_lo / scale_factor),
+            "ci_95_upper": float(ci95_hi / scale_factor),
+            "ci_99_lower": float(ci99_lo / scale_factor),
+            "ci_99_upper": float(ci99_hi / scale_factor),
+        },
+    }
+
+
+def block_bootstrap_station_era(
+    y: np.ndarray,
+    X: np.ndarray,
+    cluster_ids: np.ndarray,
+    era_ids: np.ndarray,
+    n_bootstrap: int = 5000,
+    seed: int = 42,
+    target_idx: int = 0,
+    scale_factor: float = 1.0,
+) -> dict:
+    """
+    Station-era block bootstrap: resample blocks defined by station×era
+    combinations with replacement.
+
+    This increases the effective number of clusters beyond the raw station
+    count, reducing the small-G vulnerability of pure station clustering.
+    """
+    rng = np.random.default_rng(seed)
+    n = len(y)
+
+    # Form station-era block labels
+    block_labels = np.array([f"{c}_{e}" for c, e in zip(cluster_ids, era_ids)])
+    unique_blocks = np.unique(block_labels)
+    B = int(len(unique_blocks))
+
+    # Pre-compute block indices
+    block_idx = {b: np.where(block_labels == b)[0] for b in unique_blocks}
+
+    beta_boot = np.empty(n_bootstrap, dtype=float)
+
+    for b in range(n_bootstrap):
+        drawn_blocks = rng.choice(unique_blocks, size=B, replace=True)
+        boot_idx = np.concatenate([block_idx[block] for block in drawn_blocks])
+        reg_b = robust_regression(y[boot_idx], X[boot_idx], weights=None,
+                                   scale_errors_by_birge=False)
+        beta_boot[b] = reg_b["coefficients"][target_idx]
+
+    beta_hat = robust_regression(y, X, weights=None, scale_errors_by_birge=False)["coefficients"][target_idx]
+    se_boot = float(np.std(beta_boot, ddof=1))
+    # Center bootstrap at H0 for p-value
+    centered = beta_boot - beta_hat
+    p_two = float(np.mean(np.abs(centered) >= abs(beta_hat)))
+
+    return {
+        "beta_hat": float(beta_hat),
+        "se_bootstrap": se_boot,
+        "ci_95_lower": float(np.percentile(beta_boot, 2.5)),
+        "ci_95_upper": float(np.percentile(beta_boot, 97.5)),
+        "p_value_two_tailed": p_two,
+        "snr_bootstrap": float(abs(beta_hat) / max(se_boot, 1e-20)),
+        "n_blocks": B,
+        "n_bootstrap": n_bootstrap,
+        "scaled": {
+            "beta": float(beta_hat / scale_factor),
+            "se": float(se_boot / scale_factor),
+            "snr": float(abs(beta_hat / scale_factor) / max(se_boot / scale_factor, 1e-20)),
+            "ci_95_lower": float(np.percentile(beta_boot, 2.5) / scale_factor),
+            "ci_95_upper": float(np.percentile(beta_boot, 97.5) / scale_factor),
+        },
     }
 
 

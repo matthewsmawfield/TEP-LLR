@@ -5,7 +5,7 @@
 
 **Author:** Matthew Lukin Smawfield  
 **Version:** v0.1 (Lucknow)  
-**First published:** 14 May 2026 · **Last updated:** 14 May 2026  
+**First published:** 17 May 2026 · **Last updated:** 17 May 2026  
 **Status:** Preprint (Open for Collaboration)  
 **DOI:** [10.5281/zenodo.19446029](https://doi.org/10.5281/zenodo.19446029)  
 **Website:** [https://mlsmawfield.com/tep/llr/](https://mlsmawfield.com/tep/llr/)  
@@ -21,7 +21,7 @@ This analysis uses 26,207 raw LLR O-C residuals from five international laser ra
 
 Analysis of the full 35-year dataset detects a synodic modulation correlated with $\cos(D)$. The headline estimand is a precision-weighted full-systematic regression controlling for annual, monthly, and thermal $\cos(2D)$ aliases: $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ at $6.94\sigma$ ($6.78\sigma$ cluster-robust). The unweighted full-systematic OLS sensitivity bound is $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$ / $6.52\sigma$ cluster-robust). A Cook's-Distance leverage diagnostic returns a consistent $\eta = -3.87 \times 10^{-4}$ ($7.82\sigma$ / $8.65\sigma$ cluster-robust), confirming the detection is not driven by high-leverage outliers. The signal strengthens as more systematics are controlled and is stable across mixed-model and station-specific specifications.
 
-Independent confirmation comes from a phase-locked new/full-moon differential ($\eta = -5.95 \times 10^{-4}$, $6.16\sigma$) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component.
+Independent confirmation comes from a phase-locked new/full-moon differential ($\eta = -5.95 \times 10^{-4}$, $5.91\sigma$) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component.
 
 In the TEP framework, differential screening of Temporal Shear between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven Temporal Shear suppression dominating in the Earth-Moon system. Source-level INPOP or DE430 integrator refits with $\eta$ free remain the definitive external confirmation test.
 
@@ -37,7 +37,7 @@ Code Availability: All data and analysis code required to reproduce the results 
 - **Precision-weighted full-systematic (consensus):** $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, 6.94σ; cluster-robust 6.78σ
 - **Full-systematic OLS without excision (sensitivity upper bound):** $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($N = 25{,}445$), 6.17σ; cluster-robust 6.52σ
 - **Common-$\eta$ mixed model with station systematics (pooling):** $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$, 6.40σ; $F(4, 25{,}410) = 1.19$, $p = 0.31$
-- **Phase-locked new/full-moon differential (robustness):** $\eta = -5.95 \times 10^{-4} \pm 9.66 \times 10^{-5}$, 6.16σ
+- **Phase-locked new/full-moon differential (robustness):** $\eta = -5.95 \times 10^{-4} \pm 1.01 \times 10^{-4}$, 5.91σ
 - **cosD-only OLS (baseline):** $\eta = -3.18 \times 10^{-4} \pm 6.05 \times 10^{-5}$, 5.25σ
 
 ---
@@ -111,10 +111,6 @@ cd TEP-LLR
 # Install Python dependencies
 pip install -r requirements.txt
 
-# Install static-site build dependencies
-cd site
-npm ci
-cd ..
 ```
 
 ## Essential Data Files
@@ -144,13 +140,6 @@ python scripts/utils/pipeline_quality_gate.py
 
 # Generate the evidence ledger directly
 python scripts/utils/generate_evidence_ledger.py
-
-# Rebuild the manuscript from site/components/ (runs node directly; avoids zsh
-# `compdef` noise when npm is wired into an interactive shell)
-./scripts/build_manuscript.sh
-
-# Equivalent via npm from site/ (may print a harmless zsh completion warning locally)
-npm --prefix site run build:markdown
 
 # Or run steps individually:
 # Step 0: Verify required raw residual files and checksums

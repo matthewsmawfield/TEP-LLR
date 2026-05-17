@@ -1,32 +1,32 @@
-[13:29:32] ═══ ═══ Starting Step 057: Haleakala Null-Fluctuation Simulation
-[13:29:32]     ═══ STEP PURPOSE: Quantify how often Haleakala's opposite-sign fluctuation arises under TEP
-[13:29:32]     ═══ METHOD: Monte Carlo using actual Haleakala elongation distribution, N=20000 realizations
-[13:29:32]         Haleakala raw: N = 737, after 6σ cleaning: N = 737 (removed 0)
-[13:29:32] >>> >>> Simulation (a): Under TEP model (eta_true = -4.061e-04)
-[13:29:32]         Simulated eta mean:   -4.063e-04
-[13:29:32]         Simulated eta std:    1.459e-03
-[13:29:32]         Observed eta:         2.571e-03
-[13:29:32]         Z-score of observed:  2.04
-[13:29:32]         P(eta >= 2.571e-03):   0.0197 (1.97%)
-[13:29:32]         P(|dev| >= observed): 0.0394 (3.94%)
-[13:29:32]         97.5th percentile:      2.437e-03
-[13:29:32]         99th percentile:        3.026e-03
-[13:29:32] >>> >>> Simulation (b): Under GR null (eta_true = 0)
-[13:29:33]         Simulated eta mean:   -2.692e-06
-[13:29:33]         Simulated eta std:    1.458e-03
-[13:29:33]         P(eta >= 2.571e-03):   0.0393 (3.92%)
-[13:29:33]         P(|dev| >= observed): 0.0775 (7.75%)
-[13:29:33] >>> >>> Family-wise simulation: probability ANY station deviates this much
-[13:29:54]         P(any station | TEP): 0.0415 (4.15%)
-[13:29:54]         P(any station | GR):   0.0803 (8.03%)
-[13:29:54] >>> >>> Solar-cycle context (Step 023)
-[13:29:54]         Solar-cycle eta swing: 1.888e-03
-[13:29:54]         Haleakala mean solar index: 0.4967153595101352
-[13:29:54]     ═══ INTERPRETATION
-[13:29:54]         Haleakala's fluctuation is a 2.0σ event under TEP (p = 0.0394), making it a marginal outlier. The solar-cycle modulation amplitude (1.888e-03) is of comparable order, supporting the physical explanation that Haleakala's solar-maximum operation epoch (mean index = 0.497) contributes substantially to its deviation.
-[13:29:54]     ═══ REPRODUCIBILITY
-[13:29:54]         Output file: results/outputs/step_057_haleakala_null_fluctuation.json
-[13:29:54]         MC realizations: 20,000 per model
-[13:29:54]         Random seeds: 57 (TEP), 157 (GR), 257 (family TEP), 357 (family GR)
-[13:29:54] Results saved to results/outputs/step_057_haleakala_null_fluctuation.json
-[13:29:54] ✓   Haleakala Null-Fluctuation Simulation Complete.
+[10:57:47] ═══ ═══ Starting Step 057: Haleakala Null-Fluctuation Simulation
+[10:57:47]     ═══ STEP PURPOSE: Quantify how often Haleakala's opposite-sign fluctuation arises under TEP
+[10:57:47]     ═══ METHOD: Monte Carlo using actual Haleakala elongation distribution, N=20000 realizations
+[10:57:47]         Haleakala raw: N = 737, after 6σ cleaning: N = 737 (removed 0)
+[10:57:47] >>> >>> Simulation (a): Under TEP model (eta_true = -4.061e-04)
+[10:57:47]         Simulated eta mean:   -4.063e-04
+[10:57:47]         Simulated eta std:    1.459e-03
+[10:57:47]         Observed eta:         2.571e-03
+[10:57:47]         Z-score of observed:  2.04
+[10:57:47]         P(eta >= 2.571e-03):   0.0197 (1.97%)
+[10:57:47]         P(|dev| >= observed): 0.0394 (3.94%)
+[10:57:47]         97.5th percentile:      2.437e-03
+[10:57:47]         99th percentile:        3.026e-03
+[10:57:47] >>> >>> Simulation (b): Under GR null (eta_true = 0)
+[10:57:47]         Simulated eta mean:   -2.692e-06
+[10:57:47]         Simulated eta std:    1.458e-03
+[10:57:47]         P(eta >= 2.571e-03):   0.0393 (3.92%)
+[10:57:47]         P(|dev| >= observed): 0.0775 (7.75%)
+[10:57:47] >>> >>> Family-wise simulation: probability ANY station deviates this much
+[10:58:08]         P(any station | TEP): 0.0415 (4.15%)
+[10:58:08]         P(any station | GR):   0.0803 (8.03%)
+[10:58:08] >>> >>> Solar-cycle context (Step 023)
+[10:58:08]         Solar-cycle eta swing: 1.888e-03
+[10:58:08]         Haleakala mean solar index: 0.4967153595101352
+[10:58:08]     ═══ INTERPRETATION
+[10:58:08]         Haleakala's fluctuation is a 2.0σ event under TEP (p = 0.0394), making it a marginal outlier. The solar-cycle modulation amplitude (1.888e-03) is of comparable order, supporting the physical explanation that Haleakala's solar-maximum operation epoch (mean index = 0.497) contributes substantially to its deviation.
+[10:58:08]     ═══ REPRODUCIBILITY
+[10:58:08]         Output file: results/outputs/step_057_haleakala_null_fluctuation.json
+[10:58:08]         MC realizations: 20,000 per model
+[10:58:08]         Random seeds: 57 (TEP), 157 (GR), 257 (family TEP), 357 (family GR)
+[10:58:08] Results saved to results/outputs/step_057_haleakala_null_fluctuation.json
+[10:58:08] ✓   Haleakala Null-Fluctuation Simulation Complete.

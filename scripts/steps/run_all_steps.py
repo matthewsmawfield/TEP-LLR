@@ -290,6 +290,22 @@ def main() -> None:
         "step_050_corrected_tep_analysis.py",
         # 051 — Cross-Validation Analysis.
         #        K-fold and leave-one-station-out cross-validation of the
+        #        full-systematic model. Quantifies out-of-sample predictive
+        #        stability and tests for overfitting.
+        "step_051_cross_validation_analysis.py",
+        # 052 — Station Distribution Analysis.
+        #        Per-station data fraction, phase coverage, and temporal
+        #        baseline diagnostics. Defends against Grasse-dominance
+        #        and epoch-concentration biases.
+        "step_052_station_distribution_analysis.py",
+        # 053 — Clean Subset Analysis.
+        #        Re-analysis on progressively cleaned subsets (6σ, 5σ, 4σ)
+        #        to verify the η signal is not an outlier artefact.
+        "step_053_clean_subset_analysis.py",
+        # 054 — Toy Orbital TEP Perturbation.
+        #        Analytical toy-model of a TEP-induced orbital perturbation
+        #        to demonstrate physical consistency of the measured η.
+        "step_054_toy_orbital_tep_perturbation.py",
         # -------------------------------------------------------------------
         # Group F: Results Consolidation & Validation
         # -------------------------------------------------------------------
@@ -366,6 +382,10 @@ def main() -> None:
         "step_056_dynamical_integrator_eta_refit.py",
         # 057 — Haleakala null-fluctuation simulation under TEP vs GR (family-wise).
         "step_057_haleakala_null_fluctuation.py",
+        # 058 — Predictive solar-cycle model: fit η(t) = η₀ + A·S(t) excluding
+        #        Haleakala, predict Haleakala out-of-sample, and repeat for all
+        #        stations to show Haleakala is not special.
+        "step_058_predictive_solar_model.py",
         # 059 — Grasse-specific systematic sufficiency analysis.
         #        Quantitatively falsifies the hypothesis that the pooled
         #        detection is driven by a Grasse-specific systematic by
@@ -454,6 +474,20 @@ def main() -> None:
         # 073 — Bayesian evidence cross-checks: grid quadrature, bridge sampling,
         #        Laplace/BIC (secondary), and P(η<0|data) from MCMC.
         "step_073_laplace_bayes_factor.py",
+        # 074 — Wild cluster bootstrap with Webb 6-point weights.
+        #        Co-primary small-G uncertainty companion for the headline
+        #        η estimate.  10,000 bootstrap draws on station clusters;
+        #        also includes station-era block bootstrap for comparison.
+        "step_074_wild_cluster_bootstrap.py",
+        # 075 — Generic PPN falsification test.
+        #        Tests whether the LLR η requires any scalar-tensor modification
+        #        in the standard PPN framework (β, γ), independent of TEP.
+        "step_075_generic_ppn_test.py",
+        # 076 — Full sky-scan with look-elsewhere correction.
+        #        Grids the celestial sphere in 5° steps, fits directional
+        #        modulation for every axis, and compares the Planck dipole to
+        #        a scrambled-sky null distribution.  Addresses cherry-picking.
+        "step_076_sky_scan_directional.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

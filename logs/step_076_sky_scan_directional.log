@@ -1,0 +1,9 @@
+[12:40:15] ═══ ═══ Step 076: Full Sky-Scan with Look-Elsewhere Correction ═══
+[12:40:15]     Cleaned dataset: N=25,445
+[12:40:15]     Celestial sphere grid: 2664 directions (5° steps)
+[12:40:15] >>> >>> Computing Earth-Moon directional cosines (this may take a moment)...
+[12:40:16]     Computed cos(θ_EM-n̂) matrix: (25445, 2664)
+[12:40:16] >>> >>> Fitting directional model for all grid points...
+[12:40:16]     Maximum ΔAIC = 106.48 at (RA=65.0°, Dec=-70.0°)
+[12:40:16]     Planck dipole ΔAIC = 86.82, rank = 226/2664 (top 8.5%)
+[12:40:16] >>> >>> Monte Carlo scrambled skies (n=1000)...

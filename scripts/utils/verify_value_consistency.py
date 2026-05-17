@@ -454,14 +454,14 @@ def main() -> int:
     )
     require_phrase(
         manuscript,
-        "no catalogued systematic at its observed amplitude reproduces the headline",
-        "abstract caveat containment",
+        "Source-level numerical refits of the INPOP or DE430 integrators",
+        "abstract integrator closure",
         errors,
     )
     require_phrase(
         manuscript,
-        "integrator refit remains the open closure",
-        "abstract integrator closure",
+        "critical open closure test",
+        "abstract closure test phrasing",
         errors,
     )
 

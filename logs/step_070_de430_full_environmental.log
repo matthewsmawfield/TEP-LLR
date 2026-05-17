@@ -1,23 +1,23 @@
-[13:30:57] ═══ ═══ Step 070: DE430 Full Environmental Model (Raw) ═══
-[13:30:57]     DE430 raw: N=4,597
-[13:30:57]     Computing environmental projections...
-[13:30:57]     --- Model 1: cosD only (raw, no outlier removal) ---
-[13:30:57]       η = -5.5325e-06 ± 5.6061e-04 (0.01σ)
-[13:30:57]     --- Model 2: cosD + 1/r_⊙ + v_r + cos(θ_CMB) ---
-[13:30:57]       η = 1.5861e-04 ± 5.6307e-04 (0.28σ)
-[13:30:57]         inv_r     : coeff=+1.097e+00 ± 3.603e-01  t=3.04, p=0.0024
-[13:30:57]         v_r       : coeff=-6.740e-03 ± 1.074e-02  t=-0.63, p=0.5304
-[13:30:57]         cos_cmb   : coeff=-1.092e-02 ± 5.839e-03  t=-1.87, p=0.0614
-[13:30:57]         const     : coeff=-1.084e+00 ± 3.601e-01  t=-3.01, p=0.0026
-[13:30:57]     --- Model 3: full systematic + environmental ---
-[13:30:57]       η = 3.2866e-04 ± 5.8595e-04 (0.56σ)
-[13:30:57]     --- Model 4: cosD after partialing environmental ---
-[13:30:57]       η (after partialing env) = 1.5691e-04 ± 5.5988e-04 (0.28σ)
-[13:30:57]     --- Sideband phase diagnostic ---
-[13:30:57]       Corr(residual, cos(D-l')) = +0.0529 (p=3.2878e-04)
-[13:30:57]       Corr(residual, cos(D+l')) = +0.0090 (p=5.4376e-01)
-[13:30:57]       6σ outliers: 37 (0.80%)
-[13:30:57]       Outlier correlation with |cos(D-l')|: +0.0246
-[13:30:57]       Outlier correlation with |cos(D+l')|: +0.0095
-[13:30:57] Results saved to results/outputs/step_070_de430_full_environmental.json
-[13:30:57] ✓   Step 070 complete.
+[10:59:16] ═══ ═══ Step 070: DE430 Full Environmental Model (Raw) ═══
+[10:59:16]     DE430 raw: N=4,597
+[10:59:16]     Computing environmental projections...
+[10:59:16]     --- Model 1: cosD only (raw, no outlier removal) ---
+[10:59:16]       η = -5.5325e-06 ± 5.6061e-04 (0.01σ)
+[10:59:16]     --- Model 2: cosD + 1/r_⊙ + v_r + cos(θ_CMB) ---
+[10:59:16]       η = 1.5861e-04 ± 5.6307e-04 (0.28σ)
+[10:59:16]         inv_r     : coeff=+1.097e+00 ± 3.603e-01  t=3.04, p=0.0024
+[10:59:16]         v_r       : coeff=-6.740e-03 ± 1.074e-02  t=-0.63, p=0.5304
+[10:59:16]         cos_cmb   : coeff=-1.092e-02 ± 5.839e-03  t=-1.87, p=0.0614
+[10:59:16]         const     : coeff=-1.084e+00 ± 3.601e-01  t=-3.01, p=0.0026
+[10:59:16]     --- Model 3: full systematic + environmental ---
+[10:59:16]       η = 3.2866e-04 ± 5.8595e-04 (0.56σ)
+[10:59:16]     --- Model 4: cosD after partialing environmental ---
+[10:59:16]       η (after partialing env) = 1.5691e-04 ± 5.5988e-04 (0.28σ)
+[10:59:16]     --- Sideband phase diagnostic ---
+[10:59:16]       Corr(residual, cos(D-l')) = +0.0529 (p=3.2878e-04)
+[10:59:16]       Corr(residual, cos(D+l')) = +0.0090 (p=5.4376e-01)
+[10:59:16]       6σ outliers: 37 (0.80%)
+[10:59:16]       Outlier correlation with |cos(D-l')|: +0.0246
+[10:59:16]       Outlier correlation with |cos(D+l')|: +0.0095
+[10:59:16] Results saved to results/outputs/step_070_de430_full_environmental.json
+[10:59:16] ✓   Step 070 complete.

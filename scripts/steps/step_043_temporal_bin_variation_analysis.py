@@ -278,7 +278,7 @@ def main():
     print(assessment['interpretation'])
 
     # Save results
-    logger.save_step_results(final_results, PROJECT_ROOT, "step_043_temporal_bin_variation_analysis")
+    logger.save_step_results(final_results, PROJECT_ROOT, "step_043_temporal_bin_variation")
     print_status("Step 043 completed successfully", "SUCCESS")
 
     return final_results

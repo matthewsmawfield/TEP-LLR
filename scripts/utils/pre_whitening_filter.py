@@ -78,7 +78,7 @@ def identify_peak_harmonics(phase: np.ndarray, y: np.ndarray,
             print_status(
                 f"  Peak {i+1}: f={factors[idx]:.4f} * synodic, SNR={snrs[idx]:.2f}", "CALC")
 
-    return peak_factors
+    return factors[peaks_idx]
 
 
 def apply_pre_whitening(df: pd.DataFrame, n_harmonics: int = 5, verbose: bool = False,
@@ -212,8 +212,9 @@ def validate_pre_whitening(df: pd.DataFrame, verbose: bool = False) -> dict:
 
 if __name__ == "__main__":
     # Test script
-    from scripts.utils.logger import TEPLogger
-    logger = TEPLogger("pre_whitening_test", verbose=True)
+    from scripts.utils.logger import TEPLogger, set_verbose_mode
+    logger = TEPLogger("pre_whitening_test")
+    set_verbose_mode(True)
 
     # Mock data
     t = np.linspace(0, 1000, 2000)

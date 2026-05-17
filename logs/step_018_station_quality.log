@@ -1,36 +1,36 @@
-[13:26:34] ═══ ═══ Starting Step 018: Station Quality Diagnostics...
-[13:26:34]     ═══ STEP PURPOSE: Investigate Haleakala and other station anomalies through quality metrics
-[13:26:34]     ═══ METHOD: Quality metrics comparison (RMS, outlier rate, gaps), systematic correlation analysis, quality-cut sensitivity tests
-[13:26:34]     ═══ PARAMETERS: IQR outlier threshold=3×, quality cut max residual=0.5m
-[13:26:34] Step 018: Station Quality Diagnostics
-[13:26:34]     ═══ DATA SUMMARY
-[13:26:34]         Dataset: N = 26,207 observations
-[13:26:34]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
-[13:26:34]         Data source: INPOP19a_all_stations_residuals.csv
-[13:26:34]     ═══ ANALYSIS TRACE
-[13:26:34] >>> >>> Analyzing station quality metrics across all stations
-[13:26:34] Analyzing station quality metrics...
-[13:26:34] >>> >>> Detailed analysis of Haleakala anomaly
-[13:26:34] Detailed analysis of Haleakala anomaly...
-[13:26:34] >>> >>> Testing Haleakala quality cuts
-[13:26:34] Testing Haleakala quality cuts...
-[13:26:34] >>> >>> Analyzing McDonald2 era split
-[13:26:34]     ═══ RESULTS SUMMARY
-[13:26:34]         Stations analyzed: 5
-[13:26:34]         Quality outliers identified: 0
-[13:26:34]         Haleakala RMS: 13.8 cm
-[13:26:34]         Haleakala n_obs: 737
-[13:26:34]         Haleakala likely causes: ['small_sample']
-[13:26:34]         Multi-station confidence: HIGH
-[13:26:34]     ═══ INTERPRETATION
-[13:26:34]         Haleakala positive η explained by: small_sample
-[13:26:34]         Station quality analysis tests for systematic biases
-[13:26:34]         Quality-cut sensitivity tests validate signal robustness
-[13:26:34]     ═══ REPRODUCIBILITY
-[13:26:34]         Output file: results/outputs/step_018_station_quality.json
-[13:26:34]         IQR outlier threshold: 3×
-[13:26:34]         Quality cut max residual: 0.5m
-[13:26:34] Haleakala RMS: 13.8 cm
-[13:26:34] Haleakala n_obs: 737
-[13:26:34] Haleakala likely causes: ['small_sample']
-[13:26:34] Results saved to results/outputs/step_018_station_quality.json
+[10:53:55] ═══ ═══ Starting Step 018: Station Quality Diagnostics...
+[10:53:55]     ═══ STEP PURPOSE: Investigate Haleakala and other station anomalies through quality metrics
+[10:53:55]     ═══ METHOD: Quality metrics comparison (RMS, outlier rate, gaps), systematic correlation analysis, quality-cut sensitivity tests
+[10:53:55]     ═══ PARAMETERS: IQR outlier threshold=3×, quality cut max residual=0.5m
+[10:53:55] Step 018: Station Quality Diagnostics
+[10:53:55]     ═══ DATA SUMMARY
+[10:53:55]         Dataset: N = 26,207 observations
+[10:53:55]         Stations: ['APO', 'Grasse', 'Haleakala', 'Matera', 'McDonald2']
+[10:53:55]         Data source: INPOP19a_all_stations_residuals.csv
+[10:53:55]     ═══ ANALYSIS TRACE
+[10:53:55] >>> >>> Analyzing station quality metrics across all stations
+[10:53:55] Analyzing station quality metrics...
+[10:53:55] >>> >>> Detailed analysis of Haleakala anomaly
+[10:53:55] Detailed analysis of Haleakala anomaly...
+[10:53:55] >>> >>> Testing Haleakala quality cuts
+[10:53:55] Testing Haleakala quality cuts...
+[10:53:55] >>> >>> Analyzing McDonald2 era split
+[10:53:55]     ═══ RESULTS SUMMARY
+[10:53:55]         Stations analyzed: 5
+[10:53:55]         Quality outliers identified: 0
+[10:53:55]         Haleakala RMS: 13.8 cm
+[10:53:55]         Haleakala n_obs: 737
+[10:53:55]         Haleakala likely causes: ['small_sample']
+[10:53:55]         Multi-station confidence: HIGH
+[10:53:55]     ═══ INTERPRETATION
+[10:53:55]         Haleakala positive η explained by: small_sample
+[10:53:55]         Station quality analysis tests for systematic biases
+[10:53:55]         Quality-cut sensitivity tests validate signal robustness
+[10:53:55]     ═══ REPRODUCIBILITY
+[10:53:55]         Output file: results/outputs/step_018_station_quality.json
+[10:53:55]         IQR outlier threshold: 3×
+[10:53:55]         Quality cut max residual: 0.5m
+[10:53:55] Haleakala RMS: 13.8 cm
+[10:53:55] Haleakala n_obs: 737
+[10:53:55] Haleakala likely causes: ['small_sample']
+[10:53:55] Results saved to results/outputs/step_018_station_quality.json

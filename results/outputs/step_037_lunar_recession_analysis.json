@@ -1,7 +1,7 @@
 {
     "step_id": "step_037",
     "description": "Tests lunar orbit recession anomaly (3.82 cm/yr) against TEP time-varying dynamics",
-    "timestamp": "2026-05-15T13:27:29.104131",
+    "timestamp": "2026-05-17T10:54:50.066395",
     "references": {
         "rio_rio_2012": "Riofrio 2012, Planetary Science \u2014 Lunar orbit anomaly",
         "tidal_rhythmites": "Historical average ~1.7 cm/yr from tidal rhythmites (2-3 Gyr)",

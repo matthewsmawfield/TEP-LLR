@@ -71,6 +71,25 @@
         "p_interact": 0.6756645388074649,
         "n_used": 25384
     },
+    "equal_weighted_meta_analysis": {
+        "equal_weighted_eta": -0.00012138977369131594,
+        "equal_weighted_se": 0.00026050445114459596,
+        "equal_weighted_snr": 0.4659796527773614,
+        "n_stations_included": 4,
+        "station_etas": [
+            -0.00045764667795905714,
+            -0.0005467804098727859,
+            0.0005987505462615628,
+            -7.988255319498363e-05
+        ]
+    },
+    "balanced_station_reweighted_pooled": {
+        "reweighted_eta": -0.00014738030506548005,
+        "reweighted_se": 0.00036987424838672847,
+        "reweighted_snr": 0.39846057331188955,
+        "min_n_per_station": 345,
+        "total_n_reweighted": 1725
+    },
     "grasse_conditioned_estimand": {
         "non_grasse_direct": {
             "eta": -0.00016478018808587322,

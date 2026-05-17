@@ -39,6 +39,7 @@
     "statistical": 6.60715775613479e-05,
     "systematic_combined": 0.00020740721173404252,
     "systematic_mc_component": 0.006166664191438247,
+    "empirical_ephemeris_bound_eta": 0.0002457976635440096,
     "total_uncertainty": 0.00021767683579273004,
     "signal_to_total_ratio": 2.0824370930538105,
     "systematic_to_statistical_ratio": 3.139129098914939,

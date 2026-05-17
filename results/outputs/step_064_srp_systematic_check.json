@@ -1,98 +1,98 @@
 {
-  "step_id": "step_064_srp",
-  "status": "PASS",
-  "srp_test_outcome": "NO_SRP_SIGNATURE",
-  "interpretation": "All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r\u00b2 scaling in the residuals, rules out SRP as the dominant source of the detected signal.",
-  "test_1_collinearity": {
-    "r_cosd_srp_proxy": 0.9997233708111594,
-    "vif_srp_proxy": 1807.7237942960019,
-    "severe_multicollinearity": true
-  },
-  "test_2_detrended_srp_correlation": {
-    "r_detrended_srp": -0.0003221644419246204,
-    "p_value": 0.9590167434996256,
-    "snr_sigma": 0.05138800835835247,
-    "significant": false
-  },
-  "test_3_srp_scaling": {
-    "n_bins": 10,
-    "fit_c": 0.0060011157955933815,
-    "fit_c_error": 0.0027947494285184998,
-    "fit_m": -0.0063246846921728795,
-    "fit_m_error": 0.002807929247011219,
-    "t_stat_m": -2.2524373428942064,
-    "p_value_m": 0.054360155300633206,
-    "chi2_red": 4.832194574001333,
-    "expected_m_for_pure_srp": -0.0003177569220118535,
-    "srp_scaling_detected": false,
-    "marginal_scaling": true,
-    "constant_eta_preferred": true,
-    "scaling_interpretation": "The 1/r\u00b2 slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.",
-    "bin_centers_au": [
-      0.9848984662341933,
-      0.9882516870359335,
-      0.9916049078376736,
-      0.9949581286394139,
-      0.9983113494411541,
-      1.0016645702428943,
-      1.0050177910446345,
-      1.0083710118463747,
-      1.0117242326481148,
-      1.015077453449855
-    ],
-    "bin_etas": [
-      -0.0006458207897667567,
-      -0.00036251108489804984,
-      -0.0014754801959114576,
-      0.00023908042335850268,
-      0.00020457140772377902,
-      -6.575092971097742e-05,
-      -0.000116369885532441,
-      -7.912080904835566e-05,
-      -0.0007259131793915225,
-      -0.00022750367805482701
-    ],
-    "bin_eta_errors": [
-      0.00016839576410273427,
-      0.00020475946464221684,
-      0.0003393613598885844,
-      0.00022675452151772296,
-      0.0002215509576170103,
-      0.00021008155264250924,
-      0.00019417980655465995,
-      0.0001575757930688388,
-      0.00016187019589686993,
-      0.00013513840147184005
-    ],
-    "bin_nobs": [
-      5155,
-      2106,
-      1700,
-      1831,
-      1967,
-      1857,
-      1661,
-      2396,
-      2241,
-      4530
-    ]
-  },
-  "test_4_perihelion_aphelion": {
-    "perihelion_eta": -0.0002810197627079138,
-    "perihelion_eta_error": 0.00019181272179885357,
-    "perihelion_n": 3817,
-    "aphelion_eta": 5.940674542271616e-05,
-    "aphelion_eta_error": 0.00015746943292928767,
-    "aphelion_n": 3819,
-    "delta_eta": -0.0003404265081306299,
-    "delta_eta_error": 0.00024817079310619094,
-    "significance_sigma": 1.3717428383482793,
-    "srp_predicted_delta_eta": -1.5803281189392894e-05
-  },
-  "baseline_tep_only": {
-    "eta": -0.0003177935393878212,
-    "eta_error": 6.0519175741741534e-05,
-    "snr_sigma": 5.251121408922814
-  },
-  "n_observations": 25445
+    "step_id": "step_064_srp",
+    "status": "PASS",
+    "srp_test_outcome": "NO_SRP_SIGNATURE",
+    "interpretation": "All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r\u00b2 scaling in the residuals, rules out SRP as the dominant source of the detected signal.",
+    "test_1_collinearity": {
+        "r_cosd_srp_proxy": 0.9997233708111594,
+        "vif_srp_proxy": 1807.7237942960019,
+        "severe_multicollinearity": true
+    },
+    "test_2_detrended_srp_correlation": {
+        "r_detrended_srp": -0.0003221644419246204,
+        "p_value": 0.9590167434996256,
+        "snr_sigma": 0.05138800835835247,
+        "significant": false
+    },
+    "test_3_srp_scaling": {
+        "n_bins": 10,
+        "fit_c": 0.0060011157955933815,
+        "fit_c_error": 0.0027947494285184998,
+        "fit_m": -0.0063246846921728795,
+        "fit_m_error": 0.002807929247011219,
+        "t_stat_m": -2.2524373428942064,
+        "p_value_m": 0.054360155300633206,
+        "chi2_red": 4.832194574001333,
+        "expected_m_for_pure_srp": -0.0003177569220118535,
+        "srp_scaling_detected": false,
+        "marginal_scaling": true,
+        "constant_eta_preferred": true,
+        "scaling_interpretation": "The 1/r\u00b2 slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.",
+        "bin_centers_au": [
+            0.9848984662341933,
+            0.9882516870359335,
+            0.9916049078376736,
+            0.9949581286394139,
+            0.9983113494411541,
+            1.0016645702428943,
+            1.0050177910446345,
+            1.0083710118463747,
+            1.0117242326481148,
+            1.015077453449855
+        ],
+        "bin_etas": [
+            -0.0006458207897667567,
+            -0.00036251108489804984,
+            -0.0014754801959114576,
+            0.00023908042335850268,
+            0.00020457140772377902,
+            -6.575092971097742e-05,
+            -0.000116369885532441,
+            -7.912080904835566e-05,
+            -0.0007259131793915225,
+            -0.00022750367805482701
+        ],
+        "bin_eta_errors": [
+            0.00016839576410273427,
+            0.00020475946464221684,
+            0.0003393613598885844,
+            0.00022675452151772296,
+            0.0002215509576170103,
+            0.00021008155264250924,
+            0.00019417980655465995,
+            0.0001575757930688388,
+            0.00016187019589686993,
+            0.00013513840147184005
+        ],
+        "bin_nobs": [
+            5155,
+            2106,
+            1700,
+            1831,
+            1967,
+            1857,
+            1661,
+            2396,
+            2241,
+            4530
+        ]
+    },
+    "test_4_perihelion_aphelion": {
+        "perihelion_eta": -0.0002810197627079138,
+        "perihelion_eta_error": 0.00019181272179885357,
+        "perihelion_n": 3817,
+        "aphelion_eta": 5.940674542271616e-05,
+        "aphelion_eta_error": 0.00015746943292928767,
+        "aphelion_n": 3819,
+        "delta_eta": -0.0003404265081306299,
+        "delta_eta_error": 0.00024817079310619094,
+        "significance_sigma": 1.3717428383482793,
+        "srp_predicted_delta_eta": -1.5803281189392894e-05
+    },
+    "baseline_tep_only": {
+        "eta": -0.0003177935393878212,
+        "eta_error": 6.0519175741741534e-05,
+        "snr_sigma": 5.251121408922814
+    },
+    "n_observations": 25445
 }

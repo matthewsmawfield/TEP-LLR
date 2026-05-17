@@ -161,8 +161,8 @@ def main():
         'Copyright': 'Creative Commons Attribution 4.0 International License (CC BY 4.0)',
 
         # Dates
-        'CreationDate': '2026:05:14 00:00:00',
-        'ModifyDate': '2026:05:14 00:00:00',
+        'CreationDate': '2026:05:17 00:00:00',
+        'ModifyDate': '2026:05:17 00:00:00',
 
         # XMP Dublin Core metadata (exiftool uses these prefixes)
         'XMP-dc:Creator': 'Matthew Lukin Smawfield',
@@ -172,7 +172,7 @@ def main():
         'XMP-dc:Identifier': f'doi:{args.doi}',
         'XMP-dc:Source': 'https://github.com/matthewsmawfield/TEP-LLR',
         'XMP-dc:Publisher': 'Zenodo',
-        'XMP-dc:Date': '2026-05-14',
+        'XMP-dc:Date': '2026-05-17',
         'XMP-dc:Type': 'Preprint',
         'XMP-dc:Format': 'application/pdf',
         'XMP-dc:Language': 'en',

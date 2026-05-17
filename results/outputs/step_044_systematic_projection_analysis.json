@@ -6,7 +6,9 @@
     "systematic_projections": {
         "ephemeris": {
             "source": "Cross-ephemeris residual difference (INPOP19a \u2212 DE430)",
+            "raw_rms_m": 0.003551881982746923,
             "bias_A_m": 0.003551881982746923,
+            "projection_efficiency": 1.0,
             "bias_eta": 0.00027322169098053254,
             "r_cos_elong": 0.0,
             "p_value": 1.0,
@@ -15,7 +17,9 @@
         },
         "atmospheric": {
             "source": "Monthly mean variation (seasonal tropospheric delay)",
+            "raw_rms_m": 0.009540397183148799,
             "bias_A_m": -0.0007998380028211011,
+            "projection_efficiency": 0.08383697108898723,
             "bias_eta": -6.152600021700777e-05,
             "r_cos_elong": -0.04105897873569389,
             "p_value": 2.9438850059736114e-11,
@@ -24,7 +28,9 @@
         },
         "instrumental": {
             "source": "Station-to-station mean differences (hardware calibration)",
+            "raw_rms_m": 0.0004316203057916697,
             "bias_A_m": 9.774929479535906e-05,
+            "projection_efficiency": 0.22647056564233972,
             "bias_eta": 7.519176522719928e-06,
             "r_cos_elong": 0.11091347907952814,
             "p_value": 1.6249378641458355e-72,
@@ -33,7 +39,9 @@
         },
         "tidal": {
             "source": "cos(2*elongation) harmonic (solid Earth / ocean tides)",
+            "raw_rms_m": 0.00012469199497039117,
             "bias_A_m": -9.11793526730031e-05,
+            "projection_efficiency": 0.7312366178330386,
             "bias_eta": -7.013796359461777e-06,
             "r_cos_elong": -0.3581215823088266,
             "p_value": 0.0,
@@ -42,7 +50,9 @@
         },
         "thermal": {
             "source": "Diurnal (24-hr) sinusoidal amplitude (thermal expansion)",
+            "raw_rms_m": 0.003750058483315065,
             "bias_A_m": -0.0005561137860496165,
+            "projection_efficiency": 0.14829469687576977,
             "bias_eta": -4.277798354227819e-05,
             "r_cos_elong": -0.07262701319654699,
             "p_value": 5.424729019826632e-32,

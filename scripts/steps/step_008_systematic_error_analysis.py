@@ -144,8 +144,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
 
     # Build a seasonal model signal (monthly mean assigned to each obs)
     seasonal_model = df_temp['month'].map(monthly_means).values
+    atmos_raw_rms_m = float(np.std(seasonal_model))
     atmos_bias_m = correlated_systematic_amplitude(seasonal_model, cos_elong)
     atmos_uncertainty_cm = float(atmos_bias_m * 100.0)
+    atmos_raw_cm = float(atmos_raw_rms_m * 100.0)
 
     # ------------------------------------------------------------------
     # 3. Instrumental systematic uncertainty
@@ -160,8 +162,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
         inst_model = df_temp['station'].map(station_means[powered_stations]).fillna(0).values
     else:
         inst_model = df_temp['station'].map(station_means).fillna(0).values
+    inst_raw_rms_m = float(np.std(inst_model))
     inst_bias_m = correlated_systematic_amplitude(inst_model, cos_elong)
     inst_uncertainty_cm = float(inst_bias_m * 100.0)
+    inst_raw_cm = float(inst_raw_rms_m * 100.0)
 
     # ------------------------------------------------------------------
     # 4. Tidal modeling uncertainty
@@ -174,8 +178,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
     X_tidal = np.column_stack([cos_2elong, np.ones(len(cos_2elong))])
     tidal_coeffs, _, _, _ = stable_lstsq(X_tidal, residuals)
     tidal_model = tidal_coeffs[0] * cos_2elong
+    tidal_raw_rms_m = float(np.std(tidal_model))
     tidal_bias_m = correlated_systematic_amplitude(tidal_model, cos_elong)
     tidal_uncertainty_cm = float(tidal_bias_m * 100.0)
+    tidal_raw_cm = float(tidal_raw_rms_m * 100.0)
 
     # ------------------------------------------------------------------
     # 5. Thermal expansion uncertainty
@@ -192,8 +198,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
     thermal_coeffs, _, _, _ = stable_lstsq(X_thermal, detrended)
     thermal_model = (thermal_coeffs[0] * np.cos(omega * hour_frac) +
                      thermal_coeffs[1] * np.sin(omega * hour_frac))
+    thermal_raw_rms_m = float(np.std(thermal_model))
     thermal_bias_m = correlated_systematic_amplitude(thermal_model, cos_elong)
     thermal_uncertainty_cm = float(thermal_bias_m * 100.0)
+    thermal_raw_cm = float(thermal_raw_rms_m * 100.0)
 
     # ------------------------------------------------------------------
     # Assemble budget
@@ -201,15 +209,21 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
     error_budget = {
         "ephemeris_modeling": {
             "source": "Ephemeris modeling (cross-ephemeris scatter)",
+            "raw_amplitude_cm": round(ephem_uncertainty_cm, 2),
             "magnitude_cm": round(ephem_uncertainty_cm, 2),
-            "description": "Uncertainty in lunar and planetary ephemeris fitting, derived from scatter of eta across INPOP19a and DE430",
+            "projected_bias_cm": round(ephem_uncertainty_cm, 2),
+            "projection_ratio": 1.0,
+            "description": "Uncertainty in lunar and planetary ephemeris fitting, derived from scatter of eta across INPOP19a and DE430. For ephemeris, raw amplitude equals projected bias because ephemeris differences directly affect the cos(D) slope.",
             "reference": f"Data-driven from {n_ephem} ephemerides (step_006_multi_ephemeris_comparison)",
             "method": "std(eta_ephem) * 13.0 * 100",
             "data_driven": True
         },
         "atmospheric_delay": {
             "source": "Atmospheric delay modeling",
+            "raw_amplitude_cm": round(atmos_raw_cm, 2),
             "magnitude_cm": round(atmos_uncertainty_cm, 2),
+            "projected_bias_cm": round(atmos_uncertainty_cm, 2),
+            "projection_ratio": round(atmos_uncertainty_cm / atmos_raw_cm, 4) if atmos_raw_cm > 0 else 0.0,
             "description": "Tropospheric delay correction uncertainties: seasonal model projected onto cos(elongation). Only correlated component counts.",
             "reference": "Data-driven from monthly mean residual variation, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(monthly_model, cos_elong) * 100",
@@ -217,7 +231,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
         },
         "instrumental": {
             "source": "Instrumental systematic",
+            "raw_amplitude_cm": round(inst_raw_cm, 2),
             "magnitude_cm": round(inst_uncertainty_cm, 2),
+            "projected_bias_cm": round(inst_uncertainty_cm, 2),
+            "projection_ratio": round(inst_uncertainty_cm / inst_raw_cm, 4) if inst_raw_cm > 0 else 0.0,
             "description": "Detector calibration and timing electronics: station-bias model projected onto cos(elongation).",
             "reference": "Data-driven from powered-station mean residual variation, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(station_bias_model, cos_elong) * 100",
@@ -225,7 +242,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
         },
         "tidal_modeling": {
             "source": "Tidal modeling",
+            "raw_amplitude_cm": round(tidal_raw_cm, 2),
             "magnitude_cm": round(tidal_uncertainty_cm, 2),
+            "projected_bias_cm": round(tidal_uncertainty_cm, 2),
+            "projection_ratio": round(tidal_uncertainty_cm / tidal_raw_cm, 4) if tidal_raw_cm > 0 else 0.0,
             "description": "Solid Earth and ocean tide model uncertainties: cos(2*elongation) harmonic projected onto cos(elongation). Orthogonal component excluded.",
             "reference": "Data-driven from 2nd-synodic-harmonic residual amplitude, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(tidal_model, cos_elong) * 100",
@@ -233,7 +253,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
         },
         "thermal_expansion": {
             "source": "Thermal expansion",
+            "raw_amplitude_cm": round(thermal_raw_cm, 2),
             "magnitude_cm": round(thermal_uncertainty_cm, 2),
+            "projected_bias_cm": round(thermal_uncertainty_cm, 2),
+            "projection_ratio": round(thermal_uncertainty_cm / thermal_raw_cm, 4) if thermal_raw_cm > 0 else 0.0,
             "description": "Telescope and retroreflector thermal expansion: diurnal model projected onto cos(elongation). Orthogonal component excluded.",
             "reference": "Data-driven from diurnal residual variation, elongation-correlated projection",
             "method": "correlated_systematic_amplitude(diurnal_model, cos_elong) * 100",
@@ -253,7 +276,10 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
 
     error_budget["unexplained"] = {
         "source": "Unexplained residual variance",
+        "raw_amplitude_cm": 0.0,
         "magnitude_cm": round(unexplained_rms_cm, 2),
+        "projected_bias_cm": round(unexplained_rms_cm, 2),
+        "projection_ratio": 0.0,
         "description": "Residual variance not accounted for by known systematics",
         "percentage": round((unexplained_rms_cm / total_budget_cm) * 100, 1) if total_budget_cm > 0 else 0.0,
         "variance_contribution": unexplained_variance,
@@ -262,17 +288,28 @@ def generate_systematic_error_budget(df, systematics, verbose=False, logger=None
 
     # Summary statistics
     total_systematic_cm = float(np.sqrt(budget_variance) * 100)
+    raw_total_cm = float(np.sqrt(sum((v["raw_amplitude_cm"]/100.0)**2 for v in error_budget.values() if v["raw_amplitude_cm"] > 0)) * 100)
 
     # Print error budget table
-    print_status("Systematic Error Budget Table (DATA-DRIVEN):", "TITLE")
-    print_status(f"{'Source':<40} {'Magnitude (cm)':<18} {'% Contribution':<15}", "INFO")
+    print_status("Systematic Error Budget Table (DATA-DRIVEN, cos(D)-projected):", "TITLE")
+    print_status(f"{'Source':<35} {'Raw (cm)':>10} {'Proj (cm)':>10} {'Ratio':>8} {'%':>6}", "INFO")
     print_status("-" * 75, "INFO")
     for key, value in error_budget.items():
-        print_status(f"{value['source']:<40} {value['magnitude_cm']:<18.2f} {value['percentage']:<15.1f}", "INFO")
+        if value.get("raw_amplitude_cm", 0) > 0:
+            print_status(
+                f"{value['source']:<35} {value['raw_amplitude_cm']:>10.2f} {value['magnitude_cm']:>10.2f} {value['projection_ratio']:>8.4f} {value['percentage']:>6.1f}",
+                "INFO"
+            )
+        else:
+            print_status(
+                f"{value['source']:<35} {'—':>10} {value['magnitude_cm']:>10.2f} {'—':>8} {value['percentage']:>6.1f}",
+                "INFO"
+            )
     print_status("-" * 75, "INFO")
-    print_status(f"{'Total Budget (quadrature)':<40} {total_systematic_cm:<18.2f} {'-':<15}", "INFO")
-    print_status(f"{'Total Budget (linear sum)':<40} {total_budget_cm:<18.2f} {'-':<15}", "INFO")
-    print_status(f"{'Observed RMS':<40} {global_rms * 100:<18.2f} {'-':<15}", "INFO")
+    print_status(f"{'Total projected (quadrature)':<35} {'—':>10} {total_systematic_cm:>10.2f} {'—':>8} {'—':>6}", "INFO")
+    print_status(f"{'Total raw (quadrature)':<35} {'—':>10} {raw_total_cm:>10.2f} {'—':>8} {'—':>6}", "INFO")
+    print_status(f"{'Total linear sum (projected)':<35} {'—':>10} {total_budget_cm:>10.2f} {'—':>8} {'—':>6}", "INFO")
+    print_status(f"{'Observed RMS':<35} {'—':>10} {global_rms * 100:>10.2f} {'—':>8} {'—':>6}", "INFO")
     print_status("", "INFO")
 
     return error_budget, total_systematic_cm, eta_fit

@@ -5,7 +5,7 @@ Combines INPOP19a and DE430 results using inverse-variance weighting,
 baseline-aware weights, and an ephemeris-difference systematic term.
 
 Author: TEP-LLR Analysis Pipeline
-Date: 2026-05-14
+Date: 2026-05-17
 """
 
 import json

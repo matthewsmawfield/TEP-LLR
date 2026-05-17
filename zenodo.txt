@@ -6,14 +6,14 @@ This analysis uses 26,207 raw LLR O-C residuals from five international laser ra
 
 Analysis of the full 35-year dataset detects a synodic modulation correlated with cos(D). The headline estimand is precision-weighted full-systematic regression controlling for annual, monthly, and thermal cos(2D) aliases: η = -3.91 × 10⁻⁴ ± 5.63 × 10⁻⁵ at 6.94σ (6.78σ cluster-robust; all N = 25,445 observations retained). Unweighted full-systematic OLS yields η = -4.06 × 10⁻⁴ ± 6.58 × 10⁻⁵ at 6.17σ as a sensitivity upper bound. Cook's-Distance excision on the unweighted full-systematic row (N = 23,837) returns η = -3.87 × 10⁻⁴ ± 4.95 × 10⁻⁵ at 7.82σ as a secondary leverage diagnostic. The signal strengthens as more systematics are controlled and is stable across mixed-model and station-specific specifications.
 
-Independent confirmation comes from a phase-locked new/full-moon differential (η = -5.95 × 10⁻⁴, 6.16σ) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component.
+Independent confirmation comes from a phase-locked new/full-moon differential (η = -5.95 × 10⁻⁴, 5.91σ) and a frequency null scan with no significant non-synodic power. Cross-ephemeris validation on DE430 and orthogonality tests support residual-channel survival of the synodic component. A parametric bootstrap (10,000 trials) returns zero false positives (95% upper bound on rate ≈ 3 × 10⁻⁴). Bayesian summaries give P(η < 0 | data) = 1.0000 (Step 016), with primary BIC approximation B_BIC ≈ 1.7 × 10³ and bandwidth-free synodic cross-checks (Step 073) giving BF_10 ≈ 70 (grid quadrature) and ≈ 97 (bridge sampling).
 
-In the TEP framework, differential Temporal Shear Suppression between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven gradient suppression dominating in the Earth-Moon system. Source-level INPOP or DE430 integrator refits with η free remain the definitive external confirmation test.
+In the TEP framework, differential Temporal Shear Suppression between Earth and Moon could produce an effective Nordtvedt parameter with the observed negative sign, consistent with gravitational compactness-driven gradient suppression dominating in the Earth-Moon system. Conditioned on the synodic fit, a fixed-sky directional term tied to the Planck dipole is corroborative (η_θ = -9.76 × 10⁻⁴, t = -11.03; phase null p ≈ 6 × 10⁻⁴) while uniform sky-scramble specificity remains marginal (p_F ≈ 0.096 on 100,000 directions; composite specificity Z = 1.45, p = 0.074). Source-level INPOP or DE430 integrator refits with η free remain the definitive external confirmation test.
 
 Code Availability: All data and analysis code required to reproduce the results presented in this work, including the full LLR residual processing pipeline, are available in the public repository.
 
 Website: https://mlsmawfield.com/tep/llr/
-Code Availability: https://github.com/matthewsmawfield/TEP-LLR
+Repository: https://github.com/matthewsmawfield/TEP-LLR
 
 Keywords: temporal equivalence principle – lunar laser ranging – LLR – equivalence principle – Nordtvedt effect – post-Newtonian – scalar-tensor gravity – strong equivalence principle
 

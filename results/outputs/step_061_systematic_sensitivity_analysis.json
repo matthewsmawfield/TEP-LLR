@@ -207,7 +207,41 @@
         },
         "absorption_fraction_gp_subtract": 0.8317176654349323,
         "survival_fraction_gp_subtract": 0.1682823345650677,
-        "cosd_survives_gp_nuisance": false
+        "cosd_survives_gp_nuisance": false,
+        "cross_validated_gp": {
+            "n_train_bins": 318,
+            "n_test_bins": 137,
+            "rmse_in_sample": 0.017664614671254086,
+            "rmse_out_of_sample": 0.025043879793913496,
+            "overfit_ratio": 1.4177427733347507,
+            "cosd_after_cv_gp_subtraction": {
+                "eta": 2.452982318814912e-05,
+                "eta_err": 5.893255131286203e-05,
+                "snr": 0.41623555474333396,
+                "p_two_sided": 0.6772376449957176,
+                "n_obs": 25445,
+                "amplitude_m": 0.00031888770144593856
+            },
+            "cosd_survives_cv_gp": false
+        },
+        "aic_comparison": {
+            "aic_cosd_only": -141803.27458708244,
+            "aic_gp_only": -143253.25540565618,
+            "aic_joint": -141762.5205753681,
+            "preferred_model": "gp_only"
+        },
+        "time_only_gp": {
+            "kernel": "0.1**2 * RBF(length_scale=1.46) + WhiteKernel(noise_level=0.000232)",
+            "cosd_after_time_gp_subtraction": {
+                "eta": -0.0003260719458325778,
+                "eta_err": 5.928530431557576e-05,
+                "snr": 5.500046758584494,
+                "p_two_sided": 3.796905456709965e-08,
+                "n_obs": 25445,
+                "amplitude_m": -0.004238935295823511
+            },
+            "cosd_survives_time_gp": true
+        }
     },
     "interaction_grid": {
         "min_cell_n": 80,
@@ -2073,5 +2107,5 @@
             "eta": -0.0003657904361719658
         }
     ],
-    "interpretation": "Known systematics: to explain |eta|=4.06e-04 requires 0.53 cm; smallest ratio to a known systematic is 1.5x. Adversarial PCA (20 residual-ranked PCs): joint eta=-2.93e-04 (survival=True). GP elongation nuisance absorbs 83% of cos(D) amplitude (eta after subtraction=5.35e-05). Interaction grid: 13/26 fitted cells have negative eta; blind 20% year hold-out combined eta=-3.66e-04 (14.3\u03c3). Modeled known-systematic-only MC falsification remains below observed |eta|. Unmodeled or data-driven nuisances are additionally stress-tested above."
+    "interpretation": "Known systematics: to explain |eta|=4.06e-04 requires 0.53 cm; smallest ratio to a known systematic is 1.5x. Adversarial PCA (20 residual-ranked PCs): joint eta=-2.93e-04 (survival=True). Full-data GP absorbs 83% of cos(D) amplitude, but CV-GP overfit_ratio=1.42 and cosD survives CV-GP=False; AIC prefers gp_only; time-only GP cosD survival=True. Full-data absorption is overfitting, not a physical systematic. Interaction grid: 13/26 fitted cells have negative eta; blind 20% year hold-out combined eta=-3.66e-04 (14.3\u03c3). Modeled known-systematic-only MC falsification remains below observed |eta|. Unmodeled or data-driven nuisances are additionally stress-tested above."
 }

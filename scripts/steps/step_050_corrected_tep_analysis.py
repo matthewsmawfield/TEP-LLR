@@ -19,6 +19,7 @@ Model: residual = η·cos(D) + α·cos(2D) + β·cos(2πt/27.32) + γ·sin(2πt/
 import sys
 from pathlib import Path
 import json
+import logging
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -787,8 +788,14 @@ def run_corrected_analysis():
     print_status(f"Results saved to {output_path}", "INFO")
     print_status("═══ Step 050 Complete ═══", "TITLE")
 
+    # Explicitly flush all log handlers to prevent empty log files
+    logging.shutdown()
+
     return results
 
 
 if __name__ == "__main__":
-    run_corrected_analysis()
+    try:
+        run_corrected_analysis()
+    finally:
+        logging.shutdown()

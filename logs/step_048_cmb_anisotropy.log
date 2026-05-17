@@ -1,80 +1,80 @@
-[13:28:02] ═══ ═══ Step 048: CMB Dipole Anisotropy Test ═══
-[13:28:02] >>> Computing CMB-frame projections via DE421/Skyfield...
-[13:28:02]     v_parallel range: -28.758 – 29.670 km/s
-[13:28:02]     v_perp range: 5.757 – 29.977 km/s
-[13:28:02]     cos(θ_EM-CMB) range: -0.9943 – 0.9943
-[13:28:02]     Correlation r(v_parallel, r) = -0.9211
-[13:28:02]     Correlation r(cos(D), cosθ_EM-CMB) = 0.0499
-[13:28:02]     Cleaned dataset: 25,445 observations (762 outliers removed)
-[13:28:02] ═══ ═══ MODEL A: Annual CMB velocity projection ═══
-[13:28:02]     High v_parallel (> 24.701): η = -1.0258e-03 ± 1.7651e-04
-[13:28:02]     Low v_parallel (< -24.345):  η = -1.3731e-04 ± 1.6465e-04
-[13:28:02]     Δη = -8.8847e-04 ± 2.4138e-04 (3.68σ)
-[13:28:02] ═══ ═══ MODEL B: Monthly Earth-Moon orientation anisotropy ═══
-[13:28:02]     High cosθ (> 0.841): η = -8.4400e-04 ± 1.4867e-04
-[13:28:02]     Low cosθ (< -0.898):  η = 9.2188e-04 ± 1.6654e-04
-[13:28:02]     Δη = -1.7659e-03 ± 2.2325e-04 (7.91σ)
-[13:28:02] ═══ ═══ MODEL C: Joint CMB anisotropy fit ═══
-[13:28:02]     Joint CMB: η = -2.8482e-04 + -1.0551e-05·v_parallel + -7.7669e-04·cos(θ)
-[13:28:02]       η_vpar: -1.0551e-05 ± 3.0199e-06 (t=-3.49, p=0.0005)
-[13:28:02]       η_theta: -7.7669e-04 ± 8.1286e-05 (t=-9.56, p=0.0000)
-[13:28:02]       AIC simple=-141803.3, CMB-only=-141810.9, dist-vel=-141809.8, joint-CMB=-141900.1
-[13:28:02]       ΔAIC(CMB-only vs simple) = -7.6
-[13:28:02]       ΔAIC(dist-vel vs simple) = -6.6
-[13:28:02]       ΔAIC(joint-CMB vs simple) = -96.8
-[13:28:02] ✓   Joint CMB model preferred (ΔAIC < -2)
-[13:28:02] ═══ ═══ REFINEMENT A: Orthogonalized v_parallel ═══
-[13:28:02]     Residual v_parallel (after removing r): r(v_perp, r) = -0.0000
-[13:28:02]     Orthogonalized: η_vpar_perp = -5.5372e-05 ± 7.9969e-06 (t=-6.92, p=0.0000)
-[13:28:02]     Orthogonalized: η_theta     = -9.9882e-04 ± 8.7896e-05 (t=-11.36, p=0.0000)
-[13:28:02] ═══ ═══ REFINEMENT B: Full joint (synodic + distance + v_r + cosθ) ═══
-[13:28:02]     Full joint: η_r = 7.1352e-03 ± 5.1951e-03 (t=1.37, p=0.1696)
-[13:28:02]     Full joint: η_vr = 1.1030e-03 ± 1.6958e-04 (t=6.50, p=0.0000)
-[13:28:02]     Full joint: η_theta = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000)
-[13:28:02] ═══ ═══ REFINEMENT C: cosθ marginal contribution (nested models) ═══
-[13:28:02]     Base model (synodic + dist + v_r): AIC = -141809.8
-[13:28:02]     +cosθ model: AIC = -141929.1, ΔAIC = -119.2
-[13:28:02]     F(1, 25440) = 121.49, p = 0.0000
-[13:28:02]     cosθ partial η = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000)
-[13:28:02] ═══ ═══ Phase offset test ═══
-[13:28:02]     CMB-phase annual sin: η = 2.7173e-04 ± 8.8447e-05 (t=3.07, p=0.0021)
-[13:28:02]     CMB-phase annual cos: η = 1.1125e-04 ± 7.5548e-05 (t=1.47, p=0.1409)
-[13:28:02]     Joint F(2, 25441) = 5.81, p = 0.0030
-[13:28:02] ═══ ═══ Binned anisotropy analysis ═══
-[13:28:02]     Binned trend: dη/dcos(θ) = -1.0489e-03 ± 2.2123e-04 (t=-4.74, p=0.0032)
-[13:28:02] ═══ ═══ Directional specificity test ═══
-[13:28:02]     Perpendicular-1: Δη = -5.6743e-04 ± 2.0587e-04 (2.76σ)
-[13:28:02]     Anti-CMB: Δη = 1.7659e-03 ± 2.2325e-04 (7.91σ)
-[13:28:02]     Perpendicular-2: Δη = -4.5873e-04 ± 2.2486e-04 (2.04σ)
-[13:28:02]     Anti-CMB |Δη| / True CMB |Δη| = 1.000 (expect ≈1.0 for dipole)
-[13:28:02]     Max perpendicular σ / True CMB σ = 0.348 (expect ≈0 for pure dipole)
-[13:28:02]     True CMB: 7.91σ; Null directions >2σ: 3/3
-[13:28:02] ═══ ═══ Joint-model null-direction control ═══
-[13:28:02]     True CMB: η_θ = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000); AIC=-141929.1
-[13:28:02]     CMB +90° (perp1): η_θ = -2.1571e-04 ± 9.8053e-05 (t=-2.20, p=0.0278); AIC=-141812.7
-[13:28:02]     CMB +90° (perp2): η_θ = -1.1252e-03 ± 2.1782e-04 (t=-5.17, p=0.0000); AIC=-141834.5
-[13:28:02]     CMB +180° (antipode): η_θ = 9.7721e-04 ± 8.8659e-05 (t=11.02, p=0.0000); AIC=-141929.1
-[13:28:02]     ΔAIC(perp1 vs true) = 116.4; ΔAIC(perp2 vs true) = 94.5; ΔAIC(antipode vs true) = 0.0
-[13:28:02]     |η_θ|/σ: true=11.02, perp1=2.20, perp2=5.17, antipode=11.02
-[13:28:02] ═══ ═══ Higher-order multipole test ═══
-[13:28:02]     Dipole: η = -1.0406e-03 ± 9.9352e-05
-[13:28:02]     Quadrupole: η = 1.4992e-04 ± 1.1328e-04
-[13:28:02]     Octupole: η = 2.1430e-04 ± 1.3917e-04
-[13:28:02]     Joint F(2, 25438) = 1.83, p = 0.1603
-[13:28:02] ═══ ═══ Bootstrap robustness (n=200) ═══
-[13:28:02]     η_θ bootstrap: -9.8399e-04 ± 7.2033e-05 [95% CI: -1.1161e-03, -8.4530e-04]
-[13:28:02]     η_vr bootstrap: 1.1100e-03 ± 1.5636e-04 [95% CI: 8.0829e-04, 1.4337e-03]
-[13:28:02]     η_r bootstrap: 7.0706e-03 ± 5.1756e-03 [95% CI: -2.7107e-03, 1.6055e-02]
-[13:28:02] ═══ ═══ Annual envelope of monthly anisotropy ═══
-[13:28:02]     Annual envelope sin: η = 1.0801e-03 ± 1.3082e-04 (t=8.26, p=0.0000)
-[13:28:02]     Annual envelope cos: η = -3.1697e-04 ± 1.2667e-04 (t=-2.50, p=0.0123)
-[13:28:02]     Joint F(2, 25440) = 15.11, p = 0.0000
-[13:28:02] ═══ ═══ Cross-station consistency ═══
-[13:28:02]     APO: split Δη = 2.6162e-04 (0.78σ); joint η_r=-3.02e-02 η_vr=8.80e-04 η_θ=-4.63e-04
-[13:28:02]     Grasse: split Δη = -2.3314e-03 (9.71σ); joint η_r=2.13e-02 η_vr=1.41e-03 η_θ=-1.26e-03
-[13:28:02]     Haleakala: split Δη = 8.1392e-03 (2.03σ); joint η_r=4.95e-02 η_vr=-6.51e-04 η_θ=3.84e-03
-[13:28:02]     McDonald2: split Δη = -1.5172e-03 (1.30σ); joint η_r=-3.16e-02 η_vr=-1.17e-03 η_θ=5.48e-04
-[13:28:02]     Stations with significant cosθ effect: 2/4
-[13:28:02] ✓   RESULT: Significant CMB-frame anisotropy detected.
-[13:28:02] Results saved to results/outputs/step_048_cmb_anisotropy.json
-[13:28:02] ✓   CMB Anisotropy analysis complete.
+[10:55:34] ═══ ═══ Step 048: CMB Dipole Anisotropy Test ═══
+[10:55:34] >>> Computing CMB-frame projections via DE440/Skyfield...
+[10:55:34]     v_parallel range: -28.758 – 29.670 km/s
+[10:55:34]     v_perp range: 5.757 – 29.977 km/s
+[10:55:34]     cos(θ_EM-CMB) range: -0.9943 – 0.9943
+[10:55:34]     Correlation r(v_parallel, r) = -0.9211
+[10:55:34]     Correlation r(cos(D), cosθ_EM-CMB) = 0.0499
+[10:55:34]     Cleaned dataset: 25,445 observations (762 outliers removed)
+[10:55:34] ═══ ═══ MODEL A: Annual CMB velocity projection ═══
+[10:55:34]     High v_parallel (> 24.701): η = -1.0258e-03 ± 1.7651e-04
+[10:55:34]     Low v_parallel (< -24.345):  η = -1.3731e-04 ± 1.6465e-04
+[10:55:34]     Δη = -8.8847e-04 ± 2.4138e-04 (3.68σ)
+[10:55:34] ═══ ═══ MODEL B: Monthly Earth-Moon orientation anisotropy ═══
+[10:55:34]     High cosθ (> 0.841): η = -8.4400e-04 ± 1.4867e-04
+[10:55:34]     Low cosθ (< -0.898):  η = 9.2188e-04 ± 1.6654e-04
+[10:55:34]     Δη = -1.7659e-03 ± 2.2325e-04 (7.91σ)
+[10:55:34] ═══ ═══ MODEL C: Joint CMB anisotropy fit ═══
+[10:55:34]     Joint CMB: η = -2.8482e-04 + -1.0551e-05·v_parallel + -7.7669e-04·cos(θ)
+[10:55:34]       η_vpar: -1.0551e-05 ± 3.0199e-06 (t=-3.49, p=0.0005)
+[10:55:34]       η_theta: -7.7669e-04 ± 8.1286e-05 (t=-9.56, p=0.0000)
+[10:55:34]       AIC simple=-141803.3, CMB-only=-141810.9, dist-vel=-141809.8, joint-CMB=-141900.1
+[10:55:34]       ΔAIC(CMB-only vs simple) = -7.6
+[10:55:34]       ΔAIC(dist-vel vs simple) = -6.6
+[10:55:34]       ΔAIC(joint-CMB vs simple) = -96.8
+[10:55:34] ✓   Joint CMB model preferred (ΔAIC < -2)
+[10:55:34] ═══ ═══ REFINEMENT A: Orthogonalized v_parallel ═══
+[10:55:34]     Residual v_parallel (after removing r): r(v_perp, r) = -0.0000
+[10:55:34]     Orthogonalized: η_vpar_perp = -5.5372e-05 ± 7.9969e-06 (t=-6.92, p=0.0000)
+[10:55:34]     Orthogonalized: η_theta     = -9.9882e-04 ± 8.7896e-05 (t=-11.36, p=0.0000)
+[10:55:34] ═══ ═══ REFINEMENT B: Full joint (synodic + distance + v_r + cosθ) ═══
+[10:55:34]     Full joint: η_r = 7.1352e-03 ± 5.1951e-03 (t=1.37, p=0.1696)
+[10:55:34]     Full joint: η_vr = 1.1030e-03 ± 1.6958e-04 (t=6.50, p=0.0000)
+[10:55:34]     Full joint: η_theta = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000)
+[10:55:34] ═══ ═══ REFINEMENT C: cosθ marginal contribution (nested models) ═══
+[10:55:34]     Base model (synodic + dist + v_r): AIC = -141809.8
+[10:55:34]     +cosθ model: AIC = -141929.1, ΔAIC = -119.2
+[10:55:34]     F(1, 25440) = 121.49, p = 0.0000
+[10:55:34]     cosθ partial η = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000)
+[10:55:34] ═══ ═══ Phase offset test ═══
+[10:55:34]     CMB-phase annual sin: η = 2.7173e-04 ± 8.8447e-05 (t=3.07, p=0.0021)
+[10:55:34]     CMB-phase annual cos: η = 1.1125e-04 ± 7.5548e-05 (t=1.47, p=0.1409)
+[10:55:34]     Joint F(2, 25441) = 5.81, p = 0.0030
+[10:55:34] ═══ ═══ Binned anisotropy analysis ═══
+[10:55:34]     Binned trend: dη/dcos(θ) = -1.0489e-03 ± 2.2123e-04 (t=-4.74, p=0.0032)
+[10:55:34] ═══ ═══ Directional specificity test ═══
+[10:55:34]     Perpendicular-1: Δη = -5.6743e-04 ± 2.0587e-04 (2.76σ)
+[10:55:34]     Anti-CMB: Δη = 1.7659e-03 ± 2.2325e-04 (7.91σ)
+[10:55:34]     Perpendicular-2: Δη = -4.5873e-04 ± 2.2486e-04 (2.04σ)
+[10:55:34]     Anti-CMB |Δη| / True CMB |Δη| = 1.000 (expect ≈1.0 for dipole)
+[10:55:34]     Max perpendicular σ / True CMB σ = 0.348 (expect ≈0 for pure dipole)
+[10:55:34]     True CMB: 7.91σ; Null directions >2σ: 3/3
+[10:55:34] ═══ ═══ Joint-model null-direction control ═══
+[10:55:34]     True CMB: η_θ = -9.7721e-04 ± 8.8659e-05 (t=-11.02, p=0.0000); AIC=-141929.1
+[10:55:34]     CMB +90° (perp1): η_θ = -2.1571e-04 ± 9.8053e-05 (t=-2.20, p=0.0278); AIC=-141812.7
+[10:55:34]     CMB +90° (perp2): η_θ = -1.1252e-03 ± 2.1782e-04 (t=-5.17, p=0.0000); AIC=-141834.5
+[10:55:34]     CMB +180° (antipode): η_θ = 9.7721e-04 ± 8.8659e-05 (t=11.02, p=0.0000); AIC=-141929.1
+[10:55:34]     ΔAIC(perp1 vs true) = 116.4; ΔAIC(perp2 vs true) = 94.5; ΔAIC(antipode vs true) = 0.0
+[10:55:34]     |η_θ|/σ: true=11.02, perp1=2.20, perp2=5.17, antipode=11.02
+[10:55:34] ═══ ═══ Higher-order multipole test ═══
+[10:55:34]     Dipole: η = -1.0406e-03 ± 9.9352e-05
+[10:55:34]     Quadrupole: η = 1.4992e-04 ± 1.1328e-04
+[10:55:34]     Octupole: η = 2.1430e-04 ± 1.3917e-04
+[10:55:34]     Joint F(2, 25438) = 1.83, p = 0.1603
+[10:55:34] ═══ ═══ Bootstrap robustness (n=200) ═══
+[10:55:34]     η_θ bootstrap: -9.8399e-04 ± 7.2033e-05 [95% CI: -1.1161e-03, -8.4530e-04]
+[10:55:34]     η_vr bootstrap: 1.1100e-03 ± 1.5636e-04 [95% CI: 8.0829e-04, 1.4337e-03]
+[10:55:34]     η_r bootstrap: 7.0706e-03 ± 5.1756e-03 [95% CI: -2.7107e-03, 1.6055e-02]
+[10:55:34] ═══ ═══ Annual envelope of monthly anisotropy ═══
+[10:55:34]     Annual envelope sin: η = 1.0801e-03 ± 1.3082e-04 (t=8.26, p=0.0000)
+[10:55:34]     Annual envelope cos: η = -3.1697e-04 ± 1.2667e-04 (t=-2.50, p=0.0123)
+[10:55:34]     Joint F(2, 25440) = 15.11, p = 0.0000
+[10:55:34] ═══ ═══ Cross-station consistency ═══
+[10:55:34]     APO: split Δη = 2.6162e-04 (0.78σ); joint η_r=-3.02e-02 η_vr=8.80e-04 η_θ=-4.63e-04
+[10:55:34]     Grasse: split Δη = -2.3314e-03 (9.71σ); joint η_r=2.13e-02 η_vr=1.41e-03 η_θ=-1.26e-03
+[10:55:34]     Haleakala: split Δη = 8.1392e-03 (2.03σ); joint η_r=4.95e-02 η_vr=-6.51e-04 η_θ=3.84e-03
+[10:55:34]     McDonald2: split Δη = -1.5172e-03 (1.30σ); joint η_r=-3.16e-02 η_vr=-1.17e-03 η_θ=5.48e-04
+[10:55:34]     Stations with significant cosθ effect: 2/4
+[10:55:34] ✓   RESULT: Significant CMB-frame anisotropy detected.
+[10:55:34] Results saved to results/outputs/step_048_cmb_anisotropy.json
+[10:55:34] ✓   CMB Anisotropy analysis complete.

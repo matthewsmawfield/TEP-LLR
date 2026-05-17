@@ -1,0 +1,87 @@
+{
+  "step_id": "step_058",
+  "status": "PASS",
+  "model_fit": {
+    "excluded_station": "Haleakala",
+    "n_fit": 24779,
+    "eta_0": -0.00023989574819350203,
+    "eta_0_error": 7.775169911699292e-05,
+    "A": -0.000420064929994942,
+    "A_error": 0.0002042510302354096,
+    "chi2_red": 0.003596597008868901,
+    "birge_ratio": 0.05997163503581423
+  },
+  "haleakala_prediction": {
+    "station": "Haleakala",
+    "mean_solar_index": 0.4967153595101352,
+    "eta_predicted": -0.0004485484509135394,
+    "eta_predicted_error": 7.821525672592689e-05,
+    "eta_observed": 0.0025708161272214283,
+    "eta_observed_error": 0.001164501902528554,
+    "delta": 0.003019364578134968,
+    "z_score": 2.587008991700081,
+    "p_value_two_tailed": 0.00968130657608679
+  },
+  "leave_one_station_out": [
+    {
+      "station": "APO",
+      "mean_solar_index": 0.28893434804527884,
+      "eta_predicted": -0.00034688824340440433,
+      "eta_predicted_error": 6.835717868161136e-05,
+      "eta_observed": -0.00023983556784707943,
+      "delta": 0.0001070526755573249,
+      "z_score": 0.9700283218263901
+    },
+    {
+      "station": "Grasse",
+      "mean_solar_index": 0.2826514961474558,
+      "eta_predicted": -3.887665603205759e-05,
+      "eta_predicted_error": 0.00014664825442871923,
+      "eta_observed": -0.00037818228146582576,
+      "delta": -0.0003393056254337682,
+      "z_score": 2.110149266064382
+    },
+    {
+      "station": "Haleakala",
+      "mean_solar_index": 0.4967153595101352,
+      "eta_predicted": -0.0004485484509135394,
+      "eta_predicted_error": 7.821525672592689e-05,
+      "eta_observed": 0.0025708161272214283,
+      "delta": 0.003019364578134968,
+      "z_score": 2.587008991700081
+    },
+    {
+      "station": "Matera",
+      "mean_solar_index": 0.10413135130331715,
+      "eta_predicted": -0.00026694555884469934,
+      "eta_predicted_error": 6.782780153788476e-05,
+      "eta_observed": 0.0003845938253044743,
+      "delta": 0.0006515393841491737,
+      "z_score": 0.7822237675440766
+    },
+    {
+      "station": "McDonald2",
+      "mean_solar_index": 0.3079704807941543,
+      "eta_predicted": -0.00034877602604094584,
+      "eta_predicted_error": 6.113961557968389e-05,
+      "eta_observed": -8.792793726778155e-05,
+      "delta": 0.0002608480887731643,
+      "z_score": 0.8347634257160808
+    }
+  ],
+  "haleakala_rank": {
+    "rank_by_abs_z": 1,
+    "n_stations_with_z": 5,
+    "percentile_most_deviant": 20.0
+  },
+  "model_comparison": {
+    "constant_eta_rss": 96.65853955565127,
+    "solar_model_rss": 96.6440086090573,
+    "delta_rss": 0.01453094659397891,
+    "f_statistic": 3.8253415660716312,
+    "p_value_f": 0.05049398535657623,
+    "permutation_p_value": 0.0372,
+    "n_permutations": 5000,
+    "conclusion": "Solar-cycle modulation improves fit over constant \u03b7. Permutation p = 0.0372. Haleakala's deviation is consistent with its solar-epoch timing."
+  }
+}

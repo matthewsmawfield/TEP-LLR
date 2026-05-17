@@ -51,27 +51,30 @@
     "sky_scrambling": {
         "random_axis_delta_aic_null": {
             "description": "Uniform random unit vectors on S\u00b2: empirical null for \u0394AIC when the orientation predictor is any fixed sky axis (not only permuted or rotated Planck).",
-            "n_draws": 50000,
+            "n_draws": 100000,
             "observed_delta_aic_planck": 119.2222011302656,
-            "null_delta_aic_median": 61.158882493313286,
-            "null_delta_aic_99th_percentile": 130.54359033551563,
-            "null_delta_aic_max": 137.69139511688263,
-            "empirical_p_value": 0.0954,
-            "planck_axis_exceeds_median_by": 58.06331863695232,
+            "null_delta_aic_median": 61.94497695748578,
+            "null_delta_aic_99th_percentile": 130.3451517340372,
+            "null_delta_aic_max": 137.71535595148453,
+            "empirical_p_value": 0.09559,
+            "planck_rank": 9559,
+            "planck_percentile": 90.441,
+            "gap_above_99th_percentile": -11.122950603771585,
+            "planck_axis_exceeds_median_by": 57.277224172779825,
             "jeffreys_95_interval_on_p": {
-                "k_random_ge_true": 4770,
-                "n_draws": 50000,
-                "jeffreys_95_lower": 0.09284848789113942,
-                "jeffreys_95_upper": 0.09799835170680525
+                "k_random_ge_true": 9559,
+                "n_draws": 100000,
+                "jeffreys_95_lower": 0.09377933245706387,
+                "jeffreys_95_upper": 0.0974240768060897
             },
             "correlation_matched_subnull": {
-                "n_matched": 9032,
+                "n_matched": 18208,
                 "corr_tolerance": 0.02,
-                "empirical_p_value": 0.26428255093002656
+                "empirical_p_value": 0.2663664323374341
             },
             "role": "primary_delta_aic_null_for_any_fixed_axis"
         },
-        "n_scrambles": 50000,
+        "n_scrambles": 100000,
         "strict_alpha": 0.01,
         "base_model_aic": -141809.84263390687,
         "true_delta_aic": 119.2222011302656,
@@ -80,37 +83,37 @@
         "true_f_statistic_eff": 50.0759846009532,
         "base_residual_ar1_rho": 0.41612390215657946,
         "effective_sample_size": 10491.121071398413,
-        "delta_aic_median": 61.158882493313286,
-        "delta_aic_99th_percentile": 130.54359033551563,
-        "delta_aic_max": 137.69139511688263,
-        "f_median": 63.22490673493898,
-        "f_99th_percentile": 132.86328875923934,
-        "f_eff_median": 26.060692875410496,
-        "f_eff_99th_percentile": 54.76495801389747,
-        "p_scramble_delta_aic": 0.0954,
-        "p_scramble_f": 0.0954,
-        "p_scramble_f_eff": 0.0954,
+        "delta_aic_median": 61.94497695748578,
+        "delta_aic_99th_percentile": 130.3451517340372,
+        "delta_aic_max": 137.71535595148453,
+        "f_median": 64.0128121623217,
+        "f_99th_percentile": 132.6638537645821,
+        "f_eff_median": 26.385459844920994,
+        "f_eff_99th_percentile": 54.68275284487821,
+        "p_scramble_delta_aic": 0.09559,
+        "p_scramble_f": 0.09559,
+        "p_scramble_f_eff": 0.09559,
         "p_scramble_f_monte_carlo_counts": {
-            "k_random_ge_true_f": 4770,
-            "n_draws": 50000,
-            "jeffreys_95_lower": 0.09284848789113942,
-            "jeffreys_95_upper": 0.09799835170680525
+            "k_random_ge_true_f": 9559,
+            "n_draws": 100000,
+            "jeffreys_95_lower": 0.09377933245706387,
+            "jeffreys_95_upper": 0.0974240768060897
         },
         "p_scramble_delta_aic_monte_carlo_counts": {
-            "k_random_ge_true_delta_aic": 4770,
-            "n_draws": 50000,
-            "jeffreys_95_lower": 0.09284848789113942,
-            "jeffreys_95_upper": 0.09799835170680525
+            "k_random_ge_true_delta_aic": 9559,
+            "n_draws": 100000,
+            "jeffreys_95_lower": 0.09377933245706387,
+            "jeffreys_95_upper": 0.0974240768060897
         },
         "correlation_matched": {
-            "n_matched": 9032,
+            "n_matched": 18208,
             "corr_tolerance": 0.02,
-            "p_scramble_delta_aic_matched": 0.26428255093002656,
-            "p_scramble_f_matched": 0.26428255093002656,
-            "p_scramble_f_eff_matched": 0.26428255093002656,
-            "k_random_ge_true_f_matched": 2387,
-            "jeffreys_95_lower_f_matched": 0.2552652939288244,
-            "jeffreys_95_upper_f_matched": 0.2734508513945073
+            "p_scramble_delta_aic_matched": 0.2663664323374341,
+            "p_scramble_f_matched": 0.2663664323374341,
+            "p_scramble_f_eff_matched": 0.2663664323374341,
+            "k_random_ge_true_f_matched": 4850,
+            "jeffreys_95_lower_f_matched": 0.2599830236973776,
+            "jeffreys_95_upper_f_matched": 0.27282410998479883
         },
         "true_direction_preferred": false,
         "directional_anatomy_supported": true,
@@ -492,14 +495,14 @@
             "delta_aic_vs_base": 119.2222011302656,
             "eta_theta": -0.0009772069113962894,
             "eta_theta_t": -11.022138609939493,
-            "max_vif": Infinity
+            "max_vif": 999.0
         },
         "galactic_only": {
             "aic": -141935.4962555587,
             "delta_aic_vs_base": 125.65362165184342,
             "eta_theta": -0.0011205100122927978,
             "eta_theta_t": -11.311464086056466,
-            "max_vif": Infinity
+            "max_vif": 999.0
         },
         "dual_axis": {
             "aic": -141933.96151625173,
@@ -508,7 +511,7 @@
             "eta_gal": -0.0015056806071175812,
             "eta_cmb_t": 0.6820228998612328,
             "eta_gal_t": -2.626021605012265,
-            "max_vif": Infinity
+            "max_vif": 999.0
         },
         "nested_f_tests": {
             "add_cmb_to_base": {
@@ -548,23 +551,26 @@
         },
         "random_axis_delta_aic_null": {
             "description": "Uniform random unit vectors on S\u00b2: empirical null for \u0394AIC when the orientation predictor is any fixed sky axis (not only permuted or rotated Planck).",
-            "n_draws": 50000,
+            "n_draws": 100000,
             "observed_delta_aic_planck": 119.2222011302656,
-            "null_delta_aic_median": 61.158882493313286,
-            "null_delta_aic_99th_percentile": 130.54359033551563,
-            "null_delta_aic_max": 137.69139511688263,
-            "empirical_p_value": 0.0954,
-            "planck_axis_exceeds_median_by": 58.06331863695232,
+            "null_delta_aic_median": 61.94497695748578,
+            "null_delta_aic_99th_percentile": 130.3451517340372,
+            "null_delta_aic_max": 137.71535595148453,
+            "empirical_p_value": 0.09559,
+            "planck_rank": 9559,
+            "planck_percentile": 90.441,
+            "gap_above_99th_percentile": -11.122950603771585,
+            "planck_axis_exceeds_median_by": 57.277224172779825,
             "jeffreys_95_interval_on_p": {
-                "k_random_ge_true": 4770,
-                "n_draws": 50000,
-                "jeffreys_95_lower": 0.09284848789113942,
-                "jeffreys_95_upper": 0.09799835170680525
+                "k_random_ge_true": 9559,
+                "n_draws": 100000,
+                "jeffreys_95_lower": 0.09377933245706387,
+                "jeffreys_95_upper": 0.0974240768060897
             },
             "correlation_matched_subnull": {
-                "n_matched": 9032,
+                "n_matched": 18208,
                 "corr_tolerance": 0.02,
-                "empirical_p_value": 0.26428255093002656
+                "empirical_p_value": 0.2663664323374341
             },
             "role": "primary_delta_aic_null_for_any_fixed_axis"
         }
@@ -591,7 +597,18 @@
     },
     "falsification_tests_passed": 4,
     "falsification_tests_total": 5,
-    "interpretation": "4/5 scored diagnostics pass (A\u2013E). Primary orientation identifiability is the dual-axis block (H): r(cos\u03b8_CMB, cos\u03b8_gal)=0.984; in the six-parameter model \u03b7_gal t=-2.63 while \u03b7_CMB t=0.68 (add-gal|CMB p=8.6441e-03, add-CMB|gal p=0.495). Single-axis Planck vs galactic \u0394AIC comparisons are supplementary (galactic-only beats CMB-only in AIC: True). Random-axis Monte Carlo on S\u00b2 (D): Planck \u0394AIC=119.2 vs null median 61.2; p(any axis \u2265 Planck)=0.095. TEP \u03b7_\u03b8 coverage (I): fitted \u03b7_\u03b8=-9.7721e-04 within Step 033 band=True (z=-6.14 vs \u03b7\u2080 scale). Aliasing, permutation, and orthogonalization support a nontrivial directional component; phase null p_F_eff=0.0006. Present as directional-anatomy plus fixed-sky identifiability, not unique CMB-frame proof.",
+    "composite_directional_specificity": {
+        "stouffer_combined_z": 1.4484712231219545,
+        "composite_p_value": 0.0737426541839642,
+        "individual_p_values": [
+            1e-10,
+            1e-10,
+            0.0006,
+            0.9999999999,
+            0.9999999999
+        ]
+    },
+    "interpretation": "4/5 scored diagnostics pass (A\u2013E). Primary orientation identifiability is the dual-axis block (H): r(cos\u03b8_CMB, cos\u03b8_gal)=0.984; in the six-parameter model \u03b7_gal t=-2.63 while \u03b7_CMB t=0.68 (add-gal|CMB p=8.6441e-03, add-CMB|gal p=0.495). Single-axis Planck vs galactic \u0394AIC comparisons are supplementary (galactic-only beats CMB-only in AIC: True). Random-axis Monte Carlo on S\u00b2 (D): Planck \u0394AIC=119.2 vs null median 61.9; p(any axis \u2265 Planck)=0.096. TEP \u03b7_\u03b8 coverage (I): fitted \u03b7_\u03b8=-9.7721e-04 within Step 033 band=True (z=-6.14 vs \u03b7\u2080 scale). Aliasing, permutation, and orthogonalization support a nontrivial directional component; phase null p_F_eff=0.0006. Present as directional-anatomy plus fixed-sky identifiability, not unique CMB-frame proof.",
     "input_dataset": {
         "label": "INPOP19a_all_stations_residuals",
         "path": "data/processed/INPOP19a_all_stations_residuals.csv"

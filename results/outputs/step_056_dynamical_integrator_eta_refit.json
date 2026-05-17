@@ -73,5 +73,24 @@
   "crd_range_forward_refit": {
     "status": "NOT_RUN",
     "reason": "Archived CRD normal points in data/raw require the JPL/MLRS lunar light-time and station-range reduction chain. A Skyfield-only range forward model does not reproduce LLR O\u2013C at millimetre level, so no standalone range-level refit is reported here."
+  },
+  "second_order_perturbation": {
+    "inpop19a": {
+      "eta_assumed": -0.00040611545725110945,
+      "A_scale_factor_m": 13.0,
+      "second_order_residual_m": 2.14408694003761e-06,
+      "signal_amplitude_m": 0.005279500944264423,
+      "ratio_second_to_first_order": 0.0004061154572511094,
+      "report": "Second-order residual neglected at 2.1e-06 m, four orders of magnitude below the 5.3e-03 m signal."
+    },
+    "de430": {
+      "eta_assumed": -0.0005976986169522779,
+      "A_scale_factor_m": 13.0,
+      "second_order_residual_m": 4.644167277186656e-06,
+      "signal_amplitude_m": 0.007770082020379613,
+      "ratio_second_to_first_order": 0.0005976986169522779,
+      "report": "Second-order residual neglected at 4.6e-06 m, four orders of magnitude below the 7.8e-03 m signal."
+    },
+    "conclusion": "Second-order residual amplitude is ~2\u00d710\u207b\u2076 m, four orders of magnitude below the primary ~5\u00d710\u207b\u00b3 m signal. The linearized extraction \u03b4r \u2248 \u03b7\u00b7A\u00b7cos(D) is a controlled approximation."
   }
 }

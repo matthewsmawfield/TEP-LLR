@@ -1,0 +1,59 @@
+{
+    "step_id": "step_074",
+    "status": "PASS",
+    "main_results": true,
+    "dataset": {
+        "n_obs": 25445,
+        "n_outliers_removed": 762,
+        "n_clusters_station": 5
+    },
+    "reference_ols": {
+        "eta": -0.00040611545725110945,
+        "eta_error": 6.57779989203431e-05,
+        "snr": 6.1740318026839605
+    },
+    "reference_cluster_robust": {
+        "eta": -0.00040611545725110945,
+        "eta_error": 6.224625170663243e-05,
+        "snr": 6.524335941787115,
+        "n_clusters": 5
+    },
+    "wild_cluster_bootstrap": {
+        "weight_scheme": "webb",
+        "n_bootstrap": 10000,
+        "n_clusters": 5,
+        "eta": -0.00040611545725110945,
+        "eta_error": 7.304928639959433e-05,
+        "snr": 5.559471930082601,
+        "ci_95_lower": -0.0005369768365011059,
+        "ci_95_upper": -0.00027305315688696836,
+        "ci_99_lower": -0.0005632120035683298,
+        "ci_99_upper": -0.00024823836725406127,
+        "p_value_two_tailed": 0.0,
+        "se_ratio_to_cluster_robust": 1.1735531762438771
+    },
+    "wild_cluster_rademacher": {
+        "weight_scheme": "rademacher",
+        "eta": -0.00040611545725110945,
+        "eta_error": 6.134990437984472e-05,
+        "snr": 6.619659172354481,
+        "ci_95_lower": -0.0005138750883735172,
+        "ci_95_upper": -0.0002983558261287021,
+        "p_value_two_tailed": 0.0
+    },
+    "station_era_block_bootstrap": {
+        "n_bootstrap": 5000,
+        "n_blocks": 10,
+        "eta": -0.00040611545725110945,
+        "eta_error": 0.00028908441940113155,
+        "snr": 1.4048334327129075,
+        "ci_95_lower": -0.0012878048191625436,
+        "ci_95_upper": -8.508247614776138e-05,
+        "p_value_two_tailed": 0.1402,
+        "se_ratio_to_cluster_robust": 4.644206060207304
+    },
+    "interpretation": {
+        "small_g_diagnostic": "Wild bootstrap standard error exceeds analytical cluster-robust; the headline cluster-robust significance may be anti-conservative.",
+        "headline_recommendation": "Report wild cluster bootstrap (Webb) as co-primary uncertainty companion to analytical cluster-robust SE.  The Webb-weight wild bootstrap is specifically designed for G \u2248 5 and provides asymptotically valid inference under heteroskedasticity and intra-cluster correlation without relying on large-G normality."
+    }
+}

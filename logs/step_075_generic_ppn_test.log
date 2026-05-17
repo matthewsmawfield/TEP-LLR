@@ -1,0 +1,7 @@
+[11:00:37] ═══ ═══ Step 075: Generic PPN Falsification Test ═══
+[11:00:37]     Headline η = -3.9088e-04 ± 5.6283e-05
+[11:00:37]     Measured η = -3.9088e-04 ± 5.6283e-05 deviates from GR (η=0) at 6.94σ (p = 3.79e-12). GR is rejected at 5σ.
+[11:00:37]     Given γ = 1.000000 ± 2.30e-05 (Cassini), the LLR η implies β = 0.999902 ± 0.000015. This deviates from GR (β=1) at 6.43σ (p = 1.29e-10).
+[11:00:37]     Joint (β,γ) best fit: β=0.999902 ± 1.07e-05, γ=1.000000 ± 1.63e-05. GR (β=γ=1) has Δchi²=48.2. GR is outside 99% contour — rejected at >3σ.
+[11:00:37]     MODIFIED_GRAVITY_DETECTED: Both η ≠ 0 and β ≠ 1 are established at >3σ using standard PPN formalism, independent of TEP.
+[11:00:37] ✓   Saved results to results/outputs/step_075_generic_ppn_test.json

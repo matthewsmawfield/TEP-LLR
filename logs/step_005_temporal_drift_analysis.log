@@ -1,45 +1,45 @@
-[13:26:09] ═══ Starting Temporal Drift Analysis...
-[13:26:09] 
-[13:26:09] ═══ Temporal Autocorrelation Analysis:
-[13:26:09] 
-[13:26:09]     Linear Regression Complete (N=7067, DOF=7065):
-[13:26:09]       RSS=1.759379e+02, MSE=2.490275e-02, χ²_red=0.025
-[13:26:09]       Birge Ratio = 0.158 (Scaling factor applied: 1.000)
-[13:26:09]       Condition Number κ(R) = 2.43e+00
-[13:26:09]       Final η = -1.09837750e-03 ± 3.32534476e-04
-[13:26:09]     Linear Regression Complete (N=12323, DOF=12321):
-[13:26:09]       RSS=1.259577e+01, MSE=1.022301e-03, χ²_red=0.001
-[13:26:09]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
-[13:26:09]       Condition Number κ(R) = 1.90e+00
-[13:26:09]       Final η = -2.93221837e-04 ± 4.17949614e-05
-[13:26:09]     Linear Regression Complete (N=737, DOF=735):
-[13:26:09]       RSS=1.397850e+01, MSE=1.901837e-02, χ²_red=0.019
-[13:26:09]       Birge Ratio = 0.138 (Scaling factor applied: 1.000)
-[13:26:09]       Condition Number κ(R) = 4.15e+00
-[13:26:09]       Final η = 3.55351087e-03 ± 1.44874881e-03
-[13:26:09]     Linear Regression Complete (N=2388, DOF=2386):
-[13:26:09]       RSS=2.188557e+01, MSE=9.172492e-03, χ²_red=0.009
-[13:26:09]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
-[13:26:09]       Condition Number κ(R) = 3.06e+00
-[13:26:09]       Final η = -1.78329660e-04 ± 4.14145984e-04
-[13:26:09]     Linear Regression Complete (N=751, DOF=749):
-[13:26:09]       RSS=6.423617e+00, MSE=8.576257e-03, χ²_red=0.009
-[13:26:09]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
-[13:26:09]       Condition Number κ(R) = 3.05e+00
-[13:26:09]       Final η = -1.64470034e-03 ± 7.16420519e-04
-[13:26:09]     Linear Regression Complete (N=346, DOF=344):
-[13:26:09]       RSS=1.323291e+00, MSE=3.846776e-03, χ²_red=0.004
-[13:26:09]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
-[13:26:09]       Condition Number κ(R) = 3.40e+00
-[13:26:09]       Final η = -1.81311472e-05 ± 8.70658166e-04
-[13:26:09]     Linear Regression Complete (N=2595, DOF=2593):
-[13:26:09]       RSS=2.582927e+00, MSE=9.961152e-04, χ²_red=0.001
-[13:26:09]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
-[13:26:09]       Condition Number κ(R) = 1.95e+00
-[13:26:09]       Final η = -2.39835568e-04 ± 8.66412451e-05
-[13:26:09] 
-[13:26:09] ═══ Autocorrelation Summary:
-[13:26:09] ⚠     Stations with significant autocorrelation: 5/5
-[13:26:09] 
-[13:26:09] Results saved to results/outputs/step_005_temporal_drift_analysis.json
-[13:26:09] ✓   Temporal Drift Analysis Complete.
+[10:53:32] ═══ Starting Temporal Drift Analysis...
+[10:53:32] 
+[10:53:32] ═══ Temporal Autocorrelation Analysis:
+[10:53:32] 
+[10:53:32]     Linear Regression Complete (N=7067, DOF=7065):
+[10:53:32]       RSS=1.759379e+02, MSE=2.490275e-02, χ²_red=0.025
+[10:53:32]       Birge Ratio = 0.158 (Scaling factor applied: 1.000)
+[10:53:32]       Condition Number κ(R) = 2.43e+00
+[10:53:32]       Final η = -1.09837750e-03 ± 3.32534476e-04
+[10:53:32]     Linear Regression Complete (N=12323, DOF=12321):
+[10:53:32]       RSS=1.259577e+01, MSE=1.022301e-03, χ²_red=0.001
+[10:53:32]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+[10:53:32]       Condition Number κ(R) = 1.90e+00
+[10:53:32]       Final η = -2.93221837e-04 ± 4.17949614e-05
+[10:53:32]     Linear Regression Complete (N=737, DOF=735):
+[10:53:32]       RSS=1.397850e+01, MSE=1.901837e-02, χ²_red=0.019
+[10:53:32]       Birge Ratio = 0.138 (Scaling factor applied: 1.000)
+[10:53:32]       Condition Number κ(R) = 4.15e+00
+[10:53:32]       Final η = 3.55351087e-03 ± 1.44874881e-03
+[10:53:32]     Linear Regression Complete (N=2388, DOF=2386):
+[10:53:32]       RSS=2.188557e+01, MSE=9.172492e-03, χ²_red=0.009
+[10:53:32]       Birge Ratio = 0.096 (Scaling factor applied: 1.000)
+[10:53:32]       Condition Number κ(R) = 3.06e+00
+[10:53:32]       Final η = -1.78329660e-04 ± 4.14145984e-04
+[10:53:32]     Linear Regression Complete (N=751, DOF=749):
+[10:53:32]       RSS=6.423617e+00, MSE=8.576257e-03, χ²_red=0.009
+[10:53:32]       Birge Ratio = 0.093 (Scaling factor applied: 1.000)
+[10:53:32]       Condition Number κ(R) = 3.05e+00
+[10:53:32]       Final η = -1.64470034e-03 ± 7.16420519e-04
+[10:53:32]     Linear Regression Complete (N=346, DOF=344):
+[10:53:32]       RSS=1.323291e+00, MSE=3.846776e-03, χ²_red=0.004
+[10:53:32]       Birge Ratio = 0.062 (Scaling factor applied: 1.000)
+[10:53:32]       Condition Number κ(R) = 3.40e+00
+[10:53:32]       Final η = -1.81311472e-05 ± 8.70658166e-04
+[10:53:32]     Linear Regression Complete (N=2595, DOF=2593):
+[10:53:32]       RSS=2.582927e+00, MSE=9.961152e-04, χ²_red=0.001
+[10:53:32]       Birge Ratio = 0.032 (Scaling factor applied: 1.000)
+[10:53:32]       Condition Number κ(R) = 1.95e+00
+[10:53:32]       Final η = -2.39835568e-04 ± 8.66412451e-05
+[10:53:32] 
+[10:53:32] ═══ Autocorrelation Summary:
+[10:53:32] ⚠     Stations with significant autocorrelation: 5/5
+[10:53:32] 
+[10:53:32] Results saved to results/outputs/step_005_temporal_drift_analysis.json
+[10:53:32] ✓   Temporal Drift Analysis Complete.

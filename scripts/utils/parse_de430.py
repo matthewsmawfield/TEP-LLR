@@ -39,6 +39,7 @@ def parse_de430_file(filepath: Path) -> pd.DataFrame:
     Returns:
         DataFrame with parsed data
     """
+    filepath = Path(filepath)
     data = []
 
     with open(filepath, 'r') as f:
@@ -82,7 +83,7 @@ def parse_de430_file(filepath: Path) -> pd.DataFrame:
 
                 # Robust regex-based date extraction; avoids silent mis-assignment
                 # if the fixed-width position assumption breaks.
-                date_match = re.search(r'(\d{4})(\d{2})(\d{2})', timestamp)
+                date_match = re.search(r'5\d(\d{4})(\d{2})(\d{2})', timestamp)
                 if date_match:
                     try:
                         year = int(date_match.group(1))

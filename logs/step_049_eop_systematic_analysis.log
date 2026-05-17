@@ -1,31 +1,31 @@
-[13:27:34] ═══ Starting EOP Systematic Analysis (Step 049)...
-[13:27:34]     Working with 25445 observations after 6-sigma cleaning
-[13:27:34] >>> Loading IERS B polar motion data...
-[13:27:35]     Polar motion range: x=-0.225 to 0.313 arcsec, y=0.022 to 0.597 arcsec
-[13:27:35] >>> Computing Moon positions for range geometry...
-[13:27:35] >>> Computing pole tide range effects...
-[13:27:35]     Pole tide range effect: -8.25 to 10.31 mm
-[13:27:35] >>> Testing correlations with residuals...
-[13:27:35]     Pole tide vs residuals: r=0.0682, p=1.3621e-27
-[13:27:35]     Pole tide cos(D) component: η=-2.4673e-05 (7.99σ)
-[13:27:35]     Annual part of pole tide cos(D): η=-1.4190e-05 (6.25σ)
-[13:27:35]     Residual part of pole tide cos(D): η=-1.0483e-05 (5.01σ)
-[13:27:35] >>> Testing TEP signal with and without EOP corrections...
-[13:27:35]     Original:              η=-3.1773e-04 (5.25σ)
-[13:27:35]     After pole tide:         η=-2.9305e-04 (4.85σ)
-[13:27:35]     After annual pole tide:  η=-3.0354e-04 (5.03σ)
-[13:27:35]     After Chandler pole tide: η=-3.0724e-04 (5.08σ)
-[13:27:35] >>> Testing balanced subsample...
-[13:27:35]     Balanced original:       η=-3.1462e-04 (1.06σ), N=1725
-[13:27:35]     Balanced after pole tide: η=-3.1058e-04 (1.05σ), N=1725
-[13:27:35] >>> Per-station analysis after pole tide removal...
-[13:27:35]           Grasse: orig=-3.7818e-04(5.73σ)  no_pole=-3.5818e-04(5.45σ)  pole_rms=2.89mm
-[13:27:35]              APO: orig=-2.3984e-04(2.77σ)  no_pole=-2.5884e-04(3.00σ)  pole_rms=2.07mm
-[13:27:35]        McDonald2: orig=-8.7928e-05(0.29σ)  no_pole=-6.3606e-05(0.21σ)  pole_rms=4.50mm
-[13:27:35]           Matera: orig=3.8459e-04(0.46σ)  no_pole=3.7687e-04(0.46σ)  pole_rms=3.89mm
-[13:27:35]        Haleakala: orig=2.5708e-03(2.21σ)  no_pole=2.3574e-03(2.02σ)  pole_rms=3.37mm
-[13:27:35] >>> Randomization test for spurious correlation...
-[13:27:35]     Randomized pole tide cos(D): mean=1.4975e-07, std=3.0286e-06
-[13:27:35]     Actual vs random Z-score: -8.20
-[13:27:35] ✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_049_eop_systematic_analysis.json
-[13:27:35] Results saved to results/outputs/step_049_eop_systematic_analysis.json
+[10:54:55] ═══ Starting EOP Systematic Analysis (Step 049)...
+[10:54:55]     Working with 25445 observations after 6-sigma cleaning
+[10:54:55] >>> Loading IERS B polar motion data...
+[10:54:55]     Polar motion range: x=-0.225 to 0.313 arcsec, y=0.022 to 0.597 arcsec
+[10:54:55] >>> Computing Moon positions for range geometry...
+[10:54:55] >>> Computing pole tide range effects...
+[10:54:55]     Pole tide range effect: -8.25 to 10.31 mm
+[10:54:55] >>> Testing correlations with residuals...
+[10:54:55]     Pole tide vs residuals: r=0.0682, p=1.3621e-27
+[10:54:55]     Pole tide cos(D) component: η=-2.4673e-05 (7.99σ)
+[10:54:55]     Annual part of pole tide cos(D): η=-1.4190e-05 (6.25σ)
+[10:54:55]     Residual part of pole tide cos(D): η=-1.0483e-05 (5.01σ)
+[10:54:55] >>> Testing TEP signal with and without EOP corrections...
+[10:54:55]     Original:              η=-3.1773e-04 (5.25σ)
+[10:54:55]     After pole tide:         η=-2.9305e-04 (4.85σ)
+[10:54:55]     After annual pole tide:  η=-3.0354e-04 (5.03σ)
+[10:54:55]     After Chandler pole tide: η=-3.0724e-04 (5.08σ)
+[10:54:55] >>> Testing balanced subsample...
+[10:54:55]     Balanced original:       η=-3.1462e-04 (1.06σ), N=1725
+[10:54:55]     Balanced after pole tide: η=-3.1058e-04 (1.05σ), N=1725
+[10:54:55] >>> Per-station analysis after pole tide removal...
+[10:54:55]           Grasse: orig=-3.7818e-04(5.73σ)  no_pole=-3.5818e-04(5.45σ)  pole_rms=2.89mm
+[10:54:55]              APO: orig=-2.3984e-04(2.77σ)  no_pole=-2.5884e-04(3.00σ)  pole_rms=2.07mm
+[10:54:55]        McDonald2: orig=-8.7928e-05(0.29σ)  no_pole=-6.3606e-05(0.21σ)  pole_rms=4.50mm
+[10:54:55]           Matera: orig=3.8459e-04(0.46σ)  no_pole=3.7687e-04(0.46σ)  pole_rms=3.89mm
+[10:54:55]        Haleakala: orig=2.5708e-03(2.21σ)  no_pole=2.3574e-03(2.02σ)  pole_rms=3.37mm
+[10:54:55] >>> Randomization test for spurious correlation...
+[10:54:56]     Randomized pole tide cos(D): mean=1.4975e-07, std=3.0286e-06
+[10:54:56]     Actual vs random Z-score: -8.20
+[10:54:56] ✓   Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_049_eop_systematic_analysis.json
+[10:54:56] Results saved to results/outputs/step_049_eop_systematic_analysis.json

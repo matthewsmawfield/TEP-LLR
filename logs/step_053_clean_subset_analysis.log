@@ -1,26 +1,26 @@
-[22:29:37] ═══ ═══ Step 053: Clean Subset High-SNR Analysis ═══
-[22:29:37]     Clean subset: Grasse 2010+ (N=9981) + APO (N=2595) = 12576
-[22:29:37]     Removed 0 outliers, N=12576
-[22:29:37]     --- Model 1: cosD only ---
-[22:29:37]       η = -3.0557e-04 ± 3.1178e-05 (9.80σ)
-[22:29:37]     --- Model 4: cosD + cos(2D) + annual + monthly (full) ---
-[22:29:37]       η = -3.3597e-04 ± 3.3021e-05 (10.17σ)
-[22:29:37]     --- Model 4: cluster-robust SEs ---
-[22:29:37]       η = -3.3597e-04 ± 4.6312e-05 (7.25σ, cluster-robust, 2 clusters)
-[22:29:37]     --- Model 4: station block bootstrap ---
-[22:29:40]       Station block bootstrap: η = -2.7417e-04 ± 1.2096e-04 (2.27σ), 95% CI [-3.9433e-04, 1.1990e-05], P(η<0) = 0.9650
-[22:29:40]     --- Temporal CV (pre-2013 / post-2013) ---
-[22:29:40]       Train: 2112, Test: 10464
-[22:29:40]       R²_pred = -0.0164, RMSE = 0.0235
-[22:29:40]       cos(D)-only temporal hold-out: R²_pred = -0.0009, η_train = -7.5581e-05
-[22:29:40]       Nuisance transportability (|Δ|/SE) on clean subset, pre- vs post-2013 separate fits:
-[22:29:40]         cos2D: z=3.43, p=0.0006107
-[22:29:40]         sin_y: z=0.21, p=0.8323
-[22:29:40]         cos_y: z=1.96, p=0.04971
-[22:29:40]         sin_m: z=1.57, p=0.1166
-[22:29:40]         cos_m: z=0.80, p=0.4262
-[22:29:40]       Grasse era split: η_pre=-6.0193e-04±3.36e-04, η_post=-3.4790e-04±3.40e-05, p(η_pre=η_post)=0.452
-[22:29:40]     --- Per-station cosD-only within clean subset ---
-[22:29:40]       Grasse: η = -3.0522e-04 ± 3.2605e-05 (9.36σ), N=9981
-[22:29:40]       APO: η = -2.3984e-04 ± 8.6641e-05 (2.77σ), N=2595
-[22:29:40]     Saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_053_clean_subset_analysis.json
+[10:55:13] ═══ ═══ Step 053: Clean Subset High-SNR Analysis ═══
+[10:55:13]     Clean subset: Grasse 2010+ (N=9981) + APO (N=2595) = 12576
+[10:55:13]     Removed 0 outliers, N=12576
+[10:55:13]     --- Model 1: cosD only ---
+[10:55:13]       η = -3.0557e-04 ± 3.1178e-05 (9.80σ)
+[10:55:13]     --- Model 4: cosD + cos(2D) + annual + monthly (full) ---
+[10:55:13]       η = -3.3597e-04 ± 3.3021e-05 (10.17σ)
+[10:55:13]     --- Model 4: cluster-robust SEs ---
+[10:55:13]       η = -3.3597e-04 ± 4.6312e-05 (7.25σ, cluster-robust, 2 clusters)
+[10:55:13]     --- Model 4: station block bootstrap ---
+[10:55:15]       Station block bootstrap: η = -2.7417e-04 ± 1.2096e-04 (2.27σ), 95% CI [-3.9433e-04, 1.1990e-05], P(η<0) = 0.9650
+[10:55:15]     --- Temporal CV (pre-2013 / post-2013) ---
+[10:55:15]       Train: 2112, Test: 10464
+[10:55:15]       R²_pred = -0.0164, RMSE = 0.0235
+[10:55:15]       cos(D)-only temporal hold-out: R²_pred = -0.0009, η_train = -7.5581e-05
+[10:55:15]       Nuisance transportability (|Δ|/SE) on clean subset, pre- vs post-2013 separate fits:
+[10:55:15]         cos2D: z=3.43, p=0.0006107
+[10:55:15]         sin_y: z=0.21, p=0.8323
+[10:55:15]         cos_y: z=1.96, p=0.04971
+[10:55:15]         sin_m: z=1.57, p=0.1166
+[10:55:15]         cos_m: z=0.80, p=0.4262
+[10:55:15]       Grasse era split: η_pre=-6.0193e-04±3.36e-04, η_post=-3.4790e-04±3.40e-05, p(η_pre=η_post)=0.452
+[10:55:15]     --- Per-station cosD-only within clean subset ---
+[10:55:15]       Grasse: η = -3.0522e-04 ± 3.2605e-05 (9.36σ), N=9981
+[10:55:15]       APO: η = -2.3984e-04 ± 8.6641e-05 (2.77σ), N=2595
+[10:55:15]     Saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/results/outputs/step_053_clean_subset_analysis.json

@@ -1,39 +1,39 @@
-[13:27:27] ═══ Computing Quantitative η Prediction from TEP...
-[13:27:27]     Loaded measured η from step_003: -3.1773e-04 ± 6.0519e-05
-[13:27:27]     ρ_T: 20.0 ± 8.0 g/cm³ (GNSS atomic clock correlations (Paper 6, UCD))
-[13:27:27] 
-[13:27:27] >>> --- THEORETICAL COMPARISON ---
-[13:27:27]     [Baseline 1] Microscopic-coupling-only η = α_0² Δ(Φ²): 4.3427e-24
-[13:27:27]         Earth compactness: Φ_⊕/c² = 6.953e-10
-[13:27:27]         Moon compactness:  Φ_☽/c² = 3.140e-11
-[13:27:27]         Compactness squared differential: 4.825e-19
-[13:27:27]     [Baseline 2] Volumetric suppression η = -α_0 Δ⟨(ρ/ρ_T)³⟩: -9.6594e-05
-[13:27:27]         Shielding differential (step_026): 3.2198e-02
-[13:27:27]     [Baseline 3] Standard scalar-tensor η ≈ 4α_0²: 3.6000e-05
-[13:27:27] 
-[13:27:27] >>> --- ENHANCEMENT FACTORS ---
-[13:27:27]     Measured / microscopic-coupling-only: 7.32e+19×
-[13:27:27]     Measured / standard scalar-tensor (4α_0²): 8.8×
-[13:27:27]     Measured / volumetric TEP prediction: 3.3×
-[13:27:27] 
-[13:27:27] >>> --- CROSS-DOMAIN COMPARISON (Jakarta v0.8 κ Framework) ---
-[13:27:27]     κ_MSP (pulsars): ~1.0e+06
-[13:27:27]     κ_Cep (Cepheids): 1.05e+06 ± 4.30e+05 mag (Paper 11)
-[13:27:27]     η (LLR): -3.1773e-04 (Solar System screened regime)
-[13:27:27]     Screening ratio: η/κ_Cep ~ -3.03e-10
-[13:27:27] 
-[13:27:27] >>> --- AMPLITUDE PREDICTION ---
-[13:27:27]     Measured amplitude: 0.0041 mm
-[13:27:27]     Microscopic-only amplitude: 5.645528e-23 mm
-[13:27:27]     Volumetric TEP amplitude: 0.0013 mm
-[13:27:27]     CMB orientation scale: η_θ predicted center = -3.1773e-04 (band [-1e-03, -1e-04])
-[13:27:27] 
-[13:27:27] >>> --- SUMMARY ---
-[13:27:27]     Measured η: -3.1773e-04
-[13:27:27]     Microscopic-only η: 4.3427e-24
-[13:27:27]     Standard scalar-tensor η: 3.6000e-05
-[13:27:27]     Volumetric TEP η: -9.6594e-05
-[13:27:27]     Amplitude: 0.0041 mm
-[13:27:27]     Screening ratio η/κ_Cep: -3.03e-10
-[13:27:27] Results saved to results/outputs/step_033_quantitative_eta_prediction.json
-[13:27:27] ✓   Quantitative η Prediction Complete.
+[10:54:48] ═══ Computing Quantitative η Prediction from TEP...
+[10:54:48]     Loaded measured η from step_003: -3.1773e-04 ± 6.0519e-05
+[10:54:48]     ρ_T: 20.0 ± 8.0 g/cm³ (GNSS atomic clock correlations (Paper 6, UCD))
+[10:54:48] 
+[10:54:48] >>> --- THEORETICAL COMPARISON ---
+[10:54:48]     [Baseline 1] Microscopic-coupling-only η = α_0² Δ(Φ²): 4.3427e-24
+[10:54:48]         Earth compactness: Φ_⊕/c² = 6.953e-10
+[10:54:48]         Moon compactness:  Φ_☽/c² = 3.140e-11
+[10:54:48]         Compactness squared differential: 4.825e-19
+[10:54:48]     [Baseline 2] Volumetric suppression η = -α_0 Δ⟨(ρ/ρ_T)³⟩: -9.6594e-05
+[10:54:48]         Shielding differential (step_026): 3.2198e-02
+[10:54:48]     [Baseline 3] Standard scalar-tensor η ≈ 4α_0²: 3.6000e-05
+[10:54:48] 
+[10:54:48] >>> --- ENHANCEMENT FACTORS ---
+[10:54:48]     Measured / microscopic-coupling-only: 7.32e+19×
+[10:54:48]     Measured / standard scalar-tensor (4α_0²): 8.8×
+[10:54:48]     Measured / volumetric TEP prediction: 3.3×
+[10:54:48] 
+[10:54:48] >>> --- CROSS-DOMAIN COMPARISON (Jakarta v0.8 κ Framework) ---
+[10:54:48]     κ_MSP (pulsars): ~1.0e+06
+[10:54:48]     κ_Cep (Cepheids): 1.05e+06 ± 4.30e+05 mag (Paper 11)
+[10:54:48]     η (LLR): -3.1773e-04 (Solar System screened regime)
+[10:54:48]     Screening ratio: η/κ_Cep ~ -3.03e-10
+[10:54:48] 
+[10:54:48] >>> --- AMPLITUDE PREDICTION ---
+[10:54:48]     Measured amplitude: 0.0041 mm
+[10:54:48]     Microscopic-only amplitude: 5.645528e-23 mm
+[10:54:48]     Volumetric TEP amplitude: 0.0013 mm
+[10:54:48]     CMB orientation scale: η_θ predicted center = -3.1773e-04 (band [-1e-03, -1e-04])
+[10:54:48] 
+[10:54:48] >>> --- SUMMARY ---
+[10:54:48]     Measured η: -3.1773e-04
+[10:54:48]     Microscopic-only η: 4.3427e-24
+[10:54:48]     Standard scalar-tensor η: 3.6000e-05
+[10:54:48]     Volumetric TEP η: -9.6594e-05
+[10:54:48]     Amplitude: 0.0041 mm
+[10:54:48]     Screening ratio η/κ_Cep: -3.03e-10
+[10:54:48] Results saved to results/outputs/step_033_quantitative_eta_prediction.json
+[10:54:48] ✓   Quantitative η Prediction Complete.

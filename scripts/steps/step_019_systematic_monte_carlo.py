@@ -24,6 +24,7 @@ from typing import Dict, Tuple
 import numpy as np
 from scripts.utils.numerics import stable_lstsq
 import pandas as pd
+import statsmodels.api as sm
 from scripts.utils.logger import TEPLogger, set_step_logger, set_verbose_mode, print_status
 from scripts.utils.llr_constants import ETA_SCALE_FACTOR
 
@@ -136,6 +137,44 @@ def inject_instrumental_uncertainty(df: pd.DataFrame, rng: np.random.RandomState
     df_perturbed['residual_m'] = df_perturbed['residual_m'] + drift
 
     return df_perturbed
+
+def _build_design_cosd_only(df: pd.DataFrame):
+    """Build cosD-only design matrix and extract cosD index."""
+    cos_d = np.cos(df['elongation_rad'].values)
+    const = np.ones(len(df))
+    X = np.column_stack([cos_d, const])
+    return X, 0  # cos_d is index 0
+
+def compute_cross_ephemeris_eta_difference() -> dict:
+    """Compute empirical eta difference between INPOP19a and DE430 from raw data."""
+    project_root = Path(__file__).parent.parent.parent
+    inpop_path = project_root / 'data' / 'processed' / 'INPOP19a_all_stations_residuals.csv'
+    de430_path = project_root / 'data' / 'processed' / 'DE430_all_residuals.csv'
+    if not inpop_path.exists() or not de430_path.exists():
+        return None
+    df_inpop_full = pd.read_csv(inpop_path)
+    df_de430 = pd.read_csv(de430_path)
+    # Restrict INPOP19a to DE430 time window for fair comparison
+    jd_min = df_de430['date_julian'].min()
+    jd_max = df_de430['date_julian'].max()
+    df_inpop = df_inpop_full[(df_inpop_full['date_julian'] >= jd_min) & (df_inpop_full['date_julian'] <= jd_max)].copy()
+    for d in [df_inpop, df_de430]:
+        d["cos_d"] = np.cos(d["elongation_rad"].values)
+    fit_inpop = sm.OLS(df_inpop["residual_m"], sm.add_constant(df_inpop["cos_d"])).fit()
+    fit_de430 = sm.OLS(df_de430["residual_m"], sm.add_constant(df_de430["cos_d"])).fit()
+    # Convert coefficients to eta using ETA_SCALE_FACTOR
+    eta_inpop = float(fit_inpop.params["cos_d"] / ETA_SCALE_FACTOR)
+    eta_de430 = float(fit_de430.params["cos_d"] / ETA_SCALE_FACTOR)
+    diff = float(abs(eta_inpop - eta_de430))
+    se_diff = float(np.sqrt((fit_inpop.bse["cos_d"] / ETA_SCALE_FACTOR)**2 + (fit_de430.bse["cos_d"] / ETA_SCALE_FACTOR)**2))
+    z_diff = float(diff / max(se_diff, 1e-20))
+    return {
+        "inpop19a_eta": eta_inpop,
+        "de430_eta": eta_de430,
+        "diff": diff,
+        "se_diff": se_diff,
+        "z_diff": z_diff,
+    }
 
 def compute_eta_with_error(df: pd.DataFrame) -> Tuple[float, float]:
     """Compute eta and its statistical error.
@@ -328,12 +367,17 @@ def monte_carlo_systematic_analysis(df: pd.DataFrame, n_mc: int = 1000,
     )
     literature_floor_applied = False
 
+    # Empirical cross-ephemeris bound from raw INPOP19a vs DE430 data
+    ephem_comp = compute_cross_ephemeris_eta_difference()
+    empirical_ephemeris_eta = abs(ephem_comp['diff']) if ephem_comp else None
+
     total_uncertainty_corrected = np.sqrt(final_stat_error**2 + effective_systematic**2)
 
     results['error_budget'] = {
         'statistical': float(final_stat_error),
         'systematic_combined': float(effective_systematic),
         'systematic_mc_component': float(combined_systematic_error),
+        'empirical_ephemeris_bound_eta': float(empirical_ephemeris_eta) if empirical_ephemeris_eta is not None else None,
         'total_uncertainty': float(total_uncertainty_corrected),
         'signal_to_total_ratio': float(abs(eta_baseline) / total_uncertainty_corrected),
         'systematic_to_statistical_ratio': float(effective_systematic / final_stat_error),

@@ -331,14 +331,14 @@ def compute_vif(X):
         X_others = np.delete(X, j, axis=1)
         coeffs, _, rank, _ = stable_lstsq(X_others, y_col)
         if rank < X_others.shape[1] or np.var(y_col) == 0:
-            vifs.append(np.inf)
+            vifs.append(999.0)
             continue
         with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
             y_pred = X_others @ coeffs
         ss_res = np.sum((y_col - y_pred) ** 2)
         ss_tot = np.sum((y_col - np.mean(y_col)) ** 2)
         r2 = 1 - ss_res / ss_tot if ss_tot > 0 else 0.0
-        vifs.append(1.0 / (1.0 - r2) if r2 < 0.999999 else np.inf)
+        vifs.append(1.0 / (1.0 - r2) if r2 < 0.999999 else 999.0)
     return np.array(vifs)
 
 
@@ -749,7 +749,7 @@ def cmb_falsification_analysis(df, verbose=False):
     delta_aic_true, f_true, p_f_true, f_true_eff = delta_aic_for_direction(cos_theta_c, use_eff=True)
 
     # D1. Uniform random directions on S² (empirical ΔAIC null)
-    n_scramble = 50000
+    n_scramble = 100000
     strict_alpha = 0.01
     n_threads = max(2, min(int(get_config()["N_WORKERS"]), os.cpu_count() or 8))
     em_sub = em_hat[:, mask_clean]
@@ -1044,6 +1044,11 @@ def cmb_falsification_analysis(df, verbose=False):
         "CALC",
     )
 
+    # Rank of Planck axis among random draws
+    planck_rank = int(np.sum(delta_aics_scram >= delta_aic_true))
+    planck_percentile = float(100.0 * (1.0 - planck_rank / max(len(delta_aics_scram), 1)))
+    gap_99th = float(delta_aic_true - np.percentile(delta_aics_scram, 99))
+
     random_axis_delta_aic_null = {
         "description": (
             "Uniform random unit vectors on S²: empirical null for ΔAIC when the "
@@ -1055,6 +1060,9 @@ def cmb_falsification_analysis(df, verbose=False):
         "null_delta_aic_99th_percentile": float(np.percentile(delta_aics_scram, 99)),
         "null_delta_aic_max": float(np.max(delta_aics_scram)),
         "empirical_p_value": float(p_scramble_delta_aic),
+        "planck_rank": planck_rank,
+        "planck_percentile": planck_percentile,
+        "gap_above_99th_percentile": gap_99th,
         "planck_axis_exceeds_median_by": float(delta_aic_true - np.median(delta_aics_scram)),
         "jeffreys_95_interval_on_p": {
             "k_random_ge_true": k_scramble_delta_aic,
@@ -1488,16 +1496,32 @@ def cmb_falsification_analysis(df, verbose=False):
         directional_anatomy_result.get("directional_anatomy_passed", False),
     ]
     n_passed = sum(checks)
+
+    # Composite directional specificity score (Stouffer's Z method)
+    p_floor = 1e-10
+    p_values_directional = [
+        float(min(max(aliasing_result.get("p_aliasing_t_statistic", 1.0), p_floor), 1.0 - p_floor)),
+        float(min(max(permutation_result.get("p_value_t_statistic", 1.0), p_floor), 1.0 - p_floor)),
+        float(min(max(refined_directional_nulls["phase_null"].get("p_f_eff", 1.0), p_floor), 1.0 - p_floor)),
+        float(min(max(orthogonalization_result.get("p_orthogonalized", 1.0), p_floor), 1.0 - p_floor)) if orthogonalization_result.get("available") else 1.0 - p_floor,
+        float(min(max(1.0 - directional_anatomy_result.get("true_preferred_fraction", 0.0), p_floor), 1.0 - p_floor)),
+    ]
+    z_scores = [stats.norm.ppf(1.0 - p) for p in p_values_directional]
+    combined_z = float(np.sum(z_scores) / np.sqrt(len(z_scores)))
+    if not np.isfinite(combined_z):
+        combined_z = 0.0
+    composite_p = float(min(max(1.0 - stats.norm.cdf(combined_z), p_floor), 1.0 - p_floor))
+
     if n_passed >= 4:
         falsification_result = "STRONG_SUPPORT"
         print_status(
-            f"RESULT: {n_passed}/5 falsification tests passed. Directional residual component is supported with caveats.",
+            f"RESULT: {n_passed}/5 falsification tests passed. Composite directional p={composite_p:.2e} (Z={combined_z:.2f}).",
             "SUCCESS",
         )
     elif n_passed >= 3:
         falsification_result = "PARTIAL_SUPPORT"
         print_status(
-            f"RESULT: {n_passed}/5 falsification tests passed. Directional residual component is only partially supported.",
+            f"RESULT: {n_passed}/5 falsification tests passed. Composite directional p={composite_p:.2e}.",
             "INFO",
         )
     elif n_passed >= 2:
@@ -1543,6 +1567,11 @@ def cmb_falsification_analysis(df, verbose=False):
         },
         "falsification_tests_passed": int(n_passed),
         "falsification_tests_total": 5,
+        "composite_directional_specificity": {
+            "stouffer_combined_z": combined_z,
+            "composite_p_value": composite_p,
+            "individual_p_values": [float(p) for p in p_values_directional],
+        },
         "interpretation": (
             f"{n_passed}/5 scored diagnostics pass (A–E). Primary orientation identifiability is "
             f"the dual-axis block (H): r(cosθ_CMB, cosθ_gal)={corr_cmb_gal:.3f}; in the six-parameter "
