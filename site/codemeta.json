@@ -1,6 +1,9 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
-  "@type": "ScholarlyArticle",
+  "@type": [
+    "ScholarlyArticle",
+    "SoftwareSourceCode"
+  ],
   "name": "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect",
   "description": "The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle via compactness-dependent screening. This work tests for SEP violation using Lunar Laser Ranging data, analysing 25,445 cleaned O-C residuals from five international stations spanning 35 years (1984-2019). The headline estimand is precision-weighted full-systematic regression: η = -3.91 × 10⁻⁴ ± 5.63 × 10⁻⁵ at 6.94σ (6.78σ cluster-robust). Step 064-PI shows prediction-interval coverage 86% at 68% nominal and 98% at 95% (χ²_red = 0.48 on published σ), so formal errors are conservative rather than underestimated.",
   "abstract": "The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a dynamical field that couples universally to all matter via a conformal metric. TEP preserves the Weak Equivalence Principle through universal conformal coupling, but predicts violation of the Strong Equivalence Principle (SEP) via compactness-dependent screening. This work tests for SEP violation using Lunar Laser Ranging data, analysing 25,445 cleaned O-C residuals from five international stations spanning 35 years (1984-2019). The headline estimand is precision-weighted full-systematic regression: η = -3.91 × 10⁻⁴ ± 5.63 × 10⁻⁵ at 6.94σ (6.78σ cluster-robust). Step 064-PI shows prediction-interval coverage 86% at 68% nominal and 98% at 95% (χ²_red = 0.48 on published σ), so formal errors are conservative rather than underestimated. Unweighted full-systematic OLS yields η = -4.06 × 10⁻⁴ ± 6.58 × 10⁻⁵ at 6.17σ as a sensitivity upper bound. Cook's-Distance excision returns η = -3.87 × 10⁻⁴ ± 4.95 × 10⁻⁵ at 7.82σ as a secondary leverage diagnostic.",
@@ -28,5 +31,8 @@
     "post-Newtonian",
     "scalar-tensor gravity",
     "strong equivalence principle"
-  ]
+  ],
+  "developmentStatus": "active",
+  "runtimePlatform": "Python",
+  "applicationCategory": "Scientific/Research"
 }

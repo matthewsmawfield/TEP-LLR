@@ -4,10 +4,15 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://mlsmawfield.com/tep/llr/</loc>
-        <lastmod>2026-05-10</lastmod>
+        <loc>https://matthewsmawfield.github.io/TEP-LLR/</loc>
+        <lastmod>2026-05-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
-    <!-- Add more URLs here as you create additional pages -->
+    <url>
+        <loc>https://matthewsmawfield.github.io/TEP-LLR/public/docs/17-TEP-LLR-v0.1-Lucknow.pdf</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>
