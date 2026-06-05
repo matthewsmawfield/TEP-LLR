@@ -1,26 +1,182 @@
 #!/usr/bin/env python3
-"""Unified PDF Processing Script
-Compresses PDF and embeds comprehensive metadata in one operation.
+"""Generic PDF Processing Script
+Compresses PDF and embeds metadata from CITATION.cff in one operation.
 
-This script processes the TEP-LLR manuscript PDF ("The Temporal Equivalence 
-Principle: Lunar Laser Ranging and the Nordtvedt Effect") by compressing it 
-for web distribution and embedding complete academic metadata for proper indexing and citation.
+Reads title, abstract, keywords, version, date, DOI, URL, and authors
+from the project's CITATION.cff file, then compresses the PDF with
+Ghostscript and writes the metadata using exiftool.
 
 Usage:
     python process_pdf.py <input_pdf> [--quality ebook|printer|prepress|default]
-    
+
 Example:
-    python process_pdf.py site/public/docs/17-TEP-LLR-v0.1-Lucknow.pdf --quality ebook
+    python process_pdf.py site/public/docs/26-TEP-C0-v0.1-Athens.pdf --quality ebook
 """
 
 import subprocess
 import sys
 import os
+import re
 from pathlib import Path
 import argparse
 import tempfile
 
 from compress_pdf import compress_pdf as _compress_pdf
+
+try:
+    import yaml
+except ImportError:
+    yaml = None
+
+
+def _extract_yaml_value(content, key):
+    """Extract a scalar string value from CFF content."""
+    # Match key: 'value' or key: value (non-greedy, single line)
+    pattern = rf'^{re.escape(key)}:\s*[\'"]?(.+?)[\'"]?\s*$'
+    match = re.search(pattern, content, re.MULTILINE)
+    if match:
+        return match.group(1).strip()
+    return ''
+
+
+def parse_citation_cff():
+    """Parse CITATION.cff for PDF metadata."""
+    base_dir = Path(__file__).parent.parent
+    citation_file = base_dir / 'CITATION.cff'
+
+    if not citation_file.exists():
+        return None
+
+    try:
+        content = citation_file.read_text()
+
+        if yaml:
+            data = yaml.safe_load(content)
+        else:
+            # Manual parsing fallback
+            data = {}
+            data['title'] = _extract_yaml_value(content, 'title')
+            data['version'] = _extract_yaml_value(content, 'version')
+            data['date-released'] = _extract_yaml_value(content, 'date-released')
+            data['doi'] = _extract_yaml_value(content, 'doi')
+            data['url'] = _extract_yaml_value(content, 'url')
+            data['license'] = _extract_yaml_value(content, 'license')
+
+            # Abstract may span multiple lines in CFF
+            abstract_match = re.search(
+                r'^abstract:\s*[\'"]?((?:.*?\n)+?)(?:\n\w|\Z)',
+                content, re.MULTILINE
+            )
+            if abstract_match:
+                data['abstract'] = abstract_match.group(1).strip().replace("\n  ", " ")
+            else:
+                data['abstract'] = _extract_yaml_value(content, 'abstract')
+
+            # Keywords list
+            kw_match = re.search(r'^keywords:\n((?:- .+\n)+)', content, re.MULTILINE)
+            if kw_match:
+                kws = re.findall(r'- (.+)', kw_match.group(1))
+                data['keywords'] = [k.strip() for k in kws]
+            else:
+                data['keywords'] = []
+
+            # Authors
+            authors = re.findall(r'family-names:\s*(.+)', content)
+            givens = re.findall(r'given-names:\s*(.+)', content)
+            data['authors'] = [
+                {'family-names': f.strip(), 'given-names': g.strip()}
+                for f, g in zip(authors, givens)
+            ]
+
+        return data
+    except Exception:
+        return None
+
+
+def build_metadata(cff_data):
+    """Build PDF metadata dict from parsed CFF data."""
+    title = cff_data.get('title', '')
+
+    # Author name
+    authors = cff_data.get('authors', [])
+    if authors and isinstance(authors, list) and len(authors) > 0:
+        fam = authors[0].get('family-names', 'Smawfield')
+        giv = authors[0].get('given-names', 'Matthew Lukin')
+        author_name = f"{giv} {fam}"
+    else:
+        author_name = 'Matthew Lukin Smawfield'
+
+    version = cff_data.get('version', 'v0.1')
+    v_match = re.match(r'v?([\d.]+)(?:\s*\(([^)]+)\))?', str(version))
+    if v_match:
+        version_num = v_match.group(1)
+        codename = v_match.group(2) or ''
+    else:
+        version_num = str(version).lstrip('v')
+        codename = ''
+
+    date = cff_data.get('date-released', '')
+    if date:
+        date_pdf = date.replace('-', ':')
+    else:
+        date_pdf = ''
+
+    doi = cff_data.get('doi', '')
+    url = cff_data.get('url', '')
+    abstract = cff_data.get('abstract', '')
+    license_str = cff_data.get('license', 'CC-BY-4.0')
+
+    keywords_list = cff_data.get('keywords', [])
+    if isinstance(keywords_list, list):
+        keywords = '; '.join(str(k) for k in keywords_list)
+    else:
+        keywords = str(keywords_list)
+
+    producer_label = f"TEP Research Project - Version {version_num}"
+    if codename:
+        producer_label += f" ({codename})"
+
+    metadata = {
+        'Title': title,
+        'Author': author_name,
+        'Creator': author_name,
+        'Subject': abstract,
+        'Keywords': keywords,
+        'Producer': producer_label,
+        'Copyright': f'Creative Commons Attribution 4.0 International License ({license_str})',
+    }
+
+    if date_pdf:
+        metadata['CreationDate'] = f'{date_pdf} 00:00:00'
+        metadata['ModifyDate'] = f'{date_pdf} 00:00:00'
+
+    metadata['XMP-dc:Creator'] = author_name
+    metadata['XMP-dc:Title'] = title
+    metadata['XMP-dc:Description'] = abstract[:500] if abstract else ''
+    metadata['XMP-dc:Rights'] = license_str
+    metadata['XMP-dc:Publisher'] = 'Zenodo'
+    metadata['XMP-dc:Type'] = 'Preprint'
+    metadata['XMP-dc:Format'] = 'application/pdf'
+    metadata['XMP-dc:Language'] = 'en'
+
+    if doi:
+        metadata['XMP-dc:Identifier'] = f'doi:{doi}'
+        metadata['XMP-prism:DOI'] = doi
+    if url:
+        metadata['XMP-dc:Source'] = url
+        metadata['XMP-prism:URL'] = url
+    if date:
+        metadata['XMP-dc:Date'] = date
+    if version_num:
+        metadata['XMP-prism:VersionIdentifier'] = version_num
+
+    metadata['XMP-prism:PublicationName'] = 'TEP Research Series'
+    metadata['XMP-pdfaid:Part'] = '1'
+    metadata['XMP-pdfaid:Conformance'] = 'B'
+
+    # Remove empty values
+    metadata = {k: v for k, v in metadata.items() if v}
+    return metadata
 
 
 def compress_pdf(input_path, output_path, quality='ebook'):
@@ -36,25 +192,20 @@ def compress_pdf(input_path, output_path, quality='ebook'):
 def embed_metadata(pdf_path, metadata):
     """Embed metadata into PDF using exiftool."""
     cmd = ['exiftool']
-
-    # Add all metadata fields
     for key, value in metadata.items():
         cmd.extend([f'-{key}={value}'])
-
-    # Overwrite original
     cmd.extend(['-overwrite_original', pdf_path])
-
     try:
         subprocess.run(cmd, check=True, capture_output=True)
         return True
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Exiftool metadata embedding failed: {e.stderr.decode()}")
+        stderr = e.stderr.decode() if e.stderr else str(e)
+        raise RuntimeError(f"Exiftool metadata embedding failed: {stderr}")
 
 
 def verify_metadata(pdf_path, expected_fields):
     """Verify metadata was embedded correctly."""
     cmd = ['exiftool'] + [f'-{field}' for field in expected_fields] + [pdf_path]
-
     try:
         result = subprocess.run(cmd, check=True, capture_output=True, text=True)
         return result.stdout
@@ -73,11 +224,6 @@ def main():
         default='ebook',
         help='Compression quality (default: ebook)'
     )
-    parser.add_argument(
-        '--doi',
-        default='10.5281/zenodo.19446029',
-        help='DOI to embed in metadata'
-    )
 
     args = parser.parse_args()
 
@@ -91,6 +237,21 @@ def main():
     print(f"Quality: {args.quality}")
     print()
 
+    # Load metadata from CITATION.cff
+    cff_data = parse_citation_cff()
+    if cff_data:
+        metadata = build_metadata(cff_data)
+        print(f"Loaded metadata from CITATION.cff")
+        print(f"  Title: {metadata.get('Title', 'N/A')[:60]}...")
+    else:
+        print("Warning: Could not load CITATION.cff, using minimal metadata")
+        metadata = {
+            'Title': 'TEP Manuscript',
+            'Author': 'Matthew Lukin Smawfield',
+            'Creator': 'Matthew Lukin Smawfield',
+        }
+    print()
+
     # Step 1: Compress PDF
     print("Step 1: Compressing PDF...")
     with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as tmp:
@@ -98,10 +259,7 @@ def main():
 
     try:
         stats = compress_pdf(str(input_path), tmp_path, args.quality)
-
-        # Replace original with compressed version
         os.replace(tmp_path, str(input_path))
-
         print(f"  Original:    {stats['original_mb']:.2f} MB")
         print(f"  Compressed:  {stats['compressed_mb']:.2f} MB")
         print(f"  Reduction:   {stats['reduction_pct']:.1f}%")
@@ -115,84 +273,10 @@ def main():
 
     # Step 2: Embed metadata
     print("Step 2: Embedding metadata...")
-
-    # Paper metadata - must match manuscript, CITATION.cff, and zenodo.txt
-    metadata = {
-        # Core identification
-        'Title': 'Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect',
-        'Author': 'Matthew Lukin Smawfield',
-        'Creator': 'Matthew Lukin Smawfield',
-
-        # Scientific abstract with key results
-        'Subject': (
-            'The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in which proper time is a '
-            'dynamical field φ that couples universally to all matter via a conformal metric. The coupling '
-            'strength is density-dependent through a TEP suppression mechanism. Suppression operates via the '
-            'continuous spatial profile of the time field (Temporal Topology), in which high ambient density '
-            'in deep potential wells suppresses the local field gradient (Temporal Shear). The degree of '
-            'gradient suppression scales with gravitational compactness (Φ/c²). TEP preserves the Weak Equivalence '
-            'Principle through universal conformal coupling, but predicts violation of the Strong Equivalence '
-            'Principle (SEP) via compactness-dependent suppression. This work tests for SEP violation using '
-            'Lunar Laser Ranging data, analysing 25,445 cleaned O-C residuals from five international stations spanning '
-            '35 years (1984-2019). The headline estimand is precision-weighted full-systematic regression on the full '
-            'cleaned sample: η = -3.91 × 10⁻⁴ ± 5.63 × 10⁻⁵ at 6.94σ (6.78σ cluster-robust). Unweighted full-systematic '
-            'OLS yields η = -4.06 × 10⁻⁴ ± 6.58 × 10⁻⁵ at 6.17σ as a sensitivity upper bound. Cook\'s-Distance excision on '
-            'the unweighted full-systematic row (N = 23,837) returns η = -3.87 × 10⁻⁴ ± 4.95 × 10⁻⁵ at 7.82σ as a '
-            'secondary leverage diagnostic. AR(1) GLS on the full-systematic design remains sign-consistent at 4.51σ. '
-            'DE430 residuals provide sign-consistent '
-            'cross-ephemeris validation at η = -7.03 × 10⁻⁴ ± 2.12 × 10⁻³. '
-            'The observed negative sign establishes that gravitational potential suppression dominates in the '
-            'Earth-Moon system, providing the first physical explanation for the unexplained ~1 cm synodic '
-            'residual documented by Müller & Nordtvedt (1998).'
-        ),
-
-        # Keywords for indexing
-        'Keywords': (
-            'Temporal Equivalence Principle; TEP; Lunar Laser Ranging; LLR; '
-            'Equivalence Principle; Nordtvedt Effect; Strong Equivalence Principle; '
-            'Post-Newtonian; Scalar-Tensor Gravity; Geometric Suppression; '
-            'Gravitational Physics; Earth-Moon System; INPOP19a; DE430'
-        ),
-
-        # Production metadata
-        'Producer': 'TEP-LLR Research Project - Version 0.1 (Lucknow)',
-
-        # Rights and identifiers
-        'Copyright': 'Creative Commons Attribution 4.0 International License (CC BY 4.0)',
-
-        # Dates
-        'CreationDate': '2026:05:17 00:00:00',
-        'ModifyDate': '2026:05:17 00:00:00',
-
-        # XMP Dublin Core metadata (exiftool uses these prefixes)
-        'XMP-dc:Creator': 'Matthew Lukin Smawfield',
-        'XMP-dc:Title': 'Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect',
-        'XMP-dc:Description': 'TEP test via Lunar Laser Ranging Nordtvedt effect measurement',
-        'XMP-dc:Rights': 'CC BY 4.0',
-        'XMP-dc:Identifier': f'doi:{args.doi}',
-        'XMP-dc:Source': 'https://github.com/matthewsmawfield/TEP-LLR',
-        'XMP-dc:Publisher': 'Zenodo',
-        'XMP-dc:Date': '2026-05-17',
-        'XMP-dc:Type': 'Preprint',
-        'XMP-dc:Format': 'application/pdf',
-        'XMP-dc:Language': 'en',
-
-        # PRISM (Publishing Requirements for Industry Standard Metadata)
-        'XMP-prism:DOI': args.doi,
-        'XMP-prism:URL': 'https://github.com/matthewsmawfield/TEP-LLR',
-        'XMP-prism:VersionIdentifier': '0.1',
-        'XMP-prism:PublicationName': 'TEP Research Series',
-
-        # PDF/A metadata
-        'XMP-pdfaid:Part': '1',
-        'XMP-pdfaid:Conformance': 'B'
-    }
-
     try:
         embed_metadata(str(input_path), metadata)
         print("  Metadata embedded successfully")
         print()
-
     except Exception as e:
         print(f"Error during metadata embedding: {e}")
         sys.exit(1)

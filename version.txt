@@ -1,3 +1,5 @@
+v0.2 (Lucknow) — 05 June 2026 — Formatting consistency: removed mid-sentence bold tags per TEP style rules
+
 v0.1 (Lucknow) - Initial release of TEP-LLR manuscript
 
 - 82-step LLR analysis pipeline

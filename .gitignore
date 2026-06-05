@@ -57,3 +57,5 @@ Thumbs.db
 
 # Test scripts (development tools)
 test_*.py
+
+.devin

@@ -1,9 +1,10 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "codename": "Lucknow",
-  "date": "2026-05-17",
+  "date": "2026-06-05",
   "author": "Matthew Lukin Smawfield",
   "description": "Lunar Laser Ranging Tests of TEP",
   "doi": "10.5281/zenodo.19446029",
-  "status": "Preprint"
+  "status": "Preprint",
+  "previous_version": "0.1"
 }
