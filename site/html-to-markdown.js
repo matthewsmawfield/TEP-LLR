@@ -204,7 +204,7 @@ First published: ${dateReleased}${doi ? `\nDOI: ${doi}` : ''}
 `;
             const finalMarkdown = header + markdown;
             
-            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.1-Lucknow.md');
+            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.2-Lucknow.md');
             fs.writeFileSync(outputPath, finalMarkdown, 'utf8');
             console.log(`✅ Markdown saved to: ${outputPath} (${(finalMarkdown.length / 1024).toFixed(1)} KB)`);
         } catch (error) {

@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: If you use this work, please cite it as below.
-type: software
+type: article
 authors:
 - family-names: Smawfield
   given-names: Matthew Lukin
@@ -25,7 +25,7 @@ abstract: 'The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in
   component. The observed negative sign establishes that gravitational potential suppression
   (TSS) dominates in the Earth-Moon system, providing a candidate physical explanation
   for the unexplained ~1 cm synodic residual documented by Müller & Nordtvedt (1998).'
-version: "0.2" (Lucknow)
+version: v0.2 (Lucknow)
 date-released: 2026-06-05
 doi: 10.5281/zenodo.19446029
 url: https://github.com/matthewsmawfield/TEP-LLR

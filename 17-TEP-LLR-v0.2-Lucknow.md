@@ -1,6 +1,6 @@
 # Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect
 **Matthew Lukin Smawfield**
-Version: v0.1 (Lucknow)
+Version: v0.2 (Lucknow)
 First published: 5 June 2026
 DOI: 10.5281/zenodo.19446029
 
