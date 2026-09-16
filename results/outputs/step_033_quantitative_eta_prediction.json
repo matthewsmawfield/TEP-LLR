@@ -38,9 +38,9 @@
         "screening_ratio": -3.0259682327679764e-10
     },
     "amplitude_prediction": {
-        "amplitude_measured_mm": 0.004130446637728288,
-        "amplitude_microscopic_only_mm": 5.645528079946299e-23,
-        "amplitude_volumetric_mm": 0.0012557184134383609
+        "amplitude_measured_mm": 4.130446637728288,
+        "amplitude_microscopic_only_mm": 5.645528079946299e-20,
+        "amplitude_volumetric_mm": 1.2557184134383608
     },
     "cmb_orientation_prediction": {
         "eta_0_synodic": -0.00031772666444063755,
@@ -59,5 +59,5 @@
         "rho_T_error_g_cm3": 8.0,
         "rho_T_source": "GNSS atomic clock correlations (Paper 6, UCD)"
     },
-    "conclusion": "\u03b7 = -3.1773e-04 is the LLR observable response coefficient. Three baselines are presented: (1) microscopic-coupling-only \u03b7 = \u03b1_0\u00b2 \u0394(\u03a6\u00b2) = 4.3427e-24 yields an enhancement of 7.32e+19\u00d7, confirming that \u03b7 is emergent and not produced by bare \u03b1_0 alone; (2) standard scalar-tensor \u03b7 \u2248 4\u03b1_0\u00b2 = 3.6000e-05 yields an enhancement of 8.8\u00d7, indicating that \u03b7 absorbs TEP-specific screening contributions beyond standard scalar-tensor physics; (3) the phenomenological volumetric TEP model \u03b7 \u2248 -\u03b1_0 \u0394\u27e8(\u03c1/\u03c1_T)\u00b3\u27e9 = -9.6594e-05 yields an enhancement of 3.3\u00d7, with the residual ~3\u20135\u00d7 absorbed into model uncertainties. The measured \u03b7 is much smaller than cross-domain \u03ba values (\u03b7/\u03ba_Cep ~ -3.03e-10), consistent with LLR being in a more screened Solar System regime."
+    "conclusion": "\u03b7 = -3.1773e-04 is the LLR observable response coefficient. Three baselines are presented: (1) microscopic-coupling-only \u03b7 = \u03b1_0\u00b2 \u0394(\u03a6\u00b2) = 4.3427e-24 yields an enhancement of 7.32e+19\u00d7, confirming that \u03b7 is emergent and not produced by bare \u03b1_0 alone; (2) standard scalar-tensor \u03b7 \u2248 4\u03b1_0\u00b2 = 3.6000e-05 yields an enhancement of 8.8\u00d7, indicating that \u03b7 absorbs TEP-specific screening contributions beyond standard scalar-tensor physics; (3) the phenomenological volumetric TEP model \u03b7 \u2248 \u03b1_0 S_Sigma \u0394\u27e8(\u03c1/\u03c1_T)\u00b3\u27e9 = -9.6594e-05 yields an enhancement of 3.3\u00d7, with the residual ~3\u20135\u00d7 absorbed into model uncertainties. The measured \u03b7 is much smaller than cross-domain \u03ba values (\u03b7/\u03ba_Cep ~ -3.03e-10), consistent with LLR being in a more screened Solar System regime."
 }

@@ -7,16 +7,16 @@
         predicted sign and high-significance persistence under full-systematic
         control. The primary headline estimand is precision-weighted
         full-systematic regression on the cleaned sample ($N = 25{,}445$):
-        $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$).
+        $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$).
         Because only $G=5$ stations contribute, the co-primary uncertainty
         companion is a wild cluster bootstrap with Webb 6-point weights on the
         unweighted full-systematic OLS design, giving a $95\%$ percentile
         interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$; wild cluster bootstrap).
         The unweighted full-systematic OLS, reported as a sensitivity upper
-        bound, gives $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$
+        bound, gives $\eta_{\rm resid} = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$
         ($6.17\sigma$; $6.52\sigma$ cluster-robust for comparison).
         Cook's-Distance excision ($N = 23{,}837$) yields a consistent
-        $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($7.82\sigma$;
+        $\eta_{\rm resid} = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($7.82\sigma$;
         $8.65\sigma$ cluster-robust). The signal strengthens from $5.25\sigma$
         (cosD-only) to $6.17\sigma$ (full unweighted OLS) and $6.94\sigma$
         (precision-weighted). Section 4.1 consolidates the independent synodic
@@ -27,15 +27,20 @@
     <p>
         Mandatory external closure defines the critical validation arc beyond
         the pooled residual channel: source-level INPOP or DE430 integrator
-        refits with $\eta$ free, together with independent range-level reductions
+        refits with $\eta_{\rm resid}$ free, together with independent range-level reductions
         on archived CRD normal points, are required to reproduce or refute the
-        synodic amplitude extracted here. The linearized post-fit extraction on published INPOP19a and DE430 archives recovers the same negative $\eta$
+        synodic amplitude extracted here. The linearized post-fit extraction on published INPOP19a and DE430 archives recovers the same negative $\eta_{\rm resid}$
         ($6.17\sigma$ and $5.04\sigma$), but the 82-parameter ephemeris-like
         proxy and toy Keplerian bases are
         linear stress tests, not symplectic N-body integrators. Only a
-        source-level numerical refit with dynamic $\eta$ inside the IMCCE or JPL
+        source-level numerical refit with dynamic $\eta_{\rm resid}$ inside the IMCCE or JPL
         integrator can definitively close the absorption loop; collaboration with IMCCE and JPL is invited
-        to perform such a refit.
+        to perform such a refit. The definitive, parameter-free TEP amplitude for
+        the LLR channel ($\Gamma_{\rm LLR}$) has not yet been computed from a
+        zero-parameter operator. The residual is therefore reported as a
+        measurement consistent with the framework's qualitative sign and
+        order-of-magnitude expectations, not as a confirmed prediction of a
+        specific theoretical amplitude.
     </p>
 
     <p>
@@ -47,16 +52,16 @@
         $p_{F,{\rm eff}} \approx 0.09$; composite specificity $Z = 1.45$,
         $p = 0.074$); galactic north shares a nearly
         collinear subspace ($r = 0.984$) rather than resolving a second
-        independent axis. Section 4.12.2 reports the full dipole anatomy; this
+        independent axis. Section 4.25.2 reports the full dipole anatomy; this
         layer reinforces the scalar-field architecture but does not replace the
-        synodic $\eta$ estimand.
+        synodic $\eta_{\rm resid}$ estimand.
     </p>
 
     <p>
         Station pooling with proper systematic control supports a common
         negative signal: a mixed model with station-specific systematics yields
-        $\eta = -4.31 \times 10^{-4} \pm 6.74 \times 10^{-5}$ ($6.40\sigma$;
-        $F(4, 25,410) = 1.19$, $p = 0.31$). Full-model AR(1) GLS ($4.66\sigma$)
+        $\eta_{\rm resid} = -4.32 \times 10^{-4} \pm 6.76 \times 10^{-5}$ ($6.40\sigma$;
+        $F(4, 25,410) = 1.19$, $p = 0.31$). Full-model AR(1) GLS ($4.58\sigma$)
         remains consistent with the primary result after temporal
         autocorrelation is addressed. Frequency-domain orthogonality tests
         indicate why the residual channel is structurally favored for this TEP
@@ -67,7 +72,7 @@
     <p>
         These results provide substantial empirical support for a dynamical
         proper time field $\phi$ in the sense of a nonzero synodic residual-channel
-        Nordtvedt parameter. Within the TEP framework, this elevates invariance
+        amplitude $\eta_{\rm resid}$. Within the TEP framework, this elevates invariance
         statements traditionally treated as global postulates—most notably the
         universality of light propagation—from axioms to emergent local constraints
         of the field equations: the universal speed of light becomes a local
@@ -84,9 +89,9 @@
     <p>
         Section 4.1 and the read-order guide in Section 4 consolidate the
         synodic spine before station critiques, multiplicity control, and
-        extended diagnostics (Sections 4.28–4.31, especially Section 4.28 for
-        robustness and Section 4.10 for balance stress tests). Universal sign
-        and pooling are assessed jointly through the common-$\eta$ mixed model
+        extended diagnostics (Sections 4.16–4.31, especially Section 4.16 for
+        robustness and Section 4.4 for balance stress tests). Universal sign
+        and pooling are assessed jointly through the common-$\eta_{\rm resid}$ mixed model
         ($F = 1.19$, $p = 0.31$), not through equal per-station
         $\sigma$ thresholds.
     </p>
@@ -96,14 +101,14 @@
         cross-ephemeris strand. The Planck-axis joint layer is corroborative
         fixed-sky structure whose uniform sky-scramble specificity is
         $p_F \approx 0.096$ (100,000 draws) and whose axis is not uniquely identified against
-        galactic north (Section 4.12.2). Neither reopens the headline pooled
+        galactic north (Section 4.25.2). Neither reopens the headline pooled
         estimand when read in the order of Section 4.
     </p>
 
     <h3>6.2 Interpretative Framework</h3>
 
     <p>
-        The extracted limit of $\eta \approx -4.06 \times 10^{-4}$ resolves the
+        The extracted limit of $\eta_{\rm resid} \approx -4.06 \times 10^{-4}$ resolves the
         theoretical suppression ambiguity in TEP. The negative sign supports the
         interpretation that gravitational potential scaling (Temporal Shear
         suppression $\propto \Phi/c^2$) dominates over soliton-radius scaling in
@@ -112,9 +117,9 @@
 
     <p>
         The Observable Response Coefficient framework shows internal consistency
-        across the author's body of work: preliminary $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag
+        across the author's body of work: preliminary $\kappa_{\rm Cep} = (0.326 \pm 0.206) \times 10^6$ mag
         from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular
-        cluster pulsars (Paper 10). The LLR Nordtvedt parameter $\eta \approx -4 \times 10^{-4}$
+        cluster pulsars (Paper 10). The LLR residual-channel parameter $\eta_{\rm resid} \approx -4 \times 10^{-4}$
         serves as the Solar System observable response coefficient, exhibiting a substantially
         smaller magnitude consistent with stronger screening in dense environments. Paper 13
         (wide binaries) reports a saturation amplitude $\alpha_{\rm sat} = 0.366 \pm 0.012$,
@@ -122,11 +127,11 @@
     </p>
 
     <p>
-        While TEP does not make a precise quantitative prediction for $\eta$
+        While TEP does not make a precise quantitative prediction for $\eta_{\rm resid}$
         from a single universal coupling constant due to suppression model uncertainties
         and domain-specific astrophysical amplification, the observed Nordtvedt variance
         is within the order-of-magnitude parameter range expected from the formal TEP
-        framework ($|\eta| \sim 10^{-4}$ to $10^{-2}$) and provides qualitative geometric
+        framework ($|\eta_{\rm resid}| \sim 10^{-4}$ to $10^{-2}$) and provides qualitative geometric
         parity across stellar dynamics, high-z galaxies, and planetary ephemerides.
     </p>
 
@@ -136,20 +141,21 @@
         substantially deeper compactness ($\Phi_{\oplus}/c^2 \sim 7 \times 10^{-10}$) relative
         to the Moon ($\Phi_{\rm Moon}/c^2 \sim 3 \times 10^{-11}$) suppresses Temporal Shear more
         strongly, naturally producing the observed differential coupling and the
-        measured $\eta$ within this framework.
+        measured $\eta_{\rm resid}$ within this framework.
     </p>
 
     <p>
-        The residual-channel signal of a non-zero $\eta$ has implications for gravity
-        theories. In General Relativity, $\eta = 0$ exactly. Known modeled
+        The residual-channel signal of a non-zero $\eta_{\rm resid}$ has implications for gravity
+        theories. General Relativity predicts a zero physical Nordtvedt parameter; a fitted
+        residual-channel coefficient can also reflect noise and model error. Known modelled
         artifact explanations are strongly constrained and do not reproduce the
         observed signal: no tested systematic, acting alone at its observed
-        amplitude, produces a spurious $|\eta|$ as large as observed (2,000 deterministic simulations per systematic, all fractions $0.0\%$).
+        amplitude, produces a spurious $|\eta_{\rm resid}|$ as large as observed (2,000 deterministic simulations per systematic, all fractions $0.0\%$).
         Extended systematic sensitivity tests leave the synodic coefficient intact under
-        adversarial PCA on an 82-term basis ($\eta = -2.93 \times 10^{-4}$,
-        $2.95\sigma$ with 20 residual-ranked components) and under blind 20%
-        year hold-out ($\eta = -3.66 \times 10^{-4}$, $14.3\sigma$ with
-        nuisances fit only on training years). A flexible elongation$\times$time
+        adversarial PCA on an 82-term basis ($\eta_{\rm resid} = -2.93 \times 10^{-4}$,
+        $2.95\sigma$ with 20 residual-ranked components) and under blind 5-fold
+        calendar-year cross-validation ($\eta_{\rm resid} = -3.68 \times 10^{-4}$, $6.03\sigma$ out-of-sample;
+        nominal $8.02\sigma$ fold combination with nuisances fit only on training years). A flexible elongation$\times$time
         Gaussian process can partially overlap $\cos(D)$ on the uneven sampling
         manifold ($\approx 83\%$ amplitude reduction after subtraction) without
         mapping to any tested systematic; era$\times$station$\times$lunation
@@ -158,9 +164,10 @@
         differential $\cos(D)$ systematic is disfavored by interaction tests
         ($t = -0.42$, $p = 0.676$) and three-way partition analysis,
         with bounded residual station-leverage risk retained. TEP provides a concrete
-        scalar-tensor framework that explains the observed signal while
-        remaining consistent with all other precision tests through TEP geometric
-        suppression and Yukawa suppression mechanisms. A full dynamical
+        scalar-tensor framework that explains the observed signal within the LLR
+        residual channel; consistency with the wider body of precision
+        constraints is addressed at framework level rather than by the present
+        analysis. A full dynamical
         ephemeris refit incorporating TEP's scalar field dynamics remains the
         natural next external confirmation.
     </p>

@@ -3,7 +3,7 @@
 TEP-LLR: Full Canonical Analysis Pipeline
 ==========================================
 
-Executes the complete 74-step LLR analysis pipeline in sequence.
+Executes the complete 84-script LLR analysis pipeline in sequence.
 Every step writes a JSON output to results/outputs/ and a detailed
 log to logs/.  Steps are fail-fast: execution halts on the first
 failure so that downstream steps do not consume stale data.
@@ -188,7 +188,7 @@ def main() -> None:
         "step_025_leverage_temporal_clustering.py",
         # 026 — TEP core-density suppression simulation: derives theoretical
         #        eta from Earth's inner-core density gradient mapped against
-        #        the Universal Critical Density, probing volumetric Temporal
+        #        the Temporal Topology Saturation Scale, probing volumetric Temporal
         #        Topology flattening.
         "step_026_tep_core_density_simulation.py",
         # -------------------------------------------------------------------

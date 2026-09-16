@@ -5,16 +5,19 @@
         The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in
         which proper time becomes a dynamical field $\phi$ that couples to the
         local mass density. In this framework, matter couples to a conformal
-        metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu}$, where $A(\phi) =
+        metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu} + B(\phi)\nabla_\mu\phi\nabla_\nu\phi$, where $A(\phi) =
         \exp(\beta_A\phi/M_{\rm Pl})$ is the conformal factor. The rate at which
         proper time accumulates depends on the local value of $\phi$, which in
-        turn depends on the ambient matter density through screening of Temporal Shear. This operates via the continuous spatial 
-        profile of the time field (Temporal Topology), in which high ambient 
-        density in deep potential wells suppresses the local field gradient 
-        (Temporal Shear), naturally attenuating fifth-force effects in dense 
-        environments while allowing the field to remain light and long-ranged 
+        turn depends on the ambient matter density through screening of Temporal Shear. This operates via the continuous spatial
+        profile of the time field (Temporal Topology), in which high ambient
+        density in deep potential wells suppresses the local field gradient
+        (Temporal Shear), naturally attenuating Temporal Shear effects in dense
+        environments while allowing the field to remain light and long-ranged
         in dilute regions.
     </p>
+
+<p><strong>Screening projection notice.</strong> Screening in TEP is represented at theory level by the environmental operator S_Σ(E). Quantities such as ρ_T, R_T(M), S_⊕(r), compactness Φ/c^2, local stellar density, thermal epoch, coherence length, proximity, and boundary geometry are domain-specific projections of E, not independent screening mechanisms and not interchangeable universal thresholds.</p>
+
 
     <h3>2.1 The Nordtvedt Effect</h3>
 
@@ -40,10 +43,14 @@
         General Relativity ($\beta = \gamma = 1$, all others zero), $\eta = 0$
         exactly. In standard scalar-tensor theories such as Brans-Dicke, the
         Nordtvedt parameter is approximately $\eta_{\rm BD} \approx
-        4\alpha_0^2/(1+\alpha_0^2)^2$ where $\alpha_0 \equiv 2\beta/M_{\rm Pl}$
-        is the bare scalar-tensor coupling. The Cassini bound on PPN-$\gamma$
-        constrains $\alpha_0 \lesssim 3 \times 10^{-3}$ in the unsuppressed (high 
-        Temporal Shear) regime (Will 2014).
+        4\alpha_0^2/(1+\alpha_0^2)^2$ where $\alpha_0 \equiv \beta_A$
+        is the dimensionless bare scalar-tensor coupling (following the corpus-wide convention $\varphi = \phi/M_{\rm Pl}$, so that $\beta_A = d\ln A/d\varphi$ is dimensionless; in the unscreened TEP limit $\beta_A = -1$). An illustrative screened Solar-System normalization
+        $S_\Sigma^{(\odot)} \approx 3 \times 10^{-3}$ is adopted for the phenomenological
+        estimate below.
+    </p>
+
+    <p>
+        The fitted $\eta_{\rm resid}$ used throughout the remainder of this paper is a post-fit residual-channel proxy extracted from published INPOP19a and DE430 O–C residuals. It is not a direct replacement for ephemeris-level SEP bounds until the TEP/Nordtvedt parameter is included in the source-level dynamical integrator. The symbol $\eta$ without a subscript denotes the standard Nordtvedt parameter defined in Eq.~(\ref{eq:nordtvedt_param}), while $\eta_{\rm resid}$ denotes the empirically extracted residual-channel amplitude reported in Sections 3–5.
     </p>
 
     <p>
@@ -51,7 +58,7 @@
         coupling. TEP's universal conformal coupling $A(\phi)$ preserves the
         Weak Equivalence Principle (all non-gravitational processes couple to
         the same matter metric $\tilde{g}_{\mu\nu}$, consistent with the TEP framework paper, Paper 0,
-        \S7.2). However, the <em>Strong</em> Equivalence Principle may be
+        §7.2). However, the <em>Strong</em> Equivalence Principle may be
         violated through the suppression of Temporal Shear.
     </p>
 
@@ -65,26 +72,30 @@
         $\Phi/c^2 = GM/Rc^2$ (see the TEP framework paper, Paper 0, §7, for a detailed discussion of the relationship between compactness and gradient suppression).
     </p>
 
+    <p>The compactness-dependent gradient suppression that generates the Nordtvedt effect in this analysis serves as the strongly screened, Solar-System realisation of the abstract environmental operator $\mathcal{S}_\Sigma(\mathcal{E})$. In this deeply embedded regime, the Earth-Moon compactness differential acts as the empirical proxy for the continuous saturation of Temporal Topology, yielding a heavily attenuated observable response coefficient $\eta_{\rm resid}$ without committing to specific chameleon or symmetron microphysics.</p>
+
     <p>
         For two bodies with different compactness (Earth and Moon), the
         differential acceleration in an external gravitational field $a_0$
-        produces a Nordtvedt violation. The effective coupling difference is
-        governed by the differential flattening of Temporal Topology:
+        produces a Nordtvedt-like range modulation. In an unscreened toy baseline
+        scaling simply with surface compactness, the differential coupling would be:
     </p>
 
     <div class="equation">
         \begin{equation} \label{eq:effective_coupling_diff} \Delta\alpha_{\rm eff} = \alpha_{\rm eff,\oplus} - \alpha_{\rm
-        eff,\Moon} \approx \alpha_0 \left[ \left(\frac{\Phi}{c^2}\right)_\oplus
-        - \left(\frac{\Phi}{c^2}\right)_\Moon \right] \end{equation}
+        eff,{\rm Moon}} \approx \alpha_0 \left[ \left(\frac{\Phi}{c^2}\right)_\oplus
+        - \left(\frac{\Phi}{c^2}\right)_{\rm Moon} \right] \end{equation}
     </div>
 
     <p>
-        Substituting the compactness scaling and defining the Nordtvedt
-        parameter as $\eta \equiv \delta a/a_0$ yields the TEP prediction:
+        Substituting this naive compactness scaling and defining the residual-channel
+        parameter $\eta_{\rm resid}$ (the TEP-specific residual
+        amplitude, distinct from the standard Nordtvedt parameter $\eta_N = 4\alpha_0^2/(1+\alpha_0^2)^2$,
+        which vanishes under screening) yields the toy baseline:
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:tep_prediction} \eta \approx \frac{\delta a}{a_0} \approx \alpha_0^2 \left[
+        \begin{equation} \label{eq:tep_prediction} \eta_{\rm resid} \approx \frac{\delta a}{a_0} \approx \alpha_0^2 \left[
         \left(\frac{\Phi_\oplus}{c^2}\right)^2 - \left(\frac{\Phi_{\rm
         Moon}}{c^2}\right)^2 \right] \end{equation}
     </div>
@@ -92,31 +103,43 @@
     <p>
         where $\Phi_{\oplus}/c^2 \approx 7 \times 10^{-10}$ is Earth's compactness
         and $\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$ is the Moon's
-        compactness. The quadratic dependence on compactness follows from two
-        steps. First, gradient suppression gives an effective scalar coupling
-        that scales linearly with the surface compactness:
+        compactness. As established below (Section 2.1), this naive surface-compactness baseline yields
+        $\eta_{\rm resid} \sim 10^{-24}$ and serves only as a null check confirming that
+        bare surface compactness cannot drive the LLR anomaly. In the physical TEP framework,
+        Earth's deeper potential well flattens Temporal Topology more strongly than the Moon's,
+        so Temporal Shear screening suppresses Earth's effective coupling relative to the Moon's
+        ($\alpha_{\rm eff,\oplus} < \alpha_{\rm eff,{\rm Moon}}$), naturally generating a negative
+        differential response ($\eta_{\rm resid} < 0$) that is evaluated quantitatively via the volumetric
+        suppression model in Eq.~(\ref{eq:volumetric_suppression}).
+    </p>
+
+    <p>
+        Second, in the Damour&ndash;Esposito-Far&egrave;se (DEF) scalar-tensor
+        framework the Nordtvedt parameter is linear in the sensitivity
+        difference:
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:alpha_eff_scaling}
-        \alpha_{\rm eff} \approx \alpha_0 \left( \frac{\Phi}{c^2} \right) .
+        \begin{equation} \label{eq:eta_def_standard}
+        \eta_{\rm DEF} = \frac{4\alpha_0^2\,(s_\oplus - s_{\rm Moon})}{1 + \alpha_0^2} ,
         \end{equation}
     </div>
 
     <p>
-        Second, in the Damour&ndash;Esposito-Far&egrave;se (DEF) scalar-tensor
-        framework the Nordtvedt parameter is the squared difference of the
-        effective couplings:
+        where $s_\oplus$ and $s_{\rm Moon}$ are the gravitational self-energies
+        (sensitivities) of Earth and the Moon. The TEP-specific volumetric
+        model adopted here uses a different functional form that integrates
+        interior density profiles against the saturation scale $\rho_T$:
     </p>
 
     <div class="equation">
         \begin{equation} \label{eq:eta_from_alpha_eff}
-        \eta \approx \alpha_{\rm eff,\oplus}^2 - \alpha_{\rm eff,\Moon}^2 .
+        \eta \approx \alpha_{\rm eff,\oplus}^2 - \alpha_{\rm eff,{\rm Moon}}^2 .
         \end{equation}
     </div>
 
     <p>
-        Substituting Eq.~(\ref{eq:alpha_eff_scaling}) into
+        Substituting Eq.~(\ref{eq:effective_coupling_diff}) into
         Eq.~(\ref{eq:eta_from_alpha_eff}) yields the TEP prediction in
         Eq.~(\ref{eq:tep_prediction}). Earth's deeper potential well flattens
         Temporal Topology more strongly than the Moon's, suppressing Temporal
@@ -126,11 +149,15 @@
     <p>
         Two theoretically distinct predictions are evaluated. The
         <em>compactness-squared</em> expression above uses only the bare
-        microscopic coupling $\alpha_0$ and the surface compactness differential.
-        With the Cassini-bound $\alpha_0 \lesssim 3\times10^{-3}$ and $\Delta(\Phi^2) \approx 5\times10^{-19}$, this
-        gives $\eta \approx 4\times10^{-24}$ — essentially zero. This baseline is not a
+        microscopic coupling $\alpha_0$ and the surface compactness differential,
+        with $(\alpha_0 S_\Sigma^{(\odot)})^2$ as the effective squared coupling.
+        With the illustrative normalization $S_\Sigma^{(\odot)} \approx 3\times10^{-3}$,
+        $\alpha_0 = -1$, and $\Delta(\Phi^2/c^4) \approx 5\times10^{-19}$, this
+        gives $\eta_{\rm resid} \approx \alpha_0^2 S_\Sigma^{(\odot)\,2}\,\Delta(\Phi^2/c^4)
+        \approx (3\times10^{-3})^2\times5\times10^{-19}
+        \approx 4\times10^{-24}$ &mdash; essentially zero. This baseline is not a
         physical prediction for LLR; it is a consistency check that confirms
-        the measured $\eta$ cannot arise from the bare coupling alone. $\eta$ is an
+        the measured $\eta_{\rm resid}$ cannot arise from the bare coupling alone. $\eta_{\rm resid}$ is an
         emergent observable response coefficient, not a microscopic parameter.
     </p>
 
@@ -141,43 +168,43 @@
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:volumetric_suppression} \eta \approx -\alpha_0 \left(
+        \begin{equation} \label{eq:volumetric_suppression} \eta_{\rm resid} \approx \alpha_0 \, S_\Sigma^{(\odot)} \left(
         \langle(\rho/\rho_T)^3\rangle_\oplus -
-        \langle(\rho/\rho_T)^3\rangle_\Moon \right) \end{equation}
+        \langle(\rho/\rho_T)^3\rangle_{\rm Moon} \right) \end{equation}
     </div>
 
     <p>
-        Using a simplified PREM density model and $\rho_T \approx 20$ g/cm³ from GNSS
-        calibration (Paper 6), the Earth-Moon shielding differential is
-        $\Delta\langle(\rho/\rho_T)^3\rangle \approx 3.2\times10^{-2}$, giving $\eta \approx -9.7\times10^{-5}$. The current TEP
+        Using physical parameters from the TEP framework paper (Paper 0, Jakarta v0.13): the canonical bare scalar-tensor coupling $\alpha_0 = -1.0$ (or $-\sqrt{2}$ in DEF normalisation), an illustrative Solar-System screening normalization $S_\Sigma^{(\odot)} \approx 3 \times 10^{-3}$, and a simplified PREM density model with $\rho_T \approx 20$ g/cm³ from GNSS
+        calibration (Paper 6) yielding an Earth-Moon shielding differential
+        $\Delta\langle(\rho/\rho_T)^3\rangle \approx 3.22\times10^{-2}$. The phenomenological volumetric model prediction is therefore $\eta_{\rm resid} \approx (-1.0) \times (3 \times 10^{-3}) \times (3.22 \times 10^{-2}) \approx -9.7 \times 10^{-5}$, agreeing in both sign and magnitude. The current TEP
         framework robustly predicts the sign of the effect under
         compactness-driven Temporal Shear screening and gives an order-of-magnitude expectation
         in the $10^{-4}$ regime under this phenomenological volumetric model.
         It does not yet provide a first-principles, parameter-free
-        prediction of $\eta$. The headline precision-weighted estimate
-        $\eta = -3.91\times10^{-4}$ and the naïve OLS robustness check
-        $\eta = -3.18\times10^{-4}$ lie in the same order-of-magnitude
+        prediction of $\eta_{\rm resid}$. The headline precision-weighted estimate
+        $\eta_{\rm resid} = -3.91\times10^{-4}$ and the naïve OLS robustness check
+        $\eta_{\rm resid} = -3.18\times10^{-4}$ lie in the same order-of-magnitude
         regime, but the phenomenological model
         uncertainties — PREM simplification, the exponent in $(\rho/\rho_T)^3$,
-        $\rho_T = 20 \pm 8$ g/cm³, and the upper-bound nature of the Cassini
-        $\alpha_0$ constraint — preclude a precision comparison at this stage.
+        $\rho_T = 20 \pm 8$ g/cm³, and the illustrative nature of the
+        $S_\Sigma^{(\odot)}$ normalization — preclude a precision comparison at this stage.
     </p>
 
     <p>
-        The measured $\eta$ is also ~8.8× larger than the standard scalar-tensor
-        upper-bound prediction $\eta \approx 4\alpha_0^2 \approx 3.6\times10^{-5}$ (with $\alpha_0 \lesssim 3\times10^{-3}$
-        from Cassini), consistent with the interpretation that the LLR
+        The cosD-only baseline $\eta_{\rm resid} = -3.18\times10^{-4}$ is also ~8.8&times; larger than the stated scalar-tensor
+        benchmark estimate $\eta_{\rm resid} \approx 4(\alpha_0 S_\Sigma^{(\odot)})^2 \approx 3.6\times10^{-5}$ (using the screened effective coupling with $\alpha_0 = -1$ and the illustrative
+        $S_\Sigma^{(\odot)} \approx 3\times10^{-3}$), consistent with the interpretation that the LLR
         observable response absorbs contributions from the TEP screening
-        mechanism beyond bare scalar-tensor physics. The measured $\eta$ is much
-        smaller than preliminary $\kappa_{\rm MSP} \sim 10^6$–$10^7$ and $\kappa_{\rm Cep} \sim 10^6$
-        from related work in the same framework (Papers 10 and 11), which is consistent
-        with the screening mechanism: LLR is in a more screened regime (Solar System)
-        compared to globular clusters and galactic disks, so the effective response
-        should be smaller. No separate $\kappa_{\rm LL}$ parameter is required; $\eta$ itself
+        mechanism beyond bare scalar-tensor physics. The coefficients $\kappa_{\rm MSP} \sim 10^6$–$10^7$ and $\kappa_{\rm Cep} \sim 10^6$
+        from related work in the same framework (Papers 10 and 11) carry different
+        units (spin-down and magnitude, respectively) from $\eta_{\rm resid}$ and
+        therefore cannot be compared numerically. They are cited here as
+        domain-specific observable response coefficients in the same qualitative
+        framework, not as quantitative cross-calibrations. No separate $\kappa_{\rm LL}$ parameter is required; $\eta_{\rm resid}$ itself
         is the observable response coefficient for LLR. The prediction hierarchy
         is therefore: (i) bare compactness-squared null check, (ii) volumetric
         phenomenological order-of-magnitude band, (iii) measured LLR response
-        coefficient $\eta$.
+        coefficient $\eta_{\rm resid}$.
     </p>
 
     <h3>2.2 Predicted Signal in LLR</h3>
@@ -189,25 +216,25 @@
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:range_perturbation} \delta r = 13 \eta
+        \begin{equation} \label{eq:range_perturbation} \delta r = 13 \eta_{\rm resid}
         \cos(D) \end{equation}
     </div>
 
     <p>
-        The predicted amplitude scales linearly: $|\delta r| = 13 |\eta|$
-        meters. For the order-of-magnitude estimate $\eta \sim 10^{-4}$, this
+        The predicted amplitude scales linearly: $|\delta r| = 13 |\eta_{\rm resid}|$
+        meters. For the order-of-magnitude estimate $\eta_{\rm resid} \sim 10^{-4}$, this
         gives $\sim$1.3 mm. The headline precision-weighted estimate
-        ($\eta = -3.91 \times 10^{-4}$, Section 4.1) predicts an amplitude
-        of $\sim$5.3 mm, while the leverage-excised robustness check
-        ($\eta \approx -3.6 \times 10^{-4}$) predicts $\sim$4.18 mm and the
-        naïve cosD-only OLS robustness check ($\eta \approx -3.18 \times
-        10^{-4}$) yields $\sim$4.7 mm. These amplitudes are small compared to
+        ($\eta_{\rm resid} = -3.91 \times 10^{-4}$, Section 4.1) predicts an amplitude
+        of $\sim$5.1 mm, while the leverage-excised robustness check
+        ($\eta_{\rm resid} \approx -3.6 \times 10^{-4}$) predicts $\sim$4.7 mm and the
+        naïve cosD-only OLS robustness check ($\eta_{\rm resid} \approx -3.18 \times
+        10^{-4}$) yields $\sim$4.13 mm. These amplitudes are small compared to
         the centimetre-level residual RMS, but with 26,207 observations over 35
         years, statistical averaging provides sensitivity well below the
         per-observation noise floor.
     </p>
 
-    <h3>2.3 Continuous Gradient Suppression and the Critical Density</h3>
+    <h3>2.3 Continuous Gradient Suppression and the Saturation Scale</h3>
 
     <p>
         TEP incorporates a Temporal Shear screening mechanism that
@@ -222,7 +249,7 @@
         environments, gradient coherence can remain active despite local
         $\rho \ll \rho_T$, producing the larger observable response coefficients
         $\kappa$ reported in Papers 10 and 11. LLR therefore probes the
-        strongly screened planetary channel: $\eta$ is the Solar System response
+        strongly screened planetary channel: $\eta_{\rm resid}$ is the Solar System response
         coefficient, expected to be smaller in magnitude than galactic $\kappa$
         while sharing the same screening ontology.
     </p>
@@ -234,15 +261,15 @@
         compactness and interior shielding profiles. The TEP framework further
         predicts that this coupling is not static but environmentally modulated
         by the local scalar potential $\phi(r_\odot)$, which scales with
-        heliocentric distance. Continuous TEP suppression near a threshold
+        heliocentric distance. Continuous TEP suppression near a saturation-scale
         transition implies that the effective Nordtvedt parameter
-        $\eta$ varies with heliocentric distance $r_\odot$. When the Earth-Moon
+        $\eta_{\rm resid}$ varies with heliocentric distance $r_\odot$. When the Earth-Moon
         system moves through regions where the background scalar field
-        approaches a suppression threshold, the effective coupling modulates as:
+        approaches the suppression saturation scale, the effective coupling modulates as:
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:orbital_modulation} \eta(r_\odot) = \eta_0 \left( 1 + m \cdot \frac{r_{\rm mean} -
+        \begin{equation} \label{eq:orbital_modulation} \eta_{\rm resid}(r_\odot) = \eta_0 \left( 1 + m \cdot \frac{r_{\rm mean} -
         r_\odot}{r_{\rm mean} \cdot e_\oplus} \right) \end{equation}
     </div>
 
@@ -250,7 +277,7 @@
         where $\eta_0$ is the baseline Nordtvedt parameter at mean orbital
         distance $r_{\rm mean}$, $e_\oplus \approx 0.0167$ is Earth's orbital
         eccentricity, and $m$ is the modulation depth characterizing the
-        nonlinear threshold response. For $m \approx 1$ (consistent with the
+        nonlinear response. For $m \approx 1$ (consistent with the
         observed sign-flip), the orbital modulation generates
         diagnostic sidebands at frequencies $D \pm l'$ (where $l'$ is the
         orbital longitude), spectrally orthogonal to classical multi-body
@@ -273,7 +300,7 @@
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:velocity_modulation} \eta(r_\odot, v_r) = \eta_0 \left( 1 + m_r \cdot \frac{r_{\rm mean} -
+        \begin{equation} \label{eq:velocity_modulation} \eta_{\rm resid}(r_\odot, v_r) = \eta_0 \left( 1 + m_r \cdot \frac{r_{\rm mean} -
         r_\odot}{r_{\rm mean} \cdot e_\oplus} + m_v \cdot \frac{v_r}{\bar{v}_r} \right) \end{equation}
     </div>
 
@@ -298,7 +325,7 @@
         violation or uniqueness of that frame. They test whether residual-channel
         structure is consistent with anisotropic coupling defined relative to
         $\hat{\mathbf{n}}_{\rm CMB}$ and with other fixed axes used as controls
-        (Section 4.12.2). Two operational predictions tied to
+        (Section 4.25.2). Two operational predictions tied to
         $\hat{\mathbf{n}}_{\rm CMB}$ are:
     </p>
 
@@ -323,7 +350,7 @@
     </p>
 
     <div class="equation">
-        \begin{equation} \label{eq:cmb_anisotropy} \eta = \eta_0 \left( 1 + m_{\rm CMB} \cdot \cos\theta_{\rm EM-CMB} \right) \end{equation}
+        \begin{equation} \label{eq:cmb_anisotropy} \eta_{\rm resid} = \eta_0 \left( 1 + m_{\rm CMB} \cdot \cos\theta_{\rm EM-CMB} \right) \end{equation}
     </div>
 
     <p>
@@ -335,18 +362,18 @@
     </p>
 
     <p>
-        For the Earth-Moon system, the TEP potential produces a 
-        density-dependent effective mass $m_{\rm eff}(\rho)$ that grows with 
-        local density (see the TEP framework paper, Paper 0, §4.31), limiting the scalar field range inside 
-        massive objects. For a body in the strongly suppressed regime, this 
-        translates to a suppressed effective coupling $\alpha_{\rm eff} \ll 
-        \alpha_0$, where the degree of suppression scales with the body's 
-        surface gravitational potential (see the TEP framework paper, Paper 0, §7). Earth ($\Phi_{\oplus}/c^2 
-        \approx 7 \times 10^{-10}$) experiences stronger Temporal Topology 
-        flattening than the Moon ($\Phi_{\rm Moon}/c^2 \approx 3 \times 
-        10^{-11}$), giving Earth substantially stronger self-suppression and a 
-        smaller effective coupling to $\phi$. This large differential in 
-        gravitational compactness — and the resulting differential $\alpha_{\rm 
+        For the Earth-Moon system, the TEP potential produces a
+        density-dependent effective mass $m_{\rm eff}(\rho)$ that grows with
+        local density (see the TEP framework paper, Paper 0, §4.31), limiting the scalar field range inside
+        massive objects. For a body in the strongly suppressed regime, this
+        translates to a suppressed effective coupling $\alpha_{\rm eff} \ll
+        \alpha_0$, where the degree of suppression scales with the body's
+        surface gravitational potential (see the TEP framework paper, Paper 0, §7). Earth ($\Phi_{\oplus}/c^2
+        \approx 7 \times 10^{-10}$) experiences stronger Temporal Topology
+        flattening than the Moon ($\Phi_{\rm Moon}/c^2 \approx 3 \times
+        10^{-11}$), giving Earth substantially stronger self-suppression and a
+        smaller effective coupling to $\phi$. This large differential in
+        gravitational compactness — and the resulting differential $\alpha_{\rm
         eff}$ — provides the physical basis for a Nordtvedt effect in TEP.
     </p>
 </div>

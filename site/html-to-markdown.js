@@ -25,7 +25,9 @@ class HTMLToMarkdownConverter {
                 .replace(/<(em|i)[^>]*>([\s\S]*?)<\/(em|i)>/gi, '*$2*')
                 .replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, '`$1`')
                 .replace(/<br\s*\/?>/gi, ' ')
-                .replace(/<\/?[a-zA-Z][^>]*>/g, '')
+                .replace(/<sub[^>]*>([\s\S]*?)<\/sub>/gi, '<sub>$1</sub>')
+                .replace(/<sup[^>]*>([\s\S]*?)<\/sup>/gi, '<sup>$1</sup>')
+                .replace(/<\/?(?!sub|sup)[a-zA-Z][^>]*>/g, '')
         )
             .replace(/\s+/g, ' ')
             .trim();
@@ -130,7 +132,9 @@ class HTMLToMarkdownConverter {
         html = html.replace(/<br\s*\/?>/gi, '\n');
         html = html.replace(/<hr\s*\/?>/gi, '\n---\n');
 
-        html = html.replace(/<\/?[a-zA-Z][^>]*>/g, '');
+        html = html.replace(/<sub[^>]*>([\s\S]*?)<\/sub>/gi, '<sub>$1</sub>');
+        html = html.replace(/<sup[^>]*>([\s\S]*?)<\/sup>/gi, '<sup>$1</sup>');
+        html = html.replace(/<\/?(?!sub|sup)[a-zA-Z][^>]*>/g, '');
         html = this.decodeEntities(html);
         
         // Restore LaTeX math expressions
@@ -194,17 +198,18 @@ class HTMLToMarkdownConverter {
             
             // Add title and header metadata from citation
             const title = manifest.title || 'Untitled';
+            const lastUpdated = manifest.last_updated || '';
             const header = `# ${title}
 **${author}**
 Version: ${version}
-First published: ${dateReleased}${doi ? `\nDOI: ${doi}` : ''}
+First published: ${dateReleased}${lastUpdated ? `\nLast updated: ${lastUpdated}` : ''}${doi ? `\nDOI: ${doi}` : ''}
 
 ---
 
 `;
             const finalMarkdown = header + markdown;
             
-            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.2-Lucknow.md');
+            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.3-Lucknow.md');
             fs.writeFileSync(outputPath, finalMarkdown, 'utf8');
             console.log(`✅ Markdown saved to: ${outputPath} (${(finalMarkdown.length / 1024).toFixed(1)} KB)`);
         } catch (error) {

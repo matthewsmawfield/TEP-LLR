@@ -1,25 +1,25 @@
-[19:29:00] ═══ Starting Step 061: Systematic Amplitude Sensitivity Analysis
-[19:29:00]     Loaded data: 26,207 observations
-[19:29:00]     Canonical 6σ-cleaned sample: 25,445 observations (762 outliers removed)
-[19:29:00]     Observed |eta| = 4.061e-04
-[19:29:00] 
-[19:29:00] >>> >>> Computing known-systematic sensitivity...
-[19:29:00]       ephemeris: known_amp=0.355 cm, required=0.528 cm, ratio=1.5x
-[19:29:05]       atmospheric: known_amp=-0.080 cm, required=0.528 cm, ratio=6.6x
-[19:29:10]       instrumental: known_amp=0.010 cm, required=0.528 cm, ratio=54.0x
-[19:29:15]       tidal: known_amp=-0.009 cm, required=0.528 cm, ratio=57.9x
-[19:29:20]       thermal: known_amp=-0.056 cm, required=0.528 cm, ratio=9.5x
-[19:29:25] 
-[19:29:25] >>> >>> Adversarial PCA nuisance search...
-[19:29:26]       cosD survives all PCs: True, joint eta=-2.927e-04
-[19:29:26] >>> >>> Adversarial 2D GP (elongation x time bins)...
-[19:29:29]       cosD survives GP subtraction: False, eta after GP=5.347e-05
-[19:29:29]       CV-GP: cosD survives=False, eta after CV-GP=2.453e-05 (overfit_ratio=1.42)
-[19:29:29]       AIC: cosD-only=-141803.3, GP-only=-143253.3, preferred=gp_only
-[19:29:29]       Time-only GP: cosD survives=True, eta after time-GP=-3.261e-04
-[19:29:29] >>> >>> Era x station x lunation interaction grid...
-[19:29:29]       Fitted 26/60 cells; 13 negative, 9 significant
-[19:29:29] >>> >>> Blind 20% year hold-out...
-[19:29:29]       Combined blind test eta=-3.658e-04 (14.27σ), all splits negative=False
-[19:29:29] Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
-[19:29:29] ✓   Systematic Sensitivity Analysis Complete.
+[13:59:18] ═══ Starting Step 061: Systematic Amplitude Sensitivity Analysis
+[13:59:18]     Loaded data: 26,207 observations
+[13:59:18]     Canonical 6σ-cleaned sample: 25,445 observations (762 outliers removed)
+[13:59:18]     Observed |eta| = 4.061e-04
+[13:59:18] 
+[13:59:18] >>> >>> Computing known-systematic sensitivity...
+[13:59:18]       ephemeris: known_amp=0.355 cm, required=0.528 cm, ratio=1.5x
+[13:59:23]       atmospheric: known_amp=-0.080 cm, required=0.528 cm, ratio=6.6x
+[13:59:28]       instrumental: known_amp=0.010 cm, required=0.528 cm, ratio=54.0x
+[13:59:32]       tidal: known_amp=-0.009 cm, required=0.528 cm, ratio=57.9x
+[13:59:37]       thermal: known_amp=-0.056 cm, required=0.528 cm, ratio=9.5x
+[13:59:41] 
+[13:59:41] >>> >>> Adversarial PCA nuisance search...
+[13:59:41]       cosD survives all PCs: True, joint eta=-2.927e-04
+[13:59:41] >>> >>> Adversarial 2D GP (elongation x time bins)...
+[13:59:44]       cosD survives GP subtraction: False, eta after GP=5.347e-05
+[13:59:44]       CV-GP: cosD survives=False, eta after CV-GP=2.453e-05 (overfit_ratio=1.42)
+[13:59:44]       AIC: cosD-only=-141803.3, GP-only=-143253.3, preferred=gp_only
+[13:59:44]       Time-only GP: cosD survives=True, eta after time-GP=-3.261e-04
+[13:59:44] >>> >>> Era x station x lunation interaction grid...
+[13:59:44]       Fitted 26/60 cells; 13 negative, 9 significant
+[13:59:44] >>> >>> Blind 5-fold year cross-validation...
+[13:59:44]       Concatenated out-of-sample test eta=-3.679e-04 (6.03σ), disjoint combined eta=-4.100e-04 (8.02σ), negative folds=4/5
+[13:59:44] Results saved to results/outputs/step_061_systematic_sensitivity_analysis.json
+[13:59:44] ✓   Systematic Sensitivity Analysis Complete.

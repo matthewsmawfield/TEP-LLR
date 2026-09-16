@@ -257,6 +257,13 @@ def bridge_sampling_synodic(
     """
     Iterative bridge sampling (Meng & Wong 1996) between M₁ (η,b) and M₀ (η=0,b).
     Subsamples MCMC draws for stable memory use on large N.
+
+    Uses the standard two-sample bridge sampling identity:
+      BF = E_{M0}[p1/g] / E_{M1}[p0/g]
+    where g = (1-c)*p1 + c*p0 is the bridge mixture.
+
+    M0 proposal samples are drawn from the exact M0 posterior (Gaussian with
+    mean = weighted mean, variance = 1/sum(w)), ensuring proper coverage.
     """
     if len(mcmc_samples_m1) > max_samples:
         rng = np.random.default_rng(42)
@@ -269,25 +276,36 @@ def bridge_sampling_synodic(
     b_s = samples[:, 1]
     n = len(eta_s)
 
+    # M0 posterior: b ~ N(b_mle, sigma_b) where sigma_b = 1/sqrt(sum(w))
     w = 1.0 / y_err**2
     b_mle = np.sum(w * y) / np.sum(w)
-    b_spread = np.std(y - b_mle) * 0.05
+    sigma_b = 1.0 / np.sqrt(np.sum(w))
     rng = np.random.default_rng(43)
     b_m0 = np.clip(
-        rng.normal(b_mle, max(b_spread, 1e-5), size=n),
+        rng.normal(b_mle, sigma_b, size=n),
         B_INTERCEPT_LO,
         B_INTERCEPT_HI,
     )
 
-    log_p1 = _log_posterior_chunks(eta_s, b_s, x, y, y_err, eta_lo, eta_hi)
-    log_p0 = log_likelihood_synodic(np.zeros(n), b_m0, x, y, y_err) - np.log(B_PRIOR_WIDTH)
+    # Evaluate p1 and p0 at M0 sample points (η=0, b=b_m0) for numerator
+    eta_m0 = np.zeros(n)
+    log_p0_at_m0 = log_likelihood_synodic(eta_m0, b_m0, x, y, y_err) - np.log(B_PRIOR_WIDTH)
+    log_p1_at_m0 = _log_posterior_chunks(eta_m0, b_m0, x, y, y_err, eta_lo, eta_hi)
+
+    # Evaluate p1 and p0 at M1 sample points (η=η_s, b=b_s) for denominator
+    log_p1_at_m1 = _log_posterior_chunks(eta_s, b_s, x, y, y_err, eta_lo, eta_hi)
+    log_p0_at_m1 = log_likelihood_synodic(np.zeros(n), b_s, x, y, y_err) - np.log(B_PRIOR_WIDTH)
 
     c = 0.5
     for _ in range(n_iter):
-        log_m1 = np.logaddexp(np.log(1 - c) + log_p1, np.log(c) + log_p0)
-        log_m0 = np.logaddexp(np.log(c) + log_p1, np.log(1 - c) + log_p0)
-        log_num = np.logaddexp.reduce(log_p1 - log_m1) - np.log(n)
-        log_den = np.logaddexp.reduce(log_p0 - log_m0) - np.log(n)
+        # Numerator: E_{M0}[p1 / g] at M0 samples
+        log_g_m0 = np.logaddexp(np.log(1 - c) + log_p1_at_m0, np.log(c) + log_p0_at_m0)
+        log_num = np.logaddexp.reduce(log_p1_at_m0 - log_g_m0) - np.log(n)
+
+        # Denominator: E_{M1}[p0 / g] at M1 samples
+        log_g_m1 = np.logaddexp(np.log(1 - c) + log_p1_at_m1, np.log(c) + log_p0_at_m1)
+        log_den = np.logaddexp.reduce(log_p0_at_m1 - log_g_m1) - np.log(n)
+
         log_bf = log_num - log_den
         c = 1.0 / (1.0 + np.exp(log_bf))
 
@@ -298,4 +316,5 @@ def bridge_sampling_synodic(
         "n_samples": n,
         "n_iterations": n_iter,
         "max_samples_used": max_samples,
+        "method": "two_sample_m0_posterior_proposal",
     }

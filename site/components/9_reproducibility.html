@@ -1,20 +1,20 @@
 <section id="reproducibility">
     <h2>Data Availability & Reproducibility</h2>
-    
+
     <div class="reproducibility-box" style="background: #f5f5f5; padding: 1.5em; margin: 1em 0; border-left: 4px solid #2c5aa0;">
         <p>
             This work follows open-science practices. All empirical results are fully reproducible from raw data
             using the documented pipeline. Data ingestion verifies the five INPOP19a station residual files and the DE430 cross-ephemeris residual file against
             <code>data/raw/data_manifest.json</code> SHA-256 checksums before any downstream analysis runs.
-            Monte Carlo, injection, and toy-model steps are labeled in their JSON outputs and are not treated as
+            Monte Carlo, injection, and toy-model steps are labelled in their JSON outputs and are not treated as
             independent observational detections.
         </p>
     </div>
 
     <h3>Repository & Code</h3>
     <p>
-        The repository contains a deterministic, version-controlled analysis pipeline with analysis steps 
-        for LLR data processing and statistical analysis. All canonical steps are orchestrated by 
+        The repository contains a deterministic, version-controlled analysis pipeline with analysis steps
+        for LLR data processing and statistical analysis. All canonical steps are orchestrated by
         <code>scripts/steps/run_all_steps.py</code> with comprehensive logging.
     </p>
 
@@ -77,7 +77,7 @@ TEP-LLR/
 
     <h3>Pipeline Architecture</h3>
     <p>
-        The analysis pipeline comprises 74 sequential steps organized into logical groups.
+        The analysis pipeline comprises 84 scripts organised into logical groups.
         Each step is a standalone Python script in <code>scripts/steps/</code> that produces JSON outputs and
         detailed logs in <code>logs/step_*.log</code>. Manuscript step labels in Results and Discussion
         follow the <code>step_XXX</code> script prefix wherever possible (e.g. the primary extraction
@@ -87,8 +87,8 @@ TEP-LLR/
     </p>
 
     <h4>Complete Step Inventory & Runtime</h4>
-    <p>The canonical pipeline comprises 74 sequential steps organized into logical groups. The core statistical analysis (steps 000–003) provides the primary signal extraction, while steps 004–073 perform extended systematic checks, robustness validation, and theoretical consistency tests. Recent enhancements include:</p>
-    
+    <p>The canonical pipeline comprises 84 scripts organised into logical groups. The core statistical analysis (steps 000–003) provides the primary signal extraction, while subsequent steps perform extended systematic checks, robustness validation, and theoretical consistency tests. Recent enhancements include:</p>
+
     <ul>
         <li>Temporal autocorrelation analysis with Durbin-Watson statistic and significance testing</li>
         <li>Data-driven systematic error budget computed directly from residuals (cross-ephemeris scatter, seasonal variation, station means, tidal harmonics, diurnal amplitude)</li>
@@ -111,37 +111,37 @@ TEP-LLR/
                 <td>010–013</td>
                 <td><code>step_010</code>–<code>step_013</code></td>
                 <td><code>step_010</code>–<code>step_013</code> outputs</td>
-                <td>§4.15.1–4.29.4</td>
+                <td>§4.29.1–4.29.2</td>
             </tr>
             <tr>
                 <td>029 (day/night)</td>
                 <td><code>step_027_day_night_thermal_bias.py</code></td>
                 <td><code>step_027_day_night_thermal_bias.json</code></td>
-                <td>§4.12.1</td>
+                <td>§4.29.1</td>
             </tr>
             <tr>
                 <td>029 (station power / WLS)</td>
                 <td><code>step_029_station_power_analysis.py</code></td>
                 <td><code>step_029_station_power_analysis.json</code></td>
-                <td>§4.12.4–4.12.5</td>
+                <td>§4.25.4–4.25.5</td>
             </tr>
             <tr>
                 <td>030 (geometric elongation)</td>
                 <td><code>step_028_geometric_elongation.py</code></td>
                 <td><code>step_028_geometric_elongation.json</code></td>
-                <td>§4.12.2</td>
+                <td>§4.29.2</td>
             </tr>
             <tr>
                 <td>032 (hardware epochs)</td>
                 <td><code>step_030_hardware_epoch_analysis.py</code></td>
                 <td><code>step_030_hardware_epoch_analysis.json</code></td>
-                <td>§4.6</td>
+                <td>§4.12</td>
             </tr>
             <tr>
                 <td>034 (orthogonality)</td>
                 <td><code>step_032_ephemeris_orthogonality_proof.py</code></td>
                 <td><code>step_032_ephemeris_orthogonality_proof.json</code></td>
-                <td>§4.28.6</td>
+                <td>§4.25.6</td>
             </tr>
             <tr>
                 <td>045 (matched-window)</td>
@@ -153,37 +153,37 @@ TEP-LLR/
                 <td>050 (primary extraction)</td>
                 <td><code>step_050_corrected_tep_analysis.py</code></td>
                 <td><code>step_050_corrected_tep_analysis.json</code></td>
-                <td>§4.14.3</td>
+                <td>§4.9</td>
             </tr>
             <tr>
                 <td>055 (CMB robustness suite; random-axis ΔAIC null; dual-axis primary; η_θ coverage)</td>
                 <td><code>step_055_cmb_rigorous_falsification.py</code></td>
                 <td><code>step_055_cmb_rigorous_falsification.json</code></td>
-                <td>§4.14.2 / §5.4</td>
+                <td>§4.25.2 / §5.4</td>
             </tr>
             <tr>
-                <td>056 (linearized post-fit $\eta$ extraction)</td>
+                <td>056 (linearized post-fit $\eta_{\rm resid}$ extraction)</td>
                 <td><code>step_056_dynamical_integrator_eta_refit.py</code></td>
                 <td><code>step_056_dynamical_integrator_eta_refit.json</code></td>
-                <td>§4.29</td>
+                <td>§4.14</td>
             </tr>
             <tr>
-                <td>064-PI (prediction-interval calibration)</td>
+                <td>Step 064-PI (prediction-interval calibration)</td>
                 <td><code>step_064_prediction_coverage.py</code></td>
                 <td><code>step_064_prediction_coverage.json</code></td>
-                <td>§4.20.5</td>
+                <td>§4.9.4</td>
             </tr>
             <tr>
                 <td>072 (leave-one-station-out meta; forest plot)</td>
                 <td><code>step_072_leave_one_station_out_meta.py</code></td>
                 <td><code>step_072_leave_one_station_out_meta.json</code></td>
-                <td>§4.10</td>
+                <td>§4.4</td>
             </tr>
             <tr>
-                <td>064-SRP (orbital SRP scaling)</td>
+                <td>Step 064-SRP (orbital SRP scaling)</td>
                 <td><code>step_064_srp_systematic_check.py</code></td>
                 <td><code>step_064_srp_systematic_check.json</code></td>
-                <td>§4.31.2</td>
+                <td>§4.33.2</td>
             </tr>
         </tbody>
     </table>
@@ -225,7 +225,7 @@ TEP-LLR/
             <tr>
                 <td>004</td>
                 <td><code>step_004_detection_analysis_advanced.py</code></td>
-                <td>Advanced robust analysis with multiple independent analysis families (bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, holdout)</td>
+                <td>Advanced robust analysis with multiple independent analysis families (bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modelling, sensitivity, cross-validation, holdout)</td>
                 <td>~5.4s</td>
             </tr>
             <tr>
@@ -280,7 +280,7 @@ TEP-LLR/
     </table>
 
     <h3>Reproduction Instructions</h3>
-    
+
     <h4>Quick Start (Full Reproduction)</h4>
     <div class="code-block">
 <pre>
@@ -336,9 +336,9 @@ node site/build.js
     <h4>Key Analysis Outputs</h4>
     <ul>
         <li><code>results/outputs/step_003_statistical_analysis.json</code> — Pearson correlation, linear regression, and differential analysis results</li>
-        <li><code>results/outputs/step_004_detection_analysis_advanced.json</code> — Comprehensive analysis with bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modeling, sensitivity, cross-validation, and holdout test results</li>
-        <li><code>results/outputs/step_061_systematic_sensitivity_analysis.json</code> — Known-systematic amplitude ratios and Monte Carlo null simulations; <code>adversarial_pca</code>, <code>adversarial_gp</code> (2D elongation$\times$time binned GP), <code>interaction_grid</code> (era$\times$station$\times$lunation), <code>blind_year_holdout</code>, and <code>tests_for_step_042</code></li>
-        <li><code>results/outputs/step_042_multiple_testing_correction.json</code> — Formal multiplicity control including interaction-grid and blind hold-out tests (sensitivity family)</li>
+        <li><code>results/outputs/step_004_detection_analysis_advanced.json</code> — Comprehensive analysis with bootstrap, permutation, robust regression, outlier detection, station-by-station, temporal stability, phase-binned, systematic error modelling, sensitivity, cross-validation, and holdout test results</li>
+        <li><code>results/outputs/step_061_systematic_sensitivity_analysis.json</code> — Known-systematic amplitude ratios and Monte Carlo null simulations; <code>adversarial_pca</code>, <code>adversarial_gp</code> (2D elongation$\times$time binned GP), <code>interaction_grid</code> (era$\times$station$\times$lunation), <code>blind_year_holdout</code> (5-fold disjoint calendar-year cross-validation), and <code>tests_for_step_042</code></li>
+        <li><code>results/outputs/step_042_multiple_testing_correction.json</code> — Formal multiplicity control including interaction-grid and blind 5-fold cross-validation tests (sensitivity family)</li>
         <li><code>results/outputs/step_001_data_preprocessing.json</code> — Data preprocessing statistics and validation results</li>
         <li><code>data/processed/INPOP19a_all_stations_residuals.csv</code> — Processed INPOP19a dataset with computed elongation phases</li>
         <li><code>data/processed/[station]_residuals.csv</code> — Individual station processed datasets</li>
@@ -395,33 +395,33 @@ node site/build.js
         <li>Data Integrity: Checks for missing or malformed residuals</li>
         <li>Phase Consistency: Verifies synodic phase calculations against ephemeris data</li>
         <li>Station Independence: Validates that results are consistent across independent observatories</li>
-        <li>Cross-Ephemeris Validation: DE430 dataset from JPL shows complex behavior; full dataset shows no significant correlation ($r = -0.000148$, $p = 0.992$), but after removing 37 phase-specific outliers (0.8% of data) that cluster at $135^\circ$–$225^\circ$ elongation, yields $\eta = -7.04\times10^{-4}$ at $5.96\sigma$ with bootstrap validation (95% CI on $\eta$: $[-9.63, -4.64]\times10^{-4}$) and permutation test ($p < 0.001$). Chi-square test confirms outliers are not uniformly distributed across phases ($\chi^2 = 66.1$, $p = 8.9 \times 10^{-12}$), indicating genuine measurement errors at specific phases. The primary detection relies on INPOP19a ephemeris.</li>
+        <li>Cross-Ephemeris Validation: DE430 dataset from JPL shows complex behavior; full dataset shows no significant correlation ($r = -0.000148$, $p = 0.992$), but after removing 37 phase-specific outliers (0.8% of data) that cluster at $135^\circ$–$225^\circ$ elongation, yields $\eta_{\rm resid} = -7.04\times10^{-4}$ at $5.96\sigma$ with bootstrap validation (95% CI on $\eta_{\rm resid}$: $[-9.63, -4.64]\times10^{-4}$) and permutation test ($p < 0.001$). Chi-square test confirms outliers are not uniformly distributed across phases ($\chi^2 = 66.1$, $p = 8.9 \times 10^{-12}$), indicating genuine measurement errors at specific phases. The primary detection relies on INPOP19a ephemeris.</li>
     </ul>
 
     <h3>Reproducibility Checklist</h3>
     <div class="checklist-box" style="background: #f9f9f9; padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
         <p>To verify successful reproduction:</p>
         <ol>
-            <li>All 74 canonical steps complete with "PASS" status in pipeline output</li>
+            <li>All 84 canonical scripts complete with "PASS" status in pipeline output</li>
             <li>JSON files in <code>results/outputs/</code> (step_000 through step_073, including 006b and 046b)</li>
-            <li>Key result (headline): Precision-weighted full-systematic consensus $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust; $N = 25{,}445$)</li>
-            <li>Key result (uncertainty calibration): prediction-interval coverage 86% at 68% nominal, 98% at 95% ($\chi^2_{\rm red}=0.48$ on published $\sigma$); LOSO conformal 95% band on $\eta$ excludes zero</li>
-            <li>Key result (LOSO meta): four powered exclusions share negative sign; $\eta_{\rm meta} = -4.21 \times 10^{-4}$ ($12.8\sigma$); $I^2 = 0.0\%$; excluding Grasse underpowered ($0.92\sigma$)</li>
-            <li>Key result (sensitivity upper bound): Full-systematic OLS without excision $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$); cluster-robust $6.52\sigma$; $N = 25{,}445$</li>
-            <li>Key result (secondary leverage diagnostic): Cook's-Distance-excised full-systematic OLS $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($7.82\sigma$); cluster-robust $8.65\sigma$; $N = 23{,}837$</li>
+            <li>Key result (headline): Precision-weighted full-systematic consensus $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust; $N = 25{,}445$)</li>
+            <li>Key result (uncertainty calibration): prediction-interval coverage 86% at 68% nominal, 98% at 95% ($\chi^2_{\rm red}=0.48$ on published $\sigma$); LOSO conformal 95% band on $\eta_{\rm resid}$ excludes zero</li>
+            <li>Key result (LOSO robustness): four of five exclusions exceed the observed-SNR threshold and share the negative sign; $\eta_{\rm meta} = -4.21 \times 10^{-4}$; $I^2 = 0.0\%$ heterogeneity; combined significance not reported independently (retained exclusions contain 87.8–98.6% of the full sample); excluding Grasse underpowered ($0.92\sigma$)</li>
+            <li>Key result (sensitivity upper bound): Full-systematic OLS without excision $\eta_{\rm resid} = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($6.17\sigma$); cluster-robust $6.52\sigma$; $N = 25{,}445$</li>
+            <li>Key result (secondary leverage diagnostic): Cook's-Distance-excised full-systematic OLS $\eta_{\rm resid} = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($7.82\sigma$); cluster-robust $8.65\sigma$; $N = 23{,}837$</li>
             <li>Key result: Pearson correlation on the 6σ-cleaned primary sample ($N=25{,}445$): $r = -0.0329$ ($p = 1.55 \times 10^{-7}$), $5.25\sigma$</li>
-            <li>Key result: Cook's Distance leverage-excised cosD-only OLS $\eta = -3.31 \times 10^{-4} \pm 5.85 \times 10^{-5}$ (SNR = $5.65\sigma$; $N = 25{,}176$)</li>
-            <li>Key result: Naïve OLS robustness check $\eta = -3.18 \times 10^{-4}$ ($5.25\sigma$)</li>
-            <li>Key result: MCMC robustness check $\eta = -2.87 \times 10^{-4} \pm 6.63 \times 10^{-5}$ (SNR = $4.32\sigma$; canonical estimator hierarchy)</li>
-            <li>Key result: Full-model AR(1) GLS robustness check $\eta = -4.45 \times 10^{-4} \pm 9.87 \times 10^{-5}$ (SNR = $4.51\sigma$)</li>
-            <li>Key result: cosD-only AR(1) GLS robustness check $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ (SNR = $3.51\sigma$ cluster-robust)</li>
+            <li>Key result: Cook's Distance leverage-excised cosD-only OLS $\eta_{\rm resid} = -3.31 \times 10^{-4} \pm 5.85 \times 10^{-5}$ (SNR = $5.65\sigma$; $N = 25{,}176$)</li>
+            <li>Key result: Naïve OLS robustness check $\eta_{\rm resid} = -3.18 \times 10^{-4}$ ($5.25\sigma$)</li>
+            <li>Key result: MCMC robustness check $\eta_{\rm resid} = -2.87 \times 10^{-4} \pm 6.63 \times 10^{-5}$ (SNR = $4.32\sigma$; canonical estimator hierarchy)</li>
+            <li>Key result: Full-model AR(1) GLS robustness check $\eta_{\rm resid} = -4.45 \times 10^{-4} \pm 9.87 \times 10^{-5}$ (SNR = $4.51\sigma$)</li>
+            <li>Key result: cosD-only AR(1) GLS robustness check $\eta_{\rm resid} = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ (SNR = $3.51\sigma$ cluster-robust)</li>
             <li>Key result: AR(1) parameter $\rho = 0.412$ (full model), $\rho = 0.416$ (cosD-only); significant temporal autocorrelation</li>
             <li>Key result: Bootstrap 95% CI = [-0.0411, -0.0197] (excludes zero)</li>
             <li>Key result: Permutation test p &lt; 10<sup>-4</sup> (no permutation achieved observed)</li>
-            <li>Key result: Station consistency: Grasse shows strongest individual detection (SNR = $4.97\sigma$), all stations show consistent negative $\eta$ direction except Haleakala; common-$\eta$ mixed model $F(4, 25{,}410)=1.19$, $p=0.31$</li>
+            <li>Key result: Station consistency: Grasse shows strongest individual detection (SNR = $4.97\sigma$), all stations show consistent negative $\eta_{\rm resid}$ direction except Haleakala; common-$\eta_{\rm resid}$ mixed model $F(4, 25{,}410)=1.19$, $p=0.31$</li>
             <li>Key result: Haleakala null-fluctuation simulation (20,000 MC): 2.7$\sigma$ event under TEP (two-tailed $p=0.0063$), family-wise rate 0.5%; solar-cycle context provides physical mechanism</li>
-            <li>Key result: Clean-subset exclusion (Grasse 2010+ + APO only): $\eta = -3.36 \times 10^{-4} \pm 4.63 \times 10^{-5}$ ($7.25\sigma$ cluster-robust), confirming signal without Haleakala, Matera, or McDonald2</li>
-            <li>Key result: Cross-validation: Temporal hold-out, random k-fold, leave-one-station-out, and two-tier synthetic injection (noise-only vs era-conditioned nuisance) diagnose nuisance transport; primary $\eta$ remains the pooled precision-weighted extraction</li>
+            <li>Key result: Clean-subset exclusion (Grasse 2010+ + APO only): $\eta_{\rm resid} = -3.36 \times 10^{-4} \pm 4.63 \times 10^{-5}$ ($7.25\sigma$ cluster-robust), confirming signal without Haleakala, Matera, or McDonald2</li>
+            <li>Key result: Cross-validation: Temporal hold-out, random k-fold, leave-one-station-out, and two-tier synthetic injection (noise-only vs era-conditioned nuisance) diagnose nuisance transport; primary $\eta_{\rm resid}$ remains the pooled precision-weighted extraction</li>
         </ol>
     </div>
 </section>

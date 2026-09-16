@@ -13,7 +13,7 @@ class DevServer {
         this.buildQueue = false;
         this.liveServerProcess = null;
         this.watcherReady = false;
-        this.port = 64055;
+        this.port = 51819;
     }
 
     async startLiveServer() {

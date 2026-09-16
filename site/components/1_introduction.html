@@ -35,14 +35,14 @@
         The present work extends this framework through the Temporal Equivalence
         Principle (TEP), a scalar-tensor theory where proper time becomes a
         dynamical field $\phi$ that couples universally to matter via conformal
-        metric $\tilde{g}_{\mu\nu} = A^2(\phi)g_{\mu\nu}$, with
-        $A(\phi)=\exp(\beta\phi/M_{\rm Pl})$. Scalar-tensor theories
+        metric $\tilde{g}_{\mu\nu} = A^2(\phi)g_{\mu\nu} + B(\phi)\nabla_\mu\phi\nabla_\nu\phi$, with
+        $A(\phi)=\exp(\beta_A\phi/M_{\rm Pl})$. Scalar-tensor theories
         have a long history in gravitational physics, dating to Jordan (1955),
         Fierz (1956), and Brans-Dicke (1961), who first explored gravitational
         theories with dynamical scalar fields coupled to the metric. The
         Parametrized Post-Newtonian (PPN) formalism (Will 2014) provides a
         standardized framework for testing such theories through observable
-        parameters including the Eddington parameters $\beta$ (nonlinearity) and
+        parameters including the Eddington parameters $\beta_{\rm PPN}$ (nonlinearity) and
         $\gamma$ (spatial curvature), both equal to unity in GR.
     </p>
 
@@ -50,20 +50,21 @@
         TEP preserves the Weak Equivalence Principle through universal conformal
         coupling: all non-gravitational processes couple to the same matter
         metric, ensuring local experiments remain metric-compatible. Where TEP
-        diverges from standard scalar-tensor theories is in its 
-        screening of Temporal Shear, which allows the theory 
-        to evade tight solar-system constraints while maintaining large bare 
+        diverges from standard scalar-tensor theories is in its
+        screening of Temporal Shear, which allows the theory
+        to evade tight solar-system constraints while maintaining large bare
         couplings.
-        The Cassini bound on PPN-$\gamma$ ($|\gamma - 1| < 2.3 \times 10^{-5}$;
-        Bertotti et al. 2003) constrains the effective scalar coupling to
-        $\alpha_{\rm eff} \lesssim 3 \times 10^{-3}$ in the Solar System. TEP
+        The Cassini bound on PPN-$\gamma$ (Bertotti et al. 2003) imposes a
+        stringent Solar-System constraint on the screened scalar response; its
+        detailed translation into TEP's source-charge normalization is treated
+        separately in the foundation paper. TEP
         Temporal Shear screening operates via the continuous spatial profile of the time field
         (Temporal Topology), in which high ambient density in deep potential
         wells suppresses the local field gradient (Temporal Shear). Bodies with
         high gravitational compactness $\Phi/c^2$ experience stronger
         suppression of Temporal Shear, yielding a vanishing field gradient and
         an effective scalar coupling $\alpha_{\rm eff} \ll \alpha_0$ (see the TEP framework paper, Paper 0,
-        §7). GR is recovered exactly when Temporal Shear is uniform or when 
+        §7). GR is recovered exactly when Temporal Shear is uniform or when
         $\phi$ is spatially constant.
     </p>
 
@@ -164,7 +165,7 @@
                 <td>Papers 10–11</td>
                 <td>Observable Response Coefficients for pulsar spin-down and
                     Cepheid timing/distance-ladder observables.</td>
-                <td>Motivate treating the LLR Nordtvedt parameter $\eta$ as a
+                <td>Motivate treating the LLR residual-channel parameter $\eta_{\rm resid}$ as a
                     Solar-System response coefficient rather than a bare
                     microscopic scalar coupling.</td>
             </tr>
@@ -214,7 +215,7 @@
     <h3>1.2 Claim Hierarchy and Scope</h3>
 
     <p>
-        The evidence is organized deliberately so that the empirical result,
+        The evidence is organised deliberately so that the empirical result,
         the systematic stress tests, and the TEP interpretation are not
         conflated. The paper advances a strong claim, but in a fixed hierarchy.
     </p>
@@ -260,7 +261,7 @@
                 <td>5</td>
                 <td>External closure</td>
                 <td>Source-level INPOP or DE430 integrator refits with
-                    $\eta$ free, together with independent range-level
+                    $\eta_{\rm resid}$ free, together with independent range-level
                     reductions, remain the critical external validation
                     tests.</td>
             </tr>
@@ -274,6 +275,11 @@
         has the sign, order of magnitude, screening regime, and dynamical
         structure expected for the Solar-System response of the same time-field
         theory tested elsewhere in the series.
+    </p>
+    <p>
+        The claim-discipline framework for the TEP corpus, including the scope
+        limitations of canonical precision tests, is established in TEP-EXP
+        (Paper 9).
     </p>
 
     <p>
@@ -294,12 +300,13 @@
         the TEP framework's Observable Response Coefficients, which quantify
         domain-specific astrophysical responses rather than a universal bare coupling.
         Preliminary results from related work in the same TEP framework report
-        $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag for Cepheid period-luminosity
-        anomalies (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for pulsar spin-down
-        excess (Paper 10). These coefficients are distinct from the microscopic conformal
+        $\kappa_{\rm Cep} = (0.326 \pm 0.206) \times 10^6$ mag for Cepheid period-luminosity
+        anomalies (Paper 11 v0.9, multi-block Step 44) and $\tilde\kappa_{\rm MSP} = (2.9 \pm 4.5) \times 10^4$ for pulsar spin-down
+        excess (Paper 10 v0.8, observable response); the unscreened geometric amplitude
+        is $\sim 10^6$ before environmental suppression. These coefficients are distinct from the microscopic conformal
         coupling $\beta$ or scalar-tensor coupling $\alpha_0$, absorbing instead the full
         astrophysical response including environmental activation and transfer functions.
-        The prediction $\eta \sim -10^{-4}$ emerges from the differential suppression
+        The prediction $\eta_{\rm resid} \sim -10^{-4}$ emerges from the differential suppression
         geometry combined with the understanding that LLR operates in a more screened
         Solar System regime, yielding a smaller effective response than the unscreened
         galactic probes.
@@ -315,11 +322,11 @@
         elongation angles were computed using high-precision Skyfield/DE440
         ephemerides rather than mean-phase approximations. The analysis searches
         for the predicted TEP Nordtvedt signal: a modulation of the form $\delta
-        r = 13 \eta \cos(D)$, where $D$ is the Moon-Sun elongation angle.
+        r = 13 \eta_{\rm resid} \cos(D)$, where $D$ is the Moon-Sun elongation angle.
     </p>
 
     <p>
-        The predicted amplitude for $\eta \sim 10^{-4}$ is $\sim$1–5 mm,
+        The predicted amplitude for $\eta_{\rm resid} \sim 10^{-4}$ is $\sim$1–5 mm,
         smaller than the 9.5 cm per-observation residual RMS. This is expected
         for a suppressed PPN signal in precision LLR metrology: the signal
         explains only $\sim$0.1% of the total variance, but with
@@ -345,9 +352,9 @@
         Standard orbital periods are incommensurate with the synodic month. In
         the frequency domain, $\cos(D)$ therefore lies outside the classical
         multi-body mean-motion basis used in static direct-fit ephemerides, and
-        a synodic coupling parameterized with $\eta$ fixed at zero is expected
+        a synodic coupling parameterized with $\eta_{\rm resid}$ fixed at zero is expected
         to project into post-fit residuals. Source-level integrator refits that
-        leave $\eta$ free (Section 4.14) supply the critical dynamical closure;
+        leave $\eta_{\rm resid}$ free (Section 4.14) supply the critical dynamical closure;
         the hardware epoch, synthetic absorption, and toy Keplerian analyses supply the internal linearized and simulation
         checks on that channel.
     </p>

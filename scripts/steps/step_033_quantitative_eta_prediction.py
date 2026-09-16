@@ -30,7 +30,8 @@ from scripts.utils.llr_constants import (
     GM_EARTH,
     GM_MOON,
     EARTH_RADIUS_M,
-    MOON_RADIUS_M
+    MOON_RADIUS_M,
+    ETA_SCALE_FACTOR,
 )
 
 def compute_prediction():
@@ -67,8 +68,8 @@ def compute_prediction():
     #      This is a formal TEP expression that yields ~10⁻²⁴, far below detection.
     #      It serves as a consistency check: the measured η cannot arise from
     #      bare α_0 alone, confirming that η is an emergent response coefficient.
-    #   2. PHENOMENOLOGICAL TEP (volumetric suppression): η ≈ -α_0 Δ⟨(ρ/ρ_T)³⟩
-    #      This integrates interior density structure and yields η ~ 10⁻⁴,
+    #   2. PHENOMENOLOGICAL TEP (volumetric suppression): η ≈ α_0 S_Sigma Δ⟨(ρ/ρ_T)³⟩
+    #      This integrates interior density structure and yields η ~ -10⁻⁴,
     #      consistent with the observed order of magnitude.
 
     print_status("", "INFO")
@@ -100,7 +101,7 @@ def compute_prediction():
             step_026_results = json.load(f)
         eta_volumetric = float(step_026_results.get("volumetric_prediction", {}).get("eta_volumetric", 0))
         shielding_diff = float(step_026_results.get("simulation_results", {}).get("shielding_differential", 0))
-        print_status(f"[Baseline 2] Volumetric suppression η = -α_0 Δ⟨(ρ/ρ_T)³⟩: {eta_volumetric:.4e}", "CALC")
+        print_status(f"[Baseline 2] Volumetric suppression η = α_0 S_Sigma Δ⟨(ρ/ρ_T)³⟩: {eta_volumetric:.4e}", "CALC")
         print_status(f"    Shielding differential (step_026): {shielding_diff:.4e}", "CALC")
     else:
         eta_volumetric = None
@@ -137,9 +138,10 @@ def compute_prediction():
     print_status(f"Screening ratio: η/κ_Cep ~ {eta_measured/kappa_cep_measured:.2e}", "CALC")
 
     # Amplitude predictions
-    amplitude_measured = 13 * abs(eta_measured)
-    amplitude_microscopic = 13 * abs(eta_microscopic_only)
-    amplitude_volumetric = 13 * abs(eta_volumetric) if eta_volumetric is not None else None
+    # ETA_SCALE_FACTOR converts eta to metres; these outputs are millimetres.
+    amplitude_measured = 1000 * ETA_SCALE_FACTOR * abs(eta_measured)
+    amplitude_microscopic = 1000 * ETA_SCALE_FACTOR * abs(eta_microscopic_only)
+    amplitude_volumetric = 1000 * ETA_SCALE_FACTOR * abs(eta_volumetric) if eta_volumetric is not None else None
     print_status("", "INFO")
     print_status("--- AMPLITUDE PREDICTION ---", "PROCESS")
     print_status(f"Measured amplitude: {amplitude_measured:.4f} mm", "CALC")
@@ -229,7 +231,7 @@ def compute_prediction():
             f"(2) standard scalar-tensor η ≈ 4α_0² = {eta_standard_st:.4e} "
             f"yields an enhancement of {enhancement_standard:.1f}×, indicating that η absorbs "
             f"TEP-specific screening contributions beyond standard scalar-tensor physics; "
-            f"(3) the phenomenological volumetric TEP model η ≈ -α_0 Δ⟨(ρ/ρ_T)³⟩ = "
+            f"(3) the phenomenological volumetric TEP model η ≈ α_0 S_Sigma Δ⟨(ρ/ρ_T)³⟩ = "
             f"{eta_volumetric:.4e} "
             f"yields an enhancement of {enhancement_volumetric:.1f}×, "
             f"with the residual ~3–5× absorbed into model uncertainties. "

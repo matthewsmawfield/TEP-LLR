@@ -26,7 +26,7 @@ def log_prob(theta, x, y, y_err):
     if not (ETA_LO <= eta <= ETA_HI and -0.1 <= b <= 0.1):
         return -np.inf
     model = ETA_SCALE_FACTOR * eta * x + b
-    return -0.5 * np.sum((y - model) ** 2 / y_err**2 + np.log(y_err**2))
+    return -0.5 * np.sum((y - model) ** 2 / y_err**2 + np.log(2 * np.pi) + 2 * np.log(y_err))
 
 
 def log_prob_batch(theta, x, y, y_err):
@@ -38,7 +38,7 @@ def log_prob_batch(theta, x, y, y_err):
     if not np.any(ok):
         return ll
     model = ETA_SCALE_FACTOR * np.outer(eta[ok], x) + b[ok, np.newaxis]
-    ll[ok] = -0.5 * np.sum((y - model) ** 2 / y_err**2 + np.log(y_err**2), axis=1)
+    ll[ok] = -0.5 * np.sum((y - model) ** 2 / y_err**2 + np.log(2 * np.pi) + 2 * np.log(y_err), axis=1)
     return ll
 
 
@@ -75,27 +75,44 @@ def run_laplace_bf(n_walkers=32, n_steps=5000, burn_in=1000, verbose=False):
             for s in range(0, len(samples), row_chunk)
         ]
     )
-    map_idx = int(np.argmax(logp))
-    map_eta, map_b = samples[map_idx]
-    cov = np.cov(samples.T)
-    det_cov = np.linalg.det(cov)
+
+    # Deterministic MAP via weighted least squares (exact for uniform prior + Gaussian likelihood)
+    # Design matrix X = [13*cos(D), 1], weights w = 1/y_err^2
+    # MAP = (X^T W X)^{-1} X^T W y  (computed without forming full diagonal W)
+    X = np.column_stack([ETA_SCALE_FACTOR * x, np.ones_like(x)])
+    w_vec = 1.0 / y_err**2
+    with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+        XtWX = X.T @ (w_vec[:, np.newaxis] * X)
+        XtWy = X.T @ (w_vec * y)
+    map_eta, map_b = np.linalg.solve(XtWX, XtWy)
+
+    # Inverse Hessian = (X^T W X)^{-1} (exact curvature of the log-posterior at MAP)
+    inv_hessian = np.linalg.inv(XtWX)
+    det_inv_hessian = np.linalg.det(inv_hessian)
+
+    # Log-likelihood at MAP (with full Gaussian normalisation, matching log_likelihood_synodic)
+    model_map = ETA_SCALE_FACTOR * map_eta * x + map_b
+    loglik_map = -0.5 * np.sum((y - model_map) ** 2 / y_err**2 + np.log(2 * np.pi) + 2 * np.log(y_err))
+
     d = 2
-    log_ml_laplace = logp[map_idx] + 0.5 * d * np.log(2 * np.pi) - 0.5 * np.log(det_cov)
+    log_ml_laplace = loglik_map + 0.5 * d * np.log(2 * np.pi) + 0.5 * np.log(det_inv_hessian)
 
     w = 1.0 / y_err**2
     b_mle_m0 = np.sum(w * y) / np.sum(w)
-    logp_m0 = -0.5 * np.sum((y - b_mle_m0) ** 2 / y_err**2 + np.log(y_err**2))
+    logp_m0 = -0.5 * np.sum((y - b_mle_m0) ** 2 / y_err**2 + np.log(2 * np.pi) + 2 * np.log(y_err))
     log_prior_m1 = -np.log(0.02 * 0.2)
     log_prior_m0 = -np.log(0.2)
-    log_ml_m0 = logp_m0 + log_prior_m0
+    # Laplace volume correction for M0 (1 parameter: intercept b).
+    # Posterior variance sigma_b^2 = 1 / sum(w_i) for weighted mean with known errors.
+    sigma_b_sq = 1.0 / np.sum(w)
+    log_ml_m0 = logp_m0 + log_prior_m0 + 0.5 * np.log(2 * np.pi) + 0.5 * np.log(sigma_b_sq)
     log_bf = log_ml_laplace + log_prior_m1 - log_ml_m0
     bf_laplace = float(np.exp(log_bf))
 
+    # BIC from heteroskedastic log-likelihood (consistent with Laplace/grid/bridge models)
     n = len(y)
-    rss_m1 = np.sum((y - (ETA_SCALE_FACTOR * map_eta * x + map_b)) ** 2)
-    rss_m0 = np.sum((y - b_mle_m0) ** 2)
-    bic_m1 = n * np.log(rss_m1 / n) + 2 * np.log(n)
-    bic_m0 = n * np.log(rss_m0 / n) + 1 * np.log(n)
+    bic_m1 = -2 * loglik_map + 2 * np.log(n)
+    bic_m0 = -2 * logp_m0 + 1 * np.log(n)
     bf_bic = float(np.exp(0.5 * (bic_m0 - bic_m1)))
 
     grid_evidence = log_evidence_grid(x, y, y_err, ETA_LO, ETA_HI)
@@ -113,7 +130,8 @@ def run_laplace_bf(n_walkers=32, n_steps=5000, burn_in=1000, verbose=False):
         "posterior_prob_positive_eta": p_positive,
         "map_eta": float(map_eta),
         "map_b": float(map_b),
-        "posterior_cov_det": float(det_cov),
+        "map_method": "weighted_least_squares",
+        "inv_hessian_det": float(det_inv_hessian),
         "log_ml_laplace": float(log_ml_laplace),
         "log_bf_laplace": float(log_bf),
         "bf_laplace": bf_laplace,
@@ -122,9 +140,12 @@ def run_laplace_bf(n_walkers=32, n_steps=5000, burn_in=1000, verbose=False):
             "grid_quadrature": grid_evidence,
             "bridge_sampling": bridge_evidence,
             "note": (
-                "Grid quadrature and bridge sampling are bandwidth-free synodic-only "
-                "cross-checks on the same uniform priors as Steps 016/073 MCMC. Laplace "
-                "and BIC are model-dependent approximations retained as secondary summaries."
+                "Grid quadrature is the primary bandwidth-free cross-check. Laplace "
+                "uses the exact WLS MAP and inverse Hessian (X^T W X)^{-1}. BIC uses the "
+                "heteroskedastic log-likelihood for consistency. Bridge sampling is "
+                "unstable for this nested model (M0 ⊂ M1) with BF ≫ 1 because the M1 "
+                "posterior (η ≈ -3e-4) and M0 posterior (η = 0) barely overlap; the "
+                "Savage-Dickey ratio in Step 016 is the recommended bridge estimator."
             ),
         },
         "n_samples": int(len(samples)),

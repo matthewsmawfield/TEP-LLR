@@ -1,8 +1,8 @@
 {
   "name": "tep-llr-site",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect",
-  "comment": "Package version matches manuscript version v0.1 (Lucknow)",
+  "comment": "Package version matches manuscript version v0.3 (Lucknow)",
   "main": "index.html",
   "scripts": {
     "dev": "node dev-server.js",

@@ -108,7 +108,7 @@ def analyze_tidal_resonance_model() -> dict:
         "fine_tuning": {
             "description": "TEP requires no fine-tuning of continental geometry",
             "natural_parameters": "α₀ ≈ 0.55 from stellar dynamics (Paper 12)",
-            "suppression_density": "ρ_c ≈ 20 g/cm³ from multiple independent probes",
+            "suppression_density": "ρ_T ≈ 20 g/cm³ from multiple independent probes",
             "universal_coupling": "A(φ) applies to all matter universally"
         }
     }

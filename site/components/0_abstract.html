@@ -2,19 +2,23 @@
     <h2>Abstract</h2>
 
     <p>
-        The Temporal Equivalence Principle (TEP) is a scalar-tensor theory in
-        which proper time is a dynamical field $\phi$ that couples universally
-        to all matter via a conformal metric $\tilde{g}_{\mu\nu} = A^2(\phi)
-        g_{\mu\nu}$. In deep gravitational potential wells, high ambient density
-        suppresses the local gradient of this field — a mechanism called Temporal
-        Shear screening — with the degree of suppression scaling with a body's
-        gravitational compactness $\Phi/c^2$. Because Earth and Moon have
-        different compactness and interior shielding profiles, TEP motivates a
-        compactness-dependent Strong Equivalence Principle response that would
-        appear in Lunar Laser Ranging as a synodic Earth-Moon range modulation
-        $\delta r = 13\eta\cos D$, where $D$ is the Moon-Sun elongation angle
-        and $\eta$ is the Nordtvedt parameter. The expected residual-channel
-        amplitude is at the millimetre level for $\eta \sim 10^{-4}$.
+        The Temporal Equivalence Principle (TEP) proposes that proper time
+        is a dynamical scalar field $\phi$ rather than a geometric parameter.
+        This field couples universally to all matter via a conformal metric
+        $\tilde{g}_{\mu\nu} = A^2(\phi)\,g_{\mu\nu}$; in deep gravitational
+        potential wells, high ambient density suppresses the local gradient of
+        $\phi$ — a mechanism termed Temporal Shear screening — with the degree
+        of suppression scaling with a body's gravitational compactness
+        $\Phi/c^2$. Because Earth and Moon have different compactness and interior
+        shielding profiles, TEP motivates a compactness-dependent Strong
+        Equivalence Principle response that would appear in Lunar Laser Ranging
+        as a synodic Earth-Moon range modulation
+        $\delta r = 13\eta_{\rm resid}\cos D$, where $D$ is the Moon-Sun
+        elongation angle and $\eta_{\rm resid}$ is the residual-channel amplitude
+        (an Observable Response Coefficient, distinct from the standard metric
+        Nordtvedt parameter $\eta$).
+        The expected residual-channel amplitude is at the millimetre level for
+        $\eta_{\rm resid} \sim 10^{-4}$.
     </p>
 
     <p>
@@ -24,40 +28,40 @@
         (1984–2019) after standard $6\sigma$ MAD outlier cleaning. The primary
         estimand is a precision-weighted synodic regression on the post-fit
         residual channel, with inverse station-variance weighting and a full
-        systematic model that includes annual, monthly, and station-specific
-        regressors.
+        systematic model with annual, monthly, and thermal $\cos(2D)$
+        regressors and a common intercept.
     </p>
 
     <p>
         The primary precision-weighted residual-channel estimate is
-        $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$
+        $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$
         ($6.94\sigma$; $6.78\sigma$ cluster-robust). The amplitude
         stabilises in the band $-3.2$ to $-4.1 \times 10^{-4}$ across the
         estimator hierarchy, from cosD-only ($5.25\sigma$) through
         full-systematic OLS ($6.17\sigma$) to precision-weighted
-        ($6.94\sigma$). Robustness checks — common-$\eta$ mixed model,
+        ($6.94\sigma$). Robustness checks — common-$\eta_{\rm resid}$ mixed model,
         leave-one-station-out meta-analysis, wild cluster bootstrap,
-        phase-locked differential, cross-ephemeris validation on DE430,
+        phase-locked differential, cross-ephemeris validation on cleaned DE430
+        ($\eta_{\rm resid} = -7.04 \times 10^{-4}$, $5.96\sigma$),
         parametric GR-null bootstrap, and a frequency null scan — all
         support residual-channel survival of the synodic component
         (Section 4).
-        Within the standard Parametrized Post-Newtonian framework,
-        the measured Nordtvedt parameter implies
-        $\beta = 0.999902 \pm 1.07 \times 10^{-5}$ from the joint
-        $(\beta, \gamma)$ contour, placing General Relativity
-        ($\beta = \gamma = 1$) at $\Delta\chi^2 = 48.2$, outside the
-        99\% confidence contour. A full-sky directional scan on the residual
-        channel (2,664 uniformly spaced directions, 5° grid) places the
-        Planck CMB dipole axis at rank 226/2664 (top 8.5\%); a
-        scrambled-sky null with $n = 1{,}000$ Monte Carlo realizations
-        yields a look-elsewhere-corrected $p < 0.001$.
+        If interpreted within the static Parametrized Post-Newtonian framework —
+        an interpretation the residual-channel estimand does not yet license
+        (Section 4.14) — the measured amplitude would correspond to
+        $\beta_{\rm PPN} = 0.999902 \pm 1.07 \times 10^{-5}$ from the joint
+        $(\beta_{\rm PPN}, \gamma)$ contour; this mapping is reported for scale only
+        and is not advanced as a PPN measurement pending the integrator-level refit.
+        A full-sky directional scan on the residual channel (2,664 right-ascension/declination
+        grid points at 5° intervals) places the Planck CMB dipole axis
+        at rank 226/2664 (top 8.5%).
     </p>
 
     <p>
         The result is therefore framed as a high-significance residual-channel
         candidate with a TEP interpretation, not as a completed replacement for
         direct-fit LLR bounds. Source-level numerical refits of the INPOP or
-        DE430 integrators with $\eta$ left free remain the critical open closure
+        DE430 integrators with $\eta_{\rm resid}$ left free remain the critical open closure
         test. Ephemeris-absorption stress tests bound the residual-channel
         survival amplitude but do not replace a full dynamical integrator-level
         confirmation.

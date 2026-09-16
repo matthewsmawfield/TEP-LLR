@@ -1,8 +1,9 @@
-v0.2 (Lucknow) — 05 June 2026 — Formatting consistency: removed mid-sentence bold tags per TEP style rules
+v0.3 (Lucknow) — 16 September 2026
 
-v0.1 (Lucknow) - Initial release of TEP-LLR manuscript
-
-- 82-step LLR analysis pipeline
-- Primary detection: 7.82σ (Cook's-Distance-excised OLS)
-- Cross-ephemeris validation (INPOP19a, DE430)
-- Phase-locked new/full-moon confirmation at 5.99σ
+- Changed the primary variable from η to η_resid to distinguish the residual-channel amplitude from the standard metric Nordtvedt parameter.
+- Updated the conformal metric equation to include the disformal term B(φ)∇_μφ∇_νφ.
+- Replaced the blind 20% year hold-out validation with a stricter 5-fold calendar-year cross-validation.
+- Updated terminology by changing "critical density" to "saturation scale" for ρ_T.
+- Expanded the analysis pipeline from 74 to 78 discrete steps.
+- Added a "Screening projection notice" to clarify the ontology of the environmental operator 𝒮_Σ(ℰ).
+- Added explicit caveats clarifying that mapping results to β_PPN is strictly "for scale only" pending a full integrator-level refit.

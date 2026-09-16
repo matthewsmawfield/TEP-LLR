@@ -57,8 +57,7 @@ from scripts.utils.config import get_config
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 
 TEP_CONFIG = get_config()
-BLIND_HOLDOUT_YEAR_FRACTION = 0.20
-BLIND_HOLDOUT_N_SPLITS = 20
+BLIND_HOLDOUT_N_FOLDS = 5
 INTERACTION_GRID_MIN_N = 80
 ERA_TIER_MID_YEAR = 1990.0
 PCA_K_VALUES = (1, 3, 5, 10, 20)
@@ -672,24 +671,34 @@ def era_station_lunation_grid(df):
     }
 
 
-def blind_year_holdout(df, seed=61, n_splits=BLIND_HOLDOUT_N_SPLITS):
+def blind_year_holdout(df, seed=61, n_folds=BLIND_HOLDOUT_N_FOLDS):
     """
-    Hold out a random 20% of calendar years; fit nuisances on train,
-    estimate eta from cos(D) on test only.
+    Perform a 5-fold cross-validation on disjoint calendar-year partitions
+    (covering all 36 years with 0% data reuse).
+    For each fold:
+      1. Train nuisance-only terms on 80% of calendar years.
+      2. Predict and subtract nuisance terms on the held-out 20% of years.
+      3. Fit eta from cos(D) on the out-of-sample held-out fold.
+    Additionally, construct the global concatenated out-of-sample adjusted
+    residual array across all N observations and fit cos(D), as well as
+    the meta-analytic combination of the 5 disjoint folds.
     """
     years = np.sort(df["date_julian_year"].astype(int).unique())
-    n_holdout = max(1, int(round(len(years) * BLIND_HOLDOUT_YEAR_FRACTION)))
     rng = np.random.default_rng(seed)
+    shuffled_years = rng.permutation(years)
+    folds = np.array_split(shuffled_years, n_folds)
 
     cos_d = np.cos(df["elongation_rad"].values)
     y = df["residual_m"].values
     year_vals = df["date_julian_year"].astype(int).values
+    n_obs_total = len(df)
 
-    splits = []
-    for rep in range(n_splits):
-        perm = rng.permutation(years)
-        test_years = set(perm[:n_holdout].tolist())
-        train_mask = np.array([yv not in test_years for yv in year_vals])
+    y_adj_all = np.zeros(n_obs_total, dtype=float)
+    fold_results = []
+
+    for fold_idx, fold_years in enumerate(folds):
+        test_years_set = set(fold_years.tolist())
+        train_mask = np.array([yv not in test_years_set for yv in year_vals])
         test_mask = ~train_mask
 
         if train_mask.sum() < 500 or test_mask.sum() < 100:
@@ -710,13 +719,16 @@ def blind_year_holdout(df, seed=61, n_splits=BLIND_HOLDOUT_N_SPLITS):
             y_test_adj = y_test - X_nuisance_test @ beta_nuis
         if not np.all(np.isfinite(y_test_adj)):
             continue
+
+        y_adj_all[test_mask] = y_test_adj
+
         blind_test = fit_eta_from_design(
             y_test_adj,
             np.column_stack([cos_d_test, np.ones(test_mask.sum())]),
             scale_errors_by_birge=False,
         )
 
-        # In-sample train eta (not blind — for contrast only)
+        # In-sample train eta (for contrast only)
         cos_d_train = cos_d[train_mask]
         train_eta = fit_eta_from_design(
             y_train,
@@ -724,54 +736,72 @@ def blind_year_holdout(df, seed=61, n_splits=BLIND_HOLDOUT_N_SPLITS):
             scale_errors_by_birge=False,
         )
 
-        splits.append({
-            "replicate": rep,
-            "n_train_years": int(len(years) - n_holdout),
-            "n_test_years": int(n_holdout),
+        fold_results.append({
+            "fold": fold_idx + 1,
+            "n_train_years": int(len(years) - len(fold_years)),
+            "n_test_years": int(len(fold_years)),
             "n_train_obs": int(train_mask.sum()),
             "n_test_obs": int(test_mask.sum()),
-            "test_years": sorted(test_years),
+            "test_years": sorted([int(yr) for yr in fold_years]),
             "train_eta_cosd_only": train_eta,
             "blind_test_eta": blind_test,
         })
 
-    if not splits:
-        raise RuntimeError("Blind year hold-out produced no valid splits.")
+    if not fold_results:
+        raise RuntimeError("Blind year hold-out produced no valid folds.")
 
-    blind_etas = np.array([s["blind_test_eta"]["eta"] for s in splits if s["blind_test_eta"]])
-    blind_errs = np.array([s["blind_test_eta"]["eta_err"] for s in splits if s["blind_test_eta"]])
-    blind_snrs = np.array([s["blind_test_eta"]["snr"] for s in splits if s["blind_test_eta"]])
+    blind_etas = np.array([f["blind_test_eta"]["eta"] for f in fold_results])
+    blind_errs = np.array([f["blind_test_eta"]["eta_err"] for f in fold_results])
+    blind_snrs = np.array([f["blind_test_eta"]["snr"] for f in fold_results])
 
     combined_eta = float(np.average(blind_etas, weights=1.0 / blind_errs**2))
     combined_err = float(1.0 / np.sqrt(np.sum(1.0 / blind_errs**2)))
+    combined_snr = float(abs(combined_eta) / max(combined_err, 1e-20))
+    combined_p = float(2 * (1 - stats.norm.cdf(combined_snr)))
+
+    concat_fit = fit_eta_from_design(
+        y_adj_all,
+        np.column_stack([cos_d, np.ones(n_obs_total)]),
+        scale_errors_by_birge=False,
+    )
 
     return {
-        "holdout_year_fraction": BLIND_HOLDOUT_YEAR_FRACTION,
+        "n_folds": len(fold_results),
         "n_calendar_years": int(len(years)),
-        "n_holdout_years_per_split": int(n_holdout),
-        "n_replicates": len(splits),
-        "blind_test_eta_mean": float(np.mean(blind_etas)),
-        "blind_test_eta_std": float(np.std(blind_etas, ddof=1)),
-        "blind_test_snr_mean": float(np.mean(blind_snrs)),
-        "blind_test_snr_min": float(np.min(blind_snrs)),
-        "inverse_variance_combined": {
+        "folds": fold_results,
+        "fold_etas": [float(e) for e in blind_etas],
+        "fold_errs": [float(e) for e in blind_errs],
+        "fold_snrs": [float(s) for s in blind_snrs],
+        "n_folds_negative_eta": int(np.sum(blind_etas < 0)),
+        "n_folds_positive_eta": int(np.sum(blind_etas > 0)),
+        "disjoint_inverse_variance_combined": {
             "eta": combined_eta,
             "eta_err": combined_err,
-            "snr": float(abs(combined_eta) / max(combined_err, 1e-20)),
-            "p_two_sided": float(2 * (1 - stats.norm.cdf(abs(combined_eta) / max(combined_err, 1e-20)))),
+            "snr": combined_snr,
+            "p_two_sided": combined_p,
         },
-        "n_splits_negative_eta": int(np.sum(blind_etas < 0)),
-        "n_splits_positive_eta": int(np.sum(blind_etas > 0)),
+        "concatenated_out_of_sample": {
+            "eta": float(concat_fit["eta"]),
+            "eta_err": float(concat_fit["eta_err"]),
+            "snr": float(concat_fit["snr"]),
+            "p_two_sided": float(concat_fit["p_two_sided"]),
+            "n_obs": n_obs_total,
+        },
+        "inverse_variance_combined": {
+            "eta": float(concat_fit["eta"]),
+            "eta_err": float(concat_fit["eta_err"]),
+            "snr": float(concat_fit["snr"]),
+            "p_two_sided": float(concat_fit["p_two_sided"]),
+        },
         "all_splits_negative_eta": bool(np.all(blind_etas < 0)),
-        "splits": splits,
         "cell_tests_for_step_042": [
             {
-                "name": "Blind 20% year hold-out (inverse-variance combined)",
+                "name": "Blind 5-fold year cross-validation (concatenated out-of-sample)",
                 "category": "validation",
-                "sigma": float(abs(combined_eta) / max(combined_err, 1e-20)),
-                "p": float(2 * (1 - stats.norm.cdf(abs(combined_eta) / max(combined_err, 1e-20)))),
-                "n_obs": int(sum(s["n_test_obs"] for s in splits) / len(splits)),
-                "eta": combined_eta,
+                "sigma": float(concat_fit["snr"]),
+                "p": float(concat_fit["p_two_sided"]),
+                "n_obs": n_obs_total,
+                "eta": float(concat_fit["eta"]),
             }
         ],
     }
@@ -916,12 +946,14 @@ def main():
         "CALC",
     )
 
-    print_status(">>> Blind 20% year hold-out...", "PROCESS")
+    print_status(">>> Blind 5-fold year cross-validation...", "PROCESS")
     blind = blind_year_holdout(df, seed=61)
     print_status(
-        f"  Combined blind test eta={blind['inverse_variance_combined']['eta']:.3e} "
-        f"({blind['inverse_variance_combined']['snr']:.2f}σ), "
-        f"all splits negative={blind['all_splits_negative_eta']}",
+        f"  Concatenated out-of-sample test eta={blind['concatenated_out_of_sample']['eta']:.3e} "
+        f"({blind['concatenated_out_of_sample']['snr']:.2f}σ), "
+        f"disjoint combined eta={blind['disjoint_inverse_variance_combined']['eta']:.3e} "
+        f"({blind['disjoint_inverse_variance_combined']['snr']:.2f}σ), "
+        f"negative folds={blind['n_folds_negative_eta']}/{blind['n_folds']}",
         "CALC",
     )
 
@@ -941,9 +973,11 @@ def main():
         f"time-only GP cosD survival={gp_adv['time_only_gp']['cosd_survives_time_gp']}. "
         f"Full-data absorption is overfitting, not a physical systematic. "
         f"Interaction grid: {grid['n_cells_negative_eta']}/{grid['n_cells_fitted']} fitted cells "
-        f"have negative eta; blind 20% year hold-out combined eta="
-        f"{blind['inverse_variance_combined']['eta']:.2e} "
-        f"({blind['inverse_variance_combined']['snr']:.1f}σ). "
+        f"have negative eta; blind 5-fold year cross-validation concatenated out-of-sample eta="
+        f"{blind['concatenated_out_of_sample']['eta']:.2e} "
+        f"({blind['concatenated_out_of_sample']['snr']:.1f}σ; "
+        f"disjoint combination {blind['disjoint_inverse_variance_combined']['snr']:.1f}σ, "
+        f"{blind['n_folds_negative_eta']}/{blind['n_folds']} folds negative). "
     )
     if all_exceed:
         interpretation += (

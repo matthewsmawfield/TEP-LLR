@@ -6,13 +6,14 @@
     "prior_intercept": "uniform on [-0.1, 0.1] m",
     "posterior_prob_negative_eta": 1.0,
     "posterior_prob_positive_eta": 0.0,
-    "map_eta": -0.0002863313919714783,
-    "map_b": -0.0004116129252003425,
-    "posterior_cov_det": 8.603227810261063e-16,
-    "log_ml_laplace": 55835.35331646201,
-    "log_bf_laplace": 32.4324668444533,
-    "bf_laplace": 121686215642957.73,
-    "bf_bic": 8057.059123963125,
+    "map_eta": -0.00028644759036517434,
+    "map_b": -0.00041218968553369777,
+    "map_method": "weighted_least_squares",
+    "inv_hessian_det": 8.811602374597535e-16,
+    "log_ml_laplace": 32418.285082698894,
+    "log_bf_laplace": 4.547345754366688,
+    "bf_laplace": 94.38156370725378,
+    "bf_bic": 71.22324390345337,
     "evidence_cross_checks": {
         "grid_quadrature": {
             "log_evidence_m1": 32424.05870467235,
@@ -23,14 +24,15 @@
             "n_b": 81
         },
         "bridge_sampling": {
-            "log_bf10": 4.5792796474822595,
-            "bf10": 97.44417476208444,
-            "bridge_mixture_c": 0.010158041371333104,
+            "log_bf10": 12.48168574857068,
+            "bf10": 263467.6182633501,
+            "bridge_mixture_c": 3.795518443871937e-06,
             "n_samples": 4000,
             "n_iterations": 8,
-            "max_samples_used": 4000
+            "max_samples_used": 4000,
+            "method": "two_sample_m0_posterior_proposal"
         },
-        "note": "Grid quadrature and bridge sampling are bandwidth-free synodic-only cross-checks on the same uniform priors as Steps 016/073 MCMC. Laplace and BIC are model-dependent approximations retained as secondary summaries."
+        "note": "Grid quadrature is the primary bandwidth-free cross-check. Laplace uses the exact WLS MAP and inverse Hessian (X^T W X)^{-1}. BIC uses the heteroskedastic log-likelihood for consistency. Bridge sampling is unstable for this nested model (M0 \u2282 M1) with BF \u226b 1 because the M1 posterior (\u03b7 \u2248 -3e-4) and M0 posterior (\u03b7 = 0) barely overlap; the Savage-Dickey ratio in Step 016 is the recommended bridge estimator."
     },
     "n_samples": 128000,
     "n_obs": 25445

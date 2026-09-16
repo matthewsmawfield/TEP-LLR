@@ -3,8 +3,10 @@
 
 from __future__ import annotations
 
+import ast
 import json
 import math
+import re
 import sys
 from pathlib import Path
 
@@ -144,6 +146,51 @@ def main() -> int:
     joint_eta = keplerian["eta_joint_with_kepler_terms"]
 
     manuscript = read_manuscript_sources()
+
+    # Check the actual runner inventory rather than a manually maintained count.
+    runner = PROJECT_ROOT / "scripts" / "steps" / "run_all_steps.py"
+    runner_tree = ast.parse(runner.read_text(encoding="utf-8"))
+    canonical_steps = next(
+        ast.literal_eval(node.value)
+        for node in ast.walk(runner_tree)
+        if isinstance(node, ast.Assign)
+        and any(isinstance(target, ast.Name) and target.id == "steps" for target in node.targets)
+    )
+    count_sources = [
+        *COMPONENTS_DIR.glob("*.html"),
+        PROJECT_ROOT / "README.md",
+        PROJECT_ROOT / "scripts" / "README.md",
+        runner,
+    ]
+    count_pattern = re.compile(
+        r"(?:pipeline (?:of|comprises)\s+|complete\s+)(\d+)(?=\s*(?:-|\s)(?:steps?|scripts?))"
+        r"|\b(\d+)\s+(?:sequential step scripts|canonical (?:steps|scripts))"
+    )
+    for source in count_sources:
+        for match in count_pattern.finditer(source.read_text(encoding="utf-8")):
+            count = int(next(group for group in match.groups() if group is not None))
+            if count != len(canonical_steps):
+                errors.append(f"{source.relative_to(PROJECT_ROOT)}: pipeline count {count}, runner has {len(canonical_steps)} scripts")
+
+    for source in COMPONENTS_DIR.glob("*.html"):
+        source_text = source.read_text(encoding="utf-8")
+        if re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", source_text):
+            errors.append(f"{source.name}: non-printing control character in manuscript")
+        if r"\Moon" in source_text:
+            errors.append(f"{source.name}: use portable Moon notation instead of the custom macro")
+
+    prediction = load_json(OUTPUTS_DIR / "step_033_quantitative_eta_prediction.json")
+    comparison = prediction["theoretical_comparison"]
+    amplitude_pairs = [
+        ("amplitude_measured_mm", prediction["measured_parameters"]["eta_measured"]),
+        ("amplitude_microscopic_only_mm", comparison["microscopic_coupling_only"]["eta_microscopic_only"]),
+        ("amplitude_volumetric_mm", comparison["volumetric_tep"]["eta_volumetric"]),
+    ]
+    for key, eta_value in amplitude_pairs:
+        if eta_value is not None and not math.isclose(
+            prediction["amplitude_prediction"][key], 13_000 * abs(eta_value), rel_tol=1e-12, abs_tol=0.0
+        ):
+            errors.append(f"Step 033 {key}: inconsistent metre-to-millimetre conversion")
 
     require_substring(
         manuscript,
@@ -448,7 +495,7 @@ def main() -> int:
     )
     require_phrase(
         manuscript,
-        "modeled known-systematic-only explanations fail",
+        "modelled known-systematic-only explanations fail",
         "known-systematic framing",
         errors,
     )
@@ -491,12 +538,9 @@ def main() -> int:
         "Step 061 blind hold-out eta",
         errors,
     )
-    require_substring(
-        manuscript,
-        format_sigma(float(blind["snr"]), 1),
-        "Step 061 blind hold-out SNR",
-        errors,
-    )
+    blind_snr_val = float(blind["snr"])
+    if format_sigma(blind_snr_val, 2) not in manuscript and format_sigma(blind_snr_val, 1) not in manuscript:
+        errors.append(f"Step 061 blind hold-out SNR: expected manuscript source to contain {format_sigma(blind_snr_val, 2)!r} or {format_sigma(blind_snr_val, 1)!r}")
     require_substring(
         manuscript,
         format_sci_latex(float(pca_joint["eta"]), 2),
@@ -605,11 +649,31 @@ def main() -> int:
         "stale abstract overclaim on alternatives",
         errors,
     )
+    forbid_substring(manuscript, "14.3\\sigma", "stale 14.3sigma hold-out artifact", errors)
+    forbid_substring(manuscript, "15 of 20", "stale 15 of 20 hold-out count", errors)
+    require_substring(
+        manuscript,
+        "was fixed prior to the residual-channel fit",
+        "pre-registered 6sigma MAD cleaning",
+        errors,
+    )
 
     meta = step_072["meta_analysis"]
     meta_eta_str = format_sci_latex(float(meta["eta"]), 2)
     require_substring(manuscript, meta_eta_str, "Step 072 meta eta", errors)
-    require_substring(manuscript, "12.8\\sigma", "Step 072 meta SNR (rounded)", errors)
+    forbid_substring(manuscript, "12.8\\sigma", "overlapping LOSO pseudo-significance", errors)
+    require_phrase(
+        manuscript,
+        "the subsets as independent are not reported as inferential results",
+        "LOSO overlap caveat",
+        errors,
+    )
+    require_substring(
+        manuscript,
+        format_sigma(float(step_072["consistency"]["max_shift_powered_sigma"])),
+        "LOSO maximum powered shift",
+        errors,
+    )
     require_substring(manuscript, "fig_05_loso_forest.png", "LOSO forest figure path", errors)
     require_substring(manuscript, "Step 072", "Step 072 LOSO reference", errors)
     require_substring(manuscript, "0.984", "dual-axis collinearity r", errors)
