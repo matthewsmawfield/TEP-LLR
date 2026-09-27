@@ -7,7 +7,8 @@ degree of Temporal Topology flattening in each planetary interior.
 
 Following the updated TEP framework (Papers 6, 10, 11, 12, 13):
 - ρ_T is the Temporal Topology saturation density (fundamental scale, not a local density switch)
-- The microscopic coupling β is constrained by Cassini to α_0 ≲ 3×10⁻³ in screened regime
+- Cassini bounds the screened solar source charge |α_0 S_Σ^(⊙)| ≲ 8.2×10⁻⁶;
+  in the standard unscreened limit it bounds the bare coupling α_0 ≲ 3.4×10⁻³
 - Observable response coefficients κ (like κ_MSP, κ_Cep) are empirically determined in unscreened regimes
 - A key insight from Paper 10: TEP effect operates on clock rates via A(Φ) ≈ 1 − ηΦ/c²
 - η itself is the TEP modification parameter for LLR, analogous to κ_MSP and κ_Cep
@@ -71,7 +72,7 @@ def run_core_simulation(logger, rho_T_input=None):
 
     # Calculating volumetric suppression integrals (phenomenological TEP evaluation)
     # Following updated framework (Papers 6, 10, 11, 12, 13):
-    # - The microscopic coupling β is constrained by Cassini to α_0 ≲ 3×10⁻³ in screened regime
+    # - Cassini bounds the screened solar source charge |α_0 S_Σ^(⊙)| ≲ 8.2×10⁻⁶
     # - Observable response coefficients κ (like κ_MSP, κ_Cep) are empirically determined in unscreened regimes
     # - A key insight from Paper 10: TEP effect operates on clock rates via A(Φ) ≈ 1 − ηΦ/c²
     # - η itself is the TEP modification parameter for LLR, analogous to κ_MSP and κ_Cep
@@ -120,16 +121,38 @@ def run_core_simulation(logger, rho_T_input=None):
     # the Sun than the Moon.
     shielding_differential = earth_shielding - moon_shielding
 
-    # Volumetric suppression model prediction for η
-    # η = α_0 * S_Sigma * (Earth_shielding - Moon_shielding)
-    # This is the phenomenological TEP prediction, distinct from the
-    # microscopic-coupling-only compactness-squared baseline.
-    alpha_0 = -1.0  # Canonical bare coupling
-    S_Sigma_cassini = 3.0e-3  # Cassini Solar-System screening factor
-    alpha_solar = alpha_0 * S_Sigma_cassini
-    eta_volumetric = alpha_solar * shielding_differential
-    logger.info(f"    Volumetric η prediction: {eta_volumetric:.4e}")
-    logger.info(f"    (α_0 = {alpha_0}, S_Sigma = {S_Sigma_cassini}, shielding differential = {shielding_differential:.4e})")
+    # Volumetric suppression model estimate for η
+    # η = α_eff^(Earth-Moon) * (Earth_shielding - Moon_shielding)
+    # Source-charge bookkeeping (issue 17-9): in any mediated-force
+    # decomposition the differential-fall observable carries BOTH vertices —
+    # the screened solar source charge and the screened body coupling —
+    # δa/a_0 = (α_0 S_Sigma^(Sun)) * Δα_body. Cassini bounds the source
+    # factor |α_0 S_Sigma^(Sun)| ≲ sqrt(2)·5.8e-6 ≈ 8.2e-6 (linear
+    # source-charge map, α_0 = sqrt(2)·β_A). The volumetric number below
+    # therefore admits only two readings, both fatal to a force-channel
+    # interpretation:
+    #   (a) α_eff is a body coupling — then the source factor is missing and
+    #       the product-consistent estimate is
+    #       |α_0 S_Sigma|·|α_eff|·Δ⟨(ρ/ρ_T)^3⟩ ≈ 8e-10 (body-coupling
+    #       reading) or |α_0 S_Sigma|·|α_eff| ≈ 2.4e-8 (α_eff as the whole
+    #       body-charge differential) — five orders below 10^-4;
+    #   (b) α_eff is the full response — then it is NOT distinct from the
+    #       solar source charge it must contain, and the "distinct
+    #       projection" exemption is incoherent.
+    # The quoted band is thus an effective observable response coefficient
+    # (all microscopic factors folded into one number), not a decomposable
+    # mediated-force prediction; it is additionally superseded by the
+    # canonical pairwise operator (Paper 0 v0.15, Appendix E R11), which
+    # suppresses the Earth-Moon force channel to ~10^-14.
+    alpha_eff_earth_moon = -3.0e-3  # Illustrative Earth-Moon effective coupling
+    eta_volumetric = alpha_eff_earth_moon * shielding_differential
+    alpha_eff_solar_cassini = (2.0 ** 0.5) * 5.8e-6  # ≈ 8.2e-6
+    eta_mediated_full = alpha_eff_solar_cassini * alpha_eff_earth_moon * shielding_differential
+    eta_mediated_compact = alpha_eff_solar_cassini * alpha_eff_earth_moon
+    logger.info(f"    Volumetric η estimate (effective ORC): {eta_volumetric:.4e}")
+    logger.info(f"    (α_eff(Earth-Moon) = {alpha_eff_earth_moon}, shielding differential = {shielding_differential:.4e})")
+    logger.info(f"    Mediated-force ceiling (α_⊙·α_eff·Δshielding): {eta_mediated_full:.4e}")
+    logger.info(f"    Mediated-force ceiling (α_⊙·α_eff): {eta_mediated_compact:.4e}")
 
     # In the old framework, the relationship was η = -κ_LL * (Earth_Shielding - Moon_Shielding)
     # However, based on the new insight from Paper 10, η itself is the TEP modification parameter.
@@ -171,15 +194,20 @@ def run_core_simulation(logger, rho_T_input=None):
             "effective_coupling_diagnostic": float(effective_coupling) if measured_eta is not None else None,
         } if measured_eta is not None else None,
         "volumetric_prediction": {
-            "alpha_0": float(alpha_0),
-            "S_Sigma_cassini": float(S_Sigma_cassini),
+            "alpha_eff_earth_moon": float(alpha_eff_earth_moon),
             "eta_volumetric": float(eta_volumetric),
             "measured_to_volumetric_ratio": float(volumetric_ratio) if measured_eta is not None else None,
-            "caveat": "Phenomenological (ρ/ρ_T)^3 scaling with simplified PREM density model. Ratio ~3–5 is consistent with model uncertainties (density profile simplification, ρ_T uncertainty, α_0 upper-bound nature).",
+            "caveat": "Effective observable-response band only: the mediated-force decomposition is product-limited by the screened solar source charge and returns ≲10⁻⁹–10⁻⁸, so the quoted band cannot be a charge×charge differential-fall estimate. It is additionally superseded by the canonical pairwise operator (Paper 0 v0.15, Appendix E R11), which suppresses the Earth-Moon force channel to ~10⁻¹⁴.",
+        },
+        "source_charge_product_limit": {
+            "alpha_eff_solar_cassini_ceiling": float(alpha_eff_solar_cassini),
+            "eta_mediated_with_shielding_differential": float(eta_mediated_full),
+            "eta_mediated_alpha_eff_as_full_differential": float(eta_mediated_compact),
+            "verdict": "Under any mediated-force reading the differential-fall observable is bounded by ≲10⁻⁹–10⁻⁸ — five orders below the measured 10⁻⁴ band. The volumetric α_eff can be read only as an effective response coefficient (all factors folded in), not as a body coupling; the 'distinct projection' exemption from the source-charge bound is not available to a force channel.",
         },
         "conclusions": {
             "shielding_differential": f"{shielding_differential:.2e}",
-            "explanation": "The simulation calculates Earth and Moon shielding factors from density profiles using ρ_T. The shielding differential quantifies the differential degree of Temporal Topology flattening, which is the physical origin of the Nordtvedt effect in TEP. The volumetric suppression model yields η ≈ α_0 S_Sigma Δ⟨(ρ/ρ_T)^3⟩ ≈ -10⁻⁴, consistent with the observed order of magnitude. The remaining ~3–5× factor is absorbed into model uncertainties (PREM simplification, phenomenological exponent, ρ_T uncertainty, and the upper-bound nature of the Cassini S_Sigma constraint). η itself is the observable response coefficient for LLR, not derived from κ_LL.",
+            "explanation": "The simulation calculates Earth and Moon shielding factors from density profiles using ρ_T. The shielding differential quantifies the differential degree of Temporal Topology flattening between the two interiors. The volumetric suppression model yields an effective η band ≈ α_eff^(Earth-Moon) Δ⟨(ρ/ρ_T)^3⟩ ≈ -10⁻⁴ in the observed decade, but as a mediated-force estimate it is internally inconsistent: folding in the Cassini-bounded solar source charge gives ≲10⁻⁹–10⁻⁸, and the canonical pairwise operator independently suppresses the force channel to ~10⁻¹⁴. The surviving admissible channel for the measured residual is the clock-sector/ephemeris-reduction projection (Section 2.1), whose amplitude map is the open estimand question of the source-level integrator refit. η itself is the observable response coefficient for LLR, not derived from κ_LL.",
         },
     }
 

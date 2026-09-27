@@ -120,18 +120,20 @@
     </p>
 
     <p>
-        Three stations are classified as underpowered based on expected SNR.
-        Matera ($N = 346$) lacks sufficient sample size, with expected SNR = $0.37\sigma$.
-        McDonald2 suffers from severe phase truncation, yielding expected SNR = $0.88\sigma$.
-        Haleakala, which operated 1984–1990 with 13.8 cm RMS, achieves only $0.22\sigma$
-        expected SNR at the global $\eta$ — below the powered threshold.
+        Three stations are classified as underpowered based on expected SNR at the
+        pooled reference amplitude, evaluated on the $6\sigma$-cleaned archive.
+        Matera ($N = 345$) lacks sufficient sample size, with expected SNR = $0.38\sigma$.
+        McDonald2 suffers from severe phase truncation, yielding expected SNR = $1.04\sigma$.
+        Haleakala, which operated 1984–1990 with 10.6 cm cleaned RMS (13.8 cm raw),
+        achieves only $0.27\sigma$ expected SNR at the pooled $|\eta|$ — below the powered threshold.
     </p>
 
     <p>
-        Haleakala's measured $\eta = +3.55 \times 10^{-3}$ yields an observed
-        SNR of $2.45\sigma$ ($p = 0.014$; Haleakala underpowered-station diagnostic),
-        opposite in sign to the global detection. Given its underpowered status (expected SNR = $0.22\sigma$
-        at the global $|\eta|$, below the $3\sigma$ threshold), the station
+        Haleakala's raw-sample estimate $\eta = +3.55 \times 10^{-3}$ yields an observed
+        SNR of $2.45\sigma$ ($p = 0.014$; cleaned-archive $\eta = +2.57 \times 10^{-3}$,
+        $2.21\sigma$), opposite in sign to the global detection. Given its
+        underpowered status (expected SNR = $0.27\sigma$ at the pooled $|\eta|$,
+        below the $3\sigma$ threshold), the station
         is down-weighted in precision-weighted regression.
     </p>
 
@@ -167,7 +169,7 @@
 
     <h4>3.3.1 Overview of Analysis Pipeline</h4>
     <p>
-        The analysis employs a comprehensive seven-group pipeline of 84 scripts designed to detect and validate the TEP Nordtvedt signal with maximum statistical rigor:
+        The analysis employs a comprehensive seven-group pipeline of 87 scripts designed to detect and validate the TEP Nordtvedt signal with maximum statistical rigor:
     </p>
 
     <table>
@@ -477,18 +479,26 @@
 
     <h4>3.3.10 TEP Core Density Simulation</h4>
     <p>
-        The predicted order of the residual-channel coefficient $\eta_{\rm resid}$ follows
-        directly from the screened volumetric suppression model derived in Section 2.1:
+        The core-density simulation integrates simplified PREM interior profiles for Earth and the
+        Moon against the saturation scale $\rho_T$ to obtain the shielding differential
+        $\Delta\langle(\rho/\rho_T)^3\rangle \approx 3.22\times10^{-2}$, the input of the volumetric
+        bookkeeping of Section 2.1:
         \[
-          \eta_{\rm resid} \simeq \alpha_0 S_\Sigma^{(\odot)}
+          \eta_{\rm resid} \simeq \alpha_{\rm eff}^{(\oplus-{\rm Moon})}
           \Delta\!\left\langle(\rho/\rho_T)^3\right\rangle,
         \]
-        where $\rho_T$ is the threshold density set by the chameleon potential, $S_\Sigma^{(\odot)}$
-        is the solar-environment screening factor, and the angle brackets denote volumetric
-        averages over the Earth and Moon interiors. Inserting the values adopted in Section 2.1
-        yields $\eta_{\rm resid} \approx -9.7\times10^{-5}$, consistent at order of magnitude
-        with the measured value. The reader is referred to Section 2.1 for the full derivation
-        and numerical calibration.
+        where the angle brackets denote volumetric averages over the two interiors. Inserting the
+        illustrative $\alpha_{\rm eff}^{(\oplus-{\rm Moon})} \approx 3\times10^{-3}$ yields the
+        effective response band $\eta_{\rm resid} \approx -9.7\times10^{-5}$ in the measured decade.
+        As established in Section 2.1, that number is an effective response coefficient rather than
+        a decomposable differential-fall estimate: the same step folds in the Cassini-bounded solar
+        source charge and returns a mediated-force ceiling of $\approx 8\times10^{-10}$ (or
+        $2.4\times10^{-8}$ with $\alpha_{\rm eff}$ read as the full body-charge differential), and
+        the canonical pairwise operator independently suppresses the Earth--Moon force channel to
+        $\sim 10^{-14}$. The simulation's adjudicating role is thus bookkeeping — it confirms that
+        the measured band cannot be sourced by the mediated-force sector, leaving the clock-sector
+        projection of Section 2.1 as the admissible channel. The reader is referred to Section 2.1
+        for the full derivation and numerical calibration.
     </p>
 
     <h4>3.3.11 Data Quality Validation</h4>
@@ -915,18 +925,18 @@
     <h4>3.4.23 Haleakala Station Anomaly</h4>
 
     <p>
-        The Haleakala station shows a positive $\eta$ value ($+3.55 \times 10^{-3}$) opposite to the negative $\eta$ values from other stations. This anomaly is investigated in Steps 019 and 025, with the following conclusions:
+        The Haleakala station shows a positive $\eta$ value ($+3.55 \times 10^{-3}$ on the raw archive; $+2.57 \times 10^{-3}$ after canonical $6\sigma$ cleaning) opposite to the negative $\eta$ values from other stations. This anomaly is investigated in Steps 019 and 025, with the following conclusions:
     </p>
 
     <ul>
-        <li>Statistical power limitation: With only 737 observations and RMS = 13.8 cm, Haleakala has expected SNR = $0.22\sigma$ at the global $|\eta| \approx 4.16 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
-        <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$, vs $0.22\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
-        <li>Solar cycle correlation: An investigation of whether Haleakala's timing relative to the 11-year solar cycle explains the sign flip finds partial consistency with TEP Temporal Shear screening dynamics</li>
+        <li>Statistical power limitation: With only 666 cleaned observations (737 raw) and RMS = 10.6 cm (13.8 cm raw), Haleakala has expected SNR = $0.27\sigma$ at the pooled cosD-only $|\eta| = 3.2 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
+        <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$ raw, $2.21\sigma$ cleaned, vs $0.27\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
+        <li>Solar-cycle and coverage controls: A dedicated confound audit (Step 080) shows that the pooled high-activity extreme bin contains only the 1989--1991 epochs — an era-composition contrast rather than a station-general solar modulation — and that the joint within-station solar-modulation slope is negative ($-5.0 \times 10^{-4} \pm 2.5 \times 10^{-4}$), so solar conditioning does not account for the flip; a coverage-matched control restricting every station to Haleakala's $\cos(D)$ window shifts $\eta$ by at most $6.4 \times 10^{-4}$ ($\sim$16\% of the Haleakala deviation), so the station's restricted elongation coverage does not explain it either</li>
         <li>Quality assessment: Comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis find no evidence of systematic bias</li>
     </ul>
 
     <p>
-        A formal Monte Carlo simulation (20,000 realizations using the station's actual elongation distribution) quantifies the Haleakala fluctuation. Under the TEP model the deviation is a 2.7σ event (two-tailed <em>p</em> = 0.0063); the family-wise rate -- the probability that any of the five stations would fluctuate this far under TEP -- is 0.5%. Under the GR null the family-wise rate is 1.4%, so the Haleakala fluctuation does not discriminate between the two models and is instead statistically consistent with the tail expected for an underpowered station. The solar-cycle context provides a physical mechanism: Haleakala's 1984--1990 operation epoch coincides with solar maximum (mean solar index = 0.497), and the TEP-predicted solar-cycle modulation amplitude (1.89 × 10⁻³) is of comparable order to the observed deviation, supporting a Temporal Shear screening explanation.
+        A formal Monte Carlo simulation (20,000 realizations using the station's actual elongation distribution) quantifies the Haleakala fluctuation. Under the TEP model the deviation is a 2.0σ event (two-tailed <em>p</em> = 0.039); the family-wise rate -- the probability that any of the five stations would fluctuate this far under TEP -- is 4.2%. Under the GR null the family-wise rate is 8.0%, so the Haleakala fluctuation does not discriminate between the two models. The deviation is uncommon but within the tail expected for an underpowered station, and is retained as an unresolved tension rather than dismissed as noise. Two mundane channels are explicitly excluded by the Step-080 confound audit: restriction to Haleakala's elongation coverage shifts other stations' $\eta$ estimates by at most $6.4 \times 10^{-4}$ — $\sim$16\% of the observed deviation — and the solar-conditioned joint fit (shared $d\eta/d({\rm solar\ index}) = -5.0 \times 10^{-4} \pm 2.5 \times 10^{-4}$) leaves a conditioned Haleakala excess of $+3.8 \times 10^{-3} \pm 1.5 \times 10^{-3}$ ($2.62\sigma$), so neither coverage nor era-solar conditioning resolves the flip.
     </p>
     <p>
         Excluding Haleakala does not weaken the detection. The clean-subset analysis restricted to Grasse 2010+ and APO -- which drops Haleakala, Matera, and McDonald2 entirely -- yields η = -3.36 × 10⁻⁴ ± 4.63 × 10⁻⁵ (7.25σ cluster-robust), confirming the signal is detectable in the highest-quality data alone. The common-η mixed model with station-specific systematics gives <em>F</em>(4, 25,410) = 1.19, <em>p</em> = 0.31, showing no evidence for station-specific Nordtvedt parameters. The multi-station meta-analysis therefore confirms that the global detection is robust and not driven by any single station.
@@ -978,7 +988,7 @@
     </p>
 
     <p>
-        <strong>Note:</strong> All five stations (APO, Grasse, Matera, McDonald2, Haleakala) are included in the preprocessing pipeline to avoid signal encoding. The Haleakala station (737 observations from 1984-1990, PMT era) is evaluated post-detection for systematic effects. Haleakala shows a positive Nordtvedt parameter ($\eta = +3.55 \times 10^{-3}$;
+        <strong>Note:</strong> All five stations (APO, Grasse, Matera, McDonald2, Haleakala) are included in the preprocessing pipeline to avoid signal encoding. The Haleakala station (737 raw observations from 1984-1990, PMT era; 666 after canonical cleaning) is evaluated post-detection for systematic effects. Haleakala shows a positive Nordtvedt parameter ($\eta = +3.55 \times 10^{-3}$ raw, $+2.57 \times 10^{-3}$ cleaned;
         Haleakala underpowered-station diagnostic) with opposite sign to all other
         stations, which may indicate instrumental systematic effects. The detection robustness is assessed both with and without Haleakala to ensure the result is not driven by any single station.
     </p>

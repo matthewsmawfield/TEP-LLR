@@ -41,8 +41,10 @@
         "n_downweighted_huber": 519,
         "snr_expected_at_global_eta": 3.66,
         "snr_expected_at_station_eta": 2.76,
+        "snr_expected_at_exgrasse_eta": 0.86,
         "cosd_variance": 0.3027,
         "powered_at_3sigma_expected": true,
+        "powered_at_3sigma_expected_exgrasse": false,
         "actually_powered": false,
         "detection_verdict": "powered (expected at pooled \u03b7)",
         "actual_detection_status": "not detected"
@@ -63,8 +65,10 @@
         "n_downweighted_huber": 4896,
         "snr_expected_at_global_eta": 4.81,
         "snr_expected_at_station_eta": 5.73,
+        "snr_expected_at_exgrasse_eta": 1.13,
         "cosd_variance": 0.2524,
         "powered_at_3sigma_expected": true,
+        "powered_at_3sigma_expected_exgrasse": false,
         "actually_powered": true,
         "detection_verdict": "powered (expected at pooled \u03b7)",
         "actual_detection_status": "detected"
@@ -85,8 +89,10 @@
         "n_downweighted_huber": 124,
         "snr_expected_at_global_eta": 0.27,
         "snr_expected_at_station_eta": 2.2,
+        "snr_expected_at_exgrasse_eta": 0.06,
         "cosd_variance": 0.0737,
         "powered_at_3sigma_expected": false,
+        "powered_at_3sigma_expected_exgrasse": false,
         "actually_powered": false,
         "detection_verdict": "underpowered",
         "actual_detection_status": "not detected"
@@ -107,8 +113,10 @@
         "n_downweighted_huber": 90,
         "snr_expected_at_global_eta": 0.38,
         "snr_expected_at_station_eta": 0.46,
+        "snr_expected_at_exgrasse_eta": 0.09,
         "cosd_variance": 0.0867,
         "powered_at_3sigma_expected": false,
+        "powered_at_3sigma_expected_exgrasse": false,
         "actually_powered": false,
         "detection_verdict": "underpowered",
         "actual_detection_status": "not detected"
@@ -129,8 +137,10 @@
         "n_downweighted_huber": 660,
         "snr_expected_at_global_eta": 1.04,
         "snr_expected_at_station_eta": 0.29,
+        "snr_expected_at_exgrasse_eta": 0.24,
         "cosd_variance": 0.1326,
         "powered_at_3sigma_expected": false,
+        "powered_at_3sigma_expected_exgrasse": false,
         "actually_powered": false,
         "detection_verdict": "underpowered",
         "actual_detection_status": "not detected"
@@ -140,6 +150,13 @@
     "n_actually_powered": 1,
     "n_expected_underpowered": 3,
     "n_actually_underpowered": 4,
+    "reference_amplitude": {
+      "global_eta": -0.00031772666444063755,
+      "exgrasse_eta": -7.473215899743748e-05,
+      "n_powered_at_global_reference": 2,
+      "n_powered_at_exgrasse_reference": 0,
+      "note": "The powered/underpowered classification is conditional on the reference signal amplitude. The pooled eta is 73.7% Grasse by shot count, so the global-reference classification is partly circular; the leave-Grasse-out amplitude is the Grasse-independent reference evaluated with the identical cosD-only estimator. Both classifications are reported explicitly."
+    },
     "power_analysis_conclusion": "Expected powered stations (based on SNR >= 3.0 at global \u03b7): 2. Actually powered stations (based on observed SNR >= 3.0): 1. 1 station(s) achieve conventional station-level significance (SNR \u2265 3\u03c3). The strongest inference remains the combined analysis with N = 25,445 observations.",
     "conclusion": "Pattern of detections/non-detections matches per-station power analysis. Underpowered stations failing to detect is expected and consistent with the global signal, not evidence against it. The detection is achieved primarily through combined analysis, with station-level results used as power diagnostics rather than independent discovery claims."
   },

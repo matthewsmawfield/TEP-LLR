@@ -3,7 +3,7 @@
 TEP-LLR: Full Canonical Analysis Pipeline
 ==========================================
 
-Executes the complete 84-script LLR analysis pipeline in sequence.
+Executes the complete 87-script LLR analysis pipeline in sequence.
 Every step writes a JSON output to results/outputs/ and a detailed
 log to logs/.  Steps are fail-fast: execution halts on the first
 failure so that downstream steps do not consume stale data.
@@ -497,6 +497,31 @@ def main() -> None:
         #        discrepancy. Projects the headline regression onto the
         #        differential bin structure to show expected vs observed.
         "step_078_phase_locked_explanation.py",
+        # 080 — Haleakala confound audit: coverage-matched eta, joint
+        #        solar-conditioned station slopes, and extreme-bin era
+        #        composition. Establishes that neither coverage restriction
+        #        nor solar conditioning explains the Haleakala sign flip.
+        "step_080_haleakala_confound_audit.py",
+        # 081 — Cross-ephemeris amplitude-discrepancy decomposition:
+        #        outlier-leverage controls (winsorization, one-sided
+        #        deletions) and within-ephemeris station/weighting
+        #        composition spread vs the matched-window DE430 gap.
+        "step_081_ephemeris_amplitude_decomposition.py",
+        # 082 — Tide/libration Delaunay forward model.
+        #        Replaces the cos(2D) proxy bound with an explicit
+        #        enumeration of the tide/libration harmonic family:
+        #        per-line synodic projection under the real sampling,
+        #        required-vs-measured carrier amplitudes, and
+        #        simultaneous partialling of the principal lines.
+        "step_082_tide_libration_forward.py",
+        # 083 — Derived clock-sector amplitude bookkeeping (issue 17-3).
+        #        Computes the solar conformal excursion at the Moon on the
+        #        cos(D) harmonic from real orbital geometry, the quartic
+        #        interior pinning differential (rho^{1/3}, superseding the
+        #        phenomenological rho^3 weighting), the zero-parameter S_A
+        #        amplitude factors for Earth and Moon, and the
+        #        clock-projection ceiling vs the measured eta_resid.
+        "step_083_clock_channel_amplitude.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

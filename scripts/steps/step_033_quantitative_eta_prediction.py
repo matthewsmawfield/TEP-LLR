@@ -4,7 +4,8 @@ Step 033: Quantitative η Analysis from TEP Framework
 
 Analyzes the measured Nordtvedt parameter η in the context of the TEP framework.
 Following the updated theoretical framework (Papers 6, 10, 11, 12, 13):
-- The microscopic coupling β is constrained by Cassini to α_0 ≲ 3×10⁻³ in screened regime
+- Cassini bounds the screened solar source charge |α_0 S_Σ^(⊙)| ≲ 8.2×10⁻⁶;
+  in the standard unscreened limit it bounds the bare coupling α_0 ≲ 3.4×10⁻³
 - Observable response coefficients κ (like κ_MSP, κ_Cep) are empirically determined in unscreened regimes
 - A key insight from Paper 10: TEP effect operates on clock rates via A(Φ) ≈ 1 − ηΦ/c²
 - η itself is the TEP modification parameter for LLR, analogous to κ_MSP and κ_Cep
@@ -58,24 +59,40 @@ def compute_prediction():
     # =====================================================
     # THEORETICAL COMPARISON — TWO BASELINES
     # =====================================================
-    # Following Jakarta v0.8 framework (Papers 6, 10, 11, 12, 13):
-    # - The microscopic coupling β is constrained by Cassini to α_0 ≲ 3×10⁻³
+    # Following Jakarta v0.14 framework (Papers 6, 10, 11, 12, 13):
+    # - The screened solar source charge is bounded by Cassini:
+    #   |α_0 S_Σ^(⊙)| ≲ sqrt(2)·5.8×10⁻⁶ ≈ 8.2×10⁻⁶ (linear source-charge map,
+    #   α_0 = sqrt(2)·β_A in DEF normalisation)
+    # - In standard unscreened scalar-tensor theory, Cassini bounds the bare
+    #   coupling itself: |γ-1| ≈ 2α_0² < 2.3×10⁻⁵ → α_0 ≲ 3.4×10⁻³
     # - Observable response coefficients κ are empirically determined per channel
     # - η is the LLR observable response coefficient, not derivable from α_0 alone
     #
-    # We present two theoretically distinct baselines:
-    #   1. MICROSCOPIC-COUPLING-ONLY (compactness-squared): η ≈ α_0^2 Δ(Φ²)
-    #      This is a formal TEP expression that yields ~10⁻²⁴, far below detection.
+    # We present two theoretically distinct baselines plus a bookkeeping check:
+    #   1. MICROSCOPIC-COUPLING-ONLY (compactness-squared): η ≈ (α_0 S_Σ)² Δ(Φ²)
+    #      evaluated at the Cassini ceiling — yields ~10⁻²⁹, far below detection.
     #      It serves as a consistency check: the measured η cannot arise from
-    #      bare α_0 alone, confirming that η is an emergent response coefficient.
-    #   2. PHENOMENOLOGICAL TEP (volumetric suppression): η ≈ α_0 S_Sigma Δ⟨(ρ/ρ_T)³⟩
+    #      the screened solar source charge alone, confirming that η is an
+    #      emergent response coefficient.
+    #   2. PHENOMENOLOGICAL TEP (volumetric suppression):
+    #      η ≈ α_eff^(⊕-Moon) Δ⟨(ρ/ρ_T)³⟩
     #      This integrates interior density structure and yields η ~ -10⁻⁴,
-    #      consistent with the observed order of magnitude.
+    #      an effective response band in the observed decade — but (issue 17-9)
+    #      it is not a decomposable mediated-force estimate: folding in the
+    #      Cassini-bounded solar source charge returns ≲10⁻⁹–10⁻⁸, and the
+    #      canonical pairwise operator (Paper 0 R11) independently suppresses
+    #      the force channel to ~10⁻¹⁴. The admissible sector is the
+    #      clock-sector/ephemeris-reduction projection.
 
     print_status("", "INFO")
     print_status("--- THEORETICAL COMPARISON ---", "PROCESS")
 
-    alpha_0_cassini = 3e-3  # Cassini bound: α_0 ≲ 3×10⁻³ in screened regime
+    # Cassini ceiling on the screened solar effective charge (linear
+    # source-charge map, α_0 = sqrt(2)·β_A, S_Σ^(⊙) ≲ 5.8×10⁻⁶)
+    alpha_eff_solar_ceiling = (2.0 ** 0.5) * 5.8e-6  # ≈ 8.2×10⁻⁶
+    # Standard unscreened scalar-tensor bound on the bare coupling
+    # (|γ-1| ≈ 2α_0² < 2.3×10⁻⁵); applies to baseline 3 only
+    alpha0_st_bound = 3.4e-3
 
     # Baseline 1: Compactness-squared (microscopic-coupling-only)
     M_earth = GM_EARTH / G
@@ -88,8 +105,8 @@ def compute_prediction():
     Phi_moon = G * M_moon / (R_moon * c**2)
     compactness_sq_diff = Phi_earth**2 - Phi_moon**2
 
-    eta_microscopic_only = alpha_0_cassini**2 * compactness_sq_diff
-    print_status(f"[Baseline 1] Microscopic-coupling-only η = α_0² Δ(Φ²): {eta_microscopic_only:.4e}", "CALC")
+    eta_microscopic_only = alpha_eff_solar_ceiling**2 * compactness_sq_diff
+    print_status(f"[Baseline 1] Screened-charge compactness-squared η = (α_0 S_Σ)² Δ(Φ²): {eta_microscopic_only:.4e}", "CALC")
     print_status(f"    Earth compactness: Φ_⊕/c² = {Phi_earth:.3e}", "CALC")
     print_status(f"    Moon compactness:  Φ_☽/c² = {Phi_moon:.3e}", "CALC")
     print_status(f"    Compactness squared differential: {compactness_sq_diff:.3e}", "CALC")
@@ -101,17 +118,32 @@ def compute_prediction():
             step_026_results = json.load(f)
         eta_volumetric = float(step_026_results.get("volumetric_prediction", {}).get("eta_volumetric", 0))
         shielding_diff = float(step_026_results.get("simulation_results", {}).get("shielding_differential", 0))
-        print_status(f"[Baseline 2] Volumetric suppression η = α_0 S_Sigma Δ⟨(ρ/ρ_T)³⟩: {eta_volumetric:.4e}", "CALC")
+        alpha_eff_em = float(step_026_results.get("volumetric_prediction", {}).get("alpha_eff_earth_moon", -3.0e-3))
+        print_status(f"[Baseline 2] Volumetric suppression η = α_eff^(⊕−Moon) Δ⟨(ρ/ρ_T)³⟩: {eta_volumetric:.4e}", "CALC")
         print_status(f"    Shielding differential (step_026): {shielding_diff:.4e}", "CALC")
+
+        # Baseline 2b: source-charge product-limit check (issue 17-9).
+        # A mediated differential-fall signature carries both vertices:
+        # δa/a_0 = (α_0 S_Σ^(⊙)) · Δα_body. Folding the Cassini-bounded solar
+        # source charge into the volumetric bookkeeping returns ≲10⁻⁹–10⁻⁸ —
+        # five orders below the measured band — so the volumetric number is an
+        # effective response coefficient, not a decomposable force estimate.
+        eta_mediated_full = alpha_eff_solar_ceiling * alpha_eff_em * shielding_diff
+        eta_mediated_compact = alpha_eff_solar_ceiling * alpha_eff_em
+        print_status(f"[Baseline 2b] Mediated-force ceiling α_⊙·α_eff·Δ⟨(ρ/ρ_T)³⟩: {eta_mediated_full:.4e}", "CALC")
+        print_status(f"[Baseline 2b] Mediated-force ceiling α_⊙·α_eff (α_eff as full differential): {eta_mediated_compact:.4e}", "CALC")
     else:
         eta_volumetric = None
         shielding_diff = None
+        eta_mediated_full = None
+        eta_mediated_compact = None
         print_status("[Baseline 2] Step 026 results not found; volumetric baseline unavailable.", "WARN")
 
     # Standard scalar-tensor baseline for comparison
-    # In standard scalar-tensor theories: η ≈ 4α_0² (Nordtvedt formula)
-    eta_standard_st = 4.0 * alpha_0_cassini**2
-    print_status(f"[Baseline 3] Standard scalar-tensor η ≈ 4α_0²: {eta_standard_st:.4e}", "CALC")
+    # For Brans-Dicke-type theories η = 4β-γ-3 = 2α_0²/(1+α_0²); at the
+    # standard unscreened Cassini bound α_0 ≲ 3.4×10⁻³ this gives η ≈ 2.3×10⁻⁵
+    eta_standard_st = 2.0 * alpha0_st_bound**2 / (1.0 + alpha0_st_bound**2)
+    print_status(f"[Baseline 3] Standard scalar-tensor η = 2α_0²/(1+α_0²): {eta_standard_st:.4e}", "CALC")
 
     # Enhancement factors
     enhancement_microscopic = abs(eta_measured) / abs(eta_microscopic_only) if eta_microscopic_only != 0 else None
@@ -184,21 +216,28 @@ def compute_prediction():
                 "eta_microscopic_only": float(eta_microscopic_only),
                 "compactness_squared_differential": float(compactness_sq_diff),
                 "enhancement_factor": float(enhancement_microscopic) if enhancement_microscopic is not None else None,
-                "caveat": "This baseline uses the bare α_0 with surface compactness only. It yields ~10⁻²⁴, confirming that the measured η is not produced by the microscopic coupling alone. η is an emergent observable response coefficient.",
+                "caveat": f"This baseline uses the screened solar charge with surface compactness only. It yields {eta_microscopic_only:.1e} (~10⁻²⁹), confirming that the measured η is not produced by the microscopic coupling alone. η is an emergent observable response coefficient.",
             },
             "standard_scalar_tensor": {
                 "eta_standard_st": float(eta_standard_st),
                 "formula": "η ≈ 4α_0²",
                 "enhancement_factor": float(enhancement_standard),
-                "caveat": "Standard scalar-tensor Nordtvedt formula. The ~8.8× enhancement (using the Cassini upper-bound α_0 ≲ 3×10⁻³) indicates that η absorbs additional contributions from the TEP screening mechanism beyond bare scalar-tensor physics.",
+                "caveat": f"Standard scalar-tensor Nordtvedt formula. The ~{enhancement_standard:.1f}× enhancement (using the Cassini upper-bound α_0 ≲ 3×10⁻³) indicates that η absorbs additional contributions from the TEP screening mechanism beyond bare scalar-tensor physics.",
             },
             "volumetric_tep": {
                 "eta_volumetric": float(eta_volumetric) if eta_volumetric is not None else None,
                 "shielding_differential": float(shielding_diff) if shielding_diff is not None else None,
                 "enhancement_factor": float(enhancement_volumetric) if enhancement_volumetric is not None else None,
-                "caveat": "Phenomenological TEP prediction from integrated density profiles (step_026). The ~3–5× residual is absorbed into PREM simplification, (ρ/ρ_T)³ exponent uncertainty, ρ_T = 20 ± 8 g/cm³ uncertainty, and the upper-bound nature of the Cassini α_0 constraint.",
+                "caveat": "Effective observable-response band from integrated density profiles (step_026), not a decomposable force estimate — see the product-limit check below. Superseded by the canonical pairwise operator (Paper 0 v0.15, Appendix E R11).",
             },
-            "alpha_0_cassini_bound": float(alpha_0_cassini),
+            "source_charge_product_limit": {
+                "eta_mediated_with_shielding_differential": float(eta_mediated_full) if eta_mediated_full is not None else None,
+                "eta_mediated_alpha_eff_as_full_differential": float(eta_mediated_compact) if eta_mediated_compact is not None else None,
+                "alpha_eff_solar_cassini_ceiling": float(alpha_eff_solar_ceiling),
+                "verdict": "A mediated differential-fall signature is product-limited by both vertices: δa/a_0 = (α_0 S_Σ^(⊙))·Δα_body ≲ 10⁻⁹–10⁻⁸, five orders below the measured band. The volumetric estimate therefore cannot be a charge×charge force estimate; as a full-response coefficient it is not independent of the source charge it must contain.",
+            },
+            "alpha_eff_solar_cassini_ceiling": float(alpha_eff_solar_ceiling),
+            "alpha0_standard_st_bound": float(alpha0_st_bound),
         },
         "physical_parameters": {
             "Phi_earth_over_c2": float(Phi_earth),
@@ -224,17 +263,22 @@ def compute_prediction():
         },
         "conclusion": (
             f"η = {eta_measured:.4e} is the LLR observable response coefficient. "
-            f"Three baselines are presented: "
-            f"(1) microscopic-coupling-only η = α_0² Δ(Φ²) = {eta_microscopic_only:.4e} "
+            f"The baselines adjudicate which sectors can carry it: "
+            f"(1) screened-charge compactness-squared η = (α_0 S_Σ)² Δ(Φ²) = {eta_microscopic_only:.4e} "
             f"yields an enhancement of {enhancement_microscopic:.2e}×, confirming that η is emergent "
-            f"and not produced by bare α_0 alone; "
-            f"(2) standard scalar-tensor η ≈ 4α_0² = {eta_standard_st:.4e} "
+            f"and not produced by the screened solar source charge alone; "
+            f"(2) standard scalar-tensor η = 2α_0²/(1+α_0²) = {eta_standard_st:.4e} "
             f"yields an enhancement of {enhancement_standard:.1f}×, indicating that η absorbs "
             f"TEP-specific screening contributions beyond standard scalar-tensor physics; "
-            f"(3) the phenomenological volumetric TEP model η ≈ α_0 S_Sigma Δ⟨(ρ/ρ_T)³⟩ = "
-            f"{eta_volumetric:.4e} "
-            f"yields an enhancement of {enhancement_volumetric:.1f}×, "
-            f"with the residual ~3–5× absorbed into model uncertainties. "
+            f"(3) the volumetric model η ≈ α_eff^(⊕-Moon) Δ⟨(ρ/ρ_T)³⟩ = "
+            f"{eta_volumetric if eta_volumetric is None else format(eta_volumetric, '.4e')} is an effective response band, not a decomposable force "
+            f"estimate — the source-charge product limit returns "
+            f"{eta_mediated_full if eta_mediated_full is None else format(eta_mediated_full, '.2e')} with the shielding differential "
+            f"({eta_mediated_compact if eta_mediated_compact is None else format(eta_mediated_compact, '.2e')} treating α_eff as the full body differential), five orders "
+            f"below the measured band, and the canonical pairwise operator independently suppresses "
+            f"the Earth–Moon force channel to ~10⁻¹⁴. The admissible sector is the "
+            f"clock-sector/ephemeris-reduction projection, whose amplitude map is the open estimand "
+            f"question of the source-level integrator refit. "
             f"The measured η is much smaller than cross-domain κ values "
             f"(η/κ_Cep ~ {eta_measured/kappa_cep_measured:.2e}), consistent with LLR being in a more screened Solar System regime."
         ),
@@ -246,7 +290,8 @@ def compute_prediction():
     print_status(f"Microscopic-only η: {eta_microscopic_only:.4e}", "CALC")
     print_status(f"Standard scalar-tensor η: {eta_standard_st:.4e}", "CALC")
     if eta_volumetric is not None:
-        print_status(f"Volumetric TEP η: {eta_volumetric:.4e}", "CALC")
+        print_status(f"Volumetric η band (effective ORC): {eta_volumetric:.4e}", "CALC")
+        print_status(f"Mediated-force ceiling: {eta_mediated_full:.4e} (α_⊙·α_eff·Δ) / {eta_mediated_compact:.4e} (α_⊙·α_eff)", "CALC")
     print_status(f"Amplitude: {amplitude_measured:.4f} mm", "CALC")
     print_status(f"Screening ratio η/κ_Cep: {eta_measured/kappa_cep_measured:.2e}", "CALC")
 

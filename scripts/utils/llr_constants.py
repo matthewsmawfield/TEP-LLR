@@ -593,14 +593,18 @@ CROSS_VALIDATION_SPLIT_JD = 2454600
 
 # Nordtvedt Parameter (η) - TEP Modification Parameter for LLR
 # Following the updated TEP framework (Papers 6, 10, 11, 12, 13):
-# - The microscopic coupling β is constrained by Cassini to α_0 ≲ 3×10⁻³ in screened regime
+# - The bare DEF-normalized coupling is bounded by Cassini to |α_0| ≲ 3.4×10⁻³
+#   in the UNSCREENED regime; the binding Solar-System constraint is on the
+#   screened source charge S_Σ^(⊙) ≲ 5.75×10⁻⁶ (Paper 0 §7, canonical linear
+#   PPN mapping γ−1 = −4β_A²S_Σ/(1+2β_A²S_Σ))
 # - Observable response coefficients κ (like κ_MSP, κ_Cep) are empirically determined in unscreened regimes
 # - A key insight from Paper 10: TEP effect operates on clock rates via A(Φ) ≈ 1 − ηΦ/c²
 # - This suggests η itself is the TEP modification parameter for LLR, analogous to κ_MSP and κ_Cep
 #
 # The measured η is ~100× larger than the theoretical prediction from β alone
-# (η ~ 4×10^-6 from η = 4β² - γ - 3), indicating the actual measured η includes additional
-# contributions from the screening mechanism and other effects.
+# (η ~ 2α_0²/(1+α_0²) ~ 2.3×10⁻⁵ at the standard unscreened-ST bound α_0 = 3.4×10⁻³,
+# and ≲10⁻¹⁰ at the canonical screened source charge), indicating the actual measured
+# η includes additional contributions from the screening mechanism and other effects.
 #
 # The measured η is much smaller than κ_MSP ~ 10^6 - 10^7 and κ_Cep ~ 10^6, which is consistent
 # with the screening mechanism: LLR is in a more screened regime (Solar System) compared to
@@ -615,7 +619,7 @@ CROSS_VALIDATION_SPLIT_JD = 2454600
 # This is calibrated from GNSS atomic clock correlations (Paper 6).
 # Source: GNSS distance-structured correlations (L_c ≈ 4200 km → ρ_T ≈ 20 g/cm³)
 RHO_T = 20.0  # Temporal Topology saturation density in g/cm³
-RHO_T_ERROR = 8.0  # 40% systematic uncertainty from GNSS calibration
+RHO_T_ERROR = 7.0  # 35% systematic uncertainty from GNSS calibration
 RHO_T_SOURCE = "GNSS atomic clock correlations (Paper 6, UCD)"
 
 # =============================================================================

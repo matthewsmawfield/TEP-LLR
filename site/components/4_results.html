@@ -225,7 +225,11 @@
  therefore not a replacement estimator for the headline $\eta$, but it is
  retained as corroborative fixed-sky structure on the same residual channel.
  DE430 fragility (Section 4.28) is an independent
- cross-ephemeris replication of the INPOP19a headline estimand.
+ cross-ephemeris replication of the sign of the INPOP19a headline
+ estimand; the $2.77\sigma$ matched-window amplitude discrepancy means
+ it does not replicate the amplitude itself, and its decomposition
+ locates the gap in the composition- and absorber-dependent residual
+ channel (Step 081; Section 4.20).
  </p>
 
  <h3>4.19 Multiple-Testing Consolidation</h3>
@@ -295,7 +299,7 @@
  provides a cross-observatory diagnostic. This method yields
  $\eta_{\rm WLS} = -3.21 \times 10^{-4} \pm 5.12 \times 10^{-5}$ at $6.27\sigma$
  (precision-weighted robustness check). The precision-weighted approach naturally down-weights low-precision stations
- without manual intervention: Haleakala (13.8 cm RMS, N=737), McDonald2 (severe
+ without manual intervention: Haleakala (10.6 cm cleaned RMS, N=666), McDonald2 (severe
  phase truncation), and Matera are automatically assigned lower weights due to their
  higher variance, while high-precision stations (Grasse, APO) dominate the fit.
  The weighting is determined objectively by measurement precision,
@@ -1142,12 +1146,15 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  Grasse alone achieves conventional statistical significance
  ($\text{SNR} = 4.97\sigma$). APO falls just short at
  $2.77\sigma$. Three stations are underpowered: Matera
- ($N = 346$, expected SNR = $0.37\sigma$); McDonald2 ($N = 3,139$,
+ ($N = 345$, expected SNR = $0.38\sigma$); McDonald2 ($N = 3,097$,
+ expected SNR = $1.04\sigma$;
  severe phase truncation, mean $\cos D = -0.316$); and Haleakala
- (1984–1990, $N = 737$, 13.8 cm RMS, expected SNR = $0.22\sigma$).
- Haleakala's measured $\eta = +3.55 \times 10^{-3}$ is opposite in sign
- to the powered stations and is consistent with a noise fluctuation at
- its $2.45\sigma$ precision level. Underpowered stations lack the
+ (1984–1990, $N = 666$ cleaned, 10.6 cm RMS, expected SNR = $0.27\sigma$).
+ Haleakala's measured $\eta = +2.57 \times 10^{-3}$ ($+3.55 \times 10^{-3}$
+ raw, Table 1) is opposite in sign to the powered stations: a $2.0\sigma$
+ deviation from the pooled signal under the TEP model (two-tailed Monte
+ Carlo $p = 0.039$), retained as an unresolved tension rather than
+ dismissed as a noise fluctuation (Section 5.5). Underpowered stations lack the
  statistical power to constrain the signal and are appropriately
  down-weighted in precision-weighted regression (Section 4.12.5) while
  retained for validation.
@@ -1172,12 +1179,12 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  <tbody>
  <tr>
  <td>$N$</td>
- <td>737</td>
+ <td>737 raw; 666 after canonical $6\sigma$ cleaning</td>
  <td>low sample</td>
  </tr>
  <tr>
  <td>RMS</td>
- <td>13.8 cm</td>
+ <td>13.8 cm raw; 10.6 cm cleaned</td>
  <td>poor precision</td>
  </tr>
  <tr>
@@ -1187,13 +1194,18 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  </tr>
  <tr>
  <td>$\eta$ (per-station OLS, same estimator as other stations)</td>
- <td>$+3.55 \times 10^{-3} \pm 1.45 \times 10^{-3}$</td>
- <td>use consistently; opposite sign to global detection</td>
+ <td>$+3.55 \times 10^{-3} \pm 1.45 \times 10^{-3}$ raw; $+2.57 \times 10^{-3} \pm 1.16 \times 10^{-3}$ cleaned</td>
+ <td>opposite sign to global detection in both</td>
  </tr>
  <tr>
- <td>Expected SNR at global $|\eta|$</td>
- <td>$0.22\sigma$</td>
- <td>use consistently; below $3.0\sigma$ powered threshold</td>
+ <td>Expected SNR at pooled cosD-only $|\eta| = 3.2 \times 10^{-4}$</td>
+ <td>$0.27\sigma$</td>
+ <td>below $3.0\sigma$ powered threshold</td>
+ </tr>
+ <tr>
+ <td>Expected SNR at Grasse-independent $|\eta| = 7.5 \times 10^{-5}$</td>
+ <td>$0.06\sigma$</td>
+ <td>classification is conditional on the Grasse-dominated reference amplitude — circularity quantified</td>
  </tr>
  <tr>
  <td>Inclusion status</td>
@@ -1334,10 +1346,14 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  regression fit. Grasse achieves conventional statistical significance
  ($\text{SNR} = 4.97\sigma$); APO falls just short at
  $2.77\sigma$. Three stations are underpowered: Matera (expected
-SNR = $0.37\sigma$); McDonald2 (severe phase truncation, mean
-$\cos D = -0.316$); Haleakala (expected SNR = $0.22\sigma$, 13.8 cm RMS).
- Haleakala's opposite-sign $\eta = +3.55 \times 10^{-3}$ is consistent
- with noise fluctuation at its $2.45\sigma$ precision level. Underpowered
+SNR = $0.38\sigma$); McDonald2 (expected SNR = $1.04\sigma$; severe
+phase truncation, mean
+$\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS).
+ Haleakala's opposite-sign estimate
+ ($\eta = +3.55 \times 10^{-3}$ raw, $+2.57 \times 10^{-3}$ cleaned) is a
+ $2.0\sigma$ event under the station-matched TEP simulation (two-tailed
+ $p = 0.039$, family-wise rate 4.2\%; Section 3.4.23) and is retained as
+ an unresolved tension rather than attributed to noise. Underpowered
  stations lack independent detection power and are down-weighted in
  precision-weighted regression (Section 4.12.5) while retained for
  validation. The apparent magnitude discrepancy between APO and Grasse
@@ -1474,14 +1490,34 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.22\sigma$, 13.8 cm RMS).
  with the INPOP19a direction but not amplitude. The matched-window
  amplitudes ($-7.04 \times 10^{-4}$ on cleaned DE430 vs.
  $-3.62 \times 10^{-4}$ on INPOP19a in the same 2014&ndash;2018 window)
- differ by $\Delta\eta_{\rm resid} = +3.42 \times 10^{-4}$ ($2.77\sigma$),
- a material discrepancy that a physical signal should not exhibit
- across independently built ephemerides without explanation. This gap,
- alongside the detection's structural sensitivity to the 0.8%
- outlier cut (37 observations), confirms that $\eta_{\rm resid}$
- extraction is ephemeris-model-dependent, reinforcing the necessity of
- a source-level refit with $\eta_{\rm resid}$ free inside the IMCCE
- and JPL integrators. The
+ differ by $\Delta\eta_{\rm resid} = +3.42 \times 10^{-4}$ ($2.77\sigma$).
+ Two decomposition diagnostics locate this gap in the residual-channel
+ estimand rather than in the physical signal (Step 081). First, the
+ uncleaned DE430 null is a leverage artefact, not a signal null: the 37
+ excised points carry residuals up to $\pm 7.5$ m and cluster near
+ full-moon elongation, and winsorizing them at the $6\sigma$ boundary —
+ bounded leverage with no deletion — recovers the same amplitude
+ ($\eta_{\rm resid} = -7.39 \times 10^{-4}$, $5.70\sigma$) as deletion,
+ while one-sided deletions bracket it
+ ($-1.30 \times 10^{-3}$ removing only negative excursions versus
+ $+5.98 \times 10^{-4}$ removing only positive ones). The bulk trend is
+ negative independently of the outlier treatment. Second, the
+ residual-channel amplitude is not cross-sample stable even within a
+ single ephemeris: on the same 2014–2018 window, the per-station
+ significant slopes span $-3.85 \times 10^{-4}$ (APO) to
+ $-2.30 \times 10^{-4}$ (Grasse) — a $1.7\times$ spread — and the
+ pooled window amplitude itself shifts from $-2.57 \times 10^{-4}$
+ unweighted to $-3.62 \times 10^{-4}$ under $1/\sigma^2$ weights that
+ raise the APOLLO-class share by an order of magnitude per point. The
+ $\sim 2\times$ cross-ephemeris ratio on the differently composed,
+ differently absorbed JPL archive is therefore of the same order as the
+ within-ephemeris composition dependence: since $\eta_{\rm resid}$ is the
+ projection of the physical $\cos(D)$ mode left unabsorbed by each
+ ephemeris fit, a real signal is expected to replicate in sign but not in
+ amplitude, and sign is what both ephemerides confirm. A source-level
+ refit with $\eta_{\rm resid}$ free inside the IMCCE and JPL integrators
+ remains the definitive closure: it would test whether the residual gap
+ reduces to ephemeris-absorption differences. The
  primary detection therefore relies on the INPOP19a ephemeris
  (35.5-year baseline) with full-systematic OLS
  $\eta = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ at $6.17\sigma$
@@ -1764,7 +1800,8 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.22\sigma$, 13.8 cm RMS).
  <td>0.01</td>
  <td>$-7.01 \times 10^{-6}$</td>
  <td>$-0.3581$</td>
- <td>cos(2D) mathematically orthogonal to cos(D) over $[0, 2\pi]$</td>
+ <td>cos(2D) proxy entry; superseded by the explicit Delaunay
+ tide/libration forward model (Step 082; see Discussion)</td>
  </tr>
  <tr>
  <td>Thermal expansion</td>
@@ -1924,7 +1961,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.22\sigma$, 13.8 cm RMS).
 
  <p>
  Multiple testing considerations: The canonical runner executes
- 84 sequential step scripts, but these are not independent hypothesis tests.
+ 87 sequential step scripts, but these are not independent hypothesis tests.
  They implement one coherent analysis programme on one primary residual
  channel, not 84 independent searches for unrelated signals. Applying a
  global Bonferroni correction across every pipeline step would therefore be
@@ -2119,7 +2156,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.22\sigma$, 13.8 cm RMS).
  perturbations remain sign-consistent.
  </li>
  <li>
- Station-balanced IPW and precision-weighted regression (Section 4.12.5): A naive Inverse-Probability Weighted regression forces equal station bounds across massive datasets, drastically over-weighting underpowered sets like Haleakala ($N=737$) and severely phase-truncated data like McDonald2. This naive equal-weighting yields an artificial plunge to SNR = 0.52. To resolve this constructively, a precision-weighted regression (weighting globally uniformly by the inverse square variance $1/\sigma^2_{\rm station}$) was adopted as the standard cross-observatory test. By valuing high-quality observations consistently, the precision-weighted test extracts $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$.
+ Station-balanced IPW and precision-weighted regression (Section 4.12.5): A naive Inverse-Probability Weighted regression forces equal station bounds across massive datasets, drastically over-weighting underpowered sets like Haleakala ($N=666$) and severely phase-truncated data like McDonald2. This naive equal-weighting yields an artificial plunge to SNR = 0.52. To resolve this constructively, a precision-weighted regression (weighting globally uniformly by the inverse square variance $1/\sigma^2_{\rm station}$) was adopted as the standard cross-observatory test. By valuing high-quality observations consistently, the precision-weighted test extracts $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$.
  This indicates the negative estimate persists under objective precision weighting and does not require low-precision era noise, while the dedicated station-leverage warnings in Steps 029 and 059 remain part of the evidence ledger.
  </li>
  </ul>
@@ -3252,8 +3289,11 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.22\sigma$, 13.8 cm RMS).
  The station power analysis compares expected per-station SNR at the cosD-only reference
  amplitude $\eta = -3.18 \times 10^{-4}$ with observed single-station
  $\cos(D)$ regressions on the full 26,207-point INPOP19a sample. The
- expected column is a design calculation; the observed column is the
- measured station-wise $\eta$.
+ expected column is a design calculation on the raw archive; the observed column is the
+ measured station-wise $\eta$. On the canonical $6\sigma$-cleaned archive the
+ expected-SNR values become $4.81\sigma$ (Grasse), $3.66\sigma$ (APO),
+ $1.04\sigma$ (McDonald2), $0.38\sigma$ (Matera), and $0.27\sigma$
+ (Haleakala); the powered/underpowered classification is unchanged.
  </p>
 
  <table>
@@ -3387,17 +3427,23 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.22\sigma$, 13.8 cm RMS).
  <h3>4.19 Quantitative $\eta$ Prediction</h3>
 
  <p>
- A quantitative prediction for $\eta$ was derived from the TEP geometric
+ A quantitative estimate for $\eta$ was derived from the TEP geometric
  Temporal Shear formalism. Using the Earth-Moon compactness-squared
  differential ($\Phi_\oplus^2 - \Phi_{\rm Moon}^2$) and the Observable Response
- Coefficient framework, the predicted Nordtvedt violation range is order-of-magnitude
+ Coefficient framework, the phenomenological band is order-of-magnitude
  $\eta \in [-10^{-3}, -10^{-4}]$. The measured AR(1) GLS cluster-robust parameter
- $\eta = -3.28 \times 10^{-4}$ (cosD-only AR(1) GLS robustness check) lies within this predicted theoretical range, consistent
+ $\eta = -3.28 \times 10^{-4}$ (cosD-only AR(1) GLS robustness check) lies within this band, consistent
  with the same framework that yields preliminary galactic-scale coefficients
  $\kappa_{\rm Cep} \sim 10^6$ mag and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from related
- work (Papers 10 and 11). The calibration constant $C$ derived self-consistently
- from the measurement confirms the TEP potential and coupling amplification
- required by the TEP framework.
+ work (Papers 10 and 11). Section 2.1 establishes the bookkeeping status of that
+ band: it is an effective response coefficient, not a decomposable
+ differential-fall estimate — the source-charge product limit returns
+ $\lesssim 10^{-9}$–$10^{-8}$ and the canonical pairwise operator suppresses the
+ Earth–Moon force channel to $\sim 10^{-14}$ — so the admissible carrier of the
+ measured residual is the clock-sector projection whose amplitude map is the open
+ estimand question of Section 4.14. The calibration constant $C$ is derived
+ self-consistently from the measurement; it calibrates, rather than tests, the
+ framework's response scale.
  </p>
 
  <h3>4.21 Decoupling Thermal Array Deformation</h3>

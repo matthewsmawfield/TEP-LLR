@@ -1,0 +1,227 @@
+{
+    "step_id": "step_080",
+    "status": "PASS",
+    "haleakala": {
+        "eta": 0.003553510874773223,
+        "eta_err": 0.0014487488053345344,
+        "cosD_window": [
+            -0.9460658090445111,
+            0.4148846705892175
+        ],
+        "mean_solar_idx": 0.48777298434467314
+    },
+    "coverage_diagnostic": {
+        "APO": {
+            "n": 2595,
+            "cosD_min": -0.9999874984740933,
+            "cosD_max": 0.8392702078801204,
+            "cosD_mean": -0.23088679269104237,
+            "cosD_std": 0.5501761470132431,
+            "year_min": 2006.26356852,
+            "year_max": 2016.90088362
+        },
+        "Grasse": {
+            "n": 18664,
+            "cosD_min": -0.9999811929295411,
+            "cosD_max": 0.986198941397757,
+            "cosD_mean": -0.13024982746392363,
+            "cosD_std": 0.502431821930464,
+            "year_min": 1984.26913809,
+            "year_max": 2019.77663227
+        },
+        "Haleakala": {
+            "n": 737,
+            "cosD_min": -0.9460658090445111,
+            "cosD_max": 0.4148846705892175,
+            "cosD_mean": -0.3344736429008168,
+            "cosD_std": 0.269905244937269,
+            "year_min": 1984.86808199,
+            "year_max": 1990.66064725
+        },
+        "Matera": {
+            "n": 345,
+            "cosD_min": -0.7182651055126735,
+            "cosD_max": 0.481542806989746,
+            "cosD_mean": -0.02454334823484813,
+            "cosD_std": 0.2945237149195637,
+            "year_min": 2003.14198213,
+            "year_max": 2019.23802473
+        },
+        "McDonald2": {
+            "n": 3130,
+            "cosD_min": -0.9996492101760057,
+            "cosD_max": 0.7646805583644101,
+            "cosD_mean": -0.31584786021374783,
+            "cosD_std": 0.36382938036133167,
+            "year_min": 1988.16071428,
+            "year_max": 2013.93737637
+        }
+    },
+    "coverage_matched_eta": {
+        "APO": {
+            "eta_full": -0.00023983556784707937,
+            "eta_full_err": 8.664124510162064e-05,
+            "n_full": 2595,
+            "eta_hal_window": -0.00026591516052417276,
+            "eta_hal_window_err": 0.00014125197369363744,
+            "n_hal_window": 1868,
+            "shift": -2.607959267709339e-05
+        },
+        "Grasse": {
+            "eta_full": -0.00036482684407108907,
+            "eta_full_err": 6.40816164302404e-05,
+            "n_full": 18664,
+            "eta_hal_window": -0.0002032820808993563,
+            "eta_hal_window_err": 9.9031682798707e-05,
+            "n_hal_window": 15110,
+            "shift": 0.00016154476317173277
+        },
+        "Haleakala": {
+            "eta_full": 0.003553510874773223,
+            "eta_full_err": 0.0014487488053345344,
+            "n_full": 737,
+            "eta_hal_window": 0.003553510874773223,
+            "eta_hal_window_err": 0.0014487488053345344,
+            "n_hal_window": 737,
+            "shift": 0.0
+        },
+        "Matera": {
+            "eta_full": 0.0003845938253044748,
+            "eta_full_err": 0.0008301659369748623,
+            "n_full": 345,
+            "eta_hal_window": 0.0010292275247849147,
+            "eta_hal_window_err": 0.0009014873795309262,
+            "n_hal_window": 329,
+            "shift": 0.0006446336994804399
+        },
+        "McDonald2": {
+            "eta_full": -0.000275424390131341,
+            "eta_full_err": 0.00032414957408722267,
+            "n_full": 3130,
+            "eta_hal_window": -0.0001468814475287824,
+            "eta_hal_window_err": 0.00036660866266510956,
+            "n_hal_window": 3013,
+            "shift": 0.0001285429426025586
+        }
+    },
+    "coverage_verdict": "Restricting every well-covered station to Haleakala's cos(D) window shifts eta by at most 6.4e-04 (~16% of the +3.9e-03 Haleakala-vs-Grasse deviation): coverage restriction does not explain the sign flip.",
+    "joint_solar_conditioned_fit": {
+        "shared_solar_slope_deta_didx": -0.0005020304068424868,
+        "shared_solar_slope_err": 0.0002549945500144263,
+        "shared_solar_slope_sigma": 1.968788771423093,
+        "station_intercept_slopes": {
+            "APO": {
+                "eta_at_idx0": -8.237745365974714e-05,
+                "eta_err": 0.00011799292613285625,
+                "snr": 0.6981558671321768
+            },
+            "Grasse": {
+                "eta_at_idx0": -0.0002481600207985948,
+                "eta_err": 0.00012549295822541256,
+                "snr": 1.9774816396697383
+            },
+            "Haleakala": {
+                "eta_at_idx0": 0.003825295553432803,
+                "eta_err": 0.0014602174816650407,
+                "snr": 2.6196752206191483
+            },
+            "Matera": {
+                "eta_at_idx0": 0.00043682315677281405,
+                "eta_err": 0.0008725220328183339,
+                "snr": 0.5006442706802845
+            },
+            "McDonald2": {
+                "eta_at_idx0": -0.00012043780247772713,
+                "eta_err": 0.00036963040880043775,
+                "snr": 0.32583304730956564
+            }
+        },
+        "haleakala_idx_mean": 0.48777298434467314,
+        "haleakala_predicted_eta": 0.0035804186836554727,
+        "haleakala_residual_excess_sigma": 2.6196752206191483,
+        "chi2_red": 0.48726433151779797
+    },
+    "extreme_bin_audit": {
+        "low_idx_lt_0.1": {
+            "n": 10237,
+            "eta": -0.00018351454058511445,
+            "eta_err": 6.264885413313624e-05,
+            "years": [
+                1984.0,
+                1985.0,
+                1986.0,
+                1995.0,
+                1996.0,
+                1997.0,
+                2006.0,
+                2007.0,
+                2008.0,
+                2009.0,
+                2010.0,
+                2017.0,
+                2018.0,
+                2019.0,
+                2020.0
+            ],
+            "station_counts": {
+                "Grasse": 7924,
+                "McDonald2": 1108,
+                "APO": 720,
+                "Matera": 279,
+                "Haleakala": 206
+            }
+        },
+        "high_idx_gt_0.9": {
+            "n": 1352,
+            "eta": 0.0013671372465131361,
+            "eta_err": 0.0005579148235270018,
+            "years": [
+                1989.0,
+                1990.0,
+                1991.0
+            ],
+            "station_counts": {
+                "Grasse": 1028,
+                "Haleakala": 206,
+                "McDonald2": 118
+            }
+        },
+        "high_idx_gt_0.9_excl_haleakala": {
+            "n": 1146,
+            "eta": 0.00129504195843476,
+            "eta_err": 0.0005865654014182204,
+            "station_counts": {
+                "Grasse": 1028,
+                "McDonald2": 118
+            }
+        }
+    },
+    "within_station_solar_slopes": {
+        "APO": {
+            "eta": -0.0001825993721767113,
+            "solar_slope": -0.00018248859861439044,
+            "solar_slope_err": 0.00037273794891196955
+        },
+        "Grasse": {
+            "eta": -0.0002718215805511972,
+            "solar_slope": -0.000400212065210064,
+            "solar_slope_err": 0.0003761205546907607
+        },
+        "Haleakala": {
+            "eta": 0.006139752010837169,
+            "solar_slope": -0.004777207074859889,
+            "solar_slope_err": 0.002599656715826832
+        },
+        "Matera": {
+            "eta": 0.002382893869246968,
+            "solar_slope": -0.019207739326735498,
+            "solar_slope_err": 0.005033706923870975
+        },
+        "McDonald2": {
+            "eta": 0.0004296120710598801,
+            "solar_slope": -0.0022837443343269553,
+            "solar_slope_err": 0.0010395050128805363
+        }
+    },
+    "era_confound_verdict": "The idx>0.9 extreme bin contains only the 1989-91 epochs; its positive eta persists ex-Haleakala (+1.3e-3, Grasse-dominated), so the Step-023 bin contrast is an era-composition effect. The joint within-station solar slope is negative (-5.0e-4 +- 2.5e-4), opposite to the bin-implied direction, so solar-cycle conditioning does not account for the Haleakala sign flip; the station's conditioned excess remains +3.8e-3 +- 1.5e-3 (~2.6sig)."
+}

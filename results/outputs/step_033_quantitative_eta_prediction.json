@@ -7,24 +7,31 @@
     },
     "theoretical_comparison": {
         "microscopic_coupling_only": {
-            "eta_microscopic_only": 4.342713907650999e-24,
+            "eta_microscopic_only": 3.2464199078528804e-29,
             "compactness_squared_differential": 4.825237675167776e-19,
-            "enhancement_factor": 7.316315815344554e+19,
-            "caveat": "This baseline uses the bare \u03b1_0 with surface compactness only. It yields ~10\u207b\u00b2\u2074, confirming that the measured \u03b7 is not produced by the microscopic coupling alone. \u03b7 is an emergent observable response coefficient."
+            "enhancement_factor": 9.786986078790278e+24,
+            "caveat": "This baseline uses the screened solar charge with surface compactness only. It yields 3.2e-29 (~10\u207b\u00b2\u2079), confirming that the measured \u03b7 is not produced by the microscopic coupling alone. \u03b7 is an emergent observable response coefficient."
         },
         "standard_scalar_tensor": {
-            "eta_standard_st": 3.6e-05,
+            "eta_standard_st": 2.3119732735889572e-05,
             "formula": "\u03b7 \u2248 4\u03b1_0\u00b2",
-            "enhancement_factor": 8.825740678906598,
-            "caveat": "Standard scalar-tensor Nordtvedt formula. The ~8.8\u00d7 enhancement (using the Cassini upper-bound \u03b1_0 \u2272 3\u00d710\u207b\u00b3) indicates that \u03b7 absorbs additional contributions from the TEP screening mechanism beyond bare scalar-tensor physics."
+            "enhancement_factor": 13.742661650557029,
+            "caveat": "Standard scalar-tensor Nordtvedt formula. The ~13.7\u00d7 enhancement (using the Cassini upper-bound \u03b1_0 \u2272 3\u00d710\u207b\u00b3) indicates that \u03b7 absorbs additional contributions from the TEP screening mechanism beyond bare scalar-tensor physics."
         },
         "volumetric_tep": {
             "eta_volumetric": -9.659372411064314e-05,
             "shielding_differential": 0.032197908036881044,
             "enhancement_factor": 3.289309604386906,
-            "caveat": "Phenomenological TEP prediction from integrated density profiles (step_026). The ~3\u20135\u00d7 residual is absorbed into PREM simplification, (\u03c1/\u03c1_T)\u00b3 exponent uncertainty, \u03c1_T = 20 \u00b1 8 g/cm\u00b3 uncertainty, and the upper-bound nature of the Cassini \u03b1_0 constraint."
+            "caveat": "Effective observable-response band from integrated density profiles (step_026), not a decomposable force estimate \u2014 see the product-limit check below. Superseded by the canonical pairwise operator (Paper 0 v0.15, Appendix E R11)."
         },
-        "alpha_0_cassini_bound": 0.003
+        "source_charge_product_limit": {
+            "eta_mediated_with_shielding_differential": -7.923040971289e-10,
+            "eta_mediated_alpha_eff_as_full_differential": -2.4607315985291857e-08,
+            "alpha_eff_solar_cassini_ceiling": 8.202438661763952e-06,
+            "verdict": "A mediated differential-fall signature is product-limited by both vertices: \u03b4a/a_0 = (\u03b1_0 S_\u03a3^(\u2299))\u00b7\u0394\u03b1_body \u2272 10\u207b\u2079\u201310\u207b\u2078, five orders below the measured band. The volumetric estimate therefore cannot be a charge\u00d7charge force estimate; as a full-response coefficient it is not independent of the source charge it must contain."
+        },
+        "alpha_eff_solar_cassini_ceiling": 8.202438661763952e-06,
+        "alpha0_standard_st_bound": 0.0034
     },
     "physical_parameters": {
         "Phi_earth_over_c2": 6.953485504085427e-10,
@@ -39,7 +46,7 @@
     },
     "amplitude_prediction": {
         "amplitude_measured_mm": 4.130446637728288,
-        "amplitude_microscopic_only_mm": 5.645528079946299e-20,
+        "amplitude_microscopic_only_mm": 4.220345880208745e-25,
         "amplitude_volumetric_mm": 1.2557184134383608
     },
     "cmb_orientation_prediction": {
@@ -56,8 +63,8 @@
     },
     "independent_priors": {
         "rho_T_g_cm3": 20.0,
-        "rho_T_error_g_cm3": 8.0,
+        "rho_T_error_g_cm3": 7.0,
         "rho_T_source": "GNSS atomic clock correlations (Paper 6, UCD)"
     },
-    "conclusion": "\u03b7 = -3.1773e-04 is the LLR observable response coefficient. Three baselines are presented: (1) microscopic-coupling-only \u03b7 = \u03b1_0\u00b2 \u0394(\u03a6\u00b2) = 4.3427e-24 yields an enhancement of 7.32e+19\u00d7, confirming that \u03b7 is emergent and not produced by bare \u03b1_0 alone; (2) standard scalar-tensor \u03b7 \u2248 4\u03b1_0\u00b2 = 3.6000e-05 yields an enhancement of 8.8\u00d7, indicating that \u03b7 absorbs TEP-specific screening contributions beyond standard scalar-tensor physics; (3) the phenomenological volumetric TEP model \u03b7 \u2248 \u03b1_0 S_Sigma \u0394\u27e8(\u03c1/\u03c1_T)\u00b3\u27e9 = -9.6594e-05 yields an enhancement of 3.3\u00d7, with the residual ~3\u20135\u00d7 absorbed into model uncertainties. The measured \u03b7 is much smaller than cross-domain \u03ba values (\u03b7/\u03ba_Cep ~ -3.03e-10), consistent with LLR being in a more screened Solar System regime."
+    "conclusion": "\u03b7 = -3.1773e-04 is the LLR observable response coefficient. The baselines adjudicate which sectors can carry it: (1) screened-charge compactness-squared \u03b7 = (\u03b1_0 S_\u03a3)\u00b2 \u0394(\u03a6\u00b2) = 3.2464e-29 yields an enhancement of 9.79e+24\u00d7, confirming that \u03b7 is emergent and not produced by the screened solar source charge alone; (2) standard scalar-tensor \u03b7 = 2\u03b1_0\u00b2/(1+\u03b1_0\u00b2) = 2.3120e-05 yields an enhancement of 13.7\u00d7, indicating that \u03b7 absorbs TEP-specific screening contributions beyond standard scalar-tensor physics; (3) the volumetric model \u03b7 \u2248 \u03b1_eff^(\u2295-Moon) \u0394\u27e8(\u03c1/\u03c1_T)\u00b3\u27e9 = -9.6594e-05 is an effective response band, not a decomposable force estimate \u2014 the source-charge product limit returns -7.92e-10 with the shielding differential (-2.46e-08 treating \u03b1_eff as the full body differential), five orders below the measured band, and the canonical pairwise operator independently suppresses the Earth\u2013Moon force channel to ~10\u207b\u00b9\u2074. The admissible sector is the clock-sector/ephemeris-reduction projection, whose amplitude map is the open estimand question of the source-level integrator refit. The measured \u03b7 is much smaller than cross-domain \u03ba values (\u03b7/\u03ba_Cep ~ -3.03e-10), consistent with LLR being in a more screened Solar System regime."
 }

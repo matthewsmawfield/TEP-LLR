@@ -13,7 +13,7 @@ class DevServer {
         this.buildQueue = false;
         this.liveServerProcess = null;
         this.watcherReady = false;
-        this.port = 51819;
+        this.port = 55517; // Unique port for TEP-LLR (Paper 17)
     }
 
     async startLiveServer() {

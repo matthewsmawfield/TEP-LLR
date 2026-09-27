@@ -59,6 +59,28 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
     print_status("═══ ANALYSIS TRACE", "INFO")
     print_status(">>> Performing per-station power analysis", "PROCESS")
 
+    # Grasse-independent reference amplitude.  The pooled eta is 73.7% Grasse,
+    # so classifying stations by expected SNR at the pooled eta is partly
+    # circular (Grasse sets the amplitude that defines its own dominance).
+    # The leave-Grasse-out cosD-only fit supplies a Grasse-free amplitude with
+    # the identical estimator; each station's expected SNR is reported under
+    # both references so the classification's circularity is explicit rather
+    # than hidden.
+    grasse_mask = df['station'] == 'Grasse'
+    eta_exgrasse = None
+    if grasse_mask.any() and int((~grasse_mask).sum()) >= 10:
+        sub = df.loc[~grasse_mask]
+        reg_xg = linear_regression(
+            sub['residual_m'].values,
+            np.cos(sub['elongation_rad'].values)
+        )
+        eta_exgrasse = float(reg_xg['eta'])
+        if verbose:
+            print_status(
+                f"    Reference amplitudes: pooled eta = {eta_measured:.3e}; "
+                f"leave-Grasse-out eta = {eta_exgrasse:.3e} "
+                f"(N = {int((~grasse_mask).sum())})", "DATA")
+
     stations = sorted(df['station'].unique())
     result_rows = []
 
@@ -111,6 +133,18 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
             else 0.0
         )
 
+        # Expected SNR at the Grasse-independent reference amplitude.
+        A_expected_xg = (
+            abs(eta_exgrasse) * ETA_SCALE_FACTOR
+            if eta_exgrasse is not None else None
+        )
+        snr_expected_exgrasse = (
+            float(A_expected_xg * np.sqrt(n * var_x) / rms)
+            if A_expected_xg is not None and rms > 0
+            and np.isfinite(var_x) and var_x > 0
+            else None
+        )
+
         # Is this station expected to be powered at 3σ for the pooled eta?
         powered = snr_expected >= 3.0
 
@@ -130,8 +164,16 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
             'n_downweighted_huber': int(reg_huber.get('n_downweighted', 0)),
             'snr_expected_at_global_eta': round(snr_expected, 2),
             'snr_expected_at_station_eta': round(snr_expected_at_station_eta, 2),
+            'snr_expected_at_exgrasse_eta': (
+                round(snr_expected_exgrasse, 2)
+                if snr_expected_exgrasse is not None else None
+            ),
             'cosd_variance': round(var_x, 4) if np.isfinite(var_x) else None,
             'powered_at_3sigma_expected': powered,  # Based on expected SNR
+            'powered_at_3sigma_expected_exgrasse': (
+                bool(snr_expected_exgrasse >= 3.0)
+                if snr_expected_exgrasse is not None else None
+            ),
             'actually_powered': snr_obs >= 3.0,  # Based on actual observed SNR
             'detection_verdict': (
                 'powered (expected at pooled η)' if powered else
@@ -160,6 +202,10 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
 
     n_expected_powered = len(expected_powered_rows)
     n_actually_powered = len(actually_powered_rows)
+    n_expected_powered_exgrasse = sum(
+        1 for r in result_rows
+        if r['powered_at_3sigma_expected_exgrasse']
+    )
 
     return {
         'stations': result_rows,
@@ -167,6 +213,21 @@ def per_station_power_analysis(df: pd.DataFrame, eta_measured: float,
         'n_actually_powered': n_actually_powered,
         'n_expected_underpowered': len(expected_underpowered_rows),
         'n_actually_underpowered': len(actually_underpowered_rows),
+        'reference_amplitude': {
+            'global_eta': float(eta_measured),
+            'exgrasse_eta': eta_exgrasse,
+            'n_powered_at_global_reference': n_expected_powered,
+            'n_powered_at_exgrasse_reference': n_expected_powered_exgrasse,
+            'note': (
+                'The powered/underpowered classification is conditional on the '
+                f'reference signal amplitude. The pooled eta is '
+                f'{float(grasse_mask.mean()) * 100:.1f}% Grasse by shot count, so '
+                'the global-reference classification is partly circular; the '
+                'leave-Grasse-out amplitude is the Grasse-independent reference '
+                'evaluated with the identical cosD-only estimator. Both '
+                'classifications are reported explicitly.'
+            ),
+        },
         'power_analysis_conclusion': (
             f'Expected powered stations (based on SNR >= 3.0 at global η): {n_expected_powered}. '
             f'Actually powered stations (based on observed SNR >= 3.0): {n_actually_powered}. '

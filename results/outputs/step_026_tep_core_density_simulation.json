@@ -18,14 +18,19 @@
         "effective_coupling_diagnostic": 0.009867928813160719
     },
     "volumetric_prediction": {
-        "alpha_0": -1.0,
-        "S_Sigma_cassini": 0.003,
+        "alpha_eff_earth_moon": -0.003,
         "eta_volumetric": -9.659372411064314e-05,
         "measured_to_volumetric_ratio": 3.289309604386906,
-        "caveat": "Phenomenological (\u03c1/\u03c1_T)^3 scaling with simplified PREM density model. Ratio ~3\u20135 is consistent with model uncertainties (density profile simplification, \u03c1_T uncertainty, \u03b1_0 upper-bound nature)."
+        "caveat": "Effective observable-response band only: the mediated-force decomposition is product-limited by the screened solar source charge and returns \u227210\u207b\u2079\u201310\u207b\u2078, so the quoted band cannot be a charge\u00d7charge differential-fall estimate. It is additionally superseded by the canonical pairwise operator (Paper 0 v0.15, Appendix E R11), which suppresses the Earth-Moon force channel to ~10\u207b\u00b9\u2074."
+    },
+    "source_charge_product_limit": {
+        "alpha_eff_solar_cassini_ceiling": 8.202438661763952e-06,
+        "eta_mediated_with_shielding_differential": -7.923040971289e-10,
+        "eta_mediated_alpha_eff_as_full_differential": -2.4607315985291857e-08,
+        "verdict": "Under any mediated-force reading the differential-fall observable is bounded by \u227210\u207b\u2079\u201310\u207b\u2078 \u2014 five orders below the measured 10\u207b\u2074 band. The volumetric \u03b1_eff can be read only as an effective response coefficient (all factors folded in), not as a body coupling; the 'distinct projection' exemption from the source-charge bound is not available to a force channel."
     },
     "conclusions": {
         "shielding_differential": "3.22e-02",
-        "explanation": "The simulation calculates Earth and Moon shielding factors from density profiles using \u03c1_T. The shielding differential quantifies the differential degree of Temporal Topology flattening, which is the physical origin of the Nordtvedt effect in TEP. The volumetric suppression model yields \u03b7 \u2248 \u03b1_0 S_Sigma \u0394\u27e8(\u03c1/\u03c1_T)^3\u27e9 \u2248 -10\u207b\u2074, consistent with the observed order of magnitude. The remaining ~3\u20135\u00d7 factor is absorbed into model uncertainties (PREM simplification, phenomenological exponent, \u03c1_T uncertainty, and the upper-bound nature of the Cassini S_Sigma constraint). \u03b7 itself is the observable response coefficient for LLR, not derived from \u03ba_LL."
+        "explanation": "The simulation calculates Earth and Moon shielding factors from density profiles using \u03c1_T. The shielding differential quantifies the differential degree of Temporal Topology flattening between the two interiors. The volumetric suppression model yields an effective \u03b7 band \u2248 \u03b1_eff^(Earth-Moon) \u0394\u27e8(\u03c1/\u03c1_T)^3\u27e9 \u2248 -10\u207b\u2074 in the observed decade, but as a mediated-force estimate it is internally inconsistent: folding in the Cassini-bounded solar source charge gives \u227210\u207b\u2079\u201310\u207b\u2078, and the canonical pairwise operator independently suppresses the force channel to ~10\u207b\u00b9\u2074. The surviving admissible channel for the measured residual is the clock-sector/ephemeris-reduction projection (Section 2.1), whose amplitude map is the open estimand question of the source-level integrator refit. \u03b7 itself is the observable response coefficient for LLR, not derived from \u03ba_LL."
     }
 }

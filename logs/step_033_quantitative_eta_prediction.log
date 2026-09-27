@@ -1,39 +1,42 @@
-[15:30:56] ═══ Computing Quantitative η Prediction from TEP...
-[15:30:56]     Loaded measured η from step_003: -3.1773e-04 ± 6.0519e-05
-[15:30:56]     ρ_T: 20.0 ± 8.0 g/cm³ (GNSS atomic clock correlations (Paper 6, UCD))
-[15:30:56]
-[15:30:56] >>> --- THEORETICAL COMPARISON ---
-[15:30:56]     [Baseline 1] Microscopic-coupling-only η = α_0² Δ(Φ²): 4.3427e-24
-[15:30:56]         Earth compactness: Φ_⊕/c² = 6.953e-10
-[15:30:56]         Moon compactness:  Φ_☽/c² = 3.140e-11
-[15:30:56]         Compactness squared differential: 4.825e-19
-[15:30:56]     [Baseline 2] Volumetric suppression η = α_0 S_Sigma Δ⟨(ρ/ρ_T)³⟩: -9.6594e-05
-[15:30:56]         Shielding differential (step_026): 3.2198e-02
-[15:30:56]     [Baseline 3] Standard scalar-tensor η ≈ 4α_0²: 3.6000e-05
-[15:30:56]
-[15:30:56] >>> --- ENHANCEMENT FACTORS ---
-[15:30:56]     Measured / microscopic-coupling-only: 7.32e+19×
-[15:30:56]     Measured / standard scalar-tensor (4α_0²): 8.8×
-[15:30:56]     Measured / volumetric TEP prediction: 3.3×
-[15:30:56]
-[15:30:56] >>> --- CROSS-DOMAIN COMPARISON (Jakarta v0.8 κ Framework) ---
-[15:30:56]     κ_MSP (pulsars): ~1.0e+06
-[15:30:56]     κ_Cep (Cepheids): 1.05e+06 ± 4.30e+05 mag (Paper 11)
-[15:30:56]     η (LLR): -3.1773e-04 (Solar System screened regime)
-[15:30:56]     Screening ratio: η/κ_Cep ~ -3.03e-10
-[15:30:56]
-[15:30:56] >>> --- AMPLITUDE PREDICTION ---
-[15:30:56]     Measured amplitude: 4.1304 mm
-[15:30:56]     Microscopic-only amplitude: 5.645528e-20 mm
-[15:30:56]     Volumetric TEP amplitude: 1.2557 mm
-[15:30:56]     CMB orientation scale: η_θ predicted center = -3.1773e-04 (band [-1e-03, -1e-04])
-[15:30:56]
-[15:30:56] >>> --- SUMMARY ---
-[15:30:56]     Measured η: -3.1773e-04
-[15:30:56]     Microscopic-only η: 4.3427e-24
-[15:30:56]     Standard scalar-tensor η: 3.6000e-05
-[15:30:56]     Volumetric TEP η: -9.6594e-05
-[15:30:56]     Amplitude: 4.1304 mm
-[15:30:56]     Screening ratio η/κ_Cep: -3.03e-10
-[15:30:56] Results saved to results/outputs/step_033_quantitative_eta_prediction.json
-[15:30:56] ✓   Quantitative η Prediction Complete.
+[10:01:23] ═══ Computing Quantitative η Prediction from TEP...
+[10:01:23]     Loaded measured η from step_003: -3.1773e-04 ± 6.0519e-05
+[10:01:23]     ρ_T: 20.0 ± 7.0 g/cm³ (GNSS atomic clock correlations (Paper 6, UCD))
+[10:01:23] 
+[10:01:23] >>> --- THEORETICAL COMPARISON ---
+[10:01:23]     [Baseline 1] Screened-charge compactness-squared η = (α_0 S_Σ)² Δ(Φ²): 3.2464e-29
+[10:01:23]         Earth compactness: Φ_⊕/c² = 6.953e-10
+[10:01:23]         Moon compactness:  Φ_☽/c² = 3.140e-11
+[10:01:23]         Compactness squared differential: 4.825e-19
+[10:01:23]     [Baseline 2] Volumetric suppression η = α_eff^(⊕−Moon) Δ⟨(ρ/ρ_T)³⟩: -9.6594e-05
+[10:01:23]         Shielding differential (step_026): 3.2198e-02
+[10:01:23]     [Baseline 2b] Mediated-force ceiling α_⊙·α_eff·Δ⟨(ρ/ρ_T)³⟩: -7.9230e-10
+[10:01:23]     [Baseline 2b] Mediated-force ceiling α_⊙·α_eff (α_eff as full differential): -2.4607e-08
+[10:01:23]     [Baseline 3] Standard scalar-tensor η = 2α_0²/(1+α_0²): 2.3120e-05
+[10:01:23] 
+[10:01:23] >>> --- ENHANCEMENT FACTORS ---
+[10:01:23]     Measured / microscopic-coupling-only: 9.79e+24×
+[10:01:23]     Measured / standard scalar-tensor (4α_0²): 13.7×
+[10:01:23]     Measured / volumetric TEP prediction: 3.3×
+[10:01:23] 
+[10:01:23] >>> --- CROSS-DOMAIN COMPARISON (Jakarta v0.8 κ Framework) ---
+[10:01:23]     κ_MSP (pulsars): ~1.0e+06
+[10:01:23]     κ_Cep (Cepheids): 1.05e+06 ± 4.30e+05 mag (Paper 11)
+[10:01:23]     η (LLR): -3.1773e-04 (Solar System screened regime)
+[10:01:23]     Screening ratio: η/κ_Cep ~ -3.03e-10
+[10:01:23] 
+[10:01:23] >>> --- AMPLITUDE PREDICTION ---
+[10:01:23]     Measured amplitude: 4.1304 mm
+[10:01:23]     Microscopic-only amplitude: 4.220346e-25 mm
+[10:01:23]     Volumetric TEP amplitude: 1.2557 mm
+[10:01:23]     CMB orientation scale: η_θ predicted center = -3.1773e-04 (band [-1e-03, -1e-04])
+[10:01:23] 
+[10:01:23] >>> --- SUMMARY ---
+[10:01:23]     Measured η: -3.1773e-04
+[10:01:23]     Microscopic-only η: 3.2464e-29
+[10:01:23]     Standard scalar-tensor η: 2.3120e-05
+[10:01:23]     Volumetric η band (effective ORC): -9.6594e-05
+[10:01:23]     Mediated-force ceiling: -7.9230e-10 (α_⊙·α_eff·Δ) / -2.4607e-08 (α_⊙·α_eff)
+[10:01:23]     Amplitude: 4.1304 mm
+[10:01:23]     Screening ratio η/κ_Cep: -3.03e-10
+[10:01:23] Results saved to results/outputs/step_033_quantitative_eta_prediction.json
+[10:01:23] ✓   Quantitative η Prediction Complete.

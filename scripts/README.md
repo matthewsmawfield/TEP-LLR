@@ -11,7 +11,7 @@ scripts/
 │   ├── step_001_data_preprocessing.py      # Data processing
 │   ├── step_002_de430_preprocessing.py     # DE430 ephemeris
 │   ├── step_003_statistical_analysis.py    # Statistical analysis
-│   ├── ... (84 canonical scripts total)
+│   ├── ... (87 canonical scripts total)
 │   └── run_all_steps.py                     # Run complete pipeline
 └── utils/           # Shared utilities
 ```

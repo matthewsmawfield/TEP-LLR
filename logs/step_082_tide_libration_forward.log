@@ -1,0 +1,5 @@
+[08:50:19]     Step 082: tide/libration Delaunay forward model
+[08:50:26]     INPOP19a: 1008 lines, 108 degenerate, 0 candidates; family-partialled cosE = -0.0049 m
+[08:50:28]     DE430: 2418 lines, 806 degenerate, 0 candidates; family-partialled cosE = -0.0071 m
+[08:50:28] Results saved to results/outputs/step_082_tide_libration_forward.json
+[08:50:28] ✓   Tide/Libration Forward Model Complete.

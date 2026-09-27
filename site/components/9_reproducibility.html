@@ -77,7 +77,7 @@ TEP-LLR/
 
     <h3>Pipeline Architecture</h3>
     <p>
-        The analysis pipeline comprises 84 scripts organised into logical groups.
+        The analysis pipeline comprises 87 scripts organised into logical groups.
         Each step is a standalone Python script in <code>scripts/steps/</code> that produces JSON outputs and
         detailed logs in <code>logs/step_*.log</code>. Manuscript step labels in Results and Discussion
         follow the <code>step_XXX</code> script prefix wherever possible (e.g. the primary extraction
@@ -87,7 +87,7 @@ TEP-LLR/
     </p>
 
     <h4>Complete Step Inventory & Runtime</h4>
-    <p>The canonical pipeline comprises 84 scripts organised into logical groups. The core statistical analysis (steps 000–003) provides the primary signal extraction, while subsequent steps perform extended systematic checks, robustness validation, and theoretical consistency tests. Recent enhancements include:</p>
+    <p>The canonical pipeline comprises 87 scripts organised into logical groups. The core statistical analysis (steps 000–003) provides the primary signal extraction, while subsequent steps perform extended systematic checks, robustness validation, and theoretical consistency tests. Recent enhancements include:</p>
 
     <ul>
         <li>Temporal autocorrelation analysis with Durbin-Watson statistic and significance testing</li>
@@ -185,6 +185,12 @@ TEP-LLR/
                 <td><code>step_064_srp_systematic_check.json</code></td>
                 <td>§4.33.2</td>
             </tr>
+            <tr>
+                <td>083 (clock-sector amplitude bookkeeping)</td>
+                <td><code>step_083_clock_channel_amplitude.py</code></td>
+                <td><code>step_083_clock_channel_amplitude.json</code></td>
+                <td>§2.1</td>
+            </tr>
         </tbody>
     </table>
 
@@ -247,9 +253,9 @@ TEP-LLR/
                 <td>~25s total</td>
             </tr>
             <tr>
-                <td>044–073</td>
-                <td><code>step_044_*.py</code> through <code>step_073_*.py</code></td>
-                <td>Systematic projection, independent validation, station-balanced TEP, velocity modulation, CMB anisotropy, EOP systematics, corrected TEP extraction, cross-validation, station distribution, clean subset, toy orbital perturbation, CMB robustness suite, linearized dynamical integrator refit, advanced estimator corrections (067–073), and Laplace Bayes factor</td>
+                <td>044–083</td>
+                <td><code>step_044_*.py</code> through <code>step_083_*.py</code></td>
+                <td>Systematic projection, independent validation, station-balanced TEP, velocity modulation, CMB anisotropy, EOP systematics, corrected TEP extraction, cross-validation, station distribution, clean subset, toy orbital perturbation, CMB robustness suite, linearized dynamical integrator refit, advanced estimator corrections (067–073), Laplace Bayes factor, wild cluster bootstrap, generic PPN test, sky-scan directionality, GP model comparison, phase-locked explanation, dynamical transfer closure, Haleakala confound audit, ephemeris amplitude decomposition, tide/libration Delaunay forward model, and the derived clock-sector amplitude bookkeeping (solar excursion at the Moon, quartic interior pinning, $S_A$ amplitude factors)</td>
                 <td>~3m total</td>
             </tr>
         </tbody>
@@ -402,7 +408,9 @@ node site/build.js
     <div class="checklist-box" style="background: #f9f9f9; padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
         <p>To verify successful reproduction:</p>
         <ol>
-            <li>All 84 canonical scripts complete with "PASS" status in pipeline output</li>
+            <li>All 87 canonical scripts complete with "PASS" status in pipeline output</li>
+            <li>Key result (cross-ephemeris decomposition, Step 081): the DE430 uncleaned null is a gross-error leverage artefact — winsorization at the 6σ boundary recovers $\eta_{
+m resid} = -7.39 	imes 10^{-4}$ ($5.70\sigma$) without deleting any point; on the shared 2014–2018 window the within-ephemeris composition spread (APO $-3.85 	imes 10^{-4}$ vs Grasse $-2.30 	imes 10^{-4}$; pooled $-2.57 	imes 10^{-4}$ unweighted vs $-3.62 	imes 10^{-4}$ under $1/\sigma^2$ weights) is of the same order as the $\sim 2	imes$ cross-ephemeris ratio, so the residual-channel sign is the invariant channel and it agrees in both ephemerides</li>
             <li>JSON files in <code>results/outputs/</code> (step_000 through step_073, including 006b and 046b)</li>
             <li>Key result (headline): Precision-weighted full-systematic consensus $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust; $N = 25{,}445$)</li>
             <li>Key result (uncertainty calibration): prediction-interval coverage 86% at 68% nominal, 98% at 95% ($\chi^2_{\rm red}=0.48$ on published $\sigma$); LOSO conformal 95% band on $\eta_{\rm resid}$ excludes zero</li>
@@ -419,7 +427,7 @@ node site/build.js
             <li>Key result: Bootstrap 95% CI = [-0.0411, -0.0197] (excludes zero)</li>
             <li>Key result: Permutation test p &lt; 10<sup>-4</sup> (no permutation achieved observed)</li>
             <li>Key result: Station consistency: Grasse shows strongest individual detection (SNR = $4.97\sigma$), all stations show consistent negative $\eta_{\rm resid}$ direction except Haleakala; common-$\eta_{\rm resid}$ mixed model $F(4, 25{,}410)=1.19$, $p=0.31$</li>
-            <li>Key result: Haleakala null-fluctuation simulation (20,000 MC): 2.7$\sigma$ event under TEP (two-tailed $p=0.0063$), family-wise rate 0.5%; solar-cycle context provides physical mechanism</li>
+            <li>Key result: Haleakala null-fluctuation simulation (20,000 MC): 2.0$\sigma$ event under TEP (two-tailed $p=0.039$), family-wise rate 4.2% (8.0% under the GR null); Step-080 confound audit excludes coverage restriction ($\le 6.4 \times 10^{-4}$ shift) and solar conditioning (conditioned excess $+3.8 \times 10^{-3}$, $2.62\sigma$)</li>
             <li>Key result: Clean-subset exclusion (Grasse 2010+ + APO only): $\eta_{\rm resid} = -3.36 \times 10^{-4} \pm 4.63 \times 10^{-5}$ ($7.25\sigma$ cluster-robust), confirming signal without Haleakala, Matera, or McDonald2</li>
             <li>Key result: Cross-validation: Temporal hold-out, random k-fold, leave-one-station-out, and two-tier synthetic injection (noise-only vs era-conditioned nuisance) diagnose nuisance transport; primary $\eta_{\rm resid}$ remains the pooled precision-weighted extraction</li>
         </ol>

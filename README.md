@@ -80,7 +80,7 @@ TEP-LLR/
 │   │   ├── step_002_de430_preprocessing.py     # DE430 ephemeris processing
 │   │   ├── step_003_statistical_analysis.py    # Basic TEP detection analysis
 │   │   ├── step_004_detection_analysis_advanced.py  # Advanced analysis (M4 Pro optimized)
-│   │   ├── ... (84 canonical scripts: step_000 through step_078, including 006b and 046b)
+│   │   ├── ... (87 canonical scripts: step_000 through step_082, including 006b and 046b)
 │   │   └── run_all_steps.py                     # Run complete pipeline
 │   └── utils/               # Shared utilities
 │       ├── llr_constants.py                       # Physical constants

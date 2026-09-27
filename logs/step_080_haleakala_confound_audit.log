@@ -1,0 +1,6 @@
+[01:27:12]     Per-station cos(D) coverage computed
+[01:27:12]     Coverage-matched max |shift| = 6.45e-04 vs Haleakala deviation +3.92e-03
+[01:27:12]     Shared solar slope d(eta)/d(idx) = -5.02e-04 ± 2.5e-04; Haleakala conditioned excess = +3.83e-03
+[01:27:12]     Extreme-bin and within-station solar audits complete
+[01:27:12] Results saved to results/outputs/step_080_haleakala_confound_audit.json
+[01:27:12] ✓   Haleakala Confound Audit Complete.

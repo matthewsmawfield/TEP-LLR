@@ -84,5 +84,5 @@
         "high_activity_eta": 0.0016995001502578245,
         "haleakala_mean_solar_index": 0.4967153595101352
     },
-    "interpretation": "Haleakala's fluctuation is a 2.0\u03c3 event under TEP (p = 0.0394), making it a marginal outlier. The solar-cycle modulation amplitude (1.888e-03) is of comparable order, supporting the physical explanation that Haleakala's solar-maximum operation epoch (mean index = 0.497) contributes substantially to its deviation."
+    "interpretation": "Haleakala's fluctuation is a 2.0\u03c3 event under TEP (p = 0.0394), making it a marginal outlier. The Step-023 extreme-bin contrast (1.888e-03) is of comparable order, but step_080 shows that contrast is an era-composition effect (the idx>0.9 bin contains only 1989-91 epochs) and that the shared within-station solar slope is negative, so solar conditioning does not account for the flip; Haleakala's conditioned excess remains ~2.6\u03c3 (see step_080_haleakala_confound_audit)."
 }

@@ -1,0 +1,129 @@
+{
+    "step_id": "step_081",
+    "de430_outlier_controls": {
+        "uncleaned": {
+            "eta": -5.532464701282806e-06,
+            "eta_err": 0.0005606135707941737,
+            "snr": 0.009868588613446213,
+            "n": 4597
+        },
+        "mad6_deletion": {
+            "eta": -0.0007041204853598174,
+            "eta_err": 0.00011823679990869169,
+            "snr": 5.955172043759422,
+            "n": 4560,
+            "n_removed": 37
+        },
+        "mad6_winsorized": {
+            "eta": -0.0007387570669956403,
+            "eta_err": 0.00012967230332456512,
+            "snr": 5.697107617087343,
+            "n": 4597,
+            "note": "no deletion; leverage bounded at the 6-sigma MAD boundary"
+        },
+        "delete_negative_outliers_only": {
+            "eta": -0.0012988095229303032,
+            "snr": 5.39200969221099,
+            "n_removed": 17
+        },
+        "delete_positive_outliers_only": {
+            "eta": 0.0005983085110242584,
+            "snr": 1.1450390546854448,
+            "n_removed": 20
+        },
+        "delete_gross_gt1m": {
+            "eta": -0.0009007363802062392,
+            "snr": 6.0233745436803,
+            "n_removed": 15
+        }
+    },
+    "de430_outlier_elongation_deg": [
+        74.38678268711553,
+        74.38678268711553,
+        125.70161734771081,
+        88.04740387101464,
+        75.06167353877528,
+        134.25717957491258,
+        134.25717957491258,
+        134.25717957491258,
+        134.25717957491258,
+        134.25717957491258,
+        134.25717957491258,
+        134.25717957491258,
+        140.8863557199211,
+        140.8863557199211,
+        140.8863557199211,
+        140.8863557199211,
+        140.8863557199211,
+        165.3800035748345,
+        175.31067597482306,
+        151.7327121530371,
+        151.7327121530371,
+        142.01019866799024,
+        177.15592881865172,
+        176.14136108466977,
+        176.14136108466977,
+        170.94914986436015,
+        136.71307644829142,
+        42.930671608280015,
+        25.39992621946619,
+        25.39992621946619,
+        151.47034179460306,
+        116.29543619708217,
+        42.25760782408397,
+        166.4906521125345,
+        166.4906521125345,
+        92.85767949552377,
+        124.23070783329258
+    ],
+    "inpop_window_composition": {
+        "pooled_unweighted": {
+            "eta": -0.00025746732121994625,
+            "eta_err": 3.51733436908847e-05,
+            "snr": 7.319955801832677,
+            "n": 8802
+        },
+        "pooled_sigma2_weighted": {
+            "eta": -0.00036217832771540755,
+            "eta_err": 3.599828042023596e-05,
+            "snr": 10.060989677490644,
+            "n": 8802
+        },
+        "per_station": {
+            "APO": {
+                "eta": -0.0003852165324119744,
+                "eta_err": 0.00011658602895273571,
+                "snr": 3.304139748752762,
+                "n": 724,
+                "median_sigma_mm": 31.601798760565
+            },
+            "Grasse": {
+                "eta": -0.0002299757804167272,
+                "eta_err": 3.4820268222100626e-05,
+                "snr": 6.604652754247316,
+                "n": 7813,
+                "median_sigma_mm": 98.70697444378999
+            },
+            "Matera": {
+                "eta": 0.0009386663992839446,
+                "eta_err": 0.0008148704523052761,
+                "snr": 1.1519210159460913,
+                "n": 265,
+                "median_sigma_mm": 61.9324718317995
+            }
+        },
+        "significant_station_eta_range": [
+            -0.0003852165324119744,
+            -0.0002299757804167272
+        ],
+        "station_amplitude_ratio_max_min": 1.6750308737465462
+    },
+    "summary": {
+        "de430_eta": -0.0007041204853598174,
+        "inpop_window_eta_weighted": -0.00036217832771540755,
+        "difference": 0.0003419421576444098,
+        "amplitude_ratio": 1.9441265019951748,
+        "interpretation": "The residual-channel amplitude varies by ~1.7x across stations within a single ephemeris and a further ~40% with the weighting convention; the ~2x cross-ephemeris ratio on a differently-composed, differently-absorbed archive is of the same order. Sign is the ephemeris- and composition-invariant channel: APO, Grasse, pooled INPOP19a and DE430 all agree in sign."
+    },
+    "status": "PASS"
+}

@@ -1,14 +1,16 @@
-[13:45:32] >>> Starting TEP Core Density Simulation...
-[13:45:32] Using ρ_T = 20.0 g/cm³ from GNSS atomic clock correlations (Paper 6, UCD) (independent prior from GNSS)
-[13:45:32] Calculating Earth and Moon shielding factors from density profiles...
-[13:45:32]     Earth shielding factor: 3.7098e-02
-[13:45:32]     Moon shielding factor: 4.9002e-03
-[13:45:32]     Measured η from LLR: -3.1773e-04 ± 6.0519e-05
-[13:45:32]     Volumetric η prediction: -9.6594e-05
-[13:45:32]     (α_0 = -1.0, S_Sigma = 0.003, shielding differential = 3.2198e-02)
-[13:45:32]     Effective coupling (diagnostic): η/Δshielding = 9.8679e-03
-[13:45:32]     Shielding differential: 3.2198e-02
-[13:45:32]     Measured / volumetric prediction ratio: 3.29
-[13:45:32]     Shielding differential: 3.22e-02
-[13:45:32] ✓   TEP Core Density Simulation Complete.
-[13:45:32]     Saved results to results/outputs/step_026_tep_core_density_simulation.json
+[10:01:22] >>> Starting TEP Core Density Simulation...
+[10:01:22] Using ρ_T = 20.0 g/cm³ from GNSS atomic clock correlations (Paper 6, UCD) (independent prior from GNSS)
+[10:01:22] Calculating Earth and Moon shielding factors from density profiles...
+[10:01:22]     Earth shielding factor: 3.7098e-02
+[10:01:22]     Moon shielding factor: 4.9002e-03
+[10:01:22]     Measured η from LLR: -3.1773e-04 ± 6.0519e-05
+[10:01:22]     Volumetric η estimate (effective ORC): -9.6594e-05
+[10:01:22]     (α_eff(Earth-Moon) = -0.003, shielding differential = 3.2198e-02)
+[10:01:22]     Mediated-force ceiling (α_⊙·α_eff·Δshielding): -7.9230e-10
+[10:01:22]     Mediated-force ceiling (α_⊙·α_eff): -2.4607e-08
+[10:01:22]     Effective coupling (diagnostic): η/Δshielding = 9.8679e-03
+[10:01:22]     Shielding differential: 3.2198e-02
+[10:01:22]     Measured / volumetric prediction ratio: 3.29
+[10:01:22]     Shielding differential: 3.22e-02
+[10:01:22] ✓   TEP Core Density Simulation Complete.
+[10:01:22]     Saved results to results/outputs/step_026_tep_core_density_simulation.json

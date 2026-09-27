@@ -427,6 +427,43 @@
  at $5.91\sigma$.
  </li>
  <li>
+ <strong>Tide/Libration Forward Model:</strong> The leading
+ ephemeris-family candidate &mdash; tide- and libration-model residue
+ concentrating at the synodic frequency &mdash; is tested by explicit
+ forward model rather than by proxy. Ephemeris-family model content
+ is a sum over Delaunay harmonics
+ $\cos(k_D D + k_l l + k_{l'} l' + k_F F + k_\Omega \Omega)$;
+ enumerating all integer combinations with $|k_i| \leq 3$ and
+ periods within the record, each line's projection onto the
+ $\cos(D)$ estimand is evaluated on the actual observation epochs
+ (the synodic-biased sampling generates comb leakage that a proxy
+ estimate cannot capture), and its amplitude is measured jointly
+ with $\cos(D)$ in the post-fit residual series (Step 082). For
+ INPOP19a, 1,008 lines reach the estimand or lie near-degenerate:
+ 890 are excluded outright on amplitude (measured more than $3\sigma$
+ below the carrier amplitude required to source the observed term),
+ ten approach within $3\sigma$ &mdash; all on the sampling-comb alias
+ family and none reaching the required carrier amplitude (largest
+ ratio 0.90) &mdash; and 108 lie within four Rayleigh units of the
+ synodic frequency, frequency-degenerate at the record length.
+ Simultaneous partialling of the eleven principal tide/libration
+ lines (evection 12.5&nbsp;mm, monthly 9.7&nbsp;mm, fortnightly
+ 6.2&nbsp;mm, draconic 5.0&nbsp;mm measured) leaves the synodic
+ coefficient unchanged at $-4.9 \pm 1.2$&nbsp;mm
+ ($\eta_{\rm resid} = -3.78 \times 10^{-4}$, $4.1\sigma$); the same
+ procedure on DE430 gives $-7.1 \pm 1.9$&nbsp;mm
+ ($\eta_{\rm resid} = -5.47 \times 10^{-4}$, $3.7\sigma$) with no
+ candidate carrier at all. The family's measured content is
+ additive power at its own frequencies, not the carrier of the
+ synodic slope. The only mundane channel the record cannot
+ frequency-separate is a dynamical error at exactly the synodic
+ argument; that hypothesis is a deterministic model-family term
+ common to both ephemerides, while the matched-window amplitudes
+ differ at $2.77\sigma$ &mdash; the direction expected of a
+ reduction-chain term whose projection is pipeline-dependent rather
+ than of a shared dynamical model error.
+ </li>
+ <li>
  <strong>Matched-Window Ephemeris Consistency:</strong>
  The concern that ephemeris scatter ($\pm 2.73 \times 10^{-4}$) is inflated by
  comparing mismatched time spans (INPOP19a: 35.5 years vs DE430:
@@ -497,9 +534,16 @@
  station-specific deviations ($F = 1.19$, $p = 0.31$). The precision-weighted
  headline remains $\eta_{\rm resid} = -3.91 \times 10^{-4}$ ($6.94\sigma$).
  Monte Carlo simulations of the Haleakala fluctuation (20,000 realizations)
- show Haleakala's positive deviation is a 2.7σ event under TEP
- (family-wise rate 0.5%) and is physically explicable through its solar-maximum
- operation epoch. The clean-subset analysis confirms the signal persists when
+ show Haleakala's positive deviation is a 2.0σ event under TEP
+ (two-tailed $p = 0.039$; family-wise rate 4.2%, vs 8.0% under the GR
+ null). The dedicated confound audit (Step 080) excludes the two
+ mundane channels: restricting every station to Haleakala's
+ $\cos(D)$ coverage window shifts $\eta$ by at most
+ $6.4 \times 10^{-4}$ ($\sim$16\% of the deviation), and the
+ solar-conditioned joint fit leaves a conditioned Haleakala excess
+ of $+3.8 \times 10^{-3}$ ($2.62\sigma$), so neither restricted
+ elongation coverage nor the era-confounded extreme-bin solar
+ contrast explains the flip. The clean-subset analysis confirms the signal persists when
  Haleakala, Matera, and McDonald2 are excluded entirely: the Grasse 2010+ + APO
  clean subset yields $\eta_{\rm resid} = -3.36 \times 10^{-4}$ at $7.25\sigma$
  (cluster-robust).
@@ -517,20 +561,44 @@ full estimator hierarchy in Section 4.1.
 </p>
  <p>
  The Haleakala Boundary: The Haleakala station yields $\eta_{\rm resid} = +3.55
- \times 10^{-3}$ at observed SNR $2.45\sigma$ ($p = 0.014$, Table 1;
+ \times 10^{-3}$ on the raw archive ($+2.57 \times 10^{-3}$ after
+ canonical $6\sigma$ cleaning) at observed SNR $2.45\sigma$ raw
+ ($2.21\sigma$ cleaned; $p = 0.014$, Table 1;
  Haleakala underpowered-station diagnostic). Per the
  statistical power criteria, this station is classified
- as <em>underpowered</em>: with 13.8 cm RMS and $N = 737$, its expected
- SNR at the global $|\eta_{\rm resid}| \approx 4.16 \times 10^{-4}$ is only
-$0.22\sigma$, below the $3.0\sigma$ powered-detection threshold.
- Haleakala's opposite sign and observed SNR ($2.45\sigma$, vs $0.22\sigma$ expected at the pooled $|\eta_{\rm resid}| \approx 3.2 \times 10^{-4}$ once phase-truncation variance is accounted for) exceed the noise expectation, but the station remains underpowered for independent extraction (expected SNR below the $3\sigma$ threshold).
+ as <em>underpowered</em>: with 10.6 cm cleaned RMS and $N = 666$, its expected
+ SNR at the pooled cosD-only $|\eta_{\rm resid}| = 3.2 \times 10^{-4}$ is only
+$0.27\sigma$, below the $3.0\sigma$ powered-detection threshold.
+ Haleakala's opposite sign and observed SNR exceed the noise expectation, but the station remains underpowered for independent extraction (expected SNR below the $3\sigma$ threshold).
  Underpowered stations lack the statistical power to independently
  constrain the signal and are appropriately down-weighted in
  precision-weighted regression, confirming the core global signal is
  insensitive to Haleakala's early-era noise. Quantitatively, excluding
  Haleakala from the pooled cosD-only estimator shifts $\eta_{\rm resid}$ by only
- $0.40\sigma$ (and strengthens the pooled SNR), demonstrating that the
- canonical signal is not driven by this station.
+ $0.43\sigma$ (and strengthens the pooled SNR), demonstrating that the
+ canonical signal is not driven by this station. Two qualifications are
+ stated plainly. First, the power criteria themselves are evaluated at the
+ pooled $|\eta_{\rm resid}|$, which is Grasse-dominated (73.7% of the
+ cleaned archive), so the underpowered classification of the other
+ stations is partly a consequence of Grasse's dominance rather than an
+ independent prior — the classification is therefore circular by
+ construction and is used only as a weighting convention, not as
+ evidence. The circularity is quantified, not merely acknowledged:
+ under the Grasse-independent reference amplitude (leave-Grasse-out
+ cosD-only fit, $\eta = -7.5 \times 10^{-5}$) no station reaches
+ expected $3\sigma$ power — Grasse itself drops to $1.13\sigma$
+ expected — so the powered/underpowered labels are conditional on the
+ reference amplitude by construction. Second, Haleakala's opposite-sign
+ measurement ($2.45\sigma$ raw, $2.21\sigma$ cleaned) is
+ retained as an unresolved tension: the Monte Carlo rate ($2.0\sigma$
+ event, family-wise 4.2% under TEP) makes a noise fluctuation
+ plausible, while the Step-080 audit excludes the two mundane
+ channels (coverage restriction shifts $\eta$ by
+ $\le 6.4 \times 10^{-4}$; solar-conditioned station terms leave a
+ $2.62\sigma$ excess) — but neither the sign flip nor its physical
+ origin is demonstrated. Independent replication of the negative
+ $\eta_{\rm resid}$ by stations at Grasse-level precision — which the
+ present archive does not contain — remains the decisive requirement.
  </p>
 
  <p>
@@ -1081,7 +1149,9 @@ bracketing the headline).
  to unmodelled systematics or absorbed into global fits. The TEP framework
  suggests these persistent residual structures — synodic modulation,
  full-moon deficits, perihelion enhancement — represent a coherent
- dynamical signature of compactness-dependent suppression that standard
+ residual-channel signature — whose admissible TEP channel, under the
+ canonical screening operator, is the clock-sector projection rather than
+ dynamical suppression — that standard
  GR-based ephemerides lack degrees of freedom to absorb.
  </p>
 

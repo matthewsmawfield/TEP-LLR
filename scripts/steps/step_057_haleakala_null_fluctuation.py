@@ -322,10 +322,11 @@ def run_haleakala_simulation(df, verbose=False):
             tep_interpretation = (
                 f"Haleakala's fluctuation is a {sim_tep['z_score_observed']:.1f}σ event under TEP "
                 f"(p = {sim_tep['p_two_tailed_deviation']:.4f}), making it a marginal outlier. "
-                f"The solar-cycle modulation amplitude ({solar_swing:.3e}) "
-                f"is of comparable order, supporting the physical explanation that Haleakala's "
-                f"solar-maximum operation epoch (mean index = {ms}) "
-                f"contributes substantially to its deviation."
+                f"The Step-023 extreme-bin contrast ({solar_swing:.3e}) is of comparable order, "
+                f"but step_080 shows that contrast is an era-composition effect (the idx>0.9 bin "
+                f"contains only 1989-91 epochs) and that the shared within-station solar slope is "
+                f"negative, so solar conditioning does not account for the flip; Haleakala's "
+                f"conditioned excess remains ~2.6σ (see step_080_haleakala_confound_audit)."
             )
         else:
             tep_interpretation = (
