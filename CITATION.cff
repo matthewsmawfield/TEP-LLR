@@ -16,7 +16,7 @@ abstract: |
   The result is therefore framed as a high-significance residual-channel candidate with a TEP interpretation, not as a completed replacement for direct-fit LLR bounds. Source-level numerical refits of the INPOP or DE430 integrators with η_resid left free remain the critical open closure test. Ephemeris-absorption stress tests bound the residual-channel survival amplitude but do not replace a full dynamical integrator-level confirmation.
 
   Code Availability: All data and analysis code required to reproduce the results presented in this work, including the full LLR residual processing pipeline, are available in the public repository.
-version: v0.3 (Lucknow)
+version: v0.4 (Lucknow)
 date-released: 2026-05-17
 doi: 10.5281/zenodo.19446028
 url: https://mlsmawfield.com/tep/llr
@@ -58,4 +58,4 @@ preferred-citation:
     value: 10.5281/zenodo.19446028
     description: Pre-print DOI
   url: https://doi.org/10.5281/zenodo.19446028
-  notes: Preprint v0.3 (Lucknow)
+  notes: Preprint v0.4 (Lucknow)

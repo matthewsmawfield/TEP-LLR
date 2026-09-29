@@ -253,19 +253,24 @@
         with the external ambients deepening the suppression further, returning
         $\mathcal{R} \simeq 2.2\times10^{-15}$ (the quartic-limit bookkeeping
         $y^3 \sim s^4$ gives $1.6\times10^{-14}$, the corpus's earlier
-        $2.5\times10^{-14}$ at the same order), and $\simeq 1.4\times10^{-15}$
-        for the Sun–Earth pair. A
+        $2.5\times10^{-14}$ at the same order), and $\simeq 3.3\times10^{-15}$
+        for the Sun–Earth pair (Step 085). The Sun–Moon channel, evaluated with
+        the additional terrestrial-shell ambient at the lunar orbit, returns
+        $\simeq 1.3\times10^{-15}$; the predicted differential response
+        $\Delta_{\rm EM} \simeq 2.0\times10^{-15}$ lies a factor of $\sim65$
+        below the adopted $1.3\times10^{-13}$ differential-acceleration bound
+        (<code>results/outputs/step_085_nested_llr_constraint.json</code>). A
         compactness-differential force anomaly of the
         kind the volumetric model describes is thereby suppressed to the
         $10^{-14}$–$10^{-15}$ level — invisible in this channel — and the
         illustrative $\alpha_{\rm eff}^{(\oplus-{\rm Moon})}$ normalization cannot
         be carried forward under the derived operator. This adjudication is a
         consistency check the closure passes rather than a new contradiction:
-        the canonical operator predicts no dynamical Nordtvedt anomaly, in line
+        the canonical pairwise projection predicts a dynamical Nordtvedt contribution below the stated bound, in line
         with the tight direct-fit LLR bounds on differential fall. The measured
         $\cos(D)$ residual — independently present in the published ephemeris
-        record — is therefore a non-dynamical observable, and its admissible
-        TEP interpretation is the clock-sector/ephemeris-reduction projection:
+        record — is not explained by this pairwise force projection. Its
+        established TEP analysis channel is the clock-sector/ephemeris-reduction projection:
         the lunar conformal field carries a genuine synodic component,
         $\delta\phi_\odot \simeq 2.5\times10^{-11}\cos D$ computed from the real
         orbital geometry — the exact Fourier projection of
@@ -283,13 +288,15 @@
         landscape evaluated at the Moon's instantaneous position, and its
         imprint on the residuals is set by the projection map of an ephemeris
         held to a fixed dynamical time standard, not by a second screened
-        charge. What the Cassini bookkeeping and the canonical operator jointly
-        exclude is the mediated differential fall; the clock-sector channel is
+        charge. What the Cassini bookkeeping and the canonical pairwise projection jointly
+        bound is the mediated differential-fall channel at that order; the clock-sector channel is
         bounded instead by the field-excursion amplitude and the estimand map.
         Whether that projection reaches the measured amplitude is precisely the
         estimand question the source-level integrator refit (Section 4.14)
         addresses.
     </p>
+
+    <p>Finite-body bridge geometry is tested separately in Step 084 (<code>results/outputs/step_084_earth_moon_solar_bridge.json</code>). Radial baseline and two-branch flux laws are evaluated for uniform-density Earth and Moon sources at the measured separation, then combined with a locally uniform solar-gradient background over five orientations. Under this explicitly matched-profile ansatz, exact collinearity permits an exterior bridge cancellation: the two-branch local $P_{,X}$ reaches its numerical $10^{-8}$ regulator from a solar-background value near $6.8\times10^4$. The transverse configuration retains the ambient stiffness, while $P_{,X}&lt;1$ occurs only within about $0.020^\circ$ of collinearity. This identifies a sharply defined nonlinear boundary channel rather than an additional detected force. Superposed isolated profiles are not the solution of the coupled nonlinear three-source equation; the local minimum alone determines neither integrated scalar charge nor a synodic range perturbation. The INPOP19a estimate $\eta_{\rm resid}=(-4.06\pm0.66)\times10^{-4}$ from Step 056 is the empirical comparator, not an output of Step 084. Paper 0 supplies the common kinetic operator and test-probe scope; the finite-body and ranging calculation belongs to this paper.</p>
 
     <p>
         The cosD-only baseline $\eta_{\rm resid} = -3.18\times10^{-4}$ is also ~14&times; larger than the standard scalar-tensor

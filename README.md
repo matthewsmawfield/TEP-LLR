@@ -6,8 +6,8 @@
 ![TEP-LLR: Lunar Laser Ranging](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.3 (Lucknow)  
-**First published:** 17 May 2026 · **Last updated:** 16 September 2026
+**Version:** v0.4 (Lucknow)  
+**First published:** 17 May 2026 · **Last updated:** 28 September 2026
 **Status:** Preprint (Open for Collaboration)  
 **DOI:** [10.5281/zenodo.19446028](https://doi.org/10.5281/zenodo.19446028)  
 **Website:** [https://mlsmawfield.com/tep/llr/](https://mlsmawfield.com/tep/llr/)  
@@ -165,7 +165,7 @@ python scripts/steps/step_004_detection_analysis_advanced.py --verbose
   journal={Zenodo},
   year={2026},
   doi={10.5281/zenodo.19446028},
-  note={Preprint v0.3 (Lucknow)}
+  note={Preprint v0.4 (Lucknow)}
 }
 ```
 

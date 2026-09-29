@@ -37,7 +37,7 @@ def load_citation_metadata():
 
     if not citation_file.exists():
         print("⚠️  CITATION.cff not found, using defaults")
-        return {'version': 'v0.1', 'codename': 'Lucknow', 'title': 'TEP-LLR'}
+        return {'version': 'v0.4', 'codename': 'Lucknow', 'title': 'TEP-LLR'}
 
     try:
         if yaml:
@@ -67,7 +67,7 @@ def load_citation_metadata():
 
     except Exception as e:
         print(f"⚠️  Error parsing CITATION.cff: {e}, using defaults")
-        return {'version': 'v0.1', 'codename': 'Lucknow', 'title': 'TEP-LLR'}
+        return {'version': 'v0.4', 'codename': 'Lucknow', 'title': 'TEP-LLR'}
 
 
 def build_static_site():

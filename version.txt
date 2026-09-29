@@ -1,3 +1,10 @@
+v0.4 (Lucknow) — 28 September 2026 — Corpus-resolution audit: nested-constraint steps and Haleakala reanalysis
+
+- Haleakala null-fluctuation result revised: 2.7σ event (two-tailed p = 0.0063, family-wise 0.5%) → 2.0σ event (two-tailed p = 0.039, family-wise 4.2%; 8.0% under the GR null)
+- Step-080 confound audit reported: coverage restriction bounded (≤6.4 × 10⁻⁴ shift) and solar conditioning excluded (conditioned excess +3.8 × 10⁻³, 2.62σ)
+- New pipeline steps: step_084 Earth–Moon–Solar bridge and step_085 nested LLR constraint
+- Theory and reproducibility sections updated to reflect the audit findings and pipeline expansion
+
 v0.3 (Lucknow) — 16 September 2026
 
 - Changed the primary variable from η to η_resid to distinguish the residual-channel amplitude from the standard metric Nordtvedt parameter.

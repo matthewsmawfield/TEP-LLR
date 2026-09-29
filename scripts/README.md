@@ -6,12 +6,13 @@ This folder contains the reproducible analysis pipeline for Paper 17 (Lunar Lase
 
 ```
 scripts/
-├── steps/           # Numbered analysis steps (step_000 through step_078, including 006b and 046b)
+├── steps/           # Numbered analysis steps (step_000 through step_085, including 006b and 046b)
 │   ├── step_000_llr_data_ingestion.py      # Data acquisition
 │   ├── step_001_data_preprocessing.py      # Data processing
 │   ├── step_002_de430_preprocessing.py     # DE430 ephemeris
 │   ├── step_003_statistical_analysis.py    # Statistical analysis
-│   ├── ... (87 canonical scripts total)
+│   ├── ... (canonical scripts, including Step 084's matched-profile bridge
+│   │          and Step 085's nested-operator LLR constraint)
 │   └── run_all_steps.py                     # Run complete pipeline
 └── utils/           # Shared utilities
 ```

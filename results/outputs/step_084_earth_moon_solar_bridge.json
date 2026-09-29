@@ -1,0 +1,117 @@
+{
+  "step_id": "step_084",
+  "status": "PASS",
+  "scope": "finite uniform-density radial sources, matched-gradient ansatz; not a nonlinear three-body solve or an LLR range fit",
+  "inputs": {
+    "g_t_m_s2": 3.400464162104563e-10,
+    "GM_earth_m3_s2": 398600441800000.0,
+    "GM_moon_m3_s2": 4902800582000.0,
+    "GM_sun_m3_s2": 1.32712440018e+20,
+    "earth_radius_m": 6371000.0,
+    "moon_radius_m": 1737400.0,
+    "earth_moon_separation_m": 384399000.0,
+    "solar_distance_m": 149597870700.0,
+    "kinetic_two_branch_k": 16.03,
+    "kinetic_regularizer": 1e-08
+  },
+  "resolution_comparison": {
+    "rstar_earth_m": 1082679183630.3945,
+    "earth_moon_over_rstar": 0.00035504423268862466,
+    "earth_radius_over_separation": 0.016573924489918027,
+    "moon_radius_over_separation": 0.004519782829820056,
+    "uniform_grid_cells_per_axis_for_four_cells_per_moon_radius_over_2d": 1770,
+    "uniform_grid_cells_3d_at_that_spacing": 5545233000
+  },
+  "orientation_degrees_from_earth_moon_axis": [
+    0,
+    45,
+    90,
+    135,
+    180
+  ],
+  "sectors": {
+    "baseline": {
+      "0": {
+        "solar_gradient_over_gt": 259.3216143785709,
+        "bridge_min_gradient_over_gt": 5.684341886080802e-14,
+        "bridge_min_distance_from_earth_km": 180881.58757808123,
+        "bridge_min_P_X": 1.0,
+        "solar_P_X": 67248.69968390824
+      },
+      "45": {
+        "solar_gradient_over_gt": 259.3216143785709,
+        "bridge_min_gradient_over_gt": 183.36807203533039,
+        "bridge_min_distance_from_earth_km": 241049.89121978864,
+        "bridge_min_P_X": 33624.849841954114,
+        "solar_P_X": 67248.69968390824
+      },
+      "90": {
+        "solar_gradient_over_gt": 259.3216143785709,
+        "bridge_min_gradient_over_gt": 259.3216143785709,
+        "bridge_min_distance_from_earth_km": 346023.1202755439,
+        "bridge_min_P_X": 67248.69968390824,
+        "solar_P_X": 67248.69968390824
+      },
+      "135": {
+        "solar_gradient_over_gt": 259.3216143785709,
+        "bridge_min_gradient_over_gt": 183.36807203533047,
+        "bridge_min_distance_from_earth_km": 368713.65304805845,
+        "bridge_min_P_X": 33624.84984195414,
+        "solar_P_X": 67248.69968390824
+      },
+      "180": {
+        "solar_gradient_over_gt": 259.3216143785709,
+        "bridge_min_gradient_over_gt": 3.991692536707987e-13,
+        "bridge_min_distance_from_earth_km": 372347.97082585003,
+        "bridge_min_P_X": 1.0,
+        "solar_P_X": 67248.69968390824
+      }
+    },
+    "two_branch": {
+      "0": {
+        "solar_gradient_over_gt": 255.5991074810932,
+        "bridge_min_gradient_over_gt": 0.0,
+        "bridge_min_distance_from_earth_km": 183369.60758225364,
+        "bridge_min_P_X": 1e-08,
+        "solar_P_X": 68228.09961564816
+      },
+      "45": {
+        "solar_gradient_over_gt": 255.5991074810932,
+        "bridge_min_gradient_over_gt": 180.7358621651102,
+        "bridge_min_distance_from_earth_km": 243217.775455142,
+        "bridge_min_P_X": 34714.078719036675,
+        "solar_P_X": 68228.09961564816
+      },
+      "90": {
+        "solar_gradient_over_gt": 255.5991074810932,
+        "bridge_min_gradient_over_gt": 255.5991074810932,
+        "bridge_min_distance_from_earth_km": 346023.1202760512,
+        "bridge_min_P_X": 68228.09961564816,
+        "solar_P_X": 68228.09961564816
+      },
+      "135": {
+        "solar_gradient_over_gt": 255.5991074810932,
+        "bridge_min_gradient_over_gt": 180.73586216511035,
+        "bridge_min_distance_from_earth_km": 368558.41540922,
+        "bridge_min_P_X": 34714.07871903673,
+        "solar_P_X": 68228.09961564816
+      },
+      "180": {
+        "solar_gradient_over_gt": 255.5991074810932,
+        "bridge_min_gradient_over_gt": 1.7055898239690447e-12,
+        "bridge_min_distance_from_earth_km": 372204.8159645926,
+        "bridge_min_P_X": 1.0019332727111138e-08,
+        "solar_P_X": 68228.09961564816
+      }
+    }
+  },
+  "matched_ansatz_P_X_lt_1_angular_half_width_degrees": 0.019624714001011012,
+  "matched_ansatz_P_X_lt_1_critical_gradient_over_gt": 0.08754675000113293,
+  "llr_context_not_a_model_prediction": {
+    "inpop19a_eta_resid_fit": -0.00040611545725110945,
+    "inpop19a_eta_resid_fit_error": 6.57779989203431e-05,
+    "inpop19a_eta_resid_source": "results/outputs/step_056_dynamical_integrator_eta_refit.json",
+    "fit_scope": "Open reproducible linearized integrator-parameter extraction. Not an IMCCE INPOP or JPL DE430 source-level integrator modification."
+  },
+  "limitations": "The nonlinear PDE does not permit superposition of spherical solutions. Solar field is held uniform over the pair; each body is uniform-density and its charge is assumed proportional to mass. No scalar self-energy sensitivities, three-dimensional mutual force, lunar orbit perturbation, ephemeris reduction, or disformal two-way light time is calculated. Local P_X and gradient minima cannot be interpreted as LLR range anomalies."
+}

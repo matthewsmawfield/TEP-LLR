@@ -57,6 +57,7 @@ Thumbs.db
 
 # Test scripts (development tools)
 test_*.py
+!scripts/steps/test_step_084_earth_moon_solar_bridge.py
 
 .devin/
 manuscripts/

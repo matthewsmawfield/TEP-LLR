@@ -68,11 +68,11 @@ class HTMLToMarkdownConverter {
     htmlToMarkdown(html) {
         // Preserve LaTeX math expressions
         const mathBlocks = [];
-        html = html.replace(/\$\$([\s\S]*?)\$\$/g, (match, content) => {
+        html = html.replace(/(?<!\\)\$\$([\s\S]*?)\$\$/g, (match, content) => {
             mathBlocks.push(`$$${content}$$`);
             return `___MATH_BLOCK_${mathBlocks.length - 1}___`;
         });
-        html = html.replace(/\$([^$\n]+?)\$/g, (match, content) => {
+        html = html.replace(/(?<!\\)\$([^$\n]+?)\$/g, (match, content) => {
             mathBlocks.push(`$${content}$`);
             return `___MATH_INLINE_${mathBlocks.length - 1}___`;
         });
@@ -162,7 +162,7 @@ class HTMLToMarkdownConverter {
             // Load citation metadata for header
             const citationPath = path.join(__dirname, '..', 'CITATION.cff');
             let author = 'Matthew Lukin Smawfield';
-            let version = 'v0.1 (Lucknow)';
+            let version = 'v0.4 (Lucknow)';
             let dateReleased = '2026-05-14';
             let doi = '';
             
@@ -209,7 +209,7 @@ First published: ${dateReleased}${lastUpdated ? `\nLast updated: ${lastUpdated}`
 `;
             const finalMarkdown = header + markdown;
             
-            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.3-Lucknow.md');
+            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.4-Lucknow.md');
             fs.writeFileSync(outputPath, finalMarkdown, 'utf8');
             console.log(`✅ Markdown saved to: ${outputPath} (${(finalMarkdown.length / 1024).toFixed(1)} KB)`);
 

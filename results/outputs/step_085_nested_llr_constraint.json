@@ -1,0 +1,30 @@
+{
+  "step_id": "step_085",
+  "status": "PASS",
+  "operator": "R = S_Sigma(X_env)^2 * y(s); y(1+y^2(r*/r)^4)=1; r* = sqrt(GM/g_t)",
+  "radii_au": {
+    "sun": 4176.56802036227,
+    "earth": 7.23705822588454,
+    "moon": 0.8027618794160871
+  },
+  "suppression": {
+    "sun_earth": 3.2863104872970622e-15,
+    "sun_moon": 1.2979562995040516e-15
+  },
+  "acceleration_ms2": {
+    "newtonian": 0.005931674617160913,
+    "scalar_earth": 1.9493324501609694e-17,
+    "scalar_moon": 7.699054435952291e-18,
+    "differential": 1.1794270065657403e-17
+  },
+  "llr_test": {
+    "predicted_delta_EM": 1.9883541877930106e-15,
+    "bound": 1.3e-13,
+    "passes": true
+  },
+  "consistency_checks": {
+    "cassini_shear_response": 1.0090490068391424e-23,
+    "saturn_response": 2.6751687257391674e-11,
+    "wb_activation": 0.17538980315531066
+  }
+}

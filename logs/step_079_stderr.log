@@ -1,0 +1,33 @@
+    Step 079: Dynamical transfer-function closure
+    Archive epochs: 25445 over 35.5 yr
+    Aligning synodic phase to the archive (fast grid)...
+    Phase alignment: corr(cos D_model, archive elongation) = 0.677
+    Control integration: emergent amplitude per unit eta...
+    Emergent polarization: -91069.15 m per unit eta (standard Nordtvedt ~12.9 m)
+    Scenario A: static eta, physical-parameter fit...
+Traceback (most recent call last):
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_079_dynamical_transfer_closure.py", line 498, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_079_dynamical_transfer_closure.py", line 493, in main
+    run_transfer()
+    ~~~~~~~~~~~~^^
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_079_dynamical_transfer_closure.py", line 342, in run_transfer
+    fitA, rng_fitA = fit_ranges(t_s, y0_ref, rng_eta)
+                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_079_dynamical_transfer_closure.py", line 221, in fit_ranges
+    out = least_squares(resid, p0, method="lm", diff_step=None,
+                        x_scale=np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0]),
+                        max_nfev=200)
+  File "/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/scipy/optimize/_lsq/least_squares.py", line 832, in least_squares
+    f0 = fun_wrapped(x0)
+  File "/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/scipy/optimize/_lsq/least_squares.py", line 830, in fun_wrapped
+    return np.atleast_1d(fun(x, *args, **kwargs))
+                         ~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_079_dynamical_transfer_closure.py", line 213, in resid
+    r = model(p) - target_ranges
+        ~~~~~^^^
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-LLR/scripts/steps/step_079_dynamical_transfer_closure.py", line 205, in model
+    rng, _ = integrate_range(epochs_s, y0, eta_zero, kappa_tide=p[5] * 1e-16,
+                                           ^^^^^^^^
+NameError: name 'eta_zero' is not defined

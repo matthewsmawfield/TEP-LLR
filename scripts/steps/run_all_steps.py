@@ -522,6 +522,8 @@ def main() -> None:
         #        amplitude factors for Earth and Moon, and the
         #        clock-projection ceiling vs the measured eta_resid.
         "step_083_clock_channel_amplitude.py",
+        "step_084_earth_moon_solar_bridge.py",
+        "step_085_nested_llr_constraint.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)
