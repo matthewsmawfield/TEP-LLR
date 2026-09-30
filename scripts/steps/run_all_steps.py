@@ -3,7 +3,7 @@
 TEP-LLR: Full Canonical Analysis Pipeline
 ==========================================
 
-Executes the complete 87-script LLR analysis pipeline in sequence.
+Executes the complete 91-script LLR analysis pipeline in sequence.
 Every step writes a JSON output to results/outputs/ and a detailed
 log to logs/.  Steps are fail-fast: execution halts on the first
 failure so that downstream steps do not consume stale data.
@@ -524,6 +524,7 @@ def main() -> None:
         "step_083_clock_channel_amplitude.py",
         "step_084_earth_moon_solar_bridge.py",
         "step_085_nested_llr_constraint.py",
+        "step_086_earth_moon_coupled_pde.py",
     ]
 
     run_pipeline("Full Canonical", steps, stop_on_failure=True)

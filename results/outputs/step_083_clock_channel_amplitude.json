@@ -1,7 +1,7 @@
 {
   "step": "083",
   "status": "success",
-  "description": "Derived clock-sector amplitude bookkeeping (issue 17-3): solar excursion at the Moon, quartic interior pinning, S_A amplitude factors, projection bookkeeping",
+  "description": "Derived clock-sector amplitude bookkeeping (issue 17-3): solar excursion at the Moon, quartic depth bookkeeping, step_76 ambient-excursion transmission, projection bookkeeping",
   "solar_excursion": {
     "u_sun_1au": 9.870628715107787e-09,
     "a_m_over_a_e": 0.002569548605212868,
@@ -18,6 +18,9 @@
     "S_A_earth": 0.6500753753417863,
     "S_A_moon": 0.5502604006376862,
     "S_A_differential": 0.09981497470410006,
+    "excursion_transmission_moon": 0.99685,
+    "excursion_transmission_earth": 0.99554,
+    "excursion_transmission_source": "TEP step_76 unified-profile ambient-response solve (leaking branch, T ~ 1)",
     "volumetric_cubed_phenomenological": {
       "earth": 0.03709808625414766,
       "moon": 0.004900178217266598
@@ -28,7 +31,7 @@
     },
     "differential_cubed": 0.03219790803688106,
     "differential_cuberoot": 0.08789342154543234,
-    "note": "the quartic potential pins phi_min ~ rho^{1/3}: the derived interior response is the cube root of density, not the cube; the phenomenological (rho/rho_T)^3 weighting over-concentrates on the core and is superseded"
+    "note": "the quartic potential pins the equilibrium level as rho^{1/3}: the derived interior depth bookkeeping is the cube root of density, not the cube; the phenomenological (rho/rho_T)^3 weighting over-concentrates on the core and is superseded. The S_A factors are depth ratios; the ambient-excursion transmission into interior clocks is measured on the solved profile (step_76) at T ~ 1 on the leaking branch"
   },
   "amplitude_bookkeeping": {
     "eta_measured_headline": -0.0003908842592328793,
@@ -37,10 +40,10 @@
     "delta_r_measured_m": -0.005081495370027431,
     "delta_r_measured_ols_m": -0.004130446637728288,
     "excursion_cos_D_amplitude": 2.5363123045851662e-11,
-    "lunar_tracking_S_A": 0.5502604006376862,
-    "effective_lunar_excursion": 1.3956322248633268e-11,
-    "required_projection": "delta_r = (c tau_rt/2) * delta_phi_eff with tau_rt = 2.56 s gives 5.356e-03 m -- the direct clock-projection ceiling; the measured 5.08e-03 m requires the ephemeris-fit transfer map (a fraction ~O(1) of the ceiling), which is the channel-level quantity still to be derived",
-    "ceiling_delta_r_m": 0.005355520193994053
+    "lunar_excursion_transmission": 0.99685,
+    "effective_lunar_excursion": 2.528322920825723e-11,
+    "required_projection": "delta_r = (c tau_rt/2) * delta_phi_eff with tau_rt = 2.56 s gives 9.702e-03 m -- the direct clock-projection ceiling; the measured 5.08e-03 m requires the ephemeris-fit transfer map (a fraction ~O(1) of the ceiling), which is the channel-level quantity still to be derived",
+    "ceiling_delta_r_m": 0.00970204343106666
   },
-  "verdict": "The volumetric benchmark's two underived ingredients are superseded by the corpus's master-action machinery: the quartic potential pins the interior field as rho^{1/3} (derived exponent 1/3, not 3), and the amplitude sector supplies S_A = min[1,(rho_bar/rho_T)^{1/3}] at zero free parameters -- S_A^Earth = 0.650, S_A^Moon = 0.550 -- replacing the illustrative alpha_eff. The admissible clock channel carries the computed solar excursion delta phi_sun = 2.54e-11 cos D (the manuscript's earlier ~5e-11 was the peak-to-peak excursion, not the cos-D coefficient). The force channel remains excluded at ~1e-15 by the canonical pairwise operator. What remains to be derived is the ephemeris-projection map delta_phi -> delta_r: the direct clock-projection ceiling is 5.36e-03 m vs the measured 5.08e-03 m, so the required transfer fraction is order unity -- consistent in order of magnitude, pending the explicit ephemeris-fit map (which also fixes the residual sign through the projection convention)."
+  "verdict": "The volumetric benchmark's two underived ingredients are superseded by the corpus's master-action machinery: the quartic potential pins the equilibrium interior level as rho^{1/3} (derived exponent 1/3, not 3), supplying the depth bookkeeping S_A^Earth = 0.650, S_A^Moon = 0.550, and the ambient-excursion transmission is measured on the solved unified profile (TEP step_76): real bodies sit on the leaking branch and transmit ambient field excursions ~additively, T_Moon = 0.9969. The admissible clock channel carries the computed solar excursion delta phi_sun = 2.54e-11 cos D (the manuscript's earlier ~5e-11 was the peak-to-peak excursion, not the cos-D coefficient). The force channel remains excluded at ~1e-15 by the canonical pairwise operator. What remains to be derived is the ephemeris-projection map delta_phi -> delta_r: the direct clock-projection ceiling is 9.70e-03 m vs the measured 5.08e-03 m, so the required transfer fraction is order unity -- consistent in order of magnitude, pending the explicit ephemeris-fit map (which also fixes the residual sign through the projection convention)."
 }

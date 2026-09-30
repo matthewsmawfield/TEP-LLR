@@ -31,7 +31,7 @@
  </tr>
  <tr>
  <td>2</td>
- <td>4.25</td>
+ <td>4.2</td>
  <td>Multiplicity control</td>
  </tr>
  <tr>
@@ -41,17 +41,17 @@
  </tr>
  <tr>
  <td>4</td>
- <td>4.10</td>
+ <td>4.4</td>
  <td>Station-balance power stress</td>
  </tr>
  <tr>
  <td>5</td>
- <td>4.5–4.18</td>
+ <td>4.5–4.11</td>
  <td>Station-specific systematic testing; core regression and per-station detail</td>
  </tr>
  <tr>
  <td>6</td>
- <td>4.9</td>
+ <td>4.12</td>
  <td>Hardware epochs</td>
  </tr>
  <tr>
@@ -61,7 +61,7 @@
  </tr>
  <tr>
  <td>8</td>
- <td>4.20.5, 4.15–4.32 (incl. 4.28.1)</td>
+ <td>4.9.6, 4.15–4.24, 4.26–4.33</td>
  <td>Uncertainty calibration; systematics, CV / nuisance transport, clean subset, orthogonality simulations</td>
  </tr>
  <tr>
@@ -185,7 +185,7 @@
  $5.91\sigma$); and (iv) a frequency-specific null scan with no
  significant detections at 55 tested non-synodic factors after
  correction. Leave-one-station-out meta-analysis (
- Section 4.10) gives a descriptive weighted mean
+ Section 4.4.1) gives a descriptive weighted mean
  $\eta_{\rm meta} = -4.21 \times 10^{-4}$ across four powered exclusions;
  their overlap precludes treating the combined precision as an independent significance. The
  full-systematic model without weighting or excision
@@ -197,7 +197,7 @@
  confirming that the signal is not driven by a small subset of
  influential observations. Multiplicity control is applied to
  four designated tests while treating 47 sensitivity
- analyses as bounds on the same synodic claim (Section 4.23). The canonical estimator hierarchy consolidates these into one unified framework. A matched-window ephemeris comparison on 2014–2018 adds: INPOP19a and
+ analyses as bounds on the same synodic claim (Section 4.2). The canonical estimator hierarchy consolidates these into one unified framework. A matched-window ephemeris comparison on 2014–2018 adds: INPOP19a and
  DE430 both yield negative $\eta$ at $10.0\sigma$ and $5.96\sigma$
  respectively (cosD-only), with
  $\Delta\eta = +3.42 \times 10^{-4}$ ($2.77\sigma$), and the
@@ -207,7 +207,7 @@
 
  <p>
  A fifth strand—strong corroborative dynamical structure in the same residual
- channel—is developed in Sections 4.28.1–4.14.2 (read order 9). After
+ channel—is developed in Sections 4.25.1–4.25.2 (read order 9). After
  the synodic fit is fixed, heliocentric radial velocity and
  CMB dipole orientation improve the joint model strongly
  ($\Delta\text{AIC} = -119.2$;
@@ -224,15 +224,15 @@
  not proof of a unique CMB-frame origin. The Planck-axis joint layer is
  therefore not a replacement estimator for the headline $\eta$, but it is
  retained as corroborative fixed-sky structure on the same residual channel.
- DE430 fragility (Section 4.28) is an independent
+ DE430 fragility (Section 4.13) is an independent
  cross-ephemeris replication of the sign of the INPOP19a headline
  estimand; the $2.77\sigma$ matched-window amplitude discrepancy means
  it does not replicate the amplitude itself, and its decomposition
  locates the gap in the composition- and absorber-dependent residual
- channel (Step 081; Section 4.20).
+ channel (Step 081; Section 4.13).
  </p>
 
- <h3>4.19 Multiple-Testing Consolidation</h3>
+ <h3>4.2 Multiple-Testing Consolidation</h3>
 
  <p>
  The pipeline reports 51 significance measures, of which four are
@@ -270,7 +270,7 @@
  Universality is tested at the pooled level: the common-$\eta$ mixed
  model is the primary cross-station significance statement. Per-station
  full models are informative but sub-threshold where phase coverage or
- $N$ is limited (Section 4.20); they are not treated as five
+ $N$ is limited (Section 4.20.4); they are not treated as five
  independent discovery channels.
  </p>
 
@@ -315,7 +315,7 @@
  analysis.
  </p>
 
- <h3>4.10 Station-Balanced TEP Stress Test</h3>
+ <h3>4.4 Station-Balanced TEP Stress Test</h3>
 
  <p>
  Station-balance analysis directly tests whether Grasse dominance (74% of the raw
@@ -369,7 +369,7 @@
  archive, while enforced station balance removes the statistical power
  needed for an independent subsample claim. This is a power stress
  test, not a second co-equal discovery channel, and it does not
- replace the pooled mixed-model universality test in Section 4.10.
+ replace the pooled mixed-model universality test in Section 4.3.
  The stratified equal-$N$ analysis tests whether the equal-$N$ null was merely a sampling-efficiency
  failure rather than genuine station dominance. The stability report
  confirms that random equal-$N$, stratified equal-$N$, and the
@@ -401,7 +401,7 @@
  phase coverage and precision.
  </p>
 
- <h4>Leave-one-station-out meta-analysis</h4>
+ <h4>4.4.1 Leave-one-station-out meta-analysis</h4>
 
  <p>
  Equal-$N$ subsampling is underpowered by construction. A more
@@ -566,7 +566,7 @@
  shape that happens to correlate with $\cos(D)$.
  </p>
 
- <h3>4.13 Systematic Amplitude Sensitivity</h3>
+ <h3>4.7 Systematic Amplitude Sensitivity</h3>
 
  <p>
  The systematic sensitivity analysis quantifies systematic risks to the signal. Comparisons in
@@ -605,7 +605,7 @@
  coupled systematics as residual risk.
  </p>
 
- <h4>4.13.1 Adversarial nuisance search (beyond the known list)</h4>
+ <h4>4.7.1 Adversarial nuisance search (beyond the known list)</h4>
 
  <p>
  Two data-driven searches ask whether nuisance structure learned from
@@ -652,7 +652,7 @@
  sampling manifold.
  </p>
 
- <h4>4.13.2 Era $\times$ station $\times$ lunation interaction grid</h4>
+ <h4>4.7.2 Era $\times$ station $\times$ lunation interaction grid</h4>
 
  <p>
  The dataset is partitioned into three eras (pre-1990, 1990s, post-2000),
@@ -670,7 +670,7 @@
  than inconsistent.
  </p>
 
- <h4>4.13.3 Blind 5-Fold Calendar-Year Cross-Validation</h4>
+ <h4>4.7.3 Blind 5-Fold Calendar-Year Cross-Validation</h4>
 
     <p>
     To strictly guard against partition overlap and sample reuse, a 5-fold disjoint calendar-year cross-validation
@@ -694,7 +694,7 @@
     train-and-test procedure while preserving temporal and station dependence.
     </p>
 
- <h3>4.18 Correlation Analysis</h3>
+ <h3>4.8 Correlation Analysis</h3>
 
  <p>
  The Pearson correlation coefficient between the residuals and $\cos(D)$
@@ -729,11 +729,11 @@
  provides high confidence in the rejection of the null hypothesis.
  Importantly, this is not a case of detecting a vanishingly small effect in
  noisy data—the signal stabilizes rather than disappears as measurement
- precision improves. As shown in Section 4.3, Cook's Distance excision of
+ precision improves. As shown in Section 4.9.2, Cook's Distance excision of
  high-leverage points (primarily early-era noise) yields
  $\eta = -3.31 \times 10^{-4}$ at $5.65\sigma$ (Cook's Distance leverage-excised robustness check),
  consistent with the full-model AR(1) GLS result. More compellingly,
- partitioning by hardware era (Section 4.6) reveals that the modern C-SPAD
+ partitioning by hardware era (Section 4.12) reveals that the modern C-SPAD
  epoch (2009–2019) achieves ~2 cm RMS precision while maintaining stable
  negative $\eta$ consistent with the primary value. As hardware
  precision improved by an order of magnitude over 35 years, the extracted
@@ -805,7 +805,7 @@
  (Gelman-Rubin statistic $\hat{R}_\eta = 0.999$, acceptance fraction $= 0.72$).
  </p>
 
- <h4>Primary headline: precision-weighted full-systematic model</h4>
+ <h4>4.9.1 Primary headline: precision-weighted full-systematic model</h4>
 
  <p>
  The primary reported Nordtvedt parameter uses the precision-weighted
@@ -827,7 +827,7 @@
  <li>AR(1) parameter on unweighted full-model residuals (context): $\rho = 0.412$, DW = 1.18</li>
  </ul>
 
- <h4>Leverage diagnostic: Cook's-Distance-excised full-systematic OLS</h4>
+ <h4>4.9.2 Leverage diagnostic: Cook's-Distance-excised full-systematic OLS</h4>
 
  <p>
  The same full-systematic design is refit after removing observations with
@@ -902,7 +902,7 @@
  single estimator choice.
  </p>
 
- <h4>4.9.2 Robustness Checks and Diagnostic Tests</h4>
+ <h4>4.9.3 Robustness Checks and Diagnostic Tests</h4>
 
  <p>
  To quantify leverage on the heavy-tailed LLR telemetry, Cook's distance
@@ -937,10 +937,10 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  <p>
  To test consistency across separate observatories and correctly
  account for per-station noise, further robust analysis (including
- precision-weighting) is provided in Sections 4.12 and 4.12.5.
+ precision-weighting) is provided in Sections 4.11 and 4.25.5.
  </p>
 
- <h4>4.9.3 False-Positive Rate Simulation</h4>
+ <h4>4.9.4 False-Positive Rate Simulation</h4>
 
  <p>
  To quantify the exact probability that the observed $\eta$ could arise
@@ -969,7 +969,7 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  strong fewer than once in 10,000 trials.
  </p>
 
- <h4>4.9.4 Outlier-Threshold Sensitivity Sweep</h4>
+ <h4>4.9.5 Outlier-Threshold Sensitivity Sweep</h4>
 
  <p>
  To verify that the $\eta$ signal is not an artifact of the 6σ MAD
@@ -1005,7 +1005,7 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  outlier-removal threshold choice.
  </p>
 
- <h4>4.9.5 Prediction Interval Coverage and Uncertainty Calibration</h4>
+ <h4>4.9.6 Prediction Interval Coverage and Uncertainty Calibration</h4>
 
  <p>
  A prediction-interval coverage test was performed on the 6σ-cleaned
@@ -1066,10 +1066,10 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  95% band excludes $\eta = 0$; the station bootstrap band is wider and
  nearly touches zero at its upper end. Leave-one-station-out
  meta-analysis, inverse-variance combination of the four
- powered exclusions, and Figure 5 are reported in Section 4.10.
+ powered exclusions, and Figure 5 are reported in Section 4.4.1.
  </p>
 
- <h3>4.11 Differential Analysis</h3>
+ <h3>4.10 Differential Analysis</h3>
 
  <p>
  To provide an independent test that does not rely on the specific
@@ -1125,7 +1125,7 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  </p>
 
 
- <h3>4.12 Station-by-Station Consistency</h3>
+ <h3>4.11 Station-by-Station Consistency</h3>
  <p>
  Tables 1 and 2 report two distinct statistical quantities for each LLR
  station and must not be confused. Table 1 gives the regression estimates
@@ -1156,11 +1156,11 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  Carlo $p = 0.039$), retained as an unresolved tension rather than
  dismissed as a noise fluctuation (Section 5.5). Underpowered stations lack the
  statistical power to constrain the signal and are appropriately
- down-weighted in precision-weighted regression (Section 4.12.5) while
+ down-weighted in precision-weighted regression (Section 4.25.5) while
  retained for validation.
  </p>
 
- <h4>4.15.1 Haleakala Audit</h4>
+ <h4>4.11.1 Haleakala Audit</h4>
  <p>
  The Haleakala station is classified as <em>underpowered</em> on
  objective statistical power criteria (sample size, precision, and phase
@@ -1355,7 +1355,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  $p = 0.039$, family-wise rate 4.2\%; Section 3.4.23) and is retained as
  an unresolved tension rather than attributed to noise. Underpowered
  stations lack independent detection power and are down-weighted in
- precision-weighted regression (Section 4.12.5) while retained for
+ precision-weighted regression (Section 4.25.5) while retained for
  validation. The apparent magnitude discrepancy between APO and Grasse
  full-sample OLS values reflects epoch mixing: Grasse's full-sample OLS
  includes 25 years of early PMT data whose heavy-tailed variance inflates
@@ -1372,7 +1372,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  (precision-weighted full-systematic and cluster-robust estimands).</em>
  </p>
 
- <h3>4.17 Hardware Epoch Analysis</h3>
+ <h3>4.12 Hardware Epoch Analysis</h3>
 
  <p>
  A critical test for distinguishing physical signals from instrumental
@@ -1444,7 +1444,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  per-epoch RMS ($r = 0.946$) in the $\cos D$-only analysis.
  </p>
 
- <h3>4.20 Comparison with DE430</h3>
+ <h3>4.13 Comparison with DE430</h3>
 
  <p>
  Cross-ephemeris validation was performed on DE430 residuals from
@@ -1524,7 +1524,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  significance, and cluster-robust $\eta = -4.06 \times 10^{-4}$ at
  $6.52\sigma$. Frequency-domain orthogonality tests, the
  ephemeris-absorption simulation, and the linearized post-fit extraction
- (Section 4.27) indicate why a synodic $\cos(D)$ coupling of this
+ (Sections 4.14, 4.24, and 4.25.6) indicate why a synodic $\cos(D)$ coupling of this
  magnitude is expected to project into post-fit residuals when static
  Keplerian solvers fix $\eta = 0$; source-level integrator refits with
  $\eta$ free remain the definitive dynamical closure.
@@ -1568,14 +1568,14 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  range.
  </p>
 
- <h3>4.28 Robustness and Systematic Error Analysis</h3>
+ <h3>4.16 Robustness and Systematic Error Analysis</h3>
 
  <p>
  To assess the robustness of the finding, comprehensive systematic error
  analyses were performed using multiple independent analysis families.
  Extended systematic-control, noise-injection, subsample, and station-decomposition
  results (pipeline scripts <code>step_010</code>–<code>step_013</code>, manuscript
- Steps 010–013) are detailed in Section 4.28. The key
+ Steps 010–013) are detailed in Section 4.20. The key
  results are:
  </p>
 
@@ -1648,7 +1648,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </li>
  </ul>
 
- <h4>Robust Estimator Selection: Why Theil-Sen Is Biased and What Replaces It</h4>
+ <h4>4.16.1 Robust Estimator Selection: Why Theil-Sen Is Biased and What Replaces It</h4>
 
  <p>
  The raw OLS calculation ($\eta = -3.18 \times 10^{-4}$; naïve OLS)
@@ -1737,7 +1737,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </tbody>
  </table>
 
- <h4>4.14.2 Systematic Projection Analysis</h4>
+ <h4>4.16.2 Systematic Projection Analysis</h4>
 
  <p>
  The raw RMS of systematic sources (1.05 cm) conflates the
@@ -1841,7 +1841,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  integrator-level refit.
  </p>
 
- <h4>4.14.3 Phase-Locked Differential Analysis</h4>
+ <h4>4.16.3 Phase-Locked Differential Analysis</h4>
 
  <p>
  An independent confirmation that cancels shared constant offsets
@@ -1891,7 +1891,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  observatories.
  </p>
 
- <h3>4.29 Power and Sensitivity Analysis</h3>
+ <h3>4.17 Power and Sensitivity Analysis</h3>
 
  <p>
  A power analysis determines the minimum detectable Nordtvedt parameter
@@ -1908,7 +1908,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  $\approx 99.97\%$ for $\eta = 5\times 10^{-4}$.
  </p>
 
- <h3>4.23 Temporal Evolution and Synodic Phase Coherence</h3>
+ <h3>4.18 Temporal Evolution and Synodic Phase Coherence</h3>
 
  <p>
  To evaluate temporal stability, testing must confront the
@@ -1944,15 +1944,19 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  Yet across the powered hardware eras, the underlying signal maintains
  sign-consistent negative $\eta$ (the hardware epoch analysis: 6/7 cosD-only epochs
  negative; one pre-SPAD epoch non-significant and positive). A weighted
- regression confirms zero secular drift over time ($p = 0.64$).
+ regression confirms zero secular drift over time ($p = 0.64$). This
+ concerns the post-fit residual stream: a secular trend would be largely
+ absorbed by the ephemeris fit to orbital and tidal parameters, so this
+ null is not itself a bound on secular conformal drift; that bound comes
+ from the dedicated $\dot G/G$ analyses (Section 2.4).
  </p>
 
- <h3>4.24 Systematic Artifact Summary</h3>
+ <h3>4.19 Systematic Artifact Summary</h3>
 
  <p>
  The correlation coefficient is small ($r = -0.0329$, $r^2 \approx 0.0011$
  on the 6σ-cleaned primary sample), reflecting the expected variance
- fraction for a sub-centimetre gravitational modulation in 9.5 cm RMS noise. As discussed in Section 4.25, this small
+ fraction for a sub-centimetre gravitational modulation in 9.5 cm RMS noise. As discussed in Section 4.8, this small
  effect size is expected for a subtle gravitational modulation at the
  edge of detection sensitivity and does not necessarily weaken the
  headline precision-weighted detection ($6.94\sigma$). The Pearson
@@ -1961,9 +1965,9 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
 
  <p>
  Multiple testing considerations: The canonical runner executes
- 87 sequential step scripts, but these are not independent hypothesis tests.
+ 91 sequential step scripts, but these are not independent hypothesis tests.
  They implement one coherent analysis programme on one primary residual
- channel, not 84 independent searches for unrelated signals. Applying a
+ channel, not 91 independent searches for unrelated signals. Applying a
  global Bonferroni correction across every pipeline step would therefore be
  statistically inappropriate: it would treat diagnostics, validation
  sweeps, and robustness re-fits as if they were independent discovery
@@ -2002,12 +2006,12 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
 
  <p>
  The coarse 7-bin temporal $\chi^2$/dof $\approx 33$ indicates bin-to-bin
- variation; as discussed in Section 4.21, this does not invalidate the
+ variation; as discussed in Section 4.18, this does not invalidate the
  finding since the powered hardware-era cosD-only splits remain
  sign-consistent negative, the weighted mean is consistent
  with the global detection, and no significant linear trend is present
  ($p = 0.64$). When accounting for
- known hardware upgrades (Section 4.6), the variance converges to a more
+ known hardware upgrades (Section 4.12), the variance converges to a more
  robust $\chi^2/\text{dof} \approx 6.2$.
  </p>
 
@@ -2020,7 +2024,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  fully absorbed by other model parameters, supporting its physical
  origin. Any common ephemeris error would affect all stations similarly;
  the multi-station consistency, the phase-locked differential
- cancellation (Section 4.1), and the cross-ephemeris replication on
+ cancellation (Section 4.16.3), and the cross-ephemeris replication on
  DE430 exclude a common ephemeris artifact as the source of the
  synodic modulation.
  </p>
@@ -2035,7 +2039,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  explanations.
  </p>
 
- <h4>4.12.1 Systematic Control Analysis</h4>
+ <h4>4.20.1 Systematic Control Analysis</h4>
 
  <p>
  Partial correlation analysis tests whether the TEP signal persists after
@@ -2075,7 +2079,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  outlier-driven correlations.
  </p>
 
- <h4>4.12.2 Noise Injection and Signal Recovery</h4>
+ <h4>4.20.2 Noise Injection and Signal Recovery</h4>
 
  <p>
  Noise injection tests quantify signal robustness and validate detection
@@ -2156,7 +2160,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  perturbations remain sign-consistent.
  </li>
  <li>
- Station-balanced IPW and precision-weighted regression (Section 4.12.5): A naive Inverse-Probability Weighted regression forces equal station bounds across massive datasets, drastically over-weighting underpowered sets like Haleakala ($N=666$) and severely phase-truncated data like McDonald2. This naive equal-weighting yields an artificial plunge to SNR = 0.52. To resolve this constructively, a precision-weighted regression (weighting globally uniformly by the inverse square variance $1/\sigma^2_{\rm station}$) was adopted as the standard cross-observatory test. By valuing high-quality observations consistently, the precision-weighted test extracts $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$.
+ Station-balanced IPW and precision-weighted regression (Section 4.25.5): A naive Inverse-Probability Weighted regression forces equal station bounds across massive datasets, drastically over-weighting underpowered sets like Haleakala ($N=666$) and severely phase-truncated data like McDonald2. This naive equal-weighting yields an artificial plunge to SNR = 0.52. To resolve this constructively, a precision-weighted regression (weighting globally uniformly by the inverse square variance $1/\sigma^2_{\rm station}$) was adopted as the standard cross-observatory test. By valuing high-quality observations consistently, the precision-weighted test extracts $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$.
  This indicates the negative estimate persists under objective precision weighting and does not require low-precision era noise, while the dedicated station-leverage warnings in Steps 029 and 059 remain part of the evidence ledger.
  </li>
  </ul>
@@ -2176,7 +2180,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  $\eta = -2.39 \times 10^{-4}$ at $2.77\sigma$. Matera, McDonald2, and
  Haleakala remain underpowered at $0.02\sigma$, $1.39\sigma$, and
  $2.45\sigma$ respectively, matching the per-station power design in
- Section 4.28.4. The decomposition confirms that the pooled negative
+ Section 4.25.4. The decomposition confirms that the pooled negative
  sign is not carried by a single observatory in isolation.
  </p>
 
@@ -2208,14 +2212,14 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
 
  <p>
  <strong>Savage–Dickey prior and bandwidth sensitivity.</strong>
- Table 4.18.1 documents four uniform $\eta$ priors with the intercept prior
+ Table 4.21.1 documents four uniform $\eta$ priors with the intercept prior
  held fixed. Each row recomputes
  $\mathcal{B}_{\rm SD} = \pi(\eta{=}0)/p(\eta{=}0|{\rm data})$ under its
  own MCMC posterior (reference: 5,000 steps; sensitivity priors: 2,500 steps).
  </p>
 
  <table>
- <caption>Table 4.18.1: Savage–Dickey sensitivity to $\eta$ prior and KDE bandwidth.</caption>
+ <caption>Table 4.21.1: Savage–Dickey sensitivity to $\eta$ prior and KDE bandwidth.</caption>
  <thead>
  <tr>
  <th>Prior on $\eta$</th>
@@ -2282,13 +2286,13 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <p>
  The headline quantitative claim remains the precision-weighted
  cluster-robust estimand at $6.94\sigma$. Stable Bayesian components are
- posterior exclusion of zero, Table 4.18.1, and the grid/bridge
+ posterior exclusion of zero, Table 4.21.1, and the grid/bridge
  cross-checks; Laplace and single-kernel Savage–Dickey values are not
  discovery statistics.
  </p>
 
 
- <h3>4.25 Spectral Analysis and Frequency Specificity</h3>
+ <h3>4.22 Spectral Analysis and Frequency Specificity</h3>
 
  <p>
  To test whether the detected signal is specifically locked to the
@@ -2353,7 +2357,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </p>
 
 
- <h3>4.27 Full Hard Audit Verification</h3>
+ <h3>4.23 Full Hard Audit Verification</h3>
 
  <p>
  A comprehensive bit-level data audit was performed to verify data
@@ -2397,7 +2401,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </p>
 
 
- <h3>4.16 Demonstration of Ephemeris Absorption Masking</h3>
+ <h3>4.24 Demonstration of Ephemeris Absorption Masking</h3>
 
  <p>
  Whether a genuine Nordtvedt signal would be resolved or masked by
@@ -2464,10 +2468,10 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  therefore survives in residuals if present.
  </p>
 
- <h3>4.18 Differential Suppression (Environmental Amplitude Scaling)</h3>
+ <h3>4.25 Differential Suppression (Environmental Amplitude Scaling)</h3>
 
  <p>
- <em>Note:</em> The joint regression models in Sections 4.28.1–4.14.2 were
+ <em>Note:</em> The joint regression models in Sections 4.25.1–4.25.2 were
  developed sequentially as post-hoc probes of the TEP dynamical
  framework: the synodic term is the primary theory-facing channel;
  heliocentric distance, radial velocity, and CMB orientation were added
@@ -2515,7 +2519,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </p>
 
 
- <h4>4.12.7 Orbital Velocity Modulation of Temporal Shear</h4>
+ <h4>4.25.1 Orbital Velocity Modulation of Temporal Shear</h4>
 
  <p>
  General Relativity predicts that any Nordtvedt violation, if present,
@@ -2658,7 +2662,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  statistical alias of the stronger CMB anisotropy.
  </p>
 
- <h4>4.12.8 All-Sky Directional Scan and Random-Axis Monte Carlo</h4>
+ <h4>4.25.2 All-Sky Directional Scan and Random-Axis Monte Carlo</h4>
 
  <p>
  The pooled full-systematic synodic $\eta$ in Section 4.1 remains the
@@ -2673,7 +2677,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  48.25^\circ)$ as the operational $\hat{\mathbf{n}}$ for both an annual
  velocity projection of Earth's orbital motion onto that axis and a
  monthly orientation anisotropy of the Earth–Moon line. Falsification testing
- (Section 4.14.2) shows that other fixed axes in the same regression
+ (in this subsection) shows that other fixed axes in the same regression
  class can match or slightly exceed the Planck axis in-sample; the
  discussion therefore treats this block as corroborative directional
  structure on the residual channel, not as a uniqueness proof for the
@@ -3259,7 +3263,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  confined to extreme bins.
  </p>
 
- <h4>4.12.3 Canonical Full-Systematic Extraction</h4>
+ <h4>4.25.3 Canonical Full-Systematic Extraction</h4>
 
  <p>
  The nested systematic control ladder is fit on the
@@ -3283,7 +3287,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  primary independent hypothesis for multiple-testing correction.
  </p>
 
- <h4>4.12.4 Per-Station Power and Observed Extraction</h4>
+ <h4>4.25.4 Per-Station Power and Observed Extraction</h4>
 
  <p>
  The station power analysis compares expected per-station SNR at the cosD-only reference
@@ -3362,12 +3366,12 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <p>
  No single station reaches conventional standalone significance; the
  headline detection is carried by the pooled full-systematic model
- (Section 4.14.3). Grasse-C-SPAD hardware epochs reach
+ (Section 4.25.3). Grasse-C-SPAD hardware epochs reach
  $2.37\sigma$–$8.83\sigma$ depending on the partition, with negative
  $\eta$ in every powered epoch.
  </p>
 
- <h4>4.12.5 Precision-Weighted Station Regression</h4>
+ <h4>4.25.5 Precision-Weighted Station Regression</h4>
 
  <p>
  The station power analysis implements inverse-variance weighting by station
@@ -3383,12 +3387,12 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <p>
  at $6.27\sigma$ significance. This bounds the amplitude under
  quality-weighted pooling and complements the headline
- precision-weighted extraction (Section 4.14.3). The clean-subset
+ precision-weighted extraction (Section 4.9.1). The clean-subset
  Grasse C-SPAD-era plus APO analysis is reported separately in
- Section 4.29.
+ Section 4.32.
  </p>
 
- <h4>4.12.6 Frequency Domain Orthogonality and Sideband Harmonics</h4>
+ <h4>4.25.6 Frequency Domain Orthogonality and Sideband Harmonics</h4>
  <p>
  To establish why standard LLR integrators fail to completely absorb the
  TEP signal, a spectral orthogonality analysis was executed.
@@ -3424,7 +3428,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  post-fit residuals where it is recovered by this analysis pipeline.
  </p>
 
- <h3>4.19 Quantitative $\eta$ Prediction</h3>
+ <h3>4.26 Quantitative $\eta$ Prediction</h3>
 
  <p>
  A quantitative estimate for $\eta$ was derived from the TEP geometric
@@ -3446,7 +3450,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  framework's response scale.
  </p>
 
- <h3>4.21 Decoupling Thermal Array Deformation</h3>
+ <h3>4.27 Decoupling Thermal Array Deformation</h3>
 
  <p>
  To eliminate the hypothesis that the synodic-range effect at
@@ -3462,7 +3466,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  Thus, thermal array deformation cannot explain the anomaly.
  </p>
 
- <h3>4.22 Leverage Temporal Clustering</h3>
+ <h3>4.28 Leverage Temporal Clustering</h3>
 
  <p>
  The statistical divergence between OLS ($\eta = -3.18 \times
@@ -3483,7 +3487,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  the Theil-Sen discrepancy is an estimator artefact.
  </p>
 
- <h3>4.15 False-Positive Diagnostic Results</h3>
+ <h3>4.29 False-Positive Diagnostic Results</h3>
 
  <p>
  Two dedicated false-positive diagnostic steps were executed on the full
@@ -3491,7 +3495,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  systematic confounders.
  </p>
 
- <h4>4.15.3 Day/Night Thermal Bias Null Test</h4>
+ <h4>4.29.1 Day/Night Thermal Bias Null Test</h4>
 
  <p>
  The local solar altitude was computed for every observation at its
@@ -3570,7 +3574,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  by the data.
  </p>
 
- <h4>4.15.2 True Geometric Elongation Null Test</h4>
+ <h4>4.29.2 True Geometric Elongation Null Test</h4>
 
  <p>
  The true geocentric Sun–Moon angular separation $D_{\rm true}$ was
@@ -3623,7 +3627,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  expansion, or aliasing from the mean-phase orbital approximation.
  </p>
 
- <h3>4.26 Frequency-Specific Null Testing</h3>
+ <h3>4.30 Frequency-Specific Null Testing</h3>
 
  <p>
  The TEP framework predicts the Nordtvedt modulation should appear at the
@@ -3701,7 +3705,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  across multiple frequencies.
  </p>
 
- <h3>4.28 Cross-Validation, Station Distribution, and Covariate Shift</h3>
+ <h3>4.31 Cross-Validation, Station Distribution, and Covariate Shift</h3>
 
  <p>
  Coefficient stability for the physical Nordtvedt term and out-of-sample predictive
@@ -3713,7 +3717,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  conditions, the nuisance subspace (annual, monthly, and $\cos(2D)$ aliases) is
  empirically not transportable across epochs: temporal hold-out predictive $R^2$
  for the full-systematic model is negative on the full archive and remains negative
- even on the homogeneous clean subset of Section~4.29. That pattern is not treated
+ even on the homogeneous clean subset of Section~4.32. That pattern is not treated
  here as a failure of signal authenticity; it is treated as direct evidence that
  nuisance-dominated designs cannot be sequentially re-fit across eras without bias,
  so primary extraction is performed on the maximally pooled dataset to marginalise
@@ -3787,7 +3791,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
 
  <p>
  Rolling-window projections of an effective $\eta(t)$ and their environmental
- correlations (the rolling-window analysis) are isolated in Section~4.28.1 so they are not read as
+ correlations (the rolling-window analysis) are isolated in Section~4.31.1 so they are not read as
  contradicting the global m6 stability check above: m6 tests two epoch-gated
  $\cos D$ coefficients inside the <em>pooled</em> full-systematic fit, whereas the rolling-window analysis
  probes shorter-window apparent variation that can mix environmental modulation with
@@ -3901,7 +3905,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <p>
  <strong>Per-Station cosD-Only Regression Supports Manuscript Findings.</strong>
  the validation analysis independently replicates the per-station analysis reported in
- Section 4.10. The cosD-only OLS yields: Grasse $\eta = -5.39 \times 10^{-4}$
+ Section 4.11. The cosD-only OLS yields: Grasse $\eta = -5.39 \times 10^{-4}$
  ($4.97\sigma$; per-station robustness check), APO $\eta = -2.39 \times 10^{-4}$
  ($2.77\sigma$; per-station robustness check), McDonald2 $\eta = -5.00 \times 10^{-4}$
  ($1.39\sigma$; per-station robustness check), Haleakala
@@ -3933,10 +3937,10 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  Primary inference therefore remains the precision-weighted pooled extraction
  (Section~3.4.22 and the precision-weighted regression): temporal CV is reported as a diagnostic on nuisance
  transport, not as a substitute estimand for $\eta$. The clean-subset analysis in
- Section~4.29 sharpens the same story under controlled homogeneity.
+ Section~4.32 sharpens the same story under controlled homogeneity.
  </p>
 
- <h4>4.29.1 Rolling-window $\eta(t)$ and environmental correlation</h4>
+ <h4>4.31.1 Rolling-window $\eta(t)$ and environmental correlation</h4>
 
  <p>
  TEP motivates asking whether an <em>effective</em> coupling inferred from short spans
@@ -3971,7 +3975,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  significant at the 5% level ($p \approx 0.15$ and $p \approx 0.18$ respectively).
  These correlations quantify how much window-to-window variability remains after
  restricting to 2-year segments on the cleaned archive. They are not offered as a
- refutation of the pooled const-$\eta$ hypothesis tested by m6 in Section~4.28
+ refutation of the pooled const-$\eta$ hypothesis tested by m6 in Section~4.31
  ($p = 0.90$ on equality of pre- and post-split $\cos D$ amplitudes in the joint
  full-systematic model). The conservative reading is that rolling $\hat{\eta}(t)$ is a
  local projection that can correlate with heliocentric geometry and dipole orientation
@@ -3979,7 +3983,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  remains statistically stable across the same catalogue split.
  </p>
 
- <h3>4.31 Clean-Subset High-SNR Analysis and Orbital Orthogonality</h3>
+ <h3>4.32 Clean-Subset High-SNR Analysis and Orbital Orthogonality</h3>
 
  <p>
  <strong>Robustness check — Clean Subset: Grasse C-SPAD Era (2010+) + APO.</strong>
@@ -3993,7 +3997,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </p>
 
  <p>
- Sections~4.28--4.28.1 argued that coefficient stability for $\eta$ and temporal predictive
+ Sections~4.31--4.31.1 argued that coefficient stability for $\eta$ and temporal predictive
  $R^2$ for the nuisance-augmented design measure different objects. On this clean subset,
  temporal hold-out still yields $R^2_{\mathrm{pred}} \approx -0.016$ for the
  full-systematic model (train $N=2{,}112$ pre-2013, test $N=10{,}464$ post-2013), so the
@@ -4050,7 +4054,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  shifts nuisance co-fitting and can migrate the cos(D) coefficient within
  the negative band. The manuscript retains the full-archive precision-weighted estimate as
  the <em>primary</em> headline because it uses the mixed-station design
- used in the common-$\eta$ mixed model (Section~4.25) and matches the
+ used in the common-$\eta$ mixed model (Section~4.3) and matches the
  weighting philosophy of the canonical estimator hierarchy; the clean-subset analysis is the
  high-SNR robustness channel, not a competing headline number.
  </p>
@@ -4122,7 +4126,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  to perform such a refit.
  </p>
 
- <h3>4.30 Bounds on Solar Radiation Pressure and Atmospheric Seeing Systematics</h3>
+ <h3>4.33 Bounds on Solar Radiation Pressure and Atmospheric Seeing Systematics</h3>
 
  <p>
  Two potential terrestrial or local physics mechanisms — unmodelled solar
@@ -4132,7 +4136,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  channel.
  </p>
 
- <h4>4.31.1 Local Mechanical Displacement from Solar Radiation Pressure</h4>
+ <h4>4.33.1 Local Mechanical Displacement from Solar Radiation Pressure</h4>
 
  <p>
  Direct solar radiation pressure exerts a force on the Apollo lunar
@@ -4145,12 +4149,12 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  displacement is $1.10 \times 10^{-9}$ mm, which is $2.7 \times 10^{-10}$
  times the observed TEP signal amplitude ($\approx$ 4.12 mm). Even if
  the array were completely unconstrained, free displacement over one
- synodic month would be unphysically large ($\sim$$10^5$ m), but the
+ synodic month would be unphysically large ($\sim 10^5$ m), but the
  arrays are bolted to bedrock. This mechanism cannot explain the
  anomaly.
  </p>
 
- <h4>4.31.2 Orbital SRP Scaling</h4>
+ <h4>4.33.2 Orbital SRP Scaling</h4>
 
  <p>
  Orbital solar radiation pressure on the Moon produces a geometric
@@ -4195,7 +4199,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  as the dominant source of the detected modulation.
  </p>
 
- <h4>4.31.3 Atmospheric Seeing</h4>
+ <h4>4.33.3 Atmospheric Seeing</h4>
 
  <p>
  Atmospheric seeing produces fast stochastic wander of the laser beam
@@ -4219,7 +4223,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  scaled to explain the detected modulation. Atmospheric seeing
  is bounded at 0.111 mm ($\sim$3% of signal). The systematic error budget
  in Section 3.4.16 is updated to include both bounds. These quantitative
- exclusions, together with the existing dust/thermal (Section 4.12) and
+ exclusions, together with the existing dust/thermal (Section 4.27) and
  local terrestrial systematic (Section 5.9) tests, close the currently
  nominated conventional explanations for the synodic-phase-locked
  residual modulation without claiming that every conceivable unmodelled

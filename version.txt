@@ -4,6 +4,7 @@ v0.4 (Lucknow) — 28 September 2026 — Corpus-resolution audit: nested-constra
 - Step-080 confound audit reported: coverage restriction bounded (≤6.4 × 10⁻⁴ shift) and solar conditioning excluded (conditioned excess +3.8 × 10⁻³, 2.62σ)
 - New pipeline steps: step_084 Earth–Moon–Solar bridge and step_085 nested LLR constraint
 - Theory and reproducibility sections updated to reflect the audit findings and pipeline expansion
+- Corrected pipeline step count 87 to 91
 
 v0.3 (Lucknow) — 16 September 2026
 

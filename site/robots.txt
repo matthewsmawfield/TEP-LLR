@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://matthewsmawfield.github.io/TEP-LLR/sitemap.xml
+Sitemap: https://mlsmawfield.com/tep/llr/sitemap.xml

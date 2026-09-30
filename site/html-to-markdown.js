@@ -118,7 +118,7 @@ class HTMLToMarkdownConverter {
         });
 
         html = html.replace(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi, '\n> $1\n\n');
-        html = html.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (match, content) => {
+        html = html.replace(/<p\b[^>]*>([\s\S]*?)<\/p>/gi, (match, content) => {
             // Strip leading whitespace from each line in paragraph content
             const stripped = content.split('\n').map(line => line.trim()).join(' ').trim();
             return `${stripped}\n\n`;
@@ -147,7 +147,11 @@ class HTMLToMarkdownConverter {
         });
 
         // Final cleanup: strip leading spaces from all lines
-        html = html.split('\n').map(line => line.replace(/^\s+/, '')).join('\n');
+        let inFence = false;
+        html = html.split('\n').map((line) => {
+            if (line.trimStart().startsWith('```')) inFence = !inFence;
+            return inFence ? line : line.replace(/^\s+/, '');
+        }).join('\n');
         return html.replace(/\n{3,}/g, '\n\n').trim();
     }
 
@@ -163,7 +167,7 @@ class HTMLToMarkdownConverter {
             const citationPath = path.join(__dirname, '..', 'CITATION.cff');
             let author = 'Matthew Lukin Smawfield';
             let version = 'v0.4 (Lucknow)';
-            let dateReleased = '2026-05-14';
+            let dateReleased = '2026-05-17';
             let doi = '';
             
             if (fs.existsSync(citationPath)) {

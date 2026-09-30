@@ -77,7 +77,7 @@ TEP-LLR/
 
     <h3>Pipeline Architecture</h3>
     <p>
-        The analysis pipeline comprises 87 scripts organised into logical groups.
+        The analysis pipeline comprises 91 scripts organised into logical groups.
         Each step is a standalone Python script in <code>scripts/steps/</code> that produces JSON outputs and
         detailed logs in <code>logs/step_*.log</code>. Manuscript step labels in Results and Discussion
         follow the <code>step_XXX</code> script prefix wherever possible (e.g. the primary extraction
@@ -87,7 +87,7 @@ TEP-LLR/
     </p>
 
     <h4>Complete Step Inventory & Runtime</h4>
-    <p>The canonical pipeline comprises 87 scripts organised into logical groups. The core statistical analysis (steps 000–003) provides the primary signal extraction, while subsequent steps perform extended systematic checks, robustness validation, and theoretical consistency tests. Recent enhancements include:</p>
+    <p>The canonical pipeline comprises 91 scripts organised into logical groups. The core statistical analysis (steps 000–003) provides the primary signal extraction, while subsequent steps perform extended systematic checks, robustness validation, and theoretical consistency tests. Recent enhancements include:</p>
 
     <ul>
         <li>Temporal autocorrelation analysis with Durbin-Watson statistic and significance testing</li>
@@ -111,7 +111,7 @@ TEP-LLR/
                 <td>010–013</td>
                 <td><code>step_010</code>–<code>step_013</code></td>
                 <td><code>step_010</code>–<code>step_013</code> outputs</td>
-                <td>§4.29.1–4.29.2</td>
+                <td>§4.20.1–4.20.4</td>
             </tr>
             <tr>
                 <td>029 (day/night)</td>
@@ -171,13 +171,13 @@ TEP-LLR/
                 <td>Step 064-PI (prediction-interval calibration)</td>
                 <td><code>step_064_prediction_coverage.py</code></td>
                 <td><code>step_064_prediction_coverage.json</code></td>
-                <td>§4.9.4</td>
+                <td>§4.9.6</td>
             </tr>
             <tr>
                 <td>072 (leave-one-station-out meta; forest plot)</td>
                 <td><code>step_072_leave_one_station_out_meta.py</code></td>
                 <td><code>step_072_leave_one_station_out_meta.json</code></td>
-                <td>§4.4</td>
+                <td>§4.4.1</td>
             </tr>
             <tr>
                 <td>Step 064-SRP (orbital SRP scaling)</td>
@@ -201,6 +201,12 @@ TEP-LLR/
                 <td>085 (nested-operator LLR differential constraint)</td>
                 <td><code>step_085_nested_llr_constraint.py</code></td>
                 <td><code>step_085_nested_llr_constraint.json</code></td>
+                <td>§2.1</td>
+            </tr>
+            <tr>
+                <td>086 (coupled Earth–Moon–Sun PDE at syzygy)</td>
+                <td><code>step_086_earth_moon_coupled_pde.py</code></td>
+                <td><code>step_086_earth_moon_coupled_pde.json</code></td>
                 <td>§2.1</td>
             </tr>
         </tbody>
@@ -267,7 +273,7 @@ TEP-LLR/
             <tr>
                 <td>044–083</td>
                 <td><code>step_044_*.py</code> through <code>step_083_*.py</code></td>
-                <td>Systematic projection, independent validation, station-balanced TEP, velocity modulation, CMB anisotropy, EOP systematics, corrected TEP extraction, cross-validation, station distribution, clean subset, toy orbital perturbation, CMB robustness suite, linearized dynamical integrator refit, advanced estimator corrections (067–073), Laplace Bayes factor, wild cluster bootstrap, generic PPN test, sky-scan directionality, GP model comparison, phase-locked explanation, dynamical transfer closure, Haleakala confound audit, ephemeris amplitude decomposition, tide/libration Delaunay forward model, and the derived clock-sector amplitude bookkeeping (solar excursion at the Moon, quartic interior pinning, $S_A$ amplitude factors)</td>
+                <td>Systematic projection, independent validation, station-balanced TEP, velocity modulation, CMB anisotropy, EOP systematics, corrected TEP extraction, cross-validation, station distribution, clean subset, toy orbital perturbation, CMB robustness suite, linearized dynamical integrator refit, advanced estimator corrections (067–073), Laplace Bayes factor, wild cluster bootstrap, generic PPN test, sky-scan directionality, GP model comparison, phase-locked explanation, dynamical transfer closure, Haleakala confound audit, ephemeris amplitude decomposition, tide/libration Delaunay forward model, and conditional clock-sector amplitude bookkeeping (solar-potential excursion and quartic depth diagnostic; its legacy unit-transmission range estimate is not a validated clock-to-range map, and the corrected Paper-0 Step 76 is a static boundary-response calculation)</td>
                 <td>~3m total</td>
             </tr>
             <tr>
@@ -281,6 +287,12 @@ TEP-LLR/
                 <td><code>step_085_nested_llr_constraint.py</code></td>
                 <td>Nested-operator Sun–Earth/Sun–Moon differential response against the LLR bound (migrated from Paper 0 step_22)</td>
                 <td>Short</td>
+            </tr>
+            <tr>
+                <td>086</td>
+                <td><code>step_086_earth_moon_coupled_pde.py</code></td>
+                <td>Coupled nonlinear three-source solve at syzygy (axisymmetric); supersedes the 084 matched-profile ansatz for the collinear case — no screened bridge forms</td>
+                <td>Minutes (u0 continuation)</td>
             </tr>
         </tbody>
     </table>
@@ -432,9 +444,8 @@ node site/build.js
     <div class="checklist-box" style="background: #f9f9f9; padding: 1em; border: 1px solid #ddd; margin: 1em 0;">
         <p>To verify successful reproduction:</p>
         <ol>
-            <li>All 87 canonical scripts complete with "PASS" status in pipeline output</li>
-            <li>Key result (cross-ephemeris decomposition, Step 081): the DE430 uncleaned null is a gross-error leverage artefact — winsorization at the 6σ boundary recovers $\eta_{
-m resid} = -7.39 	imes 10^{-4}$ ($5.70\sigma$) without deleting any point; on the shared 2014–2018 window the within-ephemeris composition spread (APO $-3.85 	imes 10^{-4}$ vs Grasse $-2.30 	imes 10^{-4}$; pooled $-2.57 	imes 10^{-4}$ unweighted vs $-3.62 	imes 10^{-4}$ under $1/\sigma^2$ weights) is of the same order as the $\sim 2	imes$ cross-ephemeris ratio, so the residual-channel sign is the invariant channel and it agrees in both ephemerides</li>
+            <li>All 91 canonical scripts complete with "PASS" status in pipeline output</li>
+            <li>Key result (cross-ephemeris decomposition, Step 081): the DE430 uncleaned null is a gross-error leverage artefact — winsorization at the 6σ boundary recovers $\eta_{\rm resid} = -7.39 \times 10^{-4}$ ($5.70\sigma$) without deleting any point; on the shared 2014–2018 window the within-ephemeris composition spread (APO $-3.85 \times 10^{-4}$ vs Grasse $-2.30 \times 10^{-4}$; pooled $-2.57 \times 10^{-4}$ unweighted vs $-3.62 \times 10^{-4}$ under $1/\sigma^2$ weights) is of the same order as the $\sim 2\times$ cross-ephemeris ratio, so the residual-channel sign is the invariant channel and it agrees in both ephemerides</li>
             <li>JSON files in <code>results/outputs/</code> (step_000 through step_073, including 006b and 046b)</li>
             <li>Key result (headline): Precision-weighted full-systematic consensus $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust; $N = 25{,}445$)</li>
             <li>Key result (uncertainty calibration): prediction-interval coverage 86% at 68% nominal, 98% at 95% ($\chi^2_{\rm red}=0.48$ on published $\sigma$); LOSO conformal 95% band on $\eta_{\rm resid}$ excludes zero</li>

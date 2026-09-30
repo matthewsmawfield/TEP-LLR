@@ -7,10 +7,15 @@ uses an illustrative normalization and an underived exponent.  Under the
 corpus's v0.15 master-action machinery (Paper 0, Appendix E), both ingredients
 are superseded by derived quantities:
 
-  * the quartic matter-branch potential pins the interior field at
-    phi_min(rho) = (rho/(lambda M_Pl))^{1/3}  -- a cube-ROOT density response;
-  * the clock-amplitude projection is  S_A = min[1, (rho_bar/rho_T)^{1/3}],
-    evaluated at zero free parameters (e.g. S_A^Earth ~= 0.65);
+  * the quartic matter-branch potential pins the equilibrium interior
+    level at  phi_min(rho) = (rho/(lambda M_Pl))^{1/3}  -- a cube-ROOT
+    density response, supplying the depth bookkeeping
+    S_A = min[1, (rho_bar/rho_T)^{1/3}] (e.g. S_A^Earth ~= 0.65);
+  * the ambient-excursion transmission into interior clocks is measured
+    on the solved unified profile (TEP step_76): real bodies sit on the
+    leaking (flux-following) branch, where ambient field-value
+    excursions transmit ~additively (T ~ 1; T_Moon = 0.99685 at the
+    2.5e-11 excursion scale);
   * the admissible LLR channel is the clock-sector/ephemeris projection of the
     lunar conformal-field excursion  delta phi_sun(D)  -- a one-point function
     of the temporal landscape at the Moon's instantaneous position.
@@ -149,20 +154,40 @@ def main():
         "earth": volume_weighted(EARTH_SHELLS, 1.0 / 3.0),
         "moon": volume_weighted(MOON_SHELLS, 1.0 / 3.0),
     }
+    # Excursion transmission into the lunar interior, measured on the
+    # solved unified profile (TEP step_76, step_76_ambient_transmission):
+    # real bodies sit on the leaking (flux-following) branch where the
+    # interior rides the ambient additively, so an ambient excursion at
+    # the body's location transmits at T ~ 1; the departure is of order
+    # u_int/delta with u_int the body's own plateau depth.  At the LLR
+    # excursion scale (2.5e-11) the solved lunar transmission is 0.99685;
+    # the S_A factors above are the equilibrium *depth* bookkeeping, not
+    # the excursion-transmission factor.
+    T_moon = 0.99685
+    T_earth = 0.99554
+
     interior = {
         "rho_bar_earth_gcc": rho_earth,
         "rho_bar_moon_gcc": rho_moon,
         "S_A_earth": S_A_earth,
         "S_A_moon": S_A_moon,
         "S_A_differential": S_A_earth - S_A_moon,
+        "excursion_transmission_moon": T_moon,
+        "excursion_transmission_earth": T_earth,
+        "excursion_transmission_source": "TEP step_76 unified-profile "
+            "ambient-response solve (leaking branch, T ~ 1)",
         "volumetric_cubed_phenomenological": phenom_cubed,
         "volumetric_cuberoot_derived": derived_cuberoot,
         "differential_cubed": phenom_cubed["earth"] - phenom_cubed["moon"],
         "differential_cuberoot": derived_cuberoot["earth"] - derived_cuberoot["moon"],
-        "note": "the quartic potential pins phi_min ~ rho^{1/3}: the derived "
-                "interior response is the cube root of density, not the cube; "
-                "the phenomenological (rho/rho_T)^3 weighting over-concentrates "
-                "on the core and is superseded",
+        "note": "the quartic potential pins the equilibrium level as "
+                "rho^{1/3}: the derived interior depth bookkeeping is the "
+                "cube root of density, not the cube; the phenomenological "
+                "(rho/rho_T)^3 weighting over-concentrates on the core and "
+                "is superseded. The S_A factors are depth ratios; the "
+                "ambient-excursion transmission into interior clocks is "
+                "measured on the solved profile (step_76) at T ~ 1 on the "
+                "leaking branch",
     }
 
     # ------------------------------------------------------------------
@@ -190,9 +215,11 @@ def main():
     # range amplitude of the measured coefficient
     delta_r_meas_m = ETA_SCALE_FACTOR * eta_meas          # metres (signed)
     delta_r_meas_ols_m = ETA_SCALE_FACTOR * eta_ols
-    # lunar clock response to the excursion: the Moon's amplitude factor
-    # (mean-density projection) multiplies the ambient excursion
-    delta_phi_eff = S_A_moon * cos_coeff
+    # lunar clock response to the excursion: ambient field-value
+    # excursions transmit into leaking-branch interiors ~additively
+    # (T ~ 1, TEP step_76), so the Moon's effective excursion is the
+    # ambient excursion itself up to the solved transmission
+    delta_phi_eff = T_moon * cos_coeff
 
     bookkeeping = {
         "eta_measured_headline": eta_headline,
@@ -201,7 +228,7 @@ def main():
         "delta_r_measured_m": delta_r_meas_m,
         "delta_r_measured_ols_m": delta_r_meas_ols_m,
         "excursion_cos_D_amplitude": cos_coeff,
-        "lunar_tracking_S_A": S_A_moon,
+        "lunar_excursion_transmission": T_moon,
         "effective_lunar_excursion": delta_phi_eff,
         "required_projection": (
             "delta_r = (c tau_rt/2) * delta_phi_eff with tau_rt = 2.56 s gives "
@@ -218,19 +245,22 @@ def main():
         "step": STEP_NUM,
         "status": "success",
         "description": "Derived clock-sector amplitude bookkeeping (issue 17-3): "
-                       "solar excursion at the Moon, quartic interior pinning, "
-                       "S_A amplitude factors, projection bookkeeping",
+                       "solar excursion at the Moon, quartic depth bookkeeping, "
+                       "step_76 ambient-excursion transmission, projection "
+                       "bookkeeping",
         "solar_excursion": excursion,
         "interior_response": interior,
         "amplitude_bookkeeping": bookkeeping,
         "verdict": (
             "The volumetric benchmark's two underived ingredients are superseded "
             "by the corpus's master-action machinery: the quartic potential pins "
-            "the interior field as rho^{1/3} (derived exponent 1/3, not 3), and "
-            "the amplitude sector supplies S_A = min[1,(rho_bar/rho_T)^{1/3}] at "
-            "zero free parameters -- S_A^Earth = %.3f, S_A^Moon = %.3f -- replacing "
-            "the illustrative alpha_eff. The admissible clock channel carries the "
-            "computed solar excursion delta phi_sun = %.2e cos D (the manuscript's "
+            "the equilibrium interior level as rho^{1/3} (derived exponent 1/3, "
+            "not 3), supplying the depth bookkeeping S_A^Earth = %.3f, "
+            "S_A^Moon = %.3f, and the ambient-excursion transmission is measured "
+            "on the solved unified profile (TEP step_76): real bodies sit on the "
+            "leaking branch and transmit ambient field excursions ~additively, "
+            "T_Moon = %.4f. The admissible clock channel carries the computed "
+            "solar excursion delta phi_sun = %.2e cos D (the manuscript's "
             "earlier ~5e-11 was the peak-to-peak excursion, not the cos-D "
             "coefficient). The force channel remains excluded at ~1e-15 by the "
             "canonical pairwise operator. What remains to be derived is the "
@@ -239,7 +269,7 @@ def main():
             "required transfer fraction is order unity -- consistent in order "
             "of magnitude, pending the explicit ephemeris-fit map (which also "
             "fixes the residual sign through the projection convention)."
-            % (S_A_earth, S_A_moon, cos_coeff,
+            % (S_A_earth, S_A_moon, T_moon, cos_coeff,
                bookkeeping["ceiling_delta_r_m"], abs(delta_r_meas_m))
         ),
     }
