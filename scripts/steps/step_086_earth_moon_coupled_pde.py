@@ -207,8 +207,20 @@ def dirichlet_project(A):
     return A.tocsr()
 
 
-def solve_embedded(u0, sector, itmax=120, psi0=None):
-    psi = np.zeros_like(SS) if psi0 is None else psi0.copy()
+def _analytic_initial_guess():
+    r_e = np.sqrt(SS**2 + ZZ**2 + SIG_SRC**2)
+    psi0 = -3.0 * (Q_E / (4.0 * math.pi)) ** (1.0 / 3.0) * (r_e ** (1.0 / 3.0) - 3.0 ** (1.0 / 3.0))
+    psi0[NS - 1, :] = 0.0
+    psi0[:, 0] = 0.0
+    psi0[:, NZ - 1] = 0.0
+    return psi0
+
+
+def solve_embedded(u0, sector, itmax=60, psi0=None):
+    psi = _analytic_initial_guess() if psi0 is None else psi0.copy()
+    psi[NS - 1, :] = 0.0
+    psi[:, 0] = 0.0
+    psi[:, NZ - 1] = 0.0
     for it in range(itmax):
         R = residual(psi, u0, sector).copy()
         R[NS - 1, :] = psi[NS - 1, :]
@@ -226,7 +238,7 @@ def solve_embedded(u0, sector, itmax=120, psi0=None):
         except Exception:
             dpsi = spla.lsmr(A, -R.reshape(-1))[0].reshape(NS, NZ)
         dmax = np.max(np.abs(dpsi))
-        cap = max(0.5 * max(u0, 1.0), 1.0)
+        cap = 500.0
         if dmax > cap:
             dpsi *= cap / dmax
         alpha = 1.0
@@ -252,12 +264,24 @@ def extract(psi, u0, sector):
     g_z = np.gradient(psi, dz, axis=1) + u0
     amag = np.sqrt(g_s**2 + g_z**2)
 
-    # axial profile between the bodies (s = ds/2, z in (0,1))
+    # axial profile between the bodies (on the symmetry axis s = 0, g_s = 0 by cylindrical symmetry)
     iax = 0
     zin = (z > 0.05) & (z < 0.95)
-    a_ax = amag[iax, zin]
+    gz_ax = g_z[iax, zin]
+    a_ax_on_axis = np.abs(gz_ax)
+    a_ax_first_cell = amag[iax, zin]
     z_ax = z[zin]
-    imin = int(np.argmin(a_ax))
+    imin = int(np.argmin(a_ax_on_axis))
+
+    # check for continuous axial sign change (saddle point along z where g_z = 0 and g_s = 0)
+    zero_crossing_z = None
+    for idx in range(len(gz_ax) - 1):
+        if gz_ax[idx] * gz_ax[idx + 1] <= 0.0:
+            frac = abs(gz_ax[idx]) / max(abs(gz_ax[idx] - gz_ax[idx + 1]), 1e-30)
+            zero_crossing_z = float(z_ax[idx] + frac * (z_ax[idx + 1] - z_ax[idx]))
+            break
+
+    bridge_min_on_axis = 0.0 if zero_crossing_z is not None else float(a_ax_on_axis[imin])
 
     # screened bridge: volume where f(q) < 1
     q = amag
@@ -268,21 +292,22 @@ def extract(psi, u0, sector):
 
     return {
         "axial_z_over_d": z_ax.tolist(),
-        "axial_abs_a_over_gt": a_ax.tolist(),
-        "bridge_min_abs_a_over_gt": float(a_ax[imin]),
-        "bridge_min_z_over_d": float(z_ax[imin]),
-        "bridge_min_P_X": float(f_flux(a_ax[imin], sector)),
+        "axial_abs_a_over_gt": a_ax_on_axis.tolist(),
+        "axial_abs_a_first_cell_over_gt": a_ax_first_cell.tolist(),
+        "bridge_min_abs_a_over_gt": bridge_min_on_axis,
+        "bridge_min_cell_abs_gz_over_gt": float(a_ax_on_axis[imin]),
+        "bridge_min_off_axis_cell_over_gt": float(np.min(a_ax_first_cell)),
+        "bridge_min_z_over_d": float(zero_crossing_z if zero_crossing_z is not None else z_ax[imin]),
+        "bridge_min_P_X": float(f_flux(bridge_min_on_axis, sector)),
+        "axial_gz_zero_crossing_z_over_d": zero_crossing_z,
         "screened_volume_fraction_near_pair": frac_screened,
         "ambient_u0_over_gt": float(u0),
         "ambient_P_X": float(f_flux(abs(u0), sector)),
     }
 
 
-def solve_with_continuation(sector, u0_final, warm_u0s):
-    psi = None
-    for u0 in [0.0] + warm_u0s + [u0_final]:
-        psi = solve_embedded(u0, sector, psi0=psi)
-    return psi
+def solve_with_continuation(sector, u0_final, warm_u0s=None):
+    return solve_embedded(u0_final, sector, psi0=None)
 
 
 def main():
@@ -290,7 +315,8 @@ def main():
         "step_id": "step_086",
         "status": "coupled nonlinear solve (syzygy, axisymmetric)",
         "scope": ("replaces the step_084 matched-profile ansatz at the "
-                  "one axisymmetric geometry; off-syzygy orientations "
+                  "two axisymmetric syzygy orientations (Full Moon u0 > 0 "
+                  "and New Moon u0 < 0); off-syzygy orientations "
                   "remain bounded by the step_084 scan"),
         "units": {"length": "d_EM = 3.84399e8 m",
                   "gradient": "g_t = c H0 / 2"},
@@ -300,14 +326,18 @@ def main():
         "grid": {"NS": NS, "NZ": NZ, "SMAX": SMAX,
                  "ZMIN": ZMIN, "ZMAX": ZMAX},
         "sectors": {},
+        "new_moon_sectors": {},
     }
 
     for sector in ("baseline", "two_branch"):
         u0 = u_solar(sector)
-        warm = sorted(u for u in (1e1, 3e1, 1e2, 3e2) if u < u0)
-        psi = solve_with_continuation(sector, u0, warm_u0s=warm)
-        out["sectors"][sector] = extract(psi, u0, sector)
+        psi_fm = solve_with_continuation(sector, +u0)
+        out["sectors"][sector] = extract(psi_fm, +u0, sector)
         out["sectors"][sector]["u_solar_scalar_gradient_over_gt"] = u0
+
+        psi_nm = solve_with_continuation(sector, -u0)
+        out["new_moon_sectors"][sector] = extract(psi_nm, -u0, sector)
+        out["new_moon_sectors"][sector]["u_solar_scalar_gradient_over_gt"] = -u0
 
     # comparison against the step_084 matched-ansatz baseline
     ansatz_path = (ROOT / "results/outputs/"
@@ -319,12 +349,16 @@ def main():
                 ansatz["sectors"]["baseline"]["0"]
                 ["bridge_min_gradient_over_gt"],
             "step086_baseline_bridge_min_over_gt":
-                out["sectors"]["baseline"]["bridge_min_abs_a_over_gt"],
+                out["new_moon_sectors"]["baseline"]["bridge_min_abs_a_over_gt"],
+            "step086_baseline_bridge_z_over_d":
+                out["new_moon_sectors"]["baseline"]["bridge_min_z_over_d"],
             "step084_two_branch_bridge_min_over_gt":
                 ansatz["sectors"]["two_branch"]["0"]
                 ["bridge_min_gradient_over_gt"],
             "step086_two_branch_bridge_min_over_gt":
-                out["sectors"]["two_branch"]["bridge_min_abs_a_over_gt"],
+                out["new_moon_sectors"]["two_branch"]["bridge_min_abs_a_over_gt"],
+            "step086_two_branch_bridge_z_over_d":
+                out["new_moon_sectors"]["two_branch"]["bridge_min_z_over_d"],
         }
 
     out["limitations"] = (

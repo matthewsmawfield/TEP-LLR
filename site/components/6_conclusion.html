@@ -11,7 +11,7 @@
         Because only $G=5$ stations contribute, the co-primary uncertainty
         companion is a wild cluster bootstrap with Webb 6-point weights on the
         unweighted full-systematic OLS design, giving a $95\%$ percentile
-        interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$; wild cluster bootstrap).
+        interval $[-5.37, -2.73] \times 10^{-4}$ ($|t|=5.56$, $5.56\sigma$ nominal; wild cluster bootstrap).
         The unweighted full-systematic OLS, reported as a sensitivity upper
         bound, gives $\eta_{\rm resid} = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$
         ($6.17\sigma$; $6.52\sigma$ cluster-robust for comparison).
@@ -38,12 +38,35 @@
         linear stress tests, not symplectic N-body integrators. Only a
         source-level numerical refit with dynamic $\eta_{\rm resid}$ inside the IMCCE or JPL
         integrator can definitively close the absorption loop; collaboration with IMCCE and JPL is invited
-        to perform such a refit. The definitive, parameter-free TEP amplitude for
-        the LLR channel ($\Gamma_{\rm LLR}$) has not yet been computed from a
-        zero-parameter operator. The residual is therefore reported as a
-        measurement consistent with the framework's qualitative sign and
-        order-of-magnitude expectations, not as a confirmed prediction of a
-        specific theoretical amplitude.
+        to perform such a refit. On the theoretical side, Step 083 evaluates
+        both Cassini and LLR on the single solved two-branch solar profile
+        $(k/\sqrt{2})q y^2+q^2 y^3=1$ ($k=16.03$): the profile that passes Cassini
+        ($y_{\rm tb}(1.6\,R_\odot)=2.16\times10^{-8}$, $\gamma_{\rm PPN}-1=-4.32\times10^{-8}$)
+        screens the solar scalar gradient at $1\text{ AU}$ by
+        $y_{\rm tb}(1\text{ AU})=1.47\times10^{-5}$, suppressing the direct two-way
+        scalar optical delay across the Earth&ndash;Moon baseline to
+        $\delta u_\odot^{\rm tb}=7.43\times10^{-16}\cos D$ ($\delta r_{\rm path}^{\rm tb}=-1.43\times10^{-4}$ mm,
+        $\eta_{\rm tb}=-1.10\times10^{-8}$), consistent with direct-fit LLR bounds, whereas an
+        unscreened solar scalar field would give $\gamma_{\rm PPN}-1=-2/3$ at Cassini. Because
+        at a fixed cosmic epoch inside the screened Solar System ($A_{\rm sp}(t_0)=1$) TEP's spatial 3-metric $\tilde\gamma_{ij}=\gamma_{ij}=(1-2\Phi_N/c^2)\delta_{ij}$ is
+        identical to GR's, the Newtonian solar tidal differential
+        $\Delta\Phi_{N,\odot}/c^2=2.536\times10^{-11}\cos D$ cancels in the BCRS$\to$GCRS reduction
+        identically to GR; the $-\tfrac12 L\,\delta\phi_{\rm eff}\cos D=-4.85$ mm $\cos D$ scale
+        ($\eta_{\rm ceiling}=-3.73\times10^{-4}$ at $T_{\rm Moon}=0.99685$) is therefore an
+        unscreened reference ceiling rather than a derived TEP coordinate residual, and the
+        measured $\eta_{\rm resid}=-(3.91\pm0.56)\times10^{-4}$ ($-5.08\pm0.73$ mm) stands as an
+        empirical residual-channel detection awaiting a source-level integrator refit. As
+        demonstrated in Steps 064-SRP and 081 (Sections 4.33.2 and 5.4.1), forward time-domain
+        subtraction of the $-3.00 \pm 0.50$ mm orbital solar-radiation-pressure and retroreflector-thermal
+        waveform omitted from the dynamical integrators of INPOP and DE430 (Viswanathan 2017;
+        Ke et al. 2026) absorbs $91.1\%$ of the isotropic static $\cos D$ intercept in the joint
+        kinematic-dipole Model E ($C_{1,0}: -3.30 \pm 0.79\text{ mm} \to -0.29 \pm 0.94\text{ mm}$,
+        $0.31\sigma$ — reconciling the static equivalence-principle null of Ke et al. 2026 with
+        TEP's screened force and optical-path predictions), while leaving the SRP-orthogonal
+        heliocentric radial-velocity quadrature ($\eta_{v_r}$, $t = +6.50$), fixed-sky dipole
+        orientation ($\eta_\theta$, $t = -11.02$; aligned-versus-antialigned split $9.19\sigma$),
+        and $D \pm l'$ sideband power fraction ($33\%$ observed vs. $0.056\%$ for $1/r_\odot^2$ SRP)
+        $100.0\%$ invariant.
     </p>
 
     <p>
@@ -73,9 +96,9 @@
     </p>
 
     <p>
-        These results provide substantial empirical support for a dynamical
-        proper time field $\phi$ in the sense of a nonzero synodic residual-channel
-        amplitude $\eta_{\rm resid}$. Within the TEP framework, this elevates invariance
+        These results provide substantial empirical support for a nonzero
+        synodic residual-channel component compatible with the dynamical proper-time
+        interpretation. Within the TEP framework, this elevates invariance
         statements traditionally treated as global postulates—most notably the
         universality of light propagation—from axioms to emergent local constraints
         of the field equations: the universal speed of light becomes a local
@@ -122,8 +145,8 @@
     </p>
 
     <p>
-        The Observable Response Coefficient framework shows internal consistency
-        across the author's body of work: preliminary $\kappa_{\rm Cep} = (0.266 \pm 0.239) \times 10^6$ mag
+        The Observable Response Coefficient framework exhibits consistent environmental ordering
+        across the TEP corpus: $\kappa_{\rm Cep} = (0.665 \pm 0.362) \times 10^6$ mag
         from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular
         cluster pulsars (Paper 10). The LLR residual-channel parameter $\eta_{\rm resid} \approx -4 \times 10^{-4}$
         serves as the Solar System observable response coefficient, exhibiting a substantially
@@ -143,7 +166,7 @@
     </p>
 
     <p>
-        The canonical screening operator (Paper 0 v0.15, Appendix E R11) resolves
+        The canonical screening operator (Paper 0 v0.16, Appendix E R11) resolves
         which TEP sector can carry this residual: pairwise shear suppression in
         the Earth–Moon system reaches $\sim 10^{-14}$, so a dynamical
         differential-fall anomaly is excluded at levels far below the measured

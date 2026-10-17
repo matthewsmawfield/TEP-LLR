@@ -125,5 +125,715 @@
         "amplitude_ratio": 1.9441265019951748,
         "interpretation": "The residual-channel amplitude varies by ~1.7x across stations within a single ephemeris and a further ~40% with the weighting convention; the ~2x cross-ephemeris ratio on a differently-composed, differently-absorbed archive is of the same order. Sign is the ephemeris- and composition-invariant channel: APO, Grasse, pooled INPOP19a and DE430 all agree in sign."
     },
+    "ke2026_harmonic_reconciliation": {
+        "reference": "Ke, J., Luo, J., Li, Q., Tan, Y.-J., & Shao, C.-G. (2026), Phys. Rev. D 114, 084008, doi:10.1103/94kl-p7dd",
+        "synodic_angle_convention_note": "Ke et al. (2026, Sec. IV.2.1, Ref. [85], Montenbruck & Pfleger 2000) define the synodic angle D in [0, 2pi) as the true geocentric ecliptic longitude difference D_ecl(t) = (lambda_Moon(t) - lambda_Sun(t)) mod 2pi, rather than a linear Delaunay argument polynomial D_del(t). Both D_ecl(t) and D_del(t), as well as the 3D separation angle E(t), are evaluated here.",
+        "inpop19a_unweighted": {
+            "dataset": "INPOP19a_1984_2019",
+            "n_obs": 25445,
+            "weighted_by_station_rms": false,
+            "canonical_full_systematic": {
+                "C1_mm": -5.455357588610796,
+                "C1_err_mm": 0.854951589135309,
+                "eta_resid": -0.00041964289143159967,
+                "eta_resid_err": 6.576550685656223e-05,
+                "snr": 6.380896483423464,
+                "vif_cosD": 1.1919956703280228,
+                "equiv_delta_mg_mi": 1.8674108668706187e-13,
+                "equiv_delta_mg_mi_err": 2.9265650551170196e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -2.455357588610796,
+                    "C1_err_stat_mm": 0.854951589135309,
+                    "C1_err_combined_mm": 0.9904252721760437,
+                    "C1_err_ke2026_3x_mm": 2.6131360427434522,
+                    "eta_resid_corr": -0.00018887366066236893,
+                    "eta_resid_err_combined": 7.618655939815721e-05,
+                    "eta_resid_err_ke2026_3x": 0.0002010104648264194,
+                    "snr_stat": 2.871925872544578,
+                    "snr_combined": 2.4790942412204187,
+                    "snr_ke2026_3x": 0.939621033290326
+                }
+            },
+            "ke2026_3harmonic_ecliptic_only": {
+                "C1_mm": -5.115931552312784,
+                "C1_err_mm": 1.099744846621051,
+                "eta_resid": -0.0003935331963317526,
+                "eta_resid_err": 8.459575743238855e-05,
+                "snr": 4.651925915389741,
+                "vif_cosD": 1.980720024497367,
+                "equiv_delta_mg_mi": 1.7512227236762992e-13,
+                "equiv_delta_mg_mi_err": 3.7645112057412904e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -2.1159315523127837,
+                    "C1_err_stat_mm": 1.099744846621051,
+                    "C1_err_combined_mm": 1.208072318890537,
+                    "C1_err_ke2026_3x_mm": 3.336907033320832,
+                    "eta_resid_corr": -0.00016276396556252182,
+                    "eta_resid_err_combined": 9.29286399146567e-05,
+                    "eta_resid_err_ke2026_3x": 0.00025668515640929474,
+                    "snr_stat": 1.9240204296605257,
+                    "snr_combined": 1.7514941110942777,
+                    "snr_ke2026_3x": 0.6340996411299614
+                }
+            },
+            "ke2026_3harmonic_ecliptic_plus_annual_monthly": {
+                "C1_mm": -4.730065272506766,
+                "C1_err_mm": 1.1183335381949198,
+                "eta_resid": -0.0003638511748082128,
+                "eta_resid_err": 8.60256567842246e-05,
+                "snr": 4.229565787807341,
+                "vif_cosD": 2.0603126432652337,
+                "equiv_delta_mg_mi": 1.619137727896547e-13,
+                "equiv_delta_mg_mi_err": 3.828141726897995e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -1.7300652725067662,
+                    "C1_err_stat_mm": 1.1183335381949198,
+                    "C1_err_combined_mm": 1.2250183274757844,
+                    "C1_err_ke2026_3x_mm": 3.392053820897321,
+                    "eta_resid_corr": -0.00013308194403898203,
+                    "eta_resid_err_combined": 9.42321790365988e-05,
+                    "eta_resid_err_ke2026_3x": 0.00026092721699210163,
+                    "snr_stat": 1.5470029409108401,
+                    "snr_combined": 1.4122770522720733,
+                    "snr_ke2026_3x": 0.5100347352534346
+                }
+            },
+            "ke2026_3harmonic_delaunay_only": {
+                "C1_mm": -6.666858848179347,
+                "C1_err_mm": 1.0885448047177202,
+                "eta_resid": -0.0005128352960137958,
+                "eta_resid_err": 8.373421574751695e-05,
+                "snr": 6.124560807497662,
+                "vif_cosD": 1.943548041427329,
+                "equiv_delta_mg_mi": 2.2821170672613914e-13,
+                "equiv_delta_mg_mi_err": 3.726172600764504e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -3.6668588481793467,
+                    "C1_err_stat_mm": 1.0885448047177202,
+                    "C1_err_combined_mm": 1.1978855504086938,
+                    "C1_err_ke2026_3x_mm": 3.303690077307715,
+                    "eta_resid_corr": -0.00028206606524456515,
+                    "eta_resid_err_combined": 9.21450423391303e-05,
+                    "eta_resid_err_ke2026_3x": 0.0002541300059467473,
+                    "snr_stat": 3.3685878911803093,
+                    "snr_combined": 3.061109508273382,
+                    "snr_ke2026_3x": 1.1099282203758016
+                }
+            },
+            "ke2026_3harmonic_delaunay_plus_annual_monthly": {
+                "C1_mm": -6.061708439234332,
+                "C1_err_mm": 1.107442358577885,
+                "eta_resid": -0.00046628526455648705,
+                "eta_resid_err": 8.518787373676039e-05,
+                "snr": 5.473610786405565,
+                "vif_cosD": 2.0238870988668074,
+                "equiv_delta_mg_mi": 2.0749694272763675e-13,
+                "equiv_delta_mg_mi_err": 3.7908603812858374e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -3.061708439234332,
+                    "C1_err_stat_mm": 1.107442358577885,
+                    "C1_err_combined_mm": 1.215083773890734,
+                    "C1_err_ke2026_3x_mm": 3.3597406444773292,
+                    "eta_resid_corr": -0.0002355160337872563,
+                    "eta_resid_err_combined": 9.346798260697955e-05,
+                    "eta_resid_err_ke2026_3x": 0.0002584415880367176,
+                    "snr_stat": 2.764666183769605,
+                    "snr_combined": 2.5197509052652816,
+                    "snr_ke2026_3x": 0.9112930917054873
+                }
+            },
+            "canonical_cosE_plus_ke2026_3harmonics_ecliptic_annual_monthly": {
+                "C1_mm": -4.742288377142334,
+                "C1_err_mm": 1.1201489679668475,
+                "eta_resid": -0.0003647914136263334,
+                "eta_resid_err": 8.616530522821904e-05,
+                "snr": 4.23362294905287,
+                "vif_cosD": 2.0592980101655662,
+                "equiv_delta_mg_mi": 1.6233217906371835e-13,
+                "equiv_delta_mg_mi_err": 3.8343560826557476e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -1.7422883771423336,
+                    "C1_err_stat_mm": 1.1201489679668475,
+                    "C1_err_combined_mm": 1.2266758783139065,
+                    "C1_err_ke2026_3x_mm": 3.3974407123502157,
+                    "eta_resid_corr": -0.0001340221828571026,
+                    "eta_resid_err_combined": 9.435968294722356e-05,
+                    "eta_resid_err_ke2026_3x": 0.0002613415932577089,
+                    "snr_stat": 1.5554077421547912,
+                    "snr_combined": 1.4203331197293518,
+                    "snr_ke2026_3x": 0.512823776676617
+                }
+            },
+            "canonical_cosE_plus_ke2026_3harmonics_annual_monthly": {
+                "C1_mm": -5.0147687532052725,
+                "C1_err_mm": 1.0991827767989373,
+                "eta_resid": -0.00038575144255425175,
+                "eta_resid_err": 8.455252129222594e-05,
+                "snr": 4.562270132915825,
+                "vif_cosD": 1.9856118092054897,
+                "equiv_delta_mg_mi": 1.7165939193664203e-13,
+                "equiv_delta_mg_mi_err": 3.7625871975040546e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -2.0147687532052725,
+                    "C1_err_stat_mm": 1.0991827767989373,
+                    "C1_err_combined_mm": 1.2075606721036514,
+                    "C1_err_ke2026_3x_mm": 3.3352398701297035,
+                    "eta_resid_corr": -0.00015498221178502096,
+                    "eta_resid_err_combined": 9.288928246951163e-05,
+                    "eta_resid_err_ke2026_3x": 0.00025655691308690027,
+                    "snr_stat": 1.8329697259929085,
+                    "snr_combined": 1.6684617177002052,
+                    "snr_ke2026_3x": 0.6040851128128666
+                }
+            },
+            "harmonic_coefficients_ecliptic_mm": {
+                "C1_cosD": -4.730065272506766,
+                "S1_sinD": 1.3339907214359834,
+                "C2_cos2D": -3.0451630943657415,
+                "S2_sin2D": 6.879364761567159,
+                "C3_cos3D": 0.7971059165210833,
+                "S3_sin3D": -1.3965301221805424
+            },
+            "harmonic_coefficients_mm": {
+                "C1_cosD": -6.061708439234332,
+                "S1_sinD": 1.519438133096287,
+                "C2_cos2D": -2.7974418873009097,
+                "S2_sin2D": 7.810147541677082,
+                "C3_cos3D": -0.4331649016602435,
+                "S3_sin3D": -1.4920877530970267
+            },
+            "leakage_coefficients_eq32_eq35": {
+                "L_cos2D_to_cosD": -0.396502680221076,
+                "L_sin2D_to_cosD": -0.020312638828581787,
+                "L_cos3D_to_cosD": -0.8159035654761762,
+                "L_sin3D_to_cosD": 0.02518961295731777,
+                "L_cos4D_to_cosD": 0.26231615436098465,
+                "L_sin4D_to_cosD": 0.11528947475170474,
+                "L_cos5D_to_cosD": 0.04575262791625779,
+                "L_sin5D_to_cosD": 0.02741690266843433,
+                "L_sin1D_to_cosD": -0.03630389247094686
+            }
+        },
+        "inpop19a_precision_weighted": {
+            "dataset": "INPOP19a_1984_2019",
+            "n_obs": 25445,
+            "weighted_by_station_rms": true,
+            "canonical_full_systematic": {
+                "C1_mm": -5.176860008273524,
+                "C1_err_mm": 0.7316225831580887,
+                "eta_resid": -0.0003982200006364249,
+                "eta_resid_err": 5.62786602429299e-05,
+                "snr": 7.075861417409132,
+                "vif_cosD": 1.2185289407949642,
+                "equiv_delta_mg_mi": 1.772079002832091e-13,
+                "equiv_delta_mg_mi_err": 2.5044003808103806e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -2.1768600082735237,
+                    "C1_err_stat_mm": 0.7316225831580887,
+                    "C1_err_combined_mm": 0.886155519187752,
+                    "C1_err_ke2026_3x_mm": 2.2510984957753912,
+                    "eta_resid_corr": -0.00016745076986719414,
+                    "eta_resid_err_combined": 6.816580916828862e-05,
+                    "eta_resid_err_ke2026_3x": 0.00017316142275195317,
+                    "snr_stat": 2.9753865700495314,
+                    "snr_combined": 2.456521413158751,
+                    "snr_ke2026_3x": 0.9670212175783556
+                }
+            },
+            "ke2026_3harmonic_ecliptic_only": {
+                "C1_mm": -5.692986411332404,
+                "C1_err_mm": 0.9471110350030721,
+                "eta_resid": -0.0004379220316409541,
+                "eta_resid_err": 7.285469500023632e-05,
+                "snr": 6.010896506251706,
+                "vif_cosD": 2.0450528479303176,
+                "equiv_delta_mg_mi": 1.948753040802246e-13,
+                "equiv_delta_mg_mi_err": 3.2420339275105166e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -2.692986411332404,
+                    "C1_err_stat_mm": 0.9471110350030721,
+                    "C1_err_combined_mm": 1.0709898751270202,
+                    "C1_err_ke2026_3x_mm": 2.884991128863539,
+                    "eta_resid_corr": -0.00020715280087172337,
+                    "eta_resid_err_combined": 8.238383654823232e-05,
+                    "eta_resid_err_ke2026_3x": 0.00022192239452796452,
+                    "snr_stat": 2.8433692690780115,
+                    "snr_combined": 2.5144835388971476,
+                    "snr_ke2026_3x": 0.9334470336458991
+                }
+            },
+            "ke2026_3harmonic_ecliptic_plus_annual_monthly": {
+                "C1_mm": -5.708037179518525,
+                "C1_err_mm": 0.9586347752613434,
+                "eta_resid": -0.00043907978303988655,
+                "eta_resid_err": 7.374113655856488e-05,
+                "snr": 5.954339782804559,
+                "vif_cosD": 2.1091106445612975,
+                "equiv_delta_mg_mi": 1.9539050345274952e-13,
+                "equiv_delta_mg_mi_err": 3.2814805768561375e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -2.7080371795185254,
+                    "C1_err_stat_mm": 0.9586347752613434,
+                    "C1_err_combined_mm": 1.0811940770927144,
+                    "C1_err_ke2026_3x_mm": 2.9190453389872686,
+                    "eta_resid_corr": -0.0002083105522706558,
+                    "eta_resid_err_combined": 8.316877516097802e-05,
+                    "eta_resid_err_ke2026_3x": 0.00022454194915286682,
+                    "snr_stat": 2.82488936287572,
+                    "snr_combined": 2.5046725993915206,
+                    "snr_ke2026_3x": 0.9277132983683116
+                }
+            },
+            "ke2026_3harmonic_delaunay_only": {
+                "C1_mm": -7.331444749209314,
+                "C1_err_mm": 0.9391665146332621,
+                "eta_resid": -0.0005639572884007165,
+                "eta_resid_err": 7.224357804871247e-05,
+                "snr": 7.806331076520751,
+                "vif_cosD": 2.0108408746013646,
+                "equiv_delta_mg_mi": 2.5096099333831885e-13,
+                "equiv_delta_mg_mi_err": 3.214839223167705e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -4.331444749209314,
+                    "C1_err_stat_mm": 0.9391665146332621,
+                    "C1_err_combined_mm": 1.0639707431167407,
+                    "C1_err_ke2026_3x_mm": 2.8615212177922955,
+                    "eta_resid_corr": -0.00033318805763148573,
+                    "eta_resid_err_combined": 8.184390331667237e-05,
+                    "eta_resid_err_ke2026_3x": 0.0002201170167532535,
+                    "snr_stat": 4.612009352676626,
+                    "snr_combined": 4.071018660269741,
+                    "snr_ke2026_3x": 1.5136860500203055
+                }
+            },
+            "ke2026_3harmonic_delaunay_plus_annual_monthly": {
+                "C1_mm": -7.17240284049597,
+                "C1_err_mm": 0.9491657097287912,
+                "eta_resid": -0.0005517232954227668,
+                "eta_resid_err": 7.30127469022147e-05,
+                "snr": 7.556533877045945,
+                "vif_cosD": 2.0679235277925514,
+                "equiv_delta_mg_mi": 2.455168664631312e-13,
+                "equiv_delta_mg_mi_err": 3.2490672371485544e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -4.17240284049597,
+                    "C1_err_stat_mm": 0.9491657097287912,
+                    "C1_err_combined_mm": 1.0728073193845016,
+                    "C1_err_ke2026_3x_mm": 2.891062071406396,
+                    "eta_resid_corr": -0.0003209540646535361,
+                    "eta_resid_err_combined": 8.252363995265396e-05,
+                    "eta_resid_err_ke2026_3x": 0.00022238939010818434,
+                    "snr_stat": 4.395863438522412,
+                    "snr_combined": 3.88923785763299,
+                    "snr_ke2026_3x": 1.443207630082549
+                }
+            },
+            "canonical_cosE_plus_ke2026_3harmonics_ecliptic_annual_monthly": {
+                "C1_mm": -5.719367935074382,
+                "C1_err_mm": 0.9601515914858914,
+                "eta_resid": -0.00043995137962110625,
+                "eta_resid_err": 7.385781472968395e-05,
+                "snr": 5.956734317570959,
+                "vif_cosD": 2.108096852189717,
+                "equiv_delta_mg_mi": 1.957783639313923e-13,
+                "equiv_delta_mg_mi_err": 3.286672755470936e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -2.7193679350743816,
+                    "C1_err_stat_mm": 0.9601515914858914,
+                    "C1_err_combined_mm": 1.082539181107497,
+                    "C1_err_ke2026_3x_mm": 2.9235286397940436,
+                    "eta_resid_corr": -0.0002091821488518755,
+                    "eta_resid_err_combined": 8.327224470057668e-05,
+                    "eta_resid_err_ke2026_3x": 0.00022488681844569567,
+                    "snr_stat": 2.832227701529921,
+                    "snr_combined": 2.512027261953068,
+                    "snr_ke2026_3x": 0.9301663401067127
+                }
+            },
+            "canonical_cosE_plus_ke2026_3harmonics_annual_monthly": {
+                "C1_mm": -6.167412653635542,
+                "C1_err_mm": 0.9437497526567242,
+                "eta_resid": -0.00047441635797196475,
+                "eta_resid_err": 7.259613481974801e-05,
+                "snr": 6.535008498040743,
+                "vif_cosD": 2.038663264876221,
+                "equiv_delta_mg_mi": 2.1111527929752432e-13,
+                "equiv_delta_mg_mi_err": 3.2305279994787864e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -3.167412653635542,
+                    "C1_err_stat_mm": 0.9437497526567242,
+                    "C1_err_combined_mm": 1.068018537123597,
+                    "C1_err_ke2026_3x_mm": 2.875060409931703,
+                    "eta_resid_corr": -0.00024364712720273396,
+                    "eta_resid_err_combined": 8.215527208643055e-05,
+                    "eta_resid_err_ke2026_3x": 0.00022115849307166948,
+                    "snr_stat": 3.3561997179008998,
+                    "snr_combined": 2.9656907099815544,
+                    "snr_ke2026_3x": 1.1016856003073632
+                }
+            },
+            "harmonic_coefficients_ecliptic_mm": {
+                "C1_cosD": -5.708037179518525,
+                "S1_sinD": 2.001339315250962,
+                "C2_cos2D": -2.2956560548816975,
+                "S2_sin2D": 5.391560332295356,
+                "C3_cos3D": -0.1610751526582468,
+                "S3_sin3D": -0.06539574439259406
+            },
+            "harmonic_coefficients_mm": {
+                "C1_cosD": -7.17240284049597,
+                "S1_sinD": 2.233366184177739,
+                "C2_cos2D": -2.6305587580962224,
+                "S2_sin2D": 6.093521726717681,
+                "C3_cos3D": -1.399646623207089,
+                "S3_sin3D": 0.16772391662552463
+            },
+            "leakage_coefficients_eq32_eq35": {
+                "L_cos2D_to_cosD": -0.4479694700235818,
+                "L_sin2D_to_cosD": 0.022193882775882502,
+                "L_cos3D_to_cosD": -0.7230028537850535,
+                "L_sin3D_to_cosD": 0.057591789861006486,
+                "L_cos4D_to_cosD": 0.13730316271734708,
+                "L_sin4D_to_cosD": 0.11345529595387469,
+                "L_cos5D_to_cosD": 0.03372815359873738,
+                "L_sin5D_to_cosD": 0.020242755639629174,
+                "L_sin1D_to_cosD": -0.030013108957757453
+            }
+        },
+        "de430_cleaned": {
+            "dataset": "DE430_2014_2018",
+            "n_obs": 4560,
+            "weighted_by_station_rms": false,
+            "canonical_full_systematic": {
+                "C1_mm": -7.772004365714198,
+                "C1_err_mm": 1.5409825017104013,
+                "eta_resid": -0.0005978464896703229,
+                "eta_resid_err": 0.00011853711551618472,
+                "snr": 5.0435383640552205,
+                "vif_cosD": 1.0536543116943373,
+                "equiv_delta_mg_mi": 2.6604168790329373e-13,
+                "equiv_delta_mg_mi_err": 5.27490164047022e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -4.772004365714198,
+                    "C1_err_stat_mm": 1.5409825017104013,
+                    "C1_err_combined_mm": 1.6200700819957288,
+                    "C1_err_ke2026_3x_mm": 4.649907916851562,
+                    "eta_resid_corr": -0.0003670772589010922,
+                    "eta_resid_err_combined": 0.000124620775538133,
+                    "eta_resid_err_ke2026_3x": 0.00035768522437319705,
+                    "snr_stat": 3.0967284576025684,
+                    "snr_combined": 2.9455542811059576,
+                    "snr_ke2026_3x": 1.0262578208097737
+                }
+            },
+            "ke2026_3harmonic_ecliptic_only": {
+                "C1_mm": -10.994991529950497,
+                "C1_err_mm": 1.8566181808511535,
+                "eta_resid": -0.0008457685792269612,
+                "eta_resid_err": 0.00014281678314239643,
+                "snr": 5.9220531412171775,
+                "vif_cosD": 1.5460524720960538,
+                "equiv_delta_mg_mi": 3.7636701775599773e-13,
+                "equiv_delta_mg_mi_err": 6.355346849836641e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -7.994991529950497,
+                    "C1_err_stat_mm": 1.8566181808511535,
+                    "C1_err_combined_mm": 1.9227665145479953,
+                    "C1_err_ke2026_3x_mm": 5.59225174909029,
+                    "eta_resid_corr": -0.0006149993484577305,
+                    "eta_resid_err_combined": 0.00014790511650369196,
+                    "eta_resid_err_ke2026_3x": 0.00043017321146848384,
+                    "snr_stat": 4.306212021625927,
+                    "snr_combined": 4.158066759254939,
+                    "snr_ke2026_3x": 1.4296551529982655
+                }
+            },
+            "ke2026_3harmonic_ecliptic_plus_annual_monthly": {
+                "C1_mm": -9.99190848998742,
+                "C1_err_mm": 1.8514279436500105,
+                "eta_resid": -0.0007686083453836476,
+                "eta_resid_err": 0.00014241753412692389,
+                "snr": 5.396865983500715,
+                "vif_cosD": 1.5870924457705191,
+                "equiv_delta_mg_mi": 3.420307136957232e-13,
+                "equiv_delta_mg_mi_err": 6.337580268648113e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -6.99190848998742,
+                    "C1_err_stat_mm": 1.8514279436500105,
+                    "C1_err_combined_mm": 1.9177553103897553,
+                    "C1_err_ke2026_3x_mm": 5.576743572619504,
+                    "eta_resid_corr": -0.0005378391146144169,
+                    "eta_resid_err_combined": 0.0001475196392607504,
+                    "eta_resid_err_ke2026_3x": 0.00042898027481688494,
+                    "snr_stat": 3.776495063698333,
+                    "snr_combined": 3.645881438631719,
+                    "snr_ke2026_3x": 1.2537618771492456
+                }
+            },
+            "ke2026_3harmonic_delaunay_only": {
+                "C1_mm": -12.520570829062446,
+                "C1_err_mm": 1.8628556209679843,
+                "eta_resid": -0.0009631208330048036,
+                "eta_resid_err": 0.0001432965862283065,
+                "snr": 6.7211708133110495,
+                "vif_cosD": 1.5788886520411058,
+                "equiv_delta_mg_mi": 4.2858877068713763e-13,
+                "equiv_delta_mg_mi_err": 6.376698087159639e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -9.520570829062446,
+                    "C1_err_stat_mm": 1.8628556209679843,
+                    "C1_err_combined_mm": 1.9287900519683354,
+                    "C1_err_ke2026_3x_mm": 5.61088937523706,
+                    "eta_resid_corr": -0.0007323516022355728,
+                    "eta_resid_err_combined": 0.00014836846553602578,
+                    "eta_resid_err_ke2026_3x": 0.0004316068750182354,
+                    "snr_stat": 5.110740049792657,
+                    "snr_combined": 4.936032731684135,
+                    "snr_ke2026_3x": 1.6968024483035191
+                }
+            },
+            "ke2026_3harmonic_delaunay_plus_annual_monthly": {
+                "C1_mm": -11.554857723832429,
+                "C1_err_mm": 1.8582491590976935,
+                "eta_resid": -0.0008888352095255714,
+                "eta_resid_err": 0.0001429422430075149,
+                "snr": 6.218142312758046,
+                "vif_cosD": 1.6287318855997182,
+                "equiv_delta_mg_mi": 3.955316682388793e-13,
+                "equiv_delta_mg_mi_err": 6.360929813834413e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -8.554857723832429,
+                    "C1_err_stat_mm": 1.8582491590976935,
+                    "C1_err_combined_mm": 1.9243414294992676,
+                    "C1_err_ke2026_3x_mm": 5.59712510451442,
+                    "eta_resid_corr": -0.0006580659787563407,
+                    "eta_resid_err_combined": 0.00014802626380763597,
+                    "eta_resid_err_ke2026_3x": 0.0004305480849626477,
+                    "snr_stat": 4.603719410795479,
+                    "snr_combined": 4.445602839854924,
+                    "snr_ke2026_3x": 1.5284378255066013
+                }
+            },
+            "canonical_cosE_plus_ke2026_3harmonics_ecliptic_annual_monthly": {
+                "C1_mm": -10.010007577330393,
+                "C1_err_mm": 1.8548499533856835,
+                "eta_resid": -0.0007700005828715687,
+                "eta_resid_err": 0.00014268076564505258,
+                "snr": 5.396667023690507,
+                "vif_cosD": 1.586700248270208,
+                "equiv_delta_mg_mi": 3.426502593778481e-13,
+                "equiv_delta_mg_mi_err": 6.34929407120484e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -7.010007577330393,
+                    "C1_err_stat_mm": 1.8548499533856835,
+                    "C1_err_combined_mm": 1.9210591738868619,
+                    "C1_err_ke2026_3x_mm": 5.586968332304547,
+                    "eta_resid_corr": -0.0005392313521023379,
+                    "eta_resid_err_combined": 0.00014777378260668169,
+                    "eta_resid_err_ke2026_3x": 0.00042976679479265746,
+                    "snr_stat": 3.7792855236268186,
+                    "snr_combined": 3.6490326131636577,
+                    "snr_ke2026_3x": 1.2547068750681216
+                }
+            },
+            "canonical_cosE_plus_ke2026_3harmonics_annual_monthly": {
+                "C1_mm": -10.716553596079011,
+                "C1_err_mm": 1.8447403575151144,
+                "eta_resid": -0.0008243502766214623,
+                "eta_resid_err": 0.00014190310442423957,
+                "snr": 5.809247655054463,
+                "vif_cosD": 1.5890725440540963,
+                "equiv_delta_mg_mi": 3.6683587309655075e-13,
+                "equiv_delta_mg_mi_err": 6.314688146878661e-14,
+                "post_srp_thermal_3mm_correction": {
+                    "C1_corr_mm": -7.716553596079011,
+                    "C1_err_stat_mm": 1.8447403575151144,
+                    "C1_err_combined_mm": 1.9112998160008785,
+                    "C1_err_ke2026_3x_mm": 5.556761905984899,
+                    "eta_resid_corr": -0.0005935810458522317,
+                    "eta_resid_err_combined": 0.00014702306276929834,
+                    "eta_resid_err_ke2026_3x": 0.00042744322353729995,
+                    "snr_stat": 4.183002537263994,
+                    "snr_combined": 4.037332882825676,
+                    "snr_ke2026_3x": 1.3886781054570492
+                }
+            },
+            "harmonic_coefficients_ecliptic_mm": {
+                "C1_cosD": -9.99190848998742,
+                "S1_sinD": 7.137058656079076,
+                "C2_cos2D": -7.9497038036598475,
+                "S2_sin2D": 14.32240029573404,
+                "C3_cos3D": -1.192012876836862,
+                "S3_sin3D": 2.8212516966642283
+            },
+            "harmonic_coefficients_mm": {
+                "C1_cosD": -11.554857723832429,
+                "S1_sinD": 7.9175381215380405,
+                "C2_cos2D": -7.504549141727637,
+                "S2_sin2D": 16.75426993573213,
+                "C3_cos3D": -2.692516268731023,
+                "S3_sin3D": 4.4692013964340624
+            },
+            "leakage_coefficients_eq32_eq35": {
+                "L_cos2D_to_cosD": -0.2005433068867558,
+                "L_sin2D_to_cosD": -0.050353655496968415,
+                "L_cos3D_to_cosD": -0.6868695972438881,
+                "L_sin3D_to_cosD": 0.1275526971317785,
+                "L_cos4D_to_cosD": -0.05327536276770064,
+                "L_sin4D_to_cosD": 0.09657270219832308,
+                "L_cos5D_to_cosD": 0.09358880323356003,
+                "L_sin5D_to_cosD": 0.17880467441944373,
+                "L_sin1D_to_cosD": 0.09638491423033509
+            }
+        },
+        "station_subset_leakage_eq32_eq35": {
+            "INPOP19a_Grasse_OCA_1984_2019": {
+                "L_cos2D_to_cosD": -0.316027503617836,
+                "L_sin2D_to_cosD": -0.055433412361384105,
+                "L_cos3D_to_cosD": -0.8148199037296392,
+                "L_sin3D_to_cosD": -0.0029727379636624294,
+                "L_cos4D_to_cosD": 0.21565606161323728,
+                "L_sin4D_to_cosD": 0.12244481528110028,
+                "L_cos5D_to_cosD": 0.05307973912988128,
+                "L_sin5D_to_cosD": 0.05091600533701664,
+                "L_sin1D_to_cosD": -0.0221582821033666
+            },
+            "INPOP19a_APOLLO_2006_2019": {
+                "L_cos2D_to_cosD": -0.6201023251737529,
+                "L_sin2D_to_cosD": 0.1514082353020244,
+                "L_cos3D_to_cosD": -0.534292077222316,
+                "L_sin3D_to_cosD": 0.1534435575876262,
+                "L_cos4D_to_cosD": -0.12006947006972217,
+                "L_sin4D_to_cosD": 0.12277200439622712,
+                "L_cos5D_to_cosD": -0.02490938029434517,
+                "L_sin5D_to_cosD": -0.019069930793474195,
+                "L_sin1D_to_cosD": 0.008879947784916659
+            },
+            "ke2026_published_leakage_sec_IV_2_1": {
+                "ALL_1970_2024": {
+                    "L_cos2D": -0.388,
+                    "L_cos3D": -0.761
+                },
+                "OCA_1984_2024": {
+                    "L_cos2D": -0.165,
+                    "L_cos3D": -0.85
+                },
+                "APOLLO_2006_2024": {
+                    "L_cos2D": -0.61,
+                    "L_cos3D": -0.63
+                }
+            }
+        },
+        "ke2026_published_tables_audit": {
+            "table_4_spice_ephemeris_differences_mm": {
+                "INPOP21_minus_DE430_cosD": 0.236,
+                "INPOP21_minus_DE430_err": 0.436,
+                "EPM21_minus_INPOP21_cosD": -3.511,
+                "EPM21_minus_INPOP21_err": 0.232,
+                "EPM21_minus_DE430_cosD": -3.275,
+                "EPM21_minus_DE430_err": 0.284,
+                "explanation": "EPM21 integrates lunar orbital SRP (-3.65 mm cos D) in the equations of motion, whereas INPOP (17a/19a/21a) and DE430 do not."
+            },
+            "table_5_raw_3harmonic_fits_before_srp_correction_mm": {
+                "INPOP21_ALL_1970_2024": {
+                    "a_D_mm": -2.328,
+                    "err_mm": 0.314,
+                    "snr_wls": 7.414
+                },
+                "INPOP21_ALL_1970_2016": {
+                    "a_D_mm": -2.378,
+                    "err_mm": 0.764,
+                    "snr_wls": 3.113
+                },
+                "INPOP21_OCA_1984_2024": {
+                    "a_D_mm": -2.414,
+                    "err_mm": 0.315,
+                    "snr_wls": 7.663
+                },
+                "INPOP21_OCA_1984_2016": {
+                    "a_D_mm": -2.629,
+                    "err_mm": 0.831,
+                    "snr_wls": 3.164
+                },
+                "INPOP21_APOLLO_2006_2024": {
+                    "a_D_mm": -2.45,
+                    "err_mm": 0.716,
+                    "snr_wls": 3.422
+                },
+                "INPOP21_APOLLO_2006_2016": {
+                    "a_D_mm": -3.052,
+                    "err_mm": 1.106,
+                    "snr_wls": 2.76
+                },
+                "DE430_ALL_1970_2016": {
+                    "a_D_mm": -2.612,
+                    "err_mm": 0.671,
+                    "snr_wls": 3.893
+                },
+                "DE430_OCA_1984_2016": {
+                    "a_D_mm": -2.553,
+                    "err_mm": 0.696,
+                    "snr_wls": 3.668
+                },
+                "DE430_APOLLO_2006_2016": {
+                    "a_D_mm": -2.669,
+                    "err_mm": 1.081,
+                    "snr_wls": 2.469
+                },
+                "EPM21_ALL_1970_2024": {
+                    "a_D_mm": 0.285,
+                    "err_mm": 0.264,
+                    "snr_wls": 1.08
+                },
+                "EPM21_ALL_1970_2016": {
+                    "a_D_mm": 0.192,
+                    "err_mm": 0.662,
+                    "snr_wls": 0.29
+                }
+            },
+            "table_6_and_7_calibration_arithmetic": {
+                "K_eff_ALL_1970_2024_injection_slope": 0.741,
+                "K_eff_ALL_1970_2024_table6_applied": 0.74,
+                "absorbed_fraction_ALL_1970_2024_wls": 0.259,
+                "K_eff_ALL_1970_2016_table6_applied": 0.69,
+                "K_eff_OCA_1984_2024_table6_applied": 0.874,
+                "K_eff_OCA_1984_2016_table6_applied": 0.79,
+                "K_eff_APOLLO_2006_2024_table6_applied": 0.56,
+                "K_eff_APOLLO_2006_2016_table6_applied": 0.61,
+                "inpop21_ALL_1970_2024_attenuation_corrected_mm": -3.145945945945946,
+                "inpop21_ALL_1970_2016_attenuation_corrected_mm": -3.4463768115942033,
+                "inpop21_OCA_1984_2016_attenuation_corrected_mm": -3.3278481012658228,
+                "inpop21_APOLLO_2006_2024_attenuation_corrected_mm": -4.375,
+                "inpop21_APOLLO_2006_2016_attenuation_corrected_mm": -5.00327868852459,
+                "de430_ALL_1970_2016_attenuation_corrected_mm": -3.7855072463768122,
+                "de430_APOLLO_2006_2016_attenuation_corrected_mm": -4.3754098360655735,
+                "epm21_ALL_1970_2024_attenuation_corrected_mm": 0.3851351351351351,
+                "srp_plus_thermal_offset_added_inpop_de430_mm": 3.0,
+                "thermal_only_offset_added_epm21_mm": -0.65,
+                "srp_plus_thermal_uncertainty_mm": 0.5,
+                "inpop21_final_corrected_mm": -0.146,
+                "inpop21_final_uncertainty_3x_plus_0p5_mm": 1.066,
+                "inpop21_APOLLO_2006_2024_final_corrected_mm": -1.375,
+                "inpop21_APOLLO_2006_2016_final_corrected_mm": -2.003,
+                "de430_final_corrected_mm": -0.786,
+                "de430_final_uncertainty_3x_plus_0p5_mm": 2.074,
+                "de430_APOLLO_2006_2016_final_corrected_mm": -1.375,
+                "epm21_final_corrected_mm": -0.265,
+                "epm21_final_uncertainty_3x_plus_0p5_mm": 0.937
+            }
+        },
+        "tep_forward_model_reconciliation": {
+            "screened_differential_force_Delta_EM_step085": 2e-15,
+            "screened_direct_optical_path_mm_step083": -0.00014277220958331237,
+            "screened_direct_optical_path_eta_step083": -1.0982477660254799e-08,
+            "coupled_syzygy_unscreened_volume_fraction_step086": 0.0,
+            "consistency_with_ke2026_ep_null": "TEP's master-action screening closure (Steps 083, 085, 086) predicts that both the differential free-fall acceleration (Delta_EM ~ 2.0e-15) and the direct scalar optical path delay across the Earth-Moon link (|delta_r_path| = 1.43e-4 mm, eta_tb = -1.10e-8) lie 4 to 5 orders of magnitude below current LLR sensitivity, in complete agreement with Ke et al.'s (2026) static EP constraint after orbital SRP and thermal subtraction."
+        },
+        "methodological_differences": {
+            "1_raw_table5_replication_and_table6_srp_subtraction": "Before subtracting non-EP synodic offsets, Ke et al. (2026, Table 5) independently detect a significant negative cos(D) residual in INPOP21 (-2.328 +/- 0.314 mm at 7.41 sigma on ALL 1970-2024; -2.414 +/- 0.315 mm at 7.66 sigma on OCA 1984-2024; -2.629 +/- 0.831 mm on OCA 1984-2016; -2.450 +/- 0.716 mm at 3.42 sigma on APOLLO 2006-2024; -3.052 +/- 1.106 mm on APOLLO 2006-2016) and DE430 (-2.612 +/- 0.671 mm at 3.89 sigma on ALL 1970-2016), replicating the negative post-fit synodic sign. After dividing by their span- and station-specific WLS recovery factors K_eff (0.740 on ALL 1970-2024, 0.690 on ALL 1970-2016, 0.874 on OCA 1984-2024, 0.790 on OCA 1984-2016, 0.560 on APOLLO 2006-2024, and 0.610 on APOLLO 2006-2016), their attenuation-corrected pre-SRP/thermal amplitudes are -3.146 mm (INPOP21 ALL 1970-2024), -3.446 mm (INPOP21 ALL 1970-2016), -3.786 mm (DE430 ALL 1970-2016), -3.328 mm (INPOP21 OCA 1984-2016), -4.375 mm (INPOP21 APOLLO 2006-2024 and DE430 APOLLO 2006-2016), and -5.003 mm (INPOP21 APOLLO 2006-2016). Their Table 6 nulls (-0.146 +/- 1.066 mm on INPOP21 ALL and -0.786 +/- 2.074 mm on DE430 ALL; -1.375 to -2.003 mm on APOLLO) follow from adding the +3.00 +/- 0.50 mm orbital-SRP + retroreflector-thermal correction and scaling formal WLS uncertainties by 3x in quadrature with 0.50 mm.",
+            "2_third_order_harmonic_collinearity_and_survival": "Because solar avoidance creates a gap around New Moon (D ~ 0), cos(D), cos(2D), and cos(3D) are non-orthogonal on the sampled domain (L_2 = -0.397, L_3 = -0.816 and VIF = 1.98-2.11 on INPOP19a using Ke et al.'s true ecliptic synodic angle D_ecl, matching Ke et al.'s L_2 = -0.388 and L_3 = -0.761). Fitting Ke et al.'s full 3rd-order harmonic basis sum_{n=1}^3 (C_n cos nD + S_n sin nD) does NOT erase the negative C1 coefficient: using the true ecliptic synodic angle D_ecl (Montenbruck & Pfleger 2000, Ref. [85] of Ke et al. 2026), precision-weighted INPOP19a yields C1 = -5.69 +/- 0.95 mm (6.01 sigma) pure and -5.71 +/- 0.96 mm (5.95 sigma) with annual and monthly terms (-2.71 +/- 1.07 mm, 2.53 sigma and -2.72 +/- 1.08 mm, 2.51 sigma combined after forward time-domain SRP+thermal subtraction; -7.17 +/- 0.95 mm pre-subtraction and -4.23 +/- 1.07 mm, 3.94 sigma post-subtraction using the mean Delaunay polynomial D_del), while cleaned DE430 yields C1 = -10.99 +/- 1.86 mm (5.92 sigma) pure and -9.99 +/- 1.85 mm (5.40 sigma) with annual and monthly terms on D_ecl (-6.99 +/- 1.92 mm, 3.65 sigma combined after +3.00 +/- 0.50 mm; -11.55 +/- 1.86 mm -> -8.55 +/- 1.92 mm, 4.45 sigma on D_del).",
+            "3_survival_of_srp_orthogonal_kinematic_and_dipole_channels": "Orbital SRP scales as (1 AU / r_sun(t))^2 cos D(t) and thermal expansion scales as cos D(t); both lie entirely in the radial-distance and static cos(D) subspace and are isotropic on the sky. In the joint kinematic-dipole Model E (Step 064-SRP Test 6), separating the anisotropic and velocity-quadrature terms leaves a pre-subtraction isotropic static intercept of C1,0 = 13 m * eta_0 = -3.30 +/- 0.79 mm (eta_0 = -2.54e-4), matching Ke et al.'s attenuation-calibrated INPOP21 amplitude (-3.15 to -3.45 mm) and the -3.00 +/- 0.50 mm SRP+thermal offset. Forward time-domain subtraction of [-3.65 (1 AU / r_sun)^2 + 0.65] mm cos(D) absorbs 91.1% of eta_0 (reducing C1,0 to -0.29 +/- 0.94 mm combined, eta_0 = -0.23e-4, 0.31 sigma), while leaving the heliocentric radial-velocity quadrature modulation eta_vr (t = +6.50, p = 7.9e-11), the fixed-sky orientation modulation eta_theta (t = -11.02, aligned-vs-antialigned split Delta_eta = -1.72e-3 at 9.19 sigma cleaned; -1.76e-3 at 7.92 sigma full archive), and the D +- l' sideband power 100.0% invariant."
+        }
+    },
     "status": "PASS"
 }

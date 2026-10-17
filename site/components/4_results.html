@@ -95,7 +95,7 @@
  <tr>
  <td>Wild cluster bootstrap, Webb weights</td>
  <td>$-4.06 \pm 0.73$</td>
- <td>$5.56\sigma$ ($95\%$ CI $[-5.37, -2.73]$)</td>
+ <td>$95\%$ CI $[-5.37, -2.73]$ ($|t|=5.56$, $5.56\sigma$ nominal)</td>
  <td>25,445</td>
  <td>Co-primary small-$G$ uncertainty companion; OLS full-systematic</td>
  </tr>
@@ -174,7 +174,7 @@
  (i-a) a wild cluster bootstrap with Webb 6-point weights on the same
  full-systematic design gives $\eta = -4.06 \times 10^{-4}$ with a
  $95\%$ percentile interval $[-5.37, -2.73] \times 10^{-4}$
- ($5.56\sigma$; wild cluster bootstrap), confirming that the detection survives
+ ($|t|=5.56$, $5.56\sigma$ nominal; wild cluster bootstrap), confirming that the detection survives
  even when the small-$G$ ($G=5$) unreliability of analytical
  cluster-robust standard errors is corrected by resampling;
  (ii) a common-$\eta$ mixed model with station-specific systematics
@@ -262,8 +262,8 @@
  ($F(4, 25{,}410)=1.19$, $p=0.31$). A wild cluster bootstrap with
  Webb 6-point weights on the full-systematic OLS design
  gives a $95\%$ percentile interval $[-5.37, -2.73] \times 10^{-4}$
- ($5.56\sigma$), while a station block bootstrap on the
- precision-weighted design gives $P(\eta<0)=0.945$ (94.5%).
+ ($|t|=5.56$, $5.56\sigma$ nominal), while a station block bootstrap on the
+ precision-weighted design gives $P(\eta&lt;0)=0.945$ (94.5%).
  Individual stations and balance-enforced subsamples remain below
  the $3\sigma$ powered-detection threshold where phase coverage or
  $N$ is limited.
@@ -716,7 +716,7 @@
  more negative (smaller) when the Moon is near new moon (elongation
  $\approx 0$) and more positive (larger) near full moon (elongation
  $\approx \pi$), consistent with the predicted TEP Nordtvedt signal with
- $\eta < 0$.
+ $\eta &lt; 0$.
  </p>
 
  <p>
@@ -925,7 +925,7 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  (headline), and MCMC $\eta = -2.87 \times 10^{-4}$
  (MCMC robustness check) all retain the full cleaned sample (or its
  intended weighting) without Cook filtering.
- The Bayesian posterior excludes zero; $P(\eta < 0 \,|\, {\rm data}) = 1.0000$. Bandwidth-free synodic cross-checks on the same uniform priors
+ The Bayesian posterior excludes zero; $P(\eta &lt; 0 \,|\, {\rm data}) = 1.0000$. Bandwidth-free synodic cross-checks on the same uniform priors
  give ${\rm BF}_{10} \approx 70$ (grid quadrature) and $\approx 97$
  (bridge sampling; the wild cluster bootstrap). The BIC approximation yields
  $\mathcal{B}_{\rm BIC} \approx 8.1 \times 10^{3}$. Laplace and
@@ -961,7 +961,7 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  $1.01 \times 10^{-4}$. The observed
  $|\eta_{\rm obs}| = 4.06 \times 10^{-4}$ exceeds <em>every</em> one
  of the 10,000 null realisations. The exact false-positive rate is
- therefore $p < 1/10{,}000 = 1.0 \times 10^{-4}$, with a 95%
+ therefore $p &lt; 1/10{,}000 = 1.0 \times 10^{-4}$, with a 95%
  conservative upper bound of $3.0 \times 10^{-4}$. Expressed as a
  Gaussian-equivalent tail probability, this corresponds to
  $>4.0\sigma$. This directly answers: under the exact noise model and
@@ -996,7 +996,7 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  negative at every threshold, and the bootstrap 95% CI on the 6σ sample
  is $[-4.11 \times 10^{-4}, -2.12 \times 10^{-4}]$, excluding zero. A
  permutation test (10,000 shuffles) on the 6σ-cleaned data returns
- $p < 10^{-4}$ (zero shuffles produced
+ $p &lt; 10^{-4}$ (zero shuffles produced
  $|\eta| \ge |\eta_{\rm obs}|$).
  The phase-bin $\chi^2$ for outlier distribution (8 bins) is 18.31
  ($p = 4 \times 10^{-4}$), confirming that outliers are not uniformly
@@ -1044,7 +1044,7 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  <li>WLS: $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$)</li>
  <li>Cluster-robust (WLS): $6.78\sigma$; cluster + AR(1): $4.51\sigma$</li>
  <li>Station-block bootstrap (2,000): 95% CI
- $[-5.44, +0.05] \times 10^{-4}$; $P(\eta < 0) = 94.5\%$ (upper bound
+ $[-5.44, +0.05] \times 10^{-4}$; $P(\eta &lt; 0) = 94.5\%$ (upper bound
  marginally consistent with zero; sign remains negative in 94.5% of draws)</li>
  <li>LOSO conformal 95%: $[-7.33, -0.05] \times 10^{-4}$ (excludes $\eta = 0$)</li>
  </ul>
@@ -1074,8 +1074,8 @@ On the cosD-only model, the same Cook's Distance boundary excises 1,030
  <p>
  To provide an independent test that does not rely on the specific
  functional form of the correlation, a differential analysis compares
- residuals at new moon (elongation $|D| < 0.5$ rad) versus full moon
- (elongation $|D - \pi| < 0.5$ rad):
+ residuals at new moon (elongation $|D| &lt; 0.5$ rad) versus full moon
+ (elongation $|D - \pi| &lt; 0.5$ rad):
  </p>
 
  <ul>
@@ -1352,7 +1352,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  Haleakala's opposite-sign estimate
  ($\eta = +3.55 \times 10^{-3}$ raw, $+2.57 \times 10^{-3}$ cleaned) is a
  $2.0\sigma$ event under the station-matched TEP simulation (two-tailed
- $p = 0.039$, family-wise rate 4.2\%; Section 3.4.23) and is retained as
+ $p = 0.039$, family-wise rate 4.2%; Section 3.4.23) and is retained as
  an unresolved tension rather than attributed to noise. Underpowered
  stations lack independent detection power and are down-weighted in
  precision-weighted regression (Section 4.25.5) while retained for
@@ -1746,7 +1746,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  linear regression, only the component of a systematic source
  correlated with the predictor biases the parameter estimate. For
  $\eta$, the systematic bias is given by Equation
- \eqref{eq:systematic_projection}:
+ $\eqref{eq:systematic_projection}$:
  </p>
 
  <p style="text-align: center;">
@@ -1860,10 +1860,10 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
 
  <ul>
  <li>
- New moon mean: $-12.07 \pm 1.53$ mm (N = 397, elongation < 0.5 rad)
+ New moon mean: $-12.07 \pm 1.53$ mm (N = 397, elongation &lt; 0.5 rad)
  </li>
  <li>
- Full moon mean: $+2.86 \pm 1.97$ mm (N = 1,531, $|\text{elongation} - \pi| < 0.5$ rad)
+ Full moon mean: $+2.86 \pm 1.97$ mm (N = 1,531, $|\text{elongation} - \pi| &lt; 0.5$ rad)
  </li>
  <li>
  Differential $\eta$ = $-5.95 \times 10^{-4} \pm 1.01 \times 10^{-4}$
@@ -1914,7 +1914,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  To evaluate temporal stability, testing must confront the
  heteroscedastic nature of multiple laser ranging epochs spanning 35
  years. Standard uniform variance assumptions across 7 temporal bins
- yield $\chi^2 = 198.9$ with 6 degrees of freedom ($p < 0.001$,
+ yield $\chi^2 = 198.9$ with 6 degrees of freedom ($p &lt; 0.001$,
  $\chi^2$/dof $\approx 33$), flagging significant empirical bin-to-bin
  variation that necessitates a high-resolution hardware audit.
  </p>
@@ -2154,7 +2154,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </li>
  <li>
  Station weight sensitivity: Halving the weight of each station shows
- bounded perturbations (all $\Delta\eta/\sigma_\eta < 3\sigma$).
+ bounded perturbations (all $\Delta\eta/\sigma_\eta &lt; 3\sigma$).
  Maximum shift occurs for Grasse ($\Delta\eta/\sigma_\eta =
  2.45\sigma$), reflecting its 74% data concentration. All
  perturbations remain sign-consistent.
@@ -2207,7 +2207,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <li>
  Gelman-Rubin statistic: $\hat{R}_\eta = 0.999$ (converged)
  </li>
- <li>$P(\eta < 0 \,|\, {\rm data}) = 1.0000$</li>
+ <li>$P(\eta &lt; 0 \,|\, {\rm data}) = 1.0000$</li>
  </ul>
 
  <p>
@@ -2313,7 +2313,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <li>
  Strict Delaunay Harmonics: The background variance spectrum was matched
  to high-order lunar arguments with error margins
- $< 1 \times 10^{-4}$ cyc/day, proving the residuals carry precise
+ $&lt; 1 \times 10^{-4}$ cyc/day, proving the residuals carry precise
  gravitational mechanics rather than random noise:
  <ul>
  <li>Rank 1 (26.83d): Mapped perfectly to $3D - 2l + 3l'$</li>
@@ -2579,7 +2579,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <ul>
  <li>
  CMB orientation: $\eta_\theta = -9.76 \times 10^{-4}$
- ($t = -11.03$, $p < 10^{-10}$)
+ ($t = -11.03$, $p &lt; 10^{-10}$)
  </li>
  <li>
  Velocity coefficient: $\eta_{v_r} = +1.10 \times 10^{-3}$
@@ -2640,7 +2640,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  the effective temporal shear rate experienced by the Earth-Moon system,
  the high-shear subset ($|v_r|/r > 0.482$ km/s/AU) yields
  $\eta = +2.05 \times 10^{-4}$ (high-shear robustness check), while the low-shear subset
- ($|v_r|/r < 0.149$ km/s/AU) yields $\eta = -3.36 \times 10^{-4}$
+ ($|v_r|/r &lt; 0.149$ km/s/AU) yields $\eta = -3.36 \times 10^{-4}$
  (low-shear robustness check).
  The differential is $5.41 \times 10^{-4}$ at $2.25\sigma$, consistent
  with the joint-fit velocity modulation.
@@ -2699,7 +2699,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </li>
  <li>
  Orientation anisotropy: $\eta_\theta = -7.76 \times 10^{-4}$
- ($t = -9.56$, $p < 10^{-4}$)
+ ($t = -9.56$, $p &lt; 10^{-4}$)
  </li>
  </ul>
  <p>
@@ -2728,7 +2728,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  ($t = -6.92$, $p = 4.18 \times 10^{-12}$)
  </li>
  <li>
- $\eta_\theta = -9.98 \times 10^{-4}$ ($t = -11.37$, $p < 10^{-4}$)
+ $\eta_\theta = -9.98 \times 10^{-4}$ ($t = -11.37$, $p &lt; 10^{-4}$)
  </li>
  </ul>
  <p>
@@ -2754,11 +2754,11 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </li>
  <li>
  Radial velocity: $\eta_{v_r} = +1.10 \times 10^{-3}$ (km/s)$^{-1}$
- ($t = 6.50$, $p < 10^{-10}$)
+ ($t = 6.50$, $p &lt; 10^{-10}$)
  </li>
  <li>
  CMB orientation: $\eta_\theta = -9.76 \times 10^{-4}$
- ($t = -11.03$, $p < 10^{-4}$)
+ ($t = -11.03$, $p &lt; 10^{-4}$)
  </li>
  </ul>
  <p>
@@ -2847,7 +2847,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </li>
  <li>
  $90^\circ$ perpendicular-2 (meridian plane): $\eta_\theta = -1.12 \times 10^{-3} \pm 2.17 \times 10^{-4}$
- ($t = -5.17$, $p < 10^{-4}$), AIC = $-141,834.5$
+ ($t = -5.17$, $p &lt; 10^{-4}$), AIC = $-141,834.5$
  ($\Delta$AIC = $+94.6$ vs true)
  </li>
  <li>
@@ -2864,7 +2864,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  $90^\circ$ rotations. This does <em>not</em> establish uniqueness among
  <em>all</em> celestial directions: the falsification testing (G2) refits the same joint
  model with the Earth–Moon cosine taken about the ICRS galactic north pole
- and finds $\Delta\text{AIC} = 125.7$ (vs.\ $119.2$ for the Planck axis)
+ and finds $\Delta\text{AIC} = 125.7$ (vs. $119.2$ for the Planck axis)
  with $t = -11.31$ on $\eta_\theta$ in that single-axis fit. The north
  ecliptic pole and the ephemeris-averaged Earth–Sun orbital angular-momentum
  direction yield much smaller $\Delta\text{AIC}$ ($\approx 27.5$;
@@ -2970,7 +2970,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  $9.4 \times 10^{-7}$ and standard deviation
  $8.8 \times 10^{-5}$, with maximum $|t| = 3.70$. The observed
  $\eta_\theta = -9.76 \times 10^{-4}$ ($t = -11.03$) lies beyond
- the 99.9th percentile ($p < 10^{-3}$), ruling out aliasing.
+ the 99.9th percentile ($p &lt; 10^{-3}$), ruling out aliasing.
  </li>
  <li>
  <em>Multicollinearity diagnostics.</em> All VIFs in the full joint
@@ -2986,7 +2986,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  the null distribution of $\eta_\theta$ is centered at zero
  ($\sigma = 8.0 \times 10^{-5}$) with 99.9th percentile
  $|t| = 2.75$; the observed $t = -11.03$ is far in the tail
- ($p < 10^{-3}$).
+ ($p &lt; 10^{-3}$).
  </li>
  <li>
  <em>Gram–Schmidt orthogonalization.</em> After explicitly
@@ -3108,7 +3108,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <ul>
  <li>
  Sinusoidal envelope: $\eta_{\rm env,\sin} = +1.08 \times 10^{-3}$
- ($t = 8.25$, $p < 10^{-4}$)
+ ($t = 8.25$, $p &lt; 10^{-4}$)
  </li>
  <li>
  Cosinusoidal envelope: $\eta_{\rm env,\cos} = -3.18 \times 10^{-4}$
@@ -3717,7 +3717,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  conditions, the nuisance subspace (annual, monthly, and $\cos(2D)$ aliases) is
  empirically not transportable across epochs: temporal hold-out predictive $R^2$
  for the full-systematic model is negative on the full archive and remains negative
- even on the homogeneous clean subset of Section~4.32. That pattern is not treated
+ even on the homogeneous clean subset of Section&nbsp;4.32. That pattern is not treated
  here as a failure of signal authenticity; it is treated as direct evidence that
  nuisance-dominated designs cannot be sequentially re-fit across eras without bias,
  so primary extraction is performed on the maximally pooled dataset to marginalise
@@ -3791,7 +3791,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
 
  <p>
  Rolling-window projections of an effective $\eta(t)$ and their environmental
- correlations (the rolling-window analysis) are isolated in Section~4.31.1 so they are not read as
+ correlations (the rolling-window analysis) are isolated in Section&nbsp;4.31.1 so they are not read as
  contradicting the global m6 stability check above: m6 tests two epoch-gated
  $\cos D$ coefficients inside the <em>pooled</em> full-systematic fit, whereas the rolling-window analysis
  probes shorter-window apparent variation that can mix environmental modulation with
@@ -3894,12 +3894,12 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  <strong>Random $k$-Fold CV Shows Positive Predictive Power.</strong>
  Unlike temporal or station-stratified splits, random 5-fold CV shuffles
  observations across all epochs and stations. The full-systematic model
- achieves $R^2_{\rm pred} = +0.010$ ($p < 0.05$), demonstrating genuine
+ achieves $R^2_{\rm pred} = +0.010$ ($p &lt; 0.05$), demonstrating genuine
  predictive power when covariate shift is eliminated. Random $k$-fold CV is
  therefore a useful complement to temporal diagnostics: because the archive is
  pooled across stations and epochs, a random split preserves the marginal
  predictor distribution while still testing out-of-sample generalisation, without
- replacing the primary pooled estimator in Section~3.4.22.
+ replacing the primary pooled estimator in Section&nbsp;3.4.22.
  </p>
 
  <p>
@@ -3935,9 +3935,9 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
 
  <p>
  Primary inference therefore remains the precision-weighted pooled extraction
- (Section~3.4.22 and the precision-weighted regression): temporal CV is reported as a diagnostic on nuisance
+ (Section&nbsp;3.4.22 and the precision-weighted regression): temporal CV is reported as a diagnostic on nuisance
  transport, not as a substitute estimand for $\eta$. The clean-subset analysis in
- Section~4.32 sharpens the same story under controlled homogeneity.
+ Section&nbsp;4.32 sharpens the same story under controlled homogeneity.
  </p>
 
  <h4>4.31.1 Rolling-window $\eta(t)$ and environmental correlation</h4>
@@ -3975,7 +3975,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  significant at the 5% level ($p \approx 0.15$ and $p \approx 0.18$ respectively).
  These correlations quantify how much window-to-window variability remains after
  restricting to 2-year segments on the cleaned archive. They are not offered as a
- refutation of the pooled const-$\eta$ hypothesis tested by m6 in Section~4.31
+ refutation of the pooled const-$\eta$ hypothesis tested by m6 in Section&nbsp;4.31
  ($p = 0.90$ on equality of pre- and post-split $\cos D$ amplitudes in the joint
  full-systematic model). The conservative reading is that rolling $\hat{\eta}(t)$ is a
  local projection that can correlate with heliocentric geometry and dipole orientation
@@ -3997,7 +3997,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </p>
 
  <p>
- Sections~4.31--4.31.1 argued that coefficient stability for $\eta$ and temporal predictive
+ Sections&nbsp;4.31&ndash;4.31.1 argued that coefficient stability for $\eta$ and temporal predictive
  $R^2$ for the nuisance-augmented design measure different objects. On this clean subset,
  temporal hold-out still yields $R^2_{\mathrm{pred}} \approx -0.016$ for the
  full-systematic model (train $N=2{,}112$ pre-2013, test $N=10{,}464$ post-2013), so the
@@ -4010,7 +4010,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  contrasts between independent pre-2013 and post-2013 fits on this subset: the thermal
  alias $\cos(2D)$ shifts most sharply ($z \approx 3.4$, $p \approx 6 \times 10^{-4}$),
  while several seasonal terms show weaker evidence of shift. A Grasse-only split
- (2010--2013 versus 2013--2019, $N_{\mathrm{pre}}=479$, $N_{\mathrm{post}}=9{,}502$)
+ (2010&ndash;2013 versus 2013&ndash;2019, $N_{\mathrm{pre}}=479$, $N_{\mathrm{post}}=9{,}502$)
  yields two-sided $p \approx 0.45$ on equality of the $\cos D$ slopes, illustrating
  that even within one modern detector family the nuisance geometry can move while the
  Nordtvedt-like coefficient remains statistically compatible across eras.
@@ -4034,7 +4034,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  cluster-robust, 2 clusters; clean-subset robustness check). Station
  block bootstrap on the same design gives
  $\eta = -2.74 \times 10^{-4} \pm 1.21 \times 10^{-4}$ with
- $P(\eta<0)=0.965$ (2,000 draws; conservative two-station resampling
+ $P(\eta&lt;0)=0.965$ (2,000 draws; conservative two-station resampling
  bound). Grasse alone reaches $9.4\sigma$ and
  APO reaches $2.8\sigma$; both agree on sign and approximate magnitude.
  </p>
@@ -4054,7 +4054,7 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  shifts nuisance co-fitting and can migrate the cos(D) coefficient within
  the negative band. The manuscript retains the full-archive precision-weighted estimate as
  the <em>primary</em> headline because it uses the mixed-station design
- used in the common-$\eta$ mixed model (Section~4.3) and matches the
+ used in the common-$\eta$ mixed model (Section&nbsp;4.3) and matches the
  weighting philosophy of the canonical estimator hierarchy; the clean-subset analysis is the
  high-SNR robustness channel, not a competing headline number.
  </p>
@@ -4154,50 +4154,125 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  anomaly.
  </p>
 
- <h4>4.33.2 Orbital SRP Scaling</h4>
+ <h4>4.33.2 Orbital SRP Scaling and Forward Waveform Subtraction</h4>
 
  <p>
- Orbital solar radiation pressure on the Moon produces a geometric
- signature with the same $\cos(D)$ phase dependence as the Nordtvedt
- effect: at new moon, SRP on the Moon acts toward Earth; at full moon,
- away from Earth. However, orbital SRP scales as $1/r_\odot^2$ with
- heliocentric distance, whereas a Nordtvedt-like signal carries no such
- distance dependence to leading order. Three orthogonal tests avoid the
- collinearity trap between $\cos(D)$ and $\cos(D)/r_\odot^2$ (VIF
- $\approx$ 1800):
+ Orbital solar radiation pressure on the Earth&ndash;Moon system produces a
+ geometric perturbation with the same $\cos(D)$ phase dependence as the
+ Nordtvedt effect: at new moon, SRP on the Moon acts toward Earth; at full
+ moon, away from Earth (Vokrouhlick&yacute; 1997; Williams et al. 2009).
+ Crucially, as documented in the ephemeris literature (Viswanathan 2017;
+ Viswanathan et al. 2018; Folkner et al. 2014) and verified via direct
+ SPICE trajectory differencing by Ke et al. (2026, Table 4), the EPM21
+ ephemeris integrates lunar orbital SRP dynamically in the equations of
+ motion, whereas INPOP (17a/19a/21a) and DE430 omit lunar orbital SRP from
+ the numerical integration and instead apply an <em>a posteriori</em>
+ correction of $A_{\rm SRP} = -3.65 \pm 0.08$ mm $\cos D$ combined with
+ lunar retroreflector thermal expansion $A_{\rm th} = +0.65 \pm 0.50$ mm
+ $\cos D$ (net $\Delta_{\rm SRP+th} = -3.00 \pm 0.50$ mm $\cos D$) when
+ evaluating equivalence-principle bounds. Because Earth's orbital
+ eccentricity is small ($e_\oplus = 0.0167$, heliocentric range
+ $0.983$–$1.017$ AU), the SRP proxy $\cos(D)/r_\odot^2$ and $\cos(D)$ are
+ $99.97\%$ collinear ($\mathrm{VIF} = 1807.7$). Step 064-SRP
+ (<code>results/outputs/step_064_srp_systematic_check.json</code>)
+ therefore combines radial-scaling diagnostics with explicit forward
+ time-domain waveform subtraction and orthogonal-channel survival tests:
  </p>
 
  <ul>
  <li>
- <em>Detrended-residual correlation.</em> After removing the best-fit
- TEP $\cos(D)$ signal, the correlation between detrended residuals and
- the SRP proxy is $r = -3.22 \times 10^{-4}$ ($p = 0.959$,
- SNR = $0.05\sigma$). No SRP variance remains in the residual channel.
+ <em>Radial-bin $1/r_\odot^2$ scaling and perihelion–aphelion bounds.</em>
+ Partitioning the cleaned INPOP19a sample ($N = 25{,}445$) into 10
+ heliocentric-distance bins and fitting $\eta_{\rm resid}(r_\odot) = C + M/r_\odot^2$
+ yields $M = -6.32 \times 10^{-3} \pm 2.81 \times 10^{-3}$
+ ($t_M = -2.25$, $p = 0.054$), while the 15th–85th percentile
+ perihelion–aphelion split yields $\Delta\eta_{\rm resid} = -3.40 \times 10^{-4} \pm 2.48 \times 10^{-4}$
+ ($1.37\sigma$). Because a pure $1/r_\odot^2$ SRP modulation varies by
+ only $2e_\oplus = 3.34\%$ over the year — predicting
+ $\Delta\eta_{\rm SRP} = -1.58 \times 10^{-5}$, a factor of $15.7$
+ below the statistical uncertainty of the split — radial binning
+ rules out anomalously steep $1/r_\odot^2$ scaling, whereas the
+ canonical $-3.65$ mm orbital SRP offset must be evaluated by direct
+ forward subtraction. (Detrending the residuals by $\cos D$ first
+ leaves $r = -3.22 \times 10^{-4}$, $p = 0.959$ against
+ $\cos(D)/r_\odot^2$, reflecting the $\mathrm{VIF} = 1808$
+ collinearity between the two predictors.)
  </li>
  <li>
- <em>Binned $1/r^2$ scaling test.</em> The data are partitioned into
- 10 heliocentric-distance bins; $\eta$ is extracted in each bin and
- tested for $1/r^2$ scaling. The slope coefficient is marginally
- unstable ($t_M = -2.25$, $p = 0.054$) but its sign and magnitude are
- inconsistent with simple SRP. The statistical power of this test is
- limited by the small heliocentric-distance baseline (3.4%,
- 0.983–1.017 AU).
+ <em>Forward time-domain subtraction of orbital SRP and thermal
+ expansion (Test 5).</em> Subtracting the full physical non-EP synodic
+ waveform $\Delta r_{\rm SRP+th}(t) = \bigl[-3.65(1\text{ AU}/r_\odot(t))^2 + 0.65\bigr]\text{ mm}\cos D(t)$
+ point-by-point from the cleaned INPOP19a residual series shifts the
+ precision-weighted full-systematic amplitude from
+ $C_1 = -5.18 \pm 0.73$ mm ($\eta_{\rm resid} = -3.98 \times 10^{-4}$,
+ $7.08\sigma$) to $C_1^{\rm corr} = -2.18 \pm 0.73$ mm (statistical;
+ $2.98\sigma$) or $-2.18 \pm 0.89$ mm when combined in quadrature with
+ the $\pm 0.50$ mm SRP+thermal modeling uncertainty
+ ($\eta_{\rm resid}^{\rm corr} = -(1.67 \pm 0.68)\times 10^{-4}$,
+ $2.46\sigma$; unweighted full-systematic
+ $C_1^{\rm corr} = -2.46 \pm 0.99$ mm, $2.48\sigma$ combined). In the
+ Ke et al. (2026, Sec. IV.2.1) third-order synodic harmonic basis
+ $\sum_{n=1}^{3}(C_n\cos nD + S_n\sin nD)$ evaluated on the true
+ geocentric ecliptic synodic angle
+ $D_{\rm ecl}(t) = (\lambda_{\rm Moon}(t) - \lambda_{\rm Sun}(t))\bmod 2\pi$
+ (Montenbruck &amp; Pfleger 2000) augmented with annual and monthly
+ terms, precision-weighted INPOP19a shifts from
+ $C_1 = -5.71 \pm 0.96$ mm ($5.95\sigma$; pure 3-harmonic
+ $-5.69 \pm 0.95$ mm, $6.01\sigma$) to
+ $C_1^{\rm corr} = -2.72 \pm 1.08$ mm ($2.51\sigma$ combined; pure
+ 3-harmonic $-2.71 \pm 1.07$ mm, $2.53\sigma$; or
+ $-7.17 \pm 0.95\text{ mm} \to -4.23 \pm 1.07$ mm, $3.94\sigma$ when
+ evaluated on the linear mean Delaunay polynomial $D_{\rm Del}(t)$),
+ while cleaned DE430 shifts from $C_1 = -9.99 \pm 1.85$ mm ($5.40\sigma$;
+ pure 3-harmonic $-10.99 \pm 1.86$ mm, $5.92\sigma$) to
+ $C_1^{\rm corr} = -6.99 \pm 1.92$ mm ($3.65\sigma$ combined on
+ $D_{\rm ecl}$; $-11.55 \pm 1.86\text{ mm} \to -8.55 \pm 1.92$ mm,
+ $4.45\sigma$ on $D_{\rm Del}$; Step 081). When formal WLS uncertainties
+ are additionally inflated by the empirical $3\times\sigma_{\rm formal}$
+ prescription of Ke et al. (2026, Eq. 39), these corrected static
+ amplitudes fall below the $2\sigma$ threshold ($0.93\sigma$–$1.53\sigma$;
+ Section 5.4.1).
  </li>
  <li>
- <em>Perihelion–aphelion differential.</em> The 15th–85th percentile
- split gives $\Delta\eta = -3.40 \times 10^{-4} \pm 2.48 \times 10^{-4}$
- (SNR = $1.37\sigma$), inconsistent with the SRP-predicted differential
- of $-1.58 \times 10^{-5}$.
+ <em>Exact invariance of SRP-orthogonal kinematic quadrature and
+ fixed-sky dipole channels (Test 6).</em> Because $\Delta r_{\rm SRP+th}(t)$
+ depends solely on $r_\odot(t)$ and $\cos D(t)$, it lies entirely
+ within the span of $\{\cos D,\, (r_\odot - \bar r_\odot)\cos D\}$ up to
+ $\mathcal{O}(e_\oplus^2) \sim 3 \times 10^{-4}$ and is strictly
+ isotropic on the celestial sphere. In the five-parameter joint
+ kinematic-dipole model (Model E of Section 4.25.1: $\cos D$,
+ $\Delta r_\odot\cos D$, $v_r\cos D$, $\cos\theta_{\rm CMB}\cos D$),
+ separating the anisotropic and velocity-quadrature modulations leaves a
+ pre-subtraction isotropic static intercept of
+ $\eta_0 = -2.54 \times 10^{-4} \pm 0.61 \times 10^{-4}$ ($|t| = 4.16$),
+ corresponding to $C_{1,0} = 13\text{ m}\,\eta_0 = -3.30 \pm 0.79$ mm —
+ matching the literature $-3.00 \pm 0.50$ mm orbital-SRP plus thermal
+ offset and Ke et al.'s (2026) attenuation-calibrated INPOP21 amplitude
+ ($-3.15$ to $-3.45$ mm). Refitting Model E after point-by-point
+ subtraction of $\Delta r_{\rm SRP+th}(t)$ reduces $\eta_0$ by $91.1\%$
+ to $\eta_0^{\rm corr} = -0.23 \times 10^{-4} \pm 0.61 \times 10^{-4}$
+ ($C_{1,0}^{\rm corr} = -0.29 \pm 0.79$ mm statistical, $\pm 0.94$ mm
+ combined, $0.31\sigma$; $0.12\sigma$ under $3\times\sigma_{\rm formal}$),
+ confirming that the static isotropic $\cos D$ mean in Model E is
+ accounted for by the non-EP SRP+thermal offset. By contrast, the
+ heliocentric radial-velocity quadrature coefficient remains unchanged
+ at $\eta_{v_r} = +1.103 \times 10^{-3} \pm 1.70 \times 10^{-4}$
+ ($t = +6.50$, $p = 7.9 \times 10^{-11}$; relative shift
+ $&lt; 10^{-4}$), the fixed-sky orientation coefficient remains
+ unchanged at $\eta_\theta = -9.773 \times 10^{-4} \pm 8.87 \times 10^{-5}$
+ ($t = -11.02$, $\Delta\text{AIC} = -119.2$; relative shift
+ $&lt; 10^{-4}$), and the aligned-versus-antialigned dipole split
+ ($\cos\theta \ge 0.75$ vs. $\cos\theta \le -0.75$) remains invariant at
+ $\Delta\eta_{\rm resid} = -1.720 \times 10^{-3} \pm 1.87 \times 10^{-4}$
+ ($9.19\sigma$; $7.92\sigma$ in the full-bin split), even under a
+ $2\times\Delta r_{\rm SRP+th}$ ($-6.00$ mm) stress test. Moreover,
+ pure $1/r_\odot^2$ SRP deposits only
+ $\tfrac{1}{2}(2e_\oplus)^2 = 5.6 \times 10^{-4}$ ($0.056\%$) of its
+ power into the $D \pm l'$ annual sidebands, nearly three orders of
+ magnitude below the $\sim 33\%$ sideband power fraction measured in
+ Section 4.25.6.
  </li>
  </ul>
-
- <p>
- INPOP19a's orbital integrator already includes standard lunar SRP
- modelling. An unmodelled SRP component would require both the same
- synodic phase-lock and a $1/r_\odot^2$ scaling that the residual channel
- does not exhibit. The combined the solar-radiation-pressure check evidence does not support SRP
- as the dominant source of the detected modulation.
- </p>
 
  <h4>4.33.3 Atmospheric Seeing</h4>
 
@@ -4217,16 +4292,20 @@ $\cos D = -0.316$); Haleakala (expected SNR = $0.27\sigma$, 10.6 cm cleaned RMS)
  </p>
 
  <p>
- <strong>Conclusion.</strong> Solar radiation pressure, both as a local
- mechanical displacement ($< 10^{-9}$ mm) and as an orbital scaling
- effect (no supported $1/r^2$ signature), is far too small or incorrectly
- scaled to explain the detected modulation. Atmospheric seeing
- is bounded at 0.111 mm ($\sim$3% of signal). The systematic error budget
- in Section 3.4.16 is updated to include both bounds. These quantitative
- exclusions, together with the existing dust/thermal (Section 4.27) and
- local terrestrial systematic (Section 5.9) tests, close the currently
- nominated conventional explanations for the synodic-phase-locked
- residual modulation without claiming that every conceivable unmodelled
- coupling has been eliminated.
+ <em>Conclusion.</em> Local mechanical displacement from solar
+ radiation pressure is negligible ($&lt; 10^{-9}$ mm), and atmospheric
+ seeing is bounded at $0.111$ mm ($\sim 3\%$ of the signal). Forward
+ time-domain subtraction of the $-3.00 \pm 0.50$ mm orbital-SRP plus
+ retroreflector-thermal waveform (omitted from the dynamical integrators
+ of INPOP and DE430) accounts for $\sim 58\%$ of the canonical
+ precision-weighted static $\cos D$ amplitude (leaving
+ $-2.18 \pm 0.89$ mm at $2.46\sigma$ combined, or $-2.72 \pm 1.08$ mm at
+ $2.51\sigma$ in the true-ecliptic third-order harmonic basis and
+ $-4.23 \pm 1.07$ mm at $3.94\sigma$ on the Delaunay polynomial) and
+ $91.1\%$ of the static isotropic intercept $\eta_0$ in the joint
+ kinematic-dipole fit ($C_{1,0}: -3.30 \to -0.29 \pm 0.94$ mm,
+ $0.31\sigma$), while leaving the SRP-orthogonal radial-velocity
+ quadrature ($t = +6.50$), fixed-sky orientation ($t = -11.02$), and
+ $D \pm l'$ sideband signatures strictly invariant.
  </p>
 </div>

@@ -1,9 +1,9 @@
 {
   "name": "TEP-LLR",
   "short_name": "TEP-LLR",
-  "version": "v0.4 (Lucknow)",
+  "version": "v0.5 (Lucknow)",
   "first_published": "17 May 2026",
-  "last_updated": "30 September 2026",
+  "last_updated": "17 October 2026",
   "doi": "10.5281/zenodo.19446028",
   "start_url": ".",
   "display": "standalone",

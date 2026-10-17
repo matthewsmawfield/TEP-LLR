@@ -2,40 +2,37 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19446028.svg)](https://doi.org/10.5281/zenodo.19446028)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-
 ![TEP-LLR: Lunar Laser Ranging](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.4 (Lucknow)  
-**First published:** 17 May 2026 · **Last updated:** 30 September 2026
-**Status:** Preprint (Open for Collaboration)  
+**Version:** v0.5 (Lucknow)  
+**First published:** 17 May 2026 · **Last updated:** 17 October 2026  
+**Status:** Preprint  
 **DOI:** [10.5281/zenodo.19446028](https://doi.org/10.5281/zenodo.19446028)  
 **Website:** [https://mlsmawfield.com/tep/llr/](https://mlsmawfield.com/tep/llr/)  
-**Paper Series:** TEP Series: Paper 17 (Lunar Laser Ranging)    
+**Paper Series:** TEP Series · Group C (III. Laser Ranging, Spacecraft Tracking & Solar-System Tests) · Paper 17 (`C17`)
 
 ## Abstract
 
+<!-- Generated from site/components/0_abstract.html; update the manuscript source, then run tools/sync_current_corpus_readmes.py. -->
 
+The Temporal Equivalence Principle (TEP) proposes that the local rate of proper time is governed by a dynamical scalar field $\phi=\bar\phi+M_{\rm Pl}u$ rather than treated as a fixed geometric parameter. This field couples universally to all matter via the canonical unified metric $\tilde{g}_{\mu\nu} = -A_{\rm loc}²(u_{\rm grav}(\mathbf x))U_\mu U_\nu+A_{\rm sp}²(u_{\rm drift}(t,\mathbf x))\Pi_{\mu\nu}+B(\phi)\Pi_\mu^\alpha\Pi_\nu^\beta\nabla_\alpha\phi\nabla_\beta\phi$ ($U_\mu\equiv-\nabla_\mu\bar\phi/\sqrt{2\bar X}$, $A_{\rm loc}(u_{\rm grav})=e^{\beta_A u_{\rm grav}}$, $A_{\rm sp}(u_{\rm drift})=e^{\beta_A u_{\rm drift}}=e^{-u_{\rm drift}}$; Paper 0, §2.2, Step 80). Temporal Shear is pinned where the ambient time-gradient is steep — weak-field language: $g \gg g_t \approx cH_0/2$ — by the environmental-state operator $\mathcal S_\Sigma(\mathcal E)$. The canonical pairwise benchmark gives an Earth–Moon response of order $10^{-14}$ and does not account for the reported range residual as a differential-fall signal; the analysis instead targets the synodic term in the post-fit residual channel, $\delta r = 13\eta_{\rm resid}\cos D$, where $D$ is the Moon-Sun elongation angle and $\eta_{\rm resid}$ is the residual-channel amplitude (an Observable Response Coefficient, distinct from the standard metric Nordtvedt parameter $\eta$). Evaluating both the Cassini Shapiro delay and the Earth–Moon laser path on the single solved two-branch solar profile $(k/\sqrt{2})q y²+q² y³=1$ ($k=16.03$, $g_t=cH_0/2$; Step 083) gives $y_{\rm tb}(1.6\,R_\odot)=2.16\times10^{-8}$ ($\gamma_{\rm PPN}-1=-4.32\times10^{-8}$, passing Cassini) and $y_{\rm tb}(1\text{ AU})=1.47\times10^{-5}$, which suppresses the direct scalar optical excursion across the Earth–Moon baseline to $\delta u_\odot^{\rm tb}=7.43\times10^{-16}\cos D$ ($\delta r_{\rm path}^{\rm tb}=-1.43\times10^{-4}$ mm, $\eta_{\rm tb}=-1.10\times10^{-8}$), $3.4\times10⁴$ times below the measured post-fit INPOP19a amplitude $\eta_{\rm resid} = -(3.91\pm0.56)\times10^{-4}$ ($-5.08\pm0.73$ mm) and consistent with direct-fit LLR bounds. Because at a fixed cosmic epoch inside the screened Solar System ($A_{\rm sp}(t_0)=1$) TEP's spatial 3-metric $\tilde\gamma_{ij}=\gamma_{ij}=(1-2\Phi_N/c²)\delta_{ij}$ is identical to GR's, the unscreened solar Newtonian potential differential $\Delta\Phi_{N,\odot}/c²=2.54\times10^{-11}\cos D$ (which defines an unscreened reference ceiling $-\tfrac12 L\,\delta\phi_{\rm eff}\cos D=-4.85$ mm $\cos D$, $\eta_{\rm ceiling}=-3.73\times10^{-4}$ at $T_{\rm Moon}=0.9969$; Paper 0 Step 76, Step 083) cancels in the BCRS$\to$GCRS reduction identically to GR and would give $\gamma_{\rm PPN}-1=-2/3$ at Cassini if attributed to an unscreened solar scalar field; the measured $\eta_{\rm resid}$ is therefore reported as an empirical post-fit residual-channel detection whose dynamical or ephemeris-reduction transfer map awaits a source-level integrator refit.
 
+This work analyses 26,207 raw Lunar Laser Ranging O–C residuals from the public INPOP19a ephemeris archives (Paris Observatory, Geoazur), comprising $N = 25{,}445$ measurements from five international stations (1984–2019) after standard $6\sigma$ MAD outlier cleaning. The primary estimand is a precision-weighted synodic regression on the post-fit residual channel, with inverse station-variance weighting and a full systematic model with annual, monthly, and thermal $\cos(2D)$ regressors and a common intercept.
 
+The primary precision-weighted residual-channel estimate is $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ (nominal WLS $6.94\sigma$; $6.78\sigma$ cluster-robust; wild cluster bootstrap 95% CI $[-5.37, -2.73]\times 10^{-4}$ across the $G=5$ station clusters). The amplitude stabilises in the band $-3.2$ to $-4.1 \times 10^{-4}$ across the estimator hierarchy, from cosD-only ($5.25\sigma$) through full-systematic OLS ($6.17\sigma$) to precision-weighted ($6.94\sigma$). Robustness checks — common-$\eta_{\rm resid}$ mixed model, leave-one-station-out meta-analysis, wild cluster bootstrap, phase-locked differential, cross-ephemeris validation on cleaned DE430 ($\eta_{\rm resid} = -7.04 \times 10^{-4}$, $5.96\sigma$; confirming the sign but differing in amplitude by $2.77\sigma$ from INPOP19a in the matched window), parametric GR-null bootstrap, and a frequency null scan — all support residual-channel survival of the synodic component (Section 4). If interpreted within the static Parametrized Post-Newtonian framework — an interpretation the residual-channel estimand does not yet license (Section 4.14) — the measured amplitude would correspond to $\beta_{\rm PPN} = 0.999902 \pm 1.07 \times 10^{-5}$ from the joint $(\beta_{\rm PPN}, \gamma)$ contour; this mapping is reported for scale only and is not advanced as a PPN measurement pending the integrator-level refit.
 
-The Temporal Equivalence Principle (TEP) proposes that proper time is a dynamical scalar field ϕ rather than a geometric parameter. This field couples universally to all matter via a conformal metric g̃_μν = A²(ϕ) g_μν. Temporal Shear is pinned where the ambient time-gradient is steep — weak-field language: g ≫ g_t ≈ cH_0/2 — by the environmental-state operator mathcal S_Σ(mathcal E). The canonical pairwise benchmark gives an Earth–Moon response of order 10⁻¹⁴ and does not account for the reported range residual as a differential-fall signal; the analysis instead targets the synodic term in the post-fit residual channel, δ r = 13η_residcos D, where D is the Moon-Sun elongation angle and η_resid is the residual-channel amplitude (an Observable Response Coefficient, distinct from the standard metric Nordtvedt parameter η). A candidate TEP interpretation is a clock/dynamics projection of the synodic field configuration rather than a screened force anomaly; its absolute transfer into passive two-way ranging is not established by the residual fit. This work analyses 26,207 raw Lunar Laser Ranging O–C residuals from the public INPOP19a ephemeris archives (Paris Observatory, Geoazur), comprising N = 25,445 measurements from five international stations (1984–2019) after standard 6σ MAD outlier cleaning. The primary estimand is a precision-weighted synodic regression on the post-fit residual channel, with inverse station-variance weighting and a full systematic model with annual, monthly, and thermal cos(2D) regressors and a common intercept. The primary precision-weighted residual-channel estimate is η_resid = -3.91 × 10⁻⁴ ± 5.63 × 10⁻⁵ (6.94σ; 6.78σ cluster-robust). The amplitude stabilises in the band -3.2 to -4.1 × 10⁻⁴ across the estimator hierarchy, from cosD-only (5.25σ) through full-systematic OLS (6.17σ) to precision-weighted (6.94σ). Robustness checks — common-η_resid mixed model, leave-one-station-out meta-analysis, wild cluster bootstrap, phase-locked differential, cross-ephemeris validation on cleaned DE430 (η_resid = -7.04 × 10⁻⁴, 5.96σ; confirming the sign but differing in amplitude by 2.77σ from INPOP19a in the matched window), parametric GR-null bootstrap, and a frequency null scan — all support residual-channel survival of the synodic component (Section 4). If interpreted within the static Parametrized Post-Newtonian framework — an interpretation the residual-channel estimand does not yet license (Section 4.14) — the measured amplitude would correspond to β_PPN = 0.999902 ± 1.07 × 10⁻⁵ from the joint (β_PPN, γ) contour; this mapping is reported for scale only and is not advanced as a PPN measurement pending the integrator-level refit. A full-sky directional scan on the residual channel (2,664 right-ascension/declination grid points at 5° intervals) places the Planck CMB dipole axis at rank 226/2664 (top 8.5%). The result is therefore framed as a high-significance residual-channel candidate with a TEP interpretation, not as a completed replacement for direct-fit LLR bounds. The 6.94σ figure is a detection of a synodic pattern in post-fit residuals; it is not a measurement of the Nordtvedt parameter, and the quantitative relationship between η_resid and the direct-fit η is not yet established. Source-level numerical refits of the INPOP or DE430 integrators with η_resid left free remain the critical open closure test. Ephemeris-absorption stress tests bound the residual-channel survival amplitude but do not replace a full dynamical integrator-level confirmation. Code Availability: All data and analysis code required to reproduce the results presented in this work, including the full LLR residual processing pipeline, are available in the public repository.
+The result is therefore framed as a high-significance residual-channel candidate with a TEP interpretation, not as a completed replacement for direct-fit LLR bounds. The $6.94\sigma$ figure is a detection of a synodic pattern in post-fit residuals; it is not a measurement of the Nordtvedt parameter, and the quantitative relationship between $\eta_{\rm resid}$ and the direct-fit $\eta$ is not yet established. Source-level numerical refits of the INPOP or DE430 integrators with $\eta_{\rm resid}$ left free remain the critical open closure test. Ephemeris-absorption stress tests bound the residual-channel survival amplitude but do not replace a full dynamical integrator-level confirmation.
 
+Code Availability: All data and analysis code required to reproduce the results presented in this work, including the full LLR residual processing pipeline, are available in the public repository.
+
+Keywords: temporal equivalence principle, lunar laser ranging, LLR, equivalence principle, Nordtvedt effect, post-Newtonian, scalar-tensor gravity, strong equivalence principle
+
+Current manuscript source: [0_abstract.html](site/components/0_abstract.html).
 
 ## Key Results
 
-**TEP Signal in INPOP19a LLR Residuals:**
-- **26,207 observations** from 5 stations (APO, Grasse, Matera, McDonald2, Haleakala); **25,445** after $6\sigma$ MAD cleaning
-- **Date range:** 1984–2019
-- **Residual precision:** 9.5 cm RMS
-- **Cook's-Distance-excised full-systematic OLS (leverage diagnostic):** $\eta_{\rm resid} = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$ ($N = 23{,}837$ after excision), 7.82σ; cluster-robust 8.65σ
-- **Precision-weighted full-systematic (consensus):** $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$, 6.94σ; cluster-robust 6.78σ
-- **Full-systematic OLS without excision (sensitivity upper bound):** $\eta_{\rm resid} = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$ ($N = 25{,}445$), 6.17σ; cluster-robust 6.52σ
-- **Common-$\eta_{\rm resid}$ mixed model with station systematics (pooling):** $\eta_{\rm resid} = -4.32 \times 10^{-4} \pm 6.76 \times 10^{-5}$, 6.40σ; $F(4, 25{,}410) = 1.19$, $p = 0.31$
-- **Phase-locked new/full-moon differential (robustness):** $\eta_{\rm resid} = -5.95 \times 10^{-4} \pm 1.01 \times 10^{-4}$, 5.91σ
-- **cosD-only OLS (baseline):** $\eta_{\rm resid} = -3.18 \times 10^{-4} \pm 6.05 \times 10^{-5}$, 5.25σ
-
----
+The current results and their comparison assumptions are reported in [4. Results](site/components/4_results.html), [6. Conclusion](site/components/6_conclusion.html). The abstract above is synchronized from the current manuscript.
 
 ## The TEP Research Program
 
@@ -56,7 +53,7 @@ The Temporal Equivalence Principle (TEP) proposes that proper time is a dynamica
 | **Paper 12** | [TEP-JWST](https://github.com/matthewsmawfield/TEP-JWST) | The Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies | [10.5281/zenodo.19000827](https://doi.org/10.5281/zenodo.19000827) |
 | **Paper 13** | [TEP-WB](https://github.com/matthewsmawfield/TEP-WB) | The Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries | [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) |
 | **Paper 15** | [TEP-EFA](https://github.com/matthewsmawfield/TEP-EFA) | Temporal Equivalence Principle: Temporal Shear in the Earth Flyby Anomaly | [10.5281/zenodo.19454862](https://doi.org/10.5281/zenodo.19454862) |
-| **Paper 16** | [TEP-J0437](https://github.com/matthewsmawfield/TEP-J0437) | Synchronization Holonomy in Pulsar Scintillation | [10.5281/zenodo.19454620](https://doi.org/10.5281/zenodo.19454620) |
+| **Paper 16** | [TEP-J0437](https://github.com/matthewsmawfield/TEP-J0437) | Synchronization Holonomy in Pulsar Scintillation | [10.5281/zenodo.19454619](https://doi.org/10.5281/zenodo.19454619) |
 | **Paper 17** | **TEP-LLR** (This repo) | Lunar Laser Ranging and the Nordtvedt Effect | [10.5281/zenodo.19446028](https://doi.org/10.5281/zenodo.19446028) |
 
 ## Directory Structure
@@ -162,7 +159,7 @@ python scripts/steps/step_004_detection_analysis_advanced.py --verbose
   journal={Zenodo},
   year={2026},
   doi={10.5281/zenodo.19446028},
-  note={Preprint v0.4 (Lucknow)}
+  note={Preprint v0.5 (Lucknow)}
 }
 ```
 

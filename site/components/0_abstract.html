@@ -2,10 +2,11 @@
     <h2>Abstract</h2>
 
     <p>
-        The Temporal Equivalence Principle (TEP) proposes that proper time
-        is a dynamical scalar field $\phi$ rather than a geometric parameter.
-        This field couples universally to all matter via a conformal metric
-        $\tilde{g}_{\mu\nu} = A^2(\phi)\,g_{\mu\nu}$. Temporal Shear is pinned
+        The Temporal Equivalence Principle (TEP) proposes that the local rate of proper time
+        is governed by a dynamical scalar field $\phi=\bar\phi+M_{\rm Pl}u$ rather than treated as a fixed geometric parameter.
+        This field couples universally to all matter via the canonical unified metric
+        $\tilde{g}_{\mu\nu} = -A_{\rm loc}^2(u_{\rm grav}(\mathbf x))U_\mu U_\nu+A_{\rm sp}^2(u_{\rm drift}(t,\mathbf x))\Pi_{\mu\nu}+B(\phi)\Pi_\mu^\alpha\Pi_\nu^\beta\nabla_\alpha\phi\nabla_\beta\phi$
+        ($U_\mu\equiv-\nabla_\mu\bar\phi/\sqrt{2\bar X}$, $A_{\rm loc}(u_{\rm grav})=e^{\beta_A u_{\rm grav}}$, $A_{\rm sp}(u_{\rm drift})=e^{\beta_A u_{\rm drift}}=e^{-u_{\rm drift}}$; Paper 0, §2.2, Step 80). Temporal Shear is pinned
         where the ambient time-gradient is steep — weak-field language:
         $g \gg g_t \approx cH_0/2$ — by the environmental-state operator
         $\mathcal S_\Sigma(\mathcal E)$. The canonical pairwise
@@ -16,10 +17,25 @@
         $\delta r = 13\eta_{\rm resid}\cos D$, where $D$ is the Moon-Sun
         elongation angle and $\eta_{\rm resid}$ is the residual-channel amplitude
         (an Observable Response Coefficient, distinct from the standard metric
-        Nordtvedt parameter $\eta$). A candidate TEP interpretation is a
-        clock/dynamics projection of the synodic field configuration rather
-        than a screened force anomaly; its absolute transfer into passive
-        two-way ranging is not established by the residual fit.
+        Nordtvedt parameter $\eta$). Evaluating both the Cassini Shapiro delay and the
+        Earth&ndash;Moon laser path on the single solved two-branch solar profile
+        $(k/\sqrt{2})q y^2+q^2 y^3=1$ ($k=16.03$, $g_t=cH_0/2$; Step 083) gives
+        $y_{\rm tb}(1.6\,R_\odot)=2.16\times10^{-8}$ ($\gamma_{\rm PPN}-1=-4.32\times10^{-8}$,
+        passing Cassini) and $y_{\rm tb}(1\text{ AU})=1.47\times10^{-5}$, which suppresses the
+        direct scalar optical excursion across the Earth&ndash;Moon baseline to
+        $\delta u_\odot^{\rm tb}=7.43\times10^{-16}\cos D$ ($\delta r_{\rm path}^{\rm tb}=-1.43\times10^{-4}$ mm,
+        $\eta_{\rm tb}=-1.10\times10^{-8}$), $3.4\times10^4$ times below the measured post-fit
+        INPOP19a amplitude $\eta_{\rm resid} = -(3.91\pm0.56)\times10^{-4}$ ($-5.08\pm0.73$ mm) and
+        consistent with direct-fit LLR bounds. Because at a fixed cosmic epoch inside the screened Solar System ($A_{\rm sp}(t_0)=1$) TEP's spatial 3-metric
+        $\tilde\gamma_{ij}=\gamma_{ij}=(1-2\Phi_N/c^2)\delta_{ij}$ is identical to GR's, the
+        unscreened solar Newtonian potential differential $\Delta\Phi_{N,\odot}/c^2=2.54\times10^{-11}\cos D$
+        (which defines an unscreened reference ceiling $-\tfrac12 L\,\delta\phi_{\rm eff}\cos D=-4.85$ mm $\cos D$,
+        $\eta_{\rm ceiling}=-3.73\times10^{-4}$ at $T_{\rm Moon}=0.9969$; Paper 0 Step 76, Step 083)
+        cancels in the BCRS$\to$GCRS reduction identically to GR and would give
+        $\gamma_{\rm PPN}-1=-2/3$ at Cassini if attributed to an unscreened solar scalar field;
+        the measured $\eta_{\rm resid}$ is therefore reported as an empirical post-fit
+        residual-channel detection whose dynamical or ephemeris-reduction transfer map awaits a
+        source-level integrator refit.
     </p>
 
     <p>
@@ -36,7 +52,7 @@
     <p>
         The primary precision-weighted residual-channel estimate is
         $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$
-        ($6.94\sigma$; $6.78\sigma$ cluster-robust). The amplitude
+        (nominal WLS $6.94\sigma$; $6.78\sigma$ cluster-robust; wild cluster bootstrap 95% CI $[-5.37, -2.73]\times 10^{-4}$ across the $G=5$ station clusters). The amplitude
         stabilises in the band $-3.2$ to $-4.1 \times 10^{-4}$ across the
         estimator hierarchy, from cosD-only ($5.25\sigma$) through
         full-systematic OLS ($6.17\sigma$) to precision-weighted
@@ -55,9 +71,6 @@
         $\beta_{\rm PPN} = 0.999902 \pm 1.07 \times 10^{-5}$ from the joint
         $(\beta_{\rm PPN}, \gamma)$ contour; this mapping is reported for scale only
         and is not advanced as a PPN measurement pending the integrator-level refit.
-        A full-sky directional scan on the residual channel (2,664 right-ascension/declination
-        grid points at 5° intervals) places the Planck CMB dipole axis
-        at rank 226/2664 (top 8.5%).
     </p>
 
     <p>

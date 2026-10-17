@@ -2,13 +2,16 @@
     <h2>1. Introduction</h2>
 
     <p>
-        The Strong Equivalence Principle (SEP) is a cornerstone of General
-        Relativity, stating that gravitational mass equals inertial mass and
-        that the outcome of any local non-gravitational experiment is
-        independent of the velocity and location of the freely-falling reference
-        frame. A violation of the SEP would suggest that gravity is not purely
-        metric in nature, but may involve additional fields that couple
-        differently to different bodies.
+        The equivalence principles form the empirical and conceptual foundation of
+        General Relativity: the Weak Equivalence Principle (WEP) establishes the
+        universality of free fall for test bodies; the Einstein Equivalence
+        Principle (EEP) combines WEP with local Lorentz invariance and local
+        position invariance for non-gravitational experiments; and the Strong
+        Equivalence Principle (SEP) extends the universality of free fall and
+        local invariance to self-gravitating bodies and gravitational experiments
+        themselves. A violation of the SEP indicates that bodies with different
+        gravitational self-energy or internal compactness couple differently to
+        additional gravitational degrees of freedom beyond a single metric tensor.
     </p>
 
     <p>
@@ -34,9 +37,9 @@
     <p>
         The present work extends this framework through the Temporal Equivalence
         Principle (TEP), a scalar-tensor theory where proper time becomes a
-        dynamical field $\phi$ that couples universally to matter via conformal
-        metric $\tilde{g}_{\mu\nu} = A^2(\phi)g_{\mu\nu} + B(\phi)\nabla_\mu\phi\nabla_\nu\phi$, with
-        $A(\phi)=\exp(\beta_A\phi/M_{\rm Pl})$. Scalar-tensor theories
+        dynamical field $\phi=\bar\phi+M_{\rm Pl}u$ that couples universally to matter via the canonical unified
+        metric $\tilde{g}_{\mu\nu} = -A_{\rm loc}^2(u_{\rm grav}(\mathbf x))U_\mu U_\nu+A_{\rm sp}^2(u_{\rm drift}(t,\mathbf x))\Pi_{\mu\nu} + B(\phi)\Pi_\mu^\alpha\Pi_\nu^\beta\nabla_\alpha\phi\nabla_\beta\phi$, with
+        $A_{\rm loc}(u_{\rm grav})=\exp(\beta_A u_{\rm grav})$, $A_{\rm sp}(u_{\rm drift})=\exp(\beta_A u_{\rm drift})=\exp(-u_{\rm drift})$, and cosmic temporal flow $U_\mu\equiv-\nabla_\mu\bar\phi/\sqrt{2\bar X}$ (Paper 0, §2.2, Step 80). Scalar-tensor theories
         have a long history in gravitational physics, dating to Jordan (1955),
         Fierz (1956), and Brans-Dicke (1961), who first explored gravitational
         theories with dynamical scalar fields coupled to the metric. The
@@ -301,9 +304,9 @@
         the TEP framework's Observable Response Coefficients, which quantify
         domain-specific astrophysical responses rather than a universal bare coupling.
         Preliminary results from related work in the same TEP framework report
-        $\kappa_{\rm Cep}^{\rm equiv} = (0.365\text{--}0.421) \times 10^6$ mag for Cepheid period-luminosity
-        anomalies (Paper 11 v0.10, Appendix C) and $\tilde\kappa_{\rm MSP} = (2.9 \pm 4.5) \times 10^4$ for pulsar spin-down
-        excess (Paper 10 v0.9, observable response); the unscreened geometric amplitude
+        $\kappa_{\rm Cep}^{\rm equiv} = (1.22\text{--}1.24) \times 10^6$ mag for Cepheid period-luminosity
+        anomalies (Paper 11 v0.12, Appendix C) and $\tilde\kappa_{\rm MSP} = (2.9 \pm 4.5) \times 10^4$ for pulsar spin-down
+        excess (Paper 10 v0.10, observable response); the unscreened geometric amplitude
         is $\sim 10^6$ before environmental suppression. These coefficients are distinct from the microscopic conformal
         coupling $\beta$ or scalar-tensor coupling $\alpha_0$, absorbing instead the full
         astrophysical response including environmental activation and transfer functions.
@@ -330,12 +333,14 @@
         The predicted amplitude for $\eta_{\rm resid} \sim 10^{-4}$ is $\sim$1–5 mm,
         smaller than the 9.5 cm per-observation residual RMS. This is expected
         for a suppressed PPN signal in precision LLR metrology: the signal
-        explains only $\sim$0.1% of the total variance, but with
-        $N = 25{,}445$ observations the standard error of the mean is
-        $\sigma_r \approx 1/\sqrt{N} = 0.0063$, and the observed correlation
-        coefficient $r = -0.0329$ is significant at $5.25\sigma$. The operative
-        statistical leverage is not per-shot variance explained but synodic
-        phase coherence across 35 years of independent observations. As hardware
+        explains only $\sim$0.1% of the total variance; under an idealized i.i.d.
+        scale illustration with $N = 25{,}445$ rows, $\sigma_r \approx 1/\sqrt{N} = 0.0063$
+        would place the raw correlation coefficient $r = -0.0329$ at a nominal
+        $5.25\sigma$. Because individual LLR normal points are neither temporally
+        nor station-wise independent, the operative inference does not rely on
+        i.i.d. scaling, but on synodic phase coherence across 35 years evaluated
+        through the full-systematic estimator, station-cluster covariance, and
+        correlation-aware bootstrap analyses below. As hardware
         precision improved from $\sim$10 cm (PMT era) to $\sim$2 cm (C-SPAD
         era), the extracted physical amplitude did not scale to zero; it
         converged to a fixed negative boundary, consistent with a permanent

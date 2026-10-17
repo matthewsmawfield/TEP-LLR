@@ -1,38 +1,46 @@
-[19:25:19]     ======================================================================
-[19:25:19] ═══ STEP 064: SOLAR RADIATION PRESSURE SYSTEMATIC CHECK
-[19:25:19]     ======================================================================
-[19:25:19]     Outlier cleaning: 762/26207 removed (6σ)
-[19:25:19]     Clean dataset: N = 25,445
-[19:25:21] 
-[19:25:21] >>> TEST 1: COLLINEARITY DIAGNOSTIC
-[19:25:21]       Pearson r(cosD, SRP_proxy) = 0.999723
-[19:25:21]       VIF(SRP_proxy) = 1807.72
-[19:25:21] ⚠     WARNING: VIF > 10 indicates severe multicollinearity; joint OLS decomposition is unreliable.
-[19:25:21] 
-[19:25:21] >>> TEST 2: DETRENDED-RESIDUAL SRP CORRELATION
-[19:25:21]       After removing best-fit TEP cos(D) signal (eta = -3.1779e-04)
-[19:25:21]       r(detrended, SRP_proxy) = -3.221644e-04
-[19:25:21]       p-value = 9.5902e-01
-[19:25:21]       SNR = 0.05σ
-[19:25:21]       RESULT: No significant correlation with SRP proxy after TEP detrending. SRP does not explain residual variance beyond the TEP cos(D) term.
-[19:25:21] 
-[19:25:21] >>> TEST 3: SRP SCALING TEST (central)
-[19:25:21]       Bins: 10 (N per bin: 1661–5155)
-[19:25:21]       Fit: eta(r) = C + M / r^2
-[19:25:21]       C = 6.0011e-03 ± 2.7947e-03  (t = 2.15, p = 0.064)
-[19:25:21]       M = -6.3247e-03 ± 2.8079e-03  (t = -2.25, p = 0.054)
-[19:25:21]       χ²_red = 4.83
-[19:25:21]       Expected M for pure SRP = -3.1776e-04
-[19:25:21] ⚠     The 1/r² slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.
-[19:25:21] 
-[19:25:21] >>> TEST 4: PERIHELION–APHELION DIFFERENTIAL
-[19:25:21]       Perihelion η = -2.8102e-04 ± 1.9181e-04 (N=3817)
-[19:25:21]       Aphelion   η = 5.9407e-05 ± 1.5747e-04 (N=3819)
-[19:25:21]       Δη = -3.4043e-04 ± 2.4817e-04  (SNR = 1.37σ)
-[19:25:21]       SRP-predicted Δη ≈ -1.5803e-05
-[19:25:21] 
-[19:25:21] ═══ OVERALL SUMMARY
-[19:25:21]       SRP test outcome: NO_SRP_SIGNATURE
-[19:25:21]       All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r² scaling in the residuals, rules out SRP as the dominant source of the detected signal.
-[19:25:21]     ======================================================================
-[19:25:21] Results saved to results/outputs/step_064_srp_systematic_check.json
+[23:06:33]     ======================================================================
+[23:06:33] ═══ STEP 064: SOLAR RADIATION PRESSURE SYSTEMATIC CHECK
+[23:06:33]     ======================================================================
+[23:06:33]     Outlier cleaning: 762/26207 removed (6σ)
+[23:06:33]     Clean dataset: N = 25,445
+[23:06:35] 
+[23:06:35] >>> TEST 1: COLLINEARITY DIAGNOSTIC
+[23:06:35]       Pearson r(cosD, SRP_proxy) = 0.999723
+[23:06:35]       VIF(SRP_proxy) = 1807.72
+[23:06:35] ⚠     WARNING: VIF > 10 indicates severe multicollinearity; joint OLS decomposition is unreliable.
+[23:06:35] 
+[23:06:35] >>> TEST 2: DETRENDED-RESIDUAL SRP CORRELATION
+[23:06:35]       After removing best-fit TEP cos(D) signal (eta = -3.1779e-04)
+[23:06:35]       r(detrended, SRP_proxy) = -3.221644e-04
+[23:06:35]       p-value = 9.5902e-01
+[23:06:35]       SNR = 0.05σ
+[23:06:35]       RESULT: No significant correlation with SRP proxy after TEP detrending. SRP does not explain residual variance beyond the TEP cos(D) term.
+[23:06:35] 
+[23:06:35] >>> TEST 3: SRP SCALING TEST (central)
+[23:06:35]       Bins: 10 (N per bin: 1661–5155)
+[23:06:35]       Fit: eta(r) = C + M / r^2
+[23:06:35]       C = 6.0011e-03 ± 2.7947e-03  (t = 2.15, p = 0.064)
+[23:06:35]       M = -6.3247e-03 ± 2.8079e-03  (t = -2.25, p = 0.054)
+[23:06:35]       χ²_red = 4.83
+[23:06:35]       Expected M for pure SRP = -3.1776e-04
+[23:06:35] ⚠     The 1/r² slope is marginal but not statistically significant at the 5% level, and its sign or magnitude is inconsistent with the simple SRP prediction. This is a bounded caution, not a positive SRP detection.
+[23:06:35] 
+[23:06:35] >>> TEST 4: PERIHELION–APHELION DIFFERENTIAL
+[23:06:35]       Perihelion η = -2.8102e-04 ± 1.9181e-04 (N=3817)
+[23:06:35]       Aphelion   η = 5.9407e-05 ± 1.5747e-04 (N=3819)
+[23:06:35]       Δη = -3.4043e-04 ± 2.4817e-04  (SNR = 1.37σ)
+[23:06:35]       SRP-predicted Δη ≈ -1.5803e-05
+[23:06:38] 
+[23:06:38] >>> TEST 5 & 6: FORWARD SRP+THERMAL SUBTRACTION & ORTHOGONAL SURVIVAL
+[23:06:38]       Precision-weighted full-sys C1: -5.18 mm -> -2.18 mm (2.46σ combined)
+[23:06:38]       Ke et al. 3-harm (D_ecl) C1:    -5.71 mm -> -2.72 mm (2.51σ combined)
+[23:06:38]       Ke et al. 3-harm (D_del) C1:    -7.17 mm -> -4.23 mm (3.94σ combined)
+[23:06:38]       Model E eta_0:     -2.5360e-04 -> -2.2653e-05 (absorbs static offset)
+[23:06:38]       Model E eta_vr:    1.1030e-03 (t=6.50) -> 1.1030e-03 (t=6.50)
+[23:06:38]       Model E eta_theta: -9.7726e-04 (t=-11.02) -> -9.7727e-04 (t=-11.02)
+[23:06:38] 
+[23:06:38] ═══ OVERALL SUMMARY
+[23:06:38]       SRP test outcome: NO_SRP_SIGNATURE
+[23:06:38]       Because cos(D) and cos(D)/r_sun^2 are 99.97% collinear over Earth's e = 0.0167 orbit (VIF = 1808), radial-bin scaling tests bound only anomalously steep 1/r^2 dependence rather than the 3.3% annual modulation of standard orbital SRP. Unlike EPM21, INPOP (17a/19a/21a) and DE430 do not integrate lunar orbital SRP in the equations of motion, instead applying a -3.65 mm SRP + 0.65 mm thermal = -3.00 +/- 0.50 mm cos(D) correction a posteriori (Viswanathan 2017; Williams et al. 2009; Ke et al. 2026). Forward time-domain subtraction of the full [-3.65 (1 AU / r_sun)^2 + 0.65] mm cos(D) waveform reduces the precision-weighted full-systematic static C1 amplitude from -5.18 +/- 0.73 mm (7.08 sigma) to -2.18 +/- 0.89 mm (2.46 sigma combined; -2.71 +/- 1.07 mm, 2.53 sigma in the pure 3rd-order true-ecliptic harmonic basis D_ecl of Ke et al. 2026, -2.72 +/- 1.08 mm, 2.51 sigma with annual and monthly terms, or -4.23 +/- 1.07 mm, 3.94 sigma on the mean Delaunay polynomial D_del) and absorbs 91.1% of the static isotropic intercept in the joint kinematic-dipole Model E (eta_0 from -2.54e-4 to -0.23e-4, i.e., C1,0 from -3.30 +/- 0.79 mm to -0.29 +/- 0.94 mm combined, 0.31 sigma), while leaving the SRP-orthogonal radial-velocity quadrature term eta_vr (t = +6.50, p = 7.9e-11) and fixed-sky orientation term eta_theta (t = -11.02, dipole split Delta_eta = -1.72e-3 at 9.19 sigma cleaned; -1.76e-3 at 7.92 sigma full archive) 100.0% invariant.
+[23:06:38]     ======================================================================
+[23:06:38] Results saved to results/outputs/step_064_srp_systematic_check.json

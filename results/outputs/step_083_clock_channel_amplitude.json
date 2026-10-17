@@ -1,7 +1,7 @@
 {
   "step": "083",
   "status": "success",
-  "description": "Derived clock-sector amplitude bookkeeping (issue 17-3): solar excursion at the Moon, quartic depth bookkeeping, step_76 ambient-excursion transmission, projection bookkeeping",
+  "description": "Derived clock-sector amplitude bookkeeping (issue 17-3): unified single-solar-solution two-branch audit (Cassini + LLR), quartic depth bookkeeping, step_76 ambient-excursion transmission, and unscreened solar-potential ceiling diagnostic",
   "solar_excursion": {
     "u_sun_1au": 9.870628715107787e-09,
     "a_m_over_a_e": 0.002569548605212868,
@@ -42,8 +42,33 @@
     "excursion_cos_D_amplitude": 2.5363123045851662e-11,
     "lunar_excursion_transmission": 0.99685,
     "effective_lunar_excursion": 2.528322920825723e-11,
-    "required_projection": "delta_r = (c tau_rt/2) * delta_phi_eff with tau_rt = 2.56 s gives 9.702e-03 m -- the direct clock-projection ceiling; the measured 5.08e-03 m requires the ephemeris-fit transfer map (a fraction ~O(1) of the ceiling), which is the channel-level quantity still to be derived",
-    "ceiling_delta_r_m": 0.00970204343106666
+    "ceiling_delta_r_m": 0.00970204343106666,
+    "unstretched_path_integral_factor": 0.5,
+    "predicted_delta_r_path_unscreened_ceiling_m": -0.00485102171553333,
+    "eta_predicted_unscreened_ceiling": -0.00037315551657948694,
+    "tension_sigma_unscreened_ceiling_vs_headline": 0.31499112028403725,
+    "predicted_delta_r_path_solved_twobranch_m": -1.4277220958331238e-07,
+    "eta_predicted_solved_twobranch": -1.0982477660254799e-08,
+    "unified_single_solar_solution": {
+      "k_twobranch": 16.03,
+      "g_t_m_s2": 3.400464161563069e-10,
+      "r_star_sun_AU": 4176.007826820705,
+      "y_tb_1p6_Rsun": 2.1589003313956603e-08,
+      "gamma_PPN_minus_1_Cassini_1p6_Rsun": -4.317800476357302e-08,
+      "cassini_bound": 2.3e-05,
+      "passes_cassini": true,
+      "y_tb_1AU": 1.4656717767723085e-05,
+      "delta_u_earth_moon_solved_twobranch": 7.4283340790851375e-16,
+      "delta_u_earth_moon_unscreened_2beta2_Phi": 5.0596111327665624e-11,
+      "delta_Phi_N_over_c2_input": 2.5363123045851662e-11,
+      "delta_r_path_solved_twobranch_m": -1.4277220958331238e-07,
+      "delta_r_path_solved_twobranch_mm": -0.00014277220958331237,
+      "eta_predicted_solved_twobranch": -1.0982477660254799e-08,
+      "gamma_PPN_minus_1_if_solar_u_unscreened": -0.6666666666666666,
+      "unscreened_to_solved_ratio": 33977.352663317826,
+      "consistency_note": "Under the unified metric n(x) = 1 - 2 Phi_N/c^2 - beta_A u(x), where the spatial 3-metric gamma_tilde_ij = gamma_ij = (1 - 2 Phi_N/c^2) delta_ij is identical to GR's while the spacetime lapse carries A_loc(u) = exp(beta_A u), the Newtonian solar tidal potential Delta Phi_{N,sun}/c^2 = 2.54e-11 cos D enters the BCRS->GCRS reduction identically in TEP and GR, and both the Cassini Shapiro delay and the direct scalar optical path delay sample the same screened solar field u_sun(r). The two-branch solution that passes Cassini (y_tb(1.6 R_sun) = 2.16e-08, gamma - 1 = -4.32e-08) screens the solar scalar gradient at 1 AU by y_tb(1 AU) = 1.47e-05, yielding delta_u_solved = 7.43e-16, delta_r_path = -1.43e-04 mm, and eta_solved = -1.10e-08 (3.4e+04x below the measured residual, cleanly satisfying direct-fit LLR bounds alongside Cassini). The -4.85 mm (eta = -3.73e-4) figure is the unscreened solar-potential ceiling (which would require an unscreened solar scalar field and violate Cassini at gamma - 1 = -2/3); the measured post-fit residual eta_resid = -(3.91 +/- 0.56)e-4 (-5.08 +/- 0.73 mm) is therefore reported as an empirical residual-channel detection whose dynamical or ephemeris-reduction transfer map awaits a source-level IMCCE/JPL integrator refit."
+    },
+    "required_projection": "Solved two-branch solar field (passing Cassini with gamma-1 = -4.32e-08 at 1.6 R_sun and y_tb(1 AU) = 1.47e-05) gives Earth-Moon scalar excursion delta_u_solved = 7.43e-16, |delta_r_path| = 1.43e-04 mm (eta_solved = -1.10e-08), whereas the unscreened Newtonian potential differential Delta Phi_N/c^2 = 2.536e-11 cos D defines the unscreened reference ceiling (1/2) L delta_phi_eff = 4.85 mm (eta_ceiling = -3.732e-04, excluded as a direct solar scalar gradient by Cassini) vs measured |delta_r_meas| = 5.08 mm (eta_meas = -3.909e-04 +/- 5.63e-05)."
   },
-  "verdict": "The volumetric benchmark's two underived ingredients are superseded by the corpus's master-action machinery: the quartic potential pins the equilibrium interior level as rho^{1/3} (derived exponent 1/3, not 3), supplying the depth bookkeeping S_A^Earth = 0.650, S_A^Moon = 0.550, and the ambient-excursion transmission is measured on the solved unified profile (TEP step_76): real bodies sit on the leaking branch and transmit ambient field excursions ~additively, T_Moon = 0.9969. The admissible clock channel carries the computed solar excursion delta phi_sun = 2.54e-11 cos D (the manuscript's earlier ~5e-11 was the peak-to-peak excursion, not the cos-D coefficient). The force channel remains excluded at ~1e-15 by the canonical pairwise operator. What remains to be derived is the ephemeris-projection map delta_phi -> delta_r: the direct clock-projection ceiling is 9.70e-03 m vs the measured 5.08e-03 m, so the required transfer fraction is order unity -- consistent in order of magnitude, pending the explicit ephemeris-fit map (which also fixes the residual sign through the projection convention)."
+  "verdict": "The volumetric benchmark's two underived ingredients are superseded by the corpus's master-action machinery: the quartic potential pins the equilibrium interior level as rho^{1/3} (derived exponent 1/3, not 3), supplying the depth bookkeeping S_A^Earth = 0.650, S_A^Moon = 0.550. Evaluating Cassini and LLR on the single solved two-branch solar profile ((k/sqrt(2)) q y^2 + q^2 y^3 = 1, k = 16.03) gives y_tb(1.6 R_sun) = 2.16e-08 (gamma_PPN - 1 = -4.32e-08, passing Cassini) and y_tb(1 AU) = 1.47e-05, which suppresses the direct scalar optical excursion across the Earth-Moon baseline to delta_u_solved = 7.43e-16 (|delta_r_path| = 1.43e-04 mm, eta_solved = -1.10e-08), 3.4e+04 times below the measured post-fit residual 5.08 mm (eta_resid = -3.91e-04 +/- 5.63e-05) and consistent with direct-fit LLR bounds. Because TEP's spatial 3-metric gamma_ij = (1 - 2 Phi_N/c^2) delta_ij is identical to GR's, the unscreened Newtonian tidal scale 2.54e-11 cos D (|delta_r| = 4.85 mm, eta_ceiling = -3.73e-04) cancels in BCRS->GCRS identically to GR and would violate Cassini (gamma_PPN - 1 = -2/3) if attributed to an unscreened solar scalar field; the measured post-fit synodic residual therefore stands as an empirical residual-channel detection awaiting a source-level IMCCE/JPL integrator refit."
 }

@@ -166,7 +166,7 @@ class HTMLToMarkdownConverter {
             // Load citation metadata for header
             const citationPath = path.join(__dirname, '..', 'CITATION.cff');
             let author = 'Matthew Lukin Smawfield';
-            let version = 'v0.4 (Lucknow)';
+            let version = 'v0.5 (Lucknow)';
             let dateReleased = '2026-05-17';
             let doi = '';
             
@@ -213,7 +213,7 @@ First published: ${dateReleased}${lastUpdated ? `\nLast updated: ${lastUpdated}`
 `;
             const finalMarkdown = header + markdown;
             
-            const outputPath = path.join(__dirname, '..', '17-TEP-LLR-v0.4-Lucknow.md');
+            const outputPath = path.join(__dirname, '..', 'C17-TEP-LLR-v0.5-Lucknow.md');
             fs.writeFileSync(outputPath, finalMarkdown, 'utf8');
             console.log(`✅ Markdown saved to: ${outputPath} (${(finalMarkdown.length / 1024).toFixed(1)} KB)`);
 

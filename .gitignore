@@ -61,3 +61,6 @@ test_*.py
 
 .devin/
 manuscripts/
+
+# Editor workspace state
+*.code-workspace

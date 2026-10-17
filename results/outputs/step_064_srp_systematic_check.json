@@ -2,16 +2,16 @@
     "step_id": "step_064_srp",
     "status": "PASS",
     "srp_test_outcome": "NO_SRP_SIGNATURE",
-    "interpretation": "All four tests fail to detect an SRP signature. The synodic-phase modulation is consistent with a heliocentric-distance-independent Nordtvedt-like signal and inconsistent with a simple unmodeled-SRP origin. INPOP19a's built-in SRP modeling, combined with the lack of 1/r\u00b2 scaling in the residuals, rules out SRP as the dominant source of the detected signal.",
+    "interpretation": "Because cos(D) and cos(D)/r_sun^2 are 99.97% collinear over Earth's e = 0.0167 orbit (VIF = 1808), radial-bin scaling tests bound only anomalously steep 1/r^2 dependence rather than the 3.3% annual modulation of standard orbital SRP. Unlike EPM21, INPOP (17a/19a/21a) and DE430 do not integrate lunar orbital SRP in the equations of motion, instead applying a -3.65 mm SRP + 0.65 mm thermal = -3.00 +/- 0.50 mm cos(D) correction a posteriori (Viswanathan 2017; Williams et al. 2009; Ke et al. 2026). Forward time-domain subtraction of the full [-3.65 (1 AU / r_sun)^2 + 0.65] mm cos(D) waveform reduces the precision-weighted full-systematic static C1 amplitude from -5.18 +/- 0.73 mm (7.08 sigma) to -2.18 +/- 0.89 mm (2.46 sigma combined; -2.71 +/- 1.07 mm, 2.53 sigma in the pure 3rd-order true-ecliptic harmonic basis D_ecl of Ke et al. 2026, -2.72 +/- 1.08 mm, 2.51 sigma with annual and monthly terms, or -4.23 +/- 1.07 mm, 3.94 sigma on the mean Delaunay polynomial D_del) and absorbs 91.1% of the static isotropic intercept in the joint kinematic-dipole Model E (eta_0 from -2.54e-4 to -0.23e-4, i.e., C1,0 from -3.30 +/- 0.79 mm to -0.29 +/- 0.94 mm combined, 0.31 sigma), while leaving the SRP-orthogonal radial-velocity quadrature term eta_vr (t = +6.50, p = 7.9e-11) and fixed-sky orientation term eta_theta (t = -11.02, dipole split Delta_eta = -1.72e-3 at 9.19 sigma cleaned; -1.76e-3 at 7.92 sigma full archive) 100.0% invariant.",
     "test_1_collinearity": {
         "r_cosd_srp_proxy": 0.9997233708111594,
         "vif_srp_proxy": 1807.7237942960019,
         "severe_multicollinearity": true
     },
     "test_2_detrended_srp_correlation": {
-        "r_detrended_srp": -0.0003221644419246204,
+        "r_detrended_srp": -0.00032216444192461864,
         "p_value": 0.9590167434996256,
-        "snr_sigma": 0.05138800835835247,
+        "snr_sigma": 0.0513880083583522,
         "significant": false
     },
     "test_3_srp_scaling": {
@@ -88,6 +88,331 @@
         "delta_eta_error": 0.00024817079310619094,
         "significance_sigma": 1.3717428383482793,
         "srp_predicted_delta_eta": -1.5803281189392894e-05
+    },
+    "test_5_forward_srp_thermal_subtraction": {
+        "waveform_parameters": {
+            "A_SRP_mm": -3.65,
+            "A_SRP_err_mm": 0.08,
+            "A_thermal_mm": 0.65,
+            "A_thermal_err_mm": 0.5,
+            "net_nominal_mm": -3.0,
+            "combined_correction_err_mm": 0.5,
+            "ephemeris_note": "EPM21 integrates lunar orbital SRP dynamically, whereas INPOP (17a/19a/21a) and DE430 omit lunar orbital SRP from the dynamical integrator and apply the -3.65 mm SRP + 0.65 mm thermal = -3.00 +/- 0.50 mm offset as an a posteriori correction in EP analyses (Viswanathan 2017; Williams et al. 2009; Ke et al. 2026)."
+        },
+        "cosD_only_unweighted": {
+            "pre_subtraction": {
+                "C1_mm": -4.131316012041676,
+                "C1_err_stat_mm": 0.78674928464264,
+                "C1_err_combined_mm": 0.9321879836630087,
+                "C1_err_ke2026_3x_mm": 2.4126271846208134,
+                "eta_resid": -0.0003177935393878212,
+                "eta_resid_err_stat": 6.051917574174155e-05,
+                "eta_resid_err_combined": 7.17067679740776e-05,
+                "snr_stat": 5.251121408922814,
+                "snr_combined": 4.4318486018321925,
+                "snr_ke2026_3x": 1.7123723210849027
+            },
+            "post_srp_plus_thermal": {
+                "C1_mm": -1.135542334259134,
+                "C1_err_stat_mm": 0.7867421028525243,
+                "C1_err_combined_mm": 0.9321819223739602,
+                "C1_err_ke2026_3x_mm": 2.412606107015256,
+                "eta_resid": -8.73494103276257e-05,
+                "eta_resid_err_stat": 6.0518623296348026e-05,
+                "eta_resid_err_combined": 7.170630172107386e-05,
+                "snr_stat": 1.4433476105345702,
+                "snr_combined": 1.2181552838605598,
+                "snr_ke2026_3x": 0.47067042189657915
+            },
+            "post_srp_only": {
+                "C1_mm": -0.48554233425913224,
+                "C1_err_stat_mm": 0.7867421028525243,
+                "C1_err_combined_mm": 0.9321819223739602,
+                "C1_err_ke2026_3x_mm": 2.412606107015256,
+                "eta_resid": -3.734941032762556e-05,
+                "eta_resid_err_stat": 6.0518623296348026e-05,
+                "eta_resid_err_combined": 7.170630172107386e-05,
+                "snr_stat": 0.617155650496752,
+                "snr_combined": 0.520866498915379,
+                "snr_ke2026_3x": 0.20125221968364268
+            }
+        },
+        "canonical_full_systematic_unweighted": {
+            "pre_subtraction": {
+                "C1_mm": -5.45534987115899,
+                "C1_err_stat_mm": 0.8549622523766974,
+                "C1_err_combined_mm": 0.9904344768782212,
+                "C1_err_ke2026_3x_mm": 2.613167441420722,
+                "eta_resid": -0.0004196422977814608,
+                "eta_resid_err_stat": 6.57663271058998e-05,
+                "eta_resid_err_combined": 7.618726745217086e-05,
+                "snr_stat": 6.3808078730888305,
+                "snr_combined": 5.508037127659231,
+                "snr_ke2026_3x": 2.0876388495767557
+            },
+            "post_srp_plus_thermal": {
+                "C1_mm": -2.4586276121149355,
+                "C1_err_stat_mm": 0.8549620904863586,
+                "C1_err_combined_mm": 0.9904343371313439,
+                "C1_err_ke2026_3x_mm": 2.6131669647229283,
+                "eta_resid": -0.00018912520093191813,
+                "eta_resid_err_stat": 6.576631465279683e-05,
+                "eta_resid_err_combined": 7.618725670241106e-05,
+                "snr_stat": 2.8757153556554846,
+                "snr_combined": 2.4823731568475407,
+                "snr_ke2026_3x": 0.9408612787876803
+            },
+            "post_srp_only": {
+                "C1_mm": -1.8086276121149352,
+                "C1_err_stat_mm": 0.8549620904863586,
+                "C1_err_combined_mm": 0.9904343371313439,
+                "C1_err_ke2026_3x_mm": 2.6131669647229283,
+                "eta_resid": -0.0001391252009319181,
+                "eta_resid_err_stat": 6.576631465279683e-05,
+                "eta_resid_err_combined": 7.618725670241106e-05,
+                "snr_stat": 2.1154477283151456,
+                "snr_combined": 1.8260954253195372,
+                "snr_ke2026_3x": 0.6921209538199953
+            }
+        },
+        "canonical_full_systematic_precision_weighted": {
+            "pre_subtraction": {
+                "C1_mm": -5.177202751007847,
+                "C1_err_stat_mm": 0.7316296464640845,
+                "C1_err_combined_mm": 0.8861613507624676,
+                "C1_err_ke2026_3x_mm": 2.2511191563900947,
+                "eta_resid": -0.0003982463654621421,
+                "eta_resid_err_stat": 5.6279203574160344e-05,
+                "eta_resid_err_combined": 6.816625775095904e-05,
+                "snr_stat": 7.0762615703572305,
+                "snr_combined": 5.842280016560526,
+                "snr_ke2026_3x": 2.2998350559594694
+            },
+            "post_srp_plus_thermal": {
+                "C1_mm": -2.176632378759202,
+                "C1_err_stat_mm": 0.7316357847575264,
+                "C1_err_combined_mm": 0.8861664186470629,
+                "C1_err_ke2026_3x_mm": 2.251137111292836,
+                "eta_resid": -0.000167433259904554,
+                "eta_resid_err_stat": 5.6279675750578955e-05,
+                "eta_resid_err_combined": 6.816664758823561e-05,
+                "snr_stat": 2.9750217582380363,
+                "snr_combined": 2.456234329080459,
+                "snr_ke2026_3x": 0.9669035119363095
+            },
+            "post_srp_only": {
+                "C1_mm": -1.5266323787592044,
+                "C1_err_stat_mm": 0.7316357847575264,
+                "C1_err_combined_mm": 0.8861664186470629,
+                "C1_err_ke2026_3x_mm": 2.251137111292836,
+                "eta_resid": -0.00011743325990455418,
+                "eta_resid_err_stat": 5.6279675750578955e-05,
+                "eta_resid_err_combined": 6.816664758823561e-05,
+                "snr_stat": 2.0866015722087052,
+                "snr_combined": 1.7227377912717121,
+                "snr_ke2026_3x": 0.6781605487737058
+            }
+        },
+        "ke2026_3harmonic_ecliptic_only_precision_weighted": {
+            "pre_subtraction": {
+                "C1_mm": -5.692986411332404,
+                "C1_err_stat_mm": 0.9471110350030721,
+                "C1_err_combined_mm": 1.0709898751270202,
+                "C1_err_ke2026_3x_mm": 2.884991128863539,
+                "eta_resid": -0.0004379220316409541,
+                "eta_resid_err_stat": 7.285469500023632e-05,
+                "eta_resid_err_combined": 8.238383654823232e-05,
+                "snr_stat": 6.010896506251706,
+                "snr_combined": 5.315630468175259,
+                "snr_ke2026_3x": 1.973311582963167
+            },
+            "post_srp_plus_thermal": {
+                "C1_mm": -2.707691945495976,
+                "C1_err_stat_mm": 0.9471014724874388,
+                "C1_err_combined_mm": 1.070981418694029,
+                "C1_err_ke2026_3x_mm": 2.8849628754441317,
+                "eta_resid": -0.00020828399580738276,
+                "eta_resid_err_stat": 7.285395942211068e-05,
+                "eta_resid_err_combined": 8.238318605338685e-05,
+                "snr_stat": 2.8589248609070106,
+                "snr_combined": 2.5282342888803586,
+                "snr_ke2026_3x": 0.9385534796800927
+            },
+            "post_srp_only": {
+                "C1_mm": -2.0587118029939453,
+                "C1_err_stat_mm": 0.9471014345018915,
+                "C1_err_combined_mm": 1.0709813851022532,
+                "C1_err_ke2026_3x_mm": 2.8849627632120085,
+                "eta_resid": -0.00015836244638414964,
+                "eta_resid_err_stat": 7.28539565001455e-05,
+                "eta_resid_err_combined": 8.238318346940408e-05,
+                "snr_stat": 2.17369727042667,
+                "snr_combined": 1.9222666533997577,
+                "snr_ke2026_3x": 0.7136008232916855
+            }
+        },
+        "ke2026_3harmonic_ecliptic_annual_monthly_precision_weighted": {
+            "pre_subtraction": {
+                "C1_mm": -5.708037179518525,
+                "C1_err_stat_mm": 0.9586347752613434,
+                "C1_err_combined_mm": 1.0811940770927144,
+                "C1_err_ke2026_3x_mm": 2.9190453389872686,
+                "eta_resid": -0.00043907978303988655,
+                "eta_resid_err_stat": 7.374113655856488e-05,
+                "eta_resid_err_combined": 8.316877516097802e-05,
+                "snr_stat": 5.95433978280456,
+                "snr_combined": 5.279382583067046,
+                "snr_ke2026_3x": 1.955446564423308
+            },
+            "post_srp_plus_thermal": {
+                "C1_mm": -2.7189967737140646,
+                "C1_err_stat_mm": 0.9586399642291592,
+                "C1_err_combined_mm": 1.0811986778651201,
+                "C1_err_ke2026_3x_mm": 2.9190606758263096,
+                "eta_resid": -0.00020915359797800496,
+                "eta_resid_err_stat": 7.374153570993533e-05,
+                "eta_resid_err_combined": 8.316912906654771e-05,
+                "snr_stat": 2.836306512529347,
+                "snr_combined": 2.5147984633895937,
+                "snr_ke2026_3x": 0.9314629175854277
+            },
+            "post_srp_only": {
+                "C1_mm": -2.070025730328992,
+                "C1_err_stat_mm": 0.958639907741017,
+                "C1_err_combined_mm": 1.0811986277801622,
+                "C1_err_ke2026_3x_mm": 2.919060508866397,
+                "eta_resid": -0.00015923274848684557,
+                "eta_resid_err_stat": 7.374153136469362e-05,
+                "eta_resid_err_combined": 8.316912521385864e-05,
+                "snr_stat": 2.159336069376556,
+                "snr_combined": 1.9145656284997488,
+                "snr_ke2026_3x": 0.7091410829071428
+            }
+        },
+        "ke2026_3harmonic_annual_monthly_precision_weighted": {
+            "pre_subtraction": {
+                "C1_mm": -7.17240284049597,
+                "C1_err_stat_mm": 0.9491657097287912,
+                "C1_err_combined_mm": 1.0728073193845016,
+                "C1_err_ke2026_3x_mm": 2.891062071406396,
+                "eta_resid": -0.0005517232954227668,
+                "eta_resid_err_stat": 7.30127469022147e-05,
+                "eta_resid_err_combined": 8.252363995265396e-05,
+                "snr_stat": 7.556533877045946,
+                "snr_combined": 6.685639360300944,
+                "snr_ke2026_3x": 2.480888567365438
+            },
+            "post_srp_plus_thermal": {
+                "C1_mm": -4.227721274494588,
+                "C1_err_stat_mm": 0.9492796422444952,
+                "C1_err_combined_mm": 1.0729081224316632,
+                "C1_err_ke2026_3x_mm": 2.8913987190663506,
+                "eta_resid": -0.00032520932880727597,
+                "eta_resid_err_stat": 7.302151094188425e-05,
+                "eta_resid_err_combined": 8.253139403320485e-05,
+                "snr_stat": 4.453609965234777,
+                "snr_combined": 3.9404317910398374,
+                "snr_ke2026_3x": 1.4621716633601274
+            },
+            "post_srp_only": {
+                "C1_mm": -3.5876949289481184,
+                "C1_err_stat_mm": 0.9493056438338237,
+                "C1_err_combined_mm": 1.0729311279922633,
+                "C1_err_ke2026_3x_mm": 2.891475548700482,
+                "eta_resid": -0.0002759765329960091,
+                "eta_resid_err_stat": 7.302351106414028e-05,
+                "eta_resid_err_combined": 8.253316369171256e-05,
+                "snr_stat": 3.7792832606145823,
+                "snr_combined": 3.34382593192318,
+                "snr_ke2026_3x": 1.2407834230382957
+            }
+        }
+    },
+    "test_6_srp_orthogonal_kinematic_dipole_survival": {
+        "pre_subtraction_model_E": {
+            "eta_0": -0.00025359741193406617,
+            "eta_0_err": 6.089263915032012e-05,
+            "eta_0_t": -4.164664489381603,
+            "C1_0_mm": -3.2967663551428603,
+            "C1_0_err_stat_mm": 0.7916043089541616,
+            "C1_0_err_combined_mm": 0.9362891550983573,
+            "C1_0_err_ke2026_3x_mm": 2.426877919795959,
+            "C1_0_snr_combined": 3.5210985166185487,
+            "C1_0_snr_ke2026_3x": 1.358439305187645,
+            "eta_r": 0.007142487439431491,
+            "eta_r_err": 0.00519511834529585,
+            "eta_r_t": 1.3748459543561644,
+            "eta_vr": 0.001102991696398192,
+            "eta_vr_err": 0.00016958872137715756,
+            "eta_vr_t": 6.503921295244563,
+            "eta_theta": -0.0009772589775829748,
+            "eta_theta_err": 8.866040706783144e-05,
+            "eta_theta_t": -11.0224959472079,
+            "dipole_split_aligned_eta": -0.0008926504677521774,
+            "dipole_split_antialigned_eta": 0.0008276194245185607,
+            "dipole_split_delta_eta": -0.0017202698922707382,
+            "dipole_split_delta_err": 0.0001870939798103504,
+            "dipole_split_snr": 9.194683303089208
+        },
+        "post_srp_plus_thermal_model_E": {
+            "eta_0": -2.2653378440694372e-05,
+            "eta_0_err": 6.0892625060847414e-05,
+            "eta_0_t": -0.37202170900101306,
+            "C1_0_mm": -0.29449391972902683,
+            "C1_0_err_stat_mm": 0.7916041257910164,
+            "C1_0_err_combined_mm": 0.9362890002394342,
+            "C1_0_err_ke2026_3x_mm": 2.4268773820949905,
+            "C1_0_snr_combined": 0.3145331405727471,
+            "C1_0_snr_ke2026_3x": 0.12134684755881912,
+            "eta_r": 0.0065802367922311224,
+            "eta_r_err": 0.0051951171432379475,
+            "eta_r_t": 1.266619521909351,
+            "eta_vr": 0.0011029811643611337,
+            "eta_vr_err": 0.0001695886821373464,
+            "eta_vr_t": 6.503860696717084,
+            "eta_theta": -0.0009772720313609346,
+            "eta_theta_err": 8.866038655339154e-05,
+            "eta_theta_t": -11.022645731105836,
+            "dipole_split_aligned_eta": -0.0006616897589398408,
+            "dipole_split_antialigned_eta": 0.0010577293028780918,
+            "dipole_split_delta_eta": -0.0017194190618179325,
+            "dipole_split_delta_err": 0.00018709403071826363,
+            "dipole_split_snr": 9.19013319247543
+        },
+        "post_2x_srp_plus_thermal_stress_test_model_E": {
+            "eta_0": 0.00020829065505267703,
+            "eta_0_err": 6.089261097602411e-05,
+            "eta_0_t": 3.420622826219252,
+            "C1_0_mm": 2.7077785156848013,
+            "C1_0_err_stat_mm": 0.7916039426883135,
+            "C1_0_err_combined_mm": 0.9362888454316235,
+            "C1_0_err_ke2026_3x_mm": 2.4268768445714635,
+            "C1_0_snr_combined": 2.892033296024724,
+            "C1_0_snr_ke2026_3x": 1.115746158171013,
+            "eta_r": 0.006017986145030804,
+            "eta_r_err": 0.0051951159415767134,
+            "eta_r_t": 1.1583930392907362,
+            "eta_vr": 0.0011029706323240776,
+            "eta_vr_err": 0.00016958864291048405,
+            "eta_vr_t": 6.50380009766498,
+            "eta_theta": -0.0009772850851388947,
+            "eta_theta_err": 8.866036604572125e-05,
+            "eta_theta_t": -11.02279551423145,
+            "dipole_split_aligned_eta": -0.0004307290501275043,
+            "dipole_split_antialigned_eta": 0.0012878391812376226,
+            "dipole_split_delta_eta": -0.0017185682313651269,
+            "dipole_split_delta_err": 0.000187094164009101,
+            "dipole_split_snr": 9.185579039662235
+        },
+        "invariance_summary": {
+            "eta_0_shift_fraction": -0.9106718863259373,
+            "eta_vr_relative_change": 9.548609561271044e-06,
+            "eta_theta_relative_change": 1.3357542124723923e-05,
+            "dipole_split_delta_relative_change": 0.0004945912595625038,
+            "srp_annual_modulation_depth_2e": 0.0334172,
+            "srp_sideband_power_ratio": 0.00055835462792,
+            "physical_explanation": "Orbital SRP scales as (1 AU / r_sun(t))^2 cos D(t) and lunar thermal expansion scales as cos D(t). Both lie entirely in the span of {cos D, (r_sun - <r_sun>) cos D} up to O(e^2) ~ 3e-4. In the joint Model E, separating out the anisotropic and velocity-quadrature modulations leaves a pre-subtraction isotropic static intercept of C1,0 = 13 m * eta_0 = -3.30 +/- 0.79 mm (eta_0 = -2.54e-4), matching Ke et al.'s (2026) attenuation-calibrated INPOP21 amplitude (-3.15 to -3.45 mm) and the -3.00 +/- 0.50 mm SRP+thermal offset. Subtracting the full -3.00 mm SRP+thermal waveform absorbs 91.1% of the static eta_0 intercept in Model E (from -2.54e-4 to -0.23e-4, i.e., C1,0 from -3.30 mm to -0.29 +/- 0.94 mm combined, 0.31 sigma), confirming Ke et al.'s finding that the static isotropic cos(D) mean is largely accounted for by non-EP SRP+thermal offset, while leaving the heliocentric velocity-quadrature modulation eta_vr (t = +6.50) and the fixed-sky orientation modulation eta_theta (t = -11.02, aligned-vs-antialigned split Delta_eta = -1.72e-3 at 9.19 sigma on the cleaned sample; -1.76e-3 at 7.92 sigma on the full archive) 100.0% invariant."
+        }
     },
     "baseline_tep_only": {
         "eta": -0.0003177935393878212,

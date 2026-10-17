@@ -26,5 +26,7 @@
     "cassini_shear_response": 1.0090490068391424e-23,
     "saturn_response": 2.6751687257391674e-11,
     "wb_activation": 0.17538980315531066
-  }
+  },
+  "kinetic_sector_scope": "Retained unit-term control P_,X = 1 + 2 xi; selected two-branch finite-source calculation is separate.",
+  "selected_action_prediction": false
 }

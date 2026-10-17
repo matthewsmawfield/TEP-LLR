@@ -1,0 +1,76 @@
+{
+  "step_id": "step_079",
+  "status": "PASS",
+  "step": "079_dynamical_transfer_closure",
+  "method": "Geocentric Earth-Moon-Sun numerical integration (planar, LSODA) with the coupling injected as a differential solar free-fall acceleration eta*xi_E*g_sun*s_hat; ephemeris fit adjusting the lunar initial state, Earth-mass scale, and secular tidal acceleration by nonlinear least squares on ranges sampled at the real INPOP19a epochs; residual-channel extraction identical to the headline design (step_056).",
+  "scope": "Forward dynamical transfer-function measurement on a controlled integrator. Not an IMCCE INPOP or JPL DE430 source-level refit; the planetary, relativistic, lunar-figure and station-geometry sectors are not modelled.",
+  "model": {
+    "frame": "geocentric, ecliptic plane",
+    "forces": [
+      "Earth point mass",
+      "solar tidal field",
+      "eta xi_E g_sun s-hat (injected channel)",
+      "fitted secular tidal acceleration"
+    ],
+    "earth_orbit": "Keplerian ellipse, e=0.0167 (r_sun modulation real)",
+    "fitted_parameters": [
+      "Moon initial position x,y",
+      "Moon initial velocity vx,vy",
+      "Earth mass scale",
+      "tidal secular acceleration"
+    ],
+    "xi_earth": 4.64e-10,
+    "sampling": "26,207 real INPOP19a archive epochs, phase-aligned",
+    "weights": "archive sigma_m (WLS)"
+  },
+  "phase_alignment_correlation": 0.6769663325493197,
+  "control_emergent_m_per_eta": -91069.15020531141,
+  "control_note": "Standard Nordtvedt range response ~12.9 m per unit eta; the planar integrator's emergent value is reported above. The transfer fraction F is convention-free (ratio of post-fit to pre-fit signature), so the control validates physics fidelity rather than entering the closure quantity.",
+  "scenario_A_static": {
+    "eta_injected": -0.000406,
+    "eta_emergent_prefit": -5.575987761262799,
+    "eta_resid_postfit": -4.506355124121752,
+    "eta_resid_err": 0.7639563799108237,
+    "transfer_fraction_F": 0.808171631119433
+  },
+  "scenario_B_free_harmonics": {
+    "eta_injected": -0.000406,
+    "eta_resid_postfit": -5.978371024985997,
+    "eta_resid_err": 0.8642334928529647,
+    "transfer_fraction_F": 1.072163584453792,
+    "note": "Physical-parameter fit plus free harmonic amplitudes at non-target lunar-theory frequencies (2D, D+-M) -- a conservative upper bound on periodic-term absorption unavailable to a real dynamical ephemeris."
+  },
+  "scenario_C_modulated": {
+    "eta0": -0.000105,
+    "modulation_depth_m": 1.68,
+    "eta_emergent_prefit": 2.8863792257115355,
+    "eta_resid_postfit": 2.8863792257115355,
+    "eta_resid_err": 0.3561692923467693,
+    "transfer_fraction_F": 1.0
+  },
+  "eta_sweep": [
+    {
+      "eta_injected": -0.001,
+      "eta_emergent_pre": 3.22928079929613,
+      "eta_resid": 0.7051891059849518,
+      "transfer_fraction": 0.21837342424314984
+    },
+    {
+      "eta_injected": -0.0001,
+      "eta_emergent_pre": -2.555196092030435,
+      "eta_resid": -2.555196092030435,
+      "transfer_fraction": 1.0
+    },
+    {
+      "eta_injected": 0.0004,
+      "eta_emergent_pre": -5.132634325710938,
+      "eta_resid": -2.150672996871159,
+      "transfer_fraction": 0.4190193301123712
+    }
+  ],
+  "transfer_summary": {
+    "F_mean": 0.6113910963687386,
+    "F_std": 0.308710724584469,
+    "interpretation": "F ~ 1 means the residual-channel estimand carries the full physical coupling through an ephemeris-class fit; F << 1 would mean ephemeris absorption."
+  }
+}

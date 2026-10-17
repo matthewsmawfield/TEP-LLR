@@ -103,7 +103,7 @@
         </li>
         <li>
             Phase-coverage requirement: Adequate synodic phase
-            coverage (mean $|\cos D| < 0.5$) is required to avoid
+            coverage (mean $|\cos D| &lt; 0.5$) is required to avoid
             truncation-induced slope bias. Severe phase truncation yields
             unreliable OLS estimates regardless of sample size.
         </li>
@@ -406,23 +406,23 @@
     <p>
         Statistical significance is assessed using the t-statistic for the
         correlation coefficient and regression coefficients. The Birge Ratio,
-        $R_B = \sqrt{\chi^2_{\rm red}}$, is computed for every regression.
-        When $R_B > 1$, formal errors are scaled upward by $R_B$ to account for
-        over-dispersed residuals; when $R_B < 1$, no downward rescaling is
-        applied. For the headline precision-weighted model,
-        $\chi^2_{\rm red} = 0.0038$ and $R_B = 0.062$, so the reported
-        $6.94\sigma$ headline significance is not inflated by Birge scaling.
-        Interpreting $R_B \ll 1$: this is strong <em>under-dispersion</em> of
-        the regression residuals relative to a unit reduced chi-square, not
-        evidence that formal errors should be shrunk. It arises because the
-        O–C archive combines heterogeneous per-shot and per-station noise while
-        the pooled OLS row model uses a scalar variance scale; many nuisance
-        harmonics (annual, monthly, $\cos 2D$, station structure) absorb
-        broadband variance, leaving the cos(D) slope identified primarily by
-        synodic phase coherence across $N \sim 2.5\times 10^4$ rows. In that
-        regime $\chi^2_{\rm red}$ can sit far below unity; the Birge policy
-        still applies no downward rescaling of the headline $\sigma_\eta$.
-        All reported p-values are two-tailed.
+        $R_B = \sqrt{\chi^2_{\rm red}}$, is computed as an over-dispersion guard
+        for every regression: when $R_B > 1$, formal errors are scaled upward by
+        $R_B$; when $R_B &lt; 1$, no downward rescaling is applied. For the headline
+        precision-weighted regression, the pipeline defines relative station
+        weights $w_i \propto 1/\mathrm{RMS}_{\rm station}^2$ (normalized to unit
+        scale rather than absolute inverse per-row variance $1/\sigma_i^2$ in
+        metres$^{-2}$) while accumulating residuals in metres, which yields a
+        nominal weighted sum-of-squares statistic $\chi^2_{\rm red} = 0.0038$
+        ($R_B = 0.062$). That small value is a unit-normalization consequence of
+        using relative station weights in metre units rather than physical
+        under-dispersion of the data; when evaluated against calibrated
+        published per-shot uncertainties $\sigma_m$ (Section 4.9), the true
+        reduced chi-square is $\chi^2_{\rm red} = 0.48$, reflecting slightly
+        conservative published error bars. In both conventions $R_B &lt; 1$, so the
+        Birge guard applies no downward rescaling and the nominal $6.94\sigma$
+        WLS significance is evaluated straight from the regression covariance
+        matrix. All reported p-values are two-tailed.
     </p>
 
     <h4>3.3.7 Bayesian MCMC Analysis</h4>
@@ -488,7 +488,7 @@
         a decomposable differential-fall estimate: the same step folds in the Cassini-bounded solar
         source charge and returns a mediated-force ceiling of $\approx 8\times10^{-10}$ (or
         $2.4\times10^{-8}$ with $\alpha_{\rm eff}$ read as the full body-charge differential), and
-        the canonical pairwise operator independently suppresses the Earth--Moon force channel to
+        the canonical pairwise operator independently suppresses the Earth&ndash;Moon force channel to
         $\sim 10^{-14}$. The simulation's adjudicating role is thus bookkeeping — it confirms that
         the measured band cannot be sourced by the mediated-force sector, leaving the clock-sector
         projection of Section 2.1 as the admissible channel. The reader is referred to Section 2.1
@@ -603,7 +603,7 @@
     </div>
 
     <p>
-        Equation \eqref{eq:systematic_projection}: cos($D$)-projected systematic
+        Equation $\eqref{eq:systematic_projection}$: cos($D$)-projected systematic
         bias.  A systematic of arbitrary raw amplitude cannot bias $\eta$
         unless it carries a component coherent with $\cos(D)$.  The total raw
         systematic RMS (the naive quadrature sum of all amplitudes) is
@@ -612,7 +612,7 @@
 
     <p>
         Each component is computed from an observable proxy in the data and
-        projected onto $\cos(D)$ via Equation \eqref{eq:systematic_projection}.
+        projected onto $\cos(D)$ via Equation $\eqref{eq:systematic_projection}$.
         The table below gives both the raw amplitude (what a naive RMS budget
         would quote) and the projected bias (the only quantity that can shift
         the synodic slope):
@@ -771,7 +771,7 @@
         yielding $\eta_{\rm WLS} = -3.21 \times 10^{-4}$ at $6.27\sigma$; (4)
         indicates Grasse internal chronological split independently detects
         negative $\eta$ in both halves; (5) shows that stations lacking
-        statistical power (expected SNR $< 3\sigma$) appropriately do not drive
+        statistical power (expected SNR $&lt; 3\sigma$) appropriately do not drive
         the primary detection.
     </p>
 
@@ -880,7 +880,7 @@
         The primary uncertainty companion is therefore a wild cluster bootstrap
         with Webb 6-point weights on the unweighted full-systematic
         OLS design, which gives a $95\%$ percentile interval
-        $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$).  Analytical
+        $[-5.37, -2.73] \times 10^{-4}$ (bootstrap $t$-ratio $|t|=5.56$; $5.56\sigma$ nominal equivalent).  Analytical
         cluster-robust SEs are reported for comparison but are not treated as
         the sole basis for significance claims.  Cook's-Distance excision on
         the unweighted full-systematic OLS is reported separately as a leverage
@@ -925,15 +925,15 @@
     <ul>
         <li>Statistical power limitation: With only 666 cleaned observations (737 raw) and RMS = 10.6 cm (13.8 cm raw), Haleakala has expected SNR = $0.27\sigma$ at the pooled cosD-only $|\eta| = 3.2 \times 10^{-4}$, below the $3.0\sigma$ powered-detection threshold</li>
         <li>Observed anomaly: The opposite sign and observed SNR ($2.45\sigma$ raw, $2.21\sigma$ cleaned, vs $0.27\sigma$ expected) exceed the noise expectation; the station is classified as underpowered based on expected SNR</li>
-        <li>Solar-cycle and coverage controls: A dedicated confound audit (Step 080) shows that the pooled high-activity extreme bin contains only the 1989--1991 epochs — an era-composition contrast rather than a station-general solar modulation — and that the joint within-station solar-modulation slope is negative ($-5.0 \times 10^{-4} \pm 2.5 \times 10^{-4}$), so solar conditioning does not account for the flip; a coverage-matched control restricting every station to Haleakala's $\cos(D)$ window shifts $\eta$ by at most $6.4 \times 10^{-4}$ ($\sim$16\% of the Haleakala deviation), so the station's restricted elongation coverage does not explain it either</li>
+        <li>Solar-cycle and coverage controls: A dedicated confound audit (Step 080) shows that the pooled high-activity extreme bin contains only the 1989&ndash;1991 epochs — an era-composition contrast rather than a station-general solar modulation — and that the joint within-station solar-modulation slope is negative ($-5.0 \times 10^{-4} \pm 2.5 \times 10^{-4}$), so solar conditioning does not account for the flip; a coverage-matched control restricting every station to Haleakala's $\cos(D)$ window shifts $\eta$ by at most $6.4 \times 10^{-4}$ ($\sim$16% of the Haleakala deviation), so the station's restricted elongation coverage does not explain it either</li>
         <li>Quality assessment: Comprehensive quality metrics (RMS, outlier rate, gaps) and systematic correlation analysis find no evidence of systematic bias</li>
     </ul>
 
     <p>
-        A formal Monte Carlo simulation (20,000 realizations using the station's actual elongation distribution) quantifies the Haleakala fluctuation. Under the TEP model the deviation is a 2.0σ event (two-tailed <em>p</em> = 0.039); the family-wise rate -- the probability that any of the five stations would fluctuate this far under TEP -- is 4.2%. Under the GR null the family-wise rate is 8.0%, so the Haleakala fluctuation does not discriminate between the two models. The deviation is uncommon but within the tail expected for an underpowered station, and is retained as an unresolved tension rather than dismissed as noise. Two mundane channels are explicitly excluded by the Step-080 confound audit: restriction to Haleakala's elongation coverage shifts other stations' $\eta$ estimates by at most $6.4 \times 10^{-4}$ — $\sim$16\% of the observed deviation — and the solar-conditioned joint fit (shared $d\eta/d({\rm solar\ index}) = -5.0 \times 10^{-4} \pm 2.5 \times 10^{-4}$) leaves a conditioned Haleakala excess of $+3.8 \times 10^{-3} \pm 1.5 \times 10^{-3}$ ($2.62\sigma$), so neither coverage nor era-solar conditioning resolves the flip.
+        A formal Monte Carlo simulation (20,000 realizations using the station's actual elongation distribution) quantifies the Haleakala fluctuation. Under the TEP model the deviation is a 2.0σ event (two-tailed <em>p</em> = 0.039); the family-wise rate &ndash; the probability that any of the five stations would fluctuate this far under TEP &ndash; is 4.2%. Under the GR null the family-wise rate is 8.0%, so the Haleakala fluctuation does not discriminate between the two models. The deviation is uncommon but within the tail expected for an underpowered station, and is retained as an unresolved tension rather than dismissed as noise. Two mundane channels are explicitly excluded by the Step-080 confound audit: restriction to Haleakala's elongation coverage shifts other stations' $\eta$ estimates by at most $6.4 \times 10^{-4}$ — $\sim$16% of the observed deviation — and the solar-conditioned joint fit (shared $d\eta/d({\rm solar\ index}) = -5.0 \times 10^{-4} \pm 2.5 \times 10^{-4}$) leaves a conditioned Haleakala excess of $+3.8 \times 10^{-3} \pm 1.5 \times 10^{-3}$ ($2.62\sigma$), so neither coverage nor era-solar conditioning resolves the flip.
     </p>
     <p>
-        Excluding Haleakala does not weaken the detection. The clean-subset analysis restricted to Grasse 2010+ and APO -- which drops Haleakala, Matera, and McDonald2 entirely -- yields η = -3.36 × 10⁻⁴ ± 4.63 × 10⁻⁵ (7.25σ cluster-robust), confirming the signal is detectable in the highest-quality data alone. The common-η mixed model with station-specific systematics gives <em>F</em>(4, 25,410) = 1.19, <em>p</em> = 0.31, showing no evidence for station-specific Nordtvedt parameters. The multi-station meta-analysis therefore confirms that the global detection is robust and not driven by any single station.
+        Excluding Haleakala does not weaken the detection. The clean-subset analysis restricted to Grasse 2010+ and APO &ndash; which drops Haleakala, Matera, and McDonald2 entirely &ndash; yields η = -3.36 × 10⁻⁴ ± 4.63 × 10⁻⁵ (7.25σ cluster-robust), confirming the signal is detectable in the highest-quality data alone. The common-η mixed model with station-specific systematics gives <em>F</em>(4, 25,410) = 1.19, <em>p</em> = 0.31, showing no evidence for station-specific Nordtvedt parameters. The multi-station meta-analysis therefore confirms that the global detection is robust and not driven by any single station.
     </p>
 
     <h4>3.4.24 Full Nuisance-Parameter Residual Model</h4>
@@ -1027,7 +1027,7 @@
             <tr>
                 <td>$\eta_{\rm wild}$</td>
                 <td>Wild cluster bootstrap with Webb 6-point weights on unweighted full-systematic OLS; $10{,}000$ draws; $G=5$ station clusters</td>
-                <td><strong>Co-primary small-$G$ uncertainty companion</strong>; $95\%$ CI $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$)</td>
+                <td><strong>Co-primary small-$G$ uncertainty companion</strong>; $95\%$ CI $[-5.37, -2.73] \times 10^{-4}$ ($|t|=5.56$, $5.56\sigma$ nominal)</td>
             </tr>
             <tr>
                 <td>$\eta_{\rm AR(1)}$</td>
@@ -1205,10 +1205,10 @@
         significance brackets that do not rely solely on the regression
         standard error $\sigma_\eta$, complementing the WLS and cluster-robust
         paths. The reduced $\chi^2$ from this analysis
-        ($\chi^2_{\rm red} \approx 0.48$ on published $\sigma_m$) is not the
-        same quantity as the Birge-regression $\chi^2_{\rm red} = 0.0038$ on the
-        precision-weighted headline fit (Section 3.3.6); both indicate
-        under-dispersion but on different variance definitions.
+        ($\chi^2_{\rm red} \approx 0.48$ on calibrated published $\sigma_m$) is distinct
+        from the relative-weight metre-unit regression sum
+        $\chi^2_{\rm red} = 0.0038$ on the precision-weighted headline fit
+        (Section 3.3.6).
     </p>
 
     <h4>3.4.28 Leave-One-Station-Out Meta-Analysis</h4>
@@ -1250,7 +1250,7 @@
         marginal likelihood, (ii) iterative bridge sampling between $M_1$
         ($\eta$ free) and $M_0$ ($\eta=0$), and (iii) Laplace and BIC
         approximations retained as secondary, model-dependent summaries.
-        $P(\eta < 0 \,|\, {\rm data})$ is taken directly from the MCMC chain.
+        $P(\eta &lt; 0 \,|\, {\rm data})$ is taken directly from the MCMC chain.
         Grid and bridge ${\rm BF}_{10}$ values (${\sim}70$–$100$ on the current
         archive) are preferred for referee-facing statements over Laplace values
         (${\sim}10^{14}$), which inherit prior-volume and curvature assumptions.

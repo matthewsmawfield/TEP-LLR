@@ -180,10 +180,16 @@ TEP-LLR/
                 <td>§4.4.1</td>
             </tr>
             <tr>
-                <td>Step 064-SRP (orbital SRP scaling)</td>
+                <td>Step 064-SRP (orbital SRP scaling, forward SRP+thermal subtraction &amp; orthogonal survival)</td>
                 <td><code>step_064_srp_systematic_check.py</code></td>
                 <td><code>step_064_srp_systematic_check.json</code></td>
-                <td>§4.33.2</td>
+                <td>§4.33.2 / §5.4.1</td>
+            </tr>
+            <tr>
+                <td>081 (cross-ephemeris decomposition &amp; Ke et al. 2026 matched-pipeline reconciliation)</td>
+                <td><code>step_081_ephemeris_amplitude_decomposition.py</code></td>
+                <td><code>step_081_ephemeris_amplitude_decomposition.json</code></td>
+                <td>§4.13 / §5.4.1</td>
             </tr>
             <tr>
                 <td>083 (clock-sector amplitude bookkeeping)</td>
@@ -437,7 +443,7 @@ node site/build.js
         <li>Data Integrity: Checks for missing or malformed residuals</li>
         <li>Phase Consistency: Verifies synodic phase calculations against ephemeris data</li>
         <li>Station Independence: Validates that results are consistent across independent observatories</li>
-        <li>Cross-Ephemeris Validation: DE430 dataset from JPL shows complex behavior; full dataset shows no significant correlation ($r = -0.000148$, $p = 0.992$), but after removing 37 phase-specific outliers (0.8% of data) that cluster at $135^\circ$–$225^\circ$ elongation, yields $\eta_{\rm resid} = -7.04\times10^{-4}$ at $5.96\sigma$ with bootstrap validation (95% CI on $\eta_{\rm resid}$: $[-9.63, -4.64]\times10^{-4}$) and permutation test ($p < 0.001$). Chi-square test confirms outliers are not uniformly distributed across phases ($\chi^2 = 66.1$, $p = 8.9 \times 10^{-12}$), indicating genuine measurement errors at specific phases. The primary detection relies on INPOP19a ephemeris.</li>
+        <li>Cross-Ephemeris Validation: DE430 dataset from JPL shows complex behavior; full dataset shows no significant correlation ($r = -0.000148$, $p = 0.992$), but after removing 37 phase-specific outliers (0.8% of data) that cluster at $135^\circ$–$225^\circ$ elongation, yields $\eta_{\rm resid} = -7.04\times10^{-4}$ at $5.96\sigma$ with bootstrap validation (95% CI on $\eta_{\rm resid}$: $[-9.63, -4.64]\times10^{-4}$) and permutation test ($p &lt; 0.001$). Chi-square test confirms outliers are not uniformly distributed across phases ($\chi^2 = 66.1$, $p = 8.9 \times 10^{-12}$), indicating genuine measurement errors at specific phases. The primary detection relies on INPOP19a ephemeris.</li>
     </ul>
 
     <h3>Reproducibility Checklist</h3>
@@ -445,8 +451,8 @@ node site/build.js
         <p>To verify successful reproduction:</p>
         <ol>
             <li>All 91 canonical scripts complete with "PASS" status in pipeline output</li>
-            <li>Key result (cross-ephemeris decomposition, Step 081): the DE430 uncleaned null is a gross-error leverage artefact — winsorization at the 6σ boundary recovers $\eta_{\rm resid} = -7.39 \times 10^{-4}$ ($5.70\sigma$) without deleting any point; on the shared 2014–2018 window the within-ephemeris composition spread (APO $-3.85 \times 10^{-4}$ vs Grasse $-2.30 \times 10^{-4}$; pooled $-2.57 \times 10^{-4}$ unweighted vs $-3.62 \times 10^{-4}$ under $1/\sigma^2$ weights) is of the same order as the $\sim 2\times$ cross-ephemeris ratio, so the residual-channel sign is the invariant channel and it agrees in both ephemerides</li>
-            <li>JSON files in <code>results/outputs/</code> (step_000 through step_073, including 006b and 046b)</li>
+            <li>Key result (cross-ephemeris decomposition &amp; Ke et al. 2026 reconciliation, Steps 064-SRP &amp; 081): the DE430 uncleaned null is a gross-error leverage artefact — winsorization at the 6σ boundary recovers $\eta_{\rm resid} = -7.39 \times 10^{-4}$ ($5.70\sigma$) without deleting any point; on the shared 2014–2018 window the within-ephemeris composition spread (APO $-3.85 \times 10^{-4}$ vs Grasse $-2.30 \times 10^{-4}$; pooled $-2.57 \times 10^{-4}$ unweighted vs $-3.62 \times 10^{-4}$ under $1/\sigma^2$ weights) is of the same order as the $\sim 2\times$ cross-ephemeris ratio, so the residual-channel sign is the invariant channel and it agrees in both ephemerides; in the Ke et al. (2026) third-order true-ecliptic harmonic basis $D_{\rm ecl}(t)$, precision-weighted INPOP19a yields $C_1 = -5.71 \pm 0.96$ mm ($5.95\sigma$, shifting to $-2.72 \pm 1.08$ mm, $2.51\sigma$ combined after forward orbital-SRP+thermal subtraction; $-7.17 \to -4.23 \pm 1.07$ mm, $3.94\sigma$ on $D_{\rm Del}$), while forward SRP+thermal subtraction absorbs $91.1\%$ of the Model E static isotropic intercept ($C_{1,0}: -3.30 \to -0.29 \pm 0.94$ mm, $0.31\sigma$) and leaves $\eta_{v_r}$ ($t = +6.50$) and $\eta_\theta$ ($t = -11.02$) $100.0\%$ invariant</li>
+            <li>JSON files in <code>results/outputs/</code> (step_000 through step_086, including 006b, 046b, and 064-SRP)</li>
             <li>Key result (headline): Precision-weighted full-systematic consensus $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust; $N = 25{,}445$)</li>
             <li>Key result (uncertainty calibration): prediction-interval coverage 86% at 68% nominal, 98% at 95% ($\chi^2_{\rm red}=0.48$ on published $\sigma$); LOSO conformal 95% band on $\eta_{\rm resid}$ excludes zero</li>
             <li>Key result (LOSO robustness): four of five exclusions exceed the observed-SNR threshold and share the negative sign; $\eta_{\rm meta} = -4.21 \times 10^{-4}$; $I^2 = 0.0\%$ heterogeneity; combined significance not reported independently (retained exclusions contain 87.8–98.6% of the full sample); excluding Grasse underpowered ($0.92\sigma$)</li>

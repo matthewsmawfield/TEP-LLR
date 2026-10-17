@@ -105,6 +105,11 @@ def earth_to_sun(t_s: np.ndarray) -> np.ndarray:
     return np.stack([-x, -y], axis=-1)
 
 
+def eta_zero(t, S):
+    """No Nordtvedt/TEP differential free-fall (control baseline)."""
+    return 0.0
+
+
 def rhs_factory(eta_func, kappa_tide=0.0, mu_scale=1.0):
     """Return the geocentric lunar equations of motion.
 
@@ -283,7 +288,6 @@ def run_transfer():
     # selection of the sampling).
     phase_grid = np.linspace(0, 2 * np.pi, 361)
     best = None
-    eta_zero = lambda t, S: 0.0
     print_status("Aligning synodic phase to the archive (fast grid)...", "INFO")
     t_u, inv_u = np.unique(t_s, return_inverse=True)
     for ph in phase_grid:

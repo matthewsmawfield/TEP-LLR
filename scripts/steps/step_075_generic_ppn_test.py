@@ -85,7 +85,7 @@ def compute_beta_from_eta(eta, eta_err, gamma, gamma_err):
     return beta, beta_err
 
 
-def test_gr_null(eta, eta_err):
+def eval_gr_null(eta, eta_err):
     """Test H0: η = 0 (standard GR)."""
     z_gr = abs(eta) / eta_err if eta_err > 0 else 0.0
     p_gr = 2 * (1 - stats.norm.cdf(z_gr)) if z_gr > 0 else 1.0
@@ -107,7 +107,7 @@ def test_gr_null(eta, eta_err):
     }
 
 
-def test_beta_given_gamma(eta, eta_err, gamma, gamma_err):
+def eval_beta_given_gamma(eta, eta_err, gamma, gamma_err):
     """Test H0: β = 1 given external γ constraint."""
     beta, beta_err = compute_beta_from_eta(eta, eta_err, gamma, gamma_err)
     z_beta = abs(beta - 1.0) / beta_err if beta_err > 0 else 0.0
@@ -211,11 +211,11 @@ def run_generic_ppn_test() -> dict:
     print_status(f"Headline η = {eta:.4e} ± {eta_err:.4e}", "DATA")
 
     # 1. Test GR null: η = 0
-    gr_test = test_gr_null(eta, eta_err)
+    gr_test = eval_gr_null(eta, eta_err)
     print_status(gr_test["conclusion"], "RESULT")
 
     # 2. Test β = 1 given Cassini γ
-    beta_test = test_beta_given_gamma(eta, eta_err, CASSINI_GAMMA, CASSINI_GAMMA_ERROR)
+    beta_test = eval_beta_given_gamma(eta, eta_err, CASSINI_GAMMA, CASSINI_GAMMA_ERROR)
     print_status(beta_test["conclusion"], "RESULT")
 
     # 3. Joint (β, γ) contour

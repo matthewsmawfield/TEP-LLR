@@ -23,7 +23,7 @@
  Because only $G=5$ stations contribute, the co-primary uncertainty
  companion is a wild cluster bootstrap with Webb 6-point weights on the
  unweighted full-systematic OLS design, giving a $95\%$ percentile
- interval $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$).
+ interval $[-5.37, -2.73] \times 10^{-4}$ ($|t|=5.56$, $5.56\sigma$ nominal).
  The unweighted full-systematic OLS on the same design, reported as a sensitivity
  upper bound, gives $\eta_{\rm resid} = -4.06 \times 10^{-4} \pm 6.58 \times 10^{-5}$
  ($6.17\sigma$; $6.52\sigma$ cluster-robust for comparison). Cook's-Distance excision on that
@@ -119,7 +119,7 @@
  <p>
  The headline measurement $\eta_{\rm resid} = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$
  ($6.94\sigma$), supported by a wild cluster bootstrap $95\%$ interval
- $[-5.37, -2.73] \times 10^{-4}$ ($5.56\sigma$), with Cook's leverage
+ $[-5.37, -2.73] \times 10^{-4}$ ($|t|=5.56$, $5.56\sigma$ nominal), with Cook's leverage
  diagnostics and unweighted OLS bounds consistent in sign and magnitude,
  resolves previous theoretical suppression ambiguities.
  Screening of Temporal Shear operates via the continuous spatial
@@ -156,7 +156,7 @@
 
  <p>
  This internal consistency across the framework bridges different regimes:
- preliminary results from related work report $\kappa_{\rm Cep} = (0.266 \pm 0.239) \times 10^6$ mag
+ results from related work report $\kappa_{\rm Cep} = (0.665 \pm 0.362) \times 10^6$ mag
  for Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for globular
  cluster pulsars (Paper 10), while the LLR residual-channel parameter $\eta_{\rm resid}$ serves as the
  Solar System observable response coefficient, exhibiting a smaller magnitude
@@ -173,7 +173,7 @@
  data extract a statistically robust synodic modulation at $6.94\sigma$
  from the precision-weighted full-systematic INPOP19a headline fit,
  with a wild cluster bootstrap $95\%$ interval $[-5.37, -2.73] \times 10^{-4}$
- ($5.56\sigma$) confirming the detection is not an artifact of unreliable
+ ($|t|=5.56$, $5.56\sigma$ nominal) confirming the detection is not an artifact of unreliable
  small-$G$ asymptotics. Cook's-Distance leverage diagnostics reach
  $7.82\sigma$ ($8.65\sigma$ cluster-robust) on the unweighted excised row.
  This is strong residual-channel evidence consistent with TEP because the
@@ -485,7 +485,7 @@
  matched-window comparison reinforces cross-ephemeris coherence.
  </li>
  <li>
- <strong>Heliocentric Modulation vs Terrestrial Season:</strong>
+ <em>Heliocentric Velocity and Dipole Modulation vs Terrestrial Season:</em>
  The monthly variation in $\eta_{\rm resid}$ (variance ratio = 11.3 above noise)
  is structurally inconsistent with a terrestrial seasonal
  systematic. A seasonal weather-driven effect would predict the
@@ -495,16 +495,19 @@
  and July ($\eta_{\rm resid} = -1.04 \times 10^{-3}$; monthly-variation
  robustness check), with November showing the strongest negative
  signal ($\eta_{\rm resid} = -2.64 \times 10^{-3}$, $7.53\sigma$;
- monthly-variation robustness check). This is the heliocentric
- modulation predicted by TEP: the signal strength scales
- as $1/r_\odot^2$, reaching maximum at perihelion (early January) and
- minimum at aphelion (early July). The November peak aligns with
- the heliocentric approach to perihelion, not with any terrestrial
- seasonal pattern. The modulation is consistent with a
- scalar-field gradient — a TEP prediction.
+ monthly-variation robustness check). As established in the joint
+ kinematic-dipole decomposition (Model E, Section 4.25.1), this annual
+ pattern is governed not by a static $1/r_\odot^2$ radial distance term
+ ($p = 0.171$ when controlled for fixed-sky orientation), but by the
+ heliocentric radial-velocity quadrature ($v_r \cos D$, $t = +6.50$,
+ peaking during the pre-perihelion autumn approach in Quadrant IV)
+ together with the fixed-sky dipole orientation ($\cos\theta_{\rm CMB}\cos D$,
+ $t = -11.02$). The November peak aligns with the maximum pre-perihelion
+ approach velocity and dipole alignment, rather than any terrestrial
+ seasonal pattern.
  </li>
  <li>
- <strong>Station Latitude Independence:</strong>
+ <em>Station Latitude Independence:</em>
  All stations are in the Northern Hemisphere, raising the concern
  that a latitude-dependent systematic (e.g., Coriolis effect on
  atmospheric refraction, or latitude-dependent tidal loading) could
@@ -519,6 +522,325 @@
  all yield negative $\eta_{\rm resid}$ with no systematic latitude trend.
  </li>
  </ul>
+
+ <h4>5.4.1 Reconciliation with Independent Multi-Ephemeris Residual Analyses (Ke et al. 2026)</h4>
+ <p>
+ An independent residual-based equivalence-principle study by Ke et al.
+ (2026, <em>Phys. Rev. D</em> 114, 084008) analyzed 35,069 LLR normal points across
+ EPM21 (1970–2024), INPOP21 (1970–2024), and DE430 (1970–2016) within a unified
+ data-reduction framework. Fitting a third-order synodic harmonic series
+ $\sum_{n=1}^{3}(C_n\cos nD + S_n\sin nD)$ (where $D$ is the true geocentric ecliptic
+ synodic angle $D_{\rm ecl}(t) = [\lambda_{\rm Moon}(t) - \lambda_{\rm Sun}(t)]\bmod 2\pi$
+ following Montenbruck &amp; Pfleger 2000) after iterative weighted least-squares
+ (WLS) adjustment of station coordinates, station velocities, reflector coordinates,
+ and piecewise range biases, and subsequently applying span- and subset-specific
+ signal-injection recovery factors ($K_{\rm eff} = 0.740$ on 1970–2024 ALL;
+ $K_{\rm eff} = 0.690$ on 1970–2016 ALL/DE430), an <em>a posteriori</em> orbital
+ solar-radiation-pressure (SRP) and retroreflector-thermal correction, and a
+ $3\times\sigma_{\rm formal}$ uncertainty scaling, Ke et al. reported final corrected
+ $\cos D$ amplitudes of $-0.265 \pm 0.937$ mm (EPM21), $-0.146 \pm 1.066$ mm (INPOP21),
+ and $-0.786 \pm 2.074$ mm (DE430), corresponding to
+ $\Delta(m_g/m_i)_{\rm EM} = (0.900 \pm 3.183)\times 10^{-14}$,
+ $(0.496 \pm 3.624)\times 10^{-14}$, and $(2.669 \pm 7.048)\times 10^{-14}$,
+ respectively — all consistent with zero.
+ </p>
+ <p>
+ Rather than contradicting the TEP framework, a stage-by-stage decomposition in
+ Step 081 (<code>ke2026_harmonic_reconciliation</code> in
+ <code>results/outputs/step_081_ephemeris_amplitude_decomposition.json</code>) and
+ Step 064-SRP (<code>results/outputs/step_064_srp_systematic_check.json</code>)
+ demonstrates that Ke et al. (2026) both independently replicate the raw negative
+ post-fit $\cos D$ residual in INPOP and DE430 and confirm the null static
+ equivalence-principle channel predicted by TEP's screened gravitational sector, while
+ isolating why the residual-channel structure reported here survives:
+ </p>
+ <ol>
+ <li>
+ <em>Independent replication of the raw negative $\cos D$ anomaly and WLS
+ attenuation calibration prior to SRP/thermal subtraction (Ke et al. 2026,
+ Tables 4–6 &amp; Appendix A):</em> Before applying non-EP synodic offsets,
+ Ke et al.'s third-order harmonic fits to post-fit residuals (their Table 5)
+ detect a highly significant negative $\cos D$ coefficient in both INPOP21 and
+ DE430: $\hat{a}_D^{\rm post} = -2.328 \pm 0.314$ mm ($7.41\sigma$ WLS) on the
+ full 1970–2024 INPOP21 dataset ($-2.378 \pm 0.764$ mm, $3.11\sigma$ on
+ 1970–2016), $-2.414 \pm 0.315$ mm ($7.66\sigma$) on OCA/Grasse (1984–2024),
+ $-2.629 \pm 0.831$ mm ($3.16\sigma$) on OCA/Grasse (1984–2016),
+ $-2.450 \pm 0.716$ mm ($3.42\sigma$) on APOLLO (2006–2024),
+ $-3.052 \pm 1.106$ mm ($2.76\sigma$) on APOLLO (2006–2016), and
+ $-2.612 \pm 0.671$ mm ($3.89\sigma$) on DE430 (1970–2016; $-2.553 \pm 0.696$ mm
+ on OCA and $-2.669 \pm 1.081$ mm on APOLLO). By contrast, EPM21 yields
+ $+0.285 \pm 0.264$ mm ($1.08\sigma$). By differencing the modeled Earth–Moon
+ distance trajectories directly from the SPICE kernels over 1985–2025 (their
+ Table 4), Ke et al. showed that EPM21 differs from INPOP21 and DE430 by
+ $-3.511 \pm 0.232$ mm $\cos D$ and $-3.275 \pm 0.284$ mm $\cos D$,
+ respectively (whereas INPOP21$-$DE430 is $+0.236 \pm 0.436$ mm $\cos D$),
+ because EPM21 integrates the Vokrouhlick&yacute; (1997) lunar orbital SRP
+ perturbation ($-3.65 \pm 0.08$ mm $\cos D$) in the equations of motion while
+ INPOP and DE430 omit it. Crucially, because Ke et al.'s preliminary WLS
+ re-adjustment of station coordinates, velocities, reflector coordinates, and
+ range biases partially absorbs a $\cos D$ signal (with recovery factors
+ $K_{\rm eff} = 0.740$ on 1970–2024 ALL, $0.690$ on 1970–2016 ALL, $0.874$ on
+ 1984–2024 OCA, $0.790$ on 1984–2016 OCA, $0.560$ on 2006–2024 APOLLO, and
+ $0.610$ on 2006–2016 APOLLO; their Eq. 47 and Tables 5–6), their
+ attenuation-calibrated pre-SRP/thermal amplitudes $\hat{a}_D^{\rm cal} = \hat{a}_D^{\rm post}/K_{\rm eff}$
+ are $-3.146$ mm (INPOP21 1970–2024 ALL), $-3.446$ mm (INPOP21 1970–2016 ALL),
+ $-3.786$ mm (DE430 1970–2016 ALL), $-3.328$ mm (INPOP21 1984–2016 OCA),
+ $-4.375$ mm (INPOP21 2006–2024 APOLLO and DE430 2006–2016 APOLLO), and
+ $-5.003$ mm (INPOP21 2006–2016 APOLLO). Adding the $+3.00 \pm 0.50$ mm
+ orbital-SRP ($-3.65$ mm) plus retroreflector thermal ($+0.65$ mm) correction
+ and inflating formal WLS errors by $3\times$ in quadrature with $0.50$ mm
+ ($\sigma_{\rm final} = \sqrt{(3\sigma_{\rm formal})^2 + 0.50^2}$, their Eq. 39)
+ yields their Table 6 values of $-0.146 \pm 1.066$ mm on INPOP21 ALL,
+ $-0.786 \pm 2.074$ mm on DE430 ALL, and $-1.375 \pm 2.205$ mm to
+ $-2.003 \pm 3.355$ mm on the APOLLO subsets.
+ </li>
+ <li>
+ <em>Matched-data evaluation of the third-order synodic harmonic basis and
+ forward SRP/thermal subtraction:</em> Evaluating Ke et al.'s harmonic leakage
+ diagnostics (their Eqs. 32 and 35) and simultaneous third-order specification
+ $\sum_{n=1}^{3}(C_n\cos nD + S_n\sin nD)$ directly on the cleaned INPOP19a
+ ($N = 25{,}445$, 1984–2019) and DE430 ($N = 4{,}560$, 2014–2018) archives
+ reproduces their sampling-induced harmonic correlations: on INPOP19a using the
+ true ecliptic synodic angle $D_{\rm ecl}(t)$, the dominant leakage coefficients
+ into $\cos D$ are $L_2(\cos 2D\to\cos D) = -0.397$ and
+ $L_3(\cos 3D\to\cos D) = -0.816$ ($-0.316$ and $-0.815$ on Grasse/OCA;
+ $-0.620$ and $-0.534$ on APOLLO), in close agreement with Ke et al.'s
+ published leakage coefficients ($-0.388$ and $-0.761$ on ALL; $-0.165$ and
+ $-0.850$ on OCA; $-0.610$ and $-0.630$ on APOLLO), with
+ $\mathrm{VIF}_{\cos D} = 1.98$–$2.11$ on INPOP19a and $1.55$–$1.63$ on DE430.
+ As summarized in Table 4a, including the second and third harmonics does not
+ reduce the negative $\cos D$ amplitude: on precision-weighted INPOP19a (which
+ weights APOLLO heavily and is evaluated on the published archive without a
+ secondary WLS re-projection, $K_{\rm eff} = 1$), $C_1$ shifts from
+ $-5.18 \pm 0.73$ mm ($7.08\sigma$) in the canonical full-systematic model to
+ $-5.69 \pm 0.95$ mm ($6.01\sigma$) in Ke et al.'s pure third-order
+ true-ecliptic ($D_{\rm ecl}$) harmonic model and $-5.71 \pm 0.96$ mm
+ ($5.95\sigma$) when combined with annual and monthly terms
+ ($-4.73 \pm 1.12$ mm, $4.23\sigma$ unweighted; or $-7.17 \pm 0.95$ mm,
+ $7.56\sigma$ when evaluated on the linear mean Delaunay polynomial
+ $D_{\rm Del}(t)$), matching the $-4.38$ to $-5.00$ mm attenuation-calibrated
+ APOLLO range in Ke et al. (2026). When the full non-EP orbital-SRP and thermal
+ waveform $\Delta r_{\rm SRP+th}(t) = \bigl[-3.65(1\text{ AU}/r_\odot(t))^2 + 0.65\bigr]\text{ mm}\cos D(t)$
+ is subtracted point-by-point in the time domain (Section 4.33.2), the
+ precision-weighted INPOP19a static amplitude is reduced by $52\%$–$58\%$ to
+ $-2.18 \pm 0.89$ mm ($2.46\sigma$ combined; $0.97\sigma$ under Ke et al.'s
+ $3\times\sigma_{\rm formal}$ prescription) in the canonical model and
+ $-2.72 \pm 1.08$ mm ($2.51\sigma$ combined; $0.93\sigma$ under
+ $3\times\sigma_{\rm formal}$) in the third-order true-ecliptic harmonic model
+ ($-1.75 \pm 1.23$ mm, $1.43\sigma$ combined unweighted; $-4.23 \pm 1.07$ mm,
+ $3.94\sigma$ combined and $1.46\sigma$ under $3\times\sigma_{\rm formal}$ on
+ $D_{\rm Del}$), while cleaned DE430 retains $-6.99 \pm 1.92$ mm ($3.65\sigma$
+ combined; $1.25\sigma$ under $3\times\sigma_{\rm formal}$) on $D_{\rm ecl}$ and
+ $-8.55 \pm 1.92$ mm ($4.45\sigma$ combined; $1.53\sigma$ under
+ $3\times\sigma_{\rm formal}$) on $D_{\rm Del}$.
+ </li>
+ <li>
+ <em>Consistency with TEP's screened gravitational and optical-path sector
+ and survival of SRP-orthogonal dynamical/anisotropic channels:</em> Within
+ the canonical TEP master-action closure (Section 2.1), both the nested
+ pairwise Earth–Moon differential free-fall acceleration
+ ($\Delta_{\rm EM} \simeq 2.0 \times 10^{-15}$, Step 085) and the direct
+ scalar optical path excursion across the Earth–Moon link on the
+ Cassini-compatible two-branch solar profile
+ ($\delta r_{\rm path}^{\rm tb} = -1.43 \times 10^{-4}$ mm,
+ $\eta_{\rm tb} = -1.10 \times 10^{-8}$, Step 083; zero unscreened volume
+ fraction in the coupled syzygy PDE solve of Step 086) lie four to five
+ orders of magnitude below the millimeter threshold. Consequently, TEP
+ independently predicts that the static equivalence-principle violation
+ parameter $\Delta(m_g/m_i)_{\rm EM}$ must be indistinguishable from zero
+ at current LLR precision — in direct agreement with Ke et al. (2026).
+ Indeed, in the five-parameter kinematic-dipole Model E (where the non-zero
+ sample-mean projection of the anisotropic and velocity-quadrature terms is
+ separated from the isotropic static $\cos D$ intercept), the pre-subtraction
+ static intercept is $C_{1,0} = 13\text{ m}\,\eta_0 = -3.30 \pm 0.79$ mm
+ ($\eta_0 = -2.54 \times 10^{-4}$), matching Ke et al.'s attenuation-calibrated
+ INPOP21 amplitude ($-3.15$ to $-3.45$ mm) and the $-3.00 \pm 0.50$ mm
+ SRP+thermal offset within $0.30$ mm; point-by-point subtraction of
+ $\Delta r_{\rm SRP+th}(t)$ absorbs $91.1\%$ of $\eta_0$, reducing the static
+ intercept to $C_{1,0}^{\rm corr} = -0.29 \pm 0.94$ mm combined
+ ($\eta_0^{\rm corr} = -0.23 \times 10^{-4}$, $0.31\sigma$ combined;
+ $0.12\sigma$ under $3\times\sigma_{\rm formal}$). By contrast, the observables
+ that are mathematically orthogonal to $\Delta r_{\rm SRP+th}(t)$ — the
+ heliocentric radial-velocity quadrature modulation
+ ($\eta_{v_r} = +1.103 \times 10^{-3}$, $t = +6.50$,
+ $p = 7.9 \times 10^{-11}$), the fixed-sky dipole orientation modulation
+ ($\eta_\theta = -9.773 \times 10^{-4}$, $t = -11.02$,
+ $\Delta\text{AIC} = -119.2$; aligned-versus-antialigned split
+ $\Delta\eta_{\rm resid} = -1.72 \times 10^{-3}$ at $9.19\sigma$ on the
+ cleaned sample, or $-1.76 \times 10^{-3}$ at $7.92\sigma$ in the full-bin
+ split of Section 4.25.2), and the
+ $D \pm l'$ sideband power fraction ($33\%$ observed vs. $0.056\%$ for pure
+ $1/r_\odot^2$ SRP) — remain $100.0\%$ invariant.
+ </li>
+ </ol>
+
+ <p>
+ Table 4a: Matched-data comparison of post-fit synodic $\cos D$ estimates,
+ forward SRP+thermal corrections, SRP-orthogonal dynamical/dipole channels,
+ and forward-modelled TEP predictions across INPOP19a, DE430, and Ke et al. (2026)
+ (Steps 064-SRP, 081, 083, 085).
+ </p>
+ <div class="table-scroll">
+ <table>
+ <thead>
+ <tr>
+ <th>Analysis Stage / Model Specification</th>
+ <th>Dataset &amp; Span</th>
+ <th>Raw / Fitted $C_1$ (mm)</th>
+ <th>Post-SRP+Thermal $C_1^{\rm corr}$ (mm)</th>
+ <th>$\eta_{\rm resid}^{\rm corr}$ ($10^{-4}$)</th>
+ <th>Combined SNR ($1\times\sigma \oplus 0.5\text{ mm}$)</th>
+ <th>Ke et al. $3\times\sigma$ SNR</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Ke et al. (2026) 3-harmonic + WLS ($K_{\rm eff}=0.740$)</td>
+ <td>EPM21 (1970–2024)</td>
+ <td>$+0.285 \pm 0.264$ ($+0.385$ cal)</td>
+ <td>$-0.265 \pm 0.937^{\dagger}$</td>
+ <td>$-0.202 \pm 0.715$</td>
+ <td>$0.47\sigma$</td>
+ <td>$0.28\sigma$</td>
+ </tr>
+ <tr>
+ <td>Ke et al. (2026) 3-harmonic + WLS ($K_{\rm eff}=0.740$)</td>
+ <td>INPOP21 (1970–2024)</td>
+ <td>$-2.328 \pm 0.314$ ($-3.146$ cal)</td>
+ <td>$-0.146 \pm 1.066^{\dagger}$</td>
+ <td>$-0.111 \pm 0.814$</td>
+ <td>$0.25\sigma$</td>
+ <td>$0.14\sigma$</td>
+ </tr>
+ <tr>
+ <td>Ke et al. (2026) 3-harmonic + WLS ($K_{\rm eff}=0.690$)</td>
+ <td>DE430 (1970–2016)</td>
+ <td>$-2.612 \pm 0.671$ ($-3.786$ cal)</td>
+ <td>$-0.786 \pm 2.074^{\dagger}$</td>
+ <td>$-0.600 \pm 1.583$</td>
+ <td>$0.94\sigma$</td>
+ <td>$0.38\sigma$</td>
+ </tr>
+ <tr>
+ <td>Ke et al. (2026) 3-harmonic + WLS ($K_{\rm eff}=0.610$, APOLLO)</td>
+ <td>INPOP21 APOLLO (2006–2016)</td>
+ <td>$-3.052 \pm 1.106$ ($-5.003$ cal)</td>
+ <td>$-2.003 \pm 3.355^{\dagger}$</td>
+ <td>$-1.529 \pm 2.561$</td>
+ <td>$1.65\sigma$</td>
+ <td>$0.60\sigma$</td>
+ </tr>
+ <tr>
+ <td>Canonical full-systematic (unweighted)</td>
+ <td>INPOP19a (1984–2019)</td>
+ <td>$-5.46 \pm 0.85$ ($6.38\sigma$)</td>
+ <td>$-2.46 \pm 0.99$</td>
+ <td>$-1.89 \pm 0.76$</td>
+ <td>$2.48\sigma$</td>
+ <td>$0.94\sigma$</td>
+ </tr>
+ <tr>
+ <td>Canonical full-systematic (precision-weighted)</td>
+ <td>INPOP19a (1984–2019)</td>
+ <td>$-5.18 \pm 0.73$ ($7.08\sigma$)</td>
+ <td>$-2.18 \pm 0.89$</td>
+ <td>$-1.67 \pm 0.68$</td>
+ <td>$2.46\sigma$</td>
+ <td>$0.97\sigma$</td>
+ </tr>
+ <tr>
+ <td>Ke et al. 3-harmonic $D_{\rm ecl}$ + ann./mon. (prec.-weighted)</td>
+ <td>INPOP19a (1984–2019)</td>
+ <td>$-5.71 \pm 0.96$ ($5.95\sigma$)</td>
+ <td>$-2.72 \pm 1.08$</td>
+ <td>$-2.09 \pm 0.83$</td>
+ <td>$2.51\sigma$</td>
+ <td>$0.93\sigma$</td>
+ </tr>
+ <tr>
+ <td>3-harmonic Delaunay $D_{\rm Del}$ + ann./mon. (prec.-weighted)</td>
+ <td>INPOP19a (1984–2019)</td>
+ <td>$-7.17 \pm 0.95$ ($7.56\sigma$)</td>
+ <td>$-4.23 \pm 1.07$</td>
+ <td>$-3.25 \pm 0.83$</td>
+ <td>$3.94\sigma$</td>
+ <td>$1.46\sigma$</td>
+ </tr>
+ <tr>
+ <td>Ke et al. 3-harmonic $D_{\rm ecl}$ + ann./mon. (cleaned)</td>
+ <td>DE430 (2014–2018)</td>
+ <td>$-9.99 \pm 1.85$ ($5.40\sigma$)</td>
+ <td>$-6.99 \pm 1.92$</td>
+ <td>$-5.38 \pm 1.48$</td>
+ <td>$3.65\sigma$</td>
+ <td>$1.25\sigma$</td>
+ </tr>
+ <tr>
+ <td>3-harmonic Delaunay $D_{\rm Del}$ + ann./mon. (cleaned)</td>
+ <td>DE430 (2014–2018)</td>
+ <td>$-11.55 \pm 1.86$ ($6.22\sigma$)</td>
+ <td>$-8.55 \pm 1.92$</td>
+ <td>$-6.58 \pm 1.48$</td>
+ <td>$4.45\sigma$</td>
+ <td>$1.53\sigma$</td>
+ </tr>
+ <tr>
+ <td>Model E static isotropic intercept $\eta_0$ ($\cos D$)</td>
+ <td>INPOP19a (1984–2019)</td>
+ <td>$-3.30 \pm 0.79$ ($4.16\sigma$)</td>
+ <td>$-0.29 \pm 0.94$</td>
+ <td>$-0.23 \pm 0.73$</td>
+ <td>$0.31\sigma$ ($91.1\%$ absorbed)</td>
+ <td>$0.12\sigma$</td>
+ </tr>
+ <tr>
+ <td>Model E velocity quadrature $\eta_{v_r}$ ($v_r \cos D$)</td>
+ <td>INPOP19a (1984–2019)</td>
+ <td>$+14.34 \pm 2.20$ $(\text{km/s})^{-1}$</td>
+ <td>$+14.34 \pm 2.20$ $(\text{km/s})^{-1}$ (invariant)</td>
+ <td>$+11.03 \pm 1.70$ $(\text{km/s})^{-1}$</td>
+ <td>$6.50\sigma$ ($100\%$ retained)</td>
+ <td>$2.17\sigma$</td>
+ </tr>
+ <tr>
+ <td>Model E fixed-sky dipole $\eta_\theta$ ($\cos\theta_{\rm CMB}\cos D$)</td>
+ <td>INPOP19a (1984–2019)</td>
+ <td>$-12.70 \pm 1.15$</td>
+ <td>$-12.70 \pm 1.15$ (invariant)</td>
+ <td>$-9.77 \pm 0.89$</td>
+ <td>$11.02\sigma$ ($100\%$ retained)</td>
+ <td>$3.67\sigma$</td>
+ </tr>
+ <tr>
+ <td>TEP forward-modelled screened force &amp; optical path (Steps 083, 085)</td>
+ <td>Earth–Moon (1 AU)</td>
+ <td>$-1.43 \times 10^{-4}$ mm (optical)</td>
+ <td>$\Delta_{\rm EM} = 2.0 \times 10^{-15}$ (force)</td>
+ <td>$-1.10 \times 10^{-4}$ ($\eta_{\rm tb} = -1.10 \times 10^{-8}$)</td>
+ <td>Screened null (matches Ke et al. EP bound)</td>
+ <td>—</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ <p>
+ <small>
+ $^{\dagger}$In Ke et al. (2026, Tables 5–7), raw third-harmonic fits are divided by
+ the span- and subset-specific WLS recovery factor $K_{\rm eff}$ ($0.740$ on 1970–2024
+ ALL, $0.690$ on 1970–2016 ALL/DE430, $0.610$ on 2006–2016 APOLLO) before adding
+ $+3.00 \pm 0.50$ mm (INPOP21, DE430) or $-0.65 \pm 0.50$ mm (EPM21, which already
+ integrates orbital SRP), uncertainties are reported using
+ $\sigma_{\rm final} = \sqrt{(3\sigma_{\rm formal})^2 + (0.50\text{ mm})^2}$ (their
+ Eq. 39), and $\eta$ is scaled using $13.1$ m ($S = -2.943\times 10^{10}$ m; vs.
+ $13.0$ m here). On the unprojected INPOP19a and DE430 archives ($K_{\rm eff} = 1$),
+ forward time-domain subtraction of $\Delta r_{\rm SRP+th}(t)$ reduces the
+ unconditioned static $\cos D$ amplitude into the $2.5\sigma$–$4.5\sigma$ range
+ ($0.9\sigma$–$1.5\sigma$ under $3\times\sigma_{\rm formal}$) and absorbs $91.1\%$ of
+ the Model E static isotropic intercept $\eta_0$ ($-3.30\text{ mm} \to -0.29\text{ mm}$,
+ $0.31\sigma$), while leaving the SRP-orthogonal velocity-quadrature ($\eta_{v_r}$)
+ and dipole-orientation ($\eta_\theta$) modulations strictly invariant.
+ </small>
+ </p>
 
  <h3>5.5 Station-by-Station Consistency and the Haleakala Solution</h3>
  <p>
@@ -539,7 +861,7 @@
  null). The dedicated confound audit (Step 080) excludes the two
  mundane channels: restricting every station to Haleakala's
  $\cos(D)$ coverage window shifts $\eta$ by at most
- $6.4 \times 10^{-4}$ ($\sim$16\% of the deviation), and the
+ $6.4 \times 10^{-4}$ ($\sim$16% of the deviation), and the
  solar-conditioned joint fit leaves a conditioned Haleakala excess
  of $+3.8 \times 10^{-3}$ ($2.62\sigma$), so neither restricted
  elongation coverage nor the era-confounded extreme-bin solar
@@ -803,8 +1125,8 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  a clear hierarchy: the heliocentric distance coefficient becomes
  non-significant ($\eta_r = +7.11 \times 10^{-3}$, $p = 0.171$) while
  both radial velocity ($\eta_{v_r} = +1.10 \times 10^{-3}$,
- $t = 6.50$, $p < 10^{-10}$) and CMB orientation
- ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$, $p < 10^{-4}$)
+ $t = 6.50$, $p &lt; 10^{-10}$) and CMB orientation
+ ($\eta_\theta = -9.76 \times 10^{-4}$, $t = -11.03$, $p &lt; 10^{-4}$)
  remain significant. This suggests the temporal topology is not a
  simple static $1/r$ potential but rather a dynamical field responsive
  to motion through it. Third, a nested model comparison quantifies the
@@ -865,7 +1187,7 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  emerges by chance; the null distribution has standard deviation
  $8.8 \times 10^{-5}$ and maximum $|t| = 3.70$. The observed value
  $\eta_\theta = -9.76 \times 10^{-4}$ ($t = -11.03$) lies far beyond the
- 99.9th percentile of this null distribution ($p < 10^{-3}$), ruling
+ 99.9th percentile of this null distribution ($p &lt; 10^{-3}$), ruling
  out aliasing as the origin of the signal. (ii) <em>Multicollinearity.</em>
  Variance Inflation Factors for the four non-intercept predictors in the
  full joint model are at most ~1.20 (cosD: 1.017, $r_c \cdot \cos D$:
@@ -879,9 +1201,9 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  are permuted to break any true relationship while preserving marginal
  statistics, the coefficient distribution is centered at zero with
  99.9th percentile $|t| = 2.75$; the observed $t = -11.03$ is again far
- in the tail ($p < 10^{-3}$). Gram–Schmidt orthogonalization of
+ in the tail ($p &lt; 10^{-3}$). Gram–Schmidt orthogonalization of
  $\cos\theta \cdot \cos D$ against all other predictors leaves the
- signal entirely intact ($t = -11.03$, $p < 10^{-4}$), confirming that
+ signal entirely intact ($t = -11.03$, $p &lt; 10^{-4}$), confirming that
  the effect resides in the component of $\cos\theta$ that is
  mathematically independent of synodic, distance, and velocity terms.
  </p>
@@ -956,9 +1278,9 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  dynamically responsive to motion, without uniquely identifying the Planck
  kinematic frame over other nearly collinear celestial axes in the present
  single-axis model class. The consistency of this large-scale directional
- signature with local Lorentz invariance---including order-of-magnitude
+ signature with local Lorentz invariance&mdash;including order-of-magnitude
  agreement with the GNSS anisotropy, screening at laboratory densities,
- and the relation to Temporal Shear $\Sigma_\mu = \nabla_\mu \ln A$---is
+ and the relation to Temporal Shear $\Sigma_\mu = \nabla_\mu \ln A$&mdash;is
  derived in Appendix D of Paper 0 (TEP).
  </p>
 
@@ -981,8 +1303,8 @@ The clean-subset and toy Keplerian analyses address the two most serious residua
  </p>
 
  <p>
- The Observable Response Coefficient framework shows internal consistency
- across the author's body of work: preliminary $\kappa_{\rm Cep} = (0.266 \pm 0.239) \times 10^6$ mag
+ The Observable Response Coefficient framework exhibits consistent environmental ordering
+ across the TEP corpus: $\kappa_{\rm Cep} = (0.665 \pm 0.362) \times 10^6$ mag
  from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular
  cluster pulsars (Paper 10). The LLR residual-channel parameter $\eta_{\rm resid} \approx -3.91 \times 10^{-4}$
  from the headline precision-weighted model serves as the Solar System observable response coefficient, exhibiting a substantially
@@ -1276,7 +1598,7 @@ bracketing the headline).
  LLRE, is anomalously high compared to the long-term average of ~1.7
  cm/yr inferred from tidal rhythmites over 2–3 Gyr (Riofrio 2012;
  *Planetary Science* 2012). At the current rate, the Moon would have
- coincided with Earth < 2 Gyr ago, conflicting with the accepted ~4.6 Gyr
+ coincided with Earth &lt; 2 Gyr ago, conflicting with the accepted ~4.6 Gyr
  age. Historical literature attributes this 30% discrepancy to North
  Atlantic tidal resonances, though papers explicitly note "significance
  for cosmology and the speed of light"—a connection that was never
@@ -1351,7 +1673,7 @@ bracketing the headline).
  <tr>
  <td>1998 ~1 cm residual</td>
  <td>Unexplained ($3.4\sigma$)</td>
- <td>Validated ($0.31\sigma$ consistency)</td>
+ <td>Empirical residual-channel refinement ($-5.08\pm0.73$ mm, $6.94\sigma$; screened solar metric/force channels at $-1.1\times10^{-8}$ and $2.0\times10^{-15}$, unscreened ceiling $-4.85$ mm excluded by Cassini)</td>
  </tr>
  <tr>
  <td>Full-moon deficit</td>
@@ -1417,38 +1739,46 @@ bracketing the headline).
  However, the quantitative mismatch is stark: the core density simulation analysis
  indicates that worst-case thermal expansion of the Apollo housing is ~1
  mm—an order of magnitude too small to explain a 100-fold signal
- collapse. TEP offers a more fundamental resolution: the Earth's shadow
- during an eclipse acts as a scalar flux shield. The Earth's bulk ($5.9
- \times 10^{24}$ kg) interrupts the primary solar scalar stream,
- substantially relaxing the Temporal Shear screening state within the lunar
- reflectors. The recovery of signal strength is thus a "suppression-state
- transition" in the dynamical time field, providing a geometric
- explanation for the coherence restoration that thermal diffusion alone
- struggles to satisfy on the observed 15-minute timescales.
+ collapse. Within the programmatic extensions of this section, one candidate
+ hypothesis is that syzygy alignment during a lunar eclipse alters the
+ three-body solar–terrestrial boundary geometry of the ambient scalar gradient
+ at the lunar surface (though on the static elliptic two-branch operator of
+ Step 086 the direct syzygy bridge volume vanishes, so any such effect would
+ require non-static or disformal optical-coherence coupling rather than
+ static scalar shielding). This remains a qualitative hypothesis for the
+ rapid 15-minute eclipse coherence recovery rather than an established
+ mechanism.
  </p>
 
- <h3>5.13 The Secular AU Increase ($dA/dt$)</h3>
+ <h3>5.13 Historical Ephemeris Scale-Drift Anomalies and the IAU 2012 Fixed-AU Convention</h3>
 
  <p>
- Astrometric analyses of planetary ephemerides have identified a secular
- increase in the Astronomical Unit of approximately 7–15 cm/yr (Krasinsky
- & Brumberg 2004; Standish 2005). Within standard General Relativity,
- this is often dismissed as a modelling artifact or attributed to solar
- mass loss. However, solar mass loss ($\dot{M}_\odot/M_\odot$) predicts a
- recession rate of only ~1 cm/yr—leaving more than 85% of the signal
- unexplained.
+ Early 2000s astrometric analyses of planetary ranging archives reported an
+ apparent secular drift in the fitted astronomical unit of approximately
+ 7–15 cm/yr (Krasinsky &amp; Brumberg 2004; Standish 2005), exceeding the
+ ~1 cm/yr orbital expansion expected from solar mass loss ($\dot{M}_\odot/M_\odot$).
+ Following IAU 2012 Resolution B2, the astronomical unit was redefined from a
+ fitted dynamical scale factor to an exact defining length constant of
+ $1\text{ au} \equiv 149{,}597{,}870{,}700$ m in the SI/BCRS system, so
+ historical ephemeris scale anomalies do not represent an ongoing change in a
+ defined unit. In contemporary planetary ephemerides (INPOP, DE, EPM), any
+ residual interplanetary scale drift is instead parameterized through bounds
+ on time variation of the heliocentric gravitational parameter
+ $\dot{\mu}_\odot/\mu_\odot = d(GM_\odot)/dt / (GM_\odot)$ (currently
+ constrained at the $\lesssim 10^{-13}\text{ yr}^{-1}$ level) or unmodeled
+ transponder/ranging systematics.
  </p>
 
  <p>
- The TEP framework reinterprets the AU increase as a direct tracking of
- the global cosmological evolution of the proper time field,
- $\dot{\phi}(t)$. This is not a "recession" of the Earth from the Sun in
- the gravitational sense ($g_{\mu\nu}$), but rather a consequence of the
- evolving relationship between the matter metric ($\tilde{g}_{\mu\nu}$) and
- the background geometry. The expansion represents a measurable change in
- the relationship between atomic measurement standards and the underlying
- gravitational potential well. TEP thus identifies the observed increase
- in the AU as a signature of the field's macroscopic dynamics.
+ Within the programmatic scope of these discussion subsections, the historical
+ Krasinsky–Brumberg scale question illustrates how a secular drift in the
+ matter-frame calibration factor $\dot{A}_{\rm sp}(t)$ relative to the static
+ gravitational 3-metric $\gamma_{ij}$ would project into ephemeris reductions
+ if not absorbed into $\dot{\mu}_\odot/\mu_\odot$ or clock-rate polynomials.
+ Rather than treating the pre-2012 AU figures as an active anomaly, TEP
+ identifies joint planetary-ranging and optical-clock constraints on
+ $\dot{\mu}_\odot/\mu_\odot$ as a consistency bound on secular chronometric
+ drift in the screened Solar System.
  </p>
 
  <h3>5.14 The Synodic Sampling Blind-Spot</h3>
@@ -1602,7 +1932,7 @@ bracketing the headline).
  grid quadrature ${\rm BF}_{10} \approx 70$ and corrected Laplace
  $\approx 94$, versus BIC $\approx 71$. Bridge sampling is unstable for
  this nested model ($M_0 \subset M_1$), producing ${\rm BF}_{10} \approx 263468$ ($\approx 2.6 \times 10^{5}$); the Savage–Dickey ratio in Step 016 is the
- recommended bridge estimator. The stable Bayesian statements are $P(\eta_{\rm resid} < 0 \mid
+ recommended bridge estimator. The stable Bayesian statements are $P(\eta_{\rm resid} &lt; 0 \mid
  {\rm data}) = 1$ and these moderate grid/Laplace factors; the headline signal statistic remains the precision-weighted
  estimand at $6.94\sigma$ (cluster-robust $6.78\sigma$), with the linearized post-fit extraction integrator extraction as the
  pre-registered dynamical cross-check.
@@ -1616,28 +1946,29 @@ bracketing the headline).
  </p>
 
  <p>
- The contemporary relevance of the TEP framework is underscored by the
- 2024 White House directive to establish "Coordinated Lunar Time" (LTC).
- Current relativistic models (Ashby & Patla 2024; Turyshev et al. 2024)
- acknowledge that clocks on the lunar surface tick approximately 58.7
- microseconds faster per day than their terrestrial counterparts. While
- General Relativity attributes this drift to the difference in static
- gravitational potential, TEP reinterprets the discrepancy as a suppression
- state transition.
+ The contemporary metrological relevance of cislunar time transfer is
+ highlighted by the 2024 directive to establish Coordinated Lunar Time (LTC).
+ Standard relativistic time-transfer models (Ashby &amp; Patla 2024; Turyshev
+ et al. 2024) establish that an ideal clock on the lunar surface ticks
+ approximately 58.7 microseconds per day faster than a clock on the terrestrial
+ geoid. That $+58.7\text{ }\mu\text{s/day}$ secular rate offset is the standard
+ General Relativistic monopole gravitational redshift and second-order Doppler
+ integral between the terrestrial and selenocentric potential wells; because the
+ static Newtonian potential difference is an exact gradient, this baseline
+ rate offset carries zero closed-loop synchronization holonomy ($H_{\rm resid} = 0$)
+ and is not itself a measurement of a TEP anomaly.
  </p>
 
  <p>
- Because the Moon operates in a lower-density regime ($\rho \approx 3.3
- \text{ g/cm}^3$) and possesses a shallower potential well than Earth, it
- resides at a different coordinate in the dynamic proper time field
- $\phi$. The 58.7 μs/day "offset" is the integrated local
- manifestation of the same synchronization holonomy the analysis has extracted in the LLR synodic residuals. By recognizing that LTC is not
- merely a coordinate correction but an emergent property of the scalar
- matter-metric, TEP provides the first comprehensive physical
- justification for the world’s new cislunar navigation standards. The
- establishment of LTC constitutes the first involuntary operational
- implementation of the Temporal Equivalence Principle in human
- civilization.
+ Rather, the deployment of precision optical and microwave time-transfer links
+ required to realize LTC provides a prospective experimental testbed for the
+ TEP framework. Because the Moon resides in a shallower potential well and
+ lower-density environment ($\rho \approx 3.3\text{ g/cm}^3$) than Earth,
+ multi-link cislunar clock comparisons—particularly closed-loop one-way timing
+ around Earth–Moon–Lagrange triangles (Section 5.23) and phase-resolved synodic
+ clock comparisons—can test whether small periodic or non-exact residual timing
+ departures ($\delta u_{\rm TEP}$, $H_{\rm resid} \neq 0$) exist beyond the
+ standard $+58.7\text{ }\mu\text{s/day}$ GR baseline.
  </p>
 
  <h3>5.21 Causal Safety and the GW170817 Constraint</h3>
@@ -1647,7 +1978,7 @@ bracketing the headline).
  of modern astrophysics, including the arrival-time coincidence of
  GW170817 and GRB 170817A. This measurement enforced a world-leading
  bound on the fractional difference between the speed of gravity ($c_g$)
- and light ($c_\gamma$): $|c_g - c_\gamma|/c < 10^{-15}$. Many
+ and light ($c_\gamma$): $|c_g - c_\gamma|/c &lt; 10^{-15}$. Many
  scalar-tensor theories were discarded because their disformal couplings
  ($B(\phi)$) predicted a varying $c_g$ that contradicted this
  observation.
@@ -1673,8 +2004,8 @@ bracketing the headline).
  ($\kappa$) that quantify domain-specific astrophysical responses while
  preserving theoretical unity. Different environments exhibit different
  effective responses due to varying degrees of Temporal Shear suppression
- and astrophysical amplification. Table 4 summarizes this internal consistency
- across the author's body of work.
+ and astrophysical amplification. Table 4 summarizes this environmental ordering
+ across the TEP corpus.
  </p>
 
  <p>
@@ -1717,7 +2048,7 @@ bracketing the headline).
  <tr>
  <td>Cepheids (Paper 11)</td>
  <td>Period-Luminosity Distance Bias</td>
- <td>$\kappa_{\rm Cep} = (0.266 \pm 0.239) \times 10^6$ mag (preliminary)</td>
+ <td>$\kappa_{\rm Cep} = (0.665 \pm 0.362) \times 10^6$ mag</td>
  <td>Planck tension resolution</td>
  </tr>
  <tr>
@@ -1767,7 +2098,7 @@ bracketing the headline).
  <p>
  The pipeline computes the Birge Ratio $R_B = \sqrt{\chi^2_{\rm red}}$
  for each regression. When $R_B > 1$, formal uncertainties
- are scaled upward by $\max(1.0, R_B)$; when $R_B < 1$, no downward
+ are scaled upward by $\max(1.0, R_B)$; when $R_B &lt; 1$, no downward
  rescaling is applied. For the headline precision-weighted model,
  $\chi^2_{\rm red} = 0.0038$ and $R_B = 0.062$, so the headline
  $6.94\sigma$ detection is not Birge-inflated. The conservative

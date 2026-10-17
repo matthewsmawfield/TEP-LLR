@@ -1,10 +1,12 @@
 """Nested-operator LLR differential constraint.
 
-Evaluates the canonical pairwise response R = S_Sigma(X_env)^2 * y(s) for
+Evaluates the unit-term-control pairwise response R = S_Sigma(X_env)^2 * y(s) for
 the Sun-Earth and Sun-Moon channels, takes the differential acceleration
 toward the Sun, and compares against the LLR bound. Migrated from Paper 0
 step_22_llr_differential_constraint.py; the observational constraint
-belongs to this paper while the operator itself is Paper 0's.
+belongs to this paper while the operator is the retained unit-term control of Paper 0. The selected
+two-branch field is checked separately in steps 084/086; this control
+does not derive its finite-source differential charge.
 
 Outputs results/outputs/step_085_nested_llr_constraint.json
 """
